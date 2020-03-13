@@ -1,0 +1,9 @@
+items:
+- checked: false
+  checkedicon: x
+  text: Do more stuff
+  uncheckedicon: ' '
+- checked: false
+  checkedicon: x
+  text: Do the stuff
+  uncheckedicon: ' '

@@ -1,0 +1,18 @@
+[user]
+	name = Saxon Jensen
+	email = saxon.jensen@healthengine.com.au
+	signingkey = 5F562F5EC8DE9907309AD30F9622543A6676C055 
+[core]
+	editor = nvim
+[alias]
+    co = checkout
+    ci = commit -S
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[color]
+    ui = auto
+[init]
+	templateDir = /home/saxonj/.git-templates
