@@ -3,5 +3,8 @@ copr:copr.fedorainfracloud.org:petersen:stack     Copr repo for stack owned by p
 copr:copr.fedorainfracloud.org:pschyska:alacritty Copr repo for alacritty owned by pschyska
 fedora                                            Fedora 31 - x86_64
 fedora-modular                                    Fedora Modular 31 - x86_64
+remi                                              Remi's RPM repository - Fedora 31 - x86_64
+remi-modular                                      Remi's Modular repository - Fedora 31 - x86_64
+remi-php74                                        Remi's RPM repository - PHP 7.4 - Fedora 31 - x86_64
 updates                                           Fedora 31 - x86_64 - Updates
 updates-modular                                   Fedora Modular 31 - x86_64 - Updates
