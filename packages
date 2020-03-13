@@ -372,6 +372,8 @@ glusterfs-fuse
 glusterfs-libs
 glx-utils
 gmp
+gmp-c++
+gmp-devel
 gnome-abrt
 gnome-autoar
 gnome-backgrounds
@@ -444,6 +446,7 @@ google-noto-sans-gurmukhi-fonts
 google-noto-sans-sinhala-vf-fonts
 gpgme
 gpgmepp
+gpg-pubkey
 gpg-pubkey
 gpg-pubkey
 gpg-pubkey
@@ -1143,6 +1146,7 @@ nautilus-extensions
 nautilus-sendto
 ncurses
 ncurses-base
+ncurses-compat-libs
 ncurses-libs
 ndctl
 ndctl-libs
@@ -1608,6 +1612,7 @@ sssd-krb5-common
 sssd-ldap
 sssd-nfs-idmap
 sssd-proxy
+stack
 startup-notification
 stix-fonts
 stoken-libs

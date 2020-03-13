@@ -1,0 +1,7 @@
+repo id                                           repo name
+copr:copr.fedorainfracloud.org:petersen:stack     Copr repo for stack owned by petersen
+copr:copr.fedorainfracloud.org:pschyska:alacritty Copr repo for alacritty owned by pschyska
+fedora                                            Fedora 31 - x86_64
+fedora-modular                                    Fedora Modular 31 - x86_64
+updates                                           Fedora 31 - x86_64 - Updates
+updates-modular                                   Fedora Modular 31 - x86_64 - Updates
