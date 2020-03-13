@@ -450,6 +450,7 @@ gpg-pubkey
 gpg-pubkey
 gpg-pubkey
 gpg-pubkey
+gpg-pubkey
 gpm-libs
 graphite2
 graphviz
@@ -1179,6 +1180,7 @@ NetworkManager-wifi
 NetworkManager-wwan
 nfs-utils
 nftables
+nginx-filesystem
 nmap-ncat
 nm-connection-editor
 nodejs
@@ -1306,6 +1308,7 @@ php-composer-spdx-licenses
 php-composer-xdebug-handler
 php-dbg
 php-fedora-autoloader
+php-fpm
 php-gd
 php-intl
 php-json
@@ -1521,6 +1524,7 @@ readline
 realmd
 redhat-menus
 redland
+remi-release
 rest
 rhythmbox
 rng-tools
