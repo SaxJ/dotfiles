@@ -142,7 +142,6 @@ alias silence='play  -n synth brownnoise vol'
 
 # Secret manager
 function pw() { bw list items --search $1 | jq; }
-alias orphans='sudo pacman -Rns $(pacman -Qtdq)'
 
 # Run something, muting output or redirecting it to the debug stream
 # depending on the value of _ARC_DEBUG.
@@ -178,6 +177,7 @@ complete -o nospace -o default -F _python_argcomplete utt
 
 # TODO LIST
 function pkglist() { rpm -qa --qf "%{NAME}\n" | sort > ~/packages; }
+function pkgup() { dnf install $(cat ~/packages|xargs); }
 
 # JIRA
 export JIRA_PROJECT="BI"
@@ -191,7 +191,6 @@ alias vol_up="amixer set Master 5.0%+"
 
 export GPG_TTY=$(tty)
 
-alias pq='pacman -Ss'
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 alias todo=todo.sh
 complete -F _todo todo

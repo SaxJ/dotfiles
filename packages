@@ -1353,6 +1353,7 @@ python3-firewall
 python3-gobject
 python3-gobject-base
 python3-gpg
+python3-greenlet
 python3-hawkey
 python3-humanize
 python3-idna
@@ -1371,6 +1372,8 @@ python3-mako
 python3-markupsafe
 python3-meh
 python3-meh-gui
+python3-msgpack
+python3-neovim
 python3-ntplib
 python3-olefile
 python3-ordered-set
