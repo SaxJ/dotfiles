@@ -34,12 +34,9 @@ export CARGO_PATH=$HOME/.cargo/bin
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
-# PYTHON
-#export WORKON_HOME=$HOME/.virtualenvs
-#export PROJECT_HOME=$HOME/Devel
-#source /usr/bin/virtualenvwrapper.sh
-
-# HELPER FUNCTIONS
+# COMPLETION
+[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
+    . /usr/share/bash-completion/bash_completion
 
 # PATH
 export PATH="$PATH:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.config/composer/vendor/bin"
@@ -180,9 +177,7 @@ _python_argcomplete() {
 complete -o nospace -o default -F _python_argcomplete utt
 
 # TODO LIST
-#alias todo='habitipy todos add'
-#alias todos='habitipy todos'
-#alias complete='habitipy todos complete'
+function pkglist() { rpm -qa --qf "%{NAME}\n" | sort > ~/packages; }
 
 # JIRA
 export JIRA_PROJECT="BI"

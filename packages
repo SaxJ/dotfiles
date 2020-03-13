@@ -134,6 +134,8 @@ compat-lua-libs
 compat-readline5
 conky
 conmon
+conntrack-tools
+containerd
 containernetworking-plugins
 containers-common
 container-selinux
@@ -502,6 +504,7 @@ hplip-libs
 httpd
 httpd-filesystem
 httpd-tools
+hub
 hunspell
 hunspell-en
 hunspell-en-GB
@@ -604,6 +607,10 @@ kmod
 kmod-libs
 kpartx
 krb5-libs
+kubernetes
+kubernetes-client
+kubernetes-master
+kubernetes-node
 kyotocabinet-libs
 lame-libs
 langpacks-core-en
@@ -784,6 +791,9 @@ libmwaw
 libndp
 libnet
 libnetfilter_conntrack
+libnetfilter_cthelper
+libnetfilter_cttimeout
+libnetfilter_queue
 libnfnetlink
 libnfs
 libnfsidmap
@@ -1094,6 +1104,7 @@ microcode_ctl
 mkpasswd
 mlocate
 mobile-broadband-provider-info
+moby-engine
 mod_dnssd
 ModemManager
 ModemManager-glib
@@ -1505,6 +1516,7 @@ slirp4netns
 smc-meera-fonts
 snappy
 sni-qt
+socat
 sord
 sos
 sound-theme-freedesktop
