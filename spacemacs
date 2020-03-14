@@ -42,7 +42,7 @@ values."
      docker
      (csharp :variables csharp-backend 'omnisharp)
      (wakatime :variables
-               wakatime-api-key (shell-command-to-string "pass waka")
+               wakatime-api-key "60f644f2-96bf-4c27-bab1-57c85a5e5031"
                wakatime-cli-path "/usr/bin/wakatime")
      (haskell :variables
               haskell-completion-backend 'intero
@@ -54,7 +54,7 @@ values."
                  typescript-fmt-tool 'prettier-js)
      html
      lsp
-     php
+     (php :variables php-backend 'lsp)
      yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.

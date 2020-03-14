@@ -355,6 +355,7 @@ git
 git-core
 git-core-doc
 gjs
+glib
 glib2
 glibc
 glibc-all-langpacks
@@ -482,6 +483,7 @@ gstreamer1-plugins-good
 gstreamer1-plugins-good-gtk
 gstreamer1-plugins-good-qt
 gstreamer1-plugins-ugly-free
+gtk+
 gtk2
 gtk3
 gtkmm30
@@ -596,6 +598,7 @@ jbigkit-libs
 jimtcl
 jitterentropy
 jomolhari-fonts
+jq
 js-jquery
 json-c
 json-glib
@@ -629,7 +632,9 @@ kubernetes-client
 kubernetes-master
 kubernetes-node
 kyotocabinet-libs
+lame
 lame-libs
+lame-mp3x
 langpacks-core-en
 langpacks-en
 langtable
@@ -1248,6 +1253,7 @@ parted
 passwd
 passwdqc
 passwdqc-lib
+pavucontrol
 pcaudiolib
 pciutils
 pciutils-libs

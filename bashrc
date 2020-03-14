@@ -31,6 +31,9 @@ export HELM_HOME=$HOME/helm
 # RUST
 export CARGO_PATH=$HOME/.cargo/bin
 
+# YARN
+export YARN_INSTALL_PATH=$HOME/.yarn/bin
+
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -39,7 +42,7 @@ export DOTNET_CLI_TELEMETRY_OPTOUT=1
     . /usr/share/bash-completion/bash_completion
 
 # PATH
-export PATH="$PATH:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.config/composer/vendor/bin"
+export PATH="$PATH:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.config/composer/vendor/bin:$YARN_INSTALL_PATH"
 export PATH=$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
 
 # HOW DO?
