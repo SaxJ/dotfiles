@@ -75,6 +75,7 @@ baobab
 basesystem
 bash
 bash-completion
+bat
 bc
 bcache-tools
 bind-libs
@@ -121,6 +122,7 @@ chkconfig
 chrome-gnome-shell
 chrony
 cifs-utils
+clang-libs
 cldr-emoji-annotation
 clucene-contribs-lib
 clucene-core
@@ -135,6 +137,7 @@ color-filesystem
 compat-lua-libs
 compat-openssl10
 compat-readline5
+compiler-rt
 composer
 conky
 conmon
@@ -232,6 +235,7 @@ dracut-config-rescue
 dracut-live
 dracut-network
 dracut-squash
+dropbox
 drpm
 e2fsprogs
 e2fsprogs-libs
@@ -267,6 +271,7 @@ exiv2-libs
 expat
 f31-backgrounds-base
 f31-backgrounds-gnome
+faad2-libs
 fcoe-utils
 fdk-aac-free
 fedora-bookmarks
@@ -279,6 +284,7 @@ fedora-release-workstation
 fedora-repos
 fedora-workstation-backgrounds
 fedora-workstation-repositories
+ffmpeg-libs
 fftw-libs-double
 file
 file-libs
@@ -452,6 +458,8 @@ gpg-pubkey
 gpg-pubkey
 gpg-pubkey
 gpg-pubkey
+gpg-pubkey
+gpg-pubkey
 gpm-libs
 graphite2
 graphviz
@@ -477,11 +485,14 @@ gspell
 gssdp
 gssproxy
 gstreamer1
+gstreamer1-libav
 gstreamer1-plugins-bad-free
+gstreamer1-plugins-bad-freeworld
 gstreamer1-plugins-base
 gstreamer1-plugins-good
 gstreamer1-plugins-good-gtk
 gstreamer1-plugins-good-qt
+gstreamer1-plugins-ugly
 gstreamer1-plugins-ugly-free
 gtk+
 gtk2
@@ -523,12 +534,14 @@ hplip-libs
 httpd
 httpd-filesystem
 httpd-tools
+http-parser
 hub
 hunspell
 hunspell-en
 hunspell-en-GB
 hunspell-en-US
 hwdata
+hwloc-libs
 hyperv-daemons
 hyperv-daemons-license
 hypervfcopyd
@@ -554,6 +567,7 @@ ima-evm-utils
 ImageMagick-libs
 imlib2
 initscripts
+intel-mediasdk
 ipcalc
 iproute
 iproute-tc
@@ -646,12 +660,15 @@ libabw
 libacl
 libaio
 libao
+libaom
 libappstream-glib
 libarchive
 libargon2
+libass
 libassuan
 libasyncns
 libatasmart
+libatomic
 libatomic_ops
 libattr
 libavc1394
@@ -688,6 +705,7 @@ libcdio-paranoia
 libcdr
 libchamplain
 libchamplain-gtk
+libclc
 libcmis
 libcollection
 libcom_err
@@ -698,9 +716,12 @@ libcue
 libcurl
 libdaemon
 libdatrie
+libdav1d
 libdazzle
 libdb
 libdb-utils
+libdca
+libde265
 libdhash
 libdmapsharing
 libdmx
@@ -740,6 +761,7 @@ libgdither
 libgee
 libgexiv2
 libgfortran
+libgit2
 libglvnd
 libglvnd-egl
 libglvnd-gles
@@ -797,6 +819,7 @@ libmbim-utils
 libmcpp
 libmediaart
 libmetalink
+libmms
 libmng
 libmnl
 libmodman
@@ -831,6 +854,7 @@ libnumbertext
 liboauth
 libodfgen
 libogg
+libomp
 liborcus
 libosinfo
 libotf
@@ -905,6 +929,7 @@ libreport-plugin-ureport
 libreport-web
 librevenge
 librsvg2
+librtmp
 libsamplerate
 libsane-hpaio
 libseccomp
@@ -937,6 +962,7 @@ libsss_nss_idmap
 libsss_sudo
 libstaroffice
 libstdc++
+libstdc++-devel
 libstemmer
 libsysfs
 libtalloc
@@ -967,7 +993,9 @@ libutempter
 libuuid
 libuv
 libv4l
+libva
 libvarlink-util
+libvdpau
 libverto
 libverto-libev
 libvirt-daemon
@@ -997,6 +1025,7 @@ libvirt-gobject
 libvirt-libs
 libvisio
 libvisual
+libvmaf
 libvncserver
 libvorbis
 libvpx
@@ -1122,9 +1151,11 @@ mesa-libEGL
 mesa-libgbm
 mesa-libGL
 mesa-libglapi
+mesa-libOpenCL
 mesa-libxatracker
 mesa-vulkan-drivers
 microcode_ctl
+mjpegtools-libs
 mkpasswd
 mlocate
 mobile-broadband-provider-info
@@ -1148,6 +1179,7 @@ mutter
 mythes
 mythes-en
 nautilus
+nautilus-dropbox
 nautilus-extensions
 nautilus-sendto
 ncurses
@@ -1206,12 +1238,15 @@ ntfs-3g-system-compression
 ntfsprogs
 numactl-libs
 numad
+ocl-icd
 oddjob
 oddjob-mkhomedir
 oniguruma
 openblas
 openblas-serial
+opencl-filesystem
 openconnect
+opencore-amr
 OpenEXR-libs
 openjpeg2
 openldap
@@ -1327,6 +1362,7 @@ php-pecl-zip
 php-process
 php-PsrLog
 php-seld-phar-utils
+php-soap
 php-symfony-browser-kit
 php-symfony-class-loader
 php-symfony-common
@@ -1367,6 +1403,7 @@ plymouth-plugin-two-step
 plymouth-scripts
 plymouth-system-theme
 plymouth-theme-spinner
+pocl
 podman
 podman-plugins
 policycoreutils
@@ -1387,6 +1424,7 @@ protobuf-c
 psacct
 psmisc
 publicsuffix-list-dafsa
+pugixml
 pulseaudio
 pulseaudio-libs
 pulseaudio-libs-glib2
@@ -1533,6 +1571,7 @@ redland
 remi-release
 rest
 rhythmbox
+ripgrep
 rng-tools
 rofi
 rofi-themes
@@ -1540,6 +1579,8 @@ rootfiles
 rpcbind
 rpm
 rpm-build-libs
+rpmfusion-free-release
+rpmfusion-nonfree-release
 rpm-libs
 rpm-plugin-selinux
 rpm-plugin-systemd-inhibit
@@ -1657,6 +1698,7 @@ telnet
 texlive-lib
 thai-scalable-fonts-common
 thai-scalable-waree-fonts
+the_silver_searcher
 tigervnc-license
 tigervnc-server-minimal
 time
@@ -1708,6 +1750,7 @@ usermode
 userspace-rcu
 util-linux
 vconfig
+vid.stab
 vim-common
 vim-enhanced
 vim-filesystem
@@ -1715,6 +1758,7 @@ vim-minimal
 vino
 virglrenderer
 virtualbox-guest-additions
+vo-amrwbenc
 volume_key-libs
 vpnc
 vpnc-script
@@ -1737,6 +1781,8 @@ woff2
 words
 wpa_supplicant
 wpebackend-fdo
+x264-libs
+x265-libs
 xcb-util
 xcb-util-image
 xcb-util-keysyms
@@ -1782,6 +1828,7 @@ xorg-x11-xauth
 xorg-x11-xinit
 xorg-x11-xkb-utils
 xsel
+xvidcore
 xz
 xz-libs
 yajl
@@ -1794,6 +1841,8 @@ zchunk-libs
 zd1211-firmware
 zenity
 zfs-fuse
+zimg
 zip
 zlib
 zram
+zvbi

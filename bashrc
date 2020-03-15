@@ -34,15 +34,24 @@ export CARGO_PATH=$HOME/.cargo/bin
 # YARN
 export YARN_INSTALL_PATH=$HOME/.yarn/bin
 
+# NPM
+export NPM_INSTALL=/home/saxonj/npm-global
+
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
+
+# PYTHON PACKAGES
+export PIP_INSTALL=$HOME/global-pip/bin
+
+# COMPOSER PACKAGES
+export COMPOSER_BINS=$HOME/.config/composer/vendor/bin
 
 # COMPLETION
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 
 # PATH
-export PATH="$PATH:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.npm-global/bin:$HOME/.config/composer/vendor/bin:$YARN_INSTALL_PATH"
+export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL"
 export PATH=$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
 
 # HOW DO?
@@ -196,4 +205,5 @@ export GPG_TTY=$(tty)
 
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 alias todo=todo.sh
+source todo_completion
 complete -F _todo todo

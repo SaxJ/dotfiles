@@ -141,7 +141,8 @@ set pastetoggle=<F2>
 
 " Important shit
 nnoremap ; :
-let mapleader=","
+let mapleader="\<Space>"
+let maplocalleader=","
 
 " STATUS LINE
 function! GitBranch()
@@ -195,7 +196,7 @@ let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
 " TAB-COMPLETE FOR AUTOCOMPLETE
-inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
 
 " GIT BINDINGS
 map <Leader>gs :Gstatus<CR>

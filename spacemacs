@@ -34,16 +34,14 @@ values."
      neotree
      prettier
      terraform
+     react
      (javascript :variables
-                 javascript-backend 'tern)
+                 javascript-backend 'lsp)
      sql
      swift
      elm
      docker
      (csharp :variables csharp-backend 'omnisharp)
-     (wakatime :variables
-               wakatime-api-key "60f644f2-96bf-4c27-bab1-57c85a5e5031"
-               wakatime-cli-path "/usr/bin/wakatime")
      (haskell :variables
               haskell-completion-backend 'intero
               haskell-enable-hindent-style "johan-tibell")
@@ -54,7 +52,8 @@ values."
                  typescript-fmt-tool 'prettier-js)
      html
      lsp
-     (php :variables php-backend 'lsp)
+     (php :variables
+          php-backend 'lsp)
      yaml
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
@@ -325,6 +324,7 @@ values."
    lsp-file-watch-threshold 100000000
    omnisharp-server-executable-path "/home/saxonj/omnisharp/run"
    terminal-here-terminal-command '("alacritty")
+   lsp-intelephense-server-command '("/home/saxonj/npm-global/bin/intelephense" "--stdio")
    ))
 
 (defun dotspacemacs/user-init ()
@@ -334,6 +334,7 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (add-to-list 'exec-path "/home/saxonj/.yarn/bin")
   )
 
 (defun dotspacemacs/user-config ()
