@@ -220,3 +220,4 @@ bar {
 
 # AUTOSTART
 exec --no-startup-id keynav
+exec mako

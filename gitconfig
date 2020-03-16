@@ -1,7 +1,7 @@
 [user]
 	name = Saxon Jensen
 	email = saxon.jensen@gmail.com
-	signingkey = 5F562F5EC8DE9907309AD30F9622543A6676C055 
+	signingkey = C098FCCC1C3D04E8D905FCA7678A2B9027A59690 
 [core]
 	editor = nvim
 [alias]

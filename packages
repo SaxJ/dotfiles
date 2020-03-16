@@ -295,6 +295,7 @@ findutils
 fipscheck
 fipscheck-lib
 firefox
+firefox-wayland
 firewalld
 firewalld-filesystem
 flac-libs
@@ -1135,6 +1136,7 @@ m17n-lib
 mactel-boot
 mailcap
 make
+mako
 man-db
 man-pages
 mariadb-connector-c
@@ -1579,7 +1581,9 @@ rootfiles
 rpcbind
 rpm
 rpm-build-libs
+rpmfusion-free-appstream-data
 rpmfusion-free-release
+rpmfusion-nonfree-appstream-data
 rpmfusion-nonfree-release
 rpm-libs
 rpm-plugin-selinux
