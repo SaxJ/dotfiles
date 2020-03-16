@@ -186,12 +186,6 @@ _python_argcomplete() {
 }
 complete -o nospace -o default -F _python_argcomplete utt
 
-function pkglist() { rpm -qa --qf "%{NAME}\n" | sort > ~/packages; }
-function pkgup() { dnf install $(cat ~/packages|xargs); }
-
-# JIRA
-export JIRA_PROJECT="BI"
-
 # GITHUB
 eval "$(hub alias -s)"
 
