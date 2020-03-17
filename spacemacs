@@ -41,15 +41,16 @@ values."
      swift
      elm
      docker
-     (csharp :variables csharp-backend 'omnisharp)
+     (csharp :variables
+             csharp-backend 'omnisharp
+             omnisharp-debug t)
      (haskell :variables
               haskell-completion-backend 'intero
               haskell-enable-hindent-style "johan-tibell")
      (typescript :variables
-                 typescript-indent-level 2
                  typescript-backend 'lsp
                  typescript-fmt-on-save t
-                 typescript-fmt-tool 'prettier-js)
+                 typescript-fmt-tool 'prettier)
      html
      lsp
      (php :variables
@@ -319,10 +320,8 @@ values."
    ;; (default nil)
    dotspacemacs-whitespace-cleanup nil
    comment-continue " * "
-   typescript-indent-level 2
    lsp-enable-file-watchers t
    lsp-file-watch-threshold 100000000
-   omnisharp-server-executable-path "/home/saxonj/omnisharp/run"
    terminal-here-terminal-command '("alacritty")
    lsp-intelephense-server-command '("/home/saxonj/npm-global/bin/intelephense" "--stdio")
    ))
@@ -344,6 +343,13 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
+  (setq-default typescript-indent-level 2
+                js2-basic-offset 2
+                css-indent-offset 2
+                web-mode-markup-indent-offset 2
+                web-mode-css-indent-offset 2
+                web-mode-code-indent-offset 2
+                web-mode-attr-indent-offset 2)
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -376,6 +382,7 @@ This function is called at the very end of Spacemacs initialization."
  '(package-selected-packages
    (quote
     (csv-mode fuzzy company-statistics company auto-yasnippet ac-ispell auto-complete phpunit phpcbf php-extras php-auto-yasnippets yasnippet drupal-mode php-mode yaml-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy)))
+ '(prettier-js-command "yarn fix")
  '(safe-local-variable-values
    (quote
     ((haskell-process-use-ghci . t)
