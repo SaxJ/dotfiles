@@ -30,7 +30,12 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(csv
+   '(python
+     (dart :variables
+           dart-backend 'lsp
+           lsp-dart-sdk-dir "/home/saxonj/flutter/bin/cache/dart-sdk"
+           dart-server-format-on-save t)
+     csv
      neotree
      prettier
      terraform
@@ -42,8 +47,7 @@ values."
      elm
      docker
      (csharp :variables
-             csharp-backend 'omnisharp
-             omnisharp-debug t)
+             csharp-backend 'omnisharp)
      (haskell :variables
               haskell-completion-backend 'intero
               haskell-enable-hindent-style "johan-tibell")
@@ -381,7 +385,7 @@ This function is called at the very end of Spacemacs initialization."
  '(org-agenda-files (quote ("~/Dropbox/org/Todo.org")))
  '(package-selected-packages
    (quote
-    (csv-mode fuzzy company-statistics company auto-yasnippet ac-ispell auto-complete phpunit phpcbf php-extras php-auto-yasnippets yasnippet drupal-mode php-mode yaml-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy)))
+    (yapfify stickyfunc-enhance pytest pyenv-mode py-isort pippel pipenv pyvenv pip-requirements lsp-python-ms live-py-mode importmagic epc ctable concurrent deferred helm-pydoc helm-gtags helm-cscope xcscope ggtags dap-mode lsp-treemacs bui treemacs pfuture cython-mode counsel-gtags company-anaconda blacken anaconda-mode pythonic xterm-color web-mode web-beautify wakatime-mode tide typescript-mode terraform-mode hcl-mode tagedit swift-mode sql-indent smeargle slim-mode shell-pop scss-mode sass-mode pug-mode orgit org-projectile org-category-capture org-present org-pomodoro alert log4e gntp org-mime org-download omnisharp multi-term magit-gitflow magit-popup livid-mode skewer-mode simple-httpd js2-refactor multiple-cursors js2-mode js-doc intero htmlize hlint-refactor hindent helm-themes helm-swoop helm-projectile helm-mode-manager helm-hoogle helm-gitignore helm-flx helm-descbinds helm-css-scss helm-company helm-c-yasnippet helm-ag haskell-snippets haml-mode gnuplot gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe+ git-gutter-fringe fringe-helper git-gutter+ git-gutter flycheck-pos-tip pos-tip flycheck-haskell flycheck-elm flycheck evil-magit magit git-commit with-editor eshell-z eshell-prompt-extras esh-help emmet-mode elm-mode reformatter dockerfile-mode docker transient tablist json-mode docker-tramp json-snatcher json-reformat diff-hl csv-mode csharp-mode company-web web-completion-data company-tern dash-functional tern company-ghci company-ghc ghc haskell-mode company-cabal coffee-mode cmm-mode ace-jump-helm-line helm helm-core fuzzy company-statistics company auto-yasnippet ac-ispell auto-complete phpunit phpcbf php-extras php-auto-yasnippets yasnippet drupal-mode php-mode yaml-mode ws-butler winum which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-make google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump popup f dash s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed async aggressive-indent adaptive-wrap ace-window ace-link avy)))
  '(prettier-js-command "yarn fix")
  '(safe-local-variable-values
    (quote

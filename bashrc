@@ -45,13 +45,15 @@ export PIP_INSTALL=$HOME/global-pip/bin
 # COMPOSER PACKAGES
 export COMPOSER_BINS=$HOME/.config/composer/vendor/bin
 
+export FLUTTER_BIN=$HOME/flutter/bin
+
 # COMPLETION
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 
 # PATH
 export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL"
-export PATH=$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
+export PATH=$FLUTTER_BIN:$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
 
 # HOW DO?
 alias hd="howdoi"
@@ -299,6 +301,7 @@ alias df='df -h'                          # human-readable sizes
 alias free='free -m'                      # show sizes in MB
 alias np='nano -w PKGBUILD'
 alias more=less
+alias timesync="sudo ntpdate -u pool.ntp.org"
 
 xhost +local:root > /dev/null 2>&1
 
