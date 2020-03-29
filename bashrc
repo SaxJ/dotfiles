@@ -36,6 +36,8 @@ export YARN_INSTALL_PATH=$HOME/.yarn/bin
 # NPM
 export NPM_INSTALL=/home/saxonj/npm-global
 
+export GEMS=/home/saxonj/.gem/ruby/2.7.0/bin
+
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 
@@ -52,7 +54,7 @@ export FLUTTER_BIN=$HOME/flutter/bin
     . /usr/share/bash-completion/bash_completion
 
 # PATH
-export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL"
+export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS"
 export PATH=$FLUTTER_BIN:$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
 
 # HOW DO?

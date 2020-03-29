@@ -337,7 +337,14 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  ;; Yarn executables
   (add-to-list 'exec-path "/home/saxonj/.yarn/bin")
+
+  ;; Org mode customisations
+  (setq org-todo-keywords
+      (quote ((sequence "TODO(t)" "IN_PROGRESS(i)" "|" "DONE(d)")
+              (sequence "WAITING(w@/)" "HOLD(h@/)" "|" "CANCELLED(c@/)"))))
+  (setq org-enforce-todo-dependencies t)
   )
 
 (defun dotspacemacs/user-config ()
