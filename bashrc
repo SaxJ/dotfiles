@@ -56,7 +56,7 @@ export DOOM=$HOME/.emacs.d/bin
     . /usr/share/bash-completion/bash_completion
 
 # PATH
-export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM"
+export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS"
 export PATH=$FLUTTER_BIN:$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
 
 # HOW DO?
