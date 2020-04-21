@@ -118,7 +118,7 @@
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
        ;;faust             ; dsp, but you get to keep your soul
-       (fsharp +lsp)           ; ML stands for Microsoft's Language
+       (fsharp)           ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;go                ; the hipster dialect
        (haskell +dante)  ; a language that's lazier than I am
@@ -159,7 +159,7 @@
        web               ; the tubes
 
        :email
-       ;;(mu4e +gmail)
+       (mu4e +gmail)
        ;;notmuch
        ;;(wanderlust +gmail)
 

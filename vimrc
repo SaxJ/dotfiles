@@ -25,7 +25,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'itchyny/calendar.vim'
 Plug 'vimwiki/vimwiki'
 Plug 'vim-vdebug/vdebug'
 Plug 'sunaku/vim-dasht'
@@ -33,9 +32,7 @@ Plug 'Olical/vim-expand'
 Plug 'jremmen/vim-ripgrep'
 Plug 'wakatime/vim-wakatime'
 Plug 'isobit/vim-caddyfile'
-Plug 'jceb/vim-orgmode'
 Plug 'liuchengxu/vista.vim'
-Plug 'freitass/todo.txt-vim'
 
 " HTML
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
@@ -47,7 +44,6 @@ Plug 'rstacruz/sparkup', { 'for': 'html' }
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
 
 " PYTHON
-" Plug 'Shougo/vimproc.vim', {'do' : 'make', 'for': 'python'}
 com! FormatJSON %!python -m json.tool
 
 " DOTNET
@@ -81,18 +77,11 @@ Plug 'maksimr/vim-jsbeautify', { 'for': 'javascript' }
 Plug 'Quramy/vim-js-pretty-template', { 'for': 'javascript' }
 Plug 'posva/vim-vue', { 'for': 'vue' }
 
-" HASKELL
-Plug 'pbrisbin/vim-syntax-shakespeare', { 'for': 'hamlet' }
-Plug 'parsonsmatt/intero-neovim'
-
 " MARKDOWN
 Plug 'gabrielelana/vim-markdown', { 'for': 'markdown' }
 
 " PURESCRIPT
 Plug 'purescript-contrib/purescript-vim'
-
-" ELM
-Plug 'elmcast/elm-vim'
 
 " PROLOG
 Plug 'adimit/prolog.vim'
@@ -135,11 +124,23 @@ set t_Co=256
 set clipboard=unnamedplus
 set noswapfile
 set cursorline
+
+" some things have trouble with backup files
+set nobackup
+set nowritebackup
+
+" give more message space
+set cmdheight=2
+
+set updatetime=300
+set shortmess+=c
+set signcolumn=yes
+
 filetype plugin indent on
 autocmd BufWritePost *.php %s/\$\$/\$/ge
 set pastetoggle=<F2>
 
-" Important shit
+" LEADER KEYS
 nnoremap ; :
 let mapleader="\<Space>"
 let maplocalleader=","
@@ -192,11 +193,32 @@ vnoremap // y/<C-R>"<CR>
 
 " FILE BROWSER
 noremap <C-e> :NERDTreeToggle<CR>
+
+" NETRW CLEANUP
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
 " TAB-COMPLETE FOR AUTOCOMPLETE
-"inoremap <expr><tab> pumvisible() ? "\<c-n>" : "\<tab>"
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Trigger completion with ctrl-space
+inoremap <silent><expr> <c-space> coc#refresh()
+
+" Enter to confirm completion
+if exists('*complete_info')
+  inoremap <expr> <cr> complete_info()["selected"] != "-1" ? "\<C-y>" : "\<C-g>u\<CR>"
+else
+  imap <expr> <cr> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
+endif
 
 " GIT BINDINGS
 map <Leader>gs :Gstatus<CR>
@@ -289,67 +311,86 @@ nmap <silent> gr <Plug>(coc-references)
 nmap <silent> ne <Plug>(coc-diagnostic-next)
 nmap <silent> Ne <Plug>(coc-diagnostic-prev)
 
-" ORG MODE
-nnoremap <silent> <leader>o :e ~/Dropbox/org/Todo.org<CR>
+" Use K to show documentation in preview window.
+nnoremap <silent> K :call <SID>show_documentation()<CR>
 
-" INTERO
-augroup interoMaps
-  au!
-  " Maps for intero. Restrict to Haskell buffers so the bindings don't collide.
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
 
-  " Background process and window management
-  au FileType haskell nnoremap <silent> <leader>is :InteroStart<CR>
-  au FileType haskell nnoremap <silent> <leader>ik :InteroKill<CR>
+" Highlight the symbol and its references when holding the cursor.
+autocmd CursorHold * silent call CocActionAsync('highlight')
 
-  " Open intero/GHCi split horizontally
-  au FileType haskell nnoremap <silent> <leader>io :InteroOpen<CR>
-  " Open intero/GHCi split vertically
-  au FileType haskell nnoremap <silent> <leader>iov :InteroOpen<CR><C-W>H
-  au FileType haskell nnoremap <silent> <leader>ih :InteroHide<CR>
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
 
-  " Reloading (pick one)
-  " Automatically reload on save
-  au BufWritePost *.hs InteroReload
-  " Manually save and reload
-  au FileType haskell nnoremap <silent> <leader>wr :w \| :InteroReload<CR>
+" Formatting selected code.
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
 
-  " Load individual modules
-  au FileType haskell nnoremap <silent> <leader>il :InteroLoadCurrentModule<CR>
-  au FileType haskell nnoremap <silent> <leader>if :InteroLoadCurrentFile<CR>
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder.
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
 
-  " Type-related information
-  " Heads up! These next two differ from the rest.
-  au FileType haskell map <silent> <leader>t <Plug>InteroGenericType
-  au FileType haskell map <silent> <leader>T <Plug>InteroType
-  au FileType haskell nnoremap <silent> <leader>it :InteroTypeInsert<CR>
+" Applying codeAction to the selected region.
+" Example: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
 
-  " Navigation
-  au FileType haskell nnoremap <silent> <leader>jd :InteroGoToDef<CR>
+" Remap keys for applying codeAction to the current line.
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Apply AutoFix to problem on the current line.
+nmap <leader>qf  <Plug>(coc-fix-current)
 
-  " Managing targets
-  " Prompts you to enter targets (no silent):
-  au FileType haskell nnoremap <leader>ist :InteroSetTargets<SPACE>
-augroup END
+" Introduce function text object
+" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
 
-" Intero starts automatically. Set this if you'd like to prevent that.
-let g:intero_start_immediately = 1
+" Use <TAB> for selections ranges.
+" NOTE: Requires 'textDocument/selectionRange' support from the language server.
+" coc-tsserver, coc-python are the examples of servers that support it.
+nmap <silent> <TAB> <Plug>(coc-range-select)
+xmap <silent> <TAB> <Plug>(coc-range-select)
 
-" Enable type information on hover (when holding cursor at point for ~1 second).
-let g:intero_type_on_hover = 1
+" Add `:Format` command to format current buffer.
+command! -nargs=0 Format :call CocAction('format')
 
-" Change the intero window size; default is 10.
-let g:intero_window_size = 15
+" Add `:Fold` command to fold current buffer.
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
-" Sets the intero window to split vertically; default is horizontal
-let g:intero_vertical_split = 1
+" Add `:OR` command for organize imports of the current buffer.
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
 
-let g:intero_backend = {
-    \ 'command': 'ghci',
-    \ 'cwd': expand('%:p:h'),
-    \ }
+" Add (Neo)Vim's native statusline support.
+" NOTE: Please see `:h coc-status` for integrations with external plugins that
+" provide custom statusline: lightline.vim, vim-airline.
+set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
-" OPTIONAL: Make the update time shorter, so the type info will trigger faster.
-set updatetime=500
-
-" TODO
-nnoremap <silent> <leader>t :e ~/Dropbox/todo/todo.txt<CR>
+" Mappings using CoCList:
+" Show all diagnostics.
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions.
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands.
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document.
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols.
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list.
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
