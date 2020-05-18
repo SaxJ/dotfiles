@@ -8,18 +8,16 @@
                 "storagePath": "/tmp/intelephense"
             }
         },
-        "purescript": {
-            "command": "purescript-language-server",
-            "args": ["--stdio"],
-            "filetypes": ["purescript"],
-            "rootPatterns": ["bower.json", "psc-package.json", "spago.dhall"]
-        },
-        "elmLS": {
-            "command": "elm-language-server",
-            "filetypes": ["elm"],
-            "rootPatterns": ["elm.json"],
+        "ccls": {
+            "command": "ccls",
+            "filetypes": ["c", "cpp", "objc", "objcpp"],
+            "rootPatterns": [".ccls", "compile_commands.json", ".git/", ".hg/"],
             "initializationOptions": {
+                "cache": {
+                    "directory": "/tmp/ccls"
+                }
             }
-    }
-    }
+        }
+    },
+    "python.jediEnabled": false
 }

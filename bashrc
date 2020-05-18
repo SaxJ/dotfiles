@@ -51,13 +51,14 @@ export FLUTTER_BIN=$HOME/flutter/bin
 
 export DOOM=$HOME/.emacs.d/bin
 
+export DOTNET_TOOLS=$HOME/.dotnet/tools
+
 # COMPLETION
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] && \
     . /usr/share/bash-completion/bash_completion
 
 # PATH
-export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS"
-export PATH=$FLUTTER_BIN:$DOTNET_PATH:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$PATH
+export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS:$FLUTTER_BIN:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$DOTNET_TOOLS"
 
 # HOW DO?
 alias hd="howdoi"
@@ -349,3 +350,8 @@ ex ()
   fi
 }
 source /usr/share/nvm/init-nvm.sh
+
+# JQ Magic
+function jq_contains() {
+    jq -c ".[] | select(.[\"@message\"] | contains(\"$1\"))";
+}

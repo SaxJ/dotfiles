@@ -10,7 +10,8 @@ call plug#begin('~/.vim/plugged')
 Plug 'dikiaap/minimalist', { 'as': 'minimalist' }
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'crusoexia/vim-monokai', { 'as': 'monokai' }
-Plug 'tpope/vim-vividchalk'
+Plug 'tpope/vim-vividchalk', { 'as': 'vividchalk' }
+Plug 'kyoz/purify', { 'rtp': 'vim' }
 
 " GIT
 Plug 'tpope/vim-fugitive'
@@ -19,7 +20,8 @@ Plug 'junegunn/gv.vim'
 
 " GENERAL CODE
 Plug 'scrooloose/nerdtree'
-Plug 'neoclide/coc.nvim', {'tag': '*', 'do': { -> coc#util#install()}}
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'neoclide/coc.nvim', {'branch': 'release', 'tag': '*', 'do': { -> coc#util#install()}}
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'terryma/vim-multiple-cursors'
@@ -33,22 +35,15 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'wakatime/vim-wakatime'
 Plug 'isobit/vim-caddyfile'
 Plug 'liuchengxu/vista.vim'
+Plug 'sheerun/vim-polyglot'
 
 " HTML
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html' }
 Plug 'lumiliet/vim-twig', { 'for': 'html' }
-Plug 'rstacruz/sparkup', { 'for': 'html' }
 
 " GRAPHQL
 Plug 'jparise/vim-graphql', { 'for': 'graphql' }
-
-" PYTHON
-com! FormatJSON %!python -m json.tool
-
-" DOTNET
-Plug 'kongo2002/fsharp-vim', { 'for': 'fsharp', }
-Plug 'OrangeT/vim-csharp'
 
 " LATEX
 Plug 'lervag/vimtex'
@@ -185,14 +180,20 @@ map <C-c> <Esc>
 nnoremap <Leader>s :terminal<CR>
 
 " COPY FILE PATH
-nmap <Leader>cl :let @*=expand("%:p")<CR>  
-nmap <Leader>cs :let @*=expand("%")<CR>
+nmap <Leader>cp :let @+=expand("%")<CR>
+
+" YANK ENTRIRE FILE
+nnoremap <silent> <Leader>Y ggVGy
 
 " SEARCH HIGHLIGHTED THING
 vnoremap // y/<C-R>"<CR>
 
 " FILE BROWSER
 noremap <C-e> :NERDTreeToggle<CR>
+let NERDTreeQuitOnOpen = 1
+let NERDTreeAutoDeleteBuffer = 1
+let NERDTreeMinimalUI = 1
+let NERDTreeDirArrows = 1
 
 " NETRW CLEANUP
 let g:netrw_banner = 0
@@ -244,7 +245,7 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 " COLOURS
 set t_Co=256 
 syntax on 
-colorscheme vividchalk
+colorscheme purify
 
 " PHP CBF
 map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
@@ -292,24 +293,16 @@ autocmd VimEnter * command! -bang -nargs=* Rg
   \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
 \ <bang>0)
 
-" START SCREEN
-function! MyStartscreen()
-	let l:fortune = systemlist('fortune -a')
-	call append('0', ['', ''] + map(l:fortune, '"        " . v:val'))
-	:1
-	redraw!
-
-	nnoremap <buffer> <silent> <Return> :enew<CR>:call startscreen#start()<CR>
-endfun
-let g:Startscreen_function = function('MyStartscreen') 
+" WIKI
+let g:vimwiki_list = [{'path': '~/.dotfiles/wiki/'}]
 
 " COC
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
 nmap <silent> gr <Plug>(coc-references)
-nmap <silent> ne <Plug>(coc-diagnostic-next)
-nmap <silent> Ne <Plug>(coc-diagnostic-prev)
+nmap <silent> dn <Plug>(coc-diagnostic-next)
+nmap <silent> dN <Plug>(coc-diagnostic-prev)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -394,3 +387,5 @@ nnoremap <silent> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+nnoremap <silent> <Leader>fj :%!jq .<CR>
