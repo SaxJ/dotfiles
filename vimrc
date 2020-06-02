@@ -12,6 +12,7 @@ Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'crusoexia/vim-monokai', { 'as': 'monokai' }
 Plug 'tpope/vim-vividchalk', { 'as': 'vividchalk' }
 Plug 'kyoz/purify', { 'rtp': 'vim' }
+Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
 
 " GIT
 Plug 'tpope/vim-fugitive'
@@ -28,7 +29,6 @@ Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
-Plug 'vim-vdebug/vdebug'
 Plug 'sunaku/vim-dasht'
 Plug 'Olical/vim-expand'
 Plug 'jremmen/vim-ripgrep'
@@ -245,13 +245,10 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 " COLOURS
 set t_Co=256 
 syntax on 
-colorscheme purify
+colorscheme gruvbox
 
 " PHP CBF
 map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
-
-" VDEBUG
-nnoremap <silent> <leader>e :VdebugEval
 
 " FZF
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
