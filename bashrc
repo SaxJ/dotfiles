@@ -154,6 +154,7 @@ fi
 # DOCKER
 alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
 alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias pacman-clean='sudo pacman -Rns $(pacman -Qtdq)'
 
 # Noise Generation
 alias silence='play  -n synth brownnoise vol'
