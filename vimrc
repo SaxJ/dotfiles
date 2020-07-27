@@ -119,6 +119,8 @@ set t_Co=256
 set clipboard=unnamedplus
 set noswapfile
 set cursorline
+set grepprg=rg\ --vimgrep
+set grepformat=%f:%l:%c:%m
 
 " some things have trouble with backup files
 set nobackup

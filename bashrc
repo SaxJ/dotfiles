@@ -6,13 +6,9 @@
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
 
 export EDITOR=/usr/bin/nvim
 export VISUAL=$EDITOR
-
-### MINE
-#PS1='\e[37;1m\u@\H \W \$\e[0m '
 
 # VIM
 if [ -x "$(command -v nvim)" ]; then
@@ -58,7 +54,7 @@ export DOTNET_TOOLS=$HOME/.dotnet/tools
     . /usr/share/bash-completion/bash_completion
 
 # PATH
-export PATH="$PATH:/usr/local/bin:$HOME/bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS:$FLUTTER_BIN:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$DOTNET_TOOLS"
+export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS:$FLUTTER_BIN:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$DOTNET_TOOLS"
 
 # HOW DO?
 alias hd="howdoi"
@@ -364,3 +360,7 @@ function hejq() {
 # tabtab source for packages
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
+
+SILVER=(status:black:white dir:blue:black git:green:black cmdtime:magenta:black)
+export SILVER_SHELL=bash
+eval "$(silver init)"
