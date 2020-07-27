@@ -13,6 +13,9 @@ import System.Exit
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
 import XMonad.Hooks.ManageDocks
+import XMonad.Layout.Spacing
+import XMonad.Hooks.ManageHelpers
+import XMonad.Hooks.EwmhDesktops(fullscreenEventHook,ewmh)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -66,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "rofi -show drun -show-icons")
 
     -- launch gmrun
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
@@ -216,6 +219,7 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
     [ className =? "MPlayer"        --> doFloat
     , className =? "Gimp"           --> doFloat
+    , className =? "Albion-Online"  --> doFullFloat
     , resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 
@@ -255,7 +259,7 @@ myStartupHook = return ()
 --
 main = do
     xmproc <- spawnPipe "xmobar -x 0 /home/saxonj/.xmonad/xmobar.config"
-    xmonad $ docks defaults
+    xmonad $ ewmh $ docks defaults
 
 -- A structure containing your configuration settings, overriding
 -- fields in the default config. Any you don't override, will
