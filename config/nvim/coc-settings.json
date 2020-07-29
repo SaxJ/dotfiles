@@ -19,5 +19,6 @@
             }
         }
     },
-    "python.jediEnabled": false
+    "python.jediEnabled": false,
+    "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "typescript"]
 }
