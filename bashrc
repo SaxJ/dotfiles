@@ -2,6 +2,8 @@
 # ~/.bashrc
 #
 
+export TERM=kitty
+
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
@@ -126,10 +128,6 @@ alias suz-update='helmfile delete --purge && helmfile apply --values local.yml'
 kube-vars() { ~/Documents/k8s/tools/manage_ssm_vars.py list ci-cia; }
 kube-migration() { kubectl exec $1 -c php-fpm -- /var/www/quadra/healthengine.com.au/lib/vendor/bin/phinx --configuration=/var/www/quadra/healthengine.com.au/admin/sql_scripts/phinx.yml create $2; }
 
-# GIT PROMPT
-GIT_PROMPT_ONLY_IN_REPO=1
-GIT_PROMPT_FETCH_REMOTE_STATUS=0
-source ~/.bash-git-prompt/gitprompt.sh
 source <(kubectl completion bash)
 
 # HASKELL
