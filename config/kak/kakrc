@@ -20,11 +20,12 @@ hook global WinCreate ^[^*]+$ %{editorconfig-load}
 
 # LSP
 eval %sh{kak-lsp --kakoune -s $kak_session}
-hook global WinSetOption filetype=(php) %{
+hook global WinSetOption filetype=(php|typescript|csharp) %{
         lsp-enable-window
 }
 
 # Settings
+add-highlighter /global number-lines
 
 # Plugins
 plug "andreyorst/fzf.kak"
