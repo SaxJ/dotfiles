@@ -256,7 +256,7 @@ map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 map <Leader>bt :BTags<CR>
 
-nnoremap <silent> <leader><space> :GFiles<CR>
+nnoremap <silent> <leader><space> :Files<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>A :Windows<CR>
 nnoremap <silent> <leader>; :BLines<CR>
