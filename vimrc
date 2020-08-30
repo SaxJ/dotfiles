@@ -34,7 +34,7 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'isobit/vim-caddyfile'
 Plug 'liuchengxu/vista.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'neovim/nvim-lsp'
+Plug 'SaxJ/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 
 " HTML
@@ -306,4 +306,6 @@ require'nvim_lsp'.tsserver.setup{}
 require'nvim_lsp'.omnisharp.setup{}
 require'nvim_lsp'.purescriptls.setup{}
 require'nvim_lsp'.pyls.setup{}
+require'nvim_lsp'.hls.setup{}
+require'nvim_lsp'.sumneko_lua.setup{}
 EOF
