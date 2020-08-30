@@ -303,4 +303,7 @@ require'nvim_lsp'.ccls.setup{}
 require'nvim_lsp'.vimls.setup{}
 require'nvim_lsp'.intelephense.setup{}
 require'nvim_lsp'.tsserver.setup{}
+require'nvim_lsp'.omnisharp.setup{}
+require'nvim_lsp'.purescriptls.setup{}
+require'nvim_lsp'.pyls.setup{}
 EOF
