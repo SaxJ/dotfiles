@@ -34,8 +34,10 @@ Plug 'jremmen/vim-ripgrep'
 Plug 'isobit/vim-caddyfile'
 Plug 'liuchengxu/vista.vim'
 Plug 'sheerun/vim-polyglot'
-Plug 'SaxJ/nvim-lspconfig'
+Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
+Plug 'sbdchd/neoformat'
+Plug 'easymotion/vim-easymotion'
 
 " HTML
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
@@ -249,7 +251,8 @@ map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 map <Leader>bt :BTags<CR>
 
-nnoremap <silent> <leader><space> :Files<CR>
+nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader>ft :Filestypes<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>A :Windows<CR>
 nnoremap <silent> <leader>; :BLines<CR>
@@ -260,7 +263,6 @@ nnoremap <silent> <leader>. :RgIn
 
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
-nnoremap <silent> <leader>ft :Filetypes<CR>
 
 " SEARCHING WITH RG
 function! SearchWordWithRg()
@@ -290,6 +292,7 @@ let g:vimwiki_list = [{'path': '~/.dotfiles/wiki/'}]
 
 nnoremap <silent> <Leader>fj :%!jq .<CR>
 
+nnoremap <silent> ff    <cmd>lua vim.lsp.buf.formatting()<CR>
 nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>

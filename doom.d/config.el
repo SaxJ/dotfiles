@@ -35,6 +35,12 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+(use-package lsp-haskell
+  :ensure t
+  :config
+  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper")
+)
+
 
 ;; Here are some additional functions/macros that could help you configure Doom:
 ;;

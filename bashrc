@@ -344,7 +344,7 @@ ex ()
     echo "'$1' is not a valid file"
   fi
 }
-source /usr/share/nvm/init-nvm.sh
+# source /usr/share/nvm/init-nvm.sh
 
 # JQ Magic
 function jq_contains() {
@@ -362,3 +362,9 @@ function hejq() {
 SILVER=(status:black:white dir:blue:black git:green:black cmdtime:magenta:black)
 export SILVER_SHELL=bash
 eval "$(silver init)"
+
+function pac-search() {
+    pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)';
+}
+
+alias nixify='source /etc/profile.d/nix{,-daemon}.sh'
