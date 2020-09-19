@@ -1,8 +1,0 @@
-= Personal Wiki =
-Just a bunch of interesting things I find. Mainly for keeping track of my algorithms learnings.
-
-== Algorithms ==
-    * [[Prefix Sum]] - When you want to find a subarray with some value.
-
-== Useful Tricks ==
-    * Use jq to filter for  objects containing something: `jq -c '.[] | select(.genre | contains("house"))'`

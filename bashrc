@@ -9,6 +9,8 @@ export TERM=kitty
 
 alias ls='ls --color=auto'
 
+set -o vi
+
 export EDITOR=/usr/bin/nvim
 export VISUAL=$EDITOR
 
