@@ -38,6 +38,7 @@ Plug 'neovim/nvim-lspconfig'
 Plug 'nvim-lua/completion-nvim'
 Plug 'sbdchd/neoformat'
 Plug 'easymotion/vim-easymotion'
+Plug 'nvim-treesitter/nvim-treesitter'
 
 " HTML
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
@@ -288,7 +289,7 @@ autocmd VimEnter * command! -bang -nargs=* Rg
 \ <bang>0)
 
 " WIKI
-let g:vimwiki_list = [{'path': '~/.dotfiles/wiki/'}]
+let g:vimwiki_list = [{'path': '~/wiki/'}]
 
 nnoremap <silent> <Leader>fj :%!jq .<CR>
 
@@ -311,4 +312,15 @@ require'nvim_lsp'.purescriptls.setup{}
 require'nvim_lsp'.pyls.setup{}
 require'nvim_lsp'.hls.setup{}
 require'nvim_lsp'.sumneko_lua.setup{}
+EOF
+
+" SYNTAX HIGHLIGHTING
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+  ensure_installed = "all",     -- one of "all", "language", or a list of languages
+  highlight = {
+    enable = true,              -- false will disable the whole extension
+    disable = { },  -- list of language that will be disabled
+  },
+}
 EOF

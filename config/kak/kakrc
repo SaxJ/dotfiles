@@ -29,3 +29,7 @@ add-highlighter /global number-lines
 
 # Plugins
 plug "andreyorst/fzf.kak"
+plug "Parasrah/csharp.kak"
+
+# Bindings
+map global user f ': fzf-mode<ret>'
