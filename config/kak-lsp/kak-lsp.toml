@@ -8,4 +8,4 @@ args = ["--stdio"]
 filetypes = ["csharp"]
 roots = ["*.sln"]
 command = "omnisharp-server"
-args = ["-lsp", "-d"]
+args = ["-v"]
