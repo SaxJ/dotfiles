@@ -7,24 +7,19 @@ call plug#begin('~/.vim/plugged')
 "======================================================
 "PLUGINS
 "COLOUR THEME
-Plug 'dikiaap/minimalist', { 'as': 'minimalist' }
-Plug 'dracula/vim', { 'as': 'dracula' }
-Plug 'crusoexia/vim-monokai', { 'as': 'monokai' }
-Plug 'tpope/vim-vividchalk', { 'as': 'vividchalk' }
-Plug 'kyoz/purify', { 'rtp': 'vim' }
-Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+Plug 'embark-theme/vim', { 'as': 'embark' }
 
 " GIT
 Plug 'tpope/vim-fugitive'
 Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " GENERAL CODE
+Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'terryma/vim-multiple-cursors'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
 Plug 'vimwiki/vimwiki'
@@ -39,6 +34,7 @@ Plug 'nvim-lua/completion-nvim'
 Plug 'sbdchd/neoformat'
 Plug 'easymotion/vim-easymotion'
 Plug 'nvim-treesitter/nvim-treesitter'
+Plug 'haya14busa/incsearch.vim'
 
 " HTML
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
@@ -53,7 +49,7 @@ Plug 'lervag/vimtex'
 let g:tex_flavor = 'latex'
 
 " PHP
-autocmd FileType php setl iskeyword+=$ " Make the $ in php variables part of the word
+"autocmd FileType php setl iskeyword+=$ " Make the $ in php variables part of the word
 let g:php_manual_online_search_shortcut = ''
 
 " TYPESCRIPT
@@ -136,6 +132,10 @@ set pastetoggle=<F2>
 nnoremap ; :
 let mapleader="\<Space>"
 let maplocalleader=","
+
+" SEARCHING
+map /  <Plug>(incsearch-forward)
+map ?  <Plug>(incsearch-backward)
 
 " STATUS LINE
 function! GitBranch()
@@ -243,7 +243,7 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 " COLOURS
 set t_Co=256 
 syntax on 
-colorscheme gruvbox
+colorscheme embark
 
 " PHP CBF
 map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
@@ -259,8 +259,7 @@ nnoremap <silent> <leader>A :Windows<CR>
 nnoremap <silent> <leader>; :BLines<CR>
 nnoremap <silent> <leader>o :BTags<CR>
 nnoremap <silent> <leader>? :History<CR>
-nnoremap <silent> <leader>/ :execute 'Rg ' . input('Rg/')<CR>
-nnoremap <silent> <leader>. :RgIn 
+nnoremap <silent> <leader>/ :Rg<CR>
 
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
@@ -294,7 +293,7 @@ let g:vimwiki_list = [{'path': '~/wiki/'}]
 nnoremap <silent> <Leader>fj :%!jq .<CR>
 
 nnoremap <silent> ff    <cmd>lua vim.lsp.buf.formatting()<CR>
-nnoremap <silent> gd <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <silent> gd    <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
 nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementation()<CR>
