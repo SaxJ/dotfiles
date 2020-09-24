@@ -60,9 +60,6 @@ export DOTNET_TOOLS=$HOME/.dotnet/tools
 # PATH
 export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS:$FLUTTER_BIN:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$DOTNET_TOOLS"
 
-# HOW DO?
-alias hd="howdoi"
-
 # EXCERSISM
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
     source ~/.config/exercism/exercism_completion.bash
@@ -74,6 +71,8 @@ alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-ph
 # GIT GOOD
 alias ga='git add -i'
 alias gc='git ci'
+alias gp='git pull'
+alias gpu='git push'
 alias resolve='grep -lr "<<<<<<<" . | xargs git checkout'
 
 # KUBE MADNESS
@@ -368,5 +367,3 @@ eval "$(silver init)"
 function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)';
 }
-
-alias nixify='source /etc/profile.d/nix{,-daemon}.sh'
