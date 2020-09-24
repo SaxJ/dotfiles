@@ -252,7 +252,7 @@ map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 map <Leader>bt :BTags<CR>
 
-nnoremap <silent> <leader>ff :Files<CR>
+nnoremap <silent> <leader><leader> :Files<CR>
 nnoremap <silent> <leader>ft :Filestypes<CR>
 nnoremap <silent> <leader>a :Buffers<CR>
 nnoremap <silent> <leader>A :Windows<CR>
@@ -281,12 +281,6 @@ function! SearchVisualSelectionWithRg() range
   let &clipboard = old_clipboard
   execute 'Rg' selection
 endfunction
-
-autocmd VimEnter * command! -bang -nargs=* Rg
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-\ <bang>0)
 
 " WIKI
 let g:vimwiki_list = [{'path': '~/wiki/'}]
@@ -324,3 +318,5 @@ require'nvim-treesitter.configs'.setup {
   },
 }
 EOF
+
+map <localleader> <Plug>(easymotion-prefix)

@@ -6,6 +6,6 @@ args = ["--stdio"]
 
 [language.csharp]
 filetypes = ["csharp"]
-roots = ["*.sln"]
-command = "omnisharp-server"
-args = ["-lsp", "-d"]
+roots = ["*.sln", "*.csproj"]
+command = "/home/saxonj/.cache/nvim/nvim_lsp/omnisharp/run"
+args = ["--languageserver"]
