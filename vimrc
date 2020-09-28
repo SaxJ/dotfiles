@@ -249,6 +249,8 @@ let g:vimwiki_list = [{'path': '~/wiki/'}]
 
 nnoremap <silent> <Leader>fj :%!jq .<CR>
 
+
+map <localleader> <Plug>(easymotion-prefix)
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " TAB COMPLETION
 inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
