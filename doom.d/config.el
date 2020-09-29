@@ -45,8 +45,9 @@
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 
+;; The doge loaf
+(setq fancy-splash-image "~/.doom.d/splash/loaf.png")
 
-;; Here are some additional functions/macros that could help you configure Doom:
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
