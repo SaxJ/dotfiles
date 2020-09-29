@@ -72,6 +72,8 @@ Plug 'adimit/prolog.vim'
 call plug#end()
 filetype plugin indent on    " required
 
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-pyls']
+
 "SETTINGS
 set softtabstop=4
 set shiftwidth=4
