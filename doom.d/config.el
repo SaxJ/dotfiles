@@ -48,6 +48,9 @@
 ;; The doge loaf
 (setq fancy-splash-image "~/.doom.d/splash/loaf.png")
 
+;; Better PHP indentation
+(setq c-default-style "linux" c-basic-offset 4)
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
