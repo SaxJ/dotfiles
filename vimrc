@@ -172,8 +172,8 @@ map <C-c> <Esc>
 " Shell
 nnoremap <Leader>s :terminal<CR>
 
-" COPY FILE PATH
-nmap <Leader>cp :let @+=expand("%")<CR>
+" Commenting
+nnoremap <Leader>cm :Commentary<CR>
 
 " YANK ENTRIRE FILE
 nnoremap <silent> <Leader>Y ggVGy
@@ -217,11 +217,13 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 " COLOURS
 set t_Co=256 
 syntax on 
-colorscheme gruvbox
+colorscheme embark
+let g:lightline = {
+      \ 'colorscheme': 'embark',
+      \ }
 
 " PHP CBF
 map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
-
 map <localleader> <Plug>(easymotion-prefix)
 
 " FZF
@@ -297,7 +299,7 @@ nmap <silent> ]g <Plug>(coc-diagnostic-next)
 nmap <silent> gd <Plug>(coc-definition)
 nmap <silent> gy <Plug>(coc-type-definition)
 nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
+nmap <silent> gD <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>

@@ -18,3 +18,5 @@
 	templateDir = /home/saxonj/.git-templates
 [pull]
 	rebase = false
+[github]
+	user = SaxJ
