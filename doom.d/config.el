@@ -29,7 +29,11 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/wiki")
+(after! org
+  (setq org-directory "~/Dropbox/wiki")
+  (map! :map org-mode-map
+        :n "M-j" #'org-metadown
+        :n "M-k" #'org-metaup))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
@@ -47,9 +51,6 @@
 
 ;; The doge loaf
 (setq fancy-splash-image "~/.doom.d/splash/loaf.png")
-
-;; Better PHP indentation
-(setq c-default-style "linux" c-basic-offset 4)
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
