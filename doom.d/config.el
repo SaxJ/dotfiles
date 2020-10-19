@@ -29,8 +29,9 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
+(setq org-directory "~/Dropbox/wiki")
+(setq org-agenda-files (append '("~/Dropbox/wiki/Todo.org") (file-expand-wildcards "~/Dropbox/wiki/journal/*")))
 (after! org
-  (setq org-directory "~/Dropbox/wiki")
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup))
