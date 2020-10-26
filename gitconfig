@@ -20,3 +20,5 @@
 	rebase = false
 [github]
 	user = SaxJ
+[push]
+	default = simple
