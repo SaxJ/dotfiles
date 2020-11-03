@@ -52,6 +52,10 @@
 ;; The doge loaf
 (setq fancy-splash-image "~/.doom.d/splash/loaf.png")
 
+(use-package! web-mode
+  :mode (("\\.cshtml" . web-mode)
+         ("\\.razor" . web-mode)))
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
