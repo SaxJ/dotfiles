@@ -56,6 +56,10 @@
         '(not emacs-lisp-mode sql-mode tex-mode latex-mode yaml-mode))
 (setq lsp-file-watch-threshold 10000)
 
+(use-package! web-mode
+  :mode (("\\.cshtml" . web-mode)
+         ("\\.razor" . web-mode)))
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
