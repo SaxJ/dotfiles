@@ -5,7 +5,7 @@ command = "typescript-language-server"
 args = ["--stdio"]
 
 [language.csharp]
-filetypes = ["csharp"]
+filetypes = ["csharp", "cs"]
 roots = ["*.sln", "*.csproj"]
 command = "/home/saxonj/.cache/nvim/nvim_lsp/omnisharp/run"
 args = ["--languageserver"]

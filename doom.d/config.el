@@ -52,6 +52,10 @@
 ;; The doge loaf
 (setq fancy-splash-image "~/.doom.d/splash/loaf.png")
 
+(setq +format-on-save-enabled-modes
+        '(not emacs-lisp-mode sql-mode tex-mode latex-mode yaml-mode))
+(setq lsp-file-watch-threshold 10000)
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
