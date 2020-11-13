@@ -54,11 +54,15 @@
 
 (setq +format-on-save-enabled-modes
         '(not emacs-lisp-mode sql-mode tex-mode latex-mode yaml-mode))
-(setq lsp-file-watch-threshold 10000)
 
 (use-package! web-mode
   :mode (("\\.cshtml" . web-mode)
          ("\\.razor" . web-mode)))
+
+(use-package! lsp-mode
+  :config
+  (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
+  (setq lsp-file-watch-threshold 20000))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
