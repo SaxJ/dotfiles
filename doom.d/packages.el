@@ -29,6 +29,7 @@
 ;  :recipe (:host github :repo "username/repo"))
 (package! string-inflection)
 (package! graphql-mode)
+(package! cov)
 
 ;; Kubernetes integration
 (package! kubernetes)
