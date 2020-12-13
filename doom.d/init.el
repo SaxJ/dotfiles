@@ -146,7 +146,8 @@
        ;;ocaml             ; an objective camel
        (org +pretty
             +present
-            +roam)
+            +roam
+            +brain)
        (php +lsp)
        ;;plantuml          ; diagrams for confusing people more
        (purescript +lsp)        ; javascript, but functional
