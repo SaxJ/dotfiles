@@ -360,9 +360,7 @@ function hejq() {
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
 
-SILVER=(status:black:white dir:blue:black git:green:black cmdtime:magenta:black)
-export SILVER_SHELL=bash
-eval "$(silver init)"
+source <(silver init)
 
 function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)';
