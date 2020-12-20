@@ -35,12 +35,9 @@
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup))
 
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
 ;; Splash screen
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defvar +fl/splashcii-query "" "The search query for ascii art")
 (defun +fl/splashcii-banner ()
   (mapc (lambda (line)
@@ -52,8 +49,6 @@
                       "\n" t)))
 (setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
 (setq +fl/splashcii-query "evil")
-;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
 
 (use-package lsp-haskell
   :ensure t
@@ -67,11 +62,15 @@
 
 
 (setq +format-on-save-enabled-modes
-        '(not emacs-lisp-mode sql-mode tex-mode latex-mode yaml-mode))
+        '(not sql-mode tex-mode latex-mode yaml-mode))
 
 (use-package! web-mode
-  :mode (("\\.cshtml" . web-mode)
-         ("\\.razor" . web-mode)))
+  :config
+  (setq web-mode-engines-alist
+        '(("php"    . "\\.phtml\\'")
+          ("blade"  . "\\.blade\\.")))
+  (setq web-mode-enable-engine-detection t)
+)
 
 (use-package! lsp-mode
   :config
