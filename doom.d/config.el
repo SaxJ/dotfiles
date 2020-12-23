@@ -35,6 +35,10 @@
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup))
 
+(after! doom-modeline
+  (setq doom-modeline-persp-icon t)
+  (setq doom-modeline-persp-name t))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
