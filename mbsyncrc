@@ -1,0 +1,76 @@
+# mbsyncrc based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+# ACCOUNT INFORMATION
+IMAPAccount work
+Host imap.gmail.com
+User saxon.jensen@healthengine.com.au
+PassCmd "pass gmail/work"
+Port 993
+AuthMechs LOGIN
+SSLType IMAPS
+
+IMAPStore work-remote
+Account work
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
+MaildirStore work-local
+Path ~/.mail/work
+Inbox ~/.mail/work/INBOX
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel work-inbox
+Master :work-remote:
+Slave :work-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-trash
+Master :work-remote:"[Gmail]/Bin"
+Slave :work-local:"Bin"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-sent
+Master :work-remote:"[Gmail]/Sent Mail"
+Slave :work-local:"Sent"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-all
+Master :work-remote:"[Gmail]/All Mail"
+Slave :work-local:"All"
+Create Both
+Expunge Both
+SyncState *
+
+Channel work-starred
+Master :work-remote:"[Gmail]/Starred"
+Slave :work-local:"Starred"
+Create Both
+Expunge Both
+SyncState *
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group gmail
+Channel work-inbox
+Channel work-sent
+Channel work-trash
+Channel work-all
+Channel work-starred
