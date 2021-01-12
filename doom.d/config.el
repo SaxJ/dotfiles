@@ -35,6 +35,12 @@
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup))
 
+(after! doom-modeline
+  (setq doom-modeline-persp-icon t)
+  (setq doom-modeline-persp-name t))
+
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
 ;; Splash screen
@@ -55,22 +61,15 @@
   :config
   (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"
         lsp-haskell-process-args-hie 'nil)
-)
+  )
 
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 
 
 (setq +format-on-save-enabled-modes
-        '(not sql-mode tex-mode latex-mode yaml-mode))
+      '(not sql-mode tex-mode latex-mode yaml-mode))
 
-(use-package! web-mode
-  :config
-  (setq web-mode-engines-alist
-        '(("php"    . "\\.phtml\\'")
-          ("blade"  . "\\.blade\\.")))
-  (setq web-mode-enable-engine-detection t)
-)
 
 (use-package! lsp-mode
   :config
