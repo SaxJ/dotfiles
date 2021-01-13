@@ -102,12 +102,12 @@
 # Font configuration
 font:
   normal:
-      family: "Consolas"
+      family: "Fira Code"
   bold:
-      famaly: "Consolas"
+      famaly: "Fira Code"
   italic:
-      family: "Consolas"
-  size: 14
+      family: "Fira Code"
+  size: 15
 
   # Offset is the extra space around each character. `offset.y` can be thought of
   # as modifying the line spacing, and `offset.x` as modifying the letter spacing.
