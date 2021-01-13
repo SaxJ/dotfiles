@@ -36,28 +36,28 @@ SyncState *
 
 Channel work-trash
 Master :work-remote:"[Gmail]/Bin"
-Slave :work-local:"Bin"
+Slave :work-local:"/Bin"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-sent
 Master :work-remote:"[Gmail]/Sent Mail"
-Slave :work-local:"Sent"
+Slave :work-local:"/Sent"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-all
 Master :work-remote:"[Gmail]/All Mail"
-Slave :work-local:"All"
+Slave :work-local:"/All"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-starred
 Master :work-remote:"[Gmail]/Starred"
-Slave :work-local:"Starred"
+Slave :work-local:"/Starred"
 Create Both
 Expunge Both
 SyncState *
