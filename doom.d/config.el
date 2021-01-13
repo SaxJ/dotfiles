@@ -39,6 +39,23 @@
   (setq doom-modeline-persp-icon t)
   (setq doom-modeline-persp-name t))
 
+(set-email-account! "Work"
+                    '((mu4e-sent-folder       . "/work/Sent")
+                      (mu4e-drafts-folder     . "/work/Drafts")
+                      (mu4e-trash-folder      . "/work/Bin")
+                      (mu4e-refile-folder     . "/work/All")
+                      (smtpmail-smtp-user     . "saxon.jensen@healthengine.com.au")
+                      (mu4e-compose-signature . "---\nSaxon Jensen"))
+                    t)
+
+(defun my-open-calendar ()
+  (interactive)
+  (cfw:open-calendar-buffer
+   :contents-sources
+   (list
+    (cfw:org-create-source "Green")  ; org-agenda source
+    (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass cal/work/link")) "Red"))))
+
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
