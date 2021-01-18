@@ -360,7 +360,7 @@ function hejq() {
 # uninstall by removing these lines
 [ -f ~/.config/tabtab/__tabtab.bash ] && . ~/.config/tabtab/__tabtab.bash || true
 
-source <(silver init)
+eval "$(starship init bash)"
 
 function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)';
