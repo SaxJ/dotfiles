@@ -73,6 +73,8 @@
 (setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
 (setq +fl/splashcii-query "evil")
 
+(setq +format-with-lsp nil)
+
 (use-package lsp-haskell
   :ensure t
   :config
