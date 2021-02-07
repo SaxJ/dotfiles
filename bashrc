@@ -365,3 +365,5 @@ eval "$(starship init bash)"
 function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)';
 }
+
+. ~/.nix-profile/etc/profile.d/nix.sh
