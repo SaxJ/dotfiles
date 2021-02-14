@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-export TERM=kitty
+export TERM=alacritty
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -36,7 +36,7 @@ export YARN_INSTALL_PATH=$HOME/.yarn/bin
 # NPM
 export NPM_INSTALL=/home/saxonj/npm-global
 
-export GEMS=/home/saxonj/.gem/ruby/2.7.0/bin
+export GEMS=/home/saxonj/.gems/bin
 
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -365,3 +365,5 @@ eval "$(starship init bash)"
 function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)';
 }
+
+. ~/.nix-profile/etc/profile.d/nix.sh
