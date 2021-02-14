@@ -1,7 +1,7 @@
 [user]
 	name = Saxon Jensen
 	email = saxon.jensen@healthengine.com.au
-	signingkey = B0D162982335FFB4910FB2F5ABA3C7620C77EBAD 
+	signingkey = C098FCCC1C3D04E8D905FCA7678A2B9027A59690 
 [core]
 	editor = nvim
 [alias]
