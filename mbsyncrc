@@ -4,7 +4,7 @@
 IMAPAccount work
 Host imap.gmail.com
 User saxon.jensen@healthengine.com.au
-PassCmd "pass gmail/work"
+PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
 Port 993
 AuthMechs LOGIN
 SSLType IMAPS
@@ -14,6 +14,7 @@ Account work
 
 # LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore work-local
+SubFolders Legacy
 Path ~/.mail/work
 Inbox ~/.mail/work/INBOX
 
