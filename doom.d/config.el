@@ -25,7 +25,7 @@
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
 ;; `load-theme' function. This is the default:
-(setq doom-theme 'doom-tomorrow-night)
+(setq doom-theme 'doom-outrun-electric)
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
@@ -71,7 +71,7 @@
                         (call-process "splashcii" nil standard-output nil +fl/splashcii-query))
                       "\n" t)))
 (setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
-(setq +fl/splashcii-query "evil")
+(setq +fl/splashcii-query "escher")
 
 (setq +format-with-lsp nil)
 
