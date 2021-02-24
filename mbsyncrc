@@ -4,7 +4,8 @@
 IMAPAccount work
 Host imap.gmail.com
 User saxon.jensen@healthengine.com.au
-PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+PassCmd "pass gmail/work"
+#PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
 Port 993
 AuthMechs LOGIN
 SSLType IMAPS
@@ -69,9 +70,89 @@ SyncState *
 # FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
 # "gmail-inbox", "gmail-sent", and "gmail-trash"
 #
-Group gmail
+Group work
 Channel work-inbox
 Channel work-sent
 Channel work-trash
 Channel work-all
 Channel work-starred
+
+################################################################################
+############################# NON-WORK GMAIL ###################################
+################################################################################
+
+IMAPAccount personal
+Host imap.gmail.com
+User saxon.jensen@gmail.com
+PassCmd "pass gmail/personal"
+#PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+Port 993
+AuthMechs LOGIN
+SSLType IMAPS
+
+IMAPStore personal-remote
+Account personal
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
+MaildirStore personal-local
+SubFolders Legacy
+Path ~/.mail/personal
+Inbox ~/.mail/personal/INBOX
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel personal-inbox
+Master :personal-remote:
+Slave :personal-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-trash
+Master :personal-remote:"[Gmail]/Bin"
+Slave :personal-local:"/Bin"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-sent
+Master :personal-remote:"[Gmail]/Sent Mail"
+Slave :personal-local:"/Sent"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-all
+Master :personal-remote:"[Gmail]/All Mail"
+Slave :personal-local:"/All"
+Create Both
+Expunge Both
+SyncState *
+
+Channel personal-starred
+Master :personal-remote:"[Gmail]/Starred"
+Slave :personal-local:"/Starred"
+Create Both
+Expunge Both
+SyncState *
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group personal
+Channel personal-inbox
+Channel personal-sent
+Channel personal-trash
+Channel personal-all
+Channel personal-starred
