@@ -32,6 +32,7 @@
 (package! string-inflection)
 (package! graphql-mode)
 (package! restclient)
+(package! md4rd)
 
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
