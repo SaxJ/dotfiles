@@ -33,6 +33,7 @@
 (package! graphql-mode)
 (package! restclient)
 (package! md4rd)
+(package! slack)
 
 
 (unpin! doom-themes)
