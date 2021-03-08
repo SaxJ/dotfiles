@@ -34,6 +34,8 @@
 (package! restclient)
 (package! md4rd)
 (package! slack)
+(package! kubernetes)
+(package! kubernetes-evil)
 
 
 (unpin! doom-themes)
