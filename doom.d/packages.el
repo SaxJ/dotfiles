@@ -31,12 +31,8 @@
 ;;; Code:
 (package! string-inflection)
 (package! graphql-mode)
-(package! restclient)
-(package! md4rd)
 (package! slack)
-(package! kubernetes)
-(package! kubernetes-evil)
-
+(package! mu4e-alert)
 
 (unpin! doom-themes)
 

@@ -101,7 +101,8 @@
 (use-package! lsp-mode
   :config
   (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
-  (setq lsp-file-watch-threshold 20000))
+  (setq lsp-file-watch-threshold 20000)
+  (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
 (use-package slack
   :commands (slack-start)
@@ -145,6 +146,11 @@
   :commands (alert)
   :init
   (setq alert-default-style 'notifier))
+
+(use-package! mu4e-alert
+  :config
+  (mu4e-alert-set-default-style 'libnotify)
+  (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
