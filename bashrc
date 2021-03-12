@@ -367,3 +367,5 @@ function pac-search() {
 }
 
 alias composer7="php7 /usr/bin/composer"
+
+alias unfreeze_emacs="pkill -SIGUSR2 emacs"
