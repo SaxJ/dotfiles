@@ -33,6 +33,7 @@ Plug 'sbdchd/neoformat'
 Plug 'easymotion/vim-easymotion'
 Plug 'haya14busa/incsearch.vim'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'puremourning/vimspector'
 
 " HTML
 Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
@@ -72,7 +73,7 @@ Plug 'adimit/prolog.vim'
 call plug#end()
 filetype plugin indent on    " required
 
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-pyls', 'coc-yaml']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-omnisharp']
 
 "SETTINGS
 set softtabstop=4
