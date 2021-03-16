@@ -117,8 +117,8 @@ Expunge Both
 SyncState *
 
 Channel personal-trash
-Far :personal-remote:"[Gmail]/Bin"
-Near :personal-local:"/Bin"
+Far :personal-remote:"[Gmail]/Trash"
+Near :personal-local:"/Trash"
 Create Both
 Expunge Both
 SyncState *
@@ -198,8 +198,8 @@ Expunge Both
 SyncState *
 
 Channel gaming-trash
-Far :gaming-remote:"[Gmail]/Bin"
-Near :gaming-local:"/Bin"
+Far :gaming-remote:"[Gmail]/Trash"
+Near :gaming-local:"/Trash"
 Create Both
 Expunge Both
 SyncState *
