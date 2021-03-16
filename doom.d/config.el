@@ -62,7 +62,7 @@
    :contents-sources
    (list
     (cfw:org-create-source "Green")  ; org-agenda source
-    (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass cal/work/link")) "Red"))))
+    (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/work")) "Red"))))
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
