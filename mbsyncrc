@@ -29,37 +29,37 @@ Inbox ~/.mail/work/INBOX
 # 3 "DIR" TO MATCH DIR
 
 Channel work-inbox
-Master :work-remote:
-Slave :work-local:
+Far :work-remote:
+Near :work-local:
 Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-trash
-Master :work-remote:"[Gmail]/Bin"
-Slave :work-local:"/Bin"
+Far :work-remote:"[Gmail]/Bin"
+Near :work-local:"/Bin"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-sent
-Master :work-remote:"[Gmail]/Sent Mail"
-Slave :work-local:"/Sent"
+Far :work-remote:"[Gmail]/Sent Mail"
+Near :work-local:"/Sent"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-all
-Master :work-remote:"[Gmail]/All Mail"
-Slave :work-local:"/All"
+Far :work-remote:"[Gmail]/All Mail"
+Near :work-local:"/All"
 Create Both
 Expunge Both
 SyncState *
 
 Channel work-starred
-Master :work-remote:"[Gmail]/Starred"
-Slave :work-local:"/Starred"
+Far :work-remote:"[Gmail]/Starred"
+Near :work-local:"/Starred"
 Create Both
 Expunge Both
 SyncState *
@@ -84,7 +84,7 @@ Channel work-starred
 IMAPAccount personal
 Host imap.gmail.com
 User saxon.jensen@gmail.com
- PassCmd "pass gmail/personal"
+PassCmd "pass gmail/personal"
 #PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
 Port 993
 AuthMechs LOGIN
@@ -109,37 +109,37 @@ Inbox ~/.mail/personal/INBOX
 # 3 "DIR" TO MATCH DIR
 
 Channel personal-inbox
-Master :personal-remote:
-Slave :personal-local:
+Far :personal-remote:
+Near :personal-local:
 Patterns "INBOX"
 Create Both
 Expunge Both
 SyncState *
 
 Channel personal-trash
-Master :personal-remote:"[Gmail]/Bin"
-Slave :personal-local:"/Bin"
+Far :personal-remote:"[Gmail]/Bin"
+Near :personal-local:"/Bin"
 Create Both
 Expunge Both
 SyncState *
 
 Channel personal-sent
-Master :personal-remote:"[Gmail]/Sent Mail"
-Slave :personal-local:"/Sent"
+Far :personal-remote:"[Gmail]/Sent Mail"
+Near :personal-local:"/Sent"
 Create Both
 Expunge Both
 SyncState *
 
 Channel personal-all
-Master :personal-remote:"[Gmail]/All Mail"
-Slave :personal-local:"/All"
+Far :personal-remote:"[Gmail]/All Mail"
+Near :personal-local:"/All"
 Create Both
 Expunge Both
 SyncState *
 
 Channel personal-starred
-Master :personal-remote:"[Gmail]/Starred"
-Slave :personal-local:"/Starred"
+Far :personal-remote:"[Gmail]/Starred"
+Near :personal-local:"/Starred"
 Create Both
 Expunge Both
 SyncState *
@@ -156,3 +156,84 @@ Channel personal-sent
 Channel personal-trash
 Channel personal-all
 Channel personal-starred
+
+
+################################################################################
+############################# GAMING   GMAIL ###################################
+################################################################################
+
+IMAPAccount gaming
+Host imap.gmail.com
+User speedemon999@gmail.com
+PassCmd "pass gmail/gaming"
+#PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+Port 993
+AuthMechs LOGIN
+SSLType IMAPS
+
+IMAPStore gaming-remote
+Account gaming
+
+# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
+MaildirStore gaming-local
+SubFolders Legacy
+Path ~/.mail/gaming
+Inbox ~/.mail/gaming/INBOX
+
+# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
+#
+# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
+# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
+#
+# 1 "*" TO MATCH EVERYTHING
+# 2 "!DIR" TO EXCLUDE "DIR"
+# 3 "DIR" TO MATCH DIR
+
+Channel gaming-inbox
+Far :gaming-remote:
+Near :gaming-local:
+Patterns "INBOX"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gaming-trash
+Far :gaming-remote:"[Gmail]/Bin"
+Near :gaming-local:"/Bin"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gaming-sent
+Far :gaming-remote:"[Gmail]/Sent Mail"
+Near :gaming-local:"/Sent"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gaming-all
+Far :gaming-remote:"[Gmail]/All Mail"
+Near :gaming-local:"/All"
+Create Both
+Expunge Both
+SyncState *
+
+Channel gaming-starred
+Far :gaming-remote:"[Gmail]/Starred"
+Near :gaming-local:"/Starred"
+Create Both
+Expunge Both
+SyncState *
+
+# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
+# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
+#
+# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
+# "gmail-inbox", "gmail-sent", and "gmail-trash"
+#
+Group gaming
+Channel gaming-inbox
+Channel gaming-sent
+Channel gaming-trash
+Channel gaming-all
+Channel gaming-starred
