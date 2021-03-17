@@ -50,10 +50,18 @@
 (set-email-account! "Personal"
                     '((mu4e-sent-folder       . "/personal/Sent")
                       (mu4e-drafts-folder     . "/personal/Drafts")
-                      (mu4e-trash-folder      . "/personal/Bin")
+                      (mu4e-trash-folder      . "/personal/Trash")
                       (mu4e-refile-folder     . "/personal/All")
                       (smtpmail-smtp-user     . "saxon.jensen@gmail.com")
                       (mu4e-compose-signature . "---\nSaxon Jensen"))
+                    t)
+(set-email-account! "Gaming"
+                    '((mu4e-sent-folder       . "/personal/Sent")
+                      (mu4e-drafts-folder     . "/personal/Drafts")
+                      (mu4e-trash-folder      . "/personal/Trash")
+                      (mu4e-refile-folder     . "/personal/All")
+                      (smtpmail-smtp-user     . "speedemon999@gmail.com")
+                      (mu4e-compose-signature . "---\nWoo"))
                     t)
 
 (defun my-open-calendar ()
