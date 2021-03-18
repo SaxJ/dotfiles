@@ -160,6 +160,21 @@
   (mu4e-alert-set-default-style 'libnotify)
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
+(after! mu4e
+  (defun mu4e-headers-mark-all-unread-read ()
+    "Put a \"read\" mark on all visible messages"
+    (interactive)
+    (mu4e-headers-mark-for-each-if
+     (cons 'read nil)
+     (lambda (msg param)
+       (memq 'unread (mu4e-msg-field msg :flags)))))
+
+  (defun mu4e-headers-flag-all-read ()
+    "Flag all messages as read"
+    (interactive)
+    (mu4e-headers-mark-all-unread-read)
+    (mu4e-mark-execute-all t)))
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
