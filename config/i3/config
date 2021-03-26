@@ -47,6 +47,9 @@ bindsym $mod+Return exec alacritty
 # lock the screen
 bindsym $mod+Shift+x exec xlock
 
+# notification center
+bindsym $mod+n exec "kill -s USR1 $(pidof deadd-notification-center)"
+
 # kill focused window
 bindsym $mod+q kill
 

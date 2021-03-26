@@ -14,6 +14,7 @@ chromium-widevine
 cmake
 composer
 conntrack-tools
+deadd-notification-center-bin
 dhcp
 direnv
 discord
@@ -120,7 +121,6 @@ sddm
 seahorse
 slack-desktop
 socat
-spectrwm
 stack
 starship-bin
 steam
