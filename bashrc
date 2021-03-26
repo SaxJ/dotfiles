@@ -369,3 +369,7 @@ function pac-search() {
 alias composer7="php7 /usr/bin/composer"
 
 alias unfreeze_emacs="pkill -SIGUSR2 emacs"
+
+. ~/.nix-profile/etc/profile.d/nix.sh
+
+eval "$(direnv hook bash)"
