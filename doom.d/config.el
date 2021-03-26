@@ -161,6 +161,7 @@
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 (after! mu4e
+  (add-to-list 'mu4e-view-actions '("View in Browser" . mu4e-action-view-in-browser) t)
   (defun mu4e-headers-mark-all-unread-read ()
     "Put a \"read\" mark on all visible messages"
     (interactive)
