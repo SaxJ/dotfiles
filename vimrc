@@ -73,7 +73,7 @@ Plug 'adimit/prolog.vim'
 call plug#end()
 filetype plugin indent on    " required
 
-let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-omnisharp']
+let g:coc_global_extensions = ['coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-pyls', 'coc-yaml', 'coc-omnisharp', 'coc-fsharp', 'coc-vimlsp']
 
 "SETTINGS
 set softtabstop=4
@@ -245,10 +245,9 @@ nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
 
 autocmd VimEnter * command! -bang -nargs=* Rg
-  \ call fzf#vim#ag(<q-args>,
-  \                 <bang>0 ? fzf#vim#with_preview('up:60%')
-  \                         : fzf#vim#with_preview('right:50%:hidden', '?'),
-\ <bang>0)
+    \ call fzf#vim#grep(
+    \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
+    \ fzf#vim#with_preview(), <bang>0)
 
 " WIKI
 let g:vimwiki_list = [{'path': '~/wiki/'}]
