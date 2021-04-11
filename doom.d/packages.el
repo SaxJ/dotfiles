@@ -31,8 +31,11 @@
 ;;; Code:
 (package! string-inflection)
 (package! graphql-mode)
-(package! slack)
 (package! mu4e-alert)
+(package! magit-buildkite)
+(package! kubernetes)
+(package! kubernetes-evil)
+(package! magit-buildkite :recipe (:host github :repo "czan/magit-buildkite"))
 
 (unpin! doom-themes)
 
