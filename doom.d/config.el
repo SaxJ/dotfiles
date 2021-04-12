@@ -105,6 +105,7 @@
 (setq +format-on-save-enabled-modes
       '(not sql-mode tex-mode latex-mode yaml-mode))
 
+(set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 
 (use-package! lsp-mode
   :config
