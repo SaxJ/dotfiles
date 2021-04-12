@@ -176,6 +176,12 @@
     (mu4e-headers-mark-all-unread-read)
     (mu4e-mark-execute-all t)))
 
+(map! :after mu4e
+      :map mu4e-headers-mode-map
+      :localleader
+      :nv "mr" #'mu4e-headers-flag-all-read
+      )
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages

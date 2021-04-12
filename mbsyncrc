@@ -237,3 +237,25 @@ Channel gaming-sent
 Channel gaming-trash
 Channel gaming-all
 Channel gaming-starred
+
+################################################################################
+#############################  PROFESSIONAL  ###################################
+################################################################################
+IMAPStore mailbox-remote
+Host imap.zoho.com.au
+User saxon@saxonj.dev
+PassCmd "pass email/zoho"
+SSLType STARTTLS
+
+MaildirStore mailbox-local
+Path ~/.mail/zoho/
+Inbox ~/.mail/zoho/INBOX
+SubFolders Verbatim
+
+Channel mailbox
+Master :mailbox-remote:
+Slave :mailbox-local:
+Patterns * !Archives
+Create Both
+Expunge Both
+SyncState *
