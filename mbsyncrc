@@ -241,20 +241,21 @@ Channel gaming-starred
 ################################################################################
 #############################  PROFESSIONAL  ###################################
 ################################################################################
-IMAPStore mailbox-remote
+IMAPStore zoho-remote
 Host imap.zoho.com.au
+Port 993
 User saxon@saxonj.dev
 PassCmd "pass email/zoho"
-SSLType STARTTLS
+SSLType IMAPS
 
-MaildirStore mailbox-local
+MaildirStore zoho-local
 Path ~/.mail/zoho/
 Inbox ~/.mail/zoho/INBOX
 SubFolders Verbatim
 
-Channel mailbox
-Master :mailbox-remote:
-Slave :mailbox-local:
+Channel zoho
+Far :zoho-remote:
+Near :zoho-local:
 Patterns * !Archives
 Create Both
 Expunge Both

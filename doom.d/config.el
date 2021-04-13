@@ -63,6 +63,14 @@
                       (smtpmail-smtp-user     . "speedemon999@gmail.com")
                       (mu4e-compose-signature . "---\nWoo"))
                     t)
+(set-email-account! "Professional"
+                    '((mu4e-sent-folder       . "/zoho/Sent")
+                      (mu4e-drafts-folder     . "/zoho/Drafts")
+                      (mu4e-trash-folder      . "/zoho/Trash")
+                      (mu4e-refile-folder     . "/zoho/All")
+                      (smtpmail-smtp-user     . "saxon@saxonj.dev")
+                      (mu4e-compose-signature . "---\nSaxon Jensen"))
+                    t)
 
 (defun my-open-calendar ()
   (interactive)
