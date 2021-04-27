@@ -72,14 +72,37 @@
                       (mu4e-compose-signature . "---\nSaxon Jensen"))
                     t)
 
-(defun my-open-calendar ()
-  (interactive)
+(defun calendar-helper ()
+  "Define calendar sources to load."
   (cfw:open-calendar-buffer
    :contents-sources
    (list
     (cfw:org-create-source "Green")  ; org-agenda source
     (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/work")) "IndianRed")
     )))
+
+(defun calendar-init ()
+  "Switch to existing calendar buffer if its there."
+  (if-let (win (cl-find-if (lambda (b) (string-match-p "^\\*cfw:" (buffer-name b)))
+                           (doom-visible-windows)
+                           :key #'window-buffer))
+      (select-window win)
+    (calendar-helper)))
+
+(defun my-open-calendar ()
+  "Active or switch to my calendar."
+  (interactive)
+  (if (featurep! :ui workspaces)
+      (progn
+        (+workspace-switch "Calendar" t)
+        (doom/switch-to-scratch-buffer)
+        (calendar-init)
+        (+workspace/display))
+    (setq +calendar--wconf (current-window-configuration))
+    (delete-other-windows)
+    (switch-to-buffer (doom-fallback-buffer))
+    (calendar-init)))
+
 
 ;; This determines the style of line numbers in effect. If set to `nil', line
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
