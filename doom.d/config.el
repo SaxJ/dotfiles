@@ -209,6 +209,7 @@
     (mu4e-headers-mark-all-unread-read)
     (mu4e-mark-execute-all t)))
 
+
 (map! :after mu4e
       :map mu4e-headers-mode-map
       :localleader
@@ -217,6 +218,11 @@
 (map! :leader
       :desc "Open Calendar"
       :n "oc" #'my-open-calendar)
+(map! :after magit
+      :map forge-topic-mode-map
+      :localleader
+      :desc "Add a single reviewer"
+      :n "ar" #'forge-edit-topic-review-requests)
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
