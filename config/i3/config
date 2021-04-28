@@ -26,12 +26,22 @@ font FiraCode Nerd Font:monospace 10
 # screen before suspend. Use loginctl lock-session to lock your screen.
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 
+# workspace assignment
+assign [class="emacs"] 1
+assign [class="Navigator"] 2
+assign [class="slack"] 3
+assign [class="discord"] 4
+
 # NetworkManager is the most popular way to manage wireless networks on Linux,
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
 exec --no-startup-id redshift
 exec --no-startup-id dropbox
+exec emacs
+exec firefox-developer-edition
+exec slack
+exec discord
 
 
 # Use pactl to adjust volume in PulseAudio.
