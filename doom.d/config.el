@@ -194,6 +194,20 @@
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 (after! mu4e
+  (setq mu4e-headers-draft-mark     '("D" . "⚒"))
+  (setq mu4e-headers-flagged-mark   '("F" . "✚"))
+  (setq mu4e-headers-new-mark       '("N" . "✱"))
+  (setq mu4e-headers-passed-mark    '("P" . "❯"))
+  (setq mu4e-headers-replied-mark   '("R" . "❮"))
+  (setq mu4e-headers-seen-mark      '("S" . "✔"))
+  (setq mu4e-headers-trashed-mark   '("T" . "⏚"))
+  (setq mu4e-headers-attach-mark    '("a" . "⚓"))
+  (setq mu4e-headers-encrypted-mark '("x" . "⚴"))
+  (setq mu4e-headers-signed-mark    '("s" . "☡"))
+  (setq mu4e-headers-unread-mark    '("u" . "✉"))
+  (defun space-out (str)
+    (string-join (-remove (lambda (x) (string= "" x)) (split-string str "")) " "))
+  (advice-add 'mu4e~headers-flags-str :filter-return #'space-out)
   (add-to-list 'mu4e-view-actions '("View in Browser" . mu4e-action-view-in-browser) t)
   (defun mu4e-headers-mark-all-unread-read ()
     "Put a \"read\" mark on all visible messages"
@@ -223,6 +237,7 @@
       :localleader
       :desc "Add a single reviewer"
       :n "ar" #'forge-edit-topic-review-requests)
+
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
