@@ -237,7 +237,30 @@
       :localleader
       :desc "Add a single reviewer"
       :n "ar" #'forge-edit-topic-review-requests)
+(map! :after magit
+      :map forge-topic-mode-map
+      :localleader
+      :desc "Add blob team"
+      :n "ab" #'forge-add-blob)
 
+;; Temp fix for jump to reference
+(add-hook! lsp-mode
+  (defalias '+lookup/references 'lsp-find-references))
+
+
+(defun forge-add-blob (n)
+  "Edit the review-requests of the current pull-request.
+If there is no current topic or with a prefix argument read a
+topic N and modify that instead."
+  (interactive (list (forge-read-pullreq "Request review for")))
+  (let* ((topic (forge-get-pullreq n))
+         (repo  (forge-get-repository topic))
+         (value (closql--iref topic 'review-requests))
+         (choices (mapcar #'cadr (oref repo assignees)))
+         (crm-separator ","))
+    (forge--set-topic-review-requests
+     repo topic
+     '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance"))))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
