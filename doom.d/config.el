@@ -78,7 +78,9 @@
    :contents-sources
    (list
     (cfw:org-create-source "Green")  ; org-agenda source
-    (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/work")) "IndianRed")
+    (cfw:ical-create-source "Team" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/team")) "IndianRed")
+    (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/work")) "Blue")
+    (cfw:ical-create-source "Comps" "https://calendar.google.com/calendar/ical/iu1iul1u3n8ic3s78f4df15u4o%40group.calendar.google.com/public/basic.ics" "Orange")
     )))
 
 (defun calendar-init ()
@@ -194,6 +196,7 @@
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 (after! mu4e
+  (setq mu4e-update-interval 120)
   (setq mu4e-headers-draft-mark     '("D" . "⚒"))
   (setq mu4e-headers-flagged-mark   '("F" . "✚"))
   (setq mu4e-headers-new-mark       '("N" . "✱"))
