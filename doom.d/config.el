@@ -123,8 +123,6 @@
 (setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
 (setq +fl/splashcii-query "escher")
 
-(setq +format-with-lsp nil)
-
 (use-package lsp-haskell
   :ensure t
   :config
@@ -134,7 +132,6 @@
 
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
-
 
 (setq +format-on-save-enabled-modes
       '(not sql-mode tex-mode latex-mode yaml-mode))
@@ -196,7 +193,7 @@
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 (after! mu4e
-  (setq mu4e-update-interval 120)
+  (setq mu4e-update-interval 60)
   (setq mu4e-headers-draft-mark     '("D" . "⚒"))
   (setq mu4e-headers-flagged-mark   '("F" . "✚"))
   (setq mu4e-headers-new-mark       '("N" . "✱"))
@@ -230,7 +227,7 @@
 (map! :after mu4e
       :map mu4e-headers-mode-map
       :localleader
-      :nv "mr" #'mu4e-headers-flag-all-read
+      :n "mar" #'mu4e-headers-flag-all-read
       )
 (map! :leader
       :desc "Open Calendar"
@@ -246,10 +243,6 @@
       :desc "Add blob team"
       :n "ab" #'forge-add-blob)
 
-;; Temp fix for jump to reference
-(add-hook! lsp-mode
-  (defalias '+lookup/references 'lsp-find-references))
-
 
 (defun forge-add-blob (n)
   "Edit the review-requests of the current pull-request.
@@ -264,6 +257,9 @@ topic N and modify that instead."
     (forge--set-topic-review-requests
      repo topic
      '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance"))))
+
+;; Intelephense license
+(setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
