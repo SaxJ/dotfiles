@@ -72,6 +72,7 @@
                       (mu4e-compose-signature . "---\nSaxon Jensen"))
                     t)
 
+
 (defun calendar-helper ()
   "Define calendar sources to load."
   (cfw:open-calendar-buffer
@@ -193,6 +194,10 @@
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
 (after! mu4e
+  (setq mu4e-html2text-command 'mu4e-shr2text)
+  (setq shr-color-visible-luminance-min 80)
+  (setq shr-color-visible-distance-min 5)
+
   (setq mu4e-update-interval 60)
   (setq mu4e-headers-draft-mark     '("D" . "⚒"))
   (setq mu4e-headers-flagged-mark   '("F" . "✚"))
