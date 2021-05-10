@@ -265,6 +265,10 @@ topic N and modify that instead."
 ;; Intelephense license
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
 
+;; LSP lookup references
+(add-hook! lsp-mode
+  (defalias '+lookup/references 'lsp-find-references))
+
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages

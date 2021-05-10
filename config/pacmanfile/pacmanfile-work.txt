@@ -1,6 +1,5 @@
 alacritty
 alsa-utils
-aspnet-runtime
 autoconf
 automake
 aws-cli
@@ -8,6 +7,7 @@ base
 bash-completion
 binutils
 bison
+cataclysm-dda-git
 ccls
 chamber
 chromium-widevine
@@ -15,20 +15,20 @@ cmake
 composer
 conntrack-tools
 deadd-notification-center-bin
+deno
 dhcp
 direnv
 discord
 docker
 docker-compose
-dotnet-sdk
 dropbox-cli
-dunst
 editorconfig-core-c
 efibootmgr
-emacs
+emacs-git
 fakeroot
 fd
 firefox-developer-edition
+flameshot
 flex
 fortune-mod
 fzf
@@ -45,6 +45,7 @@ helm
 htop
 httpie
 hub
+hugo
 i3status
 i3status-rust
 i3-wm
@@ -63,7 +64,7 @@ mellowplayer
 minikube
 mu
 ncurses5-compat-libs
-neovim-nightly-bin
+neovim
 nerd-fonts-complete
 networkmanager
 network-manager-applet
@@ -109,12 +110,14 @@ python-pip
 python-pylint
 qemu
 qutebrowser
+rbw-bin
 rcm
 redis
 redshift
 reflector
 ripgrep
 rofi
+rofi-rbw
 ruby-compass
 rust
 sddm
@@ -143,6 +146,7 @@ virtualbox-host-modules-arch
 visual-studio-code-insiders-bin
 wget
 xclip
+xdotool
 xf86-video-vesa
 xlockmore
 xorg-bdftopcf
@@ -197,4 +201,3 @@ xterm
 yarn
 yay
 zip
-zsa-wally
