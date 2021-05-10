@@ -79,7 +79,6 @@
    :contents-sources
    (list
     (cfw:org-create-source "Green")  ; org-agenda source
-    (cfw:ical-create-source "Team" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/team")) "IndianRed")
     (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/work")) "Blue")
     (cfw:ical-create-source "Comps" "https://calendar.google.com/calendar/ical/iu1iul1u3n8ic3s78f4df15u4o%40group.calendar.google.com/public/basic.ics" "Orange")
     )))
