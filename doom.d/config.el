@@ -110,19 +110,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
-;; Splash screen
-(defvar +fl/splashcii-query "" "The search query for ascii art")
-(defun +fl/splashcii-banner ()
-  (mapc (lambda (line)
-          (insert (propertize (+doom-dashboard--center +doom-dashboard--width line)
-                              'face 'doom-dashboard-banner) " ")
-          (insert "\n"))
-        (split-string (with-output-to-string
-                        (call-process "splashcii" nil standard-output nil +fl/splashcii-query))
-                      "\n" t)))
-(setq +doom-dashboard-ascii-banner-fn #'+fl/splashcii-banner)
-(setq +fl/splashcii-query "escher")
-
 (use-package lsp-haskell
   :ensure t
   :config
@@ -264,6 +251,7 @@ topic N and modify that instead."
 
 ;; Intelephense license
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
+(setq auto-revert-check-vc-info t)
 
 ;; LSP lookup references
 (add-hook! lsp-mode
