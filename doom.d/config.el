@@ -179,6 +179,12 @@
   (mu4e-alert-set-default-style 'libnotify)
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
+(use-package! org-jira
+  :after org
+  :config
+  (setq jiralib-url "https://hejira.atlassian.net")
+  (setq org-jira-working-dir (concat org-directory "/jira")))
+
 (after! mu4e
   (setq mu4e-html2text-command "w3m -T text/html")
 
