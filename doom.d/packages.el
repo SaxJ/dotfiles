@@ -36,8 +36,10 @@
 (package! kubernetes)
 (package! kubernetes-evil)
 (package! magit-buildkite :recipe (:host github :repo "czan/magit-buildkite"))
+(package! org-jira)
 
 (unpin! doom-themes)
+(unpin! org)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
