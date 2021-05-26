@@ -64,7 +64,7 @@ floating_modifier $mod
 bindsym $mod+Return exec alacritty
 
 # lock the screen
-bindsym $mod+Shift+x exec xlock
+bindsym $mod+Shift+x exec "i3lock-fancy-rapid 10 3"
 
 # notification center
 bindsym $mod+n exec "kill -s USR1 $(pidof deadd-notification-center)"
