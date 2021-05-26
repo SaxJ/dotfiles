@@ -187,6 +187,7 @@
 
 (after! mu4e
   (setq mu4e-html2text-command "w3m -T text/html")
+  (setq mu4e-view-show-images t)
 
   (setq mu4e-update-interval 60)
   (setq mu4e-headers-draft-mark     '("D" . "⚒"))
