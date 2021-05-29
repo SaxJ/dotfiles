@@ -121,7 +121,12 @@
       company-minimum-prefix-length 2)
 
 (setq +format-on-save-enabled-modes
-      '(not sql-mode tex-mode latex-mode yaml-mode))
+      '(not sql-mode
+            yaml-mode
+            emacs-lisp-mode
+            tex-mode
+            latex-mode
+            js2-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 
@@ -258,9 +263,7 @@ topic N and modify that instead."
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
 (setq auto-revert-check-vc-info t)
 
-(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
-(setq-hook! 'typescript-tsx-mode-hook +format-with-lsp nil)
-
+(setq +format-with-lsp nil)
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
