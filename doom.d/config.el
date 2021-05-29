@@ -258,9 +258,8 @@ topic N and modify that instead."
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
 (setq auto-revert-check-vc-info t)
 
-;; LSP lookup references
-(add-hook! lsp-mode
-  (defalias '+lookup/references 'lsp-find-references))
+(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+(setq-hook! 'typescript-tsx-mode-hook +format-with-lsp nil)
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
