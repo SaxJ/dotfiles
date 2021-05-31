@@ -124,6 +124,16 @@
       '(not sql-mode tex-mode latex-mode yaml-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
+(setq +format-with-lsp nil)
+
+(use-package! org-roam
+  :custom
+  (org-roam-directory "~/Documents/wiki")
+  (org-roam-dailies-directory "journals/")
+  (org-roam-capture-templates
+   '(("d" "default" plain
+      #'org-roam-capture--get-point "%?"
+      :file-name "pages/${slug}" :head "#+TITLE: ${title}\n" :unnarrowed t))))
 
 (use-package! lsp-mode
   :config
@@ -255,7 +265,6 @@ topic N and modify that instead."
 
 ;; Intelephense license
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
-(setq auto-revert-check-vc-info t)
 
 ;; LSP lookup references
 (add-hook! lsp-mode
