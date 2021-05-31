@@ -197,6 +197,7 @@
 
 (after! mu4e
   (setq mu4e-html2text-command "w3m -T text/html")
+  (setq mu4e-view-show-images t)
 
   (setq mu4e-update-interval 60)
   (setq mu4e-headers-draft-mark     '("D" . "⚒"))
@@ -266,9 +267,8 @@ topic N and modify that instead."
 ;; Intelephense license
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
 
-;; LSP lookup references
-(add-hook! lsp-mode
-  (defalias '+lookup/references 'lsp-find-references))
+(setq-hook! 'typescript-mode-hook +format-with-lsp nil)
+(setq-hook! 'typescript-tsx-mode-hook +format-with-lsp nil)
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
