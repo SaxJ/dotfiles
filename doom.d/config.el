@@ -126,7 +126,8 @@
             emacs-lisp-mode
             tex-mode
             latex-mode
-            js2-mode))
+            js2-mode
+            web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 
