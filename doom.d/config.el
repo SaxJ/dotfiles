@@ -29,7 +29,7 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Dropbox/wiki")
+(setq org-directory "~/Documents/wiki")
 (after! org
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
@@ -199,7 +199,7 @@
   :after org
   :config
   (setq jiralib-url "https://hejira.atlassian.net")
-  (setq org-jira-working-dir (concat org-directory "/jira")))
+  (setq org-jira-working-dir (concat org-directory "/pages/jira")))
 
 (after! mu4e
   (setq mu4e-html2text-command "w3m -T text/html")
