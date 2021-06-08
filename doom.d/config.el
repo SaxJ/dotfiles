@@ -130,7 +130,7 @@
             web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
-(setq +format-with-lsp nil)
+(setq-hook! 'js2-mode-hook +format-with-lsp nil)
 
 (use-package! org-roam
   :custom
@@ -220,7 +220,7 @@
   (defun space-out (str)
     (string-join (-remove (lambda (x) (string= "" x)) (split-string str "")) " "))
   (advice-add 'mu4e~headers-flags-str :filter-return #'space-out)
-  (add-to-list 'mu4e-view-actions '("View in Browser" . mu4e-action-view-in-browser) t)
+  (add-to-list 'mu4e-view-actions '("Widget" . mu4e-action-view-with-xwidget) t)
   (defun mu4e-headers-mark-all-unread-read ()
     "Put a \"read\" mark on all visible messages"
     (interactive)
