@@ -273,7 +273,6 @@ topic N and modify that instead."
 ;; Intelephense license
 (setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
 
-(setq +format-with-lsp nil)
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
