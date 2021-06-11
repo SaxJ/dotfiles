@@ -37,6 +37,7 @@
 (package! kubernetes-evil)
 (package! magit-buildkite :recipe (:host github :repo "czan/magit-buildkite"))
 (package! org-jira)
+(package! system-packages)
 
 (unpin! doom-themes)
 (unpin! org)
