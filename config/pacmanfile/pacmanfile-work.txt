@@ -2,7 +2,7 @@ alacritty
 alsa-utils
 autoconf
 automake
-aws-cli
+aws-cli-v2
 base
 bash-completion
 binutils
@@ -21,7 +21,6 @@ direnv
 discord
 docker
 docker-compose
-dropbox-cli
 editorconfig-core-c
 efibootmgr
 emacs-git
@@ -35,17 +34,21 @@ fzf
 gcc
 git
 github-cli
+gnome-multi-writer
 google-chrome
 gopls
 gotop-bin
 graphviz
 grub
+gst-plugins-bad
+gst-plugins-ugly
 haskell-language-server-bin
 helm
 htop
 httpie
 hub
 hugo
+i3lock-fancy-rapid-git
 i3status
 i3status-rust
 i3-wm
@@ -55,6 +58,8 @@ jq
 k9s
 kak-lsp
 kakoune
+kubectl-bin
+libgccjit
 linux
 linux-firmware
 luit
@@ -73,8 +78,10 @@ nodejs
 noto-fonts
 noto-fonts-emoji
 npm
+nushell-bin
 nvidia
 nvidia-settings
+nyxt
 openssh
 pacmanfile
 pass
@@ -106,6 +113,7 @@ powerline-fonts
 pulseaudio
 pulseaudio-alsa
 python2
+python-lsp-server
 python-pip
 python-pylint
 qemu
@@ -122,6 +130,7 @@ ruby-compass
 rust
 sddm
 seahorse
+shfmt
 slack-desktop
 socat
 stack
@@ -144,6 +153,7 @@ virt-manager
 virtualbox
 virtualbox-host-modules-arch
 visual-studio-code-insiders-bin
+w3m
 wget
 xclip
 xdotool
@@ -201,3 +211,4 @@ xterm
 yarn
 yay
 zip
+zoom
