@@ -111,7 +111,6 @@
 (setq display-line-numbers-type 'relative)
 
 (use-package lsp-haskell
-  :ensure t
   :config
   (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"
         lsp-haskell-process-args-hie 'nil)
@@ -127,6 +126,7 @@
             tex-mode
             latex-mode
             js2-mode
+            php-mode
             web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
