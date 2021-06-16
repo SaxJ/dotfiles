@@ -41,7 +41,7 @@
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
        (ligatures +extra)       ; ligatures or substitute text with pretty symbols
        tabs              ; a tab bar for Emacs
-       treemacs          ; a project drawer, like neotree but cooler
+       (treemacs +lsp)          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages
        vc-gutter         ; vcs diff in the fringe
        vi-tilde-fringe   ; fringe tildes to mark beyond EOB
@@ -90,7 +90,7 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        ;;gist              ; interacting with github gists
-       lookup              ; navigate your code and its documentation
+       (lookup +docsets)              ; navigate your code and its documentation
        (lsp +peek)
        ;;macos             ; MacOS-specific commands
        (magit +forge)             ; a git porcelain for Emacs
