@@ -34,6 +34,7 @@ fzf
 gcc
 git
 github-cli
+glslang
 gnome-multi-writer
 google-chrome
 gopls
@@ -55,6 +56,7 @@ i3-wm
 insomnia-bin
 isync
 jq
+js-beautify
 k9s
 kak-lsp
 kakoune
@@ -65,6 +67,7 @@ linux-firmware
 luit
 m4
 make
+marked
 mellowplayer
 minikube
 mu
@@ -113,9 +116,14 @@ powerline-fonts
 pulseaudio
 pulseaudio-alsa
 python2
+python-black
 python-lsp-server
+python-nose
 python-pip
+python-pipenv
+python-pyflakes
 python-pylint
+python-pytest
 qemu
 qutebrowser
 rbw-bin
@@ -128,8 +136,10 @@ rofi
 rofi-rbw
 ruby-compass
 rust
+rust-analyzer
 sddm
 seahorse
+shellcheck
 shfmt
 slack-desktop
 socat
@@ -137,10 +147,13 @@ stack
 starship-bin
 steam
 stern-bin
+stylelint
 sudo
 telegram-desktop
+terraform
 texinfo
 the_silver_searcher
+tidy
 tig
 ttf-fira-code
 ttf-font-awesome
