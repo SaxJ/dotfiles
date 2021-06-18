@@ -32,10 +32,8 @@
 (package! string-inflection)
 (package! graphql-mode)
 (package! mu4e-alert)
-(package! magit-buildkite)
 (package! kubernetes)
 (package! kubernetes-evil)
-(package! magit-buildkite :recipe (:host github :repo "czan/magit-buildkite"))
 (package! org-jira)
 (package! system-packages)
 

@@ -147,10 +147,6 @@
   (setq lsp-file-watch-threshold 20000)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
-(use-package! magit-buildkite
-  :config
-  (require 'magit-buildkite))
-
 (use-package slack
   :commands (slack-start)
   :init
