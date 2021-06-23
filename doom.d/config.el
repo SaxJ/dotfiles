@@ -126,7 +126,6 @@
             tex-mode
             latex-mode
             js2-mode
-            php-mode
             web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
