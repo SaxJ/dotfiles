@@ -126,7 +126,6 @@
             tex-mode
             latex-mode
             js2-mode
-            php-mode
             web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
@@ -140,6 +139,13 @@
    '(("d" "default" plain
       #'org-roam-capture--get-point "%?"
       :file-name "pages/${slug}" :head "#+TITLE: ${title}\n" :unnarrowed t))))
+
+(setq org-journal-dir (concat (file-name-as-directory org-roam-directory) "journals/")
+      org-journal-date-prefix "* "
+      org-journal-time-prefix "** "
+      org-journal-date-format "%a, %Y-%m-%d"
+      org-journal-file-format "%Y-%m-%d.org"
+      org-journal-time-format "%I:%M %p")
 
 (use-package! lsp-mode
   :config
