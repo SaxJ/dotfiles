@@ -144,7 +144,7 @@
       org-journal-date-prefix "* "
       org-journal-time-prefix "** "
       org-journal-date-format "%a, %Y-%m-%d"
-      org-journal-file-format "%Y-%m-%d.org"
+      org-journal-file-format "%Y_%m_%d.org"
       org-journal-time-format "%I:%M %p")
 
 (use-package! lsp-mode
