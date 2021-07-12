@@ -125,12 +125,12 @@
             emacs-lisp-mode
             tex-mode
             latex-mode
-            js2-mode
             web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq-hook! 'js2-mode-hook +format-with-lsp nil)
 
+(use-package! apex-mode)
 (use-package! org-roam
   :custom
   (org-roam-directory "~/Documents/wiki")
@@ -144,7 +144,7 @@
       org-journal-date-prefix "* "
       org-journal-time-prefix "** "
       org-journal-date-format "%a, %Y-%m-%d"
-      org-journal-file-format "%Y-%m-%d.org"
+      org-journal-file-format "%Y_%m_%d.org"
       org-journal-time-format "%I:%M %p")
 
 (use-package! lsp-mode
@@ -294,3 +294,5 @@ topic N and modify that instead."
 ;;
 ;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
 ;; they are implemented.
+
+;; PACKAGE DEFINITIONS

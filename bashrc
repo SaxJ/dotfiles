@@ -374,3 +374,5 @@ alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 . ~/.nix-profile/etc/profile.d/nix.sh
 
 eval "$(direnv hook bash)"
+eval "$(jira --completion-script-bash)"
+export JIRA_PROJECT=blob

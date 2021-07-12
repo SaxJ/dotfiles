@@ -36,6 +36,14 @@
 (package! kubernetes-evil)
 (package! org-jira)
 (package! system-packages)
+(package! submode
+  :recipe (:host github :repo "nxtr/submode"))
+(package! sosl-mode
+  :recipe (:host github :repo "nxtr/sosl-mode"))
+(package! soql-mode
+  :recipe (:host github :repo "nxtr/soql-mode"))
+(package! apex-mode
+  :recipe (:host github :repo "nxtr/apex-mode"))
 
 (unpin! doom-themes)
 (unpin! org)
