@@ -128,7 +128,7 @@
             web-mode))
 
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
-(setq-hook! 'js2-mode-hook +format-with-lsp nil)
+(setq typescript-indent-level 2)
 
 (use-package! apex-mode)
 (use-package! org-roam
@@ -201,11 +201,13 @@
   (mu4e-alert-set-default-style 'libnotify)
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
-(use-package! org-jira
-  :after org
+(use-package! helm-jira
   :config
-  (setq jiralib-url "https://hejira.atlassian.net")
-  (setq org-jira-working-dir (concat org-directory "/pages/jira")))
+  (setq
+   helm-jira-url "https://hejira.atlassian.net"
+   helm-jira-board-id 215
+   helm-jira-username "saxon.jensen@healthengine.com.au"
+   helm-jira-project "BLOB"))
 
 (after! mu4e
   (setq mu4e-html2text-command "w3m -T text/html")
@@ -296,3 +298,11 @@ topic N and modify that instead."
 ;; they are implemented.
 
 ;; PACKAGE DEFINITIONS
+
+(setq sql-connection-alist
+      '((pgsql-dev (sql-product 'postgres)
+                    (sql-port 5432)
+                    (sql-server "localhost")
+                    (sql-user "engine_master")
+                    (sql-password "he_dev")
+                    (sql-database "engine_data"))))

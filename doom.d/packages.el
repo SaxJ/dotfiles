@@ -34,8 +34,8 @@
 (package! mu4e-alert)
 (package! kubernetes)
 (package! kubernetes-evil)
-(package! org-jira)
 (package! system-packages)
+(package! helm-jira)
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
 (package! sosl-mode
@@ -44,9 +44,6 @@
   :recipe (:host github :repo "nxtr/soql-mode"))
 (package! apex-mode
   :recipe (:host github :repo "nxtr/apex-mode"))
-
-(unpin! doom-themes)
-(unpin! org)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
