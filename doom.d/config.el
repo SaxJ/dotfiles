@@ -201,13 +201,16 @@
   (mu4e-alert-set-default-style 'libnotify)
   (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
 
-(use-package! helm-jira
+(use-package! psysh
+  :after php-mode
   :config
-  (setq
-   helm-jira-url "https://hejira.atlassian.net"
-   helm-jira-board-id 215
-   helm-jira-username "saxon.jensen@healthengine.com.au"
-   helm-jira-project "BLOB"))
+  (set-repl-handler! 'php-mode #'psysh))
+
+(use-package! org-jira
+  :after org
+  :config
+  (setq jiralib-url "https://hejira.atlassian.net"
+        org-jira-working-dir (concat org-directory "/pages/jira")))
 
 (after! mu4e
   (setq mu4e-html2text-command "w3m -T text/html")
@@ -252,6 +255,9 @@
 (map! :leader
       :desc "Open Calendar"
       :n "oc" #'my-open-calendar)
+(map! :leader
+      :desc "Open SQL Client"
+      :n "os" #'sql-connect)
 (map! :after magit
       :map forge-topic-mode-map
       :localleader
@@ -301,7 +307,7 @@ topic N and modify that instead."
 
 (setq sql-connection-alist
       '((pgsql-dev (sql-product 'postgres)
-                    (sql-port 5432)
+                    (sql-port 5433)
                     (sql-server "localhost")
                     (sql-user "engine_master")
                     (sql-password "he_dev")

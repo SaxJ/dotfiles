@@ -35,7 +35,9 @@
 (package! kubernetes)
 (package! kubernetes-evil)
 (package! system-packages)
-(package! helm-jira)
+(package! org-jira)
+(package! psysh)
+
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
 (package! sosl-mode
