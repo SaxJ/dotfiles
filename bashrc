@@ -376,3 +376,4 @@ alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 eval "$(direnv hook bash)"
 eval "$(jira --completion-script-bash)"
 export JIRA_PROJECT=blob
+source /usr/share/nvm/init-nvm.sh
