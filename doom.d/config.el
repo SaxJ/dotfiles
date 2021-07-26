@@ -119,17 +119,6 @@
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 
-(setq +format-on-save-enabled-modes
-      '(not sql-mode
-            yaml-mode
-            emacs-lisp-mode
-            tex-mode
-            latex-mode
-            web-mode))
-
-(set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
-(setq typescript-indent-level 2)
-
 (use-package! apex-mode)
 (use-package! org-roam
   :custom
@@ -312,3 +301,8 @@ topic N and modify that instead."
                     (sql-user "engine_master")
                     (sql-password "he_dev")
                     (sql-database "engine_data"))))
+
+;; FORMATTING
+(setq +format-with-lsp nil)
+(set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
+(setq typescript-indent-level 2)
