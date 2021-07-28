@@ -305,4 +305,5 @@ topic N and modify that instead."
 ;; FORMATTING
 (setq +format-with-lsp nil)
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
+(setq-hook! 'csharp-mode-hook +format-with-lsp t)
 (setq typescript-indent-level 2)
