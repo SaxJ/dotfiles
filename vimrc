@@ -21,10 +21,9 @@ Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'Olical/vim-expand'
-Plug 'jremmen/vim-ripgrep'
 Plug 'isobit/vim-caddyfile'
 Plug 'liuchengxu/vista.vim'
 Plug 'sheerun/vim-polyglot'
@@ -35,7 +34,6 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'neovim/nvim-lspconfig'
 
 " HTML
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html' }
 Plug 'lumiliet/vim-twig', { 'for': 'html' }
 
@@ -105,7 +103,7 @@ set t_Co=256
 set clipboard=unnamedplus
 set noswapfile
 set cursorline
-set grepprg=rg\ --vimgrep
+" set grepprg=rg\ --vimgrep
 set grepformat=%f:%l:%c:%m
 set inccommand=nosplit
 set completeopt=menuone,noselect
@@ -196,6 +194,7 @@ let g:netrw_liststyle = 3
 
 " GIT BINDINGS
 map <Leader>gs :Git<CR>
+map <Leader>gg :Git<CR>
 map <Leader>gd :Gdiff<CR>
 map <Leader>gc :Gcommit<CR>
 map <Leader>gw :Gwrite<CR>
@@ -238,11 +237,6 @@ nnoremap <silent> <leader>/ :Rg<CR>
 
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
-
-autocmd VimEnter * command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-    \ fzf#vim#with_preview(), <bang>0)
 
 " AUTOCOMPLETE
 let g:compe = {}
