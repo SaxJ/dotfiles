@@ -356,7 +356,7 @@ end
 require'lspconfig'.vimls.setup{on_attach = on_attach}
 require'lspconfig'.ccls.setup{on_attach = on_attach}
 require'lspconfig'.bashls.setup{on_attach = on_attach}
-require'lspconfig'.denols.setup{on_attach = on_attach}
+require'lspconfig'.tsserver.setup{on_attach = on_attach}
 require'lspconfig'.dockerls.setup{on_attach = on_attach}
 require'lspconfig'.graphql.setup{on_attach = on_attach}
 require'lspconfig'.hls.setup{on_attach = on_attach}
