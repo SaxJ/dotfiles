@@ -322,22 +322,6 @@ lua << EOF
 local nvim_lsp = require('lspconfig')
 local vimPID = vim.fn.getpid()
 
--- languages
-require'lspconfig'.vimls.setup{}
-require'lspconfig'.ccls.setup{}
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.cssls.setup{}
-require'lspconfig'.denols.setup{}
-require'lspconfig'.dockerls.setup{}
-require'lspconfig'.graphql.setup{}
-require'lspconfig'.hls.setup{}
-require'lspconfig'.html.setup{}
-require'lspconfig'.intelephense.setup{init_options = {licenceKey = "/home/saxonj/.intelephense"}}
-require'lspconfig'.java_language_server.setup{}
-
-local omnisharp_bin = "/usr/bin/omnisharp"
-require'lspconfig'.omnisharp.setup{cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(vimPID)}}
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -368,24 +352,42 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
+-- languages
+require'lspconfig'.vimls.setup{on_attach = on_attach}
+require'lspconfig'.ccls.setup{on_attach = on_attach}
+require'lspconfig'.bashls.setup{on_attach = on_attach}
+require'lspconfig'.denols.setup{on_attach = on_attach}
+require'lspconfig'.dockerls.setup{on_attach = on_attach}
+require'lspconfig'.graphql.setup{on_attach = on_attach}
+require'lspconfig'.hls.setup{on_attach = on_attach}
+require'lspconfig'.intelephense.setup{on_attach = on_attach, init_options = {licenceKey = "/home/saxonj/.intelephense"}}
+
+local omnisharp_bin = "/usr/bin/omnisharp"
+require'lspconfig'.omnisharp.setup{cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(vimPID)}}
 EOF
+
+" nnoremap gD :lua vim.lsp.buf.declaration()<CR>
+" nnoremap gd :lua vim.lsp.buf.definition()<CR>
+" nnoremap K :lua vim.lsp.buf.hover()<CR>
+" nnoremap gi :lua vim.lsp.buf.implementation()<CR>
+" nnoremap <C-k> :lua vim.lsp.buf.signature_help()<CR>
+" nnoremap <space>wa :lua vim.lsp.buf.add_workspace_folder()<CR>
+" nnoremap <space>wr :lua vim.lsp.buf.remove_workspace_folder()<CR>
+" nnoremap <space>wl :lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>
+" nnoremap <space>D :lua vim.lsp.buf.type_definition()<CR>
+" nnoremap <space>rn :lua vim.lsp.buf.rename()<CR>
+" nnoremap <space>ca :lua vim.lsp.buf.code_action()<CR>
+" nnoremap gr :lua vim.lsp.buf.references()<CR>
+" nnoremap <space>e :lua vim.lsp.diagnostic.show_line_diagnostics()<CR>
+" nnoremap [d :lua vim.lsp.diagnostic.goto_prev()<CR>
+" nnoremap ]d :lua vim.lsp.diagnostic.goto_next()<CR>
+" nnoremap <space>q :lua vim.lsp.diagnostic.set_loclist()<CR>
+" nnoremap <space>f :lua vim.lsp.buf.formatting()<CR>
 
 " AUTO FORMATTING
 augroup fmt
     autocmd!
-    autocmd BufWritePre * undojoin | NeoFormat
+    autocmd BufWritePre * undojoin | Neoformat
 augroup end
