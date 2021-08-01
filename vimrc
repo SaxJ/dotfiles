@@ -23,7 +23,6 @@ Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'junegunn/fzf', { 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
-Plug 'vimwiki/vimwiki'
 Plug 'Olical/vim-expand'
 Plug 'jremmen/vim-ripgrep'
 Plug 'isobit/vim-caddyfile'
@@ -196,7 +195,7 @@ let g:netrw_liststyle = 3
 
 
 " GIT BINDINGS
-map <Leader>gs :Gstatus<CR>
+map <Leader>gs :Git<CR>
 map <Leader>gd :Gdiff<CR>
 map <Leader>gc :Gcommit<CR>
 map <Leader>gw :Gwrite<CR>
@@ -224,10 +223,6 @@ let g:lightline = {
       \ 'colorscheme': 'embark',
       \ }
 
-" PHP CBF
-map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
-map <localleader> <Plug>(easymotion-prefix)
-
 " FZF
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 map <Leader>bt :BTags<CR>
@@ -248,11 +243,6 @@ autocmd VimEnter * command! -bang -nargs=* Rg
     \ call fzf#vim#grep(
     \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
     \ fzf#vim#with_preview(), <bang>0)
-
-" WIKI
-let g:vimwiki_list = [{'path': '~/wiki/'}]
-
-nnoremap <silent> <Leader>fj :%!jq .<CR>
 
 " AUTOCOMPLETE
 let g:compe = {}
@@ -333,6 +323,7 @@ local nvim_lsp = require('lspconfig')
 local vimPID = vim.fn.getpid()
 
 -- languages
+require'lspconfig'.vimls.setup{}
 require'lspconfig'.ccls.setup{}
 require'lspconfig'.bashls.setup{}
 require'lspconfig'.cssls.setup{}
@@ -341,7 +332,7 @@ require'lspconfig'.dockerls.setup{}
 require'lspconfig'.graphql.setup{}
 require'lspconfig'.hls.setup{}
 require'lspconfig'.html.setup{}
-require'lspconfig'.intelephense.setup{}
+require'lspconfig'.intelephense.setup{init_options = {licenceKey = "/home/saxonj/.intelephense"}}
 require'lspconfig'.java_language_server.setup{}
 
 local omnisharp_bin = "/usr/bin/omnisharp"
@@ -392,3 +383,9 @@ for _, lsp in ipairs(servers) do
   }
 end
 EOF
+
+" AUTO FORMATTING
+augroup fmt
+    autocmd!
+    autocmd BufWritePre * undojoin | NeoFormat
+augroup end
