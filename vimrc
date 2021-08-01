@@ -164,6 +164,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>wv :vsplit<CR>
+nnoremap <Leader>ws :split<CR>
 
 " BETTER MODES
 map <C-c> <Esc>
@@ -173,6 +175,7 @@ nnoremap <Leader>s :terminal<CR>
 
 " Commenting
 nnoremap <Leader>cm :Commentary<CR>
+vnoremap <Leader>cm :Commentary<CR>
 
 " YANK ENTRIRE FILE
 nnoremap <silent> <Leader>Y ggVGy
@@ -366,5 +369,5 @@ EOF
 " AUTO FORMATTING
 augroup fmt
     autocmd!
-    autocmd BufWritePre * undojoin | Neoformat
+    silent autocmd BufWritePre * undojoin | Neoformat
 augroup end
