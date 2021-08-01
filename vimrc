@@ -191,15 +191,16 @@ let NERDTreeDirArrows = 1
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
-
 " GIT BINDINGS
 map <Leader>gs :Git<CR>
 map <Leader>gg :Git<CR>
-map <Leader>gd :Gdiff<CR>
-map <Leader>gc :Gcommit<CR>
-map <Leader>gw :Gwrite<CR>
-map <Leader>gp :Gpush<CR>
-map <Leader>gu :Gpull<CR>
+map <Leader>gd :Gvdiffsplit<CR>
+map <Leader>gc :G commit<CR>
+map <Leader>gP :G push<CR>
+map <Leader>gF :G pull<CR>
+map <Leader>gf :G fetch<CR>
+map <Leader>gl :Gclog<CR>
+map <leader>gb :Git blame<CR>
 
 " BETTER BEHAVIOUR ON TERMINAL MODE
 tnoremap <Esc> <C-\><C-n>
