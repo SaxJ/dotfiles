@@ -21,11 +21,9 @@ Plug 'tpope/vim-commentary'
 Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-surround'
 Plug 'editorconfig/editorconfig-vim'
-Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
-Plug 'vimwiki/vimwiki'
 Plug 'Olical/vim-expand'
-Plug 'jremmen/vim-ripgrep'
 Plug 'isobit/vim-caddyfile'
 Plug 'liuchengxu/vista.vim'
 Plug 'sheerun/vim-polyglot'
@@ -36,7 +34,6 @@ Plug 'hrsh7th/nvim-compe'
 Plug 'neovim/nvim-lspconfig'
 
 " HTML
-Plug 'kchmck/vim-coffee-script', { 'for': 'coffee' }
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html' }
 Plug 'lumiliet/vim-twig', { 'for': 'html' }
 
@@ -106,7 +103,7 @@ set t_Co=256
 set clipboard=unnamedplus
 set noswapfile
 set cursorline
-set grepprg=rg\ --vimgrep
+" set grepprg=rg\ --vimgrep
 set grepformat=%f:%l:%c:%m
 set inccommand=nosplit
 set completeopt=menuone,noselect
@@ -167,6 +164,8 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 
 nnoremap <Leader>v :vsplit<CR>
+nnoremap <Leader>wv :vsplit<CR>
+nnoremap <Leader>ws :split<CR>
 
 " BETTER MODES
 map <C-c> <Esc>
@@ -176,6 +175,7 @@ nnoremap <Leader>s :terminal<CR>
 
 " Commenting
 nnoremap <Leader>cm :Commentary<CR>
+vnoremap <Leader>cm :Commentary<CR>
 
 " YANK ENTRIRE FILE
 nnoremap <silent> <Leader>Y ggVGy
@@ -194,14 +194,16 @@ let NERDTreeDirArrows = 1
 let g:netrw_banner = 0
 let g:netrw_liststyle = 3
 
-
 " GIT BINDINGS
-map <Leader>gs :Gstatus<CR>
-map <Leader>gd :Gdiff<CR>
-map <Leader>gc :Gcommit<CR>
-map <Leader>gw :Gwrite<CR>
-map <Leader>gp :Gpush<CR>
-map <Leader>gu :Gpull<CR>
+map <Leader>gs :Git<CR>
+map <Leader>gg :Git<CR>
+map <Leader>gd :Gvdiffsplit<CR>
+map <Leader>gc :G commit<CR>
+map <Leader>gP :G push<CR>
+map <Leader>gF :G pull<CR>
+map <Leader>gf :G fetch<CR>
+map <Leader>gl :Gclog<CR>
+map <leader>gb :Git blame<CR>
 
 " BETTER BEHAVIOUR ON TERMINAL MODE
 tnoremap <Esc> <C-\><C-n>
@@ -224,10 +226,6 @@ let g:lightline = {
       \ 'colorscheme': 'embark',
       \ }
 
-" PHP CBF
-map <Leader>cbf :! phpcbf --standard=PSR2 %<CR>
-map <localleader> <Plug>(easymotion-prefix)
-
 " FZF
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
 map <Leader>bt :BTags<CR>
@@ -243,16 +241,6 @@ nnoremap <silent> <leader>/ :Rg<CR>
 
 nnoremap <silent> <leader>gl :Commits<CR>
 nnoremap <silent> <leader>ga :BCommits<CR>
-
-autocmd VimEnter * command! -bang -nargs=* Rg
-    \ call fzf#vim#grep(
-    \   'rg --column --line-number --no-heading --color=always --smart-case -- '.shellescape(<q-args>), 1,
-    \ fzf#vim#with_preview(), <bang>0)
-
-" WIKI
-let g:vimwiki_list = [{'path': '~/wiki/'}]
-
-nnoremap <silent> <Leader>fj :%!jq .<CR>
 
 " AUTOCOMPLETE
 let g:compe = {}
@@ -332,21 +320,6 @@ lua << EOF
 local nvim_lsp = require('lspconfig')
 local vimPID = vim.fn.getpid()
 
--- languages
-require'lspconfig'.ccls.setup{}
-require'lspconfig'.bashls.setup{}
-require'lspconfig'.cssls.setup{}
-require'lspconfig'.denols.setup{}
-require'lspconfig'.dockerls.setup{}
-require'lspconfig'.graphql.setup{}
-require'lspconfig'.hls.setup{}
-require'lspconfig'.html.setup{}
-require'lspconfig'.intelephense.setup{}
-require'lspconfig'.java_language_server.setup{}
-
-local omnisharp_bin = "/usr/bin/omnisharp"
-require'lspconfig'.omnisharp.setup{cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(vimPID)}}
-
 -- Use an on_attach function to only map the following keys
 -- after the language server attaches to the current buffer
 local on_attach = function(client, bufnr)
@@ -377,18 +350,24 @@ local on_attach = function(client, bufnr)
   buf_set_keymap('n', ']d', '<cmd>lua vim.lsp.diagnostic.goto_next()<CR>', opts)
   buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-
 end
 
--- Use a loop to conveniently call 'setup' on multiple servers and
--- map buffer local keybindings when the language server attaches
-local servers = { "pyright", "rust_analyzer", "tsserver" }
-for _, lsp in ipairs(servers) do
-  nvim_lsp[lsp].setup {
-    on_attach = on_attach,
-    flags = {
-      debounce_text_changes = 150,
-    }
-  }
-end
+-- languages
+require'lspconfig'.vimls.setup{on_attach = on_attach}
+require'lspconfig'.ccls.setup{on_attach = on_attach}
+require'lspconfig'.bashls.setup{on_attach = on_attach}
+require'lspconfig'.tsserver.setup{on_attach = on_attach}
+require'lspconfig'.dockerls.setup{on_attach = on_attach}
+require'lspconfig'.graphql.setup{on_attach = on_attach}
+require'lspconfig'.hls.setup{on_attach = on_attach}
+require'lspconfig'.intelephense.setup{on_attach = on_attach, init_options = {licenceKey = "/home/saxonj/.intelephense"}}
+
+local omnisharp_bin = "/usr/bin/omnisharp"
+require'lspconfig'.omnisharp.setup{cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(vimPID)}}
 EOF
+
+" AUTO FORMATTING
+augroup fmt
+    autocmd!
+    silent autocmd BufWritePre * undojoin | Neoformat
+augroup end
