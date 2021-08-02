@@ -7,8 +7,7 @@ call plug#begin('~/.vim/plugged')
 "======================================================
 "PLUGINS
 "COLOUR THEME
-Plug 'embark-theme/vim', { 'as': 'embark' }
-Plug 'morhetz/gruvbox', { 'as': 'gruvbox' }
+Plug 'liuchengxu/space-vim-theme'
 
 " GIT
 Plug 'tpope/vim-fugitive'
@@ -32,6 +31,8 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'puremourning/vimspector'
 Plug 'hrsh7th/nvim-compe'
 Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/vim-vsnip'
+Plug 'hrsh7th/vim-vsnip-integ'
 
 " HTML
 Plug 'mustache/vim-mustache-handlebars', { 'for': 'html' }
@@ -221,10 +222,7 @@ au BufRead,BufNewFile *.md setlocal textwidth=80
 " COLOURS
 set t_Co=256 
 syntax on 
-colorscheme embark
-let g:lightline = {
-      \ 'colorscheme': 'embark',
-      \ }
+colorscheme space_vim_theme
 
 " FZF
 let g:fzf_nvim_statusline = 0 " disable statusline overwriting
