@@ -6,6 +6,7 @@
 	editor = nvim
 [alias]
     co = checkout
+    cob = checkout -b
     ci = commit -S
     st = status
     br = branch
