@@ -294,9 +294,12 @@ topic N and modify that instead."
 
 ;; PACKAGE DEFINITIONS
 
+;; SQL CLIENT
+(setq sql-postgres-program "pgcli"
+      sql-postgres-options '())
 (setq sql-connection-alist
       '((pgsql-dev (sql-product 'postgres)
-                    (sql-port 5433)
+                    (sql-port 5432)
                     (sql-server "localhost")
                     (sql-user "engine_master")
                     (sql-password "he_dev")
