@@ -36,8 +36,9 @@
         :n "M-k" #'org-metaup))
 
 (after! doom-modeline
-  (setq doom-modeline-persp-icon t)
-  (setq doom-modeline-persp-name t))
+  (setq doom-modeline-persp-icon t
+        doom-modeline-persp-name t
+        auto-revert-check-vc-info t))
 
 (set-email-account! "Work"
                     '((mu4e-sent-folder       . "/work/Sent")
