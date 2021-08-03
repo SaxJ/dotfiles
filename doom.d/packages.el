@@ -47,6 +47,8 @@
 (package! apex-mode
   :recipe (:host github :repo "nxtr/apex-mode"))
 
+(package! doom-snippets :ignore t)
+
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
 ;; `:files' in the `:recipe':
