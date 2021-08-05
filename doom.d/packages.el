@@ -38,6 +38,7 @@
 (package! org-jira)
 (package! psysh)
 
+;; Salesforce!
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
 (package! sosl-mode

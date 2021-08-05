@@ -296,8 +296,6 @@ topic N and modify that instead."
 ;; PACKAGE DEFINITIONS
 
 ;; SQL CLIENT
-(setq sql-postgres-program "pgcli"
-      sql-postgres-options '())
 (setq sql-connection-alist
       '((pgsql-dev (sql-product 'postgres)
                     (sql-port 5432)
@@ -307,6 +305,8 @@ topic N and modify that instead."
                     (sql-database "engine_data"))))
 
 ;; FORMATTING
+(setq +format-on-save-enabled-modes
+      '(not yaml-mode))
 (setq +format-with-lsp nil)
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
