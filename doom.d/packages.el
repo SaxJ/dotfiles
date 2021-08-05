@@ -37,8 +37,8 @@
 (package! system-packages)
 (package! org-jira)
 (package! psysh)
-(package! php-cs-fixer)
 
+;; Salesforce!
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
 (package! sosl-mode
