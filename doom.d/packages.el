@@ -37,6 +37,7 @@
 (package! system-packages)
 (package! org-jira)
 (package! psysh)
+(package! php-cs-fixer)
 
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
