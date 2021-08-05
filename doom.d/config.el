@@ -305,7 +305,11 @@ topic N and modify that instead."
                     (sql-database "engine_data"))))
 
 ;; FORMATTING
+(setq +format-on-save-enabled-modes
+      '(not yaml-mode
+            php-mode))
 (setq +format-with-lsp nil)
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
 (setq typescript-indent-level 2)
+(add-hook! 'before-save-hook 'php-cs-fixer-before-save)
