@@ -35,7 +35,7 @@ export YARN_INSTALL_PATH=$HOME/.yarn/bin
 # NPM
 export NPM_INSTALL=/home/saxonj/npm-global
 
-export GEMS=/home/saxonj/.local/share/gem/ruby/2.7.0/bin:/home/saxonj/.gem/ruby/3.0.0/bin
+export GEMS=/home/saxonj/.local/share/gem/ruby/2.7.0/bin:/home/saxonj/.gem/ruby/3.0.0/bin:/home/saxonj/.local/share/gem/ruby/3.0.0/bin
 
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1

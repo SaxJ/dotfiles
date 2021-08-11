@@ -30,10 +30,12 @@
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/wiki")
+
 (after! org
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup))
+        :n "M-k" #'org-metaup)
+  (setq org-agenda-files (list "~/Documents/wiki")))
 
 (after! doom-modeline
   (setq doom-modeline-persp-icon t
