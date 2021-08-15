@@ -148,8 +148,8 @@
        ;;ocaml             ; an objective camel
        (org +pretty
             +present
-            +roam
-            +journal)
+            +roam2
+            +pomodoro)
        (php +lsp)
        ;;plantuml          ; diagrams for confusing people more
        (purescript +lsp)        ; javascript, but functional
@@ -172,8 +172,8 @@
        (yaml +lsp)              ; JSON, but readable
 
        :email
-       (mu4e +gmail)
-       ;;notmuch
+       ;;(mu4e +gmail)
+       (notmuch +afew)
        ;;(wanderlust +gmail)
 
        :app
