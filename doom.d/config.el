@@ -275,7 +275,7 @@ topic N and modify that instead."
      '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance"))))
 
 ;; Intelephense license
-(setq lsp-intelephense-licence-key (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass license/intelephense")))
+(setq lsp-intelephense-licence-key (auth-source-pass-get 'secret "intelephense/key"))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
