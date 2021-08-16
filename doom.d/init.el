@@ -6,7 +6,6 @@
 ;; NOTE Press 'SPC h d h' (or 'C-h d h' for non-vim users) to access Doom's
 ;;      documentation. There you'll find a "Module Index" link where you'll find
 ;;      a comprehensive list of Doom's modules and what flags they support.
-
 ;; NOTE Move your cursor over a module's name (or its flags) and press 'K' (or
 ;;      'C-c c k' for non-vim users) to view its documentation. This works on
 ;;      flags as well (those symbols that start with a plus).
@@ -149,8 +148,8 @@
        ;;ocaml             ; an objective camel
        (org +pretty
             +present
-            +roam
-            +journal)
+            +roam2
+            +pomodoro)
        (php +lsp)
        ;;plantuml          ; diagrams for confusing people more
        (purescript +lsp)        ; javascript, but functional
@@ -173,8 +172,8 @@
        (yaml +lsp)              ; JSON, but readable
 
        :email
-       (mu4e +gmail)
-       ;;notmuch
+       ;;(mu4e +gmail)
+       (notmuch +afew)
        ;;(wanderlust +gmail)
 
        :app

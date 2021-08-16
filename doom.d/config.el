@@ -29,7 +29,9 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/Documents/wiki")
+(setq org-directory "~/org")
+(setq org-roam-directory "~/org")
+
 (after! org
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
@@ -40,39 +42,8 @@
         doom-modeline-persp-name t
         auto-revert-check-vc-info t))
 
-(set-email-account! "Work"
-                    '((mu4e-sent-folder       . "/work/Sent")
-                      (mu4e-drafts-folder     . "/work/Drafts")
-                      (mu4e-trash-folder      . "/work/Bin")
-                      (mu4e-refile-folder     . "/work/All")
-                      (smtpmail-smtp-user     . "saxon.jensen@healthengine.com.au")
-                      (mu4e-compose-signature . "---\nSaxon Jensen"))
-                    t)
-(set-email-account! "Personal"
-                    '((mu4e-sent-folder       . "/personal/Sent")
-                      (mu4e-drafts-folder     . "/personal/Drafts")
-                      (mu4e-trash-folder      . "/personal/Trash")
-                      (mu4e-refile-folder     . "/personal/All")
-                      (smtpmail-smtp-user     . "saxon.jensen@gmail.com")
-                      (mu4e-compose-signature . "---\nSaxon Jensen"))
-                    t)
-(set-email-account! "Gaming"
-                    '((mu4e-sent-folder       . "/personal/Sent")
-                      (mu4e-drafts-folder     . "/personal/Drafts")
-                      (mu4e-trash-folder      . "/personal/Trash")
-                      (mu4e-refile-folder     . "/personal/All")
-                      (smtpmail-smtp-user     . "speedemon999@gmail.com")
-                      (mu4e-compose-signature . "---\nWoo"))
-                    t)
-(set-email-account! "Professional"
-                    '((mu4e-sent-folder       . "/zoho/Sent")
-                      (mu4e-drafts-folder     . "/zoho/Drafts")
-                      (mu4e-trash-folder      . "/zoho/Trash")
-                      (mu4e-refile-folder     . "/zoho/All")
-                      (smtpmail-smtp-user     . "saxon@saxonj.dev")
-                      (mu4e-compose-signature . "---\nSaxon Jensen"))
-                    t)
-
+(setq +notmuch-sync-backend 'mbsync)
+(setq +notmuch-home-function (lambda () (notmuch-search "tag:unread")))
 
 (defun calendar-helper ()
   "Define calendar sources to load."
@@ -119,23 +90,7 @@
 
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
-
 (use-package! apex-mode)
-(use-package! org-roam
-  :custom
-  (org-roam-directory "~/Documents/wiki")
-  (org-roam-dailies-directory "journals/")
-  (org-roam-capture-templates
-   '(("d" "default" plain
-      #'org-roam-capture--get-point "%?"
-      :file-name "pages/${slug}" :head "#+TITLE: ${title}\n" :unnarrowed t))))
-
-(setq org-journal-dir (concat (file-name-as-directory org-roam-directory) "journals/")
-      org-journal-date-prefix "* "
-      org-journal-time-prefix "** "
-      org-journal-date-format "%a, %Y-%m-%d"
-      org-journal-file-format "%Y_%m_%d.org"
-      org-journal-time-format "%I:%M %p")
 
 (use-package! lsp-mode
   :config
@@ -186,11 +141,6 @@
   :init
   (setq alert-default-style 'notifier))
 
-(use-package! mu4e-alert
-  :config
-  (mu4e-alert-set-default-style 'libnotify)
-  (add-hook 'after-init-hook #'mu4e-alert-enable-notifications))
-
 (use-package! psysh
   :after php-mode
   :config
@@ -200,48 +150,8 @@
   :after org
   :config
   (setq jiralib-url "https://hejira.atlassian.net"
-        org-jira-working-dir (concat org-directory "/pages/jira")))
+        org-jira-working-dir (concat org-directory "/jira")))
 
-(after! mu4e
-  (setq mu4e-html2text-command "w3m -T text/html")
-  (setq mu4e-view-show-images t)
-
-  (setq mu4e-update-interval 60)
-  (setq mu4e-headers-draft-mark     '("D" . "⚒"))
-  (setq mu4e-headers-flagged-mark   '("F" . "✚"))
-  (setq mu4e-headers-new-mark       '("N" . "✱"))
-  (setq mu4e-headers-passed-mark    '("P" . "❯"))
-  (setq mu4e-headers-replied-mark   '("R" . "❮"))
-  (setq mu4e-headers-seen-mark      '("S" . "✔"))
-  (setq mu4e-headers-trashed-mark   '("T" . "⏚"))
-  (setq mu4e-headers-attach-mark    '("a" . "⚓"))
-  (setq mu4e-headers-encrypted-mark '("x" . "⚴"))
-  (setq mu4e-headers-signed-mark    '("s" . "☡"))
-  (setq mu4e-headers-unread-mark    '("u" . "✉"))
-  (defun space-out (str)
-    (string-join (-remove (lambda (x) (string= "" x)) (split-string str "")) " "))
-  (advice-add 'mu4e~headers-flags-str :filter-return #'space-out)
-  (add-to-list 'mu4e-view-actions '("Widget" . mu4e-action-view-with-xwidget) t)
-  (defun mu4e-headers-mark-all-unread-read ()
-    "Put a \"read\" mark on all visible messages"
-    (interactive)
-    (mu4e-headers-mark-for-each-if
-     (cons 'read nil)
-     (lambda (msg param)
-       (memq 'unread (mu4e-msg-field msg :flags)))))
-
-  (defun mu4e-headers-flag-all-read ()
-    "Flag all messages as read"
-    (interactive)
-    (mu4e-headers-mark-all-unread-read)
-    (mu4e-mark-execute-all t)))
-
-
-(map! :after mu4e
-      :map mu4e-headers-mode-map
-      :localleader
-      :n "ar" #'mu4e-headers-flag-all-read
-      )
 (map! :leader
       :desc "Open Calendar"
       :n "oc" #'my-open-calendar)
@@ -258,6 +168,16 @@
       :localleader
       :desc "Add blob team"
       :n "ab" #'forge-add-blob)
+
+(defun mark-read ()
+ "Remove unread tag."
+ (notmuch-search-remove-tag (list "-unread")))
+
+(map! :after notmuch
+      :map notmuch-search-mode-map
+      :localleader
+      :desc "Mark as read"
+      :n "r" #'mark-read)
 
 
 (defun forge-add-blob (n)

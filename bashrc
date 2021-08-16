@@ -35,7 +35,7 @@ export YARN_INSTALL_PATH=$HOME/.yarn/bin
 # NPM
 export NPM_INSTALL=/home/saxonj/npm-global
 
-export GEMS=/home/saxonj/.local/share/gem/ruby/2.7.0/bin:/home/saxonj/.gem/ruby/3.0.0/bin
+export GEMS=/home/saxonj/.local/share/gem/ruby/2.7.0/bin:/home/saxonj/.gem/ruby/3.0.0/bin:/home/saxonj/.local/share/gem/ruby/3.0.0/bin
 
 # DOTNET PATH
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
@@ -344,7 +344,6 @@ ex() {
         echo "'$1' is not a valid file"
     fi
 }
-# source /usr/share/nvm/init-nvm.sh
 
 # JQ Magic
 function jq_contains() {
@@ -375,7 +374,6 @@ alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 eval "$(direnv hook bash)"
 eval "$(jira --completion-script-bash)"
 export JIRA_PROJECT=blob
-source /usr/share/nvm/init-nvm.sh
 
 function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25

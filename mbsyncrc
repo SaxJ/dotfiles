@@ -5,7 +5,6 @@ IMAPAccount work
 Host imap.gmail.com
 User saxon.jensen@healthengine.com.au
 PassCmd "pass gmail/work"
-#PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
 Port 993
 AuthMechs LOGIN
 SSLType IMAPS
@@ -85,7 +84,6 @@ IMAPAccount personal
 Host imap.gmail.com
 User saxon.jensen@gmail.com
 PassCmd "pass gmail/personal"
-#PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
 Port 993
 AuthMechs LOGIN
 SSLType IMAPS
@@ -166,7 +164,6 @@ IMAPAccount gaming
 Host imap.gmail.com
 User speedemon999@gmail.com
 PassCmd "pass gmail/gaming"
-#PassCmd "gpg -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
 Port 993
 AuthMechs LOGIN
 SSLType IMAPS
