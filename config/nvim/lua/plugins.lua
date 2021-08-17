@@ -58,6 +58,12 @@ return require("packer").startup(
 
     -- Hell yeah git
     use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+    use {
+      "pwntester/octo.nvim",
+      config = function()
+        require "octo".setup()
+      end
+    }
 
     -- org mode
 
