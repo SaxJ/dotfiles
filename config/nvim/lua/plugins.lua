@@ -25,6 +25,10 @@ return require("packer").startup(
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
+    -- Syntax
+    use "jparise/vim-graphql"
+    use "norcalli/nvim-colorizer.lua"
+
     -- General code plugins
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
@@ -54,5 +58,14 @@ return require("packer").startup(
 
     -- Hell yeah git
     use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+
+    -- org mode
+
+    use {
+      "kristijanhusak/orgmode.nvim",
+      config = function()
+        require("orgmode").setup {}
+      end
+    }
   end
 )

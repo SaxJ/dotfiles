@@ -41,7 +41,7 @@ require'lspconfig'.tsserver.setup{on_attach = on_attach}
 require'lspconfig'.dockerls.setup{on_attach = on_attach}
 require'lspconfig'.graphql.setup{on_attach = on_attach}
 require'lspconfig'.hls.setup{on_attach = on_attach}
-require'lspconfig'.intelephense.setup{on_attach = on_attach, init_options = {licenceKey = "/home/saxonj/.intelephense"}}
+require'lspconfig'.intelephense.setup{on_attach = on_attach, init_options = {licenceKey = "/home/saxonj/intelephense/licence.txt"}}
 
 local omnisharp_bin = "/usr/bin/omnisharp"
 require'lspconfig'.omnisharp.setup{cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(vimPID)}}

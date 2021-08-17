@@ -1,27 +1,37 @@
-require('formatter').setup({
-  logging = false,
-  filetype = {
-    javascript = {
+require("formatter").setup(
+  {
+    logging = false,
+    filetype = {
+      php = {
+        function()
+          return {
+            exe = "php-cs-fixer",
+            args = {"fix", vim.api.nvim_buf_get_name(0)},
+            stdin = false
+          }
+        end
+      },
+      javascript = {
         -- prettier
-       function()
+        function()
           return {
             exe = "prettier",
-            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), '--single-quote'},
+            args = {"--stdin-filepath", vim.api.nvim_buf_get_name(0), "--single-quote"},
             stdin = true
           }
         end
-    },
-    rust = {
-      -- Rustfmt
-      function()
-        return {
-          exe = "rustfmt",
-          args = {"--emit=stdout"},
-          stdin = true
-        }
-      end
-    },
-    lua = {
+      },
+      rust = {
+        -- Rustfmt
+        function()
+          return {
+            exe = "rustfmt",
+            args = {"--emit=stdout"},
+            stdin = true
+          }
+        end
+      },
+      lua = {
         -- luafmt
         function()
           return {
@@ -30,25 +40,29 @@ require('formatter').setup({
             stdin = true
           }
         end
-    },
-    cpp = {
+      },
+      cpp = {
         -- clang-format
-       function()
+        function()
           return {
             exe = "clang-format",
             args = {"--assume-filename", vim.api.nvim_buf_get_name(0)},
             stdin = true,
-            cwd = vim.fn.expand('%:p:h')  -- Run clang-format in cwd of the file.
+            cwd = vim.fn.expand("%:p:h") -- Run clang-format in cwd of the file.
           }
         end
+      }
     }
   }
-})
+)
 
 -- Format on save
-vim.api.nvim_exec([[
+vim.api.nvim_exec(
+  [[
 augroup FormatAutogroup
   autocmd!
   autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
 augroup END
-]], true)
+]],
+  true
+)
