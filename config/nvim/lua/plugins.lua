@@ -70,13 +70,13 @@ return require("packer").startup(
         require "octo".setup()
       end
     }
-
-    -- org mode
-
     use {
-      "kristijanhusak/orgmode.nvim",
+      "lewis6991/gitsigns.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim"
+      },
       config = function()
-        require("orgmode").setup {}
+        require("gitsigns").setup()
       end
     }
   end

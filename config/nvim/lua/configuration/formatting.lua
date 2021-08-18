@@ -20,7 +20,9 @@ require("formatter").setup(
       },
       javascript = {prettier},
       typesript = {prettier},
-      typesriptreact = {prettier},
+      typescriptreact = {prettier},
+      css = {prettier},
+      scss = {prettier},
       rust = {
         -- Rustfmt
         function()
