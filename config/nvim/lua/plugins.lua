@@ -25,6 +25,10 @@ return require("packer").startup(
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
     }
 
+    -- Syntax
+    use "norcalli/nvim-colorizer.lua"
+    use "jparise/vim-graphql"
+
     -- General code plugins
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
@@ -51,8 +55,20 @@ return require("packer").startup(
       "kyazdani42/nvim-tree.lua",
       requires = "kyazdani42/nvim-web-devicons"
     }
+    use {
+      "ahmedkhalf/project.nvim",
+      config = function()
+        require("project_nvim").setup {}
+      end
+    }
 
     -- Hell yeah git
     use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+    use {
+      "pwntester/octo.nvim",
+      config = function()
+        require "octo".setup()
+      end
+    }
   end
 )

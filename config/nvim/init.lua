@@ -13,7 +13,7 @@ vimp.nnoremap("<Leader>gg", ":Neogit<cr>")
 vimp.nnoremap("C-e", ":NvimTreeToggle<cr>")
 vimp.nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
 vimp.nnoremap("<leader><leader>", "<cmd>Telescope find_files<cr>")
-vimp.nnoremap("<leader>fg", "<cmd>Telescope live_grep<cr>")
+vimp.nnoremap("<leader>sp", "<cmd>Telescope live_grep<cr>")
 
 -- Easy window nav
 vimp.nnoremap("<leader>w", "<C-w>")
