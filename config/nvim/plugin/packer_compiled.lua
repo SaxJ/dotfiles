@@ -73,6 +73,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/formatter.nvim"
   },
+  ["gitsigns.nvim"] = {
+    config = { "\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0" },
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/gitsigns.nvim"
+  },
   hop = {
     config = { "\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0" },
     loaded = true,
@@ -82,6 +87,18 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/lspsaga.nvim"
   },
+  ["lualine.nvim"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/lualine.nvim"
+  },
+  neogit = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/neogit"
+  },
+  ["nvim-colorizer.lua"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-colorizer.lua"
+  },
   ["nvim-compe"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-compe"
@@ -89,6 +106,23 @@ _G.packer_plugins = {
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
+  },
+  ["nvim-tree.lua"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
+  },
+  ["nvim-web-devicons"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
+  },
+  ["octo.nvim"] = {
+    config = { "\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tocto\frequire\0" },
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/octo.nvim"
+  },
+  ["onedark.vim"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/onedark.vim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -98,17 +132,59 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
+  ["project.nvim"] = {
+    config = { "\27LJ\1\2>\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\17project_nvim\frequire\0" },
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/project.nvim"
+  },
+  ["surround.nvim"] = {
+    config = { "\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0" },
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/surround.nvim"
+  },
   ["telescope.nvim"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/telescope.nvim"
+  },
+  ["vim-graphql"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-graphql"
+  },
+  ["vim-vsnip"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip"
+  },
+  ["vim-vsnip-integ"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
+  },
+  vimpeccable = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vimpeccable"
   }
 }
 
 time([[Defining packer_plugins]], false)
+-- Config for: octo.nvim
+time([[Config for octo.nvim]], true)
+try_loadstring("\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tocto\frequire\0", "config", "octo.nvim")
+time([[Config for octo.nvim]], false)
+-- Config for: gitsigns.nvim
+time([[Config for gitsigns.nvim]], true)
+try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
+time([[Config for gitsigns.nvim]], false)
 -- Config for: hop
 time([[Config for hop]], true)
 try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop")
 time([[Config for hop]], false)
+-- Config for: surround.nvim
+time([[Config for surround.nvim]], true)
+try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+time([[Config for surround.nvim]], false)
+-- Config for: project.nvim
+time([[Config for project.nvim]], true)
+try_loadstring("\27LJ\1\2>\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
+time([[Config for project.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

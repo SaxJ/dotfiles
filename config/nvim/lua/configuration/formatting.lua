@@ -19,7 +19,7 @@ require("formatter").setup(
         end
       },
       javascript = {prettier},
-      typesript = {prettier},
+      typescript = {prettier},
       typescriptreact = {prettier},
       css = {prettier},
       scss = {prettier},
