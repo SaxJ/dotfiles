@@ -21,3 +21,12 @@ vimp.nnoremap("C-l", "<C-w>l")
 vimp.nnoremap("C-k", "<C-w>k")
 vimp.nnoremap("C-j", "<C-w>j")
 vimp.nnoremap("C-h", "<C-w>h")
+
+-- My own journalling
+vimp.nnoremap(
+  "<leader>nj",
+  function()
+    local filename = "~/Documents/wiki/journals/" .. os.date("%Y_%m_%d") .. ".md"
+    vim.cmd("tabnew " .. filename)
+  end
+)
