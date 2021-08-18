@@ -9,9 +9,18 @@ require("formatter").setup(
   {
     logging = false,
     filetype = {
+      php = {
+        function()
+          return {
+            exe = "php-cs-fixer",
+            args = {"fix", vim.api.nvim_buf_get_name(0)},
+            stdin = false
+          }
+        end
+      },
       javascript = {prettier},
-      typescript = {prettier},
-      typescriptreact = {prettier},
+      typesript = {prettier},
+      typesriptreact = {prettier},
       rust = {
         -- Rustfmt
         function()

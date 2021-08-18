@@ -4,6 +4,7 @@ require("configuration/completion")
 require("configuration/lsp")
 require("configuration/formatting")
 require("lualine").setup({theme = "onedark"})
+require("colorizer").setup()
 
 local actions = require "telescope.actions"
 require("telescope").setup {

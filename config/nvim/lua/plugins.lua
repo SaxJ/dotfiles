@@ -26,8 +26,8 @@ return require("packer").startup(
     }
 
     -- Syntax
-    use "norcalli/nvim-colorizer.lua"
     use "jparise/vim-graphql"
+    use "norcalli/nvim-colorizer.lua"
 
     -- General code plugins
     use "glepnir/lspsaga.nvim"
@@ -68,6 +68,15 @@ return require("packer").startup(
       "pwntester/octo.nvim",
       config = function()
         require "octo".setup()
+      end
+    }
+
+    -- org mode
+
+    use {
+      "kristijanhusak/orgmode.nvim",
+      config = function()
+        require("orgmode").setup {}
       end
     }
   end

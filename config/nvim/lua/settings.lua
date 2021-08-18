@@ -1,4 +1,4 @@
-local utils = require('utils')
+local utils = require("utils")
 
 local cmd = vim.cmd
 local indent = 4
@@ -8,14 +8,14 @@ local opt = vim.opt
 vim.g.mapleader = [[ ]]
 vim.g.maplocalleader = [[,]]
 
-cmd 'syntax enable'
-cmd 'filetype plugin indent on'
+cmd "syntax enable"
+cmd "filetype plugin indent on"
 
 opt.autoindent = true
 opt.breakindent = true
-opt.completeopt = 'menuone,noselect'
+opt.completeopt = "menuone,noselect"
 opt.copyindent = true
-opt.clipboard = 'unnamed,unnamedplus'
+opt.clipboard = "unnamed,unnamedplus"
 opt.cmdheight = 1
 opt.cursorline = true
 opt.expandtab = true
@@ -38,7 +38,7 @@ opt.updatetime = 300
 vim.cmd("colorscheme onedark")
 
 cmd [[
-set expandtab smarttab shiftround autoindent smartindent smartcase
+set expandtab smarttab shiftround autoindent smartindent smartcase nowrap
 set path+=**
 set wildmode=longest,list,full
 set wildmenu
