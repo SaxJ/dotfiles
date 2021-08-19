@@ -19,8 +19,10 @@ require("formatter").setup(
         end
       },
       javascript = {prettier},
-      typesript = {prettier},
-      typesriptreact = {prettier},
+      typescript = {prettier},
+      typescriptreact = {prettier},
+      css = {prettier},
+      scss = {prettier},
       rust = {
         -- Rustfmt
         function()
@@ -61,7 +63,7 @@ vim.api.nvim_exec(
   [[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.rs,*.lua FormatWrite
+  autocmd BufWritePost *.js,*.tsx,*.ts,*.jsx,*.rs,*.lua FormatWrite
 augroup END
 ]],
   true

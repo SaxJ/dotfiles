@@ -55,6 +55,12 @@ return require("packer").startup(
       "kyazdani42/nvim-tree.lua",
       requires = "kyazdani42/nvim-web-devicons"
     }
+    use {
+      "ahmedkhalf/project.nvim",
+      config = function()
+        require("project_nvim").setup {}
+      end
+    }
 
     -- Hell yeah git
     use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
@@ -64,18 +70,13 @@ return require("packer").startup(
         require "octo".setup()
       end
     }
-
-    -- org mode
-
     use {
-      "kristijanhusak/orgmode.nvim",
+      "lewis6991/gitsigns.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim"
+      },
       config = function()
-        require("orgmode").setup(
-          {
-            org_agenda_files = {"~/org/*"},
-            org_default_notes_file = "~/org/notes.org"
-          }
-        )
+        require("gitsigns").setup()
       end
     }
   end
