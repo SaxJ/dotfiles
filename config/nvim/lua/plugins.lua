@@ -63,7 +63,7 @@ return require("packer").startup(
     }
 
     -- Hell yeah git
-    use {"TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim"}
+    use "kdheepak/lazygit.nvim"
     use {
       "pwntester/octo.nvim",
       config = function()

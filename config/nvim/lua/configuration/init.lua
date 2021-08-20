@@ -61,7 +61,4 @@ require("telescope").load_extension("projects")
 local saga = require "lspsaga"
 saga.init_lsp_saga()
 
-local neogit = require("neogit")
-neogit.setup {}
-
 require("colorizer").setup()
