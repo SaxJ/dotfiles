@@ -42,8 +42,8 @@
         doom-modeline-persp-name t
         auto-revert-check-vc-info t))
 
-(setq +notmuch-sync-backend 'mbsync)
-(setq +notmuch-home-function (lambda () (notmuch-search "tag:unread")))
+(setq +notmuch-sync-backend 'mbsync
+      +notmuch-home-function (lambda () (notmuch-search "tag:inbox")))
 
 (defun calendar-helper ()
   "Define calendar sources to load."
@@ -169,17 +169,6 @@
       :desc "Add blob team"
       :n "ab" #'forge-add-blob)
 
-(defun mark-read ()
- "Remove unread tag."
- (notmuch-search-remove-tag (list "-unread")))
-
-(map! :after notmuch
-      :map notmuch-search-mode-map
-      :localleader
-      :desc "Mark as read"
-      :n "r" #'mark-read)
-
-
 (defun forge-add-blob (n)
   "Edit the review-requests of the current pull-request.
 If there is no current topic or with a prefix argument read a
@@ -194,18 +183,8 @@ topic N and modify that instead."
      repo topic
      '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance"))))
 
-(defun my-fetch-password (&rest params)
-  (require 'auth-source)
-  (let ((match (car (apply #'auth-source-search params))))
-    (if match
-        (let ((secret (plist-get match :secret)))
-          (if (functionp secret)
-              (funcall secret)
-            secret))
-      (error "Password not found for %S" params))))
-
 ;; Intelephense license
-(setq lsp-intelephense-licence-key (my-fetch-password :user intelephense))
+;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one

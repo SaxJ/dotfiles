@@ -36,8 +36,8 @@ Expunge Both
 SyncState *
 
 Channel work-trash
-Far :work-remote:"[Gmail]/Bin"
-Near :work-local:"/Bin"
+Far :work-remote:"[Gmail]/Trash"
+Near :work-local:"/Trash"
 Create Both
 Expunge Both
 SyncState *
