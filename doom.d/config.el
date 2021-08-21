@@ -194,8 +194,18 @@ topic N and modify that instead."
      repo topic
      '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance"))))
 
+(defun my-fetch-password (&rest params)
+  (require 'auth-source)
+  (let ((match (car (apply #'auth-source-search params))))
+    (if match
+        (let ((secret (plist-get match :secret)))
+          (if (functionp secret)
+              (funcall secret)
+            secret))
+      (error "Password not found for %S" params))))
+
 ;; Intelephense license
-(setq lsp-intelephense-licence-key (auth-source-pass-get 'secret "intelephense/key"))
+(setq lsp-intelephense-licence-key (my-fetch-password :user intelephense))
 
 ;;
 ;; - `load!' for loading external *.el files relative to this one
