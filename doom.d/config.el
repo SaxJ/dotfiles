@@ -29,8 +29,23 @@
 
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
-(setq org-directory "~/org")
-(setq org-roam-directory "~/org")
+(setq org-directory "~/Documents/wiki"
+      org-roam-directory "~/Documents/wiki/pages"
+      org-agenda-files '("~/Documents/wiki/pages" "~/Documents/wiki/journals")
+      rmh-elfeed-org-files '("~/Documents/wiki/pages/elfeed.org")
+
+      ;; Journal config
+      org-journal-dir (concat (file-name-as-directory org-directory) "journals/")
+      org-journal-date-prefix "* "
+      org-journal-time-prefix "** "
+      org-journal-date-format "%a, %Y-%m-%d"
+      org-journal-file-format "%Y_%m_%d.org"
+      org-journal-time-format "%I:%M %p")
+
+(defun get-journal-file-today ()
+  "Get filename for todays journal"
+  (let ((daily-name (format-time-string org-journal-file-format)))
+    (expand-file-name (concat org-journal-dir daily-name))))
 
 (after! org
   (map! :map org-mode-map
@@ -207,11 +222,11 @@ topic N and modify that instead."
 ;; SQL CLIENT
 (setq sql-connection-alist
       '((pgsql-dev (sql-product 'postgres)
-                    (sql-port 5432)
-                    (sql-server "localhost")
-                    (sql-user "engine_master")
-                    (sql-password "he_dev")
-                    (sql-database "engine_data"))))
+                   (sql-port 5432)
+                   (sql-server "localhost")
+                   (sql-user "engine_master")
+                   (sql-password "he_dev")
+                   (sql-database "engine_data"))))
 
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
@@ -222,3 +237,4 @@ topic N and modify that instead."
 (setq +format-on-save-enabled-modes
       '(not yaml-mode))
 (setq typescript-indent-level 2)
+*

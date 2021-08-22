@@ -149,7 +149,8 @@
        (org +pretty
             +present
             +roam2
-            +pomodoro)
+            +pomodoro
+            +journal)
        (php +lsp)
        ;;plantuml          ; diagrams for confusing people more
        (purescript +lsp)        ; javascript, but functional
