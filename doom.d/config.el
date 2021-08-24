@@ -58,7 +58,7 @@
         auto-revert-check-vc-info t))
 
 (setq +notmuch-sync-backend 'mbsync
-      +notmuch-home-function (lambda () (notmuch-search "tag:inbox")))
+      +notmuch-home-function (lambda () (notmuch-search "tag:unread")))
 
 (defun calendar-helper ()
   "Define calendar sources to load."

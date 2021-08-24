@@ -42,9 +42,10 @@ assign [class="Thunderbird"] 4
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
-exec --no-startup-id redshift
+#exec --no-startup-id redshift
 exec --no-startup-id dropbox
 exec --no-startup-id flameshot
+exec emacs
 exec firefox-developer-edition
 exec slack
 
@@ -74,7 +75,7 @@ bindsym $mod+q kill
 # start dmenu (a program launcher)
 bindsym $mod+p exec "rofi -modi drun,run -show drun -show-icons"
 bindsym $mod+b exec "rofi-rbw --typer wtype --clipboarder xclip --selector rofi"
-	
+
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
