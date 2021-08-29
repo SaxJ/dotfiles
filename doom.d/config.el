@@ -106,6 +106,7 @@
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 (use-package! apex-mode)
+(use-package! shakespeare-mode)
 
 (use-package! lsp-mode
   :config

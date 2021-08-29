@@ -38,9 +38,6 @@
 (package! org-jira)
 (package! psysh)
 
-(unpin! magit)
-(unpin! forge)
-
 ;; Salesforce!
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
@@ -50,6 +47,9 @@
   :recipe (:host github :repo "nxtr/soql-mode"))
 (package! apex-mode
   :recipe (:host github :repo "nxtr/apex-mode"))
+
+;; Haskell Shakespeare templates
+(package! shakespeare-mode)
 
 (package! doom-snippets :ignore t)
 
