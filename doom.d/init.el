@@ -179,7 +179,7 @@
 
        :app
        calendar
-       ;;emms
+       emms
        ;;everywhere
        ;;irc               ; how neckbeards socialize
        (rss +org)        ; emacs as an RSS reader
