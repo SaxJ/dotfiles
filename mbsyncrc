@@ -1,9 +1,7 @@
-# mbsyncrc based on
-# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
 # ACCOUNT INFORMATION
 IMAPAccount work
 Host imap.gmail.com
-User saxon.jensen@healthengine.com.au
+UserCmd "pass gmail/work/username"
 PassCmd "pass gmail/work"
 Port 993
 AuthMechs LOGIN
@@ -82,7 +80,7 @@ Channel work-starred
 
 IMAPAccount personal
 Host imap.gmail.com
-User saxon.jensen@gmail.com
+UserCmd "pass gmail/personal/username"
 PassCmd "pass gmail/personal"
 Port 993
 AuthMechs LOGIN
@@ -162,7 +160,7 @@ Channel personal-starred
 
 IMAPAccount gaming
 Host imap.gmail.com
-User speedemon999@gmail.com
+UserCmd "pass gmail/gaming/username"
 PassCmd "pass gmail/gaming"
 Port 993
 AuthMechs LOGIN
@@ -241,7 +239,7 @@ Channel gaming-starred
 IMAPStore zoho-remote
 Host imap.zoho.com.au
 Port 993
-User saxon@saxonj.dev
+UserCmd "pass email/zoho/username"
 PassCmd "pass email/zoho"
 SSLType IMAPS
 
@@ -253,6 +251,30 @@ SubFolders Verbatim
 Channel zoho
 Far :zoho-remote:
 Near :zoho-local:
+Patterns * !Archives
+Create Both
+Expunge Both
+SyncState *
+
+
+################################################################################
+#############################  MAILBOX.ORG   ###################################
+################################################################################
+IMAPStore mailbox-remote
+Host imap.mailbox.org
+Port 993
+UserCmd "pass email/mailbox/username"
+PassCmd "pass email/mailbox"
+SSLType STARTTLS
+
+MaildirStore mailbox-local
+Path ~/.mail/mailbox/
+Inbox ~/.mail/mailbox/INBOX
+SubFolders Verbatim
+
+Channel mailbox
+Far :mailbox-remote:
+Near :mailbox-local:
 Patterns * !Archives
 Create Both
 Expunge Both
