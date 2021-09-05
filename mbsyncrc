@@ -265,7 +265,7 @@ Host imap.mailbox.org
 Port 993
 UserCmd "pass email/mailbox/username"
 PassCmd "pass email/mailbox"
-SSLType STARTTLS
+SSLType IMAPS
 
 MaildirStore mailbox-local
 Path ~/.mail/mailbox/
