@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-export TERM=alacritty
+export TERM=kitty
 export AWS_PROFILE=hedev
 
 # If not running interactively, don't do anything
