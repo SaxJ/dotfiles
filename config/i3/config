@@ -45,7 +45,6 @@ exec --no-startup-id nitrogen --restore
 #exec --no-startup-id redshift
 exec --no-startup-id dropbox
 exec --no-startup-id flameshot
-exec emacs
 exec firefox-developer-edition
 exec slack
 
@@ -61,7 +60,7 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec alacritty
+bindsym $mod+Return exec kitty
 
 # lock the screen
 bindsym $mod+Shift+x exec "i3lock-fancy-rapid 10 3"
