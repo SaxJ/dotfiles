@@ -38,17 +38,35 @@ local on_attach = function(client, bufnr)
 end
 
 -- languages
-require "lspconfig".vimls.setup {on_attach = on_attach}
-require "lspconfig".ccls.setup {on_attach = on_attach}
-require "lspconfig".bashls.setup {on_attach = on_attach}
-require "lspconfig".tsserver.setup {on_attach = on_attach}
-require "lspconfig".dockerls.setup {on_attach = on_attach}
-require "lspconfig".graphql.setup {on_attach = on_attach}
-require "lspconfig".hls.setup {on_attach = on_attach}
-require "lspconfig".intelephense.setup {
-  on_attach = on_attach,
-  init_options = {licenceKey = "/home/saxonj/intelephense/licence.txt"}
-}
-
-local omnisharp_bin = "/usr/bin/omnisharp"
-require "lspconfig".omnisharp.setup {cmd = {omnisharp_bin, "--languageserver", "--hostPID", tostring(vimPID)}}
+local coq = require("coq")
+local lspconfig = require("lspconfig")
+lspconfig.vimls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.ccls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.bashls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.dockerls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.graphql.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.hls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.phpactor.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
+lspconfig.intelephense.setup(
+  coq.lsp_ensure_capabilities(
+    {
+      on_attach = on_attach,
+      init_options = {
+        licenceKey = "/home/saxonj/intelephense/licence.txt"
+      }
+    }
+  )
+)
+lspconfig.omnisharp.setup(
+  coq.lsp_ensure_capabilities(
+    {
+      cmd = {
+        "/usr/bin/omnisharp",
+        "--languageserver",
+        "--hostPID",
+        tostring(vimPID)
+      }
+    }
+  )
+)
