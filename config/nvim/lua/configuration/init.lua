@@ -3,7 +3,16 @@ local util = require("utils")
 require("configuration/completion")
 require("configuration/lsp")
 require("configuration/formatting")
-require("lualine").setup({theme = "onedark"})
+require("lualine").setup(
+  {
+    theme = "onedark",
+    sections = {
+      lualine_c = {
+        {"filename", path = 1}
+      }
+    }
+  }
+)
 require("colorizer").setup()
 
 local actions = require "telescope.actions"
