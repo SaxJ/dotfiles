@@ -380,3 +380,4 @@ function bash-stats() {
 }
 
 alias hepg="pgcli -U engine_master -d engine_data -h localhost"
+alias lg="lazygit"
