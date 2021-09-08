@@ -52,7 +52,8 @@ return require("packer").startup(
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
     use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}, {"hrsh7th/vim-vsnip-integ"}}}
-    use {"hrsh7th/nvim-compe"}
+    use {"ms-jpq/coq_nvim", branch = "coq"} -- main one
+    use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
     use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/plenary.nvim"}}}
     use {
       "blackCauldron7/surround.nvim",
