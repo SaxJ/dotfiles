@@ -47,7 +47,6 @@ lspconfig.tsserver.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
 lspconfig.dockerls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
 lspconfig.graphql.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
 lspconfig.hls.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
-lspconfig.phpactor.setup(coq.lsp_ensure_capabilities({on_attach = on_attach}))
 lspconfig.intelephense.setup(
   coq.lsp_ensure_capabilities(
     {
