@@ -1,3 +1,21 @@
-vim.g.coq_settings = {
-  auto_start = true
-}
+local cmp = require "cmp"
+cmp.setup(
+  {
+    mapping = {
+      ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item()),
+      ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item()),
+      ["<C-Space>"] = cmp.mapping.complete(),
+      ["<CR>"] = cmp.mapping.confirm(
+        {
+          behavior = cmp.ConfirmBehavior.Replace,
+          select = true
+        }
+      )
+    },
+    sources = {
+      {name = "nvim_lsp"},
+      {name = "buffer"},
+      {name = "nvim_lua"}
+    }
+  }
+)

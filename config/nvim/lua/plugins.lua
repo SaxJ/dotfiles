@@ -27,7 +27,7 @@ return require("packer").startup(
 
     -- Syntax
     use "jparise/vim-graphql"
-    use "norcalli/nvim-colorizer.lua"
+    use {"norcalli/nvim-colorizer.lua"}
 
     -- General code plugins
     use {
@@ -52,8 +52,15 @@ return require("packer").startup(
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
     use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}, {"hrsh7th/vim-vsnip-integ"}}}
-    use {"ms-jpq/coq_nvim", branch = "coq"} -- main one
-    use {"ms-jpq/coq.artifacts", branch = "artifacts"} -- 9000+ Snippets
+    use {
+      "hrsh7th/nvim-cmp",
+      requires = {
+        "hrsh7th/vim-vsnip",
+        "hrsh7th/cmp-buffer",
+        "hrsh7th/cmp-nvim-lua",
+        "hrsh7th/cmp-nvim-lsp"
+      }
+    }
     use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/plenary.nvim"}}}
     use {
       "blackCauldron7/surround.nvim",
