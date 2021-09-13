@@ -5,6 +5,13 @@ local prettier = function()
     stdin = true
   }
 end
+local phpcsfixer = function()
+  return {
+    exe = "php-cs-fixer",
+    args = {"fix", vim.api.nvim_buf_get_name(0)},
+    stdin = false
+  }
+end
 require("formatter").setup(
   {
     logging = false,
@@ -45,6 +52,15 @@ require("formatter").setup(
             cwd = vim.fn.expand("%:p:h") -- Run clang-format in cwd of the file.
           }
         end
+      },
+      tf = {
+        function()
+          return {
+            exe = "terraform",
+            args = {"fmt", "-"},
+            stdin = true
+          }
+        end
       }
     }
   }
@@ -55,7 +71,7 @@ vim.api.nvim_exec(
   [[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.tsx,*.ts,*.jsx,*.rs,*.lua FormatWrite
+  autocmd BufWritePost *.js,*.tsx,*.ts,*.jsx,*.rs,*.lua,*.php,*.cs,*.cpp,*.tf FormatWrite
 augroup END
 ]],
   true
