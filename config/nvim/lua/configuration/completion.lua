@@ -1,6 +1,11 @@
 local cmp = require "cmp"
 cmp.setup(
   {
+    snippet = {
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body)
+      end
+    },
     mapping = {
       ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item()),
       ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item()),
@@ -14,8 +19,7 @@ cmp.setup(
     },
     sources = {
       {name = "nvim_lsp"},
-      {name = "buffer"},
-      {name = "nvim_lua"}
+      {name = "buffer"}
     }
   }
 )

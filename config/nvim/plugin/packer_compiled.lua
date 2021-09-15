@@ -175,10 +175,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   },
-  ["vim-vsnip-integ"] = {
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
-  },
   vimpeccable = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vimpeccable"
