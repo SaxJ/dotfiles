@@ -49,4 +49,6 @@ set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
 ]]

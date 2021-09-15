@@ -28,6 +28,10 @@ return require("packer").startup(
     -- Syntax
     use "jparise/vim-graphql"
     use {"norcalli/nvim-colorizer.lua"}
+    use {
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate"
+    }
 
     -- General code plugins
     use {
