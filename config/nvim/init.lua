@@ -16,6 +16,10 @@ vimp.nnoremap("<leader><leader>", "<cmd>Telescope find_files<cr>")
 vimp.nnoremap("<leader>sp", "<cmd>Telescope live_grep<cr>")
 vimp.nnoremap("<leader>pp", "<cmd>Telescope projects<cr>")
 
+-- Github
+vimp.nnoremap("<leader>prc", "<cmd>Octo pr create<cr>")
+vimp.nnoremap("<leader>prl", "<cmd>Octo pr list<cr>")
+
 -- Easy window nav
 vimp.nnoremap("<leader>w", "<C-w>")
 vimp.nnoremap("C-l", "<C-w>l")

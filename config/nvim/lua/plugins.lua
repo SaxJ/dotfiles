@@ -94,13 +94,8 @@ return require("packer").startup(
     }
 
     -- Hell yeah git
+    use {"pwntester/octo.nvim"}
     use "kdheepak/lazygit.nvim"
-    use {
-      "pwntester/octo.nvim",
-      config = function()
-        require "octo".setup()
-      end
-    }
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
