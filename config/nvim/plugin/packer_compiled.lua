@@ -137,7 +137,6 @@ _G.packer_plugins = {
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
   },
   ["octo.nvim"] = {
-    config = { "\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tocto\frequire\0" },
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/octo.nvim"
   },
@@ -175,10 +174,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip"
   },
-  ["vim-vsnip-integ"] = {
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip-integ"
-  },
   vimpeccable = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vimpeccable"
@@ -194,10 +189,6 @@ time([[Config for surround.nvim]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
--- Config for: octo.nvim
-time([[Config for octo.nvim]], true)
-try_loadstring("\27LJ\1\0022\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\tocto\frequire\0", "config", "octo.nvim")
-time([[Config for octo.nvim]], false)
 -- Config for: nterm.nvim
 time([[Config for nterm.nvim]], true)
 try_loadstring("\27LJ\1\2Ž\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ð\15\nshell\tfish\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ð\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0", "config", "nterm.nvim")

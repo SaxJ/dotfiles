@@ -42,7 +42,16 @@ local lspconfig = require("lspconfig")
 lspconfig.vimls.setup({on_attach = on_attach})
 lspconfig.ccls.setup({on_attach = on_attach})
 lspconfig.bashls.setup({on_attach = on_attach})
-lspconfig.tsserver.setup({on_attach = on_attach})
+lspconfig.tsserver.setup(
+  {
+    on_attach = on_attach,
+    init_options = {
+      preferences = {
+        importModuleSpecifierPreference = "relative"
+      }
+    }
+  }
+)
 lspconfig.dockerls.setup({on_attach = on_attach})
 lspconfig.graphql.setup({on_attach = on_attach})
 lspconfig.hls.setup({on_attach = on_attach})

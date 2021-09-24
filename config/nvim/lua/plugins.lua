@@ -51,7 +51,7 @@ return require("packer").startup(
     --
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
-    use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}, {"hrsh7th/vim-vsnip-integ"}}}
+    use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}}}
     use {
       "hrsh7th/nvim-cmp",
       requires = {
@@ -90,13 +90,8 @@ return require("packer").startup(
     }
 
     -- Hell yeah git
+    use {"pwntester/octo.nvim"}
     use "kdheepak/lazygit.nvim"
-    use {
-      "pwntester/octo.nvim",
-      config = function()
-        require "octo".setup()
-      end
-    }
     use {
       "lewis6991/gitsigns.nvim",
       requires = {
