@@ -73,6 +73,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/aniseed"
   },
+  chadtree = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/chadtree"
+  },
   ["cmp-buffer"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/cmp-buffer"
@@ -127,10 +131,6 @@ _G.packer_plugins = {
   ["nvim-lspconfig"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
-  },
-  ["nvim-tree.lua"] = {
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-tree.lua"
   },
   ["nvim-web-devicons"] = {
     loaded = true,

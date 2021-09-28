@@ -78,10 +78,7 @@ return require("packer").startup(
         require "hop".setup {keys = "etovxqpdygfblzhckisuran"}
       end
     }
-    use {
-      "kyazdani42/nvim-tree.lua",
-      requires = "kyazdani42/nvim-web-devicons"
-    }
+    use {"ms-jpq/chadtree"}
     use {
       "ahmedkhalf/project.nvim",
       config = function()
