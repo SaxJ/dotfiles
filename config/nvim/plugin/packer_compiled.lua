@@ -116,7 +116,7 @@ _G.packer_plugins = {
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
   ["nterm.nvim"] = {
-    config = { "\27LJ\1\2Ž\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ð\15\nshell\tfish\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ð\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0" },
+    config = { "\27LJ\1\2Ž\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ð\15\nshell\tbash\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ð\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0" },
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nterm.nvim"
   },
@@ -191,7 +191,7 @@ try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\
 time([[Config for gitsigns.nvim]], false)
 -- Config for: nterm.nvim
 time([[Config for nterm.nvim]], true)
-try_loadstring("\27LJ\1\2Ž\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ð\15\nshell\tfish\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ð\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0", "config", "nterm.nvim")
+try_loadstring("\27LJ\1\2Ž\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ð\15\nshell\tbash\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ð\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0", "config", "nterm.nvim")
 time([[Config for nterm.nvim]], false)
 -- Config for: hop
 time([[Config for hop]], true)

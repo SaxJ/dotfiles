@@ -37,7 +37,7 @@ return require("packer").startup(
         require "nterm.main".init(
           {
             maps = true, -- load defaut mappings
-            shell = "fish",
+            shell = "bash",
             size = 20,
             direction = "horizontal", -- horizontal or vertical
             popup = 2000, -- Number of miliseconds to show the info about the commmand. 0 to dissable
