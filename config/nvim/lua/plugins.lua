@@ -19,7 +19,7 @@ return require("packer").startup(
     use "svermeulen/vimpeccable"
 
     -- Appearance
-    use "joshdick/onedark.vim"
+    use "folke/tokyonight.nvim"
     use {
       "hoob3rt/lualine.nvim",
       requires = {"kyazdani42/nvim-web-devicons", opt = true}
@@ -28,27 +28,25 @@ return require("packer").startup(
     -- Syntax
     use "jparise/vim-graphql"
     use {"norcalli/nvim-colorizer.lua"}
-
-    -- General code plugins
     use {
-      "jlesquembre/nterm.nvim",
-      requires = {"Olical/aniseed"},
+      "nvim-treesitter/nvim-treesitter",
+      run = ":TSUpdate",
       config = function()
-        require "nterm.main".init(
+        require "nvim-treesitter.configs".setup(
           {
-            maps = true, -- load defaut mappings
-            shell = "bash",
-            size = 20,
-            direction = "horizontal", -- horizontal or vertical
-            popup = 2000, -- Number of miliseconds to show the info about the commmand. 0 to dissable
-            popup_pos = "SE", --  one of "NE" "SE" "SW" "NW"
-            autoclose = 2000 -- If command is sucesful, close the terminal after that number of miliseconds. 0 to disable
+            ensure_installed = "maintained",
+            highlight = {
+              enable = true
+            },
+            indent = {
+              enable = true
+            }
           }
         )
       end
     }
-    --
-    --
+
+    -- General code plugins
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
     use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}}}
