@@ -90,6 +90,12 @@ return require("packer").startup(
     use {"pwntester/octo.nvim"}
     use "kdheepak/lazygit.nvim"
     use {
+      "f-person/git-blame.nvim",
+      config = function()
+        vim.g.gitblame_enabled = 0
+      end
+    }
+    use {
       "lewis6991/gitsigns.nvim",
       requires = {
         "nvim-lua/plenary.nvim"
