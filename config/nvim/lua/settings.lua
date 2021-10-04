@@ -35,7 +35,8 @@ opt.termguicolors = true
 opt.timeoutlen = 500
 opt.updatetime = 300
 
-vim.cmd("colorscheme onedark")
+vim.cmd("colorscheme tokyonight")
+vim.g.tokyonight_style = "night"
 
 cmd [[
 set expandtab smarttab shiftround autoindent smartindent smartcase nowrap

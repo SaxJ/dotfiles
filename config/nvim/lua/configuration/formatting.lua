@@ -18,6 +18,7 @@ require("formatter").setup(
     filetype = {
       php = {prettier},
       javascript = {prettier},
+      json = {prettier},
       typescript = {prettier},
       typescriptreact = {prettier},
       css = {prettier},

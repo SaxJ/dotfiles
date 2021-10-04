@@ -70,6 +70,7 @@ lspconfig.omnisharp.setup(
       "--languageserver",
       "--hostPID",
       tostring(vimPID)
-    }
+    },
+    on_attach = on_attach
   }
 )

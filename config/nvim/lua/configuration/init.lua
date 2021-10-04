@@ -5,7 +5,7 @@ require("configuration/lsp")
 require("configuration/formatting")
 require("lualine").setup(
   {
-    theme = "onedark",
+    theme = "tokyonight",
     sections = {
       lualine_c = {
         {"filename", path = 1},

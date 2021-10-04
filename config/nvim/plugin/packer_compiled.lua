@@ -69,10 +69,6 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  aniseed = {
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/aniseed"
-  },
   chadtree = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/chadtree"
@@ -120,11 +116,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
-  ["nterm.nvim"] = {
-    config = { "\27LJ\1\2\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ğ\15\nshell\tbash\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ğ\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0" },
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nterm.nvim"
-  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-cmp"
@@ -137,6 +128,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-lspconfig"
   },
+  ["nvim-treesitter"] = {
+    config = { "\27LJ\1\2Ÿ\1\0\0\3\0\b\0\v4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\0013\2\6\0:\2\a\1>\0\2\1G\0\1\0\vindent\1\0\1\venable\2\14highlight\1\0\1\venable\2\1\0\1\21ensure_installed\15maintained\nsetup\28nvim-treesitter.configs\frequire\0" },
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-treesitter"
+  },
   ["nvim-web-devicons"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-web-devicons"
@@ -144,10 +140,6 @@ _G.packer_plugins = {
   ["octo.nvim"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/octo.nvim"
-  },
-  ["onedark.vim"] = {
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/onedark.vim"
   },
   ["packer.nvim"] = {
     loaded = true,
@@ -171,6 +163,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/telescope.nvim"
   },
+  ["tokyonight.nvim"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
+  },
   ["vim-graphql"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-graphql"
@@ -190,6 +186,10 @@ time([[Defining packer_plugins]], false)
 time([[Config for git-blame.nvim]], true)
 try_loadstring("\27LJ\1\0022\0\0\2\0\3\0\0054\0\0\0007\0\1\0'\1\0\0:\1\2\0G\0\1\0\21gitblame_enabled\6g\bvim\0", "config", "git-blame.nvim")
 time([[Config for git-blame.nvim]], false)
+-- Config for: nvim-treesitter
+time([[Config for nvim-treesitter]], true)
+try_loadstring("\27LJ\1\2Ÿ\1\0\0\3\0\b\0\v4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\0013\2\6\0:\2\a\1>\0\2\1G\0\1\0\vindent\1\0\1\venable\2\14highlight\1\0\1\venable\2\1\0\1\21ensure_installed\15maintained\nsetup\28nvim-treesitter.configs\frequire\0", "config", "nvim-treesitter")
+time([[Config for nvim-treesitter]], false)
 -- Config for: gitsigns.nvim
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
@@ -198,10 +198,6 @@ time([[Config for gitsigns.nvim]], false)
 time([[Config for hop]], true)
 try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop")
 time([[Config for hop]], false)
--- Config for: nterm.nvim
-time([[Config for nterm.nvim]], true)
-try_loadstring("\27LJ\1\2\1\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\a\npopup\3Ğ\15\nshell\tbash\14direction\15horizontal\14popup_pos\aSE\14autoclose\3Ğ\15\tsize\3\20\tmaps\2\tinit\15nterm.main\frequire\0", "config", "nterm.nvim")
-time([[Config for nterm.nvim]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
 try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
