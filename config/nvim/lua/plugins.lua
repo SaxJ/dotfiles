@@ -50,6 +50,7 @@ return require("packer").startup(
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
     use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}}}
+    use {"kabouzeid/nvim-lspinstall"}
     use {
       "hrsh7th/nvim-cmp",
       requires = {
