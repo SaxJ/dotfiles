@@ -16,7 +16,7 @@ require("formatter").setup(
   {
     logging = false,
     filetype = {
-      php = {prettier},
+      php = {phpcsfixer},
       javascript = {prettier},
       json = {prettier},
       typescript = {prettier},
@@ -27,7 +27,7 @@ require("formatter").setup(
         function()
           return {
             exe = "dotnet",
-            args = {"format", "--include", vim.api.nvim_buf_get_name(0)},
+            args = {"format"},
             stdin = false
           }
         end
