@@ -23,6 +23,15 @@ require("formatter").setup(
       typescriptreact = {prettier},
       css = {prettier},
       scss = {prettier},
+      cs = {
+        function()
+          return {
+            exe = "dotnet",
+            args = {"format", "--include", vim.api.nvim_buf_get_name(0)},
+            stdin = false
+          }
+        end
+      },
       rust = {
         -- Rustfmt
         function()
