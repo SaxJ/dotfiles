@@ -16,7 +16,7 @@ require("formatter").setup(
   {
     logging = false,
     filetype = {
-      php = {prettier},
+      php = {phpcsfixer},
       javascript = {prettier},
       json = {prettier},
       typescript = {prettier},
@@ -72,7 +72,7 @@ vim.api.nvim_exec(
   [[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.js,*.tsx,*.ts,*.jsx,*.rs,*.lua,*.cs,*.cpp,*.tf FormatWrite
+  autocmd BufWritePost *.js,*.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf FormatWrite
 augroup END
 ]],
   true

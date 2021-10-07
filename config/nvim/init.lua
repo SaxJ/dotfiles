@@ -8,19 +8,23 @@ require("settings")
 require("configuration")
 
 local vimp = require("vimp")
+-- Misc
 vimp.nnoremap("<Leader>/", "<cmd>lua require'hop'.hint_words()<cr>")
-vimp.nnoremap("<Leader>gg", ":LazyGit<cr>")
+
+-- Project
 vimp.nnoremap("<C-e>", ":CHADopen<cr>")
 vimp.nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
 vimp.nnoremap("<leader><leader>", "<cmd>Telescope find_files<cr>")
 vimp.nnoremap("<leader>sp", "<cmd>Telescope live_grep<cr>")
 vimp.nnoremap("<leader>pp", "<cmd>Telescope projects<cr>")
 
--- Github
+-- Git
 vimp.nnoremap("<leader>prc", "<cmd>Octo pr create<cr>")
 vimp.nnoremap("<leader>prl", "<cmd>Octo pr list<cr>")
+vimp.nnoremap("<leader>gb", ":GitBlameToggle<cr>")
+vimp.nnoremap("<Leader>gg", ":LazyGit<cr>")
 
--- Easy window nav
+-- Nav
 vimp.nnoremap("<leader>w", "<C-w>")
 vimp.nnoremap("C-l", "<C-w>l")
 vimp.nnoremap("C-k", "<C-w>k")

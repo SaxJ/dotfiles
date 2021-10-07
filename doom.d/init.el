@@ -19,7 +19,7 @@
        ;;layout
 
        :completion
-       (company)           ; the ultimate code completion backend
+       company           ; the ultimate code completion backend
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;(ivy +fuzzy +prescient +icons)               ; a search engine for love and life
@@ -41,7 +41,7 @@
        ;;neotree           ; a project drawer, like NERDTree for vim
        ophints           ; highlight the region an operation acts on
        (popup +defaults)   ; tame sudden yet inevitable temporary windows
-       (ligatures +extra)       ; ligatures or substitute text with pretty symbols
+       ligatures      ; ligatures or substitute text with pretty symbols
        ;;tabs              ; a tab bar for Emacs
        (treemacs +lsp)          ; a project drawer, like neotree but cooler
        ;;unicode           ; extended unicode support for various languages

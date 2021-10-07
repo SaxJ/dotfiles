@@ -50,6 +50,7 @@ return require("packer").startup(
     use "glepnir/lspsaga.nvim"
     use "mhartington/formatter.nvim"
     use {"neovim/nvim-lspconfig", requires = {{"hrsh7th/vim-vsnip"}}}
+    use {"kabouzeid/nvim-lspinstall"}
     use {
       "hrsh7th/nvim-cmp",
       requires = {
@@ -87,6 +88,12 @@ return require("packer").startup(
     -- Hell yeah git
     use {"pwntester/octo.nvim"}
     use "kdheepak/lazygit.nvim"
+    use {
+      "f-person/git-blame.nvim",
+      config = function()
+        vim.g.gitblame_enabled = 0
+      end
+    }
     use {
       "lewis6991/gitsigns.nvim",
       requires = {

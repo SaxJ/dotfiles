@@ -37,40 +37,82 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
--- languages
-local lspconfig = require("lspconfig")
-lspconfig.vimls.setup({on_attach = on_attach})
-lspconfig.ccls.setup({on_attach = on_attach})
-lspconfig.bashls.setup({on_attach = on_attach})
-lspconfig.tsserver.setup(
-  {
-    on_attach = on_attach,
-    init_options = {
-      preferences = {
-        importModuleSpecifierPreference = "relative"
+-- Makes lua lsp work with neovim config
+local lua_settings = {
+  Lua = {
+    runtime = {
+      -- LuaJIT in the case of Neovim
+      version = "LuaJIT",
+      path = vim.split(package.path, ";")
+    },
+    diagnostics = {
+      -- Get the language server to recognize the `vim` global
+      globals = {"vim"}
+    },
+    workspace = {
+      -- Make the server aware of Neovim runtime files
+      library = {
+        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
+        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
       }
     }
   }
-)
-lspconfig.dockerls.setup({on_attach = on_attach})
-lspconfig.graphql.setup({on_attach = on_attach})
-lspconfig.hls.setup({on_attach = on_attach})
-lspconfig.intelephense.setup(
-  {
-    on_attach = on_attach,
-    init_options = {
-      licenceKey = "/home/saxonj/intelephense/licence.txt"
-    }
-  }
-)
-lspconfig.omnisharp.setup(
-  {
-    cmd = {
-      "/usr/bin/omnisharp",
-      "--languageserver",
-      "--hostPID",
-      tostring(vimPID)
-    },
+}
+
+local function make_lsp_config()
+  local capabilities = vim.lsp.protocol.make_client_capabilities()
+  capabilities.textDocument.completion.completionItem.snippetSupport = true
+  return {
+    -- enable snippet support
+    capabilities = capabilities,
+    -- map buffer local keybindings when the language server attaches
     on_attach = on_attach
   }
-)
+end
+
+local function setup_servers()
+  require "lspinstall".setup()
+
+  -- get all installed servers
+  local servers = require "lspinstall".installed_servers()
+  -- ... and add manually installed servers
+  table.insert(servers, "clangd")
+  table.insert(servers, "sourcekit")
+
+  for _, server in pairs(servers) do
+    local config = make_lsp_config()
+
+    -- language specific config
+    if server == "lua" then
+      config.settings = lua_settings
+    end
+    if server == "sourcekit" then
+      config.filetypes = {"swift", "objective-c", "objective-cpp"} -- we don't want c and cpp!
+    end
+    if server == "clangd" then
+      config.filetypes = {"c", "cpp"} -- we don't want objective-c and objective-cpp!
+    end
+    if server == "tsserver" then
+      config.init_options = {
+        preferences = {
+          importModuleSpecifierPreference = "relative"
+        }
+      }
+    end
+    if server == "intelephense" then
+      config.init_options = {
+        licenceKey = "/home/saxonj/intelephense/licence.txt"
+      }
+    end
+
+    require "lspconfig"[server].setup(config)
+  end
+end
+
+setup_servers()
+
+-- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
+require "lspinstall".post_install_hook = function()
+  setup_servers() -- reload installed servers
+  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
+end
