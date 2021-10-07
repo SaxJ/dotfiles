@@ -31,7 +31,6 @@ dotnet-sdk
 dotnet-sdk-3.1-bin
 editorconfig-core-c
 efibootmgr
-emacs-native-comp-git-enhanced
 ethtool
 fakeroot
 fd
