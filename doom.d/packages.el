@@ -37,6 +37,9 @@
 (package! system-packages)
 (package! org-jira)
 (package! psysh)
+(package! tree-sitter)
+(package! tree-sitter-langs)
+(package! slack)
 
 ;; Salesforce!
 (package! submode

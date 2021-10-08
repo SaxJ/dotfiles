@@ -27,6 +27,10 @@
 ;; `load-theme' function. This is the default:
 (setq doom-theme 'doom-outrun-electric)
 
+;; This determines the style of line numbers in effect. If set to `nil', line
+;; numbers are disabled. For relative line numbers, set this to `relative'.
+(setq display-line-numbers-type 'relative)
+
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/wiki"
@@ -92,27 +96,26 @@
     (switch-to-buffer (doom-fallback-buffer))
     (calendar-init)))
 
-
-;; This determines the style of line numbers in effect. If set to `nil', line
-;; numbers are disabled. For relative line numbers, set this to `relative'.
-(setq display-line-numbers-type 'relative)
-
-(use-package lsp-haskell
-  :config
-  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"
-        lsp-haskell-process-args-hie 'nil)
-  )
-
+;; Autocomplete tweaking
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
-(use-package! apex-mode)
-(use-package! shakespeare-mode)
 
+;; General LSP
 (use-package! lsp-mode
   :config
   (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
   (setq lsp-file-watch-threshold 20000)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
+
+;; Haskell LSP
+(use-package lsp-haskell
+  :config
+  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"
+        lsp-haskell-process-args-hie 'nil))
+(use-package! shakespeare-mode)
+
+;; Salesforce dev
+(use-package! apex-mode)
 
 (use-package slack
   :commands (slack-start)
@@ -124,8 +127,9 @@
    :name "Work"
    :default t
    :token (auth-source-pick-first-password
-           :host "work.slack")
-   :subscribed-channels '(dev-core bounce-inc bounce-inc-dev-core)
+           :host "healthengine.slack.com"
+           :user "saxon.jensen@healthengine.com.au")
+   :subscribed-channels '(dev-core blob blob-core)
    :full-and-display-names t)
 
   (evil-define-key 'normal slack-info-mode-map
@@ -238,3 +242,10 @@ topic N and modify that instead."
 (setq +format-on-save-enabled-modes
       '(not yaml-mode))
 (setq typescript-indent-level 2)
+
+;; TREE SITTER
+(use-package! tree-sitter
+  :config
+  (require 'tree-sitter-langs)
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
