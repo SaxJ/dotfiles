@@ -54,7 +54,13 @@
 (after! org
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
-        :n "M-k" #'org-metaup))
+        :n "M-k" #'org-metaup)
+  (setq org-publish-project-alist '(("wiki"
+                                     :base-directory "~/Documents/wiki"
+                                     :publishing-function org-md-export-to-markdown
+                                     :publishing-directory "~/Documents/wiki/export"
+                                     :section-numbers nil
+                                     :with-toc nil))))
 
 (after! doom-modeline
   (setq doom-modeline-persp-icon t
