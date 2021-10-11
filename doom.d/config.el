@@ -60,7 +60,9 @@
                                      :publishing-function org-md-export-to-markdown
                                      :publishing-directory "~/Documents/wiki/export"
                                      :section-numbers nil
-                                     :with-toc nil))))
+                                     :with-toc nil))
+        org-mobile-inbox-for-pull "~/Documents/wiki/inbox.org"
+        org-mobile-directory "~/Dropbox/Apps/MobileOrg"))
 
 (after! doom-modeline
   (setq doom-modeline-persp-icon t
