@@ -196,6 +196,12 @@
       :localleader
       :desc "Add blob team"
       :n "ab" #'forge-add-blob)
+(map! :leader
+      :desc "Push Org to mobile"
+      :n "nP" #'org-mobile-push)
+(map! :leader
+      :desc "Pull Org from mobile"
+      :n "np" #'org-mobile-pull)
 
 (defun forge-add-blob (n)
   "Edit the review-requests of the current pull-request.
