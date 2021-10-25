@@ -116,10 +116,6 @@
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
 ;; Haskell LSP
-(use-package lsp-haskell
-  :config
-  (setq lsp-haskell-process-path-hie "haskell-language-server-wrapper"
-        lsp-haskell-process-args-hie 'nil))
 (use-package! shakespeare-mode)
 
 ;; Salesforce dev

@@ -10,6 +10,7 @@ require("configuration")
 local vimp = require("vimp")
 -- Misc
 vimp.nnoremap("<Leader>/", "<cmd>lua require'hop'.hint_words()<cr>")
+vimp.nnoremap("<Leader>cc", ":ccl<CR>")
 
 -- Project
 vimp.nnoremap("<C-e>", ":CHADopen<cr>")
