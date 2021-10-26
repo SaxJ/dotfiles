@@ -35,6 +35,12 @@ mapx.nnoremap("C-h", "<C-w>h")
 -- FileType
 mapx.nnoremap("<leader>xx", "<Plug>RestNvim")
 
+-- Terminals
+mapx.nnoremap("<leader>ot", ":FloatermNew<cr>")
+mapx.nnoremap("<leader>tt", ":FloatermToggle<cr>")
+mapx.nnoremap("<leader>t]", ":FloatermNext<cr>")
+mapx.nnoremap("<leader>t[", ":FloatermPrev<cr>")
+
 -- My own journalling
 mapx.nnoremap(
   "<leader>nj",

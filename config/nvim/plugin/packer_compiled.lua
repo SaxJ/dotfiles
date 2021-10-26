@@ -163,7 +163,7 @@ _G.packer_plugins = {
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/project.nvim"
   },
   ["rest.nvim"] = {
-    config = { "\27LJ\1\2¨\1\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\20jump_to_request\1\26skip_ssl_verification\2\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0" },
+    config = { "\27LJ\1\2û\1\0\0\3\0\t\0\r4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\0014\0\6\0007\0\a\0%\1\b\0>\0\2\1G\0\1\0?autocmd FileType http nmap <buffer> <Enter> <Plug>RestNvim\bcmd\bvim\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\20jump_to_request\1\26skip_ssl_verification\2\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0" },
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/rest.nvim"
   },
@@ -179,6 +179,10 @@ _G.packer_plugins = {
   ["tokyonight.nvim"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/tokyonight.nvim"
+  },
+  ["vim-floaterm"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-floaterm"
   },
   ["vim-graphql"] = {
     loaded = true,
@@ -203,22 +207,22 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
--- Config for: surround.nvim
-time([[Config for surround.nvim]], true)
-try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
-time([[Config for surround.nvim]], false)
--- Config for: rest.nvim
-time([[Config for rest.nvim]], true)
-try_loadstring("\27LJ\1\2¨\1\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\20jump_to_request\1\26skip_ssl_verification\2\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0", "config", "rest.nvim")
-time([[Config for rest.nvim]], false)
--- Config for: hop
-time([[Config for hop]], true)
-try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop")
-time([[Config for hop]], false)
 -- Config for: project.nvim
 time([[Config for project.nvim]], true)
 try_loadstring("\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\17silent_chdir\1\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
 time([[Config for project.nvim]], false)
+-- Config for: rest.nvim
+time([[Config for rest.nvim]], true)
+try_loadstring("\27LJ\1\2û\1\0\0\3\0\t\0\r4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\0014\0\6\0007\0\a\0%\1\b\0>\0\2\1G\0\1\0?autocmd FileType http nmap <buffer> <Enter> <Plug>RestNvim\bcmd\bvim\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\20jump_to_request\1\26skip_ssl_verification\2\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0", "config", "rest.nvim")
+time([[Config for rest.nvim]], false)
+-- Config for: surround.nvim
+time([[Config for surround.nvim]], true)
+try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
+time([[Config for surround.nvim]], false)
+-- Config for: hop
+time([[Config for hop]], true)
+try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop")
+time([[Config for hop]], false)
 if should_profile then save_profiles() end
 
 end)

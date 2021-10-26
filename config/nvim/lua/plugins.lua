@@ -68,6 +68,7 @@ return require("packer").startup(
       end
     }
 
+    -- Tooling
     use {
       "NTBBloodbath/rest.nvim",
       requires = {"nvim-lua/plenary.nvim"},
@@ -90,6 +91,7 @@ return require("packer").startup(
         vim.cmd "autocmd FileType http nmap <buffer> <Enter> <Plug>RestNvim"
       end
     }
+    use {"voldikss/vim-floaterm"}
 
     -- Code navigation
     use {
