@@ -116,6 +116,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/lualine.nvim"
   },
+  ["mapx.nvim"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/mapx.nvim"
+  },
   ["nvim-cmp"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/nvim-cmp"
@@ -158,6 +162,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/project.nvim"
   },
+  ["rest.nvim"] = {
+    config = { "\27LJ\1\2¨\1\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\20jump_to_request\1\26skip_ssl_verification\2\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0" },
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/rest.nvim"
+  },
   ["surround.nvim"] = {
     config = { "\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0" },
     loaded = true,
@@ -178,10 +187,6 @@ _G.packer_plugins = {
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip"
-  },
-  vimpeccable = {
-    loaded = true,
-    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vimpeccable"
   }
 }
 
@@ -198,14 +203,18 @@ time([[Config for nvim-treesitter]], false)
 time([[Config for gitsigns.nvim]], true)
 try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\1G\0\1\0\nsetup\rgitsigns\frequire\0", "config", "gitsigns.nvim")
 time([[Config for gitsigns.nvim]], false)
--- Config for: hop
-time([[Config for hop]], true)
-try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop")
-time([[Config for hop]], false)
 -- Config for: surround.nvim
 time([[Config for surround.nvim]], true)
 try_loadstring("\27LJ\1\2:\0\0\2\0\3\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0002\1\0\0>\0\2\1G\0\1\0\nsetup\rsurround\frequire\0", "config", "surround.nvim")
 time([[Config for surround.nvim]], false)
+-- Config for: rest.nvim
+time([[Config for rest.nvim]], true)
+try_loadstring("\27LJ\1\2¨\1\0\0\3\0\6\0\t4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0003\2\4\0:\2\5\1>\0\2\1G\0\1\0\14highlight\1\0\2\fenabled\2\ftimeout\3–\1\1\0\3\20jump_to_request\1\26skip_ssl_verification\2\28result_split_horizontal\1\nsetup\14rest-nvim\frequire\0", "config", "rest.nvim")
+time([[Config for rest.nvim]], false)
+-- Config for: hop
+time([[Config for hop]], true)
+try_loadstring("\27LJ\1\2U\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\tkeys\28etovxqpdygfblzhckisuran\nsetup\bhop\frequire\0", "config", "hop")
+time([[Config for hop]], false)
 -- Config for: project.nvim
 time([[Config for project.nvim]], true)
 try_loadstring("\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\17silent_chdir\1\nsetup\17project_nvim\frequire\0", "config", "project.nvim")

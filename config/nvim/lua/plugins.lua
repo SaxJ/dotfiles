@@ -16,7 +16,7 @@ return require("packer").startup(
     use "wbthomason/packer.nvim"
 
     -- Libraries
-    use "svermeulen/vimpeccable"
+    use "b0o/mapx.nvim"
 
     -- Appearance
     use "folke/tokyonight.nvim"
@@ -65,6 +65,29 @@ return require("packer").startup(
       "blackCauldron7/surround.nvim",
       config = function()
         require "surround".setup {}
+      end
+    }
+
+    use {
+      "NTBBloodbath/rest.nvim",
+      requires = {"nvim-lua/plenary.nvim"},
+      config = function()
+        require("rest-nvim").setup(
+          {
+            -- Open request results in a horizontal split
+            result_split_horizontal = false,
+            -- Skip SSL verification, useful for unknown certificates
+            skip_ssl_verification = true,
+            -- Highlight request on run
+            highlight = {
+              enabled = true,
+              timeout = 150
+            },
+            -- Jump to request line on run
+            jump_to_request = false
+          }
+        )
+        vim.cmd "autocmd FileType http nmap <buffer> <Enter> <Plug>RestNvim"
       end
     }
 
