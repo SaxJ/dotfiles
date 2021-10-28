@@ -180,6 +180,9 @@
       :desc "Open Calendar"
       :n "oc" #'my-open-calendar)
 (map! :leader
+      :desc "Toggle auto-format"
+      :n "taf" #'format-all-mode)
+(map! :leader
       :desc "Open SQL Client"
       :n "os" #'sql-connect)
 (map! :after magit
