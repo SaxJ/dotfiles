@@ -29,23 +29,8 @@
 (setq user-full-name "Saxon Jensen"
       user-mail-address "saxon.jensen@gmail.com")
 
-;; Send email through SMTP
-(setq message-send-mail-function 'smtpmail-send-it
-      smtpmail-default-smtp-server "smtp.gmail.com"
-      smtpmail-smtp-service 587
-      smtpmail-local-domain "saxon-arch")
-
-;; auto-complete emacs address using bbdb command, optional
-(add-hook 'message-mode-hook
-          '(lambda ()
-             (flyspell-mode t)
-             (local-set-key (kbd "TAB") 'bbdb-complete-name)))
-
 ;; Please note mail folders in `gnus-select-method' have NO prefix like "nnimap+hotmail:" or "nnimap+gmail:"
 (setq gnus-select-method '(nntp "news.gwene.org")) ;; Read feeds/atom through gwene
-
-;; ask encryption password once
-(setq epa-file-cache-passphrase-for-symmetric-encryption t)
 
 ;; @see http://gnus.org/manual/gnus_397.html
 (add-to-list 'gnus-secondary-select-methods
@@ -66,6 +51,22 @@
                       (nnimap-stream ssl)
                       (nnir-search-engine imap)
                       (nnmail-expiry-wait 90)))
+
+;; Send email through SMTP
+(setq message-send-mail-function 'smtpmail-send-it
+      smtpmail-default-smtp-server "smtp.gmail.com"
+      smtpmail-smtp-service 587
+      smtpmail-local-domain "saxon-arch")
+
+;; auto-complete emacs address using bbdb command, optional
+(add-hook 'message-mode-hook
+          '(lambda ()
+             (flyspell-mode t)
+             (local-set-key (kbd "TAB") 'bbdb-complete-name)))
+
+;; ask encryption password once
+(setq epa-file-cache-passphrase-for-symmetric-encryption t)
+
 
 (setq gnus-thread-sort-functions
       '(gnus-thread-sort-by-most-recent-date
@@ -166,8 +167,8 @@
                               ("Gnus")))
 
      ;; see latest 200 mails in topic hen press Enter on any group
-     (gnus-topic-set-parameters "gmail-work" '((display . 200)))
-     (gnus-topic-set-parameters "gmail-personal" '((display . 200)))))
+     (gnus-topic-set-parameters "gmail-work" '((display . 50)))
+     (gnus-topic-set-parameters "gmail-personal" '((display . 50)))))
 
 (provide '.gnus)
 ;;; gnus.el ends here
