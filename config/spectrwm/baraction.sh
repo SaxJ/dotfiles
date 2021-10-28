@@ -12,7 +12,7 @@ vpn() {
 }
 
 network() {
-    eth="$(nmcli -t -c no c show --active | grep vpn | head -n1)"
+    eth="$(nmcli -t -c no c show --active | grep eth | head -n1)"
     wifi="$(nmcli -t -c no c show --active | grep wifi | head -n1)"
     if [ ! -z "$eth" ]
     then
