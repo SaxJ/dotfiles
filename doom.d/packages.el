@@ -40,8 +40,6 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! slack)
-(package! bbdb)
-(package! smtpmail-multi)
 
 ;; Salesforce!
 (package! submode
