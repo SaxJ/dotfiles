@@ -40,6 +40,7 @@
 (package! tree-sitter)
 (package! tree-sitter-langs)
 (package! slack)
+(package! bbdb)
 
 ;; Salesforce!
 (package! submode
