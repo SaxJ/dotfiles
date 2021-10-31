@@ -269,32 +269,3 @@ topic N and modify that instead."
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
 (after! lsp-mode
   (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
-
-(lsp-register-client
- (make-lsp-client :new-connection
-                  (lsp-stdio-connection
-                   #'(lambda ()
-                       (append
-                        (list (lsp-csharp--language-server-path) "-lsp" "--plugin" "/home/saxonj/Documents/cheesed/Server/bin/Debug/net5.0/Microsoft.AspNetCore.Razor.OmniSharpPlugin.dll")
-                        (when lsp-csharp-solution-file
-                          (list "-s" (expand-file-name lsp-csharp-solution-file)))))
-                   #'(lambda ()
-                       (when-let ((binary (lsp-csharp--language-server-path)))
-                         (f-exists? binary))))
-                  :major-modes '(razor-mode csharp-mode csharp-tree-sitter-mode)
-                  :server-id 'razor
-                  :priority -1
-                  :action-handlers (ht ("omnisharp/client/findReferences" 'lsp-csharp--action-client-find-references))
-                  :notification-handlers (ht ("o#/projectadded" 'ignore)
-                                             ("o#/projectchanged" 'ignore)
-                                             ("o#/projectremoved" 'ignore)
-                                             ("o#/packagerestorestarted" 'ignore)
-                                             ("o#/msbuildprojectdiagnostics" 'ignore)
-                                             ("o#/packagerestorefinished" 'ignore)
-                                             ("o#/unresolveddependencies" 'ignore)
-                                             ("o#/error" 'lsp-csharp--handle-os-error)
-                                             ("o#/testmessage" 'lsp-csharp--handle-os-testmessage)
-                                             ("o#/testcompleted" 'lsp-csharp--handle-os-testcompleted)
-                                             ("o#/projectconfiguration" 'ignore)
-                                             ("o#/projectdiagnosticstatus" 'ignore))
-                  :download-server-fn #'lsp-csharp--download-server))
