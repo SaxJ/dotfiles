@@ -26,6 +26,7 @@ return require("packer").startup(
     }
 
     -- Syntax
+    use "adamclerk/vim-razor"
     use "jparise/vim-graphql"
     use {"norcalli/nvim-colorizer.lua"}
     use {
