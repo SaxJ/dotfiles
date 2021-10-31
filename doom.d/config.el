@@ -108,14 +108,7 @@
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 
-;; General LSP
-(use-package! lsp-mode
-  :config
-  (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
-  (setq lsp-file-watch-threshold 20000)
-  (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
-
-;; Haskell LSP
+;; Haskell
 (use-package! shakespeare-mode)
 
 ;; Salesforce dev
@@ -216,9 +209,6 @@ topic N and modify that instead."
      repo topic
      '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance" "hen-zone"))))
 
-;; Intelephense license
-;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
-
 ;;
 ;; - `load!' for loading external *.el files relative to this one
 ;; - `use-package' for configuring packages
@@ -267,6 +257,4 @@ topic N and modify that instead."
 (defvar razor-mode-map)
 (define-derived-mode razor-mode web-mode "Razor")
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
-(after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
 ;;; config.el ends here
