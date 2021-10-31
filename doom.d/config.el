@@ -269,3 +269,4 @@ topic N and modify that instead."
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
 (after! lsp-mode
   (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
+;;; config.el ends here
