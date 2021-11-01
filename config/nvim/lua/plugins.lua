@@ -65,7 +65,7 @@ return require("packer").startup(
     use {
       "blackCauldron7/surround.nvim",
       config = function()
-        require "surround".setup {}
+        require "surround".setup {mappings_style = "surround"}
       end
     }
 
@@ -108,7 +108,7 @@ return require("packer").startup(
       "ahmedkhalf/project.nvim",
       config = function()
         require("project_nvim").setup {
-          silent_chdir = false
+          silent_chdir = true
         }
       end
     }
