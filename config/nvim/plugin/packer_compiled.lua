@@ -158,7 +158,7 @@ _G.packer_plugins = {
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/plenary.nvim"
   },
   ["project.nvim"] = {
-    config = { "\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\17silent_chdir\1\nsetup\17project_nvim\frequire\0" },
+    config = { "\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\17silent_chdir\2\nsetup\17project_nvim\frequire\0" },
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/project.nvim"
   },
@@ -213,7 +213,7 @@ try_loadstring("\27LJ\1\0026\0\0\2\0\3\0\0064\0\0\0%\1\1\0>\0\2\0027\0\2\0>\0\1\
 time([[Config for gitsigns.nvim]], false)
 -- Config for: project.nvim
 time([[Config for project.nvim]], true)
-try_loadstring("\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\17silent_chdir\1\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
+try_loadstring("\27LJ\1\2O\0\0\2\0\4\0\a4\0\0\0%\1\1\0>\0\2\0027\0\2\0003\1\3\0>\0\2\1G\0\1\0\1\0\1\17silent_chdir\2\nsetup\17project_nvim\frequire\0", "config", "project.nvim")
 time([[Config for project.nvim]], false)
 -- Config for: rest.nvim
 time([[Config for rest.nvim]], true)
