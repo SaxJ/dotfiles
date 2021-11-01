@@ -35,7 +35,7 @@ return require("packer").startup(
       config = function()
         require "nvim-treesitter.configs".setup(
           {
-            ensure_installed = "maintained",
+            ensure_installed = "all",
             highlight = {
               enable = true
             },
@@ -100,6 +100,39 @@ return require("packer").startup(
       end
     }
     use {"voldikss/vim-floaterm"}
+    use {
+      "nvim-neorg/neorg",
+      branch = "unstable",
+      config = function()
+        require("neorg").setup {
+          -- Tell Neorg what modules to load
+          load = {
+            ["core.defaults"] = {}, -- Load all the default modules
+            ["core.norg.concealer"] = {}, -- Allows for use of icons
+            ["core.keybinds"] = {
+              config = {
+                default_keybinds = true,
+                neog_leader = "<Leader>n"
+              }
+            },
+            ["core.norg.completion"] = {
+              config = {
+                engine = "nvim-cmp"
+              }
+            },
+            ["core.norg.dirman"] = {
+              -- Manage your directories with Neorg
+              config = {
+                workspaces = {
+                  my_workspace = "~/neorg"
+                }
+              }
+            }
+          }
+        }
+      end,
+      requires = "nvim-lua/plenary.nvim"
+    }
 
     -- Code navigation
     use {
