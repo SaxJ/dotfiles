@@ -41,9 +41,6 @@
 (package! tree-sitter-langs)
 (package! slack)
 (package! bbdb)
-(package! smtpmail-multi)
-(package! bitwarden
-  :recipe (:host github :repo "seanfarley/emacs-bitwarden"))
 
 ;; Salesforce!
 (package! submode

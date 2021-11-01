@@ -188,6 +188,10 @@ _G.packer_plugins = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-graphql"
   },
+  ["vim-razor"] = {
+    loaded = true,
+    path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-razor"
+  },
   ["vim-vsnip"] = {
     loaded = true,
     path = "/home/saxonj/.local/share/nvim/site/pack/packer/start/vim-vsnip"

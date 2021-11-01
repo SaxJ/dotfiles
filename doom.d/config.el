@@ -267,3 +267,10 @@ topic N and modify that instead."
 (use-package! bitwarden
   :config
   (bitwarden-auth-source-enable))
+;; Razor mode
+(defvar razor-mode-map)
+(define-derived-mode razor-mode web-mode "Razor")
+(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
+(after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
+;;; config.el ends here
