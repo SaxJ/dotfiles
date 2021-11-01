@@ -12,10 +12,12 @@ local mapx = require "mapx"
 mapx.nnoremap("<Leader>/", "<cmd>lua require'hop'.hint_words()<cr>")
 mapx.nnoremap("<Leader>cc", ":ccl<CR>")
 mapx.nnoremap("<Leader>om", ":FloatermNew aerc<CR>")
+mapx.nnoremap("<Leader>ok", ":FloatermNew k9s<CR>")
 
 -- Project
 mapx.nnoremap("<C-e>", ":CHADopen<cr>")
 mapx.nnoremap("<leader>op", ":CHADopen<cr>")
+mapx.nnoremap("<leader>fr", "<cmd>Telescope frecency<cr>")
 mapx.nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
 mapx.nnoremap("<leader><leader>", "<cmd>Telescope find_files<cr>")
 mapx.nnoremap("<leader>sp", "<cmd>Telescope live_grep<cr>")

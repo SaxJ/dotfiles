@@ -63,6 +63,13 @@ return require("packer").startup(
     }
     use {"nvim-telescope/telescope.nvim", requires = {{"nvim-lua/plenary.nvim"}}}
     use {
+      "nvim-telescope/telescope-frecency.nvim",
+      config = function()
+        require "telescope".load_extension("frecency")
+      end,
+      requires = {"tami5/sqlite.lua"}
+    }
+    use {
       "blackCauldron7/surround.nvim",
       config = function()
         require "surround".setup {mappings_style = "surround"}
