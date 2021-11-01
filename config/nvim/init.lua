@@ -11,6 +11,7 @@ local mapx = require "mapx"
 -- Misc
 mapx.nnoremap("<Leader>/", "<cmd>lua require'hop'.hint_words()<cr>")
 mapx.nnoremap("<Leader>cc", ":ccl<CR>")
+mapx.nnoremap("<Leader>om", ":FloatermNew aerc<CR>")
 
 -- Project
 mapx.nnoremap("<C-e>", ":CHADopen<cr>")
