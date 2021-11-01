@@ -26,6 +26,14 @@ return require("packer").startup(
     }
 
     -- Syntax
+    use "b3nj5m1n/kommentary"
+    use {
+      "folke/todo-comments.nvim",
+      requires = "nvim-lua/plenary.nvim",
+      config = function()
+        require("todo-comments").setup {}
+      end
+    }
     use "adamclerk/vim-razor"
     use "jparise/vim-graphql"
     use {"norcalli/nvim-colorizer.lua"}

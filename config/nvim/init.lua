@@ -22,6 +22,7 @@ mapx.nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
 mapx.nnoremap("<leader><leader>", "<cmd>Telescope find_files<cr>")
 mapx.nnoremap("<leader>sp", "<cmd>Telescope live_grep<cr>")
 mapx.nnoremap("<leader>pp", "<cmd>Telescope projects<cr>")
+mapx.nnoremap("<leader>pt", ":TodoTelescope<cr>")
 
 -- Git
 mapx.nnoremap("<leader>prc", "<cmd>Octo pr create<cr>")
