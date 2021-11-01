@@ -42,6 +42,8 @@
 (package! slack)
 (package! bbdb)
 (package! smtpmail-multi)
+(package! bitwarden
+  :recipe (:host github :repo "seanfarley/emacs-bitwarden"))
 
 ;; Salesforce!
 (package! submode
@@ -56,7 +58,7 @@
 ;; Haskell Shakespeare templates
 (package! shakespeare-mode)
 
-(package! doom-snippets :ignore t)
+;;(package! doom-snippets :ignore t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
