@@ -36,7 +36,7 @@ volume() {
     echo "Vol: ${parts[4]}"
 }
 
-SLEEP_SEC=5
+SLEEP_SEC=2
 while :; do
     echo "$(network) | $(vpn) | $(volume)"
 
