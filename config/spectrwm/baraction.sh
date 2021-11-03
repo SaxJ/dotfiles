@@ -30,9 +30,15 @@ network() {
     fi
 }
 
+volume() {
+    audio_status=$(pactl get-sink-volume @DEFAULT_SINK@)
+    parts=( $audio_status )
+    echo "Vol: ${parts[4]}"
+}
+
 SLEEP_SEC=5
 while :; do
-    echo "$(network) | $(vpn)"
+    echo "$(network) | $(vpn) | $(volume)"
 
     sleep $SLEEP_SEC
 done
