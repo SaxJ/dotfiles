@@ -12,6 +12,13 @@ local phpcsfixer = function()
     stdin = false
   }
 end
+local uncrust = function()
+  return {
+    exe = "uncrustify",
+    args = {"-l", "CS"},
+    stdin = true
+  }
+end
 require("formatter").setup(
   {
     logging = false,
@@ -23,6 +30,7 @@ require("formatter").setup(
       typescriptreact = {prettier},
       css = {prettier},
       scss = {prettier},
+      cs = {uncrust},
       rust = {
         -- Rustfmt
         function()
@@ -72,7 +80,7 @@ vim.api.nvim_exec(
   [[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf FormatWrite
+  autocmd BufWritePost *.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf,*.cs FormatWrite
 augroup END
 ]],
   true
