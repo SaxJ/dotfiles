@@ -10,7 +10,7 @@ export AWS_PROFILE=hedev
 
 alias ls='ls --color=auto'
 
-export EDITOR=nvim
+export EDITOR=/usr/bin/nvim
 export VISUAL=$EDITOR
 
 # VIM
@@ -380,4 +380,4 @@ function bash-stats() {
 }
 
 alias hepg="pgcli -U engine_master -d engine_data -h localhost"
-alias lg="gitui"
+alias lg="lazygit"
