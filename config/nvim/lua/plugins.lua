@@ -163,7 +163,6 @@ return require("packer").startup(
 
     -- Hell yeah git
     use {"pwntester/octo.nvim"}
-    use "kdheepak/lazygit.nvim"
     use {
       "f-person/git-blame.nvim",
       config = function()
