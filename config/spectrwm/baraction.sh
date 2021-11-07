@@ -38,7 +38,7 @@ volume() {
 
 SLEEP_SEC=2
 while :; do
-    echo "$(network) | $(vpn) | $(volume)"
+    echo "$(date) | $(network) | $(vpn) | $(volume)"
 
     sleep $SLEEP_SEC
 done
