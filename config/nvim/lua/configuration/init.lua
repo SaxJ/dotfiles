@@ -93,10 +93,20 @@ require("telescope").setup {
     grep_previewer = require "telescope.previewers".vim_buffer_vimgrep.new,
     qflist_previewer = require "telescope.previewers".vim_buffer_qflist.new,
     -- Developer configurations: Not meant for general override
-    buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker
+    buffer_previewer_maker = require "telescope.previewers".buffer_previewer_maker,
+    extensions = {
+      fzf = {
+        fuzzy = true,
+        override_generic_sorter = true,
+        override_file_sorter = true,
+        case_mode = "smart_case"
+      }
+    }
   }
 }
+require("telescope").load_extension("fzf")
 require("telescope").load_extension("projects")
+require "telescope".load_extension("frecency")
 
 local saga = require "lspsaga"
 saga.init_lsp_saga()
