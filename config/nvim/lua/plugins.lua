@@ -26,6 +26,7 @@ return require("packer").startup(
     }
 
     -- Syntax
+    use "amadeus/vim-mjml"
     use "b3nj5m1n/kommentary"
     use {
       "folke/todo-comments.nvim",
