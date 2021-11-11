@@ -185,6 +185,9 @@
 (map! :leader
       :desc "Open SQL Client"
       :n "os" #'sql-connect)
+(map! :leader
+      :desc "Open kubernetes"
+      :n "ok" #'kubernetes-overview)
 (map! :after magit
       :map forge-topic-mode-map
       :localleader
