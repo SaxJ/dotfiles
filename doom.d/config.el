@@ -264,9 +264,6 @@ topic N and modify that instead."
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 
-(use-package! bitwarden
-  :config
-  (bitwarden-auth-source-enable))
 ;; Razor mode
 (defvar razor-mode-map)
 (define-derived-mode razor-mode web-mode "Razor")
