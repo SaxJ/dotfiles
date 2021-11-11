@@ -217,7 +217,7 @@ topic N and modify that instead."
          (crm-separator ","))
     (forge--set-topic-review-requests
      repo topic
-     '("joshkulesza" "yaohua-boey" "Zylo18" "macoto35" "tspencer244" "callumfrance" "hen-zone"))))
+     '("joshkulesza" "Zylo18" "macoto35" "tspencer244" "callumfrance" "BinaryBen"))))
 
 ;; Intelephense license
 ;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
