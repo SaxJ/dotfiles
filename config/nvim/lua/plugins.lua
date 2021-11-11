@@ -48,7 +48,7 @@ return require("packer").startup(
               enable = true
             },
             indent = {
-              enable = false
+              enable = true
             }
           }
         )
