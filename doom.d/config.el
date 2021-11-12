@@ -274,3 +274,8 @@ topic N and modify that instead."
 (after! lsp-mode
   (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
 ;;; config.el ends here
+
+(after! dap-mode
+  (require 'dap-netcore)
+  (require 'dap-firefox)
+  (dap-firefox-setup))
