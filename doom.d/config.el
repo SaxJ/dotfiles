@@ -39,6 +39,7 @@
       rmh-elfeed-org-files '("~/Documents/wiki/pages/elfeed.org")
 
       ;; Journal config
+      org-journal-file-type 'yearly
       org-journal-dir (concat (file-name-as-directory org-directory) "journals/")
       org-journal-date-prefix "* "
       org-journal-time-prefix "** "
