@@ -57,12 +57,14 @@
         :n "M-k" #'org-metaup)
   (setq org-publish-project-alist '(("wiki"
                                      :base-directory "~/Documents/wiki"
-                                     :publishing-function org-md-export-to-markdown
-                                     :publishing-directory "~/Documents/wiki/export"
-                                     :section-numbers nil
-                                     :with-toc nil))
-        org-mobile-inbox-for-pull "~/Documents/wiki/inbox.org"
-        org-mobile-directory "~/Dropbox/Apps/MobileOrg"))
+                                     :publishing-function org-org-publish-to-org
+                                     :publishing-directory "~/Dropbox/Apps/MobileOrg"
+                                     :makeindex t
+                                     :auto-sitemap t
+                                     :sitemap-title "Index"
+                                     :recursive t))
+        org-export-async-debug t
+        org-export-async-init-file (concat doom-private-dir "async-org.el")))
 
 (after! doom-modeline
   (setq doom-modeline-persp-icon t
