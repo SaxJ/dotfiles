@@ -10,3 +10,5 @@ settings:
     global:
       normal:
         <Ctrl+v>: null
+  content.notifications.enabled:
+    https://app.slack.com: true
