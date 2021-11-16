@@ -201,6 +201,10 @@
       :localleader
       :desc "Add blob team"
       :n "ab" #'forge-add-blob)
+(map! :map org-mode-map
+      :localleader
+      :desc "Reset cache"
+      :n "Pr" #'org-publish-reset-cache)
 (map! :leader
       :desc "Push Org to mobile"
       :n "nP" #'org-mobile-push)
