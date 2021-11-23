@@ -256,11 +256,6 @@ topic N and modify that instead."
                    (sql-password "he_dev")
                    (sql-database "engine_data"))))
 
-;; Deployment
-(use-package! upload
-  (setq ssh-deploy-force-on-explicit-save 1
-        ssh-deploy-async 1
-        ssh-deploy-async-with-threads 1))
 
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
