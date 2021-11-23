@@ -256,7 +256,6 @@ topic N and modify that instead."
                    (sql-password "he_dev")
                    (sql-database "engine_data"))))
 
-
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
       '(not yaml-mode))
