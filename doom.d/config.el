@@ -131,11 +131,14 @@
   (setq slack-prefer-current-team t)
   :config
   (slack-register-team
-   :name "Work"
+   :name "Healthengine"
    :default t
    :token (auth-source-pick-first-password
            :host "healthengine.slack.com"
            :user "saxon.jensen@healthengine.com.au")
+   :cookie (auth-source-pick-first-password
+            :host "healthengine.slack.com"
+            :user "saxon.jensen@healthengine.com.au^cookie")
    :subscribed-channels '(dev-core blob blob-core)
    :full-and-display-names t)
 
