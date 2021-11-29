@@ -177,7 +177,9 @@
   :after org
   :config
   (setq jiralib-url "https://hejira.atlassian.net"
-        org-jira-working-dir (concat org-directory "/jira")))
+        org-jira-working-dir (concat org-directory "/jira")
+        org-jira-download-comments nil
+        org-jira-worklog-sync-p nil))
 
 (map! :leader
       :desc "Open Calendar"
