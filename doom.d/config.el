@@ -131,11 +131,14 @@
   (setq slack-prefer-current-team t)
   :config
   (slack-register-team
-   :name "Work"
+   :name "Healthengine"
    :default t
    :token (auth-source-pick-first-password
            :host "healthengine.slack.com"
            :user "saxon.jensen@healthengine.com.au")
+   :cookie (auth-source-pick-first-password
+            :host "healthengine.slack.com"
+            :user "saxon.jensen@healthengine.com.au^cookie")
    :subscribed-channels '(dev-core blob blob-core)
    :full-and-display-names t)
 
@@ -177,7 +180,9 @@
   :after org
   :config
   (setq jiralib-url "https://hejira.atlassian.net"
-        org-jira-working-dir (concat org-directory "/jira")))
+        org-jira-working-dir (concat org-directory "/jira")
+        org-jira-download-comments nil
+        org-jira-worklog-sync-p nil))
 
 (map! :leader
       :desc "Open Calendar"
