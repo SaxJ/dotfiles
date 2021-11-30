@@ -280,9 +280,15 @@ topic N and modify that instead."
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
 (after! lsp-mode
   (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
-;;; config.el ends here
+
+;; MJML
+(defvar mjml-mode-map)
+(define-derived-mode mjml-mode web-mode "MJML")
+(add-to-list 'auto-mode-alist '("\\.mjml\\'" . mjml-mode))
 
 (after! dap-mode
   (require 'dap-netcore)
   (require 'dap-firefox)
   (dap-firefox-setup))
+
+;;; config.el ends here
