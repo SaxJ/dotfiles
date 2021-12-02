@@ -194,6 +194,9 @@
       :desc "Open SQL Client"
       :n "os" #'sql-connect)
 (map! :leader
+      :desc "Open slack channel"
+      :n "oS" #'slack-channel-select)
+(map! :leader
       :desc "Open kubernetes"
       :n "ok" #'kubernetes-overview)
 (map! :after magit
