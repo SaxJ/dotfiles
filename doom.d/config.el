@@ -298,5 +298,5 @@ topic N and modify that instead."
   :config
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)) ;; enable tree-sitter syntax where possible
 ;;; config.el ends here
