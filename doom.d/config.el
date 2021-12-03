@@ -140,6 +140,9 @@
 
 ;; Haskell
 (use-package! shakespeare-mode)
+(setq lsp-haskell-server-args nil
+      lsp-haskell-server-path "haskell-language-server-wrapper")
+
 
 ;; Salesforce
 (use-package! apex-mode)
