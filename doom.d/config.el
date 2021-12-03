@@ -31,6 +31,24 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
+
+;; Autocomplete tweaking
+(setq company-idle-delay 0.1
+      company-minimum-prefix-length 2)
+
+(after! doom-modeline
+  (setq doom-modeline-persp-icon t
+        doom-modeline-persp-name t
+        auto-revert-check-vc-info t))
+
+(use-package alert
+  :commands (alert)
+  :init
+  (setq alert-default-style 'notifier))
+
+;; ###############################
+;; ORG SETTINGS
+;; ###############################
 ;; If you use `org' and don't want your org files in the default location below,
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/wiki"
@@ -67,14 +85,18 @@
         org-export-async-debug t
         org-export-async-init-file (concat doom-private-dir "async-org.el")))
 
-(after! doom-modeline
-  (setq doom-modeline-persp-icon t
-        doom-modeline-persp-name t
-        auto-revert-check-vc-info t))
+(use-package! org-jira
+  :after org
+  :config
+  (setq jiralib-url "https://hejira.atlassian.net"
+        org-jira-working-dir (concat org-directory "/jira")
+        org-jira-download-comments nil
+        org-jira-worklog-sync-p nil))
 
-(setq +notmuch-sync-backend 'mbsync
-      +notmuch-home-function (lambda () (notmuch-search "tag:unread")))
 
+;; ###############################
+;; CALENDAR
+;; ###############################
 (defun calendar-helper ()
   "Define calendar sources to load."
   (cfw:open-calendar-buffer
@@ -107,23 +129,48 @@
     (switch-to-buffer (doom-fallback-buffer))
     (calendar-init)))
 
-;; Autocomplete tweaking
-(setq company-idle-delay 0.1
-      company-minimum-prefix-length 2)
-
-;; General LSP
+;; ###############################
+;; LSP
+;; ###############################
 (use-package! lsp-mode
   :config
   (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
   (setq lsp-file-watch-threshold 20000)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
-;; Haskell LSP
+;; Haskell
 (use-package! shakespeare-mode)
 
-;; Salesforce dev
+;; Salesforce
 (use-package! apex-mode)
 
+;; PHP
+(use-package! psysh
+  :after php-mode
+  :config
+  (set-repl-handler! 'php-mode #'psysh))
+;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
+
+;; Razor mode
+(defvar razor-mode-map)
+(define-derived-mode razor-mode web-mode "Razor")
+(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
+(after! lsp-mode
+  (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
+
+;; MJML
+(defvar mjml-mode-map)
+(define-derived-mode mjml-mode web-mode "MJML")
+(add-to-list 'auto-mode-alist '("\\.mjml\\'" . mjml-mode))
+
+(after! dap-mode
+  (require 'dap-netcore)
+  (require 'dap-firefox)
+  (dap-firefox-setup))
+
+;; ###############################
+;; SLACK
+;; ###############################
 (use-package slack
   :commands (slack-start)
   :init
@@ -166,24 +213,10 @@
     ",2" 'slack-message-embed-mention
     ",3" 'slack-message-embed-channel))
 
-(use-package alert
-  :commands (alert)
-  :init
-  (setq alert-default-style 'notifier))
 
-(use-package! psysh
-  :after php-mode
-  :config
-  (set-repl-handler! 'php-mode #'psysh))
-
-(use-package! org-jira
-  :after org
-  :config
-  (setq jiralib-url "https://hejira.atlassian.net"
-        org-jira-working-dir (concat org-directory "/jira")
-        org-jira-download-comments nil
-        org-jira-worklog-sync-p nil))
-
+;; ###############################
+;; KEYBINDS
+;; ###############################
 (map! :leader
       :desc "Open Calendar"
       :n "oc" #'my-open-calendar)
@@ -220,6 +253,9 @@
       :desc "Pull Org from mobile"
       :n "np" #'org-mobile-pull)
 
+;; ###############################
+;; MAGIT
+;; ###############################
 (defun forge-add-blob (n)
   "Edit the review-requests of the current pull-request.
 If there is no current topic or with a prefix argument read a
@@ -234,26 +270,6 @@ topic N and modify that instead."
      repo topic
      '("joshkulesza" "Zylo18" "macoto35" "tspencer244" "callumfrance" "BinaryBen"))))
 
-;; Intelephense license
-;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
-
-;;
-;; - `load!' for loading external *.el files relative to this one
-;; - `use-package' for configuring packages
-;; - `after!' for running code after a package has loaded
-;; - `add-load-path!' for adding directories to the `load-path', relative to
-;;   this file. Emacs searches the `load-path' when you load packages with
-;;   `require' or `use-package'.
-;; - `map!' for binding new keys
-;;
-;; To get information about any of these functions/macros, move the cursor over
-;; the highlighted symbol at press 'K' (non-evil users must press 'C-c g k').
-;; This will open documentation for it, including demos of how they are used.
-;;
-;; You can also try 'gd' (or 'C-c g d') to jump to their definition and see how
-;; they are implemented.
-
-;; PACKAGE DEFINITIONS
 
 ;; SQL CLIENT
 (setq sql-connection-alist
@@ -280,23 +296,4 @@ topic N and modify that instead."
   (require 'tree-sitter-langs)
   (global-tree-sitter-mode)
   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
-
-;; Razor mode
-(defvar razor-mode-map)
-(define-derived-mode razor-mode web-mode "Razor")
-(add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
-(after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
-
-;; MJML
-(defvar mjml-mode-map)
-(define-derived-mode mjml-mode web-mode "MJML")
-(add-to-list 'auto-mode-alist '("\\.mjml\\'" . mjml-mode))
-
-(after! dap-mode
-  (require 'dap-netcore)
-  (require 'dap-firefox)
-  (dap-firefox-setup))
-
 ;;; config.el ends here
