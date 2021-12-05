@@ -34,6 +34,16 @@
                       ;; press 'E' to expire email
                       (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
                       (nnmail-expiry-wait 90)))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "gmail-work"
+                      (nnimap-address "imap.gmail.com")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                      ;; press 'E' to expire email
+                      (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
+                      (nnmail-expiry-wait 90)))
 
 (setq gnus-thread-sort-functions
       '(gnus-thread-sort-by-most-recent-date
@@ -116,17 +126,25 @@
      ;; "Gnus" is the root folder, and there are three mail accounts, "misc", "hotmail", "gmail"
      (setq gnus-topic-topology '(("Gnus" visible)
                                  (("misc" visible))
-                                 (("email" visible nil nil))))
+                                 (("gmail-work" visible nil nil))
+                                 (("gmail-personal" visible nil nil))))
 
      ;; each topic corresponds to a public imap folder
-     (setq gnus-topic-alist '(("email" ; the key of topic
+     (setq gnus-topic-alist '(("gmail-personal" ; the key of topic
                                "nnimap+gmail-personal:INBOX"
                                "nnimap+gmail-personal:[Gmail]/Sent Mail"
                                "nnimap+gmail-personal:[Gmail]/Trash"
                                "nnimap+gmail-personal:Drafts")
+                              ("gmail-work" ; the key of topic
+                               "nnimap+gmail-work:INBOX"
+                               "nnimap+gmail-work:[Gmail]/Sent Mail"
+                               "nnimap+gmail-work:[Gmail]/Trash"
+                               "nnimap+gmail-work:Drafts")
                               ("misc" ; the key of topic
                                "nndraft:drafts")
                               ("Gnus")))
 
      ;; see latest 200 mails in topic hen press Enter on any group
-     (gnus-topic-set-parameters "email" '((display . 200)))))
+     (gnus-topic-set-parameters "gmail-work" '((display . 200)))))
+(provide 'gnus)
+;;; gnus.el ends here
