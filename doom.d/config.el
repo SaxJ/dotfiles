@@ -224,6 +224,9 @@
       :desc "Open Calendar"
       :n "oc" #'my-open-calendar)
 (map! :leader
+      :desc "Open email"
+      :n "om" #'gnus)
+(map! :leader
       :desc "Toggle auto-format"
       :n "taf" #'format-all-mode)
 (map! :leader
