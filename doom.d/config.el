@@ -85,14 +85,6 @@
         org-export-async-debug t
         org-export-async-init-file (concat doom-private-dir "async-org.el")))
 
-(use-package! org-jira
-  :after org
-  :config
-  (setq jiralib-url "https://hejira.atlassian.net"
-        org-jira-working-dir (concat org-directory "/jira")
-        org-jira-download-comments nil
-        org-jira-worklog-sync-p nil))
-
 
 ;; ###############################
 ;; CALENDAR

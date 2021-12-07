@@ -1,4 +1,4 @@
 configuration {
-	theme: "/usr/share/rofi/themes/purple.rasi";
 	show-icons: true;
 }
+@theme "/usr/share/rofi/themes/purple.rasi"

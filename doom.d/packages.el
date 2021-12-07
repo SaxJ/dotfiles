@@ -29,20 +29,26 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;;; Code:
-(package! string-inflection)
-(package! graphql-mode)
-(package! mu4e-alert)
-(package! kubernetes)
-(package! kubernetes-evil)
-(package! system-packages)
-(package! org-jira)
-(package! psysh)
 (package! tree-sitter)
 (package! tree-sitter-langs)
-(package! slack)
-(package! bbdb)
 
-;; Salesforce!
+;; PHP
+(package! psysh)
+
+;; Graphql
+(package! graphql-mode)
+
+;; Tooling
+(package! string-inflection)
+(package! bbdb)
+(package! slack)
+(package! system-packages)
+(package! code-review)
+(package! dash-functional)
+(package! ejira
+  :recipe (:host github :repo "nyyManni/ejira"))
+
+;; Salesforce
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
 (package! sosl-mode
@@ -52,7 +58,7 @@
 (package! apex-mode
   :recipe (:host github :repo "nxtr/apex-mode"))
 
-;; Haskell Shakespeare templates
+;; Haskell
 (package! shakespeare-mode)
 
 ;;(package! doom-snippets :ignore t)
