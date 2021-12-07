@@ -31,7 +31,6 @@
 ;; numbers are disabled. For relative line numbers, set this to `relative'.
 (setq display-line-numbers-type 'relative)
 
-
 ;; Autocomplete tweaking
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
@@ -250,6 +249,10 @@
 (map! :leader
       :desc "Pull Org from mobile"
       :n "np" #'org-mobile-pull)
+
+(after! forge
+  (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
+
 
 ;; ###############################
 ;; MAGIT
