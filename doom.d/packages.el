@@ -45,8 +45,8 @@
 (package! system-packages)
 (package! code-review)
 (package! dash-functional)
-(package! ejira
-  :recipe (:host github :repo "nyyManni/ejira"))
+(package! org-jira)
+;;(package! org :disable t)
 
 ;; Salesforce
 (package! submode
