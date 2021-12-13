@@ -46,7 +46,7 @@
 (package! code-review)
 (package! dash-functional)
 (package! org-jira)
-;;(package! org :disable t)
+(package! desktop-environment)
 
 ;; Salesforce
 (package! submode

@@ -5,7 +5,8 @@
 
 (add-hook! '(emacs-startup-hook)
   (defun create-jira-dir ()
-    (make-directory "~/.org-jira" 'parents)))
+    (make-directory "~/.org-jira" 'parents)
+    (slack-start)))
 
 (setq doom-localleader-key ",")
 
@@ -42,12 +43,8 @@
 (after! doom-modeline
   (setq doom-modeline-persp-icon t
         doom-modeline-persp-name t
-        auto-revert-check-vc-info t))
-
-(use-package alert
-  :commands (alert)
-  :init
-  (setq alert-default-style 'notifier))
+        auto-revert-check-vc-info t
+        doom-modeline-github t))
 
 ;; ###############################
 ;; ORG SETTINGS
