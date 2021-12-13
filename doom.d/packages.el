@@ -29,9 +29,6 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;;; Code:
-(package! tree-sitter)
-(package! tree-sitter-langs)
-
 ;; PHP
 (package! psysh)
 

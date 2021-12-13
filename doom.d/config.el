@@ -5,8 +5,7 @@
 
 (add-hook! '(emacs-startup-hook)
   (defun create-jira-dir ()
-    (make-directory "~/.org-jira" 'parents)
-    (slack-start)))
+    (make-directory "~/.org-jira" 'parents)))
 
 (setq doom-localleader-key ",")
 
@@ -306,11 +305,4 @@ topic N and modify that instead."
 (setq +format-on-save-enabled-modes
       '(not yaml-mode))
 (setq typescript-indent-level 2)
-
-;; TREE SITTER
-(use-package! tree-sitter
-  :config
-  (require 'tree-sitter-langs)
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)) ;; enable tree-sitter syntax where possible
 ;;; config.el ends here
