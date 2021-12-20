@@ -40,8 +40,6 @@
 (package! bbdb)
 (package! slack)
 (package! system-packages)
-(package! code-review)
-(package! dash-functional)
 (package! org-jira)
 (package! desktop-environment)
 
