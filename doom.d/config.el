@@ -305,4 +305,12 @@ topic N and modify that instead."
 (setq +format-on-save-enabled-modes
       '(not yaml-mode))
 (setq typescript-indent-level 2)
+
+;; SHELL
+(use-package! dtache
+  :hook (after-init . dtache-initialize)
+  :config
+  (setq dtache-db-directory user-emacs-directory
+        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
+
 ;;; config.el ends here

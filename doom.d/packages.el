@@ -41,7 +41,8 @@
 (package! slack)
 (package! system-packages)
 (package! org-jira)
-(package! desktop-environment)
+(package! dtache
+  :recipe (:host gitlab :repo "niklaseklund/dtache"))
 
 ;; Salesforce
 (package! submode
