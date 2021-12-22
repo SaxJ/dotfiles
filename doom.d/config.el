@@ -64,6 +64,7 @@
       org-journal-file-format "%Y_%m_%d.org"
       org-journal-time-format "%I:%M %p")
 
+
 (setq jiralib-url "https://hejira.atlassian.net")
 (setq org-jira-custom-jqls
   '(
@@ -97,7 +98,10 @@
                                      :sitemap-title "Index"
                                      :recursive t))
         org-export-async-debug t
-        org-export-async-init-file (concat doom-private-dir "async-org.el")))
+        org-export-async-init-file (concat doom-private-dir "async-org.el")
+        org-todo-keywords '((sequence "TODO(t)" "BLOCKED(b)" "HOLD(h)" "IDEA(i)" "|" "DONE(d)" "KILL(k)")
+                                (sequence "[ ](T)" "[-](S)" "[?](W)" "|" "[X](D)")
+                                (sequence "|" "OKAY(o)" "YES(y)" "NO(n)"))))
 
 
 ;; ###############################
@@ -307,10 +311,10 @@ topic N and modify that instead."
 (setq typescript-indent-level 2)
 
 ;; SHELL
-(use-package! dtache
-  :hook (after-init . dtache-initialize)
-  :config
-  (setq dtache-db-directory user-emacs-directory
-        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
+;;(use-package! dtache
+;;  :hook (after-init . dtache-initialize)
+;;  :config
+;;  (setq dtache-db-directory user-emacs-directory
+;;        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
 
 ;;; config.el ends here
