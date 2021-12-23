@@ -43,6 +43,7 @@
 (package! org-jira)
 (package! dtache
   :recipe (:host gitlab :repo "niklaseklund/dtache"))
+(package! dirvish)
 
 ;; Salesforce
 (package! submode
