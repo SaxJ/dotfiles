@@ -74,62 +74,6 @@ alias gp='git pull'
 alias gpu='git push'
 alias resolve='grep -lr "<<<<<<<" . | xargs git checkout'
 
-# KUBE MADNESS
-function resolve-pod() {
-    echo $(kubectl get pods -o name | sed 's/^pod\///g' | grep "^$1" | head -1)
-}
-
-function kube() {
-    if [[ "$#" < 2 ]]; then
-        kube-fwd "$1"
-    else
-        POD=$(resolve-pod $2)
-        if [ -z "$POD" ]; then
-            POD=$(resolve-pod "heweb-$2")
-        fi
-
-        if [ -z "$POD" ]; then
-            echo "No such pod: $2"
-            return 1
-        else
-            kube-fwd "$1" "$POD" "${@:3}"
-        fi
-    fi
-}
-
-function kube-fwd() {
-    COMMAND=$1
-    shift
-
-    DIRECT_FUNCTION="kube-$COMMAND"
-
-    if type "$DIRECT_FUNCTION" | grep -q 'is a shell function'; then
-        echo "$DIRECT_FUNCTION" "$@"
-        $DIRECT_FUNCTION "$@"
-    else
-        echo kubectl "$COMMAND" "$@"
-        kubectl "$COMMAND" "$@"
-    fi
-}
-
-function kube-shell() {
-    ${2?"You gotta specify a container too."}
-    kubectl exec $1 -it -c $2 -- "bash"
-}
-
-kube-up() { minikube start; }
-kube-down() { minikube stop; }
-kube-status() { minikube status && kubectl get pods; }
-kube-tail() { kubectl logs $1 --all-containers -f; }
-kube-exec() { kubectl exec -it $1 "${@:2}"; }
-kube-logs() { stern -o raw $1 -c php-fpm | egrep --line-buffered '^{' | jq .; }
-kube-branch() { kubectl delete $(kubectl get pod -l release=heweb -o name); }
-alias suz-update='helmfile delete --purge && helmfile apply --values local.yml'
-kube-vars() { ~/Documents/k8s/tools/manage_ssm_vars.py list ci-cia; }
-kube-migration() { kubectl exec $1 -c php-fpm -- /var/www/quadra/healthengine.com.au/lib/vendor/bin/phinx --configuration=/var/www/quadra/healthengine.com.au/admin/sql_scripts/phinx.yml create $2; }
-
-source <(kubectl completion bash)
-
 # HASKELL
 export cabal_helper_libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
 export libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
