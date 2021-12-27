@@ -176,11 +176,6 @@
 (define-derived-mode mjml-mode web-mode "MJML")
 (add-to-list 'auto-mode-alist '("\\.mjml\\'" . mjml-mode))
 
-(after! dap-mode
-  (require 'dap-netcore)
-  (require 'dap-firefox)
-  (dap-firefox-setup))
-
 ;; ###############################
 ;; SLACK
 ;; ###############################
