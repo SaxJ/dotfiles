@@ -1,3 +1,3 @@
 pipewire &
 pipewire-pulse &
-exec /bin/spectrwm
+exec /bin/i3

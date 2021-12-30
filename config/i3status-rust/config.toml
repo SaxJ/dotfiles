@@ -27,21 +27,3 @@ block = "sound"
 block = "time"
 interval = 30
 format = "%a %d/%m %R"
-
-[[block]]
-block = "pacman"
-interval = 600
-format = "{pacman} pacman | {aur} AUR updates"
-format_singular = "{both} update available"
-format_up_to_date = "no updates"
-critical_updates_regex = "(linux|linux-lts|linux-zen)"
-# aur_command should output available updates to stdout (ie behave as echo -ne "update\n")
-aur_command = "yay -Qua"
-
-[[block]]
-block = "maildir"
-interval = 60
-inboxes = ["/home/saxonj/.mail/personal/INBOX", "/home/saxonj/.mail/gaming/INBOX", "/home/saxonj/.mail/work/INBOX"]
-threshold_warning = 1
-threshold_critical = 10
-display_type = "new"
