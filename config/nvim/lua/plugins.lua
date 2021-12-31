@@ -109,7 +109,6 @@ return require("packer").startup(
     use {"voldikss/vim-floaterm"}
     use {
       "nvim-neorg/neorg",
-      branch = "unstable",
       config = function()
         require("neorg").setup {
           -- Tell Neorg what modules to load
