@@ -41,8 +41,6 @@
 (package! slack)
 (package! system-packages)
 (package! org-jira)
-(package! dtache
-  :recipe (:host gitlab :repo "niklaseklund/dtache"))
 (package! dirvish)
 (package! telega
   :recipe (:host github :repo "zevlg/telega.el" :branch "releases" :files (:defaults "contrib" "etc" "server" "Makefile")))
