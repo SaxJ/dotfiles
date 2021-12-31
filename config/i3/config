@@ -44,9 +44,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
 #exec --no-startup-id redshift
 exec --no-startup-id dropbox
-exec --no-startup-id flameshot
-exec --no-startup-id maestral gui
-exec firefox-developer-edition
+exec firefox
 exec slack
 exec emacs
 
