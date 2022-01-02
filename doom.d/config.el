@@ -277,9 +277,6 @@
 (map! :leader
       :desc "Pull Org from mobile"
       :n "np" #'org-mobile-pull)
-(map! :leader
-      :desc "Open Dirvish"
-      :n "o-" #'dirvish)
 
 (after! forge
   (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
