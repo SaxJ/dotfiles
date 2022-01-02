@@ -319,9 +319,6 @@ topic N and modify that instead."
       '(not yaml-mode))
 (setq typescript-indent-level 2)
 
-;; TELEGA
-(setq telega-tdlib-min-version "1.7.0")
-
 ;; SHELL
 ;;(use-package! dtache
 ;;  :hook (after-init . dtache-initialize)
