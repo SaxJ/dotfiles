@@ -39,8 +39,6 @@
 (package! string-inflection)
 (package! bbdb)
 (package! slack)
-(package! system-packages)
-(package! org-jira)
 
 ;; Salesforce
 (package! submode
@@ -54,6 +52,9 @@
 
 ;; Haskell
 (package! shakespeare-mode)
+
+;; Unpinning org
+(unpin! (:lang org) (:tools lsp))
 
 ;;(package! doom-snippets :ignore t)
 

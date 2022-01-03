@@ -3,10 +3,6 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(add-hook! '(emacs-startup-hook)
-  (defun create-jira-dir ()
-    (make-directory "~/.org-jira" 'parents)))
-
 (setq doom-localleader-key ",")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -63,21 +59,6 @@
       org-journal-date-format "%a, %Y-%m-%d"
       org-journal-file-format "%Y_%m_%d.org"
       org-journal-time-format "%I:%M %p")
-
-
-(setq jiralib-url "https://hejira.atlassian.net")
-(setq org-jira-custom-jqls
-  '(
-    (:jql " project IN (BLOB, REC, CS, FIND, NPF, VAX) and createdDate < '2021-01-01' order by created DESC "
-          :limit 10
-          :filename "last-years-work")
-    (:jql " project IN (BLOB, REC, CS, FIND, NPF, VAX) and createdDate >= '2021-01-01' order by created DESC "
-          :limit 10
-          :filename "this-years-work")
-    (:jql " project IN (BLOB, REC, CS, FIND, NPF, VAX) and status IN ('To Do', 'In Development') AND (labels = EMPTY or labels IN ('backblob')) order by priority, created DESC "
-          :limit 20
-          :filename "team-priority")
-    ))
 
 
 (defun get-journal-file-today ()
