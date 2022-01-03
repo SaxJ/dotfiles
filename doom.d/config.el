@@ -168,20 +168,6 @@
   (setq lsp-file-watch-threshold 20000)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
-(after! lsp-mode
-  (add-to-list 'lsp-disabled-clients 'fsac)
-(lsp-register-client
-(make-lsp-client
-:new-connection (lsp-stdio-connection "~/Documents/fsharp-language-server/src/FSharpLanguageServer/bin/Release/netcoreapp3.0/linux-x64/FSharpLanguageServer")
-:major-modes '(fsharp-mode)
-:server-id 'fsharp-lsp
-:notification-handlers (ht ("fsharp/startProgress" #'ignore)
-                        ("fsharp/incrementProgress" #'ignore)
-                        ("fsharp/endProgress" #'ignore))
-:priority 1))
-
-  )
-
 ;; Haskell
 (use-package! shakespeare-mode)
 (setq lsp-haskell-server-args nil
