@@ -39,6 +39,9 @@
 (package! string-inflection)
 (package! bbdb)
 (package! slack)
+(package! dash-functional)
+(package! ejira
+  :recipe (:host github :repo "nyyManni/ejira"))
 
 ;; Salesforce
 (package! submode
