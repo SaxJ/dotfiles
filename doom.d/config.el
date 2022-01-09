@@ -178,10 +178,6 @@
 (use-package! apex-mode)
 
 ;; PHP
-(use-package! psysh
-  :after php-mode
-  :config
-  (set-repl-handler! 'php-mode #'psysh))
 ;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
 
 ;; Razor mode

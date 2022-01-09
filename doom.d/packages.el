@@ -56,9 +56,6 @@
 ;; Haskell
 (package! shakespeare-mode)
 
-;; Unpinning org
-(unpin! (:lang org) (:tools lsp))
-
 ;;(package! doom-snippets :ignore t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
