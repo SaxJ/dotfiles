@@ -43,7 +43,7 @@ assign [class="Thunderbird"] 4
 exec --no-startup-id nm-applet
 exec --no-startup-id nitrogen --restore
 #exec --no-startup-id redshift
-exec --no-startup-id dropbox
+exec --no-startup-id dropbox start
 exec firefox
 exec slack
 exec emacs
