@@ -56,6 +56,9 @@
 ;; Haskell
 (package! shakespeare-mode)
 
+;; For Fun
+(package! elcord)
+
 ;;(package! doom-snippets :ignore t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el

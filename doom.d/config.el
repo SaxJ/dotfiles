@@ -329,3 +329,6 @@ topic N and modify that instead."
 ;;        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
 
 ;;; config.el ends here
+(use-package! elcord
+  :config
+  (add-hook! 'prog-mode-hook 'elcord-mode))
