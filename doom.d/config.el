@@ -178,7 +178,7 @@
 (use-package! apex-mode)
 
 ;; PHP
-;;(setq lsp-intelephense-licence-key (my-fetch-password :user 'intelephense))
+;;(setq lsp-intelephense-licence-key (password-store-get "intelephense/key"))
 
 ;; Razor mode
 (defvar razor-mode-map)
