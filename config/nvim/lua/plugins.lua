@@ -82,6 +82,12 @@ return require("packer").startup(function()
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
+	-- Debuggers
+	use("Pocco81/DAPInstall.nvim")
+	use("mfussenegger/nvim-dap")
+	use("theHamsta/nvim-dap-virtual-text")
+	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+
 	-- Tooling
 	use({
 		"NTBBloodbath/rest.nvim",
