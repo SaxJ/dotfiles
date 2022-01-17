@@ -19,6 +19,12 @@ local uncrust = function()
 		stdin = true,
 	}
 end
+local brittany = function()
+	return {
+		exe = "brittany",
+		stdin = true,
+	}
+end
 require("formatter").setup({
 	logging = false,
 	filetype = {
@@ -30,6 +36,7 @@ require("formatter").setup({
 		css = { prettier },
 		scss = { prettier },
 		cs = { uncrust },
+		haskell = { brittany },
 		rust = {
 			-- Rustfmt
 			function()
@@ -77,7 +84,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf,*.cs FormatWrite
+  autocmd BufWritePost *.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf,*.cs,*.hs FormatWrite
 augroup END
 ]],
 	true
