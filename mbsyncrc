@@ -12,67 +12,17 @@ Account work
 
 # LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore work-local
-SubFolders Legacy
+SubFolders Verbatim
 Path ~/.mail/work
 Inbox ~/.mail/work/INBOX
 
-# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
-#
-# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
-# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
-#
-# 1 "*" TO MATCH EVERYTHING
-# 2 "!DIR" TO EXCLUDE "DIR"
-# 3 "DIR" TO MATCH DIR
-
-Channel work-inbox
+Channel work
 Far :work-remote:
 Near :work-local:
-Patterns "INBOX"
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
 Create Both
 Expunge Both
 SyncState *
-
-Channel work-trash
-Far :work-remote:"[Gmail]/Trash"
-Near :work-local:"/Trash"
-Create Both
-Expunge Both
-SyncState *
-
-Channel work-sent
-Far :work-remote:"[Gmail]/Sent Mail"
-Near :work-local:"/Sent"
-Create Both
-Expunge Both
-SyncState *
-
-Channel work-all
-Far :work-remote:"[Gmail]/All Mail"
-Near :work-local:"/All"
-Create Both
-Expunge Both
-SyncState *
-
-Channel work-starred
-Far :work-remote:"[Gmail]/Starred"
-Near :work-local:"/Starred"
-Create Both
-Expunge Both
-SyncState *
-
-# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
-# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
-#
-# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
-# "gmail-inbox", "gmail-sent", and "gmail-trash"
-#
-Group work
-Channel work-inbox
-Channel work-sent
-Channel work-trash
-Channel work-all
-Channel work-starred
 
 ################################################################################
 ############################# NON-WORK GMAIL ###################################
@@ -91,7 +41,7 @@ Account personal
 
 # LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore personal-local
-SubFolders Legacy
+SubFolders Verbatim
 Path ~/.mail/personal
 Inbox ~/.mail/personal/INBOX
 
@@ -104,55 +54,13 @@ Inbox ~/.mail/personal/INBOX
 # 2 "!DIR" TO EXCLUDE "DIR"
 # 3 "DIR" TO MATCH DIR
 
-Channel personal-inbox
+Channel personal
 Far :personal-remote:
 Near :personal-local:
-Patterns "INBOX"
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
 Create Both
 Expunge Both
 SyncState *
-
-Channel personal-trash
-Far :personal-remote:"[Gmail]/Trash"
-Near :personal-local:"/Trash"
-Create Both
-Expunge Both
-SyncState *
-
-Channel personal-sent
-Far :personal-remote:"[Gmail]/Sent Mail"
-Near :personal-local:"/Sent"
-Create Both
-Expunge Both
-SyncState *
-
-Channel personal-all
-Far :personal-remote:"[Gmail]/All Mail"
-Near :personal-local:"/All"
-Create Both
-Expunge Both
-SyncState *
-
-Channel personal-starred
-Far :personal-remote:"[Gmail]/Starred"
-Near :personal-local:"/Starred"
-Create Both
-Expunge Both
-SyncState *
-
-# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
-# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
-#
-# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
-# "gmail-inbox", "gmail-sent", and "gmail-trash"
-#
-Group personal
-Channel personal-inbox
-Channel personal-sent
-Channel personal-trash
-Channel personal-all
-Channel personal-starred
-
 
 ################################################################################
 ############################# GAMING   GMAIL ###################################
@@ -175,63 +83,13 @@ SubFolders Legacy
 Path ~/.mail/gaming
 Inbox ~/.mail/gaming/INBOX
 
-# CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
-#
-# CONNECTIONS ARE SPECIFIED USING PATTERNS, WHICH MATCH REMOTE MAIl
-# FOLDERS. SOME COMMONLY USED PATTERS INCLUDE:
-#
-# 1 "*" TO MATCH EVERYTHING
-# 2 "!DIR" TO EXCLUDE "DIR"
-# 3 "DIR" TO MATCH DIR
-
-Channel gaming-inbox
+Channel gaming
 Far :gaming-remote:
 Near :gaming-local:
-Patterns "INBOX"
+Patterns * !"[Gmail]/All Mail" !"[Gmail]/Important" !"[Gmail]/Starred" !"[Gmail]/Bin"
 Create Both
 Expunge Both
 SyncState *
-
-Channel gaming-trash
-Far :gaming-remote:"[Gmail]/Trash"
-Near :gaming-local:"/Trash"
-Create Both
-Expunge Both
-SyncState *
-
-Channel gaming-sent
-Far :gaming-remote:"[Gmail]/Sent Mail"
-Near :gaming-local:"/Sent"
-Create Both
-Expunge Both
-SyncState *
-
-Channel gaming-all
-Far :gaming-remote:"[Gmail]/All Mail"
-Near :gaming-local:"/All"
-Create Both
-Expunge Both
-SyncState *
-
-Channel gaming-starred
-Far :gaming-remote:"[Gmail]/Starred"
-Near :gaming-local:"/Starred"
-Create Both
-Expunge Both
-SyncState *
-
-# GROUPS PUT TOGETHER CHANNELS, SO THAT WE CAN INVOKE
-# MBSYNC ON A GROUP TO SYNC ALL CHANNELS
-#
-# FOR INSTANCE: "mbsync gmail" GETS MAIL FROM
-# "gmail-inbox", "gmail-sent", and "gmail-trash"
-#
-Group gaming
-Channel gaming-inbox
-Channel gaming-sent
-Channel gaming-trash
-Channel gaming-all
-Channel gaming-starred
 
 ################################################################################
 #############################  PROFESSIONAL  ###################################
