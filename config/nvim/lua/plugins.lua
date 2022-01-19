@@ -133,9 +133,7 @@ return require("packer").startup(function()
 	use({
 		"ahmedkhalf/project.nvim",
 		config = function()
-			require("project_nvim").setup({
-				silent_chdir = true,
-			})
+			require("project_nvim").setup({})
 		end,
 	})
 
