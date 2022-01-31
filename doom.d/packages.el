@@ -59,6 +59,7 @@
 ;; For Fun
 (package! elcord)
 
+(unpin! dap-mode)
 ;;(package! doom-snippets :ignore t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el

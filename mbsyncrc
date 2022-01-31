@@ -10,10 +10,9 @@ SSLType IMAPS
 IMAPStore work-remote
 Account work
 
-# LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore work-local
 SubFolders Verbatim
-Path ~/.mail/work
+Path ~/.mail/work/
 Inbox ~/.mail/work/INBOX
 
 Channel work
@@ -42,7 +41,7 @@ Account personal
 # LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore personal-local
 SubFolders Verbatim
-Path ~/.mail/personal
+Path ~/.mail/personal/
 Inbox ~/.mail/personal/INBOX
 
 # CONNECTIONS SPECIFY LINKS BETWEEN REMOTE AND LOCAL FOLDERS
@@ -79,8 +78,8 @@ Account gaming
 
 # LOCAL STORAGE (CREATE DIRECTORIES with mkdir -p Maildir/gmail)
 MaildirStore gaming-local
-SubFolders Legacy
-Path ~/.mail/gaming
+SubFolders Verbatim
+Path ~/.mail/gaming/
 Inbox ~/.mail/gaming/INBOX
 
 Channel gaming
