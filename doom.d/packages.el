@@ -57,7 +57,6 @@
 (package! shakespeare-mode)
 
 ;; For Fun
-(package! elcord)
 
 (unpin! dap-mode)
 ;;(package! doom-snippets :ignore t)

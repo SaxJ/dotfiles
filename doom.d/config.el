@@ -318,18 +318,6 @@ topic N and modify that instead."
       '(not yaml-mode))
 (setq typescript-indent-level 2)
 
-;; SHELL
-;;(use-package! dtache
-;;  :hook (after-init . dtache-initialize)
-;;  :config
-;;  (setq dtache-db-directory user-emacs-directory
-;;        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
-
-;;; config.el ends here
-(use-package! elcord
-  :config
-  (add-hook! 'prog-mode-hook 'elcord-mode))
-
 (setq +mu4e-gmail-accounts '(("saxon.jensen@gmail.com" . "/personal")
                              ("saxon.jensen@healthengine.com.au" . "/work")
                              ("speedemon999@gmail.com" . "/gaming")))
@@ -369,3 +357,12 @@ topic N and modify that instead."
                       (mu4e-refile-folder . "/personal/All")
                       (smtpmail-smtp-user . "saxon.jensen@gmail.com"))
                     t)
+
+;; SHELL
+;;(use-package! dtache
+;;  :hook (after-init . dtache-initialize)
+;;  :config
+;;  (setq dtache-db-directory user-emacs-directory
+;;        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
+
+;;; config.el ends here
