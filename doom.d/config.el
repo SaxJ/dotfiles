@@ -358,6 +358,46 @@ topic N and modify that instead."
                       (smtpmail-smtp-user . "saxon.jensen@gmail.com"))
                     t)
 
+(defun fsharp-make-lsp-cmd ()
+  "Build command for dotnet install fsharp ls."
+  (append (list "fsautocomplete" "--background-service-enabled")))
+
+(lsp-register-client
+ (make-lsp-client :new-connection (lsp-stdio-connection
+                                   #'fsharp-make-lsp-cmd
+                                   (lambda () (not (eq nil (executable-find "fsautocomplete")))))
+                  :major-modes '(fsharp-mode)
+                  :notification-handlers (ht ("fsharp/notifyCancel" #'ignore)
+                                             ("fsharp/notifyWorkspace" #'ignore)
+                                             ("fsharp/fileParsed" #'ignore)
+                                             ("fsharp/notifyWorkspacePeek" #'ignore))
+                  :initialization-options 'lsp-fsharp--make-init-options
+                  :initialized-fn (lambda (workspace)
+                                    (with-lsp-workspace workspace
+                                      ;; Something needs to be calling lsp--set-configuration
+                                      (progn
+                                        (lsp--set-configuration
+                                         (lsp-configuration-section "fsharp"))
+                                        (lsp-fsharp--workspace-load
+                                         (lsp-fsharp--project-list)))))
+                  :after-open-fn ;; workaround https://github.com/fsharp/FsAutoComplete/issues/833
+                  (lambda ()
+                    (setq-local lsp-default-create-error-handler-fn
+                                (lambda (method)
+                                  (lambda (error)
+                                    (when
+                                        (not
+                                         (seq-find (lambda (s)
+                                                     (string= s (lsp-get error :message)))
+                                                   '("Index was outside the bounds of the array."
+                                                     "No symbol information found"
+                                                     "No ident at this location")))
+                                      (lsp--warn
+                                       "%s"
+                                       (or (lsp--error-string error)
+                                           (format "%s Request has failed" method))))))))
+                  :server-id 'fsautocomplete))
+
 ;; SHELL
 ;;(use-package! dtache
 ;;  :hook (after-init . dtache-initialize)
