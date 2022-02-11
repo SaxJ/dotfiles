@@ -42,6 +42,7 @@
 (package! dash-functional)
 (package! ejira
   :recipe (:host github :repo "nyyManni/ejira"))
+(package! dtache)
 
 ;; Salesforce
 (package! submode

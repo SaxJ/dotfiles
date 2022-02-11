@@ -41,6 +41,19 @@
         auto-revert-check-vc-info t
         doom-modeline-github t))
 
+(defun get-auth-info (host user &optional port)
+  (let ((info (nth 0 (auth-source-search
+                      :host host
+                      :user user
+                      :port port
+                      :require '(:user :secret)))))
+    (if info
+        (let ((secret (plist-get info :secret)))
+          (if (functionp secret)
+              (funcall secret)
+            secret))
+      nil)))
+
 ;; ###############################
 ;; ORG SETTINGS
 ;; ###############################
@@ -168,6 +181,9 @@
   (setq lsp-file-watch-threshold 20000)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
+(after! (lsp-mode php-mode)
+  (setq lsp-intelephense-licence-key (get-auth-info "intelephense" "SaxonJ")))
+
 ;; Haskell
 (use-package! shakespeare-mode)
 (setq lsp-haskell-server-args nil
@@ -178,7 +194,6 @@
 (use-package! apex-mode)
 
 ;; PHP
-;;(setq lsp-intelephense-licence-key (password-store-get "intelephense/key"))
 
 ;; Razor mode
 (defvar razor-mode-map)
@@ -266,6 +281,11 @@
       :localleader
       :desc "Add blob team"
       :n "ab" #'forge-add-blob)
+(map! :after magit
+      :map forge-topic-mode-map
+      :localleader
+      :desc "Add shrek team"
+      :n "as" #'forge-add-shrek)
 (map! :map org-mode-map
       :localleader
       :desc "Reset cache"
@@ -298,6 +318,19 @@ topic N and modify that instead."
      repo topic
      '("joshkulesza" "Zylo18" "macoto35" "tspencer244" "callumfrance" "BinaryBen"))))
 
+(defun forge-add-shrek (n)
+  "Edit the review-requests of the current pull-request.
+If there is no current topic or with a prefix argument read a
+topic N and modify that instead."
+  (interactive (list (forge-read-pullreq "Request review for")))
+  (let* ((topic (forge-get-pullreq n))
+         (repo  (forge-get-repository topic))
+         (value (closql--iref topic 'review-requests))
+         (choices (mapcar #'cadr (oref repo assignees)))
+         (crm-separator ","))
+    (forge--set-topic-review-requests
+     repo topic
+     '("Adriansyah" "Zylo18" "callumfrance" "BrendanPauleyHE" "lukeperson"))))
 
 ;; SQL CLIENT
 (setq sql-connection-alist
