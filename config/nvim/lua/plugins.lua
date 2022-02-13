@@ -109,7 +109,6 @@ return require("packer").startup(function()
 			vim.cmd("autocmd FileType http nmap <buffer> <Enter> <Plug>RestNvim")
 		end,
 	})
-	use({ "voldikss/vim-floaterm" })
 	use({
 		"nvim-orgmode/orgmode",
 		config = function()
@@ -119,6 +118,15 @@ return require("packer").startup(function()
 			})
 		end,
 	})
+    use {
+        's1n7ax/nvim-terminal',
+        config = function()
+            vim.o.hidden = true
+            require('nvim-terminal').setup({
+                toggle_keymap = "<leader>tt"
+            })
+        end,
+    }
 
 	-- Code navigation
 	use({
@@ -139,7 +147,12 @@ return require("packer").startup(function()
 
 	-- Hell yeah git
 	use({ "pwntester/octo.nvim" })
-	use("kdheepak/lazygit.nvim")
+    use { 'TimUntersberger/neogit',
+        requires = 'nvim-lua/plenary.nvim',
+        config = function()
+            require('neogit').setup({})
+        end,
+    }
 	use({
 		"f-person/git-blame.nvim",
 		config = function()

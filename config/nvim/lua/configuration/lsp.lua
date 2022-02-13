@@ -37,24 +37,17 @@ local on_attach = function(client, bufnr)
   buf_set_keymap("n", "<space>cf", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
 end
 
+local path = vim.split(package.path, ";")
+table.insert(path, "lua/?.lua")
+table.insert(path, "lua/?/init.lua")
+
 -- Makes lua lsp work with neovim config
 local lua_settings = {
   Lua = {
-    runtime = {
-      -- LuaJIT in the case of Neovim
-      version = "LuaJIT",
-      path = vim.split(package.path, ";")
-    },
     diagnostics = {
       -- Get the language server to recognize the `vim` global
-      globals = {"vim"}
-    },
-    workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-        [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true
-      }
+      globals = {"vim", "use"},
+      disable = {"lowercase-global"}
     }
   }
 }
@@ -70,12 +63,28 @@ local function make_lsp_config()
   }
 end
 
+local runtime_path = vim.split(package.path, ';')
+table.insert(runtime_path, "lua/?.lua")
+table.insert(runtime_path, "lua/?/init.lua")
+
 local function server_opts(server)
   local config = make_lsp_config()
 
   -- language specific config
-  if server == "lua" then
-    config.settings = lua_settings
+  if server == "sumneko_lua" then
+    config.settings = {
+        Lua = {
+            runtime = {
+                version = "LuaJIT",
+                path = runtime_path,
+            },
+            diagnostics = {
+                -- Get the language server to recognize the `vim` global
+                globals = {"vim", "use"},
+                disable = {"lowercase-global"}
+            }
+        }
+    }
   end
   if server == "sourcekit" then
     config.filetypes = {"swift", "objective-c", "objective-cpp"} -- we don't want c and cpp!

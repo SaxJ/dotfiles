@@ -29,7 +29,10 @@ mapx.nnoremap("<leader>pt", ":TodoTelescope<cr>")
 mapx.nnoremap("<leader>prc", "<cmd>Octo pr create<cr>")
 mapx.nnoremap("<leader>prl", "<cmd>Octo pr list<cr>")
 mapx.nnoremap("<leader>gb", ":GitBlameToggle<cr>")
-mapx.nnoremap("<Leader>gg", ":LazyGit<cr>")
+mapx.nnoremap("<Leader>gg", ":Neogit<cr>")
+
+-- Terminal
+mapx.tnoremap('<C-[>', '<C-\\><C-n>')
 
 -- Nav
 mapx.nnoremap("<leader>w", "<C-w>")
