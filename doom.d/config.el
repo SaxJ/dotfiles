@@ -179,6 +179,9 @@
   :config
   (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
   (setq lsp-file-watch-threshold 20000)
+  (setq typescript-options
+        '(:importModuleSpecifierPreference "relative"))
+  (setq lsp-clients-typescript-init-opts typescript-options)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
 (after! (lsp-mode php-mode)
