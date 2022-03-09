@@ -37,16 +37,17 @@ return require("packer").startup(function()
 	use("adamclerk/vim-razor")
 	use("jparise/vim-graphql")
 	use({ "norcalli/nvim-colorizer.lua" })
+
+	require("orgmode").setup_ts_grammar()
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = function()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = "all",
-				disable = { "org" },
-				additional_vim_regex_highlighting = { "org" },
 				highlight = {
 					enable = true,
+					additional_vim_regex_highlighting = { "org" },
 				},
 				indent = {
 					enable = true,
@@ -56,7 +57,8 @@ return require("packer").startup(function()
 	})
 
 	-- General code plugins
-	use("glepnir/lspsaga.nvim")
+	use({ "gpanders/editorconfig.nvim" })
+	use({ "tami5/lspsaga.nvim" })
 	use("mhartington/formatter.nvim")
 	use({ "neovim/nvim-lspconfig", requires = { { "hrsh7th/vim-vsnip" } } })
 	use({ "williamboman/nvim-lsp-installer" })
@@ -115,17 +117,29 @@ return require("packer").startup(function()
 				org_agenda_files = { "~/Documents/wiki/**/*" },
 				org_default_notes_file = "~/Documents/wiki/notes.org",
 			})
+			require("orgmode").setup_ts_grammar()
 		end,
 	})
-    use {
-        's1n7ax/nvim-terminal',
-        config = function()
-            vim.o.hidden = true
-            require('nvim-terminal').setup({
-                toggle_keymap = "<leader>tt"
-            })
-        end,
-    }
+	use({
+		"s1n7ax/nvim-terminal",
+		config = function()
+			vim.o.hidden = true
+			require("nvim-terminal").setup({
+				toggle_keymap = "<leader>tt",
+			})
+		end,
+	})
+	use("eshion/vim-sync")
+	use({
+		"folke/which-key.nvim",
+		config = function()
+			require("which-key").setup({
+				-- your configuration comes here
+				-- or leave it empty to use the default settings
+				-- refer to the configuration section below
+			})
+		end,
+	})
 
 	-- Code navigation
 	use({
@@ -146,12 +160,13 @@ return require("packer").startup(function()
 
 	-- Hell yeah git
 	use({ "pwntester/octo.nvim" })
-    use { 'TimUntersberger/neogit',
-        requires = 'nvim-lua/plenary.nvim',
-        config = function()
-            require('neogit').setup({})
-        end,
-    }
+	use({
+		"TimUntersberger/neogit",
+		requires = "nvim-lua/plenary.nvim",
+		config = function()
+			require("neogit").setup({})
+		end,
+	})
 	use({
 		"f-person/git-blame.nvim",
 		config = function()
