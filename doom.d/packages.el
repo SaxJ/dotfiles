@@ -43,6 +43,7 @@
 (package! ejira
   :recipe (:host github :repo "nyyManni/ejira"))
 (package! dtache)
+(package! org-ros)
 
 ;; Salesforce
 (package! submode
