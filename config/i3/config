@@ -45,7 +45,6 @@ exec --no-startup-id dropbox start
 exec emacs
 exec firefox-developer-edition
 exec slack
-exec spotify
 
 
 # Use pactl to adjust volume in PulseAudio.
