@@ -44,6 +44,8 @@
   :recipe (:host github :repo "nyyManni/ejira"))
 (package! dtache)
 (package! org-ros)
+(package! emacs-bitwarden
+  :recipe (:host github :repo "seanfarley/emacs-bitwarden"))
 
 ;; Salesforce
 (package! submode

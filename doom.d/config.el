@@ -441,4 +441,8 @@ topic N and modify that instead."
 ;;  (setq dtache-db-directory user-emacs-directory
 ;;        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
 
+(use-package! bitwarden
+  :config
+  (setq bitwarden-automatic-unlock (lambda () (get-auth-info "bitwarden" "SaxonJ"))))
+
 ;;; config.el ends here
