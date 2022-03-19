@@ -435,12 +435,6 @@ topic N and modify that instead."
                   :server-id 'fsautocomplete))
 
 ;; SHELL
-(use-package! dtache
-  :hook (after-init . dtache-initialize)
-  :config
-  (setq dtache-db-directory user-emacs-directory
-        dtache-session-directory (expand-file-name "dtache" (temporary-file-directory))))
-
 (use-package! bitwarden
   :config
   (setq bitwarden-automatic-unlock (lambda () (get-auth-info "bitwarden" "SaxonJ"))))
