@@ -37,15 +37,12 @@
 
 ;; Tooling
 (package! string-inflection)
-(package! bbdb)
 (package! slack)
 (package! dash-functional)
 (package! ejira
   :recipe (:host github :repo "nyyManni/ejira"))
 (package! dtache)
 (package! org-ros)
-(package! emacs-bitwarden
-  :recipe (:host github :repo "seanfarley/emacs-bitwarden"))
 
 ;; Salesforce
 (package! submode
@@ -61,8 +58,6 @@
 (package! shakespeare-mode)
 
 ;; For Fun
-
-(unpin! dap-mode)
 ;;(package! doom-snippets :ignore t)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el

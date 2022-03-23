@@ -434,9 +434,4 @@ topic N and modify that instead."
                                            (format "%s Request has failed" method))))))))
                   :server-id 'fsautocomplete))
 
-;; SHELL
-(use-package! bitwarden
-  :config
-  (setq bitwarden-automatic-unlock (lambda () (get-auth-info "bitwarden" "SaxonJ"))))
-
 ;;; config.el ends here
