@@ -43,6 +43,7 @@
   :recipe (:host github :repo "nyyManni/ejira"))
 (package! dtache)
 (package! org-ros)
+(package! howm)
 
 ;; Salesforce
 (package! submode
@@ -57,6 +58,8 @@
 ;; Haskell
 (package! shakespeare-mode)
 
+(unpin! magit)
+(unpin! forge)
 ;; For Fun
 ;;(package! doom-snippets :ignore t)
 

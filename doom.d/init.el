@@ -26,7 +26,7 @@
        (vertico +icons)
 
        :ui
-       ;;deft              ; notational velocity for Emacs
+       deft              ; notational velocity for Emacs
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
@@ -120,7 +120,7 @@
        data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;elixir            ; erlang done right
-       ;;elm               ; care for a cup of TEA?
+       (elm +lsp)               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
@@ -152,7 +152,7 @@
             +pomodoro
             +journal)
        (php +lsp)
-       ;;plantuml          ; diagrams for confusing people more
+       plantuml          ; diagrams for confusing people more
        (purescript +lsp)        ; javascript, but functional
        (python +lsp +pyenv +pyright)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
