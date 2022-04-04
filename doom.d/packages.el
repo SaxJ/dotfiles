@@ -32,9 +32,6 @@
 ;; PHP
 (package! psysh)
 
-;; Graphql
-(package! graphql-mode)
-
 ;; Tooling
 (package! string-inflection)
 (package! slack)
@@ -44,6 +41,7 @@
 (package! dtache)
 (package! org-ros)
 (package! howm)
+(package! spotify)
 
 ;; Salesforce
 (package! submode
@@ -57,9 +55,6 @@
 
 ;; Haskell
 (package! shakespeare-mode)
-
-(unpin! magit)
-(unpin! forge)
 ;; For Fun
 ;;(package! doom-snippets :ignore t)
 
