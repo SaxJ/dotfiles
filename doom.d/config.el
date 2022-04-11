@@ -73,7 +73,8 @@
       org-journal-file-format "%Y_%m_%d.org"
       org-journal-time-format "%I:%M %p")
 
-(setq deft-recursive t)
+(setq deft-recursive t
+      deft-directory "~/Documents/wiki")
 
 (use-package ejira
   :init
