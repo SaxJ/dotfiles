@@ -183,8 +183,10 @@
   (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
   (setq lsp-file-watch-threshold 20000)
   (setq typescript-options
-        '(:importModuleSpecifierPreference "relative"))
-  (setq lsp-clients-typescript-init-opts typescript-options)
+        '(:importModuleSpecifierPreference "relative"
+          :includeAutomaticOptionalChainCompletions t))
+  (setq lsp-clients-typescript-init-opts typescript-options
+        lsp-clients-typescript-max-ts-server-memory 8000)
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
 
 (after! (lsp-mode php-mode)
@@ -436,5 +438,10 @@ topic N and modify that instead."
                                        (or (lsp--error-string error)
                                            (format "%s Request has failed" method))))))))
                   :server-id 'fsautocomplete))
+
+(use-package! vimrc-mode
+  :config
+  (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
+  (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
 
 ;;; config.el ends here

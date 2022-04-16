@@ -42,8 +42,9 @@
 (package! org-ros)
 (package! howm)
 (package! spotify)
+(package! system-packages)
 
-;; Salesforce
+;; Filetypes
 (package! submode
   :recipe (:host github :repo "nxtr/submode"))
 (package! sosl-mode
@@ -52,9 +53,8 @@
   :recipe (:host github :repo "nxtr/soql-mode"))
 (package! apex-mode
   :recipe (:host github :repo "nxtr/apex-mode"))
-
-;; Haskell
 (package! shakespeare-mode)
+(package! vimrc-mode)
 ;; For Fun
 ;;(package! doom-snippets :ignore t)
 
