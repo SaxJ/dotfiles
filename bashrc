@@ -4,6 +4,7 @@
 
 export TERM=alacritty
 export AWS_PROFILE=hedev
+export BW_SESSION="$(cat ~/.bw)"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
