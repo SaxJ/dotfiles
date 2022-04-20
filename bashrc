@@ -20,6 +20,7 @@ if [ -x "$(command -v nvim)" ]; then
     alias vi="nvim"
     alias vimdiff="nvim -d"
 fi
+alias hx="helix"
 
 # GO
 export GOPATH=$HOME/go_packages
@@ -80,9 +81,7 @@ export cabal_helper_libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodu
 export libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
 
 # TASKBOOK
-alias tb=taskbook
 alias pods="kubectl get pods"
-export SCRIPT_DIR=$HOME/.config/i3blocks
 
 # HABITICA
 pass habitica/cli 2>/dev/null 1>/dev/null

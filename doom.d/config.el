@@ -191,8 +191,8 @@
         '(:importModuleSpecifierPreference "relative"
           :includeAutomaticOptionalChainCompletions t))
   (setq lsp-clients-typescript-init-opts typescript-options
-        lsp-clients-typescript-max-ts-server-memory 8000)
-  (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode-insiders/extensions/visualstudioexptteam.vscodeintellicode-1.2.11"))))
+        lsp-clients-typescript-max-ts-server-memory 10000)
+  (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.2.19"))))
 
 (after! (lsp-mode php-mode)
   (setq lsp-intelephense-licence-key (get-auth-info "intelephense" "SaxonJ")))
@@ -309,6 +309,9 @@
 (map! :leader
       :desc "Pull Org from mobile"
       :n "np" #'org-mobile-pull)
+(map! :leader
+      :desc "Run command in dtache"
+      :n "Tc" #'dtache-shell-command)
 
 (after! forge
   (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
