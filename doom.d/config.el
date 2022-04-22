@@ -35,6 +35,23 @@
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 
+(defun the-hello-snail ()
+  (let* ((banner '(" ───▄▄▄     "
+                   "─▄▀░▄░▀▄    "
+                   "─█░█▄▀░█    "
+                   "─█░▀▄▄▀█▄█▄▀"
+                   "▄▄█▄▄▄▄███▀ "))
+         (longest-line (apply #'max (mapcar #'length banner))))
+    (put-text-property
+     (point)
+     (dolist (line banner (point))
+       (insert (+doom-dashboard--center
+                +doom-dashboard--width
+                (concat line (make-string (max 0 (- longest-line (length line))) 32)))
+               "\n"))
+     'face 'doom-dashboard-banner)))
+(setq +doom-dashboard-ascii-banner-fn #'the-hello-snail)
+
 (after! doom-modeline
   (setq doom-modeline-persp-icon t
         doom-modeline-persp-name t
