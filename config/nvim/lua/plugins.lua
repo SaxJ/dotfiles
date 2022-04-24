@@ -10,12 +10,24 @@ end
 
 vim.cmd([[packadd packer.nvim]])
 
-return require("packer").startup(function()
+return require("packer").startup(function(use)
 	-- Packer can manage itself
-	use("wbthomason/packer.nvim")
+	use ("wbthomason/packer.nvim")
 
 	-- Libraries
 	use("b0o/mapx.nvim")
+    use({
+        'echasnovski/mini.nvim',
+        config = function()
+            require('mini.surround').setup()
+            require('mini.comment').setup()
+            require('mini.cursorword').setup()
+            require('mini.indentscope').setup()
+            require('mini.jump').setup()
+            require('mini.pairs').setup()
+        end
+    })
+    use "folke/lua-dev.nvim"
 
 	-- Appearance
 	use("folke/tokyonight.nvim")
@@ -26,7 +38,6 @@ return require("packer").startup(function()
 
 	-- Syntax
 	use("amadeus/vim-mjml")
-	use("b3nj5m1n/kommentary")
 	use({
 		"folke/todo-comments.nvim",
 		requires = "nvim-lua/plenary.nvim",
@@ -75,12 +86,6 @@ return require("packer").startup(function()
 	use({
 		"nvim-telescope/telescope-frecency.nvim",
 		requires = { "tami5/sqlite.lua" },
-	})
-	use({
-		"blackCauldron7/surround.nvim",
-		config = function()
-			require("surround").setup({ mappings_style = "surround" })
-		end,
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 
@@ -142,15 +147,10 @@ return require("packer").startup(function()
 	})
 
 	-- Code navigation
-	use({
-		"phaazon/hop.nvim",
-		as = "hop",
-		config = function()
-			-- you can configure Hop the way you like here; see :h hop-config
-			require("hop").setup({ keys = "etovxqpdygfblzhckisuran" })
-		end,
-	})
-	use({ "ms-jpq/chadtree" })
+    use({
+        'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' },
+    })
 	use({
 		"ahmedkhalf/project.nvim",
 		config = function()

@@ -1,4 +1,7 @@
 local nvim_lsp = require("lspconfig")
+local luadev = require("lua-dev").setup()
+nvim_lsp.sumneko_lua.setup(luadev)
+
 local vimPID = vim.fn.getpid()
 
 -- Use an on_attach function to only map the following keys
@@ -41,17 +44,6 @@ local path = vim.split(package.path, ";")
 table.insert(path, "lua/?.lua")
 table.insert(path, "lua/?/init.lua")
 
--- Makes lua lsp work with neovim config
-local lua_settings = {
-  Lua = {
-    diagnostics = {
-      -- Get the language server to recognize the `vim` global
-      globals = {"vim", "use"},
-      disable = {"lowercase-global"}
-    }
-  }
-}
-
 local function make_lsp_config()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -63,28 +55,14 @@ local function make_lsp_config()
   }
 end
 
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
 
 local function server_opts(server)
   local config = make_lsp_config()
 
   -- language specific config
   if server == "sumneko_lua" then
-    config.settings = {
-        Lua = {
-            runtime = {
-                version = "LuaJIT",
-                path = runtime_path,
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {"vim", "use"},
-                disable = {"lowercase-global"}
-            }
-        }
-    }
+        local luadev = require("lua-dev").setup()
+        config = luadev
   end
   if server == "sourcekit" then
     config.filetypes = {"swift", "objective-c", "objective-cpp"} -- we don't want c and cpp!

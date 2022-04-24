@@ -1,9 +1,15 @@
-local util = require("utils")
-
 require("configuration/completion")
 require("configuration/lsp")
 require("configuration/formatting")
 require("configuration/debugger")
+require('nvim-tree').setup({
+    disable_netrw = true,
+    actions = {
+        open_file = {
+            quit_on_open = true
+        }
+    }
+})
 require("lualine").setup({
 	theme = "tokyonight",
 	sections = {
