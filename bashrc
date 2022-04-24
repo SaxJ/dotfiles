@@ -60,6 +60,7 @@ export DOTNET_TOOLS=$HOME/.dotnet/tools
 
 # PATH
 export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$YARN_INSTALL_PATH:$DOOM:$COMPOSER_BINS:$FLUTTER_BIN:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$DOTNET_TOOLS:/home/saxonj/.local/share/coursier/bin:/home/saxonj/.ghcup/bin"
+export PATH=$PATH:~/.roswell/bin
 
 # EXCERSISM
 if [ -f ~/.config/exercism/exercism_completion.bash ]; then
