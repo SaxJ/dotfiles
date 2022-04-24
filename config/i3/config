@@ -42,7 +42,6 @@ exec --no-startup-id dunst
 exec --no-startup-id picom
 exec --no-startup-id dropbox start
 
-exec emacs
 exec firefox-developer-edition
 exec slack
 
