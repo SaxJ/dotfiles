@@ -22,14 +22,13 @@ file-types = ["py"]
 shebangs = ["python"]
 roots = []
 comment-token = "#"
-language-server = { command = "pylsp" }
-# TODO: pyls needs utf-8 offsets
+language-server = { command = "pylsp"}
 indent = { tab-width = 4, unit = "    " }
 auto-format = true
 
 [[grammar]]
 name = "python"
-source = { git = "https://github.com/tree-sitter/tree-sitter-python", rev = "d6210ceab11e8d812d4ab59c07c81458ec6e5184" }
+source = { git = "https://github.com/tree-sitter/tree-sitter-python"}
 
 [[language]]
 name = "graphql"
