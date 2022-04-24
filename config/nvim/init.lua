@@ -7,29 +7,50 @@ require("settings")
 -- Plugin Config
 require("configuration")
 
+local wk = require('which-key')
 local mapx = require "mapx"
 -- Misc
-mapx.nnoremap("<Leader>/", "<cmd>lua require'hop'.hint_words()<cr>")
+wk.register({
+    o = {
+        name = "open",
+        m = {":FloatermNew aerc<CR>", "Mail"},
+        t = {":FloatermNew<CR>", "Terminal"},
+        p = {"NvimTreeToggle<cr>", "Project"},
+    },
+    ["<leader>"] = {"<cmd>Telescope frecency<cr>", "Recent Files"},
+    ["<tab>"] = {"<cmd>Telescope buffers<cr>", "Buffers"},
+    f = {
+        name = "files",
+        f = {"<cmd>Telescope find_files<cr>", "Files"},
+        r = {"<cmd>Telescope frecency<cr>", "Recent"},
+    },
+    s = {
+        name = "search",
+        p = {"<cmd>Telescope live_grep<cr>", "Search Project"},
+    },
+    p = {
+        name = "project",
+        p = {"<cmd>Telescope repo list<cr>", "Projects"},
+        t = {":TodoTelescope<cr>", "Todos"},
+    },
+    g = {
+        name = "git",
+        c = {"<cmd>Octo pr create<cr>", "Create PR"},
+        l = {"<cmd>Octo pr list<cr>", "List PRs"},
+        b = {":GitBlameToggle<cr>", "Blame"},
+        g = {":Neogit<cr>", "Git Commit"},
+    },
+    t = {
+        name = "terminal",
+        t = {":FloatermToggle<cr>", "Terminal"},
+        ["]"] = {":FloatermNext<cr>", "Next Terminal"},
+        ["["] = {":FloatermPrev<cr>", "Prev Terminal"},
+    }
+}, {prefix = "<leader>"})
+
+-- misc
 mapx.nnoremap("<Leader>cc", ":ccl<CR>")
-mapx.nnoremap("<Leader>om", ":FloatermNew aerc<CR>")
-mapx.nnoremap("<Leader>ok", ":FloatermNew k9s<CR>")
-
--- Project
 mapx.nnoremap("<C-e>", ":NvimTreeToggle<cr>")
-mapx.nnoremap("<leader>op", ":NvimTreeToggle<cr>")
-mapx.nnoremap("<leader>fr", "<cmd>Telescope frecency<cr>")
-mapx.nnoremap("<leader>ff", "<cmd>Telescope find_files<cr>")
-mapx.nnoremap("<leader><leader>", "<cmd>Telescope find_files<cr>")
-mapx.nnoremap("<leader><Tab>", "<cmd>Telescope buffers<cr>")
-mapx.nnoremap("<leader>sp", "<cmd>Telescope live_grep<cr>")
-mapx.nnoremap("<leader>pp", "<cmd>Telescope projects<cr>")
-mapx.nnoremap("<leader>pt", ":TodoTelescope<cr>")
-
--- Git
-mapx.nnoremap("<leader>prc", "<cmd>Octo pr create<cr>")
-mapx.nnoremap("<leader>prl", "<cmd>Octo pr list<cr>")
-mapx.nnoremap("<leader>gb", ":GitBlameToggle<cr>")
-mapx.nnoremap("<Leader>gg", ":Neogit<cr>")
 
 -- Terminal
 mapx.tnoremap('<C-[>', '<C-\\><C-n>')
@@ -44,12 +65,6 @@ mapx.nnoremap("C-h", "<C-w>h")
 -- FileType Specific --
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", {ft = "http"})
-
--- Terminals
-mapx.nnoremap("<leader>ot", ":FloatermNew<cr>")
-mapx.nnoremap("<leader>tt", ":FloatermToggle<cr>")
-mapx.nnoremap("<leader>t]", ":FloatermNext<cr>")
-mapx.nnoremap("<leader>t[", ":FloatermPrev<cr>")
 
 -- My own journalling
 mapx.nnoremap(

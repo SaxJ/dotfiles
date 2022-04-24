@@ -29,6 +29,7 @@ return require("packer").startup(function(use)
     })
     use "folke/lua-dev.nvim"
 
+
 	-- Appearance
 	use("folke/tokyonight.nvim")
 	use({
@@ -88,6 +89,7 @@ return require("packer").startup(function(use)
 		requires = { "tami5/sqlite.lua" },
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+	use 'airblade/vim-rooter'
 
 	-- Debuggers
 	use("mfussenegger/nvim-dap")
@@ -95,6 +97,7 @@ return require("packer").startup(function(use)
 	use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
 
 	-- Tooling
+	use 'voldikss/vim-floaterm'
 	use({
 		"NTBBloodbath/rest.nvim",
 		requires = { "nvim-lua/plenary.nvim" },
@@ -138,11 +141,7 @@ return require("packer").startup(function(use)
 	use({
 		"folke/which-key.nvim",
 		config = function()
-			require("which-key").setup({
-				-- your configuration comes here
-				-- or leave it empty to use the default settings
-				-- refer to the configuration section below
-			})
+			require("which-key").setup()
 		end,
 	})
 
@@ -151,12 +150,10 @@ return require("packer").startup(function(use)
         'kyazdani42/nvim-tree.lua',
         requires = { 'kyazdani42/nvim-web-devicons' },
     })
-	use({
-		"ahmedkhalf/project.nvim",
-		config = function()
-			require("project_nvim").setup({})
-		end,
-	})
+    use {
+        'cljoly/telescope-repo.nvim',
+        requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim'},
+    }
 
 	-- Hell yeah git
 	use({ "pwntester/octo.nvim" })

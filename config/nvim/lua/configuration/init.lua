@@ -111,8 +111,9 @@ require("telescope").setup({
 	},
 })
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("projects")
 require("telescope").load_extension("frecency")
+require('telescope').load_extension('repo')
+vim.g['rooter_cd_cmd'] = 'lcd'
 
 local saga = require("lspsaga")
 saga.init_lsp_saga()
