@@ -45,6 +45,18 @@ wk.register({
         t = {":FloatermToggle<cr>", "Terminal"},
         ["]"] = {":FloatermNext<cr>", "Next Terminal"},
         ["["] = {":FloatermPrev<cr>", "Prev Terminal"},
+    },
+    n = {
+        name = "notes",
+        v = {':Neorg gtd views<cr>', 'View Notes'},
+        c = {':Neorg gtd capture<cr>', 'Create Note'},
+        j = {
+            name = "journal",
+            t = {':Neorg journal today<cr>', 'Today'},
+            y = {':Neorg journal yesterday<cr>', 'Yesterday'},
+            n = {':Neorg journal tomorrow<cr>', 'Tomorrow'},
+            c = {':Neorg journal ', 'Create'},
+        }
     }
 }, {prefix = "<leader>"})
 
@@ -65,3 +77,7 @@ mapx.nnoremap("C-h", "<C-w>h")
 -- FileType Specific --
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", {ft = "http"})
+mapx.nmap('<localleader>d', ":put =strftime('%m/%d/%y')<cr>", "silent", {ft = "norg"})
+
+-- autorun
+vim.cmd [[silent! NeorgStart silent=true]]

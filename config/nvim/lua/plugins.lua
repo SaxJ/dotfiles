@@ -19,16 +19,15 @@ return require("packer").startup(function(use)
     use({
         'echasnovski/mini.nvim',
         config = function()
-            require('mini.surround').setup()
-            require('mini.comment').setup()
-            require('mini.cursorword').setup()
-            require('mini.indentscope').setup()
-            require('mini.jump').setup()
-            require('mini.pairs').setup()
+            require('mini.surround').setup({})
+            require('mini.comment').setup({})
+            require('mini.cursorword').setup({})
+            require('mini.indentscope').setup({})
+            require('mini.jump').setup({})
+            require('mini.pairs').setup({})
         end
     })
     use "folke/lua-dev.nvim"
-
 
 	-- Appearance
 	use("folke/tokyonight.nvim")
@@ -50,7 +49,6 @@ return require("packer").startup(function(use)
 	use("jparise/vim-graphql")
 	use({ "norcalli/nvim-colorizer.lua" })
 
-	require("orgmode").setup_ts_grammar()
 	use({
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
@@ -59,7 +57,6 @@ return require("packer").startup(function(use)
 				ensure_installed = "all",
 				highlight = {
 					enable = true,
-					additional_vim_regex_highlighting = { "org" },
 				},
 				indent = {
 					enable = true,
@@ -119,15 +116,9 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({
-		"nvim-orgmode/orgmode",
-		config = function()
-			require("orgmode").setup({
-				org_agenda_files = { "~/Documents/wiki/**/*" },
-				org_default_notes_file = "~/Documents/wiki/notes.org",
-			})
-			require("orgmode").setup_ts_grammar()
-		end,
-	})
+        "nvim-neorg/neorg",
+        requires = "nvim-lua/plenary.nvim",
+    })
 	use({
 		"s1n7ax/nvim-terminal",
 		config = function()

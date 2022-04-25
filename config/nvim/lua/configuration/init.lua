@@ -246,3 +246,34 @@ require("octo").setup({
 		},
 	},
 })
+
+-- Neorg
+require('neorg').setup {
+    load = {
+        ['core.defaults'] = {},
+        ["core.norg.dirman"] = {
+            config = {
+                workspaces = {
+                    work = "~/Documents/wiki",
+                }
+            }
+        },
+        ['core.norg.concealer'] = {},
+        ['core.norg.completion'] = {
+            config = {
+                engine = 'nvim-cmp',
+            }
+        },
+        ["core.norg.journal"] = {
+            config = {
+                stategy = 'flat',
+            },
+        },
+        ["core.norg.manoeuvre"] = {},
+        ["core.gtd.base"] = {
+            config = {
+                workspace = "work",
+            },
+        },
+    }
+}
