@@ -159,9 +159,12 @@ return require("packer").startup(function(use)
 	use({ "pwntester/octo.nvim" })
 	use({
 		"TimUntersberger/neogit",
-		requires = "nvim-lua/plenary.nvim",
+		requires = {"nvim-lua/plenary.nvim", "sindrets/diffview.nvim"},
 		config = function()
-			require("neogit").setup({})
+			require("neogit").setup({
+			    use_magit_keybindings = true,
+			    integrations = {diffview = true},
+			})
 		end,
 	})
 	use({

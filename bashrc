@@ -2,7 +2,7 @@
 # ~/.bashrc
 #
 
-export TERM=alacritty
+export TERM=kitty
 export AWS_PROFILE=hedev
 export BW_SESSION="$(cat ~/.bw)"
 

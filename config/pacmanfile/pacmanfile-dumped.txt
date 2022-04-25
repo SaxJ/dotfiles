@@ -71,7 +71,7 @@ grip
 groff
 gtk2
 gzip
-helix
+helix-git
 heroku-cli-bin
 hoogle
 htop
@@ -89,6 +89,7 @@ jdk-openjdk
 jq
 js-beautify
 keynav
+kitty
 lazygit
 librewolf-bin
 libtool
@@ -97,6 +98,7 @@ lightdm
 lightdm-gtk-greeter
 linux
 linux-firmware
+lolcate
 m4
 make
 man-db
