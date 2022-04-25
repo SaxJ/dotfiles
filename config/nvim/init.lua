@@ -65,12 +65,3 @@ mapx.nnoremap("C-h", "<C-w>h")
 -- FileType Specific --
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", {ft = "http"})
-
--- My own journalling
-mapx.nnoremap(
-  "<leader>nj",
-  function()
-    local filename = "~/Documents/wiki/journals/" .. os.date("%Y_%m_%d") .. ".md"
-    vim.cmd("tabnew " .. filename)
-  end
-)
