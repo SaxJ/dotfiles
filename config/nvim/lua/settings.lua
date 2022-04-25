@@ -1,5 +1,3 @@
-local utils = require("utils")
-
 local cmd = vim.cmd
 local indent = 4
 local opt = vim.opt
