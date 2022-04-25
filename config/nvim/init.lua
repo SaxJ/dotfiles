@@ -17,7 +17,7 @@ wk.register({
         t = {":FloatermNew<CR>", "Terminal"},
         p = {"NvimTreeToggle<cr>", "Project"},
     },
-    ["<leader>"] = {"<cmd>Telescope frecency<cr>", "Recent Files"},
+    ["<leader>"] = {"<cmd>Telescope find_files<cr>", "Recent Files"},
     ["<tab>"] = {"<cmd>Telescope buffers<cr>", "Buffers"},
     f = {
         name = "files",
