@@ -376,7 +376,7 @@ topic N and modify that instead."
 
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
-      '(not yaml-mode))
+      '(not yaml-mode php-mode))
 (setq +format-with-lsp nil)
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
