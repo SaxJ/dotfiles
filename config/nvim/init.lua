@@ -46,6 +46,10 @@ wk.register({
         ["]"] = {":FloatermNext<cr>", "Next Terminal"},
         ["["] = {":FloatermPrev<cr>", "Prev Terminal"},
     },
+    T = {
+        name = 'tasks',
+        t = {":FloatermNew taskwarrior-tui<CR>", 'Show Tasks'},
+    },
     n = {
         name = "notes",
         v = {':Neorg gtd views<cr>', 'View Notes'},
