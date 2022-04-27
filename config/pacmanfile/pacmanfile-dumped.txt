@@ -170,6 +170,7 @@ sfdx-cli
 shellcheck
 slack-desktop
 smartmontools
+spectrwm
 spotify
 starship
 stylelint
