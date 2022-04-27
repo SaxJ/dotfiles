@@ -210,7 +210,8 @@
         '(:importModuleSpecifierPreference "relative"
           :includeAutomaticOptionalChainCompletions t))
   (setq lsp-clients-typescript-init-opts typescript-options
-        lsp-clients-typescript-max-ts-server-memory 10000)
+        lsp-clients-typescript-max-ts-server-memory 10000
+        lsp-csharp-server-path "/usr/bin/omnisharp")
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.2.19"))))
 
 (after! (lsp-mode php-mode)
