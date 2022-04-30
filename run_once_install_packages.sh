@@ -29,7 +29,7 @@ paru -S --needed \
     bash-language-server \
     bat \
     bitwarden-cli \
-    bitwarden-rofi-git \
+    bitwarden-rofi \
     calc \
     ccls \
     chezmoi \
@@ -67,7 +67,7 @@ paru -S --needed \
     gotop-bin \
     gparted \
     graphviz \
-    helix-git \
+    helix \
     heroku-cli-bin \
     hoogle \
     htop \
@@ -99,7 +99,7 @@ paru -S --needed \
     nvm \
     nyxt \
     omnisharp-roslyn \
-    openvpn3-git \
+    openvpn3 \
     p7zip \
     pacmanfile \
     paru-bin \
