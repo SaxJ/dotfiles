@@ -1,0 +1,14 @@
+user: Saxon Jensen
+login: saxon.jensen@healthengine.com.au
+password-source: pass
+password-name: jira
+endpoint: https://hejira.atlassian.net
+custom-commands:
+  - name: mine
+    help: display issues assigned to me
+    script: |-
+      {{jira}} list --template table --query "resolution = unresolved and status != Closed and assignee=currentuser() ORDER BY updated"
+  - name: sprint
+    help: display issues for active sprint
+    script: |-
+      {{jira}} list --template table --query "sprint in openSprints() and type != epic and resolution = unresolved ORDER BY updated"
