@@ -1,14 +1,16 @@
 #!/bin/sh
-echo "Install paru"
+echo "Install paru..."
 if ! command -v paru &> /dev/null
 then
     sudo pacman -S --needed base-devel
     git clone https://aur.archlinux.org/paru.git ~/.paru
     cd ~/.paru || return
     makepkg -si
+else
+    echo "  Already installed"
 fi
 
-echo "Install my dev packages"
+printf "\n\nInstall my dev packages..."
 paru -S --needed \
     aerc \
     alacritty \
