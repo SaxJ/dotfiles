@@ -9,7 +9,7 @@ then
 fi
 
 echo "Install my dev packages"
-paru -S -needed \
+paru -S --needed \
     aerc \
     alacritty \
     aspell \
