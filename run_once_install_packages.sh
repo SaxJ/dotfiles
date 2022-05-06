@@ -17,9 +17,7 @@ paru -S --needed \
     aspell \
     aspell-en \
     aspnet-runtime \
-    aspnet-runtime-5.0-bin \
     aspnet-targeting-pack \
-    aspnet-targeting-pack-5.0-bin \
     autoconf \
     automake \
     aws-cli-v2-bin \
@@ -41,10 +39,7 @@ paru -S --needed \
     docker \
     docker-compose \
     dotnet-runtime \
-    dotnet-runtime-5.0-bin \
     dotnet-sdk \
-    dotnet-sdk-5.0-bin \
-    dotnet-targeting-pack-5.0-bin \
     dropbox \
     dtach \
     dunst \
