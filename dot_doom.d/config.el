@@ -383,8 +383,6 @@ topic N and modify that instead."
 (setq +format-with-lsp nil)
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
-(setq +format-on-save-enabled-modes
-      '(not yaml-mode))
 (setq typescript-indent-level 2)
 
 (setq +mu4e-gmail-accounts '(("saxon.jensen@gmail.com" . "/personal")
