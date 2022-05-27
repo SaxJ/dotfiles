@@ -21,6 +21,9 @@ if [ -x "$(command -v nvim)" ]; then
     alias vimdiff="nvim -d"
 fi
 
+alias hx="helix"
+alias cd="z"
+
 # GO
 export GOPATH=$HOME/go_packages
 
