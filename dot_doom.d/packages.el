@@ -38,7 +38,6 @@
 (package! dash-functional)
 (package! ejira
   :recipe (:host github :repo "nyyManni/ejira"))
-(package! dtache)
 (package! org-ros)
 (package! howm)
 (package! spotify)

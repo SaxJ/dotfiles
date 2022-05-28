@@ -3,6 +3,11 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
+;;; Code:
+;; Performance
+(setq gc-cons-threshold 100000000
+      read-process-output-max 3000000)
+
 (setq doom-localleader-key ",")
 
 ;; Some functionality uses this to identify you, e.g. GPG configuration, email
@@ -205,12 +210,13 @@
 (use-package! lsp-mode
   :config
   (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
-  (setq lsp-file-watch-threshold 20000)
+  (setq lsp-file-watch-threshold nil
+        lsp-idle-delay 0.9)
   (setq typescript-options
         '(:importModuleSpecifierPreference "relative"
           :includeAutomaticOptionalChainCompletions t))
   (setq lsp-clients-typescript-init-opts typescript-options
-        lsp-clients-typescript-max-ts-server-memory 10000
+        lsp-clients-typescript-max-ts-server-memory 100000
         lsp-csharp-server-path "/usr/bin/omnisharp")
   (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.2.19"))))
 
