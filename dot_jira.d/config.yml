@@ -12,3 +12,7 @@ custom-commands:
     help: display issues for active sprint
     script: |-
       {{jira}} list --template table --query "sprint in openSprints() and type != epic and resolution = unresolved ORDER BY updated"
+  - name: lifeguard
+    help: display lifeguard issues
+    script: |-
+      {{jira}} list --template table --query "labels = lifeguard order by created DESC"
