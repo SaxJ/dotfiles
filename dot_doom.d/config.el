@@ -336,8 +336,14 @@
       :desc "Pull Org from mobile"
       :n "np" #'org-mobile-pull)
 (map! :leader
-      :desc "Run command in dtache"
-      :n "Tc" #'dtache-shell-command)
+      :desc "Create new terminal"
+      :n "Tc" #'multi-vterm)
+(map! :leader
+      :desc "Next terminal"
+      :n "Tn" #'multi-vterm-next)
+(map! :leader
+      :desc "Previous terminal"
+      :n "Tp" #'multi-vterm-prev)
 
 (after! forge
   (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
@@ -358,7 +364,7 @@ topic N and modify that instead."
          (crm-separator ","))
     (forge--set-topic-review-requests
      repo topic
-     '("joshkulesza" "Zylo18" "macoto35" "tspencer244" "callumfrance" "BinaryBen"))))
+     '("joshkulesza" "Zylo18" "macoto35"))))
 
 (defun forge-add-shrek (n)
   "Edit the review-requests of the current pull-request.
