@@ -164,5 +164,6 @@ paru -S --needed \
     xdg-utils \
     xdotool \
     yarn \
+    zellij \
     zoom \
     zoxide
