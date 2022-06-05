@@ -18,6 +18,7 @@ paru -S --needed \
     aspell-en \
     aspnet-runtime \
     aspnet-targeting-pack \
+    atool \
     autoconf \
     automake \
     aws-cli-v2-bin \
@@ -57,8 +58,8 @@ paru -S --needed \
     github-cli \
     glslang \
     gnome-keyring \
-    gobuster-bin \
     go-jira \
+    gobuster-bin \
     gotop-bin \
     gparted \
     graphviz \
@@ -67,8 +68,8 @@ paru -S --needed \
     hoogle \
     htop \
     hub \
-    i3blocks \
     i3-gaps \
+    i3blocks \
     i3lock \
     i3status \
     i3status-rust \
@@ -86,10 +87,11 @@ paru -S --needed \
     mu \
     neovim \
     nerd-fonts-complete \
-    netstandard-targeting-pack-bin \
     net-tools \
+    netstandard-targeting-pack-bin \
     networkmanager \
     nmap \
+    nnn \
     npm \
     nvm \
     nyxt \
@@ -104,6 +106,11 @@ paru -S --needed \
     pdfjs \
     pgformatter \
     php \
+    php-gd \
+    php-imagick \
+    php-imap \
+    php-intl \
+    php-sodium \
     php7 \
     php7-gd \
     php7-igbinary \
@@ -116,11 +123,6 @@ paru -S --needed \
     php7-phpdbg \
     php7-sodium \
     php7-sqlite \
-    php-gd \
-    php-imagick \
-    php-imap \
-    php-intl \
-    php-sodium \
     picom \
     pkgconf \
     postman-bin \
@@ -146,6 +148,7 @@ paru -S --needed \
     slack-desktop \
     spectrwm \
     spotify \
+    sshfs \
     starship \
     stylelint \
     task \
@@ -155,6 +158,7 @@ paru -S --needed \
     tidy \
     tor \
     unison \
+    unzip \
     vim \
     visual-studio-code-bin \
     wget \
@@ -165,5 +169,6 @@ paru -S --needed \
     xdotool \
     yarn \
     zellij \
+    zip \
     zoom \
     zoxide
