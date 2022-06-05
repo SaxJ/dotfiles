@@ -1,5 +1,5 @@
 require("configuration/completion")
-require("configuration/lsp")
+--require("configuration/lsp")
 require("configuration/formatting")
 require("configuration/debugger")
 require('nvim-tree').setup({

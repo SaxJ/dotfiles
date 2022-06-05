@@ -8,8 +8,9 @@ if fn.empty(fn.glob(install_path)) > 0 then
 	execute("packadd packer.nvim")
 end
 
-vim.cmd([[packadd packer.nvim]])
+vim.cmd("packadd packer.nvim")
 
+-- Package installation
 return require("packer").startup(function(use)
 	-- Packer can manage itself
 	use ("wbthomason/packer.nvim")
@@ -36,7 +37,7 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
-	-- Syntax
+	-- Extra Languages
 	use("amadeus/vim-mjml")
 	use({
 		"folke/todo-comments.nvim",
@@ -47,30 +48,47 @@ return require("packer").startup(function(use)
 	})
 	use("adamclerk/vim-razor")
 	use("jparise/vim-graphql")
-	use({ "norcalli/nvim-colorizer.lua" })
+	use("norcalli/nvim-colorizer.lua")
 
-	use({
-		"nvim-treesitter/nvim-treesitter",
-		run = ":TSUpdate",
-		config = function()
-			require("nvim-treesitter.configs").setup({
-				ensure_installed = "all",
-				highlight = {
-					enable = true,
-				},
-				indent = {
-					enable = true,
-				},
-			})
-		end,
-	})
+	-- LSP
+	use("tami5/lspsaga.nvim")
+    use({'junnplus/nvim-lsp-setup',
+        requires = {
+            'neovim/nvim-lspconfig',
+            'williamboman/nvim-lsp-installer',
+            'hrsh7th/vim-vsnip',
+        },
+        config = function ()
+            require('nvim-lsp-setup').setup({
+                default_mappings = true,
+                on_attach = function (client, bufnr)
+                    require('nvim-lsp-setup.utils').format_on_save(client)
+                end,
+                capabilities = vim.lsp.protocol.make_client_capabilities(),
+                servers = {
+                    sumneko_lua = {
+                        config = require('lua-dev').setup()
+                    },
+                    tsserver = {
+                        init_options = {
+                            preferences = {
+                                importModuleSpecifierPreference = "relative"
+                            }
+                        }
+                    },
+                    intelephense = {
+                        init_options = {
+                            licenceKey = '/home/saxonj/intelephense/licence.txt'
+                        }
+                    }
+                }
+            })
+        end
+    })
 
 	-- General code plugins
-	use({ "gpanders/editorconfig.nvim" })
-	use({ "tami5/lspsaga.nvim" })
+	use("gpanders/editorconfig.nvim")
 	use("mhartington/formatter.nvim")
-	use({ "neovim/nvim-lspconfig", requires = { { "hrsh7th/vim-vsnip" } } })
-	use({ "williamboman/nvim-lsp-installer" })
 	use({
 		"hrsh7th/nvim-cmp",
 		requires = {
@@ -87,6 +105,22 @@ return require("packer").startup(function(use)
 	})
 	use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
 	use 'airblade/vim-rooter'
+	use({
+		"nvim-treesitter/nvim-treesitter",
+		run = ":TSUpdate",
+		config = function()
+			require("nvim-treesitter.configs").setup({
+				ensure_installed = "all",
+				highlight = {
+					enable = true,
+				},
+				indent = {
+					enable = true,
+				},
+			})
+		end,
+	})
+	use("nvim-treesitter/nvim-treesitter-context")
 
 	-- Debuggers
 	use("mfussenegger/nvim-dap")
