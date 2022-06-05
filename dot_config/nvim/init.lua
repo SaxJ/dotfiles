@@ -9,13 +9,38 @@ require("configuration")
 
 local wk = require('which-key')
 local mapx = require "mapx"
+
+local Terminal = require('toggleterm.terminal').Terminal
+local lazyGit = Terminal:new({
+    cmd = "lazygit",
+    dir = "git_dir",
+    hidden = true,
+    close_on_exit = true,
+    direction = 'float',
+})
+local mail = Terminal:new({
+    dir = '~',
+    cmd = 'aerc',
+    hidden = true,
+    close_on_exit = true,
+    direction = 'float',
+})
+local floatingTerminal = Terminal:new({
+    direction = 'float'
+})
+
 -- Misc
 wk.register({
+    b = {
+        name = 'buffers',
+        b = { "<cmd>Telescope buffers<cr>", "Buffers" }
+    },
     o = {
         name = "open",
-        m = { ":FloatermNew aerc<CR>", "Mail" },
-        t = { ":FloatermNew<CR>", "Terminal" },
+        m = { function() mail:toggle() end, "Mail" },
+        T = { function() floatingTerminal:toggle() end, "Terminal" },
         p = { "NvimTreeToggle<cr>", "Project" },
+        ['-'] = { ':NnnPicker %:p:h<CR>', 'Files' }
     },
     ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
     ["<tab>"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
@@ -23,6 +48,11 @@ wk.register({
         name = "files",
         f = { "<cmd>Telescope find_files<cr>", "Files" },
         r = { "<cmd>Telescope frecency<cr>", "Recent" },
+        t = {
+            name = 'testing',
+            t = { ':Ultest', 'Run Tests' },
+            s = { ':UltestSummary', 'Test Summary' },
+        }
     },
     s = {
         name = "search",
@@ -30,19 +60,21 @@ wk.register({
     },
     p = {
         name = "project",
-        p = { "<cmd>Telescope repo list<cr>", "Projects" },
+        p = { ":Telescope repo list<cr>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
+        m = { ":Telescope harpoon marks<cr>", "Marks" }
     },
     g = {
         name = "git",
         c = { "<cmd>Octo pr create<cr>", "Create PR" },
         l = { "<cmd>Octo pr list<cr>", "List PRs" },
         b = { ":GitBlameToggle<cr>", "Blame" },
-        g = { ":Neogit<cr>", "Git Commit" },
+        g = { function() lazyGit:toggle() end, "LazyGit" },
+        -- y = { ''}
     },
     t = {
-        name = "terminal",
-        t = { ":FloatermToggle<cr>", "Terminal" },
+        name = "toggle",
+        t = { ":ToggleTerm size=30<cr>", "Terminal" },
         ["]"] = { ":FloatermNext<cr>", "Next Terminal" },
         ["["] = { ":FloatermPrev<cr>", "Prev Terminal" },
     },
@@ -61,22 +93,25 @@ wk.register({
             n = { ':Neorg journal tomorrow<cr>', 'Tomorrow' },
             c = { ':Neorg journal ', 'Create' },
         }
+    },
+    w = {
+        name = 'window',
+        h = { ':FocusSplitLeft<cr>', 'Split Left' },
+        j = { ':FocusSplitDown<cr>', 'Split Down' },
+        k = { ':FocusSplitUp<cr>', 'Split Up' },
+        l = { ':FocusSplitRight<cr>', 'Split Right' },
     }
 }, { prefix = "<leader>" })
 
+wk.register({
+    t = { ':UltestNearest<cr>', 'Run Test' }
+}, { prefix = '<localleader>' })
+
 -- misc
-mapx.nnoremap("<Leader>cc", ":ccl<CR>")
-mapx.nnoremap("<C-e>", ":NvimTreeToggle<cr>")
+mapx.nnoremap("<C-e>", ":NnnExplorer %:p:h<CR>")
 
 -- Terminal
-mapx.tnoremap('<C-[>', '<C-\\><C-n>')
-
--- Nav
-mapx.nnoremap("<leader>w", "<C-w>")
-mapx.nnoremap("C-l", "<C-w>l")
-mapx.nnoremap("C-k", "<C-w>k")
-mapx.nnoremap("C-j", "<C-w>j")
-mapx.nnoremap("C-h", "<C-w>h")
+mapx.tnoremap('<Esc>', '<C-\\><C-n>')
 
 -- FileType Specific --
 -- HTTP
