@@ -89,14 +89,14 @@ return require("packer").startup(function(use)
                         schemas = require('schemastore').json.schemas(),
                         validate = { enable = true },
                     },
-                    omnisharp = {
-                        cmd = {
-                            '/usr/bin/omnisharp',
-                            '--languageserver',
-                            '--hostPID',
-                            tostring(vim.fn.getpid()),
-                        }
-                    }
+                    -- omnisharp = {
+                    --     cmd = {
+                    --         '/usr/bin/omnisharp',
+                    --         '--languageserver',
+                    --         '--hostPID',
+                    --         tostring(vim.fn.getpid()),
+                    --     }
+                    -- }
                 }
             })
         end
