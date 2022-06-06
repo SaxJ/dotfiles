@@ -167,12 +167,6 @@ return require("packer").startup(function(use)
     end }
 
     -- Tooling
-    use('direnv/direnv.vim')
-    use {
-        "rcarriga/vim-ultest",
-        requires = { "vim-test/vim-test" },
-        run = ":UpdateRemotePlugins"
-    }
     use {
         "luukvbaal/nnn.nvim",
         config = function() require("nnn").setup() end

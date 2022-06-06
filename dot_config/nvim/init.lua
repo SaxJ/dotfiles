@@ -48,11 +48,6 @@ wk.register({
         name = "files",
         f = { "<cmd>Telescope find_files<cr>", "Files" },
         r = { "<cmd>Telescope frecency<cr>", "Recent" },
-        t = {
-            name = 'testing',
-            t = { ':Ultest', 'Run Tests' },
-            s = { ':UltestSummary', 'Test Summary' },
-        }
     },
     s = {
         name = "search",
@@ -102,10 +97,6 @@ wk.register({
         l = { ':FocusSplitRight<cr>', 'Split Right' },
     }
 }, { prefix = "<leader>" })
-
-wk.register({
-    t = { ':UltestNearest<cr>', 'Run Test' }
-}, { prefix = '<localleader>' })
 
 -- misc
 mapx.nnoremap("<C-e>", ":NnnExplorer %:p:h<CR>")
