@@ -105,10 +105,8 @@ require("telescope").setup({
     },
 })
 require("telescope").load_extension("fzf")
-require("telescope").load_extension("frecency")
-require('telescope').load_extension('repo')
 require('telescope').load_extension('harpoon')
-vim.g['rooter_cd_cmd'] = 'lcd'
+require('telescope').load_extension('projects')
 
 require("octo").setup({
     default_remote = { "upstream", "origin" }, -- order to try remotes

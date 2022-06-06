@@ -125,12 +125,8 @@ return require("packer").startup(function(use)
         },
     })
     use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
-    use({
-        "nvim-telescope/telescope-frecency.nvim",
-        requires = { "tami5/sqlite.lua" },
-    })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
-    use 'airblade/vim-rooter'
+    use('airblade/vim-rooter')
     use({
         "nvim-treesitter/nvim-treesitter",
         run = ":TSUpdate",
@@ -208,13 +204,15 @@ return require("packer").startup(function(use)
         end
     }
     use {
-        'cljoly/telescope-repo.nvim',
-        requires = { 'nvim-telescope/telescope.nvim', 'nvim-lua/plenary.nvim' },
-    }
-    use {
         'ThePrimeagen/harpoon',
         requires = { 'nvim-lua/plenary.nvim' }
     }
+    use({
+        'ahmedkhalf/project.nvim',
+        config = function()
+            require('project_nvim').setup({})
+        end
+    })
 
     -- Version Control
     use({ "pwntester/octo.nvim" })

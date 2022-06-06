@@ -47,7 +47,6 @@ wk.register({
     f = {
         name = "files",
         f = { "<cmd>Telescope find_files<cr>", "Files" },
-        r = { "<cmd>Telescope frecency<cr>", "Recent" },
     },
     s = {
         name = "search",
@@ -55,7 +54,7 @@ wk.register({
     },
     p = {
         name = "project",
-        p = { ":Telescope repo list<cr>", "Projects" },
+        p = { ":Telescope projects<cr>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
         m = { ":Telescope harpoon marks<cr>", "Marks" }
     },
@@ -65,17 +64,10 @@ wk.register({
         l = { "<cmd>Octo pr list<cr>", "List PRs" },
         b = { ":GitBlameToggle<cr>", "Blame" },
         g = { function() lazyGit:toggle() end, "LazyGit" },
-        -- y = { ''}
     },
     t = {
         name = "toggle",
         t = { ":ToggleTerm size=30<cr>", "Terminal" },
-        ["]"] = { ":FloatermNext<cr>", "Next Terminal" },
-        ["["] = { ":FloatermPrev<cr>", "Prev Terminal" },
-    },
-    T = {
-        name = 'tasks',
-        t = { ":FloatermNew taskwarrior-tui<CR>", 'Show Tasks' },
     },
     n = {
         name = "notes",
