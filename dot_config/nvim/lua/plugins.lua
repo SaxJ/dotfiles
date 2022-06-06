@@ -209,6 +209,20 @@ return require("packer").startup(function(use)
     })
 
     -- Version Control
+    use({
+        'TimUntersberger/neogit',
+        requires = {
+            'nvim-lua/plenary.nvim',
+            'sindrets/diffview.nvim',
+        },
+        config = function()
+            require('neogit').setup({
+                integrations = {
+                    diffview = true
+                }
+            })
+        end
+    })
     use({ "pwntester/octo.nvim" })
     use({
         "f-person/git-blame.nvim",

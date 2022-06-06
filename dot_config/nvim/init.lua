@@ -63,7 +63,7 @@ wk.register({
         c = { "<cmd>Octo pr create<cr>", "Create PR" },
         l = { "<cmd>Octo pr list<cr>", "List PRs" },
         b = { ":GitBlameToggle<cr>", "Blame" },
-        g = { function() lazyGit:toggle() end, "LazyGit" },
+        g = { ':Neogit<CR>', "Open Git" },
     },
     t = {
         name = "toggle",
