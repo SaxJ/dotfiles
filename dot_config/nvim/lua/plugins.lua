@@ -198,12 +198,6 @@ return require("packer").startup(function(use)
 
     -- Code navigation
     use {
-        "beauwilliams/focus.nvim",
-        config = function()
-            require("focus").setup()
-        end
-    }
-    use {
         'ThePrimeagen/harpoon',
         requires = { 'nvim-lua/plenary.nvim' }
     }

@@ -80,13 +80,6 @@ wk.register({
             n = { ':Neorg journal tomorrow<cr>', 'Tomorrow' },
             c = { ':Neorg journal ', 'Create' },
         }
-    },
-    w = {
-        name = 'window',
-        h = { ':FocusSplitLeft<cr>', 'Split Left' },
-        j = { ':FocusSplitDown<cr>', 'Split Down' },
-        k = { ':FocusSplitUp<cr>', 'Split Up' },
-        l = { ':FocusSplitRight<cr>', 'Split Right' },
     }
 }, { prefix = "<leader>" })
 
