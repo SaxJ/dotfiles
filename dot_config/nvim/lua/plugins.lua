@@ -55,7 +55,7 @@ return require("packer").startup(function(use)
         "tami5/lspsaga.nvim",
         config = function()
             local saga = require('lspsaga')
-            saga.init_lsp_saga()
+            saga.setup({ })
         end
     })
     use({ 'junnplus/nvim-lsp-setup',
@@ -67,6 +67,8 @@ return require("packer").startup(function(use)
         config = function()
             require('nvim-lsp-setup').setup({
                 default_mappings = true,
+                gr = 'lua require('goto-preview').goto_preview_references()',
+                gi = 'lua require('goto-preview').goto_preview_implementation()',
                 on_attach = function(client, bufnr)
                     require('nvim-lsp-setup.utils').format_on_save(client)
                 end,
@@ -96,7 +98,7 @@ return require("packer").startup(function(use)
     use {
         'rmagatti/goto-preview',
         config = function()
-            require('goto-preview').setup {}
+            require('goto-preview').setup({})
         end
     }
     use('b0o/schemastore.nvim')
