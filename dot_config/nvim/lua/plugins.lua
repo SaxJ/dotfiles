@@ -94,7 +94,8 @@ return require("packer").startup(function(use)
                     omnisharp = {
                         cmd = {
                             '/usr/bin/omnisharp',
-                            '--languageserver',
+                            '-lsp',
+                            '-v',
                             '--hostPID',
                             tostring(vim.fn.getpid()),
                         }
