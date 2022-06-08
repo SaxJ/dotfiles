@@ -84,6 +84,11 @@ wk.register({
             n = { ':Neorg journal tomorrow<cr>', 'Tomorrow' },
             c = { ':Neorg journal ', 'Create' },
         }
+    },
+    r = {
+        name = 'remote',
+        u = { ':call SyncUploadFile()<cr>', 'Upload' },
+        d = { ':call SyncDownloadFile()<cr>', 'Download' },
     }
 }, { prefix = "<leader>" })
 
