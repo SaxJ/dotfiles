@@ -11,16 +11,16 @@ local wk = require('which-key')
 local mapx = require "mapx"
 
 local Terminal = require('toggleterm.terminal').Terminal
-local lazyGit = Terminal:new({
-    cmd = "lazygit",
-    dir = "git_dir",
+local mail = Terminal:new({
+    dir = '~',
+    cmd = 'aerc',
     hidden = true,
     close_on_exit = true,
     direction = 'float',
 })
-local mail = Terminal:new({
+local tasks = Terminal:new({
     dir = '~',
-    cmd = 'aerc',
+    cmd = 'taskwarrior-tui',
     hidden = true,
     close_on_exit = true,
     direction = 'float',
@@ -68,6 +68,10 @@ wk.register({
     t = {
         name = "toggle",
         t = { ":ToggleTerm size=30<cr>", "Terminal" },
+    },
+    T = {
+        name = 'tasks',
+        t = { function() tasks:toggle() end, 'Taskwarrior' },
     },
     n = {
         name = "notes",
