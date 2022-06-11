@@ -6,7 +6,8 @@
  '(safe-local-variable-values
    '((ssh-deploy-async . 0)
      (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-remote-root . "/ssh:ubuntu@minikube:/home/ubuntu/megatron"))))
+     (ssh-deploy-remote-root . "/ssh:ubuntu@minikube:/home/ubuntu/megatron")))
+ '(warning-suppress-types '((after-save-hook))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
