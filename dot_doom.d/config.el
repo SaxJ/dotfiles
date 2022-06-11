@@ -206,27 +206,12 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
+(use-package! eglot
   :config
-  (add-to-list 'lsp-file-watch-ignored "[/\\\]vendor$")
-  (setq lsp-file-watch-threshold nil
-        lsp-idle-delay 0.9)
-  (setq typescript-options
-        '(:importModuleSpecifierPreference "relative"
-          :includeAutomaticOptionalChainCompletions t))
-  (setq lsp-clients-typescript-init-opts typescript-options
-        lsp-clients-typescript-max-ts-server-memory 100000
-        lsp-csharp-server-path "/usr/bin/omnisharp")
-  (setq lsp-clients-typescript-plugins (vector (list :name "@vsintellicode/typescript-intellicode-plugin" :location "~/.vscode/extensions/visualstudioexptteam.vscodeintellicode-1.2.19"))))
-
-(after! (lsp-mode php-mode)
-  (setq lsp-intelephense-licence-key (get-auth-info "intelephense" "SaxonJ")))
+  (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio"))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
-(setq lsp-haskell-server-args nil
-      lsp-haskell-server-path "haskell-language-server-wrapper")
-
 
 ;; Salesforce
 (use-package! apex-mode)
@@ -237,8 +222,6 @@
 (defvar razor-mode-map)
 (define-derived-mode razor-mode web-mode "Razor")
 (add-to-list 'auto-mode-alist '("\\.cshtml\\'" . razor-mode))
-(after! lsp-mode
-  (add-to-list 'lsp-language-id-configuration '(".*\\.cshtml$" . "razor")))
 
 ;; MJML
 (defvar mjml-mode-map)
@@ -436,54 +419,15 @@ topic N and modify that instead."
                       (smtpmail-smtp-user . "saxon.jensen@gmail.com"))
                     t)
 
-(defun fsharp-make-lsp-cmd ()
-  "Build command for dotnet install fsharp ls."
-  (append (list "fsautocomplete" "--background-service-enabled")))
-
-(lsp-register-client
- (make-lsp-client :new-connection (lsp-stdio-connection
-                                   #'fsharp-make-lsp-cmd
-                                   (lambda () (not (eq nil (executable-find "fsautocomplete")))))
-                  :major-modes '(fsharp-mode)
-                  :notification-handlers (ht ("fsharp/notifyCancel" #'ignore)
-                                             ("fsharp/notifyWorkspace" #'ignore)
-                                             ("fsharp/fileParsed" #'ignore)
-                                             ("fsharp/notifyWorkspacePeek" #'ignore))
-                  :initialization-options 'lsp-fsharp--make-init-options
-                  :initialized-fn (lambda (workspace)
-                                    (with-lsp-workspace workspace
-                                      ;; Something needs to be calling lsp--set-configuration
-                                      (progn
-                                        (lsp--set-configuration
-                                         (lsp-configuration-section "fsharp"))
-                                        (lsp-fsharp--workspace-load
-                                         (lsp-fsharp--project-list)))))
-                  :after-open-fn ;; workaround https://github.com/fsharp/FsAutoComplete/issues/833
-                  (lambda ()
-                    (setq-local lsp-default-create-error-handler-fn
-                                (lambda (method)
-                                  (lambda (error)
-                                    (when
-                                        (not
-                                         (seq-find (lambda (s)
-                                                     (string= s (lsp-get error :message)))
-                                                   '("Index was outside the bounds of the array."
-                                                     "No symbol information found"
-                                                     "No ident at this location")))
-                                      (lsp--warn
-                                       "%s"
-                                       (or (lsp--error-string error)
-                                           (format "%s Request has failed" method))))))))
-                  :server-id 'fsautocomplete))
 
 (use-package! vimrc-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
 
-(use-package! tree-sitter
-  :config
-  (global-tree-sitter-mode)
-  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
+;; (use-package! tree-sitter
+;;   :config
+;;   (global-tree-sitter-mode)
+;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
 
 ;;; config.el ends here
