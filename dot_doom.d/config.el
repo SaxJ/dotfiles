@@ -206,16 +206,6 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
-  :config
-  (setq lsp-file-watch-threshold nil
-        lsp-idle-delay 0.9
-        typescript-options '(:importModuleSpecifierPreference "relative"
-                             :includeAutomaticOptionalChainCompletions t)
-        lsp-clients-typescript-init-opts '(:importModuleSpecifierPreference "relative"
-                                           :includeAutomaticOptionalChainCompletions t)
-        lsp-csharp-server-path "/usr/bin/omnisharp"
-        lsp-intelephense-licence-key (get-auth-info "intelephense" "SaxonJ")))
 
 ;; Haskell
 (use-package! shakespeare-mode)
