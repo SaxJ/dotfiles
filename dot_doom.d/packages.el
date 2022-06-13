@@ -31,6 +31,7 @@
 ;;; Code:
 (package! tree-sitter)
 (package! tree-sitter-langs)
+(unpin! lsp-mode lsp-ui)
 
 ;; Tooling
 (package! string-inflection)
