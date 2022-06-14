@@ -206,6 +206,12 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
+;; (use-package! eglot
+;;   :config
+;;   (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
+;;   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
+
 
 ;; Haskell
 (use-package! shakespeare-mode)
