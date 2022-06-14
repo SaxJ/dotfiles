@@ -92,6 +92,7 @@ paru -S --needed \
     networkmanager \
     nmap \
     nnn \
+    nodejs \
     nodejs-intelephense \
     npm \
     nvm \
