@@ -211,6 +211,9 @@
 ;;   (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
 ;;   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
 ;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
+(use-package! lsp-mode
+  :config
+  (setq lsp-csharp-server-path "/usr/bin/omnisharp"))
 
 
 ;; Haskell
