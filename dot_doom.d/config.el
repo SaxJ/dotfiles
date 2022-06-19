@@ -431,9 +431,4 @@ topic N and modify that instead."
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
 
-;; (use-package! tree-sitter
-;;   :config
-;;   (global-tree-sitter-mode)
-;;   (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode))
-
 ;;; config.el ends here

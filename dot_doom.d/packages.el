@@ -28,10 +28,6 @@
                                         ;(package! another-package
                                         ;  :recipe (:host github :repo "username/repo"))
 
-;;; Code:
-(package! tree-sitter)
-(package! tree-sitter-langs)
-
 ;; Tooling
 (package! string-inflection)
 (package! slack)
@@ -40,9 +36,7 @@
   :recipe (:host github :repo "nyyManni/ejira"))
 (package! multi-vterm)
 (package! org-ros)
-(package! howm)
 (package! spotify)
-(package! system-packages)
 
 ;; Filetypes
 (package! submode
