@@ -70,7 +70,7 @@ return require("packer").startup(function(use)
                 gr = "lua require('goto-preview').goto_preview_references()",
                 gi = "lua require('goto-preview').goto_preview_implementation()",
                 on_attach = function(client, bufnr)
-                    require('nvim-lsp-setup.utils').format_on_save(client)
+                    --require('nvim-lsp-setup.utils').format_on_save(client)
                 end,
                 capabilities = vim.lsp.protocol.make_client_capabilities(),
                 servers = {
