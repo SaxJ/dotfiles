@@ -6,6 +6,7 @@
 ;;; Code:
 ;; Performance
 (setq read-process-output-max (* 1024 1024)) ;; 1mb
+(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
 
 (setq doom-localleader-key ",")
 
@@ -213,7 +214,8 @@
 ;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
 (use-package! lsp-mode
   :config
-  (setq lsp-csharp-server-path "/usr/bin/omnisharp"))
+  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
+        lsp-file-watch-threshold nil))
 
 
 ;; Haskell
@@ -430,5 +432,7 @@ topic N and modify that instead."
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
+
+(add-hook! 'prog-mode-hook 'nyan-mode)
 
 ;;; config.el ends here

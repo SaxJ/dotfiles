@@ -28,6 +28,9 @@
                                         ;(package! another-package
                                         ;  :recipe (:host github :repo "username/repo"))
 
+;; Dumb Things
+(package! nyan-mode)
+
 ;; Tooling
 (package! string-inflection)
 (package! slack)
