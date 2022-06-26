@@ -127,8 +127,10 @@ paru -S --needed \
     php7-sqlite \
     picom \
     pkgconf \
+    sxhkd \
     postman-bin \
     procs \
+    polybar \
     psysh \
     pulseaudio-alsa \
     pyright \
