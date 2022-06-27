@@ -334,6 +334,9 @@
 (map! :leader
       :desc "Previous terminal"
       :n "Tp" #'multi-vterm-prev)
+(map! :leader
+      :desc "Gnus"
+      :n "om" #'gnus)
 
 (after! forge
   (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
@@ -432,7 +435,4 @@ topic N and modify that instead."
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
-
-(add-hook! 'prog-mode-hook 'nyan-mode)
-
 ;;; config.el ends here

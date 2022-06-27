@@ -136,7 +136,7 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        ;;(go +lsp)         ; the hipster dialect
-       (graphql +lsp)
+       (graphql)
        (haskell +lsp)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
@@ -177,7 +177,7 @@
        ;;zig
 
        :email
-       (mu4e +gmail)
+       ;;(mu4e +gmail)
        ;;(notmuch +afew)
        ;;(wanderlust +gmail)
 

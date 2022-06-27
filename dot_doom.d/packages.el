@@ -29,7 +29,8 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;; Dumb Things
-(package! nyan-mode)
+;; Email
+(package! bbdb)
 
 ;; Tooling
 (package! string-inflection)
