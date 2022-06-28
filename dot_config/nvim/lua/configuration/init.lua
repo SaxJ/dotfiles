@@ -127,7 +127,8 @@ require('neorg').setup {
         },
         ["core.norg.journal"] = {
             config = {
-                stategy = 'flat',
+                strategy = 'flat',
+                journal_folder = '~/Documents/wiki/journal',
             },
         },
         ["core.norg.manoeuvre"] = {},
