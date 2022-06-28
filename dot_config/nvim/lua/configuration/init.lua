@@ -128,7 +128,8 @@ require('neorg').setup {
         ["core.norg.journal"] = {
             config = {
                 strategy = 'flat',
-                journal_folder = '~/Documents/wiki/journal',
+                workspace = '~/Documents/wiki',
+                journal_folder = 'journal',
             },
         },
         ["core.norg.manoeuvre"] = {},
