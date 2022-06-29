@@ -53,7 +53,7 @@ return require("packer").startup(function(use)
 
 	-- LSP
 	use({
-		"tami5/lspsaga.nvim",
+		"glepnir/lspsaga.nvim",
 		config = function()
 			local saga = require("lspsaga")
 			saga.setup({})
@@ -71,6 +71,10 @@ return require("packer").startup(function(use)
 				default_mappings = true,
 				gr = "lua require('goto-preview').goto_preview_references()",
 				gi = "lua require('goto-preview').goto_preview_implementation()",
+				K = ":Lspsaga hover_doc<CR>",
+				gs = ":Lspsaga signature_help<CR>",
+				gd = ":Lspsaga preview_definition<CR>",
+				gD = ":Lspsaga lsp_finder<CR>",
 				on_attach = function(client, bufnr)
 					--require('nvim-lsp-setup.utils').format_on_save(client)
 				end,
@@ -239,22 +243,6 @@ return require("packer").startup(function(use)
 	})
 
 	-- Version Control
-	use({
-		"TimUntersberger/neogit",
-		requires = {
-			"nvim-lua/plenary.nvim",
-			"sindrets/diffview.nvim",
-		},
-		config = function()
-			require("neogit").setup({
-				integrations = {
-					diffview = true,
-				},
-				disable_commit_confirmation = true,
-				disable_insert_on_commit = false,
-			})
-		end,
-	})
 	use({
 		"ldelossa/gh.nvim",
 		requires = { { "ldelossa/litee.nvim" } },

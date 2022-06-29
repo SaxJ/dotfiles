@@ -25,6 +25,12 @@ local tasks = Terminal:new({
 	close_on_exit = true,
 	direction = "float",
 })
+local lazygit = Terminal:new({
+	cmd = "lg",
+	hidden = true,
+	close_on_exit = true,
+	direction = "float",
+})
 local floatingTerminal = Terminal:new({
 	direction = "float",
 })
@@ -71,7 +77,12 @@ wk.register({
 	g = {
 		name = "git",
 		b = { ":GitBlameToggle<cr>", "Blame" },
-		g = { ":Neogit<CR>", "Open Git" },
+		g = {
+			function()
+				lazygit:toggle()
+			end,
+			"Open Git",
+		},
 		h = {
 			name = "+Github",
 			c = {
@@ -147,6 +158,12 @@ wk.register({
 		name = "remote",
 		u = { ":call SyncUploadFile()<cr>", "Upload" },
 		d = { ":call SyncDownloadFile()<cr>", "Download" },
+	},
+	c = {
+		name = "code",
+		a = { ":Lspsaga code_action<CR>", "Action" },
+		r = { "Lspsaga rename<CR>", "Rename" },
+		d = { "Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
 	},
 }, { prefix = "<leader>" })
 
