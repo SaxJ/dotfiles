@@ -26,7 +26,7 @@ local tasks = Terminal:new({
 	direction = "float",
 })
 local lazygit = Terminal:new({
-	cmd = "lg",
+	cmd = "lazygit",
 	hidden = true,
 	close_on_exit = true,
 	direction = "float",

@@ -56,7 +56,7 @@ return require("packer").startup(function(use)
 		"glepnir/lspsaga.nvim",
 		config = function()
 			local saga = require("lspsaga")
-			saga.setup({})
+			saga.init_lsp_saga()
 		end,
 	})
 	use({
