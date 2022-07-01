@@ -106,7 +106,6 @@ paru -S --needed \
     pass-import \
     pass-otp \
     pdfjs \
-    pgformatter \
     php \
     php-gd \
     php-imagick \
