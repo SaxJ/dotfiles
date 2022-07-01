@@ -84,7 +84,6 @@ paru -S --needed \
     librewolf-bin \
     make \
     man-db \
-    mu \
     neovim \
     nerd-fonts-complete \
     net-tools \
