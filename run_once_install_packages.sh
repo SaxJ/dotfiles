@@ -11,7 +11,7 @@ else
 fi
 
 printf "\n\nInstall my dev packages..."
-paru -S --needed \
+paru -fm -S --needed \
     aerc \
     alacritty \
     aspell \
@@ -49,7 +49,7 @@ paru -S --needed \
     elm-bin \
     elm-format-bin \
     elm-language-server \
-    emacs-nativecomp \
+    emacs-git \
     fd \
     firefox-developer-edition \
     fzf \
