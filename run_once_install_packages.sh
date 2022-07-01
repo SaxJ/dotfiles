@@ -11,7 +11,7 @@ else
 fi
 
 printf "\n\nInstall my dev packages..."
-paru -fm -S --needed \
+paru --fm -S --needed \
     aerc \
     alacritty \
     aspell \
