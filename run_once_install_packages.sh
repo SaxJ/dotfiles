@@ -167,7 +167,6 @@ paru -S --needed \
     visual-studio-code-bin \
     wget \
     which \
-    wtfutil \
     xclip \
     xdg-utils \
     xdotool \
