@@ -107,6 +107,11 @@ return require("packer").startup(function(use)
 						},
 					},
 					elmls = { { cmd = "elm-language-server" } },
+					hls = {
+						cmd = {
+							"haskell-language-server-wrapper",
+						},
+					},
 				},
 			})
 		end,

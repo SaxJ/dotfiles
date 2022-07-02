@@ -126,7 +126,6 @@ paru -S --needed \
     picom \
     pkgconf \
     sxhkd \
-    postman-bin \
     procs \
     polybar \
     psysh \
