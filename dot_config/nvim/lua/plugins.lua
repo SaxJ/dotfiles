@@ -69,7 +69,7 @@ return require("packer").startup(function(use)
 		config = function()
 			require("nvim-lsp-setup").setup({
 				default_mappings = true,
-				gr = "lua require('goto-preview').goto_preview_references()",
+				gr = ":Lspsaga signature_help<CR>",
 				gi = "lua require('goto-preview').goto_preview_implementation()",
 				K = ":Lspsaga hover_doc<CR>",
 				gs = ":Lspsaga signature_help<CR>",

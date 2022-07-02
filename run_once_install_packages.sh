@@ -49,7 +49,7 @@ paru -S --needed \
     elm-bin \
     elm-format-bin \
     elm-language-server \
-    emacs-nativecomp \
+    emacs-git \
     fd \
     firefox-developer-edition \
     fzf \
@@ -84,7 +84,6 @@ paru -S --needed \
     librewolf-bin \
     make \
     man-db \
-    mu \
     neovim \
     nerd-fonts-complete \
     net-tools \
@@ -106,7 +105,6 @@ paru -S --needed \
     pass-import \
     pass-otp \
     pdfjs \
-    pgformatter \
     php \
     php-gd \
     php-imagick \
@@ -167,7 +165,6 @@ paru -S --needed \
     visual-studio-code-bin \
     wget \
     which \
-    wtfutil \
     xclip \
     xdg-utils \
     xdotool \
