@@ -151,6 +151,7 @@ paru -S --needed \
     sshfs \
     starship \
     stylelint \
+    syncthing-gtk-python3 \
     task \
     taskwarrior-tui \
     terraform \
