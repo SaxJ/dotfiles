@@ -49,7 +49,7 @@ paru -S --needed \
     elm-bin \
     elm-format-bin \
     elm-language-server \
-    emacs-git \
+    #emacs-git \
     fd \
     firefox-developer-edition \
     fzf \
