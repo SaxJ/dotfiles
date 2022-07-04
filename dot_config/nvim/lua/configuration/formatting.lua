@@ -19,6 +19,13 @@ local uncrust = function()
 		stdin = true,
 	}
 end
+local elmFormat = function()
+	return {
+		exe = "elm-format",
+		args = { "--stdin" },
+		stdin = true,
+	}
+end
 local brittany = function()
 	return {
 		exe = "brittany",
@@ -28,6 +35,7 @@ end
 require("formatter").setup({
 	logging = false,
 	filetype = {
+		elm = { elmFormat },
 		php = { phpcsfixer },
 		javascript = { prettier },
 		json = { prettier },
