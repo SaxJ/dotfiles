@@ -94,7 +94,7 @@ wk.register({
 		t = { ":ToggleTerm size=30<cr>", "Terminal" },
 	},
 	T = {
-		name = "tasks",
+		name = "+tasks",
 		t = {
 			function()
 				tasks:toggle()
@@ -103,19 +103,10 @@ wk.register({
 		},
 	},
 	n = {
-		name = "notes",
-		v = { ":Neorg gtd views<cr>", "View Notes" },
-		c = { ":Neorg gtd capture<cr>", "Create Note" },
-		j = {
-			name = "journal",
-			t = { ":Neorg journal today<cr>", "Today" },
-			y = { ":Neorg journal yesterday<cr>", "Yesterday" },
-			n = { ":Neorg journal tomorrow<cr>", "Tomorrow" },
-			c = { ":Neorg journal ", "Create" },
-		},
+		name = "+notes",
 	},
 	r = {
-		name = "remote",
+		name = "+remote",
 		u = { ":call SyncUploadFile()<cr>", "Upload" },
 		d = { ":call SyncDownloadFile()<cr>", "Download" },
 	},

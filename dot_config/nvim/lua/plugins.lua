@@ -154,10 +154,12 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = function()
+			require("orgmode").setup_ts_grammar()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = "all",
 				highlight = {
 					enable = true,
+					additional_vim_regex_highlighting = { "org" },
 				},
 				indent = {
 					enable = true,
@@ -166,6 +168,17 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("nvim-treesitter/nvim-treesitter-context")
+
+	-- Notes
+	use({
+		"nvim-orgmode/orgmode",
+		config = function()
+			require("orgmode").setup({
+				org_agenda_files = { "~/Documents/wiki/**/*.org" },
+				org_default_notes_file = "~/Documents/wiki/notes.org",
+			})
+		end,
+	})
 
 	-- Debuggers
 	use("mfussenegger/nvim-dap")
@@ -215,10 +228,6 @@ return require("packer").startup(function(use)
 			})
 			vim.cmd("autocmd FileType http nmap <buffer> <Enter> <Plug>RestNvim")
 		end,
-	})
-	use({
-		"nvim-neorg/neorg",
-		requires = "nvim-lua/plenary.nvim",
 	})
 	use("eshion/vim-sync")
 	use({

@@ -107,36 +107,3 @@ require("telescope").setup({
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("harpoon")
 require("telescope").load_extension("projects")
-
--- Neorg
-require("neorg").setup({
-	load = {
-		["core.defaults"] = {},
-		["core.norg.dirman"] = {
-			config = {
-				workspaces = {
-					work = "~/Documents/wiki",
-				},
-			},
-		},
-		["core.norg.concealer"] = {},
-		["core.norg.completion"] = {
-			config = {
-				engine = "nvim-cmp",
-			},
-		},
-		["core.norg.journal"] = {
-			config = {
-				strategy = "flat",
-				workspace = "work",
-				journal_folder = "journal",
-			},
-		},
-		["core.norg.manoeuvre"] = {},
-		["core.gtd.base"] = {
-			config = {
-				workspace = "work",
-			},
-		},
-	},
-})
