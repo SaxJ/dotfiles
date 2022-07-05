@@ -172,6 +172,7 @@ return require("packer").startup(function(use)
 	use({
 		"nvim-orgmode/orgmode",
 		config = function()
+			require("orgmode").setup_ts_grammar()
 			require("orgmode").setup({
 				org_agenda_files = { "~/Documents/wiki/**/*.org" },
 				org_default_notes_file = "~/Documents/wiki/notes.org",
