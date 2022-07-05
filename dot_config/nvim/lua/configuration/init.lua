@@ -37,14 +37,6 @@ parser_configs.http = {
 		branch = "main",
 	},
 }
-parser_configs.org = {
-	install_info = {
-		url = "https://github.com/milisims/tree-sitter-org",
-		files = { "src/parser.c", "src/scanner.cc" },
-		revision = "f110024d539e676f25b72b7c80b0fd43c34264ef",
-		filetype = "org",
-	},
-}
 
 local actions = require("telescope.actions")
 require("telescope").setup({
