@@ -77,11 +77,12 @@ wk.register({
 	g = {
 		name = "git",
 		b = { ":GitBlameToggle<cr>", "Blame" },
-		g = {
+		g = { ":Neogit<cr>", "Magit" },
+		l = {
 			function()
 				lazygit:toggle()
 			end,
-			"Open Git",
+			"Lazy Git",
 		},
 		f = {
 			name = "+forge",
