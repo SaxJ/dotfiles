@@ -154,7 +154,6 @@ return require("packer").startup(function(use)
 		"nvim-treesitter/nvim-treesitter",
 		run = ":TSUpdate",
 		config = function()
-			require("orgmode").setup_ts_grammar()
 			require("nvim-treesitter.configs").setup({
 				ensure_installed = "all",
 				highlight = {
