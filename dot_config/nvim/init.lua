@@ -59,7 +59,12 @@ wk.register({
 		["-"] = { ":Neotree<CR>", "Files" },
 	},
 	["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
-	["<tab>"] = { "<cmd>Telescope buffers<cr>", "Buffers" },
+	["<tab>"] = {
+		name = "+workspaces",
+		t = { ":GonvimSidebarToggle<cr>", "Workspaces" },
+		n = { ":GonvimWorkspaceNew<cr>", "New" },
+		["<tab>"] = { ":GonvimWorkspaceSwitch ", "Switch" },
+	},
 	f = {
 		name = "files",
 		f = { "<cmd>Telescope find_files<cr>", "Files" },

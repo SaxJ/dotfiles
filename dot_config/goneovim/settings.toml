@@ -145,11 +145,11 @@ Clipboard = true
 
 [Cursor]
 ## Specifies whether the smooth cursor feature is enabled or disabled by a boolean value.
-# SmoothMove = false
+SmoothMove = false
 
 ## Specifies the duration of the animation at the smooth cursor. Default is 55ms.
 ## Note that Goneovim uses the specified value as a base value and makes slight adjustments depending on the distance.
-# Duration = ５５
+# Duration = 22
 
 
 
@@ -171,9 +171,8 @@ Clipboard = true
 
 ## The statusline configuration below relates to the display of Goenovim's own external status lines.
 ## If you want to use neovim's status line plugin, you should disable its display.
-# [Statusline]
-## Whether or not to display the external status line
-# Visible = false
+[Statusline]
+Visible = false
 
 ## Options: "textLabel" / "icon" / "background" / "none"
 # ModeIndicatorType = "textLabel"
@@ -248,13 +247,13 @@ Clipboard = true
 
 [SideBar]
 ## Specifies whether to show the external sidebar or not.
-# Visible = false
+Visible = true
 
 ## Specify the sidebar width
-# Width = 200
+Width = 100
 
 ## Specify whether or not to draw a shadow under the sidebar.
-# DropShadow = false
+DropShadow = false
 
 ## Specify the color to use when selecting items in the sidebar or palette in hexadecimal format
 # AccentColor = "#5596ea"
