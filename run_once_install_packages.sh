@@ -59,6 +59,7 @@ paru -S --needed \
     gnome-keyring \
     go-jira \
     gobuster-bin \
+    gopass \
     gotop-bin \
     gparted \
     graphviz \
@@ -124,9 +125,7 @@ paru -S --needed \
     php7-sqlite \
     picom \
     pkgconf \
-    sxhkd \
     procs \
-    polybar \
     psysh \
     pulseaudio-alsa \
     pyright \
