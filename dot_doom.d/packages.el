@@ -53,6 +53,7 @@
   :recipe (:host github :repo "nxtr/apex-mode"))
 (package! shakespeare-mode)
 (package! vimrc-mode)
+(package! caddyfile-mode)
 
 ;; For Fun
 ;;(package! doom-snippets :ignore t)
