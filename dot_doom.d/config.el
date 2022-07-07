@@ -241,9 +241,8 @@
 ;; ###############################
 (use-package slack
   :commands (slack-start)
-  :init
-  (setq slack-buffer-emojify t) ;; if you want to enable emoji, default nil
-  (setq slack-prefer-current-team t)
+  :init (setq slack-buffer-emojify t
+              slack-prefer-current-team t)
   :config
   (slack-register-team
    :name "Healthengine"
@@ -254,7 +253,7 @@
    :cookie (auth-source-pick-first-password
             :host "healthengine.slack.com"
             :user "saxon.jensen@healthengine.com.au^cookie")
-   :subscribed-channels '(dev-core blob blob-core)
+   :subscribed-channels '(shrek2)
    :full-and-display-names t)
 
   (evil-define-key 'normal slack-info-mode-map
