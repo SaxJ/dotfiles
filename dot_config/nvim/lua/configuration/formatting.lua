@@ -44,7 +44,7 @@ require("formatter").setup({
 		css = { prettier },
 		scss = { prettier },
 		cs = { uncrust },
-		haskell = { brittany },
+		--haskell = { brittany },
 		rust = {
 			-- Rustfmt
 			function()

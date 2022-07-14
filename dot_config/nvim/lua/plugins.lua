@@ -20,7 +20,15 @@ return require("packer").startup(function(use)
 	use({
 		"echasnovski/mini.nvim",
 		config = function()
-			require("mini.surround").setup({})
+			require("mini.surround").setup({
+				add = "Sa", -- Add surrounding in Normal and Visual modes
+				delete = "Sd", -- Delete surrounding
+				find = "Sf", -- Find surrounding (to the right)
+				find_left = "SF", -- Find surrounding (to the left)
+				highlight = "Sh", -- Highlight surrounding
+				replace = "Sr", -- Replace surrounding
+				update_n_lines = "Sn", -- Update `n_lines`
+			})
 			require("mini.comment").setup({})
 			require("mini.cursorword").setup({})
 			require("mini.indentscope").setup({})
@@ -107,9 +115,19 @@ return require("packer").startup(function(use)
 						},
 					},
 					elmls = { { cmd = "elm-language-server" } },
-					hls = {
-						cmd = {
-							"haskell-language-server-wrapper",
+					hls = { { cmd = "haskell-language-server-wrapper" } },
+					pylsp = {
+						{
+							cmd = "pylsp",
+							filetypes = "python",
+							root_dir = function(fname)
+								local root_files = {
+									"requirements.txt",
+								}
+								return require("lspconfig.util").root_pattern(unpack(root_files))(fname)
+									or require("lspconfig.util").find_git_ancestor(fname)
+							end,
+							single_file_support = true,
 						},
 					},
 				},
