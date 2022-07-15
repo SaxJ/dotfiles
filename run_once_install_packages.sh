@@ -1,5 +1,5 @@
 #!/bin/sh
-echo "Install paru..."
+printf "Install paru...\n"
 if ! command -v paru &> /dev/null
 then
     sudo pacman -S --needed base-devel
@@ -7,7 +7,7 @@ then
     cd ~/.paru || return
     makepkg -si
 else
-    echo "  Already installed"
+    printf "  Already installed\n"
 fi
 
 printf "\n\nInstall my dev packages..."
