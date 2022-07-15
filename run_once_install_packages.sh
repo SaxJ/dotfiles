@@ -42,7 +42,6 @@ paru -S --needed \
     dotnet-runtime \
     dotnet-sdk \
     dropbox \
-    dtach \
     dunst \
     editorconfig-core-c \
     efibootmgr \
@@ -81,7 +80,6 @@ paru -S --needed \
     keynav \
     kitty \
     lazygit \
-    librewolf-bin \
     make \
     man-db \
     neovim \
