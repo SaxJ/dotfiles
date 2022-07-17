@@ -31,6 +31,11 @@
 ;; Dumb Things
 ;; Email
 (package! bbdb)
+(package! dianyou)
+(package! gnus-select-account)
+(package! gnus-summary-ext)
+(package! gnus-desktop-notify)
+(package! all-the-icons-gnus)
 
 ;; Tooling
 (package! string-inflection)
