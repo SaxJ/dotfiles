@@ -44,6 +44,7 @@
                       ;; press 'E' to expire email
                       (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
                       (nnmail-expiry-wait 90)))
+(add-to-list 'gnus-secondary-select-methods '(nnhackernews ""))
 
 (setq gnus-thread-sort-functions
       '(gnus-thread-sort-by-most-recent-date

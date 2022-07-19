@@ -36,6 +36,7 @@
 (package! gnus-summary-ext)
 (package! gnus-desktop-notify)
 (package! all-the-icons-gnus)
+(package! nnhackernews)
 
 ;; Tooling
 (package! string-inflection)

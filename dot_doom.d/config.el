@@ -337,6 +337,33 @@
       :desc "Gnus"
       :n "om" #'gnus)
 
+(defun gnus-daemon-scan ()
+  (let ((win (current-window-configuration))
+        (gnus-read-active-file 'some)
+        (gnus-check-new-newsgroups nil)
+        (gnus-verbose 2)
+        (gnus-verbose-backends 5)
+        (level 3)
+        )
+    (while-no-input
+      (unwind-protect
+          (save-window-excursion
+            (when (gnus-alive-p)
+              (with-current-buffer gnus-group-buffer
+                (gnus-group-get-new-news))))
+        (set-window-configuration win)))))
+
+(setq gnus-demon-timestep 10)
+(gnus-demon-add-handler 'gnus-daemon-scan 12 1)
+
+(use-package! all-the-icons-gnus
+  :config
+  (all-the-icons-gnus-setup))
+
+(use-package! gnus-select-account
+  :config
+  (gnus-select-account-enable))
+
 (after! forge
   (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
 
