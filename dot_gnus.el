@@ -44,6 +44,14 @@
                       ;; press 'E' to expire email
                       (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
                       (nnmail-expiry-wait 90)))
+(add-to-list 'gnus-secondary-select-methods
+             '(nnimap "mailbox"
+                      (nnimap-address "imap.mailbox.org")
+                      (nnimap-server-port 993)
+                      (nnimap-stream ssl)
+                      (nnir-search-engine imap)
+                      (nnmail-expiry-target 'delete)
+                      (nnmail-expiry-wait 90)))
 (add-to-list 'gnus-secondary-select-methods '(nnhackernews ""))
 
 (setq gnus-thread-sort-functions
@@ -66,7 +74,8 @@
 ;; BBDB: Address list
 (require 'bbdb)
 (bbdb-initialize 'message 'gnus 'sendmail)
-(add-hook 'gnus-startup-hook 'bbdb-insinuate-gnus) ;; TODO
+(add-hook 'gnus-startup-hook 'bbdb-insinuate-mail)
+
 (setq bbdb/mail-auto-create-p t
       bbdb/news-auto-create-p t)
 
@@ -127,6 +136,7 @@
      ;; "Gnus" is the root folder, and there are three mail accounts, "misc", "hotmail", "gmail"
      (setq gnus-topic-topology '(("Gnus" visible)
                                  (("misc" visible))
+                                 (("mailbox" visible nil nil))
                                  (("gmail-work" visible nil nil))
                                  (("gmail-personal" visible nil nil))))
 
@@ -141,11 +151,14 @@
                                "nnimap+gmail-work:[Gmail]/Sent Mail"
                                "nnimap+gmail-work:[Gmail]/Trash"
                                "nnimap+gmail-work:Drafts")
+                              ("mailbox"
+                               "nnimap+mailbox:INBOX"
+                               "nnimap+mailbox:Sent")
                               ("misc" ; the key of topic
                                "nndraft:drafts")
                               ("Gnus")))
 
-     ;; see latest 200 mails in topic hen press Enter on any group
+     ;; see latest 200 mails in topic then press Enter on any group
      (gnus-topic-set-parameters "gmail-work" '((display . 200)))))
 (provide 'gnus)
 ;;; gnus.el ends here
