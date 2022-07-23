@@ -201,6 +201,13 @@ return require("packer").startup(function(use)
 
 	-- General code plugins
 	use({
+		"danymat/neogen",
+		config = function()
+			require("neogen").setup({})
+		end,
+		requires = "nvim-treesitter/nvim-treesitter",
+	})
+	use({
 		"kevinhwang91/nvim-ufo",
 		requires = "kevinhwang91/promise-async",
 		config = function()

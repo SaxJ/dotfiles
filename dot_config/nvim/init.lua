@@ -121,6 +121,7 @@ wk.register({
 		a = { ":Lspsaga code_action<CR>", "Action" },
 		r = { ":Lspsaga rename<CR>", "Rename" },
 		d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
+		g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
 	},
 	["."] = { ":Neotree current %:p:h:h %:p<CR>", "Files" },
 }, { prefix = "<leader>" })
