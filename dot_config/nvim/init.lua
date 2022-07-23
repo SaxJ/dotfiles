@@ -82,7 +82,7 @@ wk.register({
 	g = {
 		name = "git",
 		b = { ":GitBlameToggle<cr>", "Blame" },
-		g = { ":Neogit<cr>", "Magit" },
+		g = { ":Neogit<CR>", "Neogit" },
 		l = {
 			function()
 				lazygit:toggle()
@@ -97,7 +97,7 @@ wk.register({
 	},
 	t = {
 		name = "toggle",
-		t = { ":ToggleTerm size=30<cr>", "Terminal" },
+		t = { ":ToggleTerm size=15<cr>", "Terminal" },
 	},
 	T = {
 		name = "+tasks",
