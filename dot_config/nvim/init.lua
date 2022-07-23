@@ -131,6 +131,13 @@ mapx.nnoremap("<C-e>", ":Neotree current %:p:h:h %:p<CR>")
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
+-- LSP
+mapx.nnoremap("gd", "lua vim.lsp.buf.definition()")
+mapx.nnoremap("gD", "lua vim.lsp.buf.references()")
+mapx.nnoremap("gI", "lua vim.lsp.buf.implementation()")
+mapx.nnoremap("gt", "lua vim.lsp.buf.type_definition()")
+mapx.nnoremap("K", "lua vim.lsp.buf.hover()")
+
 -- FileType Specific --
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
