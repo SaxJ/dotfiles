@@ -201,6 +201,12 @@ return require("packer").startup(function(use)
 
 	-- General code plugins
 	use({
+		"ray-x/lsp_signature.nvim",
+		config = function()
+			require("lsp_signature").setup({})
+		end,
+	})
+	use({
 		"danymat/neogen",
 		config = function()
 			require("neogen").setup({})
