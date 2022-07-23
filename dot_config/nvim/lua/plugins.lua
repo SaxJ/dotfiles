@@ -36,7 +36,7 @@ return require("packer").startup(function(use)
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
 
-	-- Extra Languages
+	-- Languages
 	use("amadeus/vim-mjml")
 	use("rescript-lang/vim-rescript")
 	use({
