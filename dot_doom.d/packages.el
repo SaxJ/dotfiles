@@ -47,6 +47,7 @@
 (package! multi-vterm)
 (package! org-ros)
 (package! spotify)
+(package! dirvish)
 
 ;; Filetypes
 (package! submode
