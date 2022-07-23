@@ -20,15 +20,6 @@ return require("packer").startup(function(use)
 	use({
 		"echasnovski/mini.nvim",
 		config = function()
-			require("mini.surround").setup({
-				add = "Sa", -- Add surrounding in Normal and Visual modes
-				delete = "Sd", -- Delete surrounding
-				find = "Sf", -- Find surrounding (to the right)
-				find_left = "SF", -- Find surrounding (to the left)
-				highlight = "Sh", -- Highlight surrounding
-				replace = "Sr", -- Replace surrounding
-				update_n_lines = "Sn", -- Update `n_lines`
-			})
 			require("mini.comment").setup({})
 			require("mini.cursorword").setup({})
 			require("mini.indentscope").setup({})
