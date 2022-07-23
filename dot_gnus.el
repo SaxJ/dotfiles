@@ -152,10 +152,8 @@
                                "nnimap+gmail-work:[Gmail]/Trash"
                                "nnimap+gmail-work:Drafts")
                               ("mailbox"
-                               "nnimap+mailbox:INBOX"
+                               "nnimap+mailbox:Inbox"
                                "nnimap+mailbox:Sent")
-                              ("misc" ; the key of topic
-                               "nndraft:drafts")
                               ("Gnus")))
 
      ;; see latest 200 mails in topic then press Enter on any group
