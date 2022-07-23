@@ -35,6 +35,14 @@ return require("packer").startup(function(use)
 		"hoob3rt/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
 	})
+	use({
+		"gelguy/wilder.nvim",
+		config = function()
+			local wilder = require("wilder")
+			wilder.setup({ modes = { ":", "/", "?" } })
+		end,
+	})
+	use("onsails/lspkind.nvim")
 
 	-- Languages
 	use("amadeus/vim-mjml")
