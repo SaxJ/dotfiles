@@ -192,6 +192,12 @@ return require("packer").startup(function(use)
 	})
 
 	-- General code plugins
+	use({
+		"kylechui/nvim-surround",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	})
 	use("gpanders/editorconfig.nvim")
 	use("mhartington/formatter.nvim")
 	use({
