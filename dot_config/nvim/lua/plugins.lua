@@ -43,6 +43,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("onsails/lspkind.nvim")
+	use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
 	-- Languages
 	use("amadeus/vim-mjml")
