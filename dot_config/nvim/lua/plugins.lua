@@ -120,7 +120,10 @@ return require("packer").startup(function(use)
 				on_attach = function(client, bufnr)
 					--require('nvim-lsp-setup.utils').format_on_save(client)
 				end,
-				default_mappings = false,
+				default_mappings = true,
+				mappings = {
+					gD = "lua vim.lsp.buf.references()",
+				},
 				capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 				servers = {
 					sumneko_lua = require("lua-dev").setup(),
