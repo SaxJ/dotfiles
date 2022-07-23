@@ -133,7 +133,7 @@ mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
 -- LSP
 mapx.nnoremap("gd", "lua vim.lsp.buf.definition()")
-mapx.nnoremap("gD", "lua vim.lsp.buf.references()")
+mapx.nnoremap("gD", "<cmd>lua vim.lsp.buf.references()<Cr>", "silent", "LSP: Goto references")
 mapx.nnoremap("gI", "lua vim.lsp.buf.implementation()")
 mapx.nnoremap("gt", "lua vim.lsp.buf.type_definition()")
 mapx.nnoremap("K", "lua vim.lsp.buf.hover()")
@@ -142,6 +142,3 @@ mapx.nnoremap("K", "lua vim.lsp.buf.hover()")
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
 mapx.nmap("<localleader>d", ":put =strftime('%m/%d/%y')<cr>", "silent", { ft = "norg" })
-
--- autorun
-vim.cmd([[silent! NeorgStart silent=true]])
