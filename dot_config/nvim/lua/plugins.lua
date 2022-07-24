@@ -290,6 +290,19 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+	use({
+		"akinsho/org-bullets.nvim",
+		config = function()
+			require("org-bullets").setup()
+		end,
+	})
+	use({
+		"lukas-reineke/headlines.nvim",
+		config = function()
+			require("headlines").setup()
+		end,
+	})
+	use({ "dhruvasagar/vim-table-mode" })
 
 	-- Debuggers
 	use("mfussenegger/nvim-dap")
