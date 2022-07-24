@@ -509,6 +509,7 @@ return require("packer").startup(function(use)
 			neogit.setup({
 				disable_signs = false,
 				disable_hint = false,
+				disable_insert_on_commit = false,
 				disable_context_highlighting = false,
 				disable_commit_confirmation = true,
 				auto_refresh = true,
