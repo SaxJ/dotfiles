@@ -279,12 +279,18 @@ return require("packer").startup(function(use)
 			require("orgmode").setup({
 				org_agenda_files = { "~/Documents/wiki/**/*.org" },
 				org_default_notes_file = "~/Documents/wiki/notes.org",
-				org_todo_keywords = { "TODO", "PROG", "BLOCKED", "|", "DONE" },
+				org_todo_keywords = { "TODO(t)", "PROG", "BLOCKED", "|", "DONE" },
 				org_capture_templates = {
 					t = {
 						description = "Todo",
 						template = "* TODO [#%^{A|B|C}] %? %t",
 						target = "~/Documents/wiki/todo.org",
+					},
+				},
+				mappings = {
+					org = {
+						org_todo = "<localleader>t",
+						org_priority = "<localleader>p",
 					},
 				},
 			})
