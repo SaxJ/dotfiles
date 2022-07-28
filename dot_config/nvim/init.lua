@@ -80,15 +80,10 @@ wk.register({
 		m = { ":Telescope harpoon marks<cr>", "Marks" },
 	},
 	g = {
-		name = "git",
+		name = "+git",
 		b = { ":GitBlameToggle<cr>", "Blame" },
-		g = { ":Neogit<CR>", "Neogit" },
-		l = {
-			function()
-				lazygit:toggle()
-			end,
-			"Lazy Git",
-		},
+		B = { ":GitBlameToggle<cr>", "Blame" },
+		g = { ":LazyGit<CR>", "Git" },
 		f = {
 			name = "+forge",
 			s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
