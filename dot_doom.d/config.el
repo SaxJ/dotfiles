@@ -5,8 +5,7 @@
 
 ;;; Code:
 ;; Performance
-(setq read-process-output-max (* 1024 1024)) ;; 1mb
-(add-to-list 'load-path "/usr/share/emacs/site-lisp/mu4e")
+(setq read-process-output-max 1000000000)
 
 (setq doom-localleader-key ",")
 
@@ -84,7 +83,7 @@
 ;; change `org-directory'. It must be set before org loads!
 (setq org-directory "~/Documents/wiki"
       org-roam-directory "~/Documents/wiki/pages"
-      org-agenda-files '("~/Documents/wiki/pages" "~/Documents/wiki/journals")
+      org-agenda-files '("~/Documents/wiki/pages" "~/Documents/wiki/journals" "~/Documents/wiki")
       rmh-elfeed-org-files '("~/Documents/wiki/pages/elfeed.org")
 
       ;; Journal config
@@ -166,7 +165,19 @@
                                  ("IDEA" :foreground "#9C27B0")
                                  ("DONE" :foreground "white")
                                  ("KILL" . +org-todo-cancel))
-        org-log-done "time"))
+        org-log-done "time"
+        org-capture-templates '(("t" "Personal todo" entry (file +org-capture-todo-file) "* TODO [#%^{A|B|C}] %? %t")
+                               ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
+                               ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file) "* %U %?\n%i\n%a" :prepend t)
+                               ("p" "Templates for projects")
+                               ("pt" "Project-local todo" entry (file+headline +org-capture-project-todo-file "Inbox") "* TODO %?\n%i\n%a" :prepend t)
+                               ("pn" "Project-local notes" entry (file+headline +org-capture-project-notes-file "Inbox") "* %U %?\n%i\n%a" :prepend t)
+                               ("pc" "Project-local changelog" entry (file+headline +org-capture-project-changelog-file "Unreleased") "* %U %?\n%i\n%a" :prepend t)
+                               ("o" "Centralized templates for projects")
+                               ("ot" "Project todo" entry #'+org-capture-central-project-todo-file "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
+                               ("on" "Project notes" entry #'+org-capture-central-project-notes-file "* %U %?\n %i\n %a" :heading "Notes" :prepend t)
+                               ("oc" "Project changelog" entry #'+org-capture-central-project-changelog-file "* %U %?\n %i\n %a" :heading "Changelog" :prepend t))
+        ))
 
 
 ;; ###############################
