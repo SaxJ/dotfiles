@@ -316,13 +316,8 @@ alias composer7="php7 /usr/bin/composer"
 
 alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 
-# I don't need this anymore?
-#. ~/.nix-profile/etc/profile.d/nix.sh
-
 eval "$(direnv hook bash)"
-eval "$(jira --completion-script-bash)"
 eval "$(zoxide init bash)"
-export JIRA_PROJECT=blob
 
 function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
@@ -333,8 +328,6 @@ alias lg="lazygit"
 
 
 [ -z "$NVM_DIR" ] && export NVM_DIR="$HOME/.nvm"
-source /usr/share/nvm/nvm.sh
 source /usr/share/nvm/bash_completion
-source /usr/share/nvm/install-nvm-exec
 
 [ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
