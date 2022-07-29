@@ -1,4 +1,9 @@
 #!/bin/sh
+. /etc/os-release
+if [ "$NAME" = "Void" ]; then
+	exit
+fi
+
 printf "Install paru...\n"
 if ! command -v paru &> /dev/null
 then
