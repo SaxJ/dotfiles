@@ -46,7 +46,6 @@ return require("packer").startup(function(use)
 
     -- Languages
     use("amadeus/vim-mjml")
-    use("rescript-lang/vim-rescript")
     use({
         "folke/todo-comments.nvim",
         requires = "nvim-lua/plenary.nvim",
