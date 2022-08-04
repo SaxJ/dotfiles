@@ -1,5 +1,4 @@
 require("configuration/debugger")
-require("configuration/lsp")
 require("lualine").setup({
     options = {
         theme = "auto",
