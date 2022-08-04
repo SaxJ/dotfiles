@@ -319,12 +319,6 @@ return require("packer").startup(function(use)
             require("which-key").setup()
         end,
     })
-    use({
-        "glacambre/firenvim",
-        run = function()
-            vim.fn["firenvim#install"](0)
-        end,
-    })
     use("jghauser/mkdir.nvim")
 
     -- Code navigation
