@@ -125,6 +125,7 @@ paru -S --needed \
     php7-pgsql \
     php7-phpdbg \
     php7-sodium \
+    nitrogen \
     php7-sqlite \
     picom \
     pkgconf \
