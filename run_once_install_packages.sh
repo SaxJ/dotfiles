@@ -17,6 +17,7 @@ fi
 
 printf "\n\nInstall my dev packages..."
 paru -S --needed \
+    polybar \
     aerc \
     alacritty \
     aspell \
