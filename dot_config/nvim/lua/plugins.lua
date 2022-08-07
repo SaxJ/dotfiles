@@ -27,12 +27,13 @@ return require("packer").startup(function(use)
             require("mini.pairs").setup({})
         end,
     })
-    use("folke/lua-dev.nvim")
+    use('folke/lua-dev.nvim')
+    use('arkav/lualine-lsp-progress')
 
     -- Appearance
     use("folke/tokyonight.nvim")
     use({
-        "hoob3rt/lualine.nvim",
+        'nvim-lualine/lualine.nvim',
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
     })
     use({
