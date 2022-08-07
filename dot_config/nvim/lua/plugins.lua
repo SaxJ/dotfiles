@@ -59,7 +59,12 @@ return require("packer").startup(function(use)
     use("norcalli/nvim-colorizer.lua")
 
     -- LSP
-    use("onsails/lspkind.nvim")
+    use({
+        "onsails/lspkind.nvim",
+        config = function ()
+            require('lspkind').init({})
+        end
+    })
     use({
         "RishabhRD/nvim-lsputils",
         requires = "RishabhRD/popfix",
