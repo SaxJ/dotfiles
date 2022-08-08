@@ -18,6 +18,15 @@ local formatting_options = {
     }
 }
 
-vim.api.nvim_create_autocmd({'BufWritePost'}, {pattern = {"*"}, command = "FormatWrite"})
+-- Format on save
+vim.api.nvim_exec(
+	[[
+augroup FormatAutogroup
+  autocmd!
+  autocmd BufWritePost *.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf FormatWrite
+augroup END
+]],
+	true
+)
 
 return formatting_options
