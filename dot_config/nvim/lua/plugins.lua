@@ -72,74 +72,27 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({
-		"RishabhRD/nvim-lsputils",
-		requires = "RishabhRD/popfix",
+		"hrsh7th/nvim-cmp",
+		requires = {
+			{ "hrsh7th/nvim-cmp" },
+			{ "hrsh7th/cmp-buffer" },
+			{ "hrsh7th/cmp-path" },
+			{ "saadparwaiz1/cmp_luasnip" },
+			{ "hrsh7th/cmp-nvim-lsp" },
+			{ "hrsh7th/cmp-nvim-lua" },
+			{ "L3MON4D3/LuaSnip" },
+		},
 		config = function()
-			if vim.fn.has("nvim-0.5.1") == 1 then
-				vim.lsp.handlers["textDocument/codeAction"] = require("lsputil.codeAction").code_action_handler
-				vim.lsp.handlers["textDocument/references"] = require("lsputil.locations").references_handler
-				vim.lsp.handlers["textDocument/definition"] = require("lsputil.locations").definition_handler
-				vim.lsp.handlers["textDocument/declaration"] = require("lsputil.locations").declaration_handler
-				vim.lsp.handlers["textDocument/typeDefinition"] = require("lsputil.locations").typeDefinition_handler
-				vim.lsp.handlers["textDocument/implementation"] = require("lsputil.locations").implementation_handler
-				vim.lsp.handlers["textDocument/documentSymbol"] = require("lsputil.symbols").document_handler
-				vim.lsp.handlers["workspace/symbol"] = require("lsputil.symbols").workspace_handler
-			else
-				local bufnr = vim.api.nvim_buf_get_number(0)
-
-				vim.lsp.handlers["textDocument/codeAction"] = function(_, _, actions)
-					require("lsputil.codeAction").code_action_handler(nil, actions, nil, nil, nil)
-				end
-
-				vim.lsp.handlers["textDocument/references"] = function(_, _, result)
-					require("lsputil.locations").references_handler(nil, result, { bufnr = bufnr }, nil)
-				end
-
-				vim.lsp.handlers["textDocument/definition"] = function(_, method, result)
-					require("lsputil.locations").definition_handler(
-						nil,
-						result,
-						{ bufnr = bufnr, method = method },
-						nil
-					)
-				end
-
-				vim.lsp.handlers["textDocument/declaration"] = function(_, method, result)
-					require("lsputil.locations").declaration_handler(
-						nil,
-						result,
-						{ bufnr = bufnr, method = method },
-						nil
-					)
-				end
-
-				vim.lsp.handlers["textDocument/typeDefinition"] = function(_, method, result)
-					require("lsputil.locations").typeDefinition_handler(
-						nil,
-						result,
-						{ bufnr = bufnr, method = method },
-						nil
-					)
-				end
-
-				vim.lsp.handlers["textDocument/implementation"] = function(_, method, result)
-					require("lsputil.locations").implementation_handler(
-						nil,
-						result,
-						{ bufnr = bufnr, method = method },
-						nil
-					)
-				end
-
-				vim.lsp.handlers["textDocument/documentSymbol"] = function(_, _, result, _, bufn)
-					require("lsputil.symbols").document_handler(nil, result, { bufnr = bufn }, nil)
-				end
-
-				vim.lsp.handlers["textDocument/symbol"] = function(_, _, result, _, bufn)
-					require("lsputil.symbols").workspace_handler(nil, result, { bufnr = bufn }, nil)
-				end
-			end
+			require("configuration/completion")
 		end,
+	})
+	use({
+		"junnplus/lsp-setup.nvim",
+		requires = {
+			"neovim/nvim-lspconfig",
+			"williamboman/mason.nvim",
+			"williamboman/mason-lspconfig.nvim",
+		},
 	})
 	use({
 		"glepnir/lspsaga.nvim",
@@ -148,48 +101,29 @@ return require("packer").startup(function(use)
 			saga.init_lsp_saga()
 		end,
 	})
-	use({
-		"VonHeikemen/lsp-zero.nvim",
-		requires = {
-			-- LSP Support
-			{ "neovim/nvim-lspconfig" },
-			{ "williamboman/nvim-lsp-installer" },
-
-			-- Autocompletion
-			{ "hrsh7th/nvim-cmp" },
-			{ "hrsh7th/cmp-buffer" },
-			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
-			{ "hrsh7th/cmp-nvim-lsp" },
-			{ "hrsh7th/cmp-nvim-lua" },
-
-			-- Snippets
-			{ "L3MON4D3/LuaSnip" },
-			{ "rafamadriz/friendly-snippets" },
-		},
-		config = function()
-			local lsp = require("lsp-zero")
-			lsp.preset("recommended")
-			lsp.configure("sumneko_lua", require("lua-dev").setup())
-			lsp.configure("tsserver", {
-				init_options = {
-					preferences = {
-						importModuleSpecifierPreference = "relative",
-					},
-				},
-			})
-			lsp.configure("intelephense", {
-				init_options = {
-					licenceKey = "/home/saxonj/intelephense/licence.txt",
-				},
-			})
-			lsp.configure("jsonls", {
-				schemas = require("schemastore").json.schemas(),
-				validate = { enable = true },
-			})
-			lsp.setup()
-		end,
-	})
+	-- 	config = function()
+	-- 		local lsp = require("lsp-zero")
+	-- 		lsp.preset("recommended")
+	-- 		lsp.configure("sumneko_lua", require("lua-dev").setup())
+	-- 		lsp.configure("tsserver", {
+	-- 			init_options = {
+	-- 				preferences = {
+	-- 					importModuleSpecifierPreference = "relative",
+	-- 				},
+	-- 			},
+	-- 		})
+	-- 		lsp.configure("intelephense", {
+	-- 			init_options = {
+	-- 				licenceKey = "/home/saxonj/intelephense/licence.txt",
+	-- 			},
+	-- 		})
+	-- 		lsp.configure("jsonls", {
+	-- 			schemas = require("schemastore").json.schemas(),
+	-- 			validate = { enable = true },
+	-- 		})
+	-- 		lsp.setup()
+	-- 	end,
+	-- })
 	use({
 		"rmagatti/goto-preview",
 		config = function()
