@@ -23,8 +23,7 @@ local formatting_options = {
 vim.cmd([[
 augroup FormatAutogroup
   autocmd!
-  autocmd User FormatterPre lua print "This will print before formatting"
-  autocmd User FormatterPost lua print "This will print after formatting"
+  autocmd BufWritePost * FormatWrite
 augroup END
 ]])
 
