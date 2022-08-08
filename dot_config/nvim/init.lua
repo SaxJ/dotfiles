@@ -61,9 +61,7 @@ wk.register({
 	["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
 	["<tab>"] = {
 		name = "+workspaces",
-		t = { ":GonvimSidebarToggle<cr>", "Workspaces" },
-		n = { ":GonvimWorkspaceNew<cr>", "New" },
-		["<tab>"] = { ":GonvimWorkspaceSwitch ", "Switch" },
+		n = { ":tabnew<cr>", "New" },
 	},
 	f = {
 		name = "files",
