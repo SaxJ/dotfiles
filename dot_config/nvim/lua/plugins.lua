@@ -147,6 +147,22 @@ return require("packer").startup(function(use)
             local lsp = require("lsp-zero")
             lsp.preset('recommended')
             lsp.configure('sumneko_lua', require('lua-dev').setup())
+            lsp.configure('tsserver', {
+                init_options = {
+                    preferences = {
+                        importModuleSpecifierPreference = 'relative'
+                    }
+                }
+            })
+            lsp.configure('intelephense', {
+                init_options = {
+                    licenceKey = "/home/saxonj/intelephense/licence.txt",
+                }
+            })
+            lsp.configure('jsonls', {
+                schemas = require("schemastore").json.schemas(),
+                validate = { enable = true },
+            })
             lsp.setup()
         end,
     })
