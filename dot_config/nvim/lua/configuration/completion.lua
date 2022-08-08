@@ -29,3 +29,4 @@ cmp.setup({
 		end
 	end, { "i", "s" }),
 })
+print("fucked")
