@@ -77,10 +77,10 @@ return require("packer").startup(function(use)
 			{ "hrsh7th/nvim-cmp" },
 			{ "hrsh7th/cmp-buffer" },
 			{ "hrsh7th/cmp-path" },
-			{ "saadparwaiz1/cmp_luasnip" },
 			{ "hrsh7th/cmp-nvim-lsp" },
 			{ "hrsh7th/cmp-nvim-lua" },
 			{ "L3MON4D3/LuaSnip" },
+			{ "saadparwaiz1/cmp_luasnip" },
 		},
 		config = function()
 			require("configuration/completion")
@@ -93,6 +93,54 @@ return require("packer").startup(function(use)
 			"williamboman/mason.nvim",
 			"williamboman/mason-lspconfig.nvim",
 		},
+		config = function()
+			require("lsp-setup").setup({
+				servers = {
+					sumneko_lua = require("lua-dev").setup(),
+					tsserver = {
+						init_options = {
+							preferences = {
+								importModuleSpecifierPreference = "relative",
+							},
+						},
+					},
+					intelephense = {
+						init_options = {
+							licenceKey = "/home/saxonj/intelephense/licence.txt",
+						},
+					},
+					jsonls = {
+						schemas = require("schemastore").json.schemas(),
+						validate = { enable = true },
+					},
+					omnisharp = {
+						cmd = {
+							"/usr/bin/omnisharp",
+							"-lsp",
+							"-v",
+							"--hostPID",
+							tostring(vim.fn.getpid()),
+						},
+					},
+					elmls = { { cmd = "elm-language-server" } },
+					hls = { { cmd = "haskell-language-server-wrapper" } },
+					pylsp = {
+						{
+							cmd = "pylsp",
+							filetypes = "python",
+							root_dir = function(fname)
+								local root_files = {
+									"requirements.txt",
+								}
+								return require("lspconfig.util").root_pattern(unpack(root_files))(fname)
+									or require("lspconfig.util").find_git_ancestor(fname)
+							end,
+							single_file_support = true,
+						},
+					},
+				},
+			})
+		end,
 	})
 	use({
 		"glepnir/lspsaga.nvim",
@@ -101,29 +149,6 @@ return require("packer").startup(function(use)
 			saga.init_lsp_saga()
 		end,
 	})
-	-- 	config = function()
-	-- 		local lsp = require("lsp-zero")
-	-- 		lsp.preset("recommended")
-	-- 		lsp.configure("sumneko_lua", require("lua-dev").setup())
-	-- 		lsp.configure("tsserver", {
-	-- 			init_options = {
-	-- 				preferences = {
-	-- 					importModuleSpecifierPreference = "relative",
-	-- 				},
-	-- 			},
-	-- 		})
-	-- 		lsp.configure("intelephense", {
-	-- 			init_options = {
-	-- 				licenceKey = "/home/saxonj/intelephense/licence.txt",
-	-- 			},
-	-- 		})
-	-- 		lsp.configure("jsonls", {
-	-- 			schemas = require("schemastore").json.schemas(),
-	-- 			validate = { enable = true },
-	-- 		})
-	-- 		lsp.setup()
-	-- 	end,
-	-- })
 	use({
 		"rmagatti/goto-preview",
 		config = function()
