@@ -17,15 +17,6 @@ fi
 
 printf "\n\nInstall my dev packages..."
 paru -S --needed \
-    polybar \
-    sbcl \
-    gopls \
-    gomodifytags \
-    gotests \
-    gore \
-    marked \
-    rust-analyzer \
-    go-tools \
     aerc \
     alacritty \
     aspell \
@@ -71,8 +62,13 @@ paru -S --needed \
     glslang \
     gnome-keyring \
     go-jira \
+    go-tools \
     gobuster-bin \
+    gomodifytags \
     gopass \
+    gopls \
+    gore \
+    gotests \
     gotop-bin \
     gparted \
     graphviz \
@@ -96,15 +92,17 @@ paru -S --needed \
     lazygit \
     make \
     man-db \
+    marked \
     neovim \
     nerd-fonts-complete \
     net-tools \
     netstandard-targeting-pack-bin \
     networkmanager \
+    nitrogen \
     nmap \
     nnn \
-    nodejs-lts-gallium \
     nodejs-intelephense \
+    nodejs-lts-gallium \
     npm \
     nvm \
     nyxt \
@@ -134,10 +132,10 @@ paru -S --needed \
     php7-pgsql \
     php7-phpdbg \
     php7-sodium \
-    nitrogen \
     php7-sqlite \
     picom \
     pkgconf \
+    polybar \
     procs \
     psysh \
     pulseaudio-alsa \
@@ -153,6 +151,8 @@ paru -S --needed \
     roswell \
     rsync \
     rust \
+    rust-analyzer \
+    sbcl \
     scrot \
     sed \
     sfdx-cli \
