@@ -18,6 +18,14 @@ fi
 printf "\n\nInstall my dev packages..."
 paru -S --needed \
     polybar \
+    sbcl \
+    gopls \
+    gomodifytags \
+    gotests \
+    gore \
+    marked \
+    rust-analyzer \
+    go-tools \
     aerc \
     alacritty \
     aspell \
