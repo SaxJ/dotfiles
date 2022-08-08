@@ -23,6 +23,7 @@ fi
 
 alias hx="helix"
 alias cd="z"
+alias icat="kitty +kitten icat"
 
 # GO
 export GOPATH=$HOME/go_packages
