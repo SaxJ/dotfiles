@@ -46,7 +46,12 @@ return require("packer").startup(function(use)
     use({ "kevinhwang91/nvim-bqf", ft = "qf" })
 
     -- Languages
-    use('mhartington/formatter.nvim')
+    use({
+        'mhartington/formatter.nvim' , 
+        config = function ()
+            require('formatter').setup(require('formatter_config'))
+        end
+    })
     use("amadeus/vim-mjml")
     use({
         "folke/todo-comments.nvim",
