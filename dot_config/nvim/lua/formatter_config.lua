@@ -1,23 +1,14 @@
-local prettier = function()
-	return {
-		exe = "prettier",
-		args = { "--stdin-filepath", vim.api.nvim_buf_get_name(0) },
-		stdin = true,
-	}
-end
 local phpcsfixer = function()
 	return {
 		exe = "php-cs-fixer",
-		args = { "fix", vim.api.nvim_buf_get_name(0) },
+		args = { "fix" },
 		stdin = false,
 	}
 end
-
-local uncrust = function()
+local csharpier = function()
 	return {
-		exe = "uncrustify",
-		args = { "-l", "CS" },
-		stdin = true,
+		exe = "dotnet-csharpier",
+		stdin = false,
 	}
 end
 local elmFormat = function()
@@ -38,37 +29,22 @@ require("formatter").setup({
 	filetype = {
 		elm = { elmFormat },
 		php = { phpcsfixer },
-		javascript = { prettier },
-		json = { prettier },
-		typescript = { prettier },
-		typescriptreact = { prettier },
-		css = { prettier },
-		scss = { prettier },
-		--cs = { uncrust },
-		--haskell = { brittany },
+		javascript = { require("formatter.filetypes.javascript").prettier },
+		json = { require("formatter.filetypes.json").prettier },
+		typescript = { require("formatter.filetypes.typescript").prettier },
+		typescriptreact = { require("formatter.filetypes.typescriptreact").prettier },
+		css = { require("formatter.filetypes.css").prettier },
+		scss = { require("formatter.filetypes.css").prettier },
+		cs = { require("formatter.filetypes.cs").dotnetformat },
+		haskell = { brittany },
 		rust = {
-			-- Rustfmt
-			function()
-				return {
-					exe = "rustfmt",
-					args = { "--emit=stdout" },
-					stdin = true,
-				}
-			end,
+			require("formatter.filetypes.rust").rustfmt,
 		},
 		lua = {
 			require("formatter.filetypes.lua").stylua,
 		},
 		cpp = {
-			-- clang-format
-			function()
-				return {
-					exe = "clang-format",
-					args = { "--assume-filename", vim.api.nvim_buf_get_name(0) },
-					stdin = true,
-					cwd = vim.fn.expand("%:p:h"), -- Run clang-format in cwd of the file.
-				}
-			end,
+			require("formatter.filetypes.cpp").clangformat,
 		},
 		tf = {
 			function()
@@ -87,7 +63,7 @@ vim.api.nvim_exec(
 	[[
 augroup FormatAutogroup
   autocmd!
-  autocmd BufWritePost *.tsx,*.ts,*.jsx,*.rs,*.lua,*.cpp,*.tf FormatWrite
+  autocmd BufWritePost * FormatWrite
 augroup END
 ]],
 	true
