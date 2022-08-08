@@ -12,6 +12,7 @@ local phpcsfixer = function()
 		stdin = false,
 	}
 end
+
 local uncrust = function()
 	return {
 		exe = "uncrustify",
@@ -56,13 +57,7 @@ require("formatter").setup({
 			end,
 		},
 		lua = {
-			function()
-				return {
-					exe = "stylua",
-					args = { "--indent-width", 2, "-" },
-					stdin = true,
-				}
-			end,
+			require("formatter.filetypes.lua").stylua,
 		},
 		cpp = {
 			-- clang-format
