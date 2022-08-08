@@ -49,7 +49,7 @@ return require("packer").startup(function(use)
     use({
         'mhartington/formatter.nvim' , 
         config = function ()
-            require('formatter').setup(require('formatter_config'))
+            require('formatter_config')
         end
     })
     use("amadeus/vim-mjml")
