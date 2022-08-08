@@ -96,19 +96,39 @@ return require("packer").startup(function(use)
 				end
 
 				vim.lsp.handlers["textDocument/definition"] = function(_, method, result)
-					require("lsputil.locations").definition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+					require("lsputil.locations").definition_handler(
+						nil,
+						result,
+						{ bufnr = bufnr, method = method },
+						nil
+					)
 				end
 
 				vim.lsp.handlers["textDocument/declaration"] = function(_, method, result)
-					require("lsputil.locations").declaration_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+					require("lsputil.locations").declaration_handler(
+						nil,
+						result,
+						{ bufnr = bufnr, method = method },
+						nil
+					)
 				end
 
 				vim.lsp.handlers["textDocument/typeDefinition"] = function(_, method, result)
-					require("lsputil.locations").typeDefinition_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+					require("lsputil.locations").typeDefinition_handler(
+						nil,
+						result,
+						{ bufnr = bufnr, method = method },
+						nil
+					)
 				end
 
 				vim.lsp.handlers["textDocument/implementation"] = function(_, method, result)
-					require("lsputil.locations").implementation_handler(nil, result, { bufnr = bufnr, method = method }, nil)
+					require("lsputil.locations").implementation_handler(
+						nil,
+						result,
+						{ bufnr = bufnr, method = method },
+						nil
+					)
 				end
 
 				vim.lsp.handlers["textDocument/documentSymbol"] = function(_, _, result, _, bufn)
