@@ -6,8 +6,8 @@ local opt = vim.opt
 vim.g.mapleader = [[ ]]
 vim.g.maplocalleader = [[,]]
 
-cmd "syntax enable"
-cmd "filetype plugin indent on"
+cmd("syntax enable")
+cmd("filetype plugin indent on")
 
 opt.autoindent = true
 opt.breakindent = true
@@ -33,10 +33,12 @@ opt.termguicolors = true
 opt.timeoutlen = 500
 opt.updatetime = 300
 
+vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
+
 vim.cmd("colorscheme tokyonight")
 vim.g.tokyonight_style = "night"
 
-cmd [[
+cmd([[
 set expandtab smarttab shiftround autoindent smartindent smartcase nowrap
 set path+=**
 set wildmode=longest,list,full
@@ -48,4 +50,4 @@ set wildignore+=**/node_modules/*
 set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
-]]
+]])

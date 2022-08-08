@@ -12,111 +12,112 @@ local mapx = require("mapx")
 
 local Terminal = require("toggleterm.terminal").Terminal
 local mail = Terminal:new({
-	dir = "~",
-	cmd = "aerc",
-	hidden = true,
-	close_on_exit = true,
-	direction = "float",
+    dir = "~",
+    cmd = "aerc",
+    hidden = true,
+    close_on_exit = true,
+    direction = "float",
 })
 local tasks = Terminal:new({
-	dir = "~",
-	cmd = "taskwarrior-tui",
-	hidden = true,
-	close_on_exit = true,
-	direction = "float",
+    dir = "~",
+    cmd = "taskwarrior-tui",
+    hidden = true,
+    close_on_exit = true,
+    direction = "float",
 })
 local lazygit = Terminal:new({
-	cmd = "lazygit",
-	hidden = true,
-	close_on_exit = true,
-	direction = "float",
+    cmd = "lazygit",
+    hidden = true,
+    close_on_exit = true,
+    direction = "float",
 })
 local floatingTerminal = Terminal:new({
-	direction = "float",
+    direction = "float",
 })
 
 -- Misc
 wk.register({
-	b = {
-		name = "buffers",
-		b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-	},
-	o = {
-		name = "open",
-		m = {
-			function()
-				mail:toggle()
-			end,
-			"Mail",
-		},
-		T = {
-			function()
-				floatingTerminal:toggle()
-			end,
-			"Terminal",
-		},
-		p = { "NvimTreeToggle<cr>", "Project" },
-		["-"] = { ":Neotree<CR>", "Files" },
-	},
-	["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
-	["<tab>"] = {
-		name = "+workspaces",
-		n = { ":tabnew<cr>", "New" },
-	},
-	f = {
-		name = "files",
-		f = { "<cmd>Telescope find_files<cr>", "Files" },
-	},
-	s = {
-		name = "search",
-		p = { "<cmd>Telescope live_grep<cr>", "Search Project" },
-	},
-	p = {
-		name = "project",
-		p = { ":Telescope projects<cr>", "Projects" },
-		t = { ":TodoTelescope<cr>", "Todos" },
-		m = { ":Telescope harpoon marks<cr>", "Marks" },
-	},
-	g = {
-		name = "+git",
-		b = { ":GitBlameToggle<cr>", "Blame" },
-		B = { ":GitBlameToggle<cr>", "Blame" },
-		g = { ":LazyGit<CR>", "Git" },
-		f = {
-			name = "+forge",
-			s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
-			l = { ":Octo pr list<CR>", "List" },
-		},
-	},
-	t = {
-		name = "toggle",
-		t = { ":ToggleTerm size=15<cr>", "Terminal" },
-	},
-	T = {
-		name = "+tasks",
-		t = {
-			function()
-				tasks:toggle()
-			end,
-			"Taskwarrior",
-		},
-	},
-	n = {
-		name = "+notes",
-	},
-	r = {
-		name = "+remote",
-		u = { ":call SyncUploadFile()<cr>", "Upload" },
-		d = { ":call SyncDownloadFile()<cr>", "Download" },
-	},
-	c = {
-		name = "code",
-		a = { ":Lspsaga code_action<CR>", "Action" },
-		r = { ":Lspsaga rename<CR>", "Rename" },
-		d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
-		g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
-	},
-	["."] = { ":Neotree current %:p:h:h %:p<CR>", "Files" },
+    b = {
+        name = "buffers",
+        b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+    },
+    o = {
+        name = "open",
+        m = {
+            function()
+                mail:toggle()
+            end,
+            "Mail",
+        },
+        T = {
+            function()
+                floatingTerminal:toggle()
+            end,
+            "Terminal",
+        },
+        p = { "NvimTreeToggle<cr>", "Project" },
+        ["-"] = { ":Neotree<CR>", "Files" },
+    },
+    ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
+    ["<tab>"] = {
+        name = "+workspaces",
+        n = { ":tabnew<cr>", "New" },
+        ["<tab>"] = { ":SearchSession<cr>", "Sessions" },
+    },
+    f = {
+        name = "files",
+        f = { "<cmd>Telescope find_files<cr>", "Files" },
+    },
+    s = {
+        name = "search",
+        p = { "<cmd>Telescope live_grep<cr>", "Search Project" },
+    },
+    p = {
+        name = "project",
+        p = { ":Telescope projects<cr>", "Projects" },
+        t = { ":TodoTelescope<cr>", "Todos" },
+        m = { ":Telescope harpoon marks<cr>", "Marks" },
+    },
+    g = {
+        name = "+git",
+        b = { ":GitBlameToggle<cr>", "Blame" },
+        B = { ":GitBlameToggle<cr>", "Blame" },
+        g = { ":LazyGit<CR>", "Git" },
+        f = {
+            name = "+forge",
+            s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
+            l = { ":Octo pr list<CR>", "List" },
+        },
+    },
+    t = {
+        name = "toggle",
+        t = { ":ToggleTerm size=15<cr>", "Terminal" },
+    },
+    T = {
+        name = "+tasks",
+        t = {
+            function()
+                tasks:toggle()
+            end,
+            "Taskwarrior",
+        },
+    },
+    n = {
+        name = "+notes",
+    },
+    r = {
+        name = "+remote",
+        u = { ":call SyncUploadFile()<cr>", "Upload" },
+        d = { ":call SyncDownloadFile()<cr>", "Download" },
+    },
+    c = {
+        name = "code",
+        a = { ":Lspsaga code_action<CR>", "Action" },
+        r = { ":Lspsaga rename<CR>", "Rename" },
+        d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
+        g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
+    },
+    ["."] = { ":Neotree current %:p:h:h %:p<CR>", "Files" },
 }, { prefix = "<leader>" })
 
 -- misc

@@ -7,7 +7,13 @@ require("lualine").setup({
     sections = {
         lualine_c = {
             { "filename", path = 1 },
-            { 'lsp_progress' },
+            { "lsp_progress" },
+        },
+        lualine_x = {
+            require("auto-session-library").current_session_name,
+            "encoding",
+            "fileformat",
+            "filetype",
         },
     },
 })
@@ -84,3 +90,4 @@ require("telescope").setup({
 require("telescope").load_extension("fzf")
 require("telescope").load_extension("harpoon")
 require("telescope").load_extension("projects")
+require("telescope").load_extension("session-lens")
