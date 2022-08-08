@@ -1,5 +1,3 @@
-local util = require('formatter.util')
-
 local formatting_options = {
     logging = false,
     log_level = vim.log.levels.WARN,
@@ -20,11 +18,6 @@ local formatting_options = {
     }
 }
 
-vim.cmd([[
-augroup FormatAutogroup
-  autocmd!
-  autocmd BufWritePost * FormatWrite
-augroup END
-]])
+vim.api.nvim_create_autocmd({'BufWritePost'}, {pattern = {"*"}, command = "FormatWrite"})
 
 return formatting_options
