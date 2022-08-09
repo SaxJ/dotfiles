@@ -10,7 +10,6 @@ require("lualine").setup({
             { "lsp_progress" },
         },
         lualine_x = {
-            require("auto-session-library").current_session_name,
             "encoding",
             "fileformat",
             "filetype",

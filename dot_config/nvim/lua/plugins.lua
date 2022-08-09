@@ -324,15 +324,6 @@ return require("packer").startup(function(use)
         end,
     })
     use({ "jghauser/mkdir.nvim" })
-    use({
-        "rmagatti/auto-session",
-        config = function()
-            require("auto-session").setup({
-                log_level = "error",
-                auto_session_suppress_dirs = { "~/", "~/Downloads", "/" },
-            })
-        end,
-    })
 
     -- Code navigation
     use({
