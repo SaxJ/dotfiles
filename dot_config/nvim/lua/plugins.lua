@@ -331,15 +331,6 @@ return require("packer").startup(function(use)
         requires = { "nvim-lua/plenary.nvim" },
     })
     use({
-        "rmagatti/session-lens",
-        requires = { "rmagatti/auto-session", "nvim-telescope/telescope.nvim" },
-        config = function()
-            require("session-lens").setup({
-                path_display = { "shorten" },
-            })
-        end,
-    })
-    use({
         "ahmedkhalf/project.nvim",
         config = function()
             require("project_nvim").setup({})
