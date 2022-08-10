@@ -218,19 +218,11 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-;; (use-package! eglot
-;;   :config
-;;   (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
-;;   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
-(use-package! lsp-mode
+(use-package! eglot
   :config
-  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-        lsp-file-watch-threshold nil
-        lsp-clients-typescript-max-ts-server-memory 6000
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-surveys-enabled nil))
+  (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
 
 (use-package! dirvish
   :ensure t
