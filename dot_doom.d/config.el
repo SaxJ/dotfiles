@@ -352,9 +352,6 @@
 (map! :leader
       :desc "Previous terminal"
       :n "Tp" #'multi-vterm-prev)
-(map! :leader
-      :desc "Gnus"
-      :n "om" #'gnus)
 
 (defun gnus-daemon-scan ()
   (let ((win (current-window-configuration))
@@ -434,6 +431,46 @@ topic N and modify that instead."
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
 (setq typescript-indent-level 2)
+
+(setq +mu4e-gmail-accounts '(("saxon.jensen@gmail.com" . "/personal")
+                             ("saxon.jensen@healthengine.com.au" . "/work")
+                             ("speedemon999@gmail.com" . "/gaming")))
+
+(set-email-account! "Work"
+                    '((mu4e-sent-folder . "/work/Sent")
+                      (mu4e-drafts-folder . "/work/Drafts")
+                      (mu4e-trash-folder . "/work/Trash")
+                      (mu4e-refile-folder . "/work/All")
+                      (smtpmail-smtp-user . "saxon.jensen@healthengine.com.au"))
+                    t)
+(set-email-account! "Gaming"
+                    '((mu4e-sent-folder . "/gaming/Sent")
+                      (mu4e-drafts-folder . "/gaming/Drafts")
+                      (mu4e-trash-folder . "/gaming/Trash")
+                      (mu4e-refile-folder . "/gaming/All")
+                      (smtpmail-smtp-user . "speedemon999@gmail.com"))
+                    t)
+(set-email-account! "Mailbox"
+                    '((mu4e-sent-folder . "/mailbox/Sent")
+                      (mu4e-drafts-folder . "/mailbox/Drafts")
+                      (mu4e-trash-folder . "/mailbox/Trash")
+                      (mu4e-refile-folder . "/mailbox/Inbox")
+                      (smtpmail-smtp-user . "saxonj@mailbox.org"))
+                    t)
+(set-email-account! "Dev"
+                    '((mu4e-sent-folder . "/zoho/Sent")
+                      (mu4e-drafts-folder . "/zoho/Drafts")
+                      (mu4e-trash-folder . "/zoho/Trash")
+                      (mu4e-refile-folder . "/zoho/All")
+                      (smtpmail-smtp-user . "saxon@saxonj.dev"))
+                    t)
+(set-email-account! "Personal"
+                    '((mu4e-sent-folder . "/personal/Sent")
+                      (mu4e-drafts-folder . "/personal/Drafts")
+                      (mu4e-trash-folder . "/personal/Trash")
+                      (mu4e-refile-folder . "/personal/All")
+                      (smtpmail-smtp-user . "saxon.jensen@gmail.com"))
+                    t)
 
 
 (use-package! vimrc-mode
