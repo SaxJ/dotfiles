@@ -1,11 +1,13 @@
 #!/bin/sh
 . /etc/os-release
 if [ "$NAME" = "Void" ]; then
-	exit
+    exit
 fi
 
 printf "Install paru...\n"
-if ! command -v paru &> /dev/null
+if
+    ! command -v paru &
+    >/dev/null
 then
     sudo pacman -S --needed base-devel
     git clone https://aur.archlinux.org/paru.git ~/.paru
@@ -54,7 +56,7 @@ paru -S --needed \
     elm-format-bin \
     elm-language-server \
     fd \
-    firefox-developer-edition \
+    firefox \
     fzf \
     ghcup-hs-bin \
     git \
@@ -105,7 +107,6 @@ paru -S --needed \
     nodejs-lts-gallium \
     npm \
     nvm \
-    nyxt \
     omnisharp-roslyn \
     openvpn3 \
     p7zip \
