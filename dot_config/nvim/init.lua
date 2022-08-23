@@ -82,7 +82,7 @@ wk.register({
         name = "+git",
         b = { ":GitBlameToggle<cr>", "Blame" },
         B = { ":GitBlameToggle<cr>", "Blame" },
-        g = { ":LazyGit<CR>", "Git" },
+        g = { ":Neogit<CR>", "Git" },
         f = {
             name = "+forge",
             s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },

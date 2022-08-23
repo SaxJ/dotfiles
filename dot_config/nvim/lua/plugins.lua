@@ -227,7 +227,7 @@ return require("packer").startup(function(use)
             })
         end,
     })
-    use("nvim-treesitter/nvim-treesitter-context")
+    --use("nvim-treesitter/nvim-treesitter-context")
 
     -- Notes
     use({
@@ -478,7 +478,19 @@ return require("packer").startup(function(use)
     })
 
     -- Version Control
-    use({ "kdheepak/lazygit.nvim" })
+    use({
+        "TimUntersberger/neogit",
+        requires = { "nvim-lua/plenary.nvim", "sindrets/diffview.nvim" },
+        config = function()
+            require("neogit").setup({
+                disable_commit_confirmation = true,
+                use_magit_keybindings = true,
+                integrations = {
+                    diffview = true,
+                },
+            })
+        end,
+    })
     use({
         "f-person/git-blame.nvim",
         config = function()
