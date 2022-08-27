@@ -20,6 +20,7 @@ fi
 printf "\n\nInstall my dev packages..."
 paru -S --needed \
     aerc \
+    ngrok \
     alacritty \
     aspell \
     aspell-en \
