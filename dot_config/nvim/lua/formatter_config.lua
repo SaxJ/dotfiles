@@ -28,7 +28,7 @@ require("formatter").setup({
     logging = false,
     filetype = {
         elm = { elmFormat },
-        php = { phpcsfixer },
+        --php = { phpcsfixer },
         javascript = { require("formatter.filetypes.javascript").prettier },
         json = { require("formatter.filetypes.json").prettier },
         typescript = { require("formatter.filetypes.typescript").prettier },
