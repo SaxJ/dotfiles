@@ -38,8 +38,13 @@ local floatingTerminal = Terminal:new({
 -- Misc
 wk.register({
     b = {
-        name = "buffers",
+        name = "+buffers",
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+        y = { ":%y+<CR>", "Yank" },
+    },
+    i = {
+        name = "+insert",
+        u = { ":r! uuidgen<CR>", "UUID" },
     },
     o = {
         name = "open",

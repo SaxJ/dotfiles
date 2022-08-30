@@ -358,6 +358,9 @@
 (map! :leader
       :desc "Previous terminal"
       :n "Tp" #'multi-vterm-prev)
+(map! :leader
+      :desc "Insert UUID"
+      :n "iu" #'uuidgen)
 (map! :after mu4e
       :map mu4e-headers-mode-map
       :localleader
