@@ -48,6 +48,7 @@
 (package! org-ros)
 (package! spotify)
 (package! dirvish)
+(package! telega)
 
 ;; Filetypes
 (package! submode
