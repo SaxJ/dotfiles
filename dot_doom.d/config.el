@@ -299,6 +299,12 @@
     ",2" 'slack-message-embed-mention
     ",3" 'slack-message-embed-channel))
 
+(defun mark-many-read (n)
+  "Mark a number of messages read"
+  (interactive "nNumber: ")
+  (let ((x 0)) x)
+  (while (< n)
+    (mu4e-headers-mark-for-read)))
 
 ;; ###############################
 ;; KEYBINDS
@@ -352,6 +358,11 @@
 (map! :leader
       :desc "Previous terminal"
       :n "Tp" #'multi-vterm-prev)
+(map! :after mu4e
+      :map mu4e-headers-mode-map
+      :localleader
+      :desc "Mark many read"
+      :n "mm" #'mark-many-read)
 
 (defun gnus-daemon-scan ()
   (let ((win (current-window-configuration))
