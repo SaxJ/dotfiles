@@ -57,7 +57,7 @@ paru -S --needed \
     elm-format-bin \
     elm-language-server \
     fd \
-    firefox \
+    firefox-developer-edition \
     fzf \
     ghcup-hs-bin \
     git \
