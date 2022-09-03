@@ -25,15 +25,6 @@ local tasks = Terminal:new({
     close_on_exit = true,
     direction = "float",
 })
-local lazygit = Terminal:new({
-    cmd = "lazygit",
-    hidden = true,
-    close_on_exit = true,
-    direction = "float",
-})
-local floatingTerminal = Terminal:new({
-    direction = "float",
-})
 
 -- Misc
 wk.register({
@@ -54,12 +45,7 @@ wk.register({
             end,
             "Mail",
         },
-        T = {
-            function()
-                floatingTerminal:toggle()
-            end,
-            "Terminal",
-        },
+        T = { ":terminal<CR>", "Terminal" },
         p = { "NvimTreeToggle<cr>", "Project" },
         ["-"] = { ":Neotree<CR>", "Files" },
     },
