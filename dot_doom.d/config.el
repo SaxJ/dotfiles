@@ -157,7 +157,7 @@
                                      :recursive t))
         org-export-async-debug t
         org-export-async-init-file (concat doom-private-dir "async-org.el")
-        org-todo-keywords '((sequence "TODO(t!)" "PROG(p!)" "BLOCKED(b!)" "HOLD(h!)" "IDEA(i)" "|" "DONE(d)" "KILL(k)"))
+        org-todo-keywords '((sequence "TODO(t!)" "PROG(p!)" "BLOCKED(b!)" "HOLD(h!)" "REVIEW(r!)" "IDEA(i)" "|" "DONE(d)" "KILL(k)"))
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
                                  ("BLOCKED" :foreground "#F44336")
