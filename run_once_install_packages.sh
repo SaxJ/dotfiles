@@ -75,7 +75,7 @@ paru -S --needed \
     gotop-bin \
     gparted \
     graphviz \
-    helix \
+    helix-git \
     heroku-cli-bin \
     hoogle \
     htop \
@@ -112,7 +112,6 @@ paru -S --needed \
     openvpn3 \
     p7zip \
     pacmanfile \
-    paru-bin \
     pass \
     pass-import \
     pass-otp \
