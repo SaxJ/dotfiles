@@ -486,6 +486,7 @@ return require("packer").startup(function(use)
             require("neogit").setup({
                 disable_commit_confirmation = true,
                 use_magit_keybindings = true,
+                disable_insert_on_commit = false,
                 integrations = {
                     diffview = true,
                 },
