@@ -230,6 +230,7 @@
         lsp-clients-typescript-max-ts-server-memory 6000
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
+        lsp-typescript-preferences-import-module-specifier "relative"
         lsp-typescript-surveys-enabled nil))
 
 (use-package! dirvish
