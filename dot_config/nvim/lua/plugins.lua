@@ -232,6 +232,14 @@ return require("packer").startup(function(use)
 
     -- Notes
     use({
+        "phaazon/mind.nvim",
+        branch = "v2.2",
+        requires = { "nvim-lua/plenary.nvim" },
+        config = function()
+            require("mind").setup()
+        end,
+    })
+    use({
         "nvim-orgmode/orgmode",
         config = function()
             require("orgmode").setup_ts_grammar()
