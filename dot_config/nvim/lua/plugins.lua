@@ -31,7 +31,7 @@ return require("packer").startup(function(use)
     use("arkav/lualine-lsp-progress")
 
     -- Appearance
-    use("folke/tokyonight.nvim")
+    use("rafamadriz/neon")
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },

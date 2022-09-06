@@ -48,6 +48,7 @@ wk.register({
         T = { ":terminal<CR>", "Terminal" },
         p = { "NvimTreeToggle<cr>", "Project" },
         ["-"] = { ":Neotree<CR>", "Files" },
+        n = { ":MindOpenMain<CR>", "Notes" },
     },
     ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
     ["<tab>"] = {
