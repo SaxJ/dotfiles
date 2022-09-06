@@ -1,8 +1,8 @@
 require("configuration/debugger")
 require("lualine").setup({
     options = {
-        theme = "auto",
-        globalstatus = true,
+        theme = "dracula-nvim",
+        globalstatus = false,
     },
     sections = {
         lualine_c = {
