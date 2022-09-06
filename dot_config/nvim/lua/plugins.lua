@@ -22,7 +22,6 @@ return require("packer").startup(function(use)
         config = function()
             require("mini.comment").setup({})
             require("mini.cursorword").setup({})
-            require("mini.indentscope").setup({})
             require("mini.jump").setup({})
             require("mini.pairs").setup({})
         end,
@@ -64,6 +63,15 @@ return require("packer").startup(function(use)
     use("jparise/vim-graphql")
     use("norcalli/nvim-colorizer.lua")
     use("pbrisbin/vim-syntax-shakespeare")
+    use({
+        "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("indent_blankline").setup({
+                show_current_context = true,
+                show_current_context_start = true,
+            })
+        end,
+    })
 
     -- LSP
     use({
