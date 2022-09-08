@@ -8,6 +8,7 @@ vim.g.maplocalleader = [[,]]
 
 cmd("syntax enable")
 cmd("filetype plugin indent on")
+cmd("command! CopyRelPath call setreg('+', expand('%'))")
 
 opt.autoindent = true
 opt.breakindent = true
