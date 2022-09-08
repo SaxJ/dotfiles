@@ -233,11 +233,6 @@
         lsp-typescript-preferences-import-module-specifier "relative"
         lsp-typescript-surveys-enabled nil))
 
-(use-package! dirvish
-  :ensure t
-  :init
-  (dirvish-override-dired-mode))
-
 ;; Haskell
 (use-package! shakespeare-mode)
 
