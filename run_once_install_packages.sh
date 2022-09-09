@@ -75,7 +75,7 @@ paru -S --needed \
     gotop-bin \
     gparted \
     graphviz \
-    helix-git \
+    helix \
     heroku-cli-bin \
     hoogle \
     htop \
