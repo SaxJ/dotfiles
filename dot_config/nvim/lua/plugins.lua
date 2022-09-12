@@ -52,13 +52,6 @@ return require("packer").startup(function(use)
         end,
     })
     use("amadeus/vim-mjml")
-    use({
-        "folke/todo-comments.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = function()
-            require("todo-comments").setup({})
-        end,
-    })
     use("adamclerk/vim-razor")
     use("jparise/vim-graphql")
     use("norcalli/nvim-colorizer.lua")
@@ -275,12 +268,6 @@ return require("packer").startup(function(use)
         "akinsho/org-bullets.nvim",
         config = function()
             require("org-bullets").setup({})
-        end,
-    })
-    use({
-        "lukas-reineke/headlines.nvim",
-        config = function()
-            require("headlines").setup()
         end,
     })
     use({ "dhruvasagar/vim-table-mode" })
@@ -522,13 +509,6 @@ return require("packer").startup(function(use)
         },
         config = function()
             require("gitsigns").setup()
-        end,
-    })
-    use({
-        "ruifm/gitlinker.nvim",
-        requires = "nvim-lua/plenary.nvim",
-        config = function()
-            require("gitlinker").setup()
         end,
     })
 end)
