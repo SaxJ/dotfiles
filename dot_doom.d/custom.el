@@ -4,9 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(safe-local-variable-values
-   '((haskell-process-use-ghci . t)
-     (haskell-indent-spaces . 4)
-     (ssh-deploy-async . 1)
+   '((ssh-deploy-async . 1)
      (ssh-deploy-async . 0)
      (ssh-deploy-on-explicit-save . 0)
      (ssh-deploy-remote-root . "/ssh:ubuntu@minikube:/home/ubuntu/megatron")))
