@@ -24,6 +24,7 @@ fi
 alias hx="helix"
 alias cd="z"
 alias icat="kitty +kitten icat"
+alias ghp="gh pr create -d --fill -w"
 
 # GO
 export GOPATH=$HOME/go_packages
