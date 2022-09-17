@@ -66,7 +66,7 @@ return require("packer").startup(function(use)
     })
 
     -- LSP
-    use("nvim-web-devicons")
+    use("kyazdani42/nvim-web-devicons")
     use({
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
