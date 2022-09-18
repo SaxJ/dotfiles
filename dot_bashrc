@@ -24,7 +24,7 @@ fi
 alias hx="helix"
 alias cd="z"
 alias icat="kitty +kitten icat"
-alias prc="gh pr create -d --fill -w"
+alias prc="gh pr create --fill -w"
 alias prv="gh pr view --web"
 
 # GO
