@@ -284,11 +284,15 @@ return require("packer").startup(function(use)
                             override_file_sorter = true,
                             case_mode = "smart_case",
                         },
+                        file_browser = {
+                            hijack_netrw = true,
+                        },
                     },
                 },
             })
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("projects")
+            require("telescope").load_extension("file_browser")
         end,
     })
 

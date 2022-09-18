@@ -58,7 +58,7 @@ wk.register({
     },
     f = {
         name = "files",
-        f = { "<cmd>Telescope find_files<cr>", "Files" },
+        f = { "<cmd>Telescope file_browser<cr>", "Files" },
     },
     s = {
         name = "search",
@@ -68,6 +68,7 @@ wk.register({
         name = "project",
         p = { ":Telescope projects<cr>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
+        f = { ":Telescope file_browser<CR>", "Project Files" },
     },
     g = {
         name = "+git",
@@ -108,7 +109,7 @@ wk.register({
         d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
         g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
     },
-    ["."] = { ":Neotree current %:p:h:h %:p<CR>", "Files" },
+    ["."] = { ":Telescope file_browser path=%:p:h", "Files" },
 }, { prefix = "<leader>" })
 
 -- misc
