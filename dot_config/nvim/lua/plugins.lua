@@ -34,6 +34,25 @@ return require("packer").startup(function(use)
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "dracula-nvim",
+                    globalstatus = false,
+                },
+                sections = {
+                    lualine_c = {
+                        { "filename", path = 1 },
+                        { "lsp_progress" },
+                    },
+                    lualine_x = {
+                        "encoding",
+                        "fileformat",
+                        "filetype",
+                    },
+                },
+            })
+        end,
     })
     use({
         "gelguy/wilder.nvim",
@@ -53,7 +72,12 @@ return require("packer").startup(function(use)
     use("amadeus/vim-mjml")
     use("adamclerk/vim-razor")
     use("jparise/vim-graphql")
-    use("norcalli/nvim-colorizer.lua")
+    use({
+        "norcalli/nvim-colorizer.lua",
+        config = function()
+            require("colorizer").setup()
+        end,
+    })
     use("pbrisbin/vim-syntax-shakespeare")
     use({
         "lukas-reineke/indent-blankline.nvim",
@@ -92,7 +116,37 @@ return require("packer").startup(function(use)
             { "saadparwaiz1/cmp_luasnip" },
         },
         config = function()
-            require("configuration/completion")
+            local cmp = require("cmp")
+            local lspkind = require("lspkind")
+
+            cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        require("luasnip").lsp_expand(args.body)
+                    end,
+                },
+                mapping = {
+                    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item()),
+                    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item()),
+                    ["<C-Space>"] = cmp.mapping.complete(),
+                    ["<CR>"] = cmp.mapping.confirm({
+                        behavior = cmp.ConfirmBehavior.Replace,
+                        select = true,
+                    }),
+                },
+                sources = {
+                    { name = "nvim_lsp" },
+                    { name = "luasnip" },
+                    { name = "orgmode" },
+                    { name = "buffer" },
+                },
+                formatting = {
+                    format = lspkind.cmp_format({
+                        mode = "symbol",
+                        maxwidth = 50,
+                    }),
+                },
+            })
         end,
     })
     use({
@@ -174,6 +228,67 @@ return require("packer").startup(function(use)
         },
         config = function()
             require("telescope").load_extension("yaml_schema")
+
+            local actions = require("telescope.actions")
+            require("telescope").setup({
+                defaults = {
+                    mappings = {
+                        i = {
+                            ["<C-j>"] = actions.move_selection_next,
+                            ["<C-k>"] = actions.move_selection_previous,
+                        },
+                    },
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                    },
+                    prompt_prefix = "> ",
+                    selection_caret = "> ",
+                    entry_prefix = "  ",
+                    initial_mode = "insert",
+                    selection_strategy = "reset",
+                    sorting_strategy = "descending",
+                    layout_strategy = "horizontal",
+                    layout_config = {
+                        horizontal = {
+                            mirror = false,
+                        },
+                        vertical = {
+                            mirror = false,
+                        },
+                    },
+                    file_sorter = require("telescope.sorters").get_fuzzy_file,
+                    file_ignore_patterns = {},
+                    generic_sorter = require("telescope.sorters").get_generic_fuzzy_sorter,
+                    winblend = 0,
+                    border = {},
+                    borderchars = { "─", "│", "─", "│", "╭", "╮", "╯", "╰" },
+                    color_devicons = true,
+                    use_less = true,
+                    path_display = {},
+                    set_env = { ["COLORTERM"] = "truecolor" }, -- default = nil,
+                    file_previewer = require("telescope.previewers").vim_buffer_cat.new,
+                    grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
+                    qflist_previewer = require("telescope.previewers").vim_buffer_qflist.new,
+                    -- Developer configurations: Not meant for general override
+                    buffer_previewer_maker = require("telescope.previewers").buffer_previewer_maker,
+                    extensions = {
+                        fzf = {
+                            fuzzy = true,
+                            override_generic_sorter = true,
+                            override_file_sorter = true,
+                            case_mode = "smart_case",
+                        },
+                    },
+                },
+            })
+            require("telescope").load_extension("fzf")
+            require("telescope").load_extension("projects")
         end,
     })
 
@@ -217,8 +332,9 @@ return require("packer").startup(function(use)
         end,
     })
     use({ "gpanders/editorconfig.nvim" })
-    use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
+    use({ "nvim-telescope/telescope-file-browser.nvim" })
+    use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
     use({ "airblade/vim-rooter" })
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -234,6 +350,15 @@ return require("packer").startup(function(use)
                     enable = true,
                 },
             })
+
+            local parser_configs = require("nvim-treesitter.parsers").get_parser_configs()
+            parser_configs.http = {
+                install_info = {
+                    url = "https://github.com/NTBBloodbath/tree-sitter-http",
+                    files = { "src/parser.c" },
+                    branch = "main",
+                },
+            }
         end,
     })
 
@@ -280,8 +405,71 @@ return require("packer").startup(function(use)
 
     -- Debuggers
     use("mfussenegger/nvim-dap")
-    use("theHamsta/nvim-dap-virtual-text")
-    use({ "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } })
+    use({
+        "theHamsta/nvim-dap-virtual-text",
+        config = function()
+            require("nvim-dap-virtual-text").setup({
+                enabled = true, -- enable this plugin (the default)
+                enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+                highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+                highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+                show_stop_reason = true, -- show stop reason when stopped for exceptions
+                commented = false, -- prefix virtual text with comment string
+                -- experimental features:
+                virt_text_pos = "eol", -- position of virtual text, see `:h nvim_buf_set_extmark()`
+                all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
+                virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
+                virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
+                -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
+            })
+        end,
+    })
+    use({
+        "rcarriga/nvim-dap-ui",
+        requires = { "mfussenegger/nvim-dap" },
+        config = function()
+            require("dapui").setup({
+                icons = { expanded = "▾", collapsed = "▸" },
+                mappings = {
+                    -- Use a table to apply multiple mappings
+                    expand = { "<CR>", "<2-LeftMouse>" },
+                    open = "o",
+                    remove = "d",
+                    edit = "e",
+                    repl = "r",
+                },
+                layouts = {
+                    {
+                        elements = {
+                            "scopes",
+                            "breakpoints",
+                            "stacks",
+                            "watches",
+                        },
+                        size = 40,
+                        position = "left",
+                    },
+                    {
+                        elements = {
+                            "repl",
+                            "console",
+                        },
+                        size = 10,
+                        position = "bottom",
+                    },
+                },
+                floating = {
+                    max_height = nil, -- These can be integers or a float between 0 and 1.
+                    max_width = nil, -- Floats will be treated as percentage of your screen.
+                    border = "single", -- Border style. Can be "single", "double" or "rounded"
+                    mappings = {
+                        close = { "q", "<Esc>" },
+                    },
+                },
+                windows = { indent = 1 },
+            })
+        end,
+    })
 
     -- Terminal
     use({
