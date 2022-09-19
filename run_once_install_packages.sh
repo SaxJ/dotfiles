@@ -20,7 +20,6 @@ fi
 printf "\n\nInstall my dev packages..."
 paru -S --needed \
     aerc \
-    ngrok \
     alacritty \
     aspell \
     aspell-en \
@@ -101,6 +100,7 @@ paru -S --needed \
     net-tools \
     netstandard-targeting-pack-bin \
     networkmanager \
+    ngrok \
     nitrogen \
     nmap \
     nnn \
@@ -170,6 +170,8 @@ paru -S --needed \
     terraform \
     texinfo \
     tidy \
+    tmux \
+    tmuxinator \
     tor \
     unison \
     unzip \
