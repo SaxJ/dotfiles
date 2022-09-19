@@ -38,6 +38,7 @@
 ;; Autocomplete tweaking
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
+(defconst telega-tdlib-max-version "1.8.5")
 
 (defun the-hello-snail ()
   "Prints an ascii snail."
