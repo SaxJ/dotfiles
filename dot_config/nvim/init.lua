@@ -83,7 +83,7 @@ wk.register({
     },
     t = {
         name = "toggle",
-        t = { ":ToggleTerm size=25<cr>", "Terminal" },
+        t = { ":ToggleTerm size=15<cr>", "Terminal" },
     },
     T = {
         name = "+tasks",
@@ -109,7 +109,7 @@ wk.register({
         d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
         g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
     },
-    ["."] = { ":Telescope file_browser path=%:p:h<CR>", "Files" },
+    ["."] = { ":Telescope file_browser path=%:p:h", "Files" },
 }, { prefix = "<leader>" })
 
 -- misc
