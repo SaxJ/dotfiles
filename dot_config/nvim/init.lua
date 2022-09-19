@@ -66,7 +66,13 @@ wk.register({
     },
     p = {
         name = "project",
-        p = { ":Telescope projects<cr>", "Projects" },
+        p = {
+            function()
+                require("telescope").extensions.tmuxinator.projects(require("telescope.themes").get_dropdown({}))
+            end,
+            "Projects",
+        },
+        -- p = { ":Telescope projects<cr>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
         f = { ":Telescope file_browser<CR>", "Project Files" },
     },
