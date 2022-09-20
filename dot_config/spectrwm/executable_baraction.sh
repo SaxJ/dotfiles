@@ -1,38 +1,32 @@
 #! /usr/bin/bash
 
 vpn() {
-    nmcli_output="$(nmcli -t -c no c show --active | grep vpn | head -n1)"
-    if [ -z "$nmcli_output" ]
-    then
-        echo "VPN: Disconnected"
+    if openvpn3 sessions-list | grep -q 'office.ovpn'; then
+        echo "VPN: Connected"
     else
-        vpn_name="$(echo "$nmcli_output" | sed -e 's/:.*$//')"
-        echo "VPN: $vpn_name"
+        echo "VPN: Disconnected"
     fi
 }
 
 network() {
     eth="$(nmcli -t -c no c show --active | grep eth | head -n1)"
     wifi="$(nmcli -t -c no c show --active | grep wifi | head -n1)"
-    if [ ! -z "$eth" ]
-    then
+    if [ ! -z "$eth" ]; then
         echo "Network: Eth"
     fi
 
-    if [ ! -z "$wifi" ]
-    then
+    if [ ! -z "$wifi" ]; then
         echo "Network: Wifi"
     fi
 
-    if [ -z "$eth$wifi" ]
-    then
+    if [ -z "$eth$wifi" ]; then
         echo "Network: Offline"
     fi
 }
 
 volume() {
     audio_status=$(pactl get-sink-volume @DEFAULT_SINK@)
-    parts=( $audio_status )
+    parts=($audio_status)
     echo "Vol: ${parts[4]}"
 }
 
