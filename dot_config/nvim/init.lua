@@ -51,11 +51,6 @@ wk.register({
         n = { ":MindOpenMain<CR>", "Notes" },
     },
     ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
-    ["<tab>"] = {
-        name = "+workspaces",
-        n = { ":tabnew<cr>", "New" },
-        ["<tab>"] = { ":SearchSession<cr>", "Sessions" },
-    },
     f = {
         name = "files",
         f = { "<cmd>Telescope file_browser<cr>", "Files" },
@@ -66,13 +61,7 @@ wk.register({
     },
     p = {
         name = "project",
-        p = {
-            function()
-                require("telescope").extensions.tmuxinator.projects(require("telescope.themes").get_dropdown({}))
-            end,
-            "Projects",
-        },
-        -- p = { ":Telescope projects<cr>", "Projects" },
+        p = { ":Telescope projects<CR>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
         f = { ":Telescope file_browser<CR>", "Project Files" },
     },
