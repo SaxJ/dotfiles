@@ -293,7 +293,6 @@ return require("packer").startup(function(use)
             require("telescope").load_extension("fzf")
             require("telescope").load_extension("projects")
             require("telescope").load_extension("file_browser")
-            require("telescope").load_extension("tmuxinator")
         end,
     })
 
@@ -337,10 +336,11 @@ return require("packer").startup(function(use)
         end,
     })
     use({ "gpanders/editorconfig.nvim" })
-    use({ "danielpieper/telescope-tmuxinator.nvim" })
     use({ "nvim-telescope/telescope-fzf-native.nvim", run = "make" })
     use({ "nvim-telescope/telescope-file-browser.nvim" })
     use({ "nvim-telescope/telescope.nvim", requires = { { "nvim-lua/plenary.nvim" } } })
+
+    -- Project Management
     use({ "airblade/vim-rooter" })
     use({
         "nvim-treesitter/nvim-treesitter",
@@ -365,6 +365,15 @@ return require("packer").startup(function(use)
                     branch = "main",
                 },
             }
+        end,
+    })
+    use({
+        "rmagatti/auto-session",
+        config = function()
+            require("auto-session").setup({
+                log_level = "error",
+                auto_session_suppress_dirs = { "~/", "~/Projects", "~/Downloads", "/" },
+            })
         end,
     })
 
