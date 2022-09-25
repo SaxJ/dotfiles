@@ -20,7 +20,7 @@ template:
         Fixed: 2
       run:
         plugin:
-          location: "zellij:compact-bar"
+          location: "zellij:status-bar"
       
 tabs:
 - name: megatron
