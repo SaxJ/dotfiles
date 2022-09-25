@@ -95,7 +95,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        gist              ; interacting with github gists
        (lookup +docsets)              ; navigate your code and its documentation
-       (lsp +peek)
+       (lsp +eglot)
        (magit +forge)             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        (pass +auth)              ; password manager for nerds
@@ -136,8 +136,8 @@
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        (go +lsp +tree-sitter)         ; the hipster dialect
-       (graphql)
-       (haskell +lsp)  ; a language that's lazier than I am
+       (graphql +lsp)
+       (haskell)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        (json +lsp +tree-sitter)              ; At least it ain't XML
