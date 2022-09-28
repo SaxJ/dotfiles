@@ -44,6 +44,7 @@
 (package! dash-functional)
 (package! ejira
   :recipe (:host github :repo "nyyManni/ejira"))
+(package! multi-vterm)
 (package! org-ros)
 (package! spotify)
 (package! telega)

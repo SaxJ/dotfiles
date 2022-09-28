@@ -219,11 +219,20 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! eglot
+;; (use-package! eglot
+;;   :config
+;;   (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
+;;   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
+(use-package! lsp-mode
   :config
-  (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
-  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
+  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
+        lsp-file-watch-threshold nil
+        lsp-clients-typescript-max-ts-server-memory 6000
+        lsp-javascript-format-enable nil
+        lsp-typescript-format-enable nil
+        lsp-typescript-preferences-import-module-specifier "relative"
+        lsp-typescript-surveys-enabled nil))
 
 ;; Haskell
 (use-package! shakespeare-mode)
