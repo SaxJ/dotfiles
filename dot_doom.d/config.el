@@ -228,6 +228,7 @@
   :config
   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
         lsp-file-watch-threshold nil
+        lsp-idle-delay 0.8
         lsp-clients-typescript-max-ts-server-memory 6000
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
