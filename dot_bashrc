@@ -4,7 +4,7 @@
 
 export TERM=kitty
 export AWS_PROFILE=hedev
-#export LSP_USE_PLISTS=true
+export LSP_USE_PLISTS=true
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
