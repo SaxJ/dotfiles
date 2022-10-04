@@ -104,7 +104,7 @@ wk.register({
         d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
         g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
     },
-    ["."] = { ":Telescope file_browser path=%:p:h", "Files" },
+    ["."] = { ":Telescope file_browser path=%:p:h<CR>", "Files" },
 }, { prefix = "<leader>" })
 
 -- misc
