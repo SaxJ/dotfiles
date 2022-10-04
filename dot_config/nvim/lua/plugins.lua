@@ -30,14 +30,14 @@ return require("packer").startup(function(use)
     use("arkav/lualine-lsp-progress")
 
     -- Appearance
-    use("Mofiqul/dracula.nvim")
+    use({ "kartikp10/noctis.nvim", requires = { "rktjmp/lush.nvim" } })
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = "dracula-nvim",
+                    theme = "noctis",
                     globalstatus = false,
                 },
                 sections = {
