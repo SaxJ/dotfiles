@@ -37,7 +37,7 @@ return require("packer").startup(function(use)
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = "noctis",
+                    theme = "auto",
                     globalstatus = false,
                 },
                 sections = {
