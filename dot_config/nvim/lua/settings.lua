@@ -36,8 +36,6 @@ opt.updatetime = 300
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
-vim.cmd("colorscheme noctis")
-
 cmd([[
 set expandtab smarttab shiftround autoindent smartindent smartcase nowrap
 set path+=**

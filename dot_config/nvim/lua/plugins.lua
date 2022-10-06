@@ -30,15 +30,24 @@ return require("packer").startup(function(use)
     use("arkav/lualine-lsp-progress")
 
     -- Appearance
-    use({ "kartikp10/noctis.nvim", requires = { "rktjmp/lush.nvim" } })
+    use({
+        "navarasu/onedark.nvim",
+        config = function()
+            -- Lua
+            require("onedark").setup({
+                style = "darker",
+            })
+            require("onedark").load()
+        end,
+    })
     use({
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
         config = function()
             require("lualine").setup({
                 options = {
-                    theme = "auto",
-                    globalstatus = false,
+                    theme = "onedark",
+                    globalstatus = true,
                 },
                 sections = {
                     lualine_c = {
