@@ -121,7 +121,9 @@ paru -S --needed \
     php-imagick \
     php-imap \
     php-intl \
+    php-pgsql \
     php-sodium \
+    php-sqlite \
     php7 \
     php7-gd \
     php7-igbinary \
