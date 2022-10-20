@@ -48,6 +48,7 @@
 (package! org-ros)
 (package! spotify)
 (package! telega)
+(package! org-kanban)
 
 ;; Filetypes
 (package! submode
