@@ -52,6 +52,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    elm-bin \
 	    elm-format-bin \
 	    elm-language-server \
+	    emacs-nativecomp \
 	    fd \
 	    firefox-developer-edition \
 	    fzf \
