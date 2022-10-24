@@ -4,9 +4,6 @@ require("plugins")
 -- General settings
 require("settings")
 
--- Plugin Config
-require("configuration")
-
 local wk = require("which-key")
 local mapx = require("mapx")
 
