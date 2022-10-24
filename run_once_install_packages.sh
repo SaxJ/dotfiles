@@ -1,6 +1,6 @@
 #!/bin/sh
 . /etc/os-release
-if [ "$NAME" = "Arch" ]; then
+if [ "$NAME" = "Arch Linux" ]; then
 	printf "Install paru...\n"
 	if
 	    ! command -v paru &
