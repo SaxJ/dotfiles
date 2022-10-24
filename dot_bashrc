@@ -330,7 +330,4 @@ alias lg="lazygit"
 
 
 [ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
-export PATH="~/.pyenv/bin:$PATH"
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 #eval "$(zellij setup --generate-auto-start bash)"
