@@ -4,3 +4,5 @@ encryption = "gpg"
 
 [data]
     email = {{ $email | quote }}
+[gpg]
+    recipient = {{ $email | quote }}
