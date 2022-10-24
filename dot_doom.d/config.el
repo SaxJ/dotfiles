@@ -444,6 +444,8 @@ topic N and modify that instead."
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
 (setq typescript-indent-level 2)
 
+;; EMAIL
+(setq +notmuch-home-function (lambda () (notmuch-search "tag:new")))
 (setq +mu4e-gmail-accounts '(("saxon.jensen@gmail.com" . "/personal")
                              ("saxon.jensen@healthengine.com.au" . "/work")
                              ("speedemon999@gmail.com" . "/gaming")))
