@@ -35,6 +35,8 @@ import subprocess
 def autostart():
     subprocess.Popen(['nitrogen', '--restore'])
     subprocess.Popen(['dropbox'])
+    subprocess.Popen(['emacs', '--daemon'])
+    subprocess.Popen(['udiskie'])
 
 
 
