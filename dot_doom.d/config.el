@@ -357,6 +357,10 @@
       :localleader
       :desc "Mark many read"
       :n "mm" #'mark-many-read)
+(map! :map notmuch-search-mode-map
+      :localleader
+      :desc "Mark read"
+      :v "r" (lambda () (notmuch-search-remove-tag "-unread")))
 
 (defun gnus-daemon-scan ()
   (let ((win (current-window-configuration))
@@ -439,7 +443,7 @@ topic N and modify that instead."
 
 ;; EMAIL
 (setq +notmuch-sync-backend 'mbsync
-      +notmuch-home-function (lambda () (notmuch-search "tag:new")))
+      +notmuch-home-function (lambda () (notmuch-search "tag:unread")))
 
 (use-package! vimrc-mode
   :config
