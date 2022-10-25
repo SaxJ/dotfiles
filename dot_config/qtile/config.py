@@ -140,6 +140,7 @@ widget_defaults = dict(
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
+small_space = 20
 
 screens = [
     Screen(
@@ -149,9 +150,12 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Volume(),
+                widget.PulseVolume(),
+                widget.Spacer(length = small_space),
                 widget.Systray(),
+                widget.Spacer(length = small_space),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
+                widget.Spacer(length = small_space),
                 widget.NvidiaSensors(),
             ],
             24,
