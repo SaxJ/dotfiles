@@ -91,16 +91,6 @@ keys = [
     Key([mod], "p", lazy.spawn("rofi -show drun -show-icons -run-command '{cmd}'"))
 ]
 
-def create_group(g):
-    if g == '1':
-        return Group(g, spawn='emacs')
-    if g == '2':
-        return Group(g, spawn='firefox-developer-edition')
-    if g == '3':
-        return Group(g, spawn='slack')
-
-    return Group(g)
-
 groups = [Group(i) for i in "123456789"]
 
 for i in groups:
@@ -159,17 +149,10 @@ screens = [
                 widget.GroupBox(),
                 widget.Prompt(),
                 widget.WindowName(),
-                widget.Chord(
-                    chords_colors={
-                        "launch": ("#ff0000", "#ffffff"),
-                    },
-                    name_transform=lambda name: name.upper(),
-                ),
-                # NB Systray is incompatible with Wayland, consider using StatusNotifier instead
-                # widget.StatusNotifier(),
+                widget.Volume(),
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
-                widget.QuickExit(),
+                widget.NvidiaSensors(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders

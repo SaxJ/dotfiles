@@ -297,13 +297,6 @@
     ",2" 'slack-message-embed-mention
     ",3" 'slack-message-embed-channel))
 
-(defun mark-many-read (n)
-  "Mark a number of messages read"
-  (interactive "nNumber: ")
-  (let ((x 0)) x)
-  (while (< n)
-    (mu4e-headers-mark-for-read)))
-
 ;; ###############################
 ;; KEYBINDS
 ;; ###############################
@@ -445,47 +438,8 @@ topic N and modify that instead."
 (setq typescript-indent-level 2)
 
 ;; EMAIL
-(setq +notmuch-home-function (lambda () (notmuch-search "tag:new")))
-(setq +mu4e-gmail-accounts '(("saxon.jensen@gmail.com" . "/personal")
-                             ("saxon.jensen@healthengine.com.au" . "/work")
-                             ("speedemon999@gmail.com" . "/gaming")))
-
-(set-email-account! "Work"
-                    '((mu4e-sent-folder . "/work/Sent")
-                      (mu4e-drafts-folder . "/work/Drafts")
-                      (mu4e-trash-folder . "/work/Trash")
-                      (mu4e-refile-folder . "/work/All")
-                      (smtpmail-smtp-user . "saxon.jensen@healthengine.com.au"))
-                    t)
-(set-email-account! "Gaming"
-                    '((mu4e-sent-folder . "/gaming/Sent")
-                      (mu4e-drafts-folder . "/gaming/Drafts")
-                      (mu4e-trash-folder . "/gaming/Trash")
-                      (mu4e-refile-folder . "/gaming/All")
-                      (smtpmail-smtp-user . "speedemon999@gmail.com"))
-                    t)
-(set-email-account! "Mailbox"
-                    '((mu4e-sent-folder . "/mailbox/Sent")
-                      (mu4e-drafts-folder . "/mailbox/Drafts")
-                      (mu4e-trash-folder . "/mailbox/Trash")
-                      (mu4e-refile-folder . "/mailbox/Inbox")
-                      (smtpmail-smtp-user . "saxonj@mailbox.org"))
-                    t)
-(set-email-account! "Dev"
-                    '((mu4e-sent-folder . "/zoho/Sent")
-                      (mu4e-drafts-folder . "/zoho/Drafts")
-                      (mu4e-trash-folder . "/zoho/Trash")
-                      (mu4e-refile-folder . "/zoho/All")
-                      (smtpmail-smtp-user . "saxon@saxonj.dev"))
-                    t)
-(set-email-account! "Personal"
-                    '((mu4e-sent-folder . "/personal/Sent")
-                      (mu4e-drafts-folder . "/personal/Drafts")
-                      (mu4e-trash-folder . "/personal/Trash")
-                      (mu4e-refile-folder . "/personal/All")
-                      (smtpmail-smtp-user . "saxon.jensen@gmail.com"))
-                    t)
-
+(setq +notmuch-sync-backend 'mbsync
+      +notmuch-home-function (lambda () (notmuch-search "tag:new")))
 
 (use-package! vimrc-mode
   :config
