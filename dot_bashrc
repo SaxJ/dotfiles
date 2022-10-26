@@ -28,7 +28,10 @@ alias cd="z"
 alias icat="kitty +kitten icat"
 alias prc="gh pr create --fill -w"
 alias prv="gh pr view --web"
+
+# VPN
 alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
+alias vpnd="openvpn3 session-manage --disconnect --config ~/.config/office.ovpn"
 
 # GO
 export GOPATH=$HOME/go_packages
