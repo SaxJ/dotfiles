@@ -82,7 +82,7 @@ wk.register({
     },
     t = {
         name = "toggle",
-        t = { ":ToggleTerm size=15<cr>", "Terminal" },
+        t = { ":ToggleTerm size=20<cr>", "Terminal" },
     },
     T = {
         name = "+tasks",
