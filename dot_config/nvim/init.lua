@@ -22,6 +22,10 @@ local tasks = Terminal:new({
     close_on_exit = true,
     direction = "float",
 })
+local lazyGit = Terminal:new({
+    cmd = "lazygit",
+    hidden = true
+})
 
 -- Misc
 wk.register({
@@ -66,7 +70,9 @@ wk.register({
         name = "+git",
         b = { ":GitBlameToggle<cr>", "Blame" },
         B = { ":GitBlameToggle<cr>", "Blame" },
-        g = { ":Neogit<CR>", "Git" },
+        g = { function()
+                lazyGit:toggle()
+                end, "Git" },
         f = {
             name = "+forge",
             s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
