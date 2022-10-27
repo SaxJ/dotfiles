@@ -24,7 +24,8 @@ local tasks = Terminal:new({
 })
 local lazyGit = Terminal:new({
     cmd = "lazygit",
-    hidden = true
+    hidden = true,
+    direction = "tab"
 })
 
 -- Misc
