@@ -49,6 +49,7 @@
 (package! spotify)
 (package! telega)
 (package! org-kanban)
+(package! git-auto-commit-mode)
 
 ;; Filetypes
 (package! submode
