@@ -24,10 +24,14 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 alias hx="helix"
-alias cd="z"
 alias icat="kitty +kitten icat"
 alias prc="gh pr create --fill -w"
 alias prv="gh pr view --web"
+
+function cd() {
+    z $1
+    zellij action rename-tab ${PWD##*/}
+}
 
 # VPN
 alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
