@@ -173,6 +173,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    tmux \
 	    tmuxinator \
 	    tor \
+	    udiskie \
 	    unison \
 	    unzip \
 	    vim \
