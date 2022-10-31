@@ -77,12 +77,6 @@ return require("packer").startup(function(use)
     })
 
     -- Languages
-    use({
-        "mhartington/formatter.nvim",
-        config = function()
-            require("formatter_config")
-        end,
-    })
     use("amadeus/vim-mjml")
     use("adamclerk/vim-razor")
     use("jparise/vim-graphql")
@@ -151,7 +145,6 @@ return require("packer").startup(function(use)
                 sources = {
                     { name = "nvim_lsp" },
                     { name = "luasnip" },
-                    { name = "orgmode" },
                     { name = "buffer" },
                 },
                 formatting = {
@@ -163,60 +156,19 @@ return require("packer").startup(function(use)
             })
         end,
     })
+    use("williamboman/mason.nvim")
+    use("williamboman/mason-lspconfig.nvim")
     use({
-        "junnplus/lsp-setup.nvim",
-        requires = {
-            "neovim/nvim-lspconfig",
-            "williamboman/mason.nvim",
-            "williamboman/mason-lspconfig.nvim",
-        },
-        config = function()
-            require("lsp-setup").setup({
-                servers = {
-                    tsserver = {
-                        init_options = {
-                            preferences = {
-                                importModuleSpecifierPreference = "relative",
-                            },
-                        },
-                    },
-                    intelephense = {
-                        init_options = {
-                            licenceKey = "/home/saxonj/intelephense/licence.txt",
-                        },
-                    },
-                    jsonls = {
-                        schemas = require("schemastore").json.schemas(),
-                        validate = { enable = true },
-                    },
-                    omnisharp = {
-                        cmd = {
-                            "/usr/bin/omnisharp",
-                            "-lsp",
-                            "-v",
-                            "--hostPID",
-                            tostring(vim.fn.getpid()),
-                        },
-                    },
-                    elmls = { { cmd = "elm-language-server" } },
-                    hls = { { cmd = "haskell-language-server-wrapper" } },
-                    pylsp = {
-                        {
-                            cmd = "pylsp",
-                            filetypes = "python",
-                            root_dir = function(fname)
-                                local root_files = {
-                                    "requirements.txt",
-                                }
-                                return require("lspconfig.util").root_pattern(unpack(root_files))(fname)
-                                    or require("lspconfig.util").find_git_ancestor(fname)
-                            end,
-                            single_file_support = true,
-                        },
-                    },
-                },
+        "neovim/nvim-lspconfig",
+        config = function ()
+            require('mason').setup()
+            require('mason-lspconfig').setup()
+            require('mason-lspconfig').setup_handlers({
+                function (name)
+                    require('lspconfig')[name].setup({})
+                end,
             })
-        end,
+        end
     })
     use({
         "glepnir/lspsaga.nvim",
@@ -390,105 +342,8 @@ return require("packer").startup(function(use)
             require("mind").setup()
         end,
     })
-    use({
-        "nvim-orgmode/orgmode",
-        config = function()
-            require("orgmode").setup_ts_grammar()
-            require("orgmode").setup({
-                org_agenda_files = { "~/Documents/wiki/**/*.org" },
-                org_default_notes_file = "~/Documents/wiki/notes.org",
-                org_todo_keywords = { "TODO(t)", "PROG", "BLOCKED", "REVIEW", "|", "DONE" },
-                org_capture_templates = {
-                    t = {
-                        description = "Todo",
-                        template = "* TODO [#%^{A|B|C}] %? %t",
-                        target = "~/Documents/wiki/todo.org",
-                    },
-                },
-                mappings = {
-                    org = {
-                        org_todo = "<localleader>t",
-                        org_priority = "<localleader>p",
-                    },
-                },
-            })
-        end,
-    })
-    use({
-        "akinsho/org-bullets.nvim",
-        config = function()
-            require("org-bullets").setup({})
-        end,
-    })
-    use({ "dhruvasagar/vim-table-mode" })
 
     -- Debuggers
-    use("mfussenegger/nvim-dap")
-    use({
-        "theHamsta/nvim-dap-virtual-text",
-        config = function()
-            require("nvim-dap-virtual-text").setup({
-                enabled = true, -- enable this plugin (the default)
-                enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-                highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-                highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-                show_stop_reason = true, -- show stop reason when stopped for exceptions
-                commented = false, -- prefix virtual text with comment string
-                -- experimental features:
-                virt_text_pos = "eol", -- position of virtual text, see `:h nvim_buf_set_extmark()`
-                all_frames = false, -- show virtual text for all stack frames not only current. Only works for debugpy on my machine.
-                virt_lines = false, -- show virtual lines instead of virtual text (will flicker!)
-                virt_text_win_col = nil, -- position the virtual text at a fixed window column (starting from the first text column) ,
-                -- e.g. 80 to position at column 80, see `:h nvim_buf_set_extmark()`
-            })
-        end,
-    })
-    use({
-        "rcarriga/nvim-dap-ui",
-        requires = { "mfussenegger/nvim-dap" },
-        config = function()
-            require("dapui").setup({
-                icons = { expanded = "▾", collapsed = "▸" },
-                mappings = {
-                    -- Use a table to apply multiple mappings
-                    expand = { "<CR>", "<2-LeftMouse>" },
-                    open = "o",
-                    remove = "d",
-                    edit = "e",
-                    repl = "r",
-                },
-                layouts = {
-                    {
-                        elements = {
-                            "scopes",
-                            "breakpoints",
-                            "stacks",
-                            "watches",
-                        },
-                        size = 40,
-                        position = "left",
-                    },
-                    {
-                        elements = {
-                            "repl",
-                            "console",
-                        },
-                        size = 10,
-                        position = "bottom",
-                    },
-                },
-                floating = {
-                    max_height = nil, -- These can be integers or a float between 0 and 1.
-                    max_width = nil, -- Floats will be treated as percentage of your screen.
-                    border = "single", -- Border style. Can be "single", "double" or "rounded"
-                    mappings = {
-                        close = { "q", "<Esc>" },
-                    },
-                },
-                windows = { indent = 1 },
-            })
-        end,
-    })
 
     -- Terminal
     use({
