@@ -156,8 +156,6 @@ screens = [
                 widget.Spacer(length = small_space),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p"),
                 widget.Spacer(length = small_space),
-                widget.NvidiaSensors(),
-                widget.ThermalSensor(),
             ],
             24,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
