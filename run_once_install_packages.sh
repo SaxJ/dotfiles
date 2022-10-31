@@ -25,7 +25,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    atool \
 	    autoconf \
 	    automake \
-	    aws-cli-v2-bin \
+	    aws-cli-v2 \
 	    aws-session-manager-plugin \
 	    base-devel \
 	    bash-completion \
