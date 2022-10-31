@@ -25,7 +25,7 @@ local tasks = Terminal:new({
 local lazyGit = Terminal:new({
     cmd = "lazygit",
     hidden = true,
-    direction = "tab"
+    direction = "tab",
 })
 
 -- Misc
@@ -34,6 +34,12 @@ wk.register({
         name = "+buffers",
         b = { "<cmd>Telescope buffers<cr>", "Buffers" },
         y = { ":%y+<CR>", "Yank" },
+        f = {
+            function()
+                vim.lsp.buf.format()
+            end,
+            "Format",
+        },
     },
     i = {
         name = "+insert",
@@ -61,7 +67,7 @@ wk.register({
     f = {
         name = "files",
         f = { "<cmd>Telescope file_browser<cr>", "Files" },
-        Y = { ":CopyRelPath<CR>", "Yank Path"},
+        Y = { ":CopyRelPath<CR>", "Yank Path" },
     },
     s = {
         name = "search",
@@ -77,9 +83,12 @@ wk.register({
         name = "+git",
         b = { ":GitBlameToggle<cr>", "Blame" },
         B = { ":GitBlameToggle<cr>", "Blame" },
-        g = { function()
+        g = {
+            function()
                 lazyGit:toggle()
-                end, "Git" },
+            end,
+            "Git",
+        },
         f = {
             name = "+forge",
             s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
