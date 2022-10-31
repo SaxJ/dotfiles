@@ -50,12 +50,18 @@ wk.register({
         T = { ":terminal<CR>", "Terminal" },
         p = { "NvimTreeToggle<cr>", "Project" },
         ["-"] = { ":Neotree<CR>", "Files" },
-        n = { ":MindOpenMain<CR>", "Notes" },
+        t = {
+            function()
+                tasks:toggle()
+            end,
+            "Taskwarrior",
+        },
     },
     ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
     f = {
         name = "files",
         f = { "<cmd>Telescope file_browser<cr>", "Files" },
+        Y = { ":CopyRelPath<CR>", "Yank Path"},
     },
     s = {
         name = "search",
@@ -83,15 +89,6 @@ wk.register({
     t = {
         name = "toggle",
         t = { ":ToggleTerm size=20<cr>", "Terminal" },
-    },
-    T = {
-        name = "+tasks",
-        t = {
-            function()
-                tasks:toggle()
-            end,
-            "Taskwarrior",
-        },
     },
     n = {
         name = "+notes",
