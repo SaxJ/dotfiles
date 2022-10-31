@@ -35,6 +35,7 @@ return require("packer").startup(function(use)
     })
 
     -- Appearance
+    use("kyazdani42/nvim-web-devicons")
     use({
         "navarasu/onedark.nvim",
         config = function()
@@ -96,9 +97,20 @@ return require("packer").startup(function(use)
             })
         end,
     })
+    use({
+        "jose-elias-alvarez/null-ls.nvim",
+        config = function()
+            require("null-ls").setup({
+                sources = {
+                    require("null-ls").builtins.formatting.stylua,
+                    require("null-ls").builtins.diagnostics.eslint,
+                    require("null-ls").builtins.completion.spell,
+                },
+            })
+        end
+    })
 
     -- LSP
-    use("kyazdani42/nvim-web-devicons")
     use({
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
@@ -160,11 +172,11 @@ return require("packer").startup(function(use)
     use("williamboman/mason-lspconfig.nvim")
     use({
         "neovim/nvim-lspconfig",
-        config = function ()
+        config = function()
             require('mason').setup()
             require('mason-lspconfig').setup()
             require('mason-lspconfig').setup_handlers({
-                function (name)
+                function(name)
                     require('lspconfig')[name].setup({})
                 end,
             })
