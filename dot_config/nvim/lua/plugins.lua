@@ -179,6 +179,7 @@ return require("packer").startup(function(use)
                 function(name)
                     require('lspconfig')[name].setup({})
                 end,
+
             })
         end
     })
