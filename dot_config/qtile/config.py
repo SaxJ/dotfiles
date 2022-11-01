@@ -35,7 +35,6 @@ import subprocess
 def autostart():
     subprocess.Popen(['nitrogen', '--restore'])
     subprocess.Popen(['dropbox'])
-    subprocess.Popen(['emacs', '--daemon'])
     subprocess.Popen(['udiskie'])
 
 
@@ -188,6 +187,7 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
+        Match(title="Around"),
     ]
 )
 auto_fullscreen = True
