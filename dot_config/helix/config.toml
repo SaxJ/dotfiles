@@ -16,3 +16,9 @@ hidden = false
 
 [editor.lsp]
 display-messages = true
+
+[keys.normal]
+"$" = "goto_line_end"
+
+[keys.select]
+"$" = "goto_line_end"
