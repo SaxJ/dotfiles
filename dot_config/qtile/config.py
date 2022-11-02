@@ -86,6 +86,7 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "shift"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "x", lazy.spawn("i3lock -i /home/saxonj/.config/spectrwm/polite_cat.png -c 000000"), desc="Lock"),
     Key([mod], "r", lazy.spawncmd(), desc="Spawn a command using a prompt widget"),
     Key([mod], "p", lazy.spawn("rofi -show drun -show-icons -run-command '{cmd}'"))
 ]
