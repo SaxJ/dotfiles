@@ -27,12 +27,6 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("arkav/lualine-lsp-progress")
-	use({
-		"folke/neodev.nvim",
-		config = function()
-			require("neodev").setup({})
-		end,
-	})
 
 	-- Appearance
 	use("kyazdani42/nvim-web-devicons")
