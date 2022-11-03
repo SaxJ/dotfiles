@@ -27,6 +27,7 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use("arkav/lualine-lsp-progress")
+	use("samjwill/nvim-unception")
 
 	-- Appearance
 	use("kyazdani42/nvim-web-devicons")
@@ -170,7 +171,7 @@ return require("packer").startup(function(use)
 			require("mason-lspconfig").setup()
 			require("mason-lspconfig").setup_handlers({
 				function(name)
-					require("lspconfig")[name].setup({ })
+					require("lspconfig")[name].setup({})
 				end,
 			})
 		end,
