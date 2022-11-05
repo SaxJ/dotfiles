@@ -28,9 +28,12 @@ alias icat="kitty +kitten icat"
 alias prc="gh pr create --fill -w"
 alias prv="gh pr view --web"
 
+zellij_sessions=$(zellij list-sessions)
 function cd() {
     z $1
-    zellij action rename-tab ${PWD##*/}
+    if [ "$zellij_sessions" == "No active zellij sessions found." ]; then
+        zellij action rename-tab ${PWD##*/}
+    fi
 }
 
 # VPN
