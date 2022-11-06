@@ -63,21 +63,21 @@ wk.register({
             "Taskwarrior",
         },
     },
-    ["<leader>"] = { "<cmd>Telescope find_files<cr>", "Recent Files" },
+    ["<leader>"] = { "<cmd>Telescope find_files hidden=true<cr>", "Recent Files" },
     f = {
         name = "files",
-        f = { "<cmd>Telescope file_browser<cr>", "Files" },
+        f = { "<cmd>Telescope file_browser hidden=true<cr>", "Files" },
         Y = { ":CopyRelPath<CR>", "Yank Path" },
     },
     s = {
         name = "search",
-        p = { "<cmd>Telescope live_grep<cr>", "Search Project" },
+        p = { "<cmd>Telescope live_grep hidden=true<cr>", "Search Project" },
     },
     p = {
         name = "project",
         p = { ":Telescope projects<CR>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
-        f = { ":Telescope file_browser<CR>", "Project Files" },
+        f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
     },
     g = {
         name = "+git",
@@ -114,7 +114,7 @@ wk.register({
         d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
         g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
     },
-    ["."] = { ":Telescope file_browser path=%:p:h<CR>", "Files" },
+    ["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
 
 -- misc
