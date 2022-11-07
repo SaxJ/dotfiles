@@ -18,6 +18,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	paru -S --needed \
 	    aerc \
 	    alacritty \
+	    around \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -93,6 +94,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    make \
 	    man-db \
 	    marked \
+	    mermaid-cli \
 	    neovim \
 	    nerd-fonts-complete \
 	    net-tools \
