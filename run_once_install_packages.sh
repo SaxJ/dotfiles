@@ -1,19 +1,6 @@
 #!/bin/sh
 . /etc/os-release
 if [ "$NAME" = "Arch Linux" ]; then
-	printf "Install paru...\n"
-	if
-	    ! command -v paru &
-	    >/dev/null
-	then
-	    sudo pacman -S --needed base-devel
-	    git clone https://aur.archlinux.org/paru.git ~/.paru
-	    cd ~/.paru || return
-	    makepkg -si
-	else
-	    printf "  Already installed\n"
-	fi
-
 	printf "\n\nInstall my dev packages..."
 	paru -S --needed \
 	    aerc \
@@ -141,7 +128,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    polybar \
 	    procs \
 	    psysh \
-	    pulseaudio-alsa \
 	    pyright \
 	    python-adblock \
 	    python-lsp-server \
