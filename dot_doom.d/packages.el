@@ -49,7 +49,7 @@
 (package! spotify)
 (package! telega)
 (package! org-kanban)
-(package! git-auto-commit-mode)
+(package! ob-mermaid)
 
 ;; Filetypes
 (package! submode
@@ -63,6 +63,7 @@
 (package! shakespeare-mode)
 (package! vimrc-mode)
 (package! caddyfile-mode)
+(package! mermaid-mode)
 
 ;; For Fun
 ;;(package! doom-snippets :ignore t)
