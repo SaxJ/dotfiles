@@ -150,7 +150,7 @@ return require("packer").startup(function(use)
 				},
 				sources = {
 					{ name = "nvim_lsp" },
-                    { name = "orgmode"},
+					{ name = "orgmode" },
 					{ name = "luasnip" },
 					{ name = "buffer" },
 				},
