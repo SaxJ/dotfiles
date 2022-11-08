@@ -98,7 +98,6 @@ return require("packer").startup(function(use)
 				sources = {
 					require("null-ls").builtins.formatting.stylua,
 					require("null-ls").builtins.diagnostics.eslint,
-					require("null-ls").builtins.completion.spell,
 				},
 			})
 		end,
