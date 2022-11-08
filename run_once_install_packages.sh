@@ -3,6 +3,7 @@
 if [ "$NAME" = "Arch Linux" ]; then
 	printf "\n\nInstall my dev packages..."
 	paru -S --needed \
+	    dante \
 	    catimg \
 	    moar \
 	    aerc \
