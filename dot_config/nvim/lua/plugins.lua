@@ -341,14 +341,31 @@ return require("packer").startup(function(use)
 
 	-- Notes
 	use({
-		"phaazon/mind.nvim",
-		branch = "v2.2",
-		requires = { "nvim-lua/plenary.nvim" },
+		"nvim-orgmode/orgmode",
+		requires = { "akinsho/org-bullets.nvim" },
 		config = function()
-			require("mind").setup()
+			require("orgmode").setup_ts_grammar()
+			require("orgmode").setup({
+				org_agenda_files = { "~/Documents/wiki/**/*.org" },
+				org_default_notes_file = "~/Documents/wiki/notes.org",
+				org_todo_keywords = { "TODO(t)", "PROG", "BLOCKED", "REVIEW", "|", "DONE" },
+				org_capture_templates = {
+					t = {
+						description = "Todo",
+						template = "* TODO [#%^{A|B|C}] %? %t",
+						target = "~/Documents/wiki/todo.org",
+					},
+				},
+				mappings = {
+					org = {
+						org_todo = "<localleader>t",
+						org_priority = "<localleader>p",
+					},
+				},
+			})
+			require("org-bullets").setup({})
 		end,
 	})
-
 	-- Debuggers
 
 	-- Terminal
