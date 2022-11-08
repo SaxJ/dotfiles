@@ -3,9 +3,6 @@
 if [ "$NAME" = "Arch Linux" ]; then
 	printf "\n\nInstall my dev packages..."
 	paru -S --needed \
-	    dante \
-	    catimg \
-	    moar \
 	    aerc \
 	    alacritty \
 	    around \
@@ -25,10 +22,12 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    bitwarden-cli \
 	    bitwarden-rofi \
 	    calc \
+	    catimg \
 	    ccls \
 	    chezmoi \
 	    cmake \
 	    composer \
+	    dante \
 	    devtools \
 	    direnv \
 	    discord \
@@ -85,6 +84,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    man-db \
 	    marked \
 	    mermaid-cli \
+	    moar \
 	    neovim \
 	    nerd-fonts-complete \
 	    net-tools \
@@ -165,7 +165,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    tmuxinator \
 	    tor \
 	    udiskie \
-	    unison \
 	    unzip \
 	    vim \
 	    visual-studio-code-bin \
