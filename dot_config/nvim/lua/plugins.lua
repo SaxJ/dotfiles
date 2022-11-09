@@ -72,7 +72,8 @@ return require("packer").startup(function(use)
     })
 
     -- Languages
-    use('mracos/mermaid.vim')
+    use("imsnif/kdl.vim")
+    use("mracos/mermaid.vim")
     use("amadeus/vim-mjml")
     use("adamclerk/vim-razor")
     use("jparise/vim-graphql")
@@ -456,9 +457,13 @@ return require("packer").startup(function(use)
             require("gitsigns").setup()
         end,
     })
-    use({ "TimUntersberger/neogit", requires = "nvim-lua/plenary.nvim", config = function()
-        require('neogit').setup({
-            use_magit_keybindings = true,
-        })
-    end})
+    use({
+        "TimUntersberger/neogit",
+        requires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("neogit").setup({
+                use_magit_keybindings = true,
+            })
+        end,
+    })
 end)
