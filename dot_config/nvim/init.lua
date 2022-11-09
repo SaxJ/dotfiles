@@ -83,12 +83,7 @@ wk.register({
         name = "+git",
         b = { ":GitBlameToggle<cr>", "Blame" },
         B = { ":GitBlameToggle<cr>", "Blame" },
-        g = {
-            function()
-                lazyGit:toggle()
-            end,
-            "Git",
-        },
+        g = { ":Neogit<cr>", "Git" },
         f = {
             name = "+forge",
             s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
@@ -125,7 +120,7 @@ vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
 vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set('n', 'gr', vim.lsp.buf.references, bufopts)
+vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
