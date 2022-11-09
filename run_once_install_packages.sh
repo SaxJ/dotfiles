@@ -5,7 +5,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	paru -S --needed \
 	    aerc \
 	    ranger \
-	    alacritty \
 	    around \
 	    aspell \
 	    aspell-en \
