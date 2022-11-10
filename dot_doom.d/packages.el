@@ -29,6 +29,9 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;; Dumb Things
+(package! mastodon)
+(package! chezmoi)
+
 ;; Email
 (package! bbdb)
 (package! dianyou)
@@ -42,24 +45,21 @@
 (package! string-inflection)
 (package! slack)
 (package! dash-functional)
-(package! ejira
-  :recipe (:host github :repo "nyyManni/ejira"))
+(package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 (package! multi-vterm)
 (package! org-ros)
 (package! spotify)
 (package! telega)
 (package! org-kanban)
 (package! ob-mermaid)
+(package! org-remark)
+
 
 ;; Filetypes
-(package! submode
-  :recipe (:host github :repo "nxtr/submode"))
-(package! sosl-mode
-  :recipe (:host github :repo "nxtr/sosl-mode"))
-(package! soql-mode
-  :recipe (:host github :repo "nxtr/soql-mode"))
-(package! apex-mode
-  :recipe (:host github :repo "nxtr/apex-mode"))
+(package! submode :recipe (:host github :repo "nxtr/submode"))
+(package! sosl-mode :recipe (:host github :repo "nxtr/sosl-mode"))
+(package! soql-mode :recipe (:host github :repo "nxtr/soql-mode"))
+(package! apex-mode :recipe (:host github :repo "nxtr/apex-mode"))
 (package! shakespeare-mode)
 (package! vimrc-mode)
 (package! caddyfile-mode)
