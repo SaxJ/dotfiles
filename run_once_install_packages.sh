@@ -35,6 +35,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    docker-compose \
 	    dotnet-runtime \
 	    dotnet-sdk \
+	    dotnet-sdk-6.0 \
 	    dropbox \
 	    dunst \
 	    editorconfig-core-c \
