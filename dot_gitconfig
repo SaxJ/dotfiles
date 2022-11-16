@@ -17,6 +17,7 @@
     ui = auto
 [init]
 	templateDir = /home/saxonj/.git-templates
+	defaultBranch = master
 [pull]
 	rebase = false
 [github]
