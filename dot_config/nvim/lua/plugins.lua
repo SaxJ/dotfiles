@@ -463,6 +463,7 @@ return require("packer").startup(function(use)
         config = function()
             require("neogit").setup({
                 use_magit_keybindings = true,
+                disable_commit_confirmation = false,
             })
         end,
     })
