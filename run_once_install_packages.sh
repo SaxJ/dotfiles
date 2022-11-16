@@ -10,6 +10,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    aspell-en \
 	    aspnet-runtime \
 	    aspnet-targeting-pack \
+	aspnet-targeting-pack-6.0 \
 	    atool \
 	    autoconf \
 	    automake \
