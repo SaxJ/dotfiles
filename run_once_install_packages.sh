@@ -179,6 +179,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    zellij \
 	    zip \
 	    zoom \
-	    zoxide
-        aspnet-targeting-pack-6.0 \
+	    zoxide \
+        aspnet-targeting-pack-6.0
 fi
