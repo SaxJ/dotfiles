@@ -4,13 +4,11 @@ if [ "$NAME" = "Arch Linux" ]; then
 	printf "\n\nInstall my dev packages..."
 	paru -S --needed \
 	    aerc \
-	    ranger \
 	    around \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
 	    aspnet-targeting-pack \
-	aspnet-targeting-pack-6.0 \
 	    atool \
 	    autoconf \
 	    automake \
@@ -47,6 +45,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    emacs-nativecomp \
 	    fd \
 	    firefox-developer-edition \
+	    flatpak \
 	    fzf \
 	    ghcup-hs-bin \
 	    git \
@@ -138,6 +137,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    python-lsp-server \
 	    python-pip \
 	    qutebrowser \
+	    ranger \
 	    rcm \
 	    reflector \
 	    ripgrep \
@@ -180,4 +180,5 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    zip \
 	    zoom \
 	    zoxide
+        aspnet-targeting-pack-6.0 \
 fi
