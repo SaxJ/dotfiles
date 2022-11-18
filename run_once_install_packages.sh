@@ -5,7 +5,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	paru -S --needed \
 	    aerc \
 	    ranger \
-	    around \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -155,7 +154,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    sshfs \
 	    starship \
 	    stylelint \
-	    syncthing-gtk-python3 \
 	    task \
 	    taskwarrior-tui \
 	    terraform \
