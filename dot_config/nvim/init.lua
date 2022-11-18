@@ -53,14 +53,12 @@ wk.register({
             end,
             "Mail",
         },
-        T = { ":terminal<CR>", "Terminal" },
+        T = { ":terminal<CR>", "Terminal Full" },
         p = { "NvimTreeToggle<cr>", "Project" },
         ["-"] = { ":Neotree<CR>", "Files" },
         t = {
-            function()
-                tasks:toggle()
-            end,
-            "Taskwarrior",
+            ":ToggleTerm size=20<cr>",
+            "Terminal Popup",
         },
     },
     ["<leader>"] = { "<cmd>Telescope find_files hidden=true<cr>", "Recent Files" },
@@ -92,7 +90,12 @@ wk.register({
     },
     t = {
         name = "toggle",
-        t = { ":ToggleTerm size=20<cr>", "Terminal" },
+        t = {
+            function()
+                tasks:toggle()
+            end,
+            "Terminal",
+        },
     },
     n = {
         name = "+notes",

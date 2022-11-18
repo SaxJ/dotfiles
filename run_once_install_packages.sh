@@ -34,6 +34,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    docker-compose \
 	    dotnet-runtime \
 	    dotnet-sdk \
+	    dotnet-sdk-6.0 \
 	    dropbox \
 	    dunst \
 	    editorconfig-core-c \
@@ -44,6 +45,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    emacs-nativecomp \
 	    fd \
 	    firefox-developer-edition \
+	    flatpak \
 	    fzf \
 	    ghcup-hs-bin \
 	    git \
@@ -135,6 +137,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    python-lsp-server \
 	    python-pip \
 	    qutebrowser \
+	    ranger \
 	    rcm \
 	    reflector \
 	    ripgrep \
@@ -175,5 +178,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    zellij \
 	    zip \
 	    zoom \
-	    zoxide
+	    zoxide \
+        aspnet-targeting-pack-6.0
 fi
