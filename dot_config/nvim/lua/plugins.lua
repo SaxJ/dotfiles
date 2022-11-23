@@ -171,11 +171,14 @@ return require("packer").startup(function(use)
         config = function()
             require("mason").setup()
             require("mason-lspconfig").setup()
-            require("mason-lspconfig").setup_handlers({
-                function(name)
-                    require("lspconfig")[name].setup({})
-                end,
-            })
+
+            require("lspconfig").sumneko_lua.setup()
+        end,
+    })
+    use({
+        "folke/neodev.nvim",
+        config = function()
+            require("neodev").setup()
         end,
     })
     use({
