@@ -164,6 +164,12 @@ return require("packer").startup(function(use)
             })
         end,
     })
+    use({
+        "folke/neodev.nvim",
+        config = function()
+            require("neodev").setup()
+        end,
+    })
     use("williamboman/mason.nvim")
     use("williamboman/mason-lspconfig.nvim")
     use({
@@ -173,12 +179,6 @@ return require("packer").startup(function(use)
             require("mason-lspconfig").setup()
 
             require("lspconfig").sumneko_lua.setup()
-        end,
-    })
-    use({
-        "folke/neodev.nvim",
-        config = function()
-            require("neodev").setup()
         end,
     })
     use({
