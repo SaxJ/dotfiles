@@ -1,8 +1,11 @@
+-- General settings
+require("settings")
+
 -- Plugins
 require("plugins")
 
--- General settings
-require("settings")
+-- LSP
+require("lsp")
 
 local wk = require("which-key")
 local mapx = require("mapx")
@@ -117,13 +120,6 @@ wk.register({
 
 -- misc
 mapx.nnoremap("<C-e>", ":Neotree current %:p:h:h %:p<CR>")
-local bufopts = { noremap = true, silent = true, buffer = bufnr }
-vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
-vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
-vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
-vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-vim.keymap.set("n", "gr", vim.lsp.buf.references, bufopts)
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")

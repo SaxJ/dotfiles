@@ -130,62 +130,13 @@ return require("packer").startup(function(use)
             { "L3MON4D3/LuaSnip" },
             { "saadparwaiz1/cmp_luasnip" },
         },
-        config = function()
-            local cmp = require("cmp")
-            local lspkind = require("lspkind")
-
-            cmp.setup({
-                snippet = {
-                    expand = function(args)
-                        require("luasnip").lsp_expand(args.body)
-                    end,
-                },
-                mapping = {
-                    ["<Tab>"] = cmp.mapping(cmp.mapping.select_next_item()),
-                    ["<S-Tab>"] = cmp.mapping(cmp.mapping.select_prev_item()),
-                    ["<C-Space>"] = cmp.mapping.complete(),
-                    ["<CR>"] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    }),
-                },
-                sources = {
-                    { name = "nvim_lsp" },
-                    { name = "orgmode" },
-                    { name = "luasnip" },
-                    { name = "buffer" },
-                },
-                formatting = {
-                    format = lspkind.cmp_format({
-                        mode = "symbol",
-                        maxwidth = 50,
-                    }),
-                },
-            })
-        end,
     })
-    use({
-        "folke/neodev.nvim",
-        config = function()
-            require("neodev").setup()
-        end,
-    })
-    use("williamboman/mason.nvim")
-    use("williamboman/mason-lspconfig.nvim")
-    use({
-        "neovim/nvim-lspconfig",
-        config = function()
-            require("mason").setup()
-            require("mason-lspconfig").setup()
-
-            require("lspconfig").sumneko_lua.setup()
-        end,
-    })
+    use({ "folke/neodev.nvim" })
+    use({ "neovim/nvim-lspconfig" })
     use({
         "glepnir/lspsaga.nvim",
         config = function()
-            local saga = require("lspsaga")
-            saga.init_lsp_saga()
+            require("lspsaga").init_lsp_saga()
         end,
     })
     use({
