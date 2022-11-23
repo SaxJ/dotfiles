@@ -63,7 +63,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    gotop-bin \
 	    gparted \
 	    graphviz \
-	    helix \
+	    helix-git \
 	    heroku-cli-bin \
 	    hoogle \
 	    htop \
