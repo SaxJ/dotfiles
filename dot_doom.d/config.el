@@ -5,7 +5,9 @@
 
 ;;; Code:
 ;; Performance
-(setq read-process-output-max 1000000000)
+(setq read-process-output-max 1000000000
+      max-lisp-eval-depth 10000
+      max-specpdl-size 10000)
 
 (setq doom-localleader-key ",")
 
@@ -219,30 +221,11 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-;; (use-package! eglot
-;;   :config
-;;   (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
-;;   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
-(use-package! lsp-mode
+(use-package! eglot
   :config
-  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-        lsp-file-watch-threshold nil
-        lsp-idle-delay 0.8
-        lsp-clients-typescript-max-ts-server-memory 6000
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil)
-  (advice-add 'json-parse-string :around
-              (lambda (orig string &rest rest)
-                (apply orig (s-replace "\\u0000" "" string)
-                       rest)))
-  (advice-add 'json-parse-buffer :around
-              (lambda (orig &rest rest)
-                (while (re-search-forward "\\u0000" nil t)
-                  (replace-match ""))
-                (apply orig rest))))
+  (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
