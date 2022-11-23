@@ -33,6 +33,7 @@ opt.tabstop = indent
 opt.termguicolors = true
 opt.timeoutlen = 500
 opt.updatetime = 300
+opt.autoread = true
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal"
 
