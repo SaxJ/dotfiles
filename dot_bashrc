@@ -24,7 +24,6 @@ if [ -x "$(command -v nvim)" ]; then
     alias vimdiff="nvim -d"
 fi
 
-alias hx="helix"
 alias icat="kitty +kitten icat"
 alias prc="gh pr create --fill -w"
 alias prv="gh pr view --web"
