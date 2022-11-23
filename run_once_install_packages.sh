@@ -4,7 +4,6 @@ if [ "$NAME" = "Arch Linux" ]; then
 	printf "\n\nInstall my dev packages..."
 	paru -S --needed \
 	    aerc \
-	    ranger \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -43,6 +42,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    elm-format-bin \
 	    elm-language-server \
 	    emacs-nativecomp \
+	    eslint \
 	    fd \
 	    firefox-developer-edition \
 	    flatpak \
@@ -81,6 +81,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    keynav \
 	    kitty \
 	    lazygit \
+	    lua-language-server \
 	    make \
 	    man-db \
 	    marked \
@@ -138,6 +139,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    python-pip \
 	    qutebrowser \
 	    ranger \
+	    ranger \
 	    rcm \
 	    reflector \
 	    ripgrep \
@@ -157,6 +159,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    sshfs \
 	    starship \
 	    stylelint \
+	    stylua \
 	    task \
 	    taskwarrior-tui \
 	    terraform \
