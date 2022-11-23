@@ -46,7 +46,7 @@ wk.register({
         u = { ":r! uuidgen<CR>", "UUID" },
     },
     o = {
-        name = "+open",
+        name = "open",
         m = {
             function()
                 mail:toggle()
@@ -60,20 +60,19 @@ wk.register({
             ":ToggleTerm size=20<cr>",
             "Terminal Popup",
         },
-        d = { ":TroubleToggle<cr>", "Diagnostics" },
     },
     ["<leader>"] = { "<cmd>Telescope find_files hidden=true<cr>", "Recent Files" },
     f = {
-        name = "+files",
+        name = "files",
         f = { "<cmd>Telescope file_browser hidden=true<cr>", "Files" },
         Y = { ":CopyRelPath<CR>", "Yank Path" },
     },
     s = {
-        name = "+search",
+        name = "search",
         p = { "<cmd>Telescope live_grep hidden=true<cr>", "Search Project" },
     },
     p = {
-        name = "+project",
+        name = "project",
         p = { ":Telescope projects<CR>", "Projects" },
         t = { ":TodoTelescope<cr>", "Todos" },
         f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
@@ -90,12 +89,12 @@ wk.register({
         },
     },
     t = {
-        name = "+toggle",
+        name = "toggle",
         t = {
             function()
                 tasks:toggle()
             end,
-            "Tasks",
+            "Terminal",
         },
     },
     n = {
@@ -107,11 +106,11 @@ wk.register({
         d = { ":call SyncDownloadFile()<cr>", "Download" },
     },
     c = {
-        name = "+code",
+        name = "code",
         a = { ":Lspsaga code_action<CR>", "Action" },
         r = { ":Lspsaga rename<CR>", "Rename" },
         d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
-        D = { ":lua require('neogen').generate()<CR>", "Docs" },
+        g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
     },
     ["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
