@@ -50,7 +50,6 @@ cmp.setup({
 
 local servers = {
     'bashls',
-    'cssls',
     'dockerls',
     'hls',
     'intelephense',
@@ -60,9 +59,23 @@ local servers = {
     'tsserver',
     'yamlls',
 }
+
 for _, lsp in ipairs(servers) do
-    lspconfig[lsp].setup({
-        on_attach = attach_keybinds,
-        capabilities = capabilities,
-    })
+    if (lsp == 'omnisharp') then
+        lspconfig['omnisharp'].setup({
+            cmd = {"omnisharp"},
+            enable_editorconfig_support = true,
+            enable_roslyn_analyzers = true,
+            organise_imports_on_format = true,
+            enable_import_completion = true,
+
+            on_attach = attach_keybinds,
+            capabilities = capabilities,
+        })
+    else
+        lspconfig[lsp].setup({
+            on_attach = attach_keybinds,
+            capabilities = capabilities,
+        })
+    end
 end
