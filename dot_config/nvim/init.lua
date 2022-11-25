@@ -12,110 +12,114 @@ local mapx = require("mapx")
 
 local Terminal = require("toggleterm.terminal").Terminal
 local mail = Terminal:new({
-    dir = "~",
-    cmd = "aerc",
-    hidden = true,
-    close_on_exit = true,
-    direction = "float",
+	dir = "~",
+	cmd = "aerc",
+	hidden = true,
+	close_on_exit = true,
+	direction = "float",
 })
 local tasks = Terminal:new({
-    dir = "~",
-    cmd = "taskwarrior-tui",
-    hidden = true,
-    close_on_exit = true,
-    direction = "float",
+	dir = "~",
+	cmd = "taskwarrior-tui",
+	hidden = true,
+	close_on_exit = true,
+	direction = "float",
 })
 local lazyGit = Terminal:new({
-    cmd = "lazygit",
-    hidden = true,
-    direction = "tab",
+	cmd = "lazygit",
+	hidden = true,
+	direction = "tab",
 })
 
 -- Misc
 wk.register({
-    b = {
-        name = "+buffers",
-        b = { "<cmd>Telescope buffers<cr>", "Buffers" },
-        y = { ":%y+<CR>", "Yank" },
-        f = {
-            function()
-                vim.lsp.buf.format()
-            end,
-            "Format",
-        },
-    },
-    i = {
-        name = "+insert",
-        u = { ":r! uuidgen<CR>", "UUID" },
-    },
-    o = {
-        name = "+open",
-        m = {
-            function()
-                mail:toggle()
-            end,
-            "Mail",
-        },
-        T = { ":terminal<CR>", "Terminal Full" },
-        p = { "NvimTreeToggle<cr>", "Project" },
-        ["-"] = { ":Neotree<CR>", "Files" },
-        t = {
-            ":ToggleTerm size=20<cr>",
-            "Terminal Popup",
-        },
-    },
-    ["<leader>"] = { "<cmd>Telescope find_files hidden=true<cr>", "Recent Files" },
-    f = {
-        name = "+files",
-        f = { "<cmd>Telescope file_browser hidden=true<cr>", "Files" },
-        Y = { ":CopyRelPath<CR>", "Yank Path" },
-    },
-    s = {
-        name = "+search",
-        p = { "<cmd>Telescope live_grep hidden=true<cr>", "Search Project" },
-    },
-    p = {
-        name = "+project",
-        p = { ":Telescope projects<CR>", "Projects" },
-        t = { ":TodoTelescope<cr>", "Todos" },
-        f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
-    },
-    g = {
-        name = "+git",
-        b = { ":GitBlameToggle<cr>", "Blame" },
-        B = { ":GitBlameToggle<cr>", "Blame" },
-        g = { ":Neogit<cr>", "Git" },
-        f = {
-            name = "+forge",
-            s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
-            l = { ":Octo pr list<CR>", "List" },
-        },
-    },
-    t = {
-        name = "toggle",
-        t = {
-            function()
-                tasks:toggle()
-            end,
-            "Terminal",
-        },
-    },
-    n = {
-        name = "+notes",
-    },
-    r = {
-        name = "+remote",
-        u = { ":call SyncUploadFile()<cr>", "Upload" },
-        d = { ":call SyncDownloadFile()<cr>", "Download" },
-    },
-    c = {
-        name = "+code",
-        a = { ":Lspsaga code_action<CR>", "Action" },
-        r = { ":Lspsaga rename<CR>", "Rename" },
-        d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
-        g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
-    },
-    ["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
+	b = {
+		name = "+buffers",
+		b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+		y = { ":%y+<CR>", "Yank" },
+		f = {
+			function()
+				vim.lsp.buf.format()
+			end,
+			"Format",
+		},
+	},
+	i = {
+		name = "+insert",
+		u = { ":r! uuidgen<CR>", "UUID" },
+	},
+	o = {
+		name = "+open",
+		m = {
+			function()
+				mail:toggle()
+			end,
+			"Mail",
+		},
+		T = { ":terminal<CR>", "Terminal Full" },
+		p = { "NvimTreeToggle<cr>", "Project" },
+		["-"] = { ":Neotree<CR>", "Files" },
+		t = {
+			":ToggleTerm size=20<cr>",
+			"Terminal Popup",
+		},
+		d = {
+			":TroubleToggler<CR>",
+			"Diagnostics",
+		},
+	},
+	["<leader>"] = { "<cmd>Telescope find_files hidden=true<cr>", "Recent Files" },
+	f = {
+		name = "+files",
+		f = { "<cmd>Telescope file_browser hidden=true<cr>", "Files" },
+		Y = { ":CopyRelPath<CR>", "Yank Path" },
+	},
+	s = {
+		name = "+search",
+		p = { "<cmd>Telescope live_grep hidden=true<cr>", "Search Project" },
+	},
+	p = {
+		name = "+project",
+		p = { ":Telescope projects<CR>", "Projects" },
+		t = { ":TodoTelescope<cr>", "Todos" },
+		f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
+	},
+	g = {
+		name = "+git",
+		b = { ":GitBlameToggle<cr>", "Blame" },
+		B = { ":GitBlameToggle<cr>", "Blame" },
+		g = { ":Neogit<cr>", "Git" },
+		f = {
+			name = "+forge",
+			s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
+			l = { ":Octo pr list<CR>", "List" },
+		},
+	},
+	t = {
+		name = "toggle",
+		t = {
+			function()
+				tasks:toggle()
+			end,
+			"Terminal",
+		},
+	},
+	n = {
+		name = "+notes",
+	},
+	r = {
+		name = "+remote",
+		u = { ":call SyncUploadFile()<cr>", "Upload" },
+		d = { ":call SyncDownloadFile()<cr>", "Download" },
+	},
+	c = {
+		name = "+code",
+		a = { ":Lspsaga code_action<CR>", "Action" },
+		r = { ":Lspsaga rename<CR>", "Rename" },
+		d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
+		g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
+	},
+	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
 
 -- misc
