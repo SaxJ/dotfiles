@@ -140,12 +140,6 @@ return require("packer").startup(function(use)
             require("lspsaga").init_lsp_saga()
         end,
     })
-    use({
-        "rmagatti/goto-preview",
-        config = function()
-            require("goto-preview").setup({})
-        end,
-    })
     use("b0o/schemastore.nvim")
     use({
         "someone-stole-my-name/yaml-companion.nvim",
