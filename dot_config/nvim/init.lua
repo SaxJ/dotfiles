@@ -67,6 +67,12 @@ wk.register({
 			":TroubleToggler<CR>",
 			"Diagnostics",
 		},
+		g = {
+			function()
+				lazyGit:toggle()
+			end,
+			"Lazy Git",
+		},
 	},
 	["<leader>"] = { "<cmd>Telescope find_files hidden=true<cr>", "Recent Files" },
 	f = {
