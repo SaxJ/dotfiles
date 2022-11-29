@@ -1,9 +1,3 @@
 [[language]]
 name = "c-sharp"
-scope = "source.csharp"
-injection-regex = "c-?sharp"
-file-types = ["cs"]
-roots = ["sln", "csproj"]
-comment-token = "//"
-indent = { tab-width = 4, unit = " " }
-language-server = { command = "csharp-ls" }
+language-server = { command = "omnisharp", args = [ "--languageserver" ] }
