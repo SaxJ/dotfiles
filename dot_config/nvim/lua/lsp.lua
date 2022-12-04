@@ -3,6 +3,7 @@ require("neodev").setup()
 local cmp = require("cmp")
 local lspkind = require("lspkind")
 local lspconfig = require('lspconfig')
+local ht = require('haskell-tools')
 
 local capabilities = require("cmp_nvim_lsp").default_capabilities()
 
@@ -51,7 +52,6 @@ cmp.setup({
 local servers = {
     'bashls',
     'dockerls',
-    'hls',
     'intelephense',
     'jsonls',
     'csharp_ls',
@@ -66,3 +66,19 @@ for _, lsp in ipairs(servers) do
         capabilities = capabilities,
     })
 end
+
+ht.setup({
+    hls = {
+        on_attach = function(client, bufnr)
+            local bufopts = { noremap = true, silent = true, buffer = bufnr }
+
+            vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, bufopts)
+            vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, bufopts)
+            vim.keymap.set('n', '<leader>rf', function()
+                ht.repl.toggle(vim.api.nvim_buf_get_name(0))
+            end, bufopts)
+
+            attach_keybinds(client, bufnr)
+        end
+    }
+})
