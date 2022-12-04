@@ -219,11 +219,6 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-;; (use-package! eglot
-;;   :config
-;;   (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
-;;   (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
 (use-package! lsp-mode
   :config
   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
@@ -233,16 +228,7 @@
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
         lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil)
-  (advice-add 'json-parse-string :around
-              (lambda (orig string &rest rest)
-                (apply orig (s-replace "\\u0000" "" string)
-                       rest)))
-  (advice-add 'json-parse-buffer :around
-              (lambda (orig &rest rest)
-                (while (re-search-forward "\\u0000" nil t)
-                  (replace-match ""))
-                (apply orig rest))))
+        lsp-typescript-surveys-enabled nil))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -370,6 +356,10 @@
       :localleader
       :desc "Mark read"
       :v "r" (lambda () (notmuch-search-remove-tag "-unread")))
+(map! :map dired-mode-map
+      :localleader
+      :desc "Add File"
+      :n "a" #'dired-create-empty-file)
 
 (defun gnus-daemon-scan ()
   (let ((win (current-window-configuration))
@@ -458,5 +448,16 @@ topic N and modify that instead."
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
+
+(use-package! obsidian
+  :demand t
+  :config
+  (obsidian-specify-path "~/Documents/wiki/notes")
+  (global-obsidian-mode t)
+  :bind
+  (:map obsidian-mode-map
+        ("C-c C-o" . obsidian-follow-link-at-point)
+        ("C-c C-l" . obsidian-insert-wikilink)))
+
 ;;; config.el ends here
 ;;;
