@@ -34,6 +34,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    dotnet-runtime \
 	    dotnet-sdk \
 	    dotnet-sdk-6.0 \
+	    doctl \
 	    dropbox \
 	    dunst \
 	    editorconfig-core-c \
