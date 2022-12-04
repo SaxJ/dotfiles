@@ -334,4 +334,4 @@ alias lg="lazygit"
 
 
 [ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
-#eval "$(zellij setup --generate-auto-start bash)"
+eval "$(zellij setup --generate-auto-start bash)"
