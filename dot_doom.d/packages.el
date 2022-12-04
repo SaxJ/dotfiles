@@ -53,6 +53,7 @@
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
+(package! obsidian)
 
 
 ;; Filetypes
