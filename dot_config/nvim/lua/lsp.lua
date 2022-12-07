@@ -72,7 +72,7 @@ ht.setup({
         on_attach = function(client, bufnr)
             local bufopts = { noremap = true, silent = true, buffer = bufnr }
 
-            vim.keymap.set('n', '<space>ca', vim.lsp.codelens.run, bufopts)
+            vim.keymap.set('n', '<space>ca', vim.lsp.buf.code_action, bufopts)
             vim.keymap.set('n', '<space>hs', ht.hoogle.hoogle_signature, bufopts)
             vim.keymap.set('n', '<leader>rf', function()
                 ht.repl.toggle(vim.api.nvim_buf_get_name(0))
