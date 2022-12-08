@@ -36,6 +36,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    dotnet-sdk-6.0 \
 	    doctl \
 	    dropbox \
+	    telegram-tdlib \
 	    dunst \
 	    editorconfig-core-c \
 	    efibootmgr \
