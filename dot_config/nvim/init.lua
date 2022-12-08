@@ -95,6 +95,12 @@ wk.register({
 		b = { ":GitBlameToggle<cr>", "Blame" },
 		B = { ":GitBlameToggle<cr>", "Blame" },
 		g = { ":Neogit<cr>", "Git" },
+		-- g = {
+		-- 	function()
+		-- 		lazyGit:toggle()
+		-- 	end,
+		-- 	"Lazy Git",
+		-- },
 		f = {
 			name = "+forge",
 			s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
@@ -135,6 +141,10 @@ mapx.nnoremap("<C-e>", ":Neotree current %:p:h:h %:p<CR>")
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
 -- FileType Specific --
+
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
 mapx.nmap("<localleader>d", ":put =strftime('%m/%d/%y')<cr>", "silent", { ft = "norg" })
+
+-- Neogit
+mapx.nmap("@cp", ":! gh pr create --fill -w<CR>", "silent", { ft = 'NeogitStatus'})

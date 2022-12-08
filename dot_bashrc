@@ -27,6 +27,31 @@ fi
 alias icat="kitty +kitten icat"
 alias prc="gh pr create --fill -w"
 alias prv="gh pr view --web"
+alias hepg="pgcli -U engine_master -d engine_data -h localhost"
+alias lg="lazygit"
+alias gui="gitui"
+
+# VPN
+alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
+alias vpnd="openvpn3 session-manage --disconnect --config ~/.config/office.ovpn"
+
+# GIT GOOD
+alias ga='git add -i'
+alias gc='git ci'
+alias gp='git pull'
+alias gpu='git push'
+alias resolve='grep -lr "<<<<<<<" . | xargs git checkout'
+
+# DOCKER
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias pacman-clean='sudo pacman -Rns $(pacman -Qtdq)'
+
+# Noise Generation
+alias silence='play  -n synth brownnoise vol'
+
+# TASKBOOK
+alias pods="kubectl get pods"
 
 function cd() {
     z $1
@@ -35,9 +60,6 @@ function cd() {
     fi
 }
 
-# VPN
-alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
-alias vpnd="openvpn3 session-manage --disconnect --config ~/.config/office.ovpn"
 
 # GO
 export GOPATH=$HOME/go_packages
@@ -79,19 +101,10 @@ export PATH=$PATH:~/.roswell/bin:~/.nix-profile/bin
 alias yt-audio="youtube-dl -x --audio-format vorbis --audio-quality 0"
 alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
 
-# GIT GOOD
-alias ga='git add -i'
-alias gc='git ci'
-alias gp='git pull'
-alias gpu='git push'
-alias resolve='grep -lr "<<<<<<<" . | xargs git checkout'
 
 # HASKELL
 export cabal_helper_libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
 export libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
-
-# TASKBOOK
-alias pods="kubectl get pods"
 
 # HABITICA
 pass habitica/cli 2>/dev/null 1>/dev/null
@@ -99,13 +112,6 @@ if [ $? -eq 0 ]; then
     source <(pass habitica/cli)
 fi
 
-# DOCKER
-alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
-alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
-alias pacman-clean='sudo pacman -Rns $(pacman -Qtdq)'
-
-# Noise Generation
-alias silence='play  -n synth brownnoise vol'
 
 # Secret manager
 function pw() { bw list items --search $1 | jq; }
@@ -329,9 +335,7 @@ function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
 }
 
-alias hepg="pgcli -U engine_master -d engine_data -h localhost"
-alias lg="lazygit"
 
 
 [ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
-#eval "$(zellij setup --generate-auto-start bash)"
+eval "$(zellij setup --generate-auto-start bash)"
