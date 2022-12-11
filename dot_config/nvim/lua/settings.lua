@@ -50,3 +50,7 @@ set wildignore+=**/android/*
 set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 ]])
+
+vim.diagnostic.config({
+    virtual_text = false
+})
