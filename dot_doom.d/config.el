@@ -5,7 +5,9 @@
 
 ;;; Code:
 ;; Performance
-(setq read-process-output-max 1000000000)
+(setq read-process-output-max 1000000000
+      max-lisp-eval-depth 10000
+      max-specpdl-size 10000)
 
 (setq doom-localleader-key ",")
 
@@ -219,16 +221,21 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
+; (use-package! lsp-mode
+;   :config
+;   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
+;         lsp-file-watch-threshold nil
+;         lsp-idle-delay 0.8
+;         lsp-clients-typescript-max-ts-server-memory 6000
+;         lsp-javascript-format-enable nil
+;         lsp-typescript-format-enable nil
+;         lsp-typescript-preferences-import-module-specifier "relative"
+;         lsp-typescript-surveys-enabled nil))
+(use-package! eglot
   :config
-  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-        lsp-file-watch-threshold nil
-        lsp-idle-delay 0.8
-        lsp-clients-typescript-max-ts-server-memory 6000
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil))
+  (add-to-list 'eglot-server-programs '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs '(typescript-tsx-mode . ("typescript-language-server" "--stdio"))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
