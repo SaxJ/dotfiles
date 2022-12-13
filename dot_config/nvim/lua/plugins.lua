@@ -71,10 +71,10 @@ return require("packer").startup(function(use)
 		end,
 	})
 	use({
-	    'Mofiqul/trld.nvim',
-	    config = function ()
-	       require('trld').setup({})
-	    end
+		"Mofiqul/trld.nvim",
+		config = function()
+			require("trld").setup({})
+		end,
 	})
 
 	-- Languages
@@ -228,7 +228,6 @@ return require("packer").startup(function(use)
 				},
 			})
 			require("telescope").load_extension("fzf")
-			require("telescope").load_extension("projects")
 			require("telescope").load_extension("file_browser")
 		end,
 	})
@@ -354,7 +353,14 @@ return require("packer").startup(function(use)
 		},
 		config = function()
 			vim.cmd([[ let g:neo_tree_remove_legacy_commands = 1 ]])
-			require("neo-tree").setup({})
+			require("neo-tree").setup({
+				sync_root_with_cwd = true,
+				respect_buf_cwd = true,
+				update_focused_file = {
+					enable = true,
+					update_root = true,
+				},
+			})
 		end,
 	})
 	use({
@@ -399,9 +405,41 @@ return require("packer").startup(function(use)
 
 	-- Code navigation
 	use({
-		"ahmedkhalf/project.nvim",
+		"gnikdroy/projections.nvim",
 		config = function()
-			require("project_nvim").setup({})
+			-- setup
+			require("projections").setup({
+				workspaces = {
+					"~/Documents",
+				},
+				store_hooks = {
+					pre = function()
+						vim.cmd("tabd Neotree close")
+						vim.cmd("tabn")
+					end,
+				},
+			})
+
+			-- fuzzy search
+			require("telescope").load_extension("projections")
+
+			-- autostore session on exit
+			local Session = require("projections.session")
+			vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
+				callback = function()
+					Session.store(vim.loop.cwd())
+				end,
+			})
+
+			-- Switch to project if vim was started in a project dir
+			local switcher = require("projections.switcher")
+			vim.api.nvim_create_autocmd({ "VimEnter" }, {
+				callback = function()
+					if vim.fn.argc() == 0 then
+						switcher.switch(vim.loop.cwd())
+					end
+				end,
+			})
 		end,
 	})
 

@@ -86,8 +86,7 @@ wk.register({
 	},
 	p = {
 		name = "+project",
-		p = { ":Telescope projects<CR>", "Projects" },
-		t = { ":TodoTelescope<cr>", "Todos" },
+		p = { ":Telescope projections<CR>", "Projects" },
 		f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
 	},
 	g = {
