@@ -70,6 +70,12 @@ return require("packer").startup(function(use)
 			wilder.setup({ modes = { ":", "/", "?" } })
 		end,
 	})
+	use({
+	    'Mofiqul/trld.nvim',
+	    config = function ()
+	       require('trld').setup({})
+	    end
+	})
 
 	-- Languages
 	use("imsnif/kdl.vim")

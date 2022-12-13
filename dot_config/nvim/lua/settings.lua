@@ -51,6 +51,7 @@ set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 ]])
 
+-- Don't show diagnostics on the same line
 vim.diagnostic.config({
     virtual_text = false
 })
