@@ -64,7 +64,7 @@ wk.register({
 			"Terminal Popup",
 		},
 		d = {
-			":TroubleToggler<CR>",
+			":TroubleToggle<CR>",
 			"Diagnostics",
 		},
 		g = {
