@@ -14,7 +14,7 @@ local attach_keybinds = function(_, bufnr)
 	vim.keymap.set("n", "gD", vim.lsp.buf.declaration, bufopts)
 	vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
-	vim.keymap.set("n", "gi", vim.lsp.buf.implementation, bufopts)
+	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "gr", ":Trouble lsp_references<CR>", bufopts)
 end
@@ -51,20 +51,29 @@ cmp.setup({
 
 local servers = {
 	"bashls",
+	"omnisharp",
 	"dockerls",
 	"intelephense",
 	"jsonls",
-	"csharp_ls",
 	"sumneko_lua",
 	"tsserver",
 	"yamlls",
+	"cssls",
 }
 
 for _, lsp in ipairs(servers) do
-	lspconfig[lsp].setup({
-		on_attach = attach_keybinds,
-		capabilities = capabilities,
-	})
+	if lsp == "omnisharp" then
+		lspconfig[lsp].setup({
+			on_attach = attach_keybinds,
+			capabilities = capabilities,
+			cmd = { "omnisharp" },
+		})
+	else
+		lspconfig[lsp].setup({
+			on_attach = attach_keybinds,
+			capabilities = capabilities,
+		})
+	end
 end
 
 ht.setup({
