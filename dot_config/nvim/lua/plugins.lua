@@ -404,44 +404,6 @@ return require("packer").startup(function(use)
 	})
 
 	-- Code navigation
-	use({
-		"gnikdroy/projections.nvim",
-		config = function()
-			-- setup
-			require("projections").setup({
-				workspaces = {
-					"~/Documents",
-				},
-				store_hooks = {
-					pre = function()
-						vim.cmd("tabd Neotree close")
-						vim.cmd("tabn")
-					end,
-				},
-			})
-
-			-- fuzzy search
-			require("telescope").load_extension("projections")
-
-			-- autostore session on exit
-			local Session = require("projections.session")
-			vim.api.nvim_create_autocmd({ "VimLeavePre" }, {
-				callback = function()
-					Session.store(vim.loop.cwd())
-				end,
-			})
-
-			-- Switch to project if vim was started in a project dir
-			local switcher = require("projections.switcher")
-			vim.api.nvim_create_autocmd({ "VimEnter" }, {
-				callback = function()
-					if vim.fn.argc() == 0 then
-						switcher.switch(vim.loop.cwd())
-					end
-				end,
-			})
-		end,
-	})
 
 	-- Version Control
 	use({
