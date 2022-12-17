@@ -80,7 +80,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	    jq \
 	    js-beautify \
 	    keynav \
-	    kitty \
+	    alacritty \
 	    lazygit \
 	    lua-language-server \
 	    make \
