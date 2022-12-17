@@ -102,8 +102,6 @@ wk.register({
 		-- },
 		f = {
 			name = "+forge",
-			s = { ":Octo search assignee:SaxJ is:pr<CR>", "Search" },
-			l = { ":Octo pr list<CR>", "List" },
 		},
 	},
 	t = {
