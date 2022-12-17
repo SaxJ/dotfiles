@@ -31,16 +31,16 @@ return require("packer").startup(function(use)
 
 	-- Appearance
 	use("kyazdani42/nvim-web-devicons")
+
+	-- Theme
 	use({
-		"catppuccin/nvim",
-		as = "catppuccin",
+		"folke/tokyonight.nvim",
 		config = function()
-			require("catppuccin").setup({
-				flavour = "macchiato", -- mocha, macchiato, frappe, latte
-			})
-			vim.api.nvim_command("colorscheme catppuccin")
+			vim.api.nvim_command("colorscheme tokyonight-storm")
 		end,
 	})
+
+	-- Statusline
 	use({
 		"nvim-lualine/lualine.nvim",
 		requires = { "kyazdani42/nvim-web-devicons", opt = true },
@@ -48,6 +48,7 @@ return require("packer").startup(function(use)
 			require("lualine").setup({
 				options = {
 					globalstatus = true,
+					theme = "tokyonight",
 				},
 				sections = {
 					lualine_c = {
@@ -63,6 +64,8 @@ return require("packer").startup(function(use)
 			})
 		end,
 	})
+
+	-- Autocomplete commands
 	use({
 		"gelguy/wilder.nvim",
 		config = function()
@@ -70,6 +73,8 @@ return require("packer").startup(function(use)
 			wilder.setup({ modes = { ":", "/", "?" } })
 		end,
 	})
+
+	-- Show diagnostics in top right
 	use({
 		"Mofiqul/trld.nvim",
 		config = function()
@@ -152,7 +157,11 @@ return require("packer").startup(function(use)
 	use({
 		"glepnir/lspsaga.nvim",
 		config = function()
-			require("lspsaga").init_lsp_saga()
+			require("lspsaga").init_lsp_saga({
+				symbol_in_winbar = {
+					in_custom = true,
+				},
+			})
 		end,
 	})
 	use("b0o/schemastore.nvim")
