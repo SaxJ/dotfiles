@@ -17,6 +17,9 @@ local attach_keybinds = function(_, bufnr)
 	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
 	vim.keymap.set("n", "gr", ":Trouble lsp_references<CR>", bufopts)
+
+	vim.keymap.set("n", "]e", ":Lspsaga diagnostic_jump_next<CR>", bufopts)
+	vim.keymap.set("n", "[e", ":Lspsaga diagnostic_jump_prev<CR>", bufopts)
 end
 
 -- Autocomplete mapping
