@@ -1,7 +1,6 @@
 require("neodev").setup()
 
 local cmp = require("cmp")
-local lspkind = require("lspkind")
 local lspconfig = require("lspconfig")
 local ht = require("haskell-tools")
 
@@ -16,7 +15,7 @@ local attach_keybinds = function(_, bufnr)
 	vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
 	vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
 	vim.keymap.set("n", "<C-k>", vim.lsp.buf.signature_help, bufopts)
-	vim.keymap.set("n", "gr", ":Trouble lsp_references<CR>", bufopts)
+	vim.keymap.set("n", "gr", ":Telescope lsp_references<CR>", bufopts)
 
 	vim.keymap.set("n", "]e", ":Lspsaga diagnostic_jump_next<CR>", bufopts)
 	vim.keymap.set("n", "[e", ":Lspsaga diagnostic_jump_prev<CR>", bufopts)
@@ -70,6 +69,15 @@ for _, lsp in ipairs(servers) do
 			on_attach = attach_keybinds,
 			capabilities = capabilities,
 			cmd = { "omnisharp" },
+		})
+	elseif lsp == "jsonls" then
+		lspconfig[lsp].setup({
+			settings = {
+				json = {
+					schemas = require("schemastore").json.schemas(),
+					validate = { enable = true },
+				},
+			},
 		})
 	else
 		lspconfig[lsp].setup({
