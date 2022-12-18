@@ -42,13 +42,7 @@ cmp.setup({
 		{ name = "orgmode" },
 		{ name = "luasnip" },
 		-- { name = "buffer" },
-	},
-	formatting = {
-		format = lspkind.cmp_format({
-			mode = "symbol",
-			maxwidth = 50,
-		}),
-	},
+	}
 })
 
 local servers = {
