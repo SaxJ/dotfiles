@@ -63,10 +63,6 @@ wk.register({
 			":ToggleTerm size=20<cr>",
 			"Terminal Popup",
 		},
-		d = {
-			":TroubleToggle<CR>",
-			"Diagnostics",
-		},
 		g = {
 			function()
 				lazyGit:toggle()
