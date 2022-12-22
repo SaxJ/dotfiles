@@ -339,4 +339,9 @@ function bash-stats() {
 
 
 [ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
-#eval "$(zellij setup --generate-auto-start bash)"
+eval "$(zellij setup --generate-auto-start bash)"
+
+# tab multiplexer configuration: https://github.com/austinjones/tab-rs/
+source "/home/saxonj/.local/share/tab/completion/tab.bash"
+# end tab configuration
+
