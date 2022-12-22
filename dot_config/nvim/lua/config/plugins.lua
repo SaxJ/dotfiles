@@ -1,0 +1,17 @@
+return {
+    "b0o/mapx.nvim",
+    "arkav/lualine-lsp-progress",
+    "samjwill/nvim-unception",
+    "imsnif/kdl.vim",
+    "mracos/mermaid.vim",
+	"amadeus/vim-mjml",
+	"adamclerk/vim-razor",
+	"jparise/vim-graphql",
+	"pbrisbin/vim-syntax-shakespeare",
+    "folke/neodev.nvim",
+    "b0o/schemastore.nvim",
+    "gpanders/editorconfig.nvim",
+    "eshion/vim-sync",
+    "jghauser/mkdir.nvim",
+    "airblade/vim-rooter",
+}
