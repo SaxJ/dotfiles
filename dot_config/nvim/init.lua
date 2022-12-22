@@ -2,10 +2,7 @@
 require("settings")
 
 -- Plugins
-require("plugins")
-
--- LSP
-require("lsp")
+require("config.lazy")
 
 local wk = require("which-key")
 local mapx = require("mapx")
