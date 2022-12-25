@@ -1,6 +1,6 @@
 [[language]]
 name = "c-sharp"
-language-server = { command = "omnisharp", args = ["--languageserver"] }
+language-server = { command = "omnisharp", args = ["--languageserver", "RoslynExtensionsOptions:enableDecompilationSupport=true", "RoslynExtensionsOptions:enableImportCompletion=true", "RoslynExtensionsOptions:enableAnalyzersSupport=true"] }
 
 [[language]]
 name = "php"
