@@ -8,6 +8,7 @@ export TERM=kitty
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
+export NODE_OPTIONS=--openssl-legacy-provider
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -54,10 +55,14 @@ alias silence='play  -n synth brownnoise vol'
 # TASKBOOK
 alias pods="kubectl get pods"
 
+# Zellij
+alias zr="zellij run"
+alias zrf="zellij run -f"
+
 function cd() {
-    z $1
+    z "$1"
     if [ -n "$ZELLIJ_SESSION_NAME" ]; then
-        zellij action rename-tab ${PWD##*/}
+        zellij action rename-tab "${PWD##*/}"
     fi
 }
 
@@ -339,7 +344,7 @@ function bash-stats() {
 
 
 [ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
-eval "$(zellij setup --generate-auto-start bash)"
+#eval "$(zellij setup --generate-auto-start bash)"
 
 # tab multiplexer configuration: https://github.com/austinjones/tab-rs/
 source "/home/saxonj/.local/share/tab/completion/tab.bash"
