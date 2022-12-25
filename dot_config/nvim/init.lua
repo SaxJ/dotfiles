@@ -116,10 +116,9 @@ wk.register({
 	},
 	c = {
 		name = "+code",
-		a = { ":Lspsaga code_action<CR>", "Action" },
-		r = { ":Lspsaga rename<CR>", "Rename" },
-		d = { ":Lspsaga show_line_diagnostics<CR>", "Diagnostic" },
-		g = { ":lua require('neogen').generate()<CR>", "Generate Docs" },
+		a = { vim.lsp.buf.code_action, "Code Action" },
+		r = { vim.lsp.buf.rename, "Rename" },
+		g = { require('neogen').generate, "Generate Docs" },
 	},
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
