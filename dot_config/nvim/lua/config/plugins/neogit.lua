@@ -1,4 +1,5 @@
 return {
+    enabled = false,
 	"TimUntersberger/neogit",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
