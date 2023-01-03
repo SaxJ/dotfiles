@@ -4,6 +4,7 @@ if [ "$NAME" = "Arch Linux" ]; then
 	printf "\n\nInstall my dev packages..."
 	paru -S --needed \
 	    aerc \
+			netcoredbg \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
