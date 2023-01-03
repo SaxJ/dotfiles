@@ -66,33 +66,6 @@
 (package! caddyfile-mode)
 (package! mermaid-mode)
 
-(unpin!
- ;; checkers
- flycheck
- flycheck-popup-tip
- flycheck-posframe
-
- ;; lsp
- lsp-mode
- lsp-ui
- consult-lsp
-
- ;; tree-sitter
- evil-textobj-tree-sitter
- tree-sitter
- tree-sitter-langs
-
- ;; magit
- evil-magit
- forge
- code-review
- magit
-
- ;; calendar
- calfw
- calfw-org
- org-gcal)
-
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
 ;; `:files' in the `:recipe':
