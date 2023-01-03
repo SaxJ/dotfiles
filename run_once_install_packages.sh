@@ -104,7 +104,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    nodejs-lts-gallium \
 	    npm \
 	    nvm \
-	    omnisharp-roslyn \
+	    omnisharp-roslyn-bin \
 	    openvpn3 \
 	    p7zip \
 	    pacmanfile \
