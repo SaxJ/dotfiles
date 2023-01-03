@@ -1,7 +1,7 @@
 #!/bin/sh
 . /etc/os-release
 if [ "$NAME" = "Arch Linux" ]; then
-	printf "\n\nInstall my dev packages..."
+	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
 	    aerc \
 			netcoredbg \
