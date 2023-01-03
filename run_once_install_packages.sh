@@ -1,6 +1,6 @@
 #!/bin/bash
 . /etc/os-release
-read -r -e -p "\nInstall dev packages?\n" install
+read -r -e -p "Install dev packages?" -N 1 install
 
 if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
