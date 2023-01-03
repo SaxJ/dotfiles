@@ -1,6 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 . /etc/os-release
-if [ "$NAME" = "Arch Linux" ]; then
+read -e -p "Install dev packages?" install
+
+if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
 	    aerc \
