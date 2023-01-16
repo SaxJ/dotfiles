@@ -1,7 +1,17 @@
 [[language]]
 name = "c-sharp"
 language-server = { command = "omnisharp", args = ["--languageserver", "RoslynExtensionsOptions:enableDecompilationSupport=true", "RoslynExtensionsOptions:enableImportCompletion=true", "RoslynExtensionsOptions:enableAnalyzersSupport=true"] }
+auto-format = true
 
 [[language]]
 name = "php"
 roots = ["composer.json"]
+auto-format = true
+
+[[language]]
+name = "tsx"
+auto-format = true
+
+[[language]]
+name = "typescript"
+auto-format = true
