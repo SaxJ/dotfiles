@@ -1,10 +1,10 @@
-theme = "onedark"
+theme = "my-onedark"
 
 [editor]
 line-number = "relative"
 mouse = false
 shell = ["bash", "-c"]
-idle-timeout = 100
+idle-timeout = 400
 
 [editor.cursor-shape]
 insert = "bar"
@@ -22,3 +22,6 @@ display-messages = true
 
 [keys.select]
 "$" = "goto_line_end"
+
+[keys.insert]
+"C-space" = "completion"
