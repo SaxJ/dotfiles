@@ -1,4 +1,4 @@
-theme = "my-onedark"
+theme = "saxon"
 
 [editor]
 line-number = "relative"
@@ -9,10 +9,13 @@ idle-timeout = 400
 [editor.cursor-shape]
 insert = "bar"
 normal = "block"
-select = "underline"
+select = "block"
 
 [editor.file-picker]
 hidden = false
+
+[editor.indent-guides]
+render = true
 
 [editor.lsp]
 display-messages = true
