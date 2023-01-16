@@ -45,7 +45,6 @@ exec --no-startup-id dropbox start
 
 exec firefox-developer-edition
 exec slack
-exec emacs
 
 # Use pactl to adjust volume in PulseAudio.
 set $refresh_i3status killall -SIGUSR1 i3status
