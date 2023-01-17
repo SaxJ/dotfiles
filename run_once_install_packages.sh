@@ -143,8 +143,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    python-pip \
 	    qutebrowser \
 	    ranger \
-	    ranger \
-	    rcm \
 	    reflector \
 	    ripgrep \
 	    rofi \
@@ -186,5 +184,5 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    zip \
 	    zoom \
 	    zoxide \
-        aspnet-targeting-pack-6.0
+      aspnet-targeting-pack-6.0
 fi
