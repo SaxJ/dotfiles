@@ -138,7 +138,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    sbcl \
 	    scrot \
 	    sed \
-	    sfdx-cli \
 	    shellcheck \
 	    slack-desktop \
 	    spectrwm \
