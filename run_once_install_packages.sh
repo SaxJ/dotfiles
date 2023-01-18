@@ -116,7 +116,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    php-gd \
 	    php-imagick \
 	    php-imap \
-	    php-intl \
 	    php-pgsql \
 	    php-sodium \
 	    php-sqlite \
