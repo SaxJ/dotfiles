@@ -67,7 +67,7 @@ wk.register({
 			"Lazy Git",
 		},
 	},
-	["<leader>"] = { ":Telescope frecency workspace=CWD<cr>", "Recent Files" },
+	["<leader>"] = { ":Telescope find_files<cr>", "Recent Files" },
 	f = {
 		name = "+files",
 		f = { "<cmd>Telescope file_browser hidden=true<cr>", "Files" },
