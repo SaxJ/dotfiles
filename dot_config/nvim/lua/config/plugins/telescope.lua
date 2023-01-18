@@ -8,13 +8,13 @@ return {
         config = function()
             require("telescope").load_extension("yaml_schema")
 
-            local actions = require("telescope.actions")
             require("telescope").setup({
                 defaults = {
                     mappings = {
                         i = {
-                            ["<C-j>"] = actions.move_selection_next,
-                            ["<C-k>"] = actions.move_selection_previous,
+                            ["<C-j>"] = "move_selection_next",
+                            ["<C-k>"] = "move_selection_previous",
+                            ["<esc>"] = "close",
                         },
                     },
                     vimgrep_arguments = {
@@ -66,6 +66,11 @@ return {
                         file_browser = {
                             hijack_netrw = true,
                         },
+                        frecency = {
+                            default_workspace = 'CWD',
+                            ignore_patterns = {"*.git/*", "*/tmp/*", "*/node_modules/*"},
+                            show_unindexed = false
+                        }
                     },
                 },
             })
