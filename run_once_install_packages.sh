@@ -77,7 +77,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    i3lock \
 	    i3status \
 	    i3status-rust \
-	    insomnia-bin \
 	    isync \
 	    jdk-openjdk \
 	    jq \
