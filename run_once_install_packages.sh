@@ -6,7 +6,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
 	    aerc \
-			netcoredbg \
+        netcoredbg \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -120,18 +120,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    php-pgsql \
 	    php-sodium \
 	    php-sqlite \
-	    php7 \
-	    php7-gd \
-	    php7-igbinary \
-	    php7-imagick \
-	    php7-imap \
-	    php7-intl \
-	    php7-memcache \
-	    php7-memcached \
-	    php7-pgsql \
-	    php7-phpdbg \
-	    php7-sodium \
-	    php7-sqlite \
 	    picom \
 	    pkgconf \
 	    polybar \
@@ -167,8 +155,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    terraform \
 	    texinfo \
 	    tidy \
-	    tmux \
-	    tmuxinator \
 	    tor \
 	    udiskie \
 	    unzip \
@@ -180,7 +166,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    xdg-utils \
 	    xdotool \
 	    yarn \
-	    zellij \
 	    zip \
 	    zoom \
 	    zoxide \
