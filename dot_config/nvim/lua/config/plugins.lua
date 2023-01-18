@@ -14,6 +14,7 @@ return {
     "eshion/vim-sync",
     "jghauser/mkdir.nvim",
     "airblade/vim-rooter",
+    "fladson/vim-kitty",
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
