@@ -6,7 +6,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
 	    aerc \
-        netcoredbg \
+	    alacritty \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -34,12 +34,11 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    discord \
 	    docker \
 	    docker-compose \
+	    doctl \
 	    dotnet-runtime \
 	    dotnet-sdk \
 	    dotnet-sdk-6.0 \
-	    doctl \
 	    dropbox \
-	    telegram-tdlib \
 	    dunst \
 	    editorconfig-core-c \
 	    efibootmgr \
@@ -82,7 +81,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    jq \
 	    js-beautify \
 	    keynav \
-	    alacritty \
 	    lazygit \
 	    lua-language-server \
 	    make \
@@ -148,6 +146,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    stylua \
 	    task \
 	    taskwarrior-tui \
+	    telegram-tdlib \
 	    terraform \
 	    texinfo \
 	    tidy \
@@ -156,6 +155,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    unzip \
 	    vim \
 	    visual-studio-code-bin \
+	    wezterm \
 	    wget \
 	    which \
 	    xclip \
@@ -165,5 +165,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    zip \
 	    zoom \
 	    zoxide \
+        netcoredbg \
       aspnet-targeting-pack-6.0
 fi
