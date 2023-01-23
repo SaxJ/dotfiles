@@ -93,6 +93,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    net-tools \
 	    netstandard-targeting-pack-bin \
 	    networkmanager \
+	    newsboat \
 	    ngrok \
 	    nitrogen \
 	    nmap \
@@ -166,5 +167,5 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    zoom \
 	    zoxide \
         netcoredbg \
-      aspnet-targeting-pack-6.0
+        aspnet-targeting-pack-6.0
 fi
