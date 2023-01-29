@@ -12,7 +12,11 @@ return {
                     },
                 },
             },
-            ['core.presenter'] = {},
+            ['core.presenter'] = {
+                config = {
+                    zen_mode = "zen-mode"
+                }
+            },
             ["core.norg.manoeuvre"] = {},
         },
     },
