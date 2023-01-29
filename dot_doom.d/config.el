@@ -6,6 +6,7 @@
 ;;; Code:
 ;; Performance
 (setq read-process-output-max 1000000000)
+(setq byte-compile-warnings (not 'docstrings))
 
 (setq doom-localleader-key ",")
 
@@ -228,15 +229,7 @@
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
         lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil)
-  (advice-add 'json-parse-string :around
-              (lambda (orig (s-replace "\\u0000" "" string)
-                       rest)))
-  (advice-add 'json-parse-buffer :around
-              (lambda (orig &rest rest)
-                (while (re-search-forward "\\u0000" nil t)
-                  (replace-match ""))
-                (apply orig rest))))
+        lsp-typescript-surveys-enabled nil))
 
 ;; Haskell
 (use-package! shakespeare-mode)
