@@ -6,6 +6,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
 	    aerc \
+	    deno \
 	    alacritty \
 	    aspell \
 	    aspell-en \
