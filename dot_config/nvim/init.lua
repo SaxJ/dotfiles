@@ -84,8 +84,8 @@ wk.register({
 	},
 	g = {
 		name = "+git",
-		b = { ":GitBlameToggle<cr>", "Blame" },
-		B = { ":GitBlameToggle<cr>", "Blame" },
+		b = { ":ToggleBlameLine<cr>", "Blame" },
+		B = { ":ToggleBlameLine<cr>", "Blame" },
 		g = {
 			function()
 				lazyGit:toggle()

@@ -15,6 +15,7 @@ return {
     "jghauser/mkdir.nvim",
     "airblade/vim-rooter",
     "fladson/vim-kitty",
+    "tveskag/nvim-blame-line",
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
