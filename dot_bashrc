@@ -9,6 +9,7 @@ export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
 export NODE_OPTIONS=--openssl-legacy-provider
+export LLAMA_EDITOR=hx
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -31,7 +32,6 @@ alias prv="gh pr view --web"
 alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
 alias gui="gitui"
-# alias hx="helix"
 
 # VPN
 alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
@@ -347,5 +347,5 @@ function bash-stats() {
 #eval "$(zellij setup --generate-auto-start bash)"
 
 # tab multiplexer configuration: https://github.com/austinjones/tab-rs/
-source "/home/saxonj/.local/share/tab/completion/tab.bash"
+# source "/home/saxonj/.local/share/tab/completion/tab.bash"
 # end tab configuration

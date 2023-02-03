@@ -66,7 +66,7 @@ wk.register({
             end,
             "Lazy Git",
         },
-        r = { "IronRepl<cr>", "Repl" },
+        r = { ":IronRepl<cr>", "Repl" },
     },
     ["<leader>"] = { ":Telescope find_files<cr>", "Recent Files" },
     f = {

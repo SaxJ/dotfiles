@@ -8,6 +8,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    aerc \
 	    deno \
 	    alacritty \
+	    llama \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
