@@ -16,3 +16,7 @@ custom-commands:
     help: display lifeguard issues
     script: |-
       {{jira}} list --template table --query "labels = lifeguard order by created DESC"
+  - name: release
+    help: Display release notes
+    script: |-
+      {{jira}} list --template releasenote -f "customfield_11961,summary" --query "\"Release note[Short text]\" is not EMPTY AND statusCategoryChangedDate >= -30d order by statusCategoryChangedDate asc"
