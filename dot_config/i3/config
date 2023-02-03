@@ -123,7 +123,7 @@ bindsym $mod+space focus mode_toggle
 
 # focus the parent container
 bindsym $mod+a focus parent
-bindsym $mod+Shift+s exec "scrot -s '/home/saxonj/Images/%Y-%m-%d_$wx$h.png'"
+bindsym $mod+Shift+s exec "scrot -s '/home/saxonj/Pictures/%Y-%m-%d_$wx$h.png'"
 
 # focus the child container
 #bindsym $mod+d focus child
