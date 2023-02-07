@@ -108,6 +108,13 @@ wk.register({
     },
     n = {
         name = "+notes",
+        j = {
+            name = "+journal",
+            t = { ":Neorg journal today<CR>", "Today" },
+            n = { ":Neorg journal tomorrow<CR>", "Tomorrow" },
+            y = { ":Neorg journal yesterday<CR>", "Yesterday" },
+            i = { ":Neorg journal toc<CR>", "Index" },
+        },
     },
     r = {
         name = "+remote",
