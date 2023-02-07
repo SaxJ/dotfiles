@@ -7,6 +7,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	paru -S --needed \
 	    aerc \
 	    deno \
+			llama \
 	    alacritty \
 	    llama \
 	    aspell \
