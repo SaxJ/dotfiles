@@ -10,14 +10,14 @@ return {
                 ["core.norg.journal"] = {
                     config = {
                         strategy = "flat",
-                        workspace = "notes"
+                        workspace = "journal"
                     }
                 },
                 ["core.norg.dirman"] = { -- Manages Neorg workspaces
                     config = {
-                        default_workspace = "notes",
+                        default_workspace = "journal",
                         workspaces = {
-                            notes = "~/Documents/wiki/neorg",
+                            journal = "~/journal",
                         },
                     },
                 },
