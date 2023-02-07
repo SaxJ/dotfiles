@@ -7,8 +7,15 @@ return {
             load = {
                 ["core.defaults"] = {}, -- Loads default behaviour
                 ["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
+                ["core.norg.journal"] = {
+                    config = {
+                        strategy = "flat",
+                        workspace = "notes"
+                    }
+                },
                 ["core.norg.dirman"] = { -- Manages Neorg workspaces
                     config = {
+                        default_workspace = "notes",
                         workspaces = {
                             notes = "~/Documents/wiki/neorg",
                         },
