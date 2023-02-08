@@ -7,9 +7,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	paru -S --needed \
 	    aerc \
 	    deno \
-			llama \
 	    alacritty \
-	    llama \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -51,6 +49,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    emacs-nativecomp \
 	    eslint \
 	    fd \
+			felix-rs \
 	    firefox-developer-edition \
 	    flatpak \
 	    fzf \
@@ -169,6 +168,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    zip \
 	    zoom \
 	    zoxide \
-        netcoredbg \
-        aspnet-targeting-pack-6.0
+      netcoredbg \
+      aspnet-targeting-pack-6.0
 fi
