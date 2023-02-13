@@ -1,8 +1,7 @@
 return {
-	"VonHeikemen/lsp-zero.nvim",
+	"neovim/nvim-lspconfig",
 	dependencies = {
 		-- LSP Support
-		{ "neovim/nvim-lspconfig" },
 		{ "williamboman/mason.nvim" },
 		{ "williamboman/mason-lspconfig.nvim" },
 
@@ -25,21 +24,23 @@ return {
 		{ "ray-x/lsp_signature.nvim" },
 	},
 	config = function()
-		require("lsp_signature").setup({})
+		local lsp_capabilities = require('cmp_nvim_lsp').default_capabilities()
+		local lsp_attach = function(client, bufnr)
+			local bufopts = { noremap=true, silent=true, buffer=bufnr }
+		  vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
+		  vim.keymap.set('n', 'gd', vim.lsp.buf.definition, bufopts)
+		  vim.keymap.set('n', 'K', vim.lsp.buf.hover, bufopts)
+		  vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, bufopts)
+		end
 
-		local lsp = require("lsp-zero")
-
-		lsp.preset("recommended")
-
-		local cmp = require("cmp")
-		local cmp_mappings = lsp.defaults.cmp_mappings({
-			["<C-Space>"] = cmp.mapping.complete(),
-			["<C-e>"] = cmp.mapping.abort(),
+		local lspconfig = require('lspconfig')
+		require('mason-lspconfig').setup_handlers({
+			function (server_name)
+				lspconfig[server_name].setup({
+					on_attach = lsp_attach,
+					capabilities = lsp_capabilities
+				})
+			end
 		})
-		lsp.setup_nvim_cmp({
-			mapping = cmp_mappings,
-		})
-
-		lsp.setup()
 	end,
 }
