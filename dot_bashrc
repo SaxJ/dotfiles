@@ -10,6 +10,8 @@ export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
 export NODE_OPTIONS=--openssl-legacy-provider
 export LLAMA_EDITOR=hx
+export NNN_OPTS="e"
+export NNN_OPENER="/usr/share/nnn/plugins/nuke"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
