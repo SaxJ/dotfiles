@@ -91,7 +91,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    mermaid-cli \
 	    moar \
 	    neovim \
-	    nerd-fonts-complete \
 	    net-tools \
 	    netstandard-targeting-pack-bin \
 	    networkmanager \
