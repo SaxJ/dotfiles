@@ -1,6 +1,5 @@
 local cmd = vim.cmd
 local indent = 4
-local opt = vim.opt
 
 -- Leader/local leader
 vim.g.mapleader = [[ ]]
@@ -10,30 +9,30 @@ cmd("syntax enable")
 cmd("filetype plugin indent on")
 cmd("command! CopyRelPath call setreg('+', expand('%'))")
 
-opt.autoindent = true
-opt.breakindent = true
-opt.completeopt = "menuone,noselect"
-opt.copyindent = true
-opt.clipboard = "unnamed,unnamedplus"
-opt.cmdheight = 1
-opt.cursorline = true
-opt.expandtab = true
-opt.hidden = true
-opt.ignorecase = true
-opt.inccommand = "split"
-opt.number = true
-opt.relativenumber = true
-opt.scrolloff = 8
-opt.scrolloff = 8
-opt.shiftwidth = indent
-opt.softtabstop = indent
-opt.splitbelow = true
-opt.splitright = true
-opt.tabstop = indent
-opt.termguicolors = true
-opt.timeoutlen = 500
-opt.updatetime = 300
-opt.autoread = true
+vim.opt.autoindent = true
+vim.opt.breakindent = true
+vim.opt.completeopt = "menuone,noselect"
+vim.opt.copyindent = true
+vim.opt.clipboard = "unnamed,unnamedplus"
+vim.opt.cmdheight = 1
+vim.opt.cursorline = true
+vim.opt.expandtab = true
+vim.opt.hidden = true
+vim.opt.ignorecase = true
+vim.opt.inccommand = "split"
+vim.opt.incsearch = true
+vim.opt.number = true
+vim.opt.relativenumber = true
+vim.opt.scrolloff = 8
+vim.opt.scrolloff = 8
+vim.opt.shiftwidth = indent
+vim.opt.softtabstop = indent
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+vim.opt.tabstop = indent
+vim.opt.termguicolors = true
+vim.opt.timeoutlen = 500
+vim.opt.updatetime = 300
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
@@ -54,4 +53,11 @@ set wildignore+=**/.git/*
 -- Don't show diagnostics on the same line
 vim.diagnostic.config({
     virtual_text = false
+})
+
+-- Autoread files when they're changed
+vim.opt.autoread = true
+vim.api.nvim_create_autocmd({'VimEnter', 'FocusGained', 'BufEnter'}, {
+    group = vim.api.nvim_create_augroup('ReloadFileOnChange', {}),
+    command = 'checktime'
 })
