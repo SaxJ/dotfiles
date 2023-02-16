@@ -102,6 +102,8 @@ return {
                         ["textDocument/definition"] = require("omnisharp_extended").handler,
                     },
                     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
+                    on_attach = lsp_attach,
+                    capabilities = lsp_capabilities,
                 })
             end,
         })
