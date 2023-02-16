@@ -12,6 +12,7 @@ application/x-extension-xhtml=firefoxdeveloperedition.desktop
 application/x-extension-xht=firefoxdeveloperedition.desktop
 application/x-directory=doom-dired.desktop
 inode/directory=doom-dired.desktop
+x-scheme-handler/slack=slack.desktop
 
 [Added Associations]
 x-scheme-handler/http=firefoxdeveloperedition.desktop;
