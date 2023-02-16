@@ -454,7 +454,6 @@ topic N and modify that instead."
   :demand t
   :config
   (obsidian-specify-path "~/Documents/wiki/notes")
-  (global-obsidian-mode t)
   :bind
   (:map obsidian-mode-map
         ("C-c C-o" . obsidian-follow-link-at-point)
