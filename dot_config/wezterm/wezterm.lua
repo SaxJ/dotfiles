@@ -204,7 +204,7 @@ wezterm.on("update-right-status", function(window)
 end)
 
 return {
-    font = wezterm.font('FiraCode Nerd Font Mono'),
+    font = wezterm.font('FiraCode Nerd Font'),
 	font_size = 13,
 	max_fps = 120,
 	enable_wayland = false,
