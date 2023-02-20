@@ -25,7 +25,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18))
+(setq doom-font (font-spec :family "Fira Code" :size 18))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -229,7 +229,8 @@
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
         lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil))
+        lsp-typescript-surveys-enabled nil
+        lsp-disabled-clients '(php-ls)))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -238,6 +239,9 @@
 (use-package! apex-mode)
 
 ;; PHP
+(use-package! php-mode
+  :config
+  (setq php-mode-coding-style 'psr2))
 
 ;; Razor mode
 (defvar razor-mode-map)
