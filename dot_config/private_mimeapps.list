@@ -25,3 +25,5 @@ application/x-extension-shtml=firefoxdeveloperedition.desktop;
 application/xhtml+xml=firefoxdeveloperedition.desktop;
 application/x-extension-xhtml=firefoxdeveloperedition.desktop;
 application/x-extension-xht=firefoxdeveloperedition.desktop;
+x-scheme-handler/sms=org.gnome.Shell.Extensions.GSConnect.desktop;
+x-scheme-handler/tel=org.gnome.Shell.Extensions.GSConnect.desktop;
