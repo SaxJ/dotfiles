@@ -22,7 +22,7 @@ display-messages = true
 
 [keys.normal]
 "$" = "goto_line_end"
-"C-e" = "file_picker_in_current_buffer_directory"
+# "C-e" = "file_picker_in_current_buffer_directory"
 
 [keys.select]
 "$" = "goto_line_end"
