@@ -4,6 +4,17 @@
 # ~/.bashrc
 #
 
+export GOPATH=$HOME/go_packages
+export HELM_HOME=$HOME/helm
+export CARGO_PATH=$HOME/.cargo/bin
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export PIP_INSTALL=$HOME/global-pip/bin
+export DOOM=$HOME/.emacs.d/bin
+export DOTNET_TOOLS=$HOME/.dotnet/tools
+
+# PATH
+export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin"
+
 export TERM=kitty
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
@@ -78,42 +89,10 @@ function cd() {
 }
 
 
-# GO
-export GOPATH=$HOME/go_packages
-
-# HELM
-export HELM_HOME=$HOME/helm
-
-# RUST
-export CARGO_PATH=$HOME/.cargo/bin
-
-# NPM
-export NPM_INSTALL=/home/saxonj/npm-global
-
-export GEMS=/home/saxonj/.local/share/gem/ruby/2.7.0/bin:/home/saxonj/.gem/ruby/3.0.0/bin:/home/saxonj/.local/share/gem/ruby/3.0.0/bin
-
-# DOTNET PATH
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-
-# PYTHON PACKAGES
-export PIP_INSTALL=$HOME/global-pip/bin
-
-# COMPOSER PACKAGES
-export COMPOSER_BINS=$HOME/.config/composer/vendor/bin
-
-export FLUTTER_BIN=$HOME/flutter/bin
-
-export DOOM=$HOME/.emacs.d/bin
-
-export DOTNET_TOOLS=$HOME/.dotnet/tools
-
 # COMPLETION
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] &&
     . /usr/share/bash-completion/bash_completion
 
-# PATH
-export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/npm-global/bin:$PIP_INSTALL:$GEMS:$(yarn global bin):$DOOM:$COMPOSER_BINS:$FLUTTER_BIN:$HOME/.dotnet:$HOME/Documents/docker-helmfile:$DOTNET_TOOLS:/home/saxonj/.local/share/coursier/bin:/home/saxonj/.ghcup/bin"
-export PATH=$PATH:~/.roswell/bin:~/.nix-profile/bin
 
 alias yt-audio="youtube-dl -x --audio-format vorbis --audio-quality 0"
 alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
