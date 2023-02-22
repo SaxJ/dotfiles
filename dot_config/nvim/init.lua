@@ -17,7 +17,7 @@ local mail = Terminal:new({
 })
 local tasks = Terminal:new({
     dir = "~",
-    cmd = "taskwarrior-tui",
+    cmd = "vit",
     hidden = true,
     close_on_exit = true,
     direction = "float",
