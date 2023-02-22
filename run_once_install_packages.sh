@@ -6,8 +6,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
 	    aerc \
-	    deno \
-	    alacritty \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
@@ -24,17 +22,12 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    bitwarden-cli \
 	    bitwarden-rofi \
 	    calc \
-	    catimg \
 	    ccls \
 	    chezmoi \
 	    cmake \
 	    composer \
-	    dante \
 	    devtools \
 	    direnv \
-	    discord \
-	    docker \
-	    docker-compose \
 	    doctl \
 	    dotnet-runtime \
 	    dotnet-sdk \
@@ -43,15 +36,10 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    dunst \
 	    editorconfig-core-c \
 	    efibootmgr \
-	    elm-bin \
-	    elm-format-bin \
-	    elm-language-server \
 	    emacs-nativecomp \
 	    eslint \
 	    fd \
-			felix-rs \
 	    firefox-developer-edition \
-	    flatpak \
 	    fzf \
 	    ghcup-hs-bin \
 	    git \
@@ -69,9 +57,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    gotop-bin \
 	    gparted \
 	    graphviz \
-	    heroku-cli-bin \
 	    hoogle \
-	    htop \
 	    hub \
 	    i3-gaps \
 	    i3blocks \
@@ -95,8 +81,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    netstandard-targeting-pack-bin \
 	    networkmanager \
 	    newsboat \
-	    ngrok \
-	    nitrogen \
 	    nmap \
 	    nnn \
 	    nodejs-intelephense \
@@ -106,10 +90,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    omnisharp-roslyn-bin \
 	    openvpn3 \
 	    p7zip \
-	    pacmanfile \
-	    pass \
-	    pass-import \
-	    pass-otp \
 	    pdfjs \
 	    php \
 	    php-gd \
@@ -127,11 +107,9 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    python-lsp-server \
 	    python-pip \
 	    qutebrowser \
-	    ranger \
 	    reflector \
 	    ripgrep \
 	    rofi \
-	    roswell \
 	    rsync \
 	    rust \
 	    rust-analyzer \
@@ -140,23 +118,16 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    sed \
 	    shellcheck \
 	    slack-desktop \
-	    spectrwm \
-	    spotify \
 	    sshfs \
-	    starship \
 	    stylelint \
 	    stylua \
 	    task \
 	    taskwarrior-tui \
-	    telegram-tdlib \
 	    terraform \
 	    texinfo \
 	    tidy \
-	    tor \
-	    udiskie \
 	    unzip \
 	    vim \
-	    visual-studio-code-bin \
 	    wezterm \
 	    wget \
 	    which \
@@ -167,6 +138,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    zip \
 	    zoom \
 	    zoxide \
-      netcoredbg \
-      aspnet-targeting-pack-6.0
+	    netcoredbg \
+	    aspnet-targeting-pack-6.0
 fi
