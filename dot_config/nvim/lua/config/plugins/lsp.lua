@@ -43,7 +43,8 @@ return {
         require("neodev").setup()
         require('haskell-tools').setup({
             hls = {
-                on_attach = lsp_attach
+                autostart = true,
+                on_attach = lsp_attach,
             }
         })
 
