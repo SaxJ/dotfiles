@@ -51,6 +51,12 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    gobuster-bin \
 	    gomodifytags \
 	    gopass \
+			racket \
+			taplo \
+			typescript-language-server \
+			vscode-css-languageserver \
+			vscode-html-languageserver \
+			yaml-language-server \
 	    gopls \
 	    gore \
 	    gotests \
