@@ -46,6 +46,7 @@ alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
 alias gui="gitui"
 alias tt="taskwarrior-tui"
+alias hx="helix"
 
 # VPN
 alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
