@@ -55,7 +55,7 @@ wk.register({
         },
         T = { ":terminal<CR>", "Terminal Full" },
         p = { "NvimTreeToggle<cr>", "Project" },
-        ["-"] = { ":Neotree<CR>", "Files" },
+        ["-"] = { require('oil').open, "Files" },
         t = {
             ":ToggleTerm size=20<cr>",
             "Terminal Popup",
