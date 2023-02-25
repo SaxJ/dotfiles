@@ -25,7 +25,7 @@
 ;;
 ;; They all accept either a font-spec, font string ("Input Mono-12"), or xlfd
 ;; font string. You generally only need these two:
-(setq doom-font (font-spec :family "Fira Code" :size 18))
+(setq doom-font (font-spec :family "FiraCode Nerd Font" :size 18))
 
 ;; There are two ways to load a theme. Both assume the theme is installed and
 ;; available. You can either set `doom-theme' or manually load a theme with the
@@ -462,17 +462,6 @@ topic N and modify that instead."
   (:map obsidian-mode-map
         ("C-c C-o" . obsidian-follow-link-at-point)
         ("C-c C-l" . obsidian-insert-wikilink)))
-
-;; Need this to keep lsp working until emacs 29
-(advice-add 'json-parse-string :around
-            (lambda (orig string &rest rest)
-              (apply orig (s-replace "\\u0000" "" string)
-                     rest)))
-(advice-add 'json-parse-buffer :around
-            (lambda (orig &rest rest)
-              (while (re-search-forward "\\u0000" nil t)
-                (replace-match ""))
-              (apply orig rest)))
 
 ;;; config.el ends here
 ;;;
