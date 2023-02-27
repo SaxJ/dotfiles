@@ -6,7 +6,8 @@
  '(custom-safe-themes
    '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
  '(safe-local-variable-values
-   '((ssh-deploy-on-explicit-save . f)
+   '((ssh-deploy-on-explicit-save . t)
+     (ssh-deploy-on-explicit-save . f)
      (ssh-deploy-on-explicit-save . 1)
      (ssh-deploy-async-with-threads . 1)
      (haskell-process-use-ghci . t)

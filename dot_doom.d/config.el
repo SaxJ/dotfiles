@@ -463,5 +463,9 @@ topic N and modify that instead."
         ("C-c C-o" . obsidian-follow-link-at-point)
         ("C-c C-l" . obsidian-insert-wikilink)))
 
+(use-package! vterm
+  :config
+  (setq vterm-shell "/usr/bin/bash"))
+
 ;;; config.el ends here
 ;;;
