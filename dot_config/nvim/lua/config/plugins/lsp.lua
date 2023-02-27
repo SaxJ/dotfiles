@@ -37,6 +37,8 @@ return {
             vim.keymap.set("n", "gd", vim.lsp.buf.definition, bufopts)
             vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
             vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
+
+            require('lsp_signature').on_attach({}, bufnr)
         end
 
         -- Lua LSP
@@ -93,6 +95,13 @@ return {
         require("mason-lspconfig").setup_handlers({
             function(server_name)
                 lspconfig[server_name].setup({
+                    on_attach = lsp_attach,
+                    capabilities = lsp_capabilities,
+                })
+            end,
+            ["tsserver"] = function()
+                lspconfig.tsserver.setup({
+                    init_options = {preferences = {importModuleSpecifierPreference = 'relative'}},
                     on_attach = lsp_attach,
                     capabilities = lsp_capabilities,
                 })
