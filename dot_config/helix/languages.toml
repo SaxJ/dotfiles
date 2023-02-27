@@ -11,7 +11,9 @@ auto-format = true
 [[language]]
 name = "tsx"
 auto-format = true
+config = {preferences.importModuleSpecifierPreference = "relative"}
 
 [[language]]
 name = "typescript"
+config = {preferences.importModuleSpecifierPreference = "relative"}
 auto-format = true
