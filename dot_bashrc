@@ -89,6 +89,10 @@ function cd() {
     fi
 }
 
+function cast() {
+    ffmpeg -f alsa -ac 2 -i pulse -f x11grab -r 30 -s YxZ -i :0.0 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 "$1"
+}
+
 
 # COMPLETION
 [[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] &&
