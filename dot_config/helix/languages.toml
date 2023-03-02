@@ -1,6 +1,6 @@
 [[language]]
 name = "c-sharp"
-language-server = { command = "omnisharp", args = ["--languageserver", "RoslynExtensionsOptions:enableDecompilationSupport=true", "RoslynExtensionsOptions:enableImportCompletion=true", "RoslynExtensionsOptions:enableAnalyzersSupport=true"] }
+language-server = { command = "omnisharp", args = ["--languageserver"] }
 auto-format = true
 
 [[language]]
