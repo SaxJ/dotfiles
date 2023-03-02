@@ -21,6 +21,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    bat \
 	    bitwarden-cli \
 	    bitwarden-rofi \
+			broot \
 	    calc \
 	    ccls \
 	    chezmoi \
@@ -88,7 +89,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    networkmanager \
 	    newsboat \
 	    nmap \
-	    nnn \
 	    nodejs-intelephense \
 	    nodejs-lts-gallium \
 	    npm \
