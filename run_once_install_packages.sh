@@ -37,7 +37,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    dunst \
 	    editorconfig-core-c \
 	    efibootmgr \
-	    emacs29-git \
 	    eslint \
 	    fd \
 	    firefox-developer-edition \
