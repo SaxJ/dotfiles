@@ -9,7 +9,7 @@ export HELM_HOME=$HOME/helm
 export CARGO_PATH=$HOME/.cargo/bin
 export DOTNET_CLI_TELEMETRY_OPTOUT=1
 export PIP_INSTALL=$HOME/global-pip/bin
-export DOOM=$HOME/.emacs.d/bin
+export DOOM=$HOME/.config/emacs/bin
 export DOTNET_TOOLS=$HOME/.dotnet/tools
 
 # PATH
