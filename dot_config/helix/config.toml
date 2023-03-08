@@ -3,7 +3,7 @@ theme = "saxon"
 [editor]
 line-number = "relative"
 mouse = false
-shell = ["bash", "-c"]
+shell = ["bash", "-i", "-c"]
 idle-timeout = 400
 
 [editor.cursor-shape]
@@ -29,3 +29,6 @@ display-messages = true
 
 [keys.insert]
 "C-space" = "completion"
+
+[keys.normal.space]
+g = {s = ":sh git_sync"}
