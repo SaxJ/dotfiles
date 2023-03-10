@@ -1,5 +1,4 @@
 local wezterm = require("wezterm")
--- local is_dark = wezterm.gui.get_appearance():find("Dark")
 local is_dark = true
 
 local function is_vi_process(pane)
