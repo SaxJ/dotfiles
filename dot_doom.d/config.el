@@ -1,5 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-
+;
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -357,10 +357,6 @@
       :localleader
       :desc "Mark many read"
       :n "mm" #'mark-many-read)
-(map! :map notmuch-search-mode-map
-      :localleader
-      :desc "Mark read"
-      :v "r" (lambda () (notmuch-search-remove-tag "-unread")))
 (map! :map dired-mode-map
       :localleader
       :desc "Add File"
@@ -445,10 +441,6 @@ topic N and modify that instead."
 (setq-hook! 'csharp-mode-hook +format-with-lsp t)
 (setq typescript-indent-level 2)
 
-;; EMAIL
-(setq +notmuch-sync-backend 'mbsync
-      +notmuch-home-function (lambda () (notmuch-search "tag:unread")))
-
 (use-package! vimrc-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
@@ -466,6 +458,52 @@ topic N and modify that instead."
 (use-package! vterm
   :config
   (setq vterm-shell "/usr/bin/bash"))
+
+
+(set-email-account! "Work"
+  '((mu4e-sent-folder       . "/work/Sent")
+    (mu4e-drafts-folder     . "/work/Drafts")
+    (mu4e-trash-folder      . "/work/Trash")
+    (mu4e-refile-folder     . "/work/All Mail")
+    (smtpmail-smtp-user     . "saxon.jensen@healthengine.com.au")
+    (mu4e-compose-signature . ""))
+  t)
+(set-email-account! "Personal"
+  '((mu4e-sent-folder       . "/personal/Sent")
+    (mu4e-drafts-folder     . "/personal/Drafts")
+    (mu4e-trash-folder      . "/personal/Trash")
+    (mu4e-refile-folder     . "/personal/All Mail")
+    (smtpmail-smtp-user     . "saxon.jensen@gmail.com")
+    (mu4e-compose-signature . ""))
+  t)
+(set-email-account! "Gaming"
+  '((mu4e-sent-folder       . "/gaming/Sent")
+    (mu4e-drafts-folder     . "/gaming/Drafts")
+    (mu4e-trash-folder      . "/gaming/Trash")
+    (mu4e-refile-folder     . "/gaming/All Mail")
+    (smtpmail-smtp-user     . "speedemon999@gmail.com")
+    (mu4e-compose-signature . ""))
+  t)
+(set-email-account! "Mailbox"
+  '((mu4e-sent-folder       . "/mailbox/Sent")
+    (mu4e-drafts-folder     . "/mailbox/Drafts")
+    (mu4e-trash-folder      . "/mailbox/Trash")
+    (mu4e-refile-folder     . "/mailbox/All Mail")
+    (smtpmail-smtp-user     . "saxonj@mailbox.org")
+    (mu4e-compose-signature . ""))
+  t)
+(set-email-account! "Zoho"
+  '((mu4e-sent-folder       . "/work/Sent")
+    (mu4e-drafts-folder     . "/work/Drafts")
+    (mu4e-trash-folder      . "/work/Trash")
+    (mu4e-refile-folder     . "/work/All Mail")
+    (smtpmail-smtp-user     . "saxon@saxonj.dev")
+    (mu4e-compose-signature . ""))
+  t)
+
+(setq +mu4e-gmail-accounts '(("saxon.jensen@healthengine.com.au" . "/work")
+                             ("saxon.jensen@gmail.com" . "/personal")
+                             ("speedemon999@gmail.com" . "/gaming")))
 
 ;;; config.el ends here
 ;;;
