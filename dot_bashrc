@@ -271,7 +271,7 @@ function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 }
 
-alias composer7="php7 /usr/bin/composer"
+alias composer8="php81 /usr/bin/composer"
 
 alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 
