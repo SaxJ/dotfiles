@@ -16,7 +16,7 @@ return {
     "airblade/vim-rooter",
     "fladson/vim-kitty",
     "tveskag/nvim-blame-line",
-    "tpope/vim-fugitive",
+    "sheerun/vim-polyglot",
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
