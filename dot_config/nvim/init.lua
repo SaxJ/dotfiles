@@ -131,7 +131,7 @@ wk.register({
 }, { prefix = "<leader>" })
 
 -- misc
-mapx.nnoremap("<C-e>", ":Neotree current %:p:h:h %:p<CR>")
+mapx.nnoremap("<C-e>", ":NvimTreeToggle<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
