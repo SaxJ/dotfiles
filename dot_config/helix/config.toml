@@ -5,6 +5,7 @@ line-number = "relative"
 mouse = false
 shell = ["bash", "-i", "-c"]
 idle-timeout = 400
+auto-format = false
 
 [editor.cursor-shape]
 insert = "bar"
