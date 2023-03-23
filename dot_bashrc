@@ -4,6 +4,9 @@
 # ~/.bashrc
 #
 
+export EDITOR=/usr/bin/hx
+export VISUAL=$EDITOR
+
 export GOPATH=$HOME/go_packages
 export HELM_HOME=$HOME/helm
 export CARGO_PATH=$HOME/.cargo/bin
@@ -28,11 +31,6 @@ export NNN_OPENER="/usr/share/nnn/plugins/nuke"
 [[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
-
-export EDITOR=/usr/bin/hx
-export VISUAL=$EDITOR
-
-# VIM
 if [ -x "$(command -v nvim)" ]; then
     alias vim="nvim"
     alias vi="nvim"
@@ -92,29 +90,8 @@ function cast() {
     ffmpeg -f alsa -ac 2 -f x11grab -r 30 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 "$1"
 }
 
-
-# COMPLETION
-[[ $PS1 && -f /usr/share/bash-completion/bash_completion ]] &&
-    . /usr/share/bash-completion/bash_completion
-
-
 alias yt-audio="youtube-dl -x --audio-format vorbis --audio-quality 0"
 alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
-
-
-# HASKELL
-export cabal_helper_libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
-export libexecdir=/home/saxonj/Documents/haskell-ide-engine/submodules/cabal-helper
-
-# HABITICA
-pass habitica/cli 2>/dev/null 1>/dev/null
-if [ $? -eq 0 ]; then
-    source <(pass habitica/cli)
-fi
-
-
-# Secret manager
-function pw() { bw list items --search $1 | jq; }
 
 # Run something, muting output or redirecting it to the debug stream
 # depending on the value of _ARC_DEBUG.
@@ -156,7 +133,6 @@ alias vol_down="amixer set Master 5.0%-"
 alias vol_up="amixer set Master 5.0%+"
 
 export GPG_TTY=$(tty)
-
 export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
 
 # TOOLS
@@ -165,16 +141,6 @@ alias urldecode='python3 -c "import sys, urllib.parse as ul; \
 
 alias urlencode='python3 -c "import sys, urllib.parse as ul; \
     print (ul.quote_plus(sys.argv[1]))"'
-
-# Change the window title of X terminals
-case ${TERM} in
-xterm* | rxvt* | Eterm* | aterm | kterm | gnome* | interix | konsole*)
-    PROMPT_COMMAND='echo -ne "\033]0;$(basename "$(pwd)")\007"'
-    ;;
-screen*)
-    PROMPT_COMMAND='echo -ne "\033_${USER}@${HOSTNAME%%.*}:${PWD/#$HOME/\~}\033\\"'
-    ;;
-esac
 
 use_color=true
 
@@ -222,10 +188,7 @@ else
 fi
 
 unset use_color safe_term match_lhs sh
-
-
 xhost +local:root >/dev/null 2>&1
-
 complete -cf sudo
 shopt -s checkwinsize
 shopt -s expand_aliases
@@ -266,13 +229,11 @@ function hejq() {
     stern -o raw heweb | egrep --line-buffered '^{' | jq .
 }
 
-
 function pac-search() {
     pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
 }
 
 alias composer8="php81 /usr/bin/composer"
-
 alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 
 eval "$(direnv hook bash)"
