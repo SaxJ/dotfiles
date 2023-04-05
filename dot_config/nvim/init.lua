@@ -54,7 +54,7 @@ wk.register({
             "Mail",
         },
         T = { ":terminal<CR>", "Terminal Full" },
-        p = { "NvimTreeToggle<cr>", "Project" },
+        p = { ":NvimTreeToggle<cr>", "Project" },
         ["-"] = { require('oil').open, "Files" },
         t = {
             ":ToggleTerm size=20<cr>",
@@ -135,7 +135,7 @@ wk.register({
 }, { prefix = "<leader>" })
 
 -- misc
-mapx.nnoremap("<C-e>", ":NvimTreeToggle<CR>")
+mapx.nnoremap("<C-e>", ":NvimTreeFindFileToggle<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
