@@ -146,5 +146,7 @@ mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
 mapx.nmap("<localleader>d", ":put =strftime('%m/%d/%y')<cr>", "silent", { ft = "norg" })
 
+mapx.nmap('<localleader>p', ":lua require('image_preview').PreviewImage()<CR>", 'silent', {ft = "NvimTree"})
+
 -- Neogit
 mapx.nmap("@cp", ":! gh pr create --fill -w<CR>", "silent", { ft = "NeogitStatus" })
