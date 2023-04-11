@@ -352,11 +352,6 @@
 (map! :leader
       :desc "Insert UUID"
       :n "iu" #'uuidgen)
-(map! :after mu4e
-      :map mu4e-headers-mode-map
-      :localleader
-      :desc "Mark many read"
-      :n "mm" #'mark-many-read)
 (map! :map dired-mode-map
       :localleader
       :desc "Add File"
@@ -459,39 +454,6 @@ topic N and modify that instead."
   :config
   (setq vterm-shell "/usr/bin/bash"))
 
-;; Email Configuration
-(set-email-account! "Work"
-                    '((mu4e-sent-folder . "/work/Sent")
-                      (mu4e-drafts-folder . "/work/Drafts")
-                      (mu4e-trash-folder . "/work/Trash")
-                      (mu4e-refile-folder . "/work/INBOX")
-                      (smtpmail-smtp-user . "saxon.jensen@healthengine.com.au"))
-                    t)
-(set-email-account! "Personal"
-                    '((mu4e-sent-folder . "/personal/Sent")
-                      (mu4e-drafts-folder . "/personal/Drafts")
-                      (mu4e-trash-folder . "/personal/Trash")
-                      (mu4e-refile-folder . "/personal/INBOX")
-                      (smtpmail-smtp-user . "saxon.jensen@gmail.com"))
-                    t)
-(set-email-account! "Gaming"
-                    '((mu4e-sent-folder . "/gaming/Sent")
-                      (mu4e-drafts-folder . "/gaming/Drafts")
-                      (mu4e-trash-folder . "/gaming/Trash")
-                      (mu4e-refile-folder . "/gaming/INBOX")
-                      (smtpmail-smtp-user . "speedemon999@gmail.com"))
-                    t)
-(set-email-account! "Mailbox"
-                    '((mu4e-sent-folder . "/mailbox/Sent")
-                      (mu4e-drafts-folder . "/mailbox/Drafts")
-                      (mu4e-trash-folder . "/mailbox/Trash")
-                      (mu4e-refile-folder . "/mailbox/INBOX")
-                      (smtpmail-smtp-user . "saxonj@mailbox.org"))
-                    t)
-
-(setq +mu4e-gmail-accounts '(("saxon.jensen@healthengine.com.au" . "/work")
-                             ("saxon.jensen@gmail.com" . "/personal")
-                             ("speedemon999@gmail.com" . "/gaming")))
 
 ;;; config.el ends here
 ;;;
