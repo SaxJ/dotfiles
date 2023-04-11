@@ -10,7 +10,6 @@ return {
     "pbrisbin/vim-syntax-shakespeare",
     "folke/neodev.nvim",
     "b0o/schemastore.nvim",
-    "gpanders/editorconfig.nvim",
     "eshion/vim-sync",
     "jghauser/mkdir.nvim",
     "airblade/vim-rooter",
