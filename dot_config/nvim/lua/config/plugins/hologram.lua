@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	'edluffy/hologram.nvim',
 	config = function ()
 		require('hologram').setup({
