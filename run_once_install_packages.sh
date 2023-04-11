@@ -21,10 +21,8 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    bat \
 	    bitwarden-cli \
 	    bitwarden-rofi \
-      broot \
-      neomutt \
-      mutt-wizard \
-			cronie \
+		broot \
+		cronie \
 	    calc \
 	    ccls \
 	    chezmoi \
