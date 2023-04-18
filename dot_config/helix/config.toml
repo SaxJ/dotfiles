@@ -20,9 +20,16 @@ render = true
 
 [editor.lsp]
 display-messages = true
+display-inlay-hints = true
+
+[editor.statusline]
+left = ["mode", "spinner", "file-name"]
+center = []
+right = ["diagnostics", "selections", "position", "version-control"]
 
 [keys.normal]
 "$" = "goto_line_end"
+"^" = "goto_line_start"
 "C-e" = "file_picker_in_current_buffer_directory"
 
 [keys.select]
