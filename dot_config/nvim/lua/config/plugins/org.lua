@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	'nvim-orgmode/orgmode',
 	dependencies = {
 		'akinsho/org-bullets.nvim',
