@@ -28,6 +28,13 @@ local lazyGit = Terminal:new({
     direction = "tab",
 })
 
+local insertDate = function ()
+    local pos = vim.api.nvim_win_get_cursor(0)[2]
+    local line = vim.api.nvim_get_current_line()
+    local nline = line:sub(0, pos) .. os.date('%a, %Y-%m-%d') .. line:sub(pos + 1)
+    vim.api.nvim_set_current_line(nline)
+end
+
 -- Misc
 wk.register({
     b = {
@@ -44,6 +51,7 @@ wk.register({
     i = {
         name = "+insert",
         u = { ":r! uuidgen<CR>", "UUID" },
+        d = { insertDate, "Date" },
     },
     o = {
         name = "+open",
@@ -141,10 +149,11 @@ mapx.nnoremap("<C-e>", ":NvimTreeFindFileToggle<CR>")
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
 -- FileType Specific --
+-- Neorg
+mapx.nmap("<localleader>d", insertDate, "silent", {ft = "norg"})
 
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
-mapx.nmap("<localleader>d", ":put =strftime('%m/%d/%y')<cr>", "silent", { ft = "norg" })
 
 mapx.nmap('<localleader>p', ":lua require('image_preview').PreviewImage()<CR>", 'silent', {ft = "NvimTree"})
 
