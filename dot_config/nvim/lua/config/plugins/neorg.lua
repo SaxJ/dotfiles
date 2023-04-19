@@ -7,15 +7,14 @@ return {
 			["core.norg.concealer"] = {}, -- Adds pretty icons to your documents
 			["core.norg.journal"] = {
 				config = {
-					strategy = "flat",
-					workspace = "journal"
+					strategy = "%Y-%m",
+					workspace = "notes"
 				},
 			},
 			["core.norg.dirman"] = { -- Manages Neorg workspaces
 				config = {
 					workspaces = {
-						notes = "~/Documents/wiki/neorg/notes",
-						journal = "~/Documents/wiki/neorg/journal",
+						notes = "~/Documents/wiki/neorg",
 					},
 					default_workspace = 'notes',
 				},
