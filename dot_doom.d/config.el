@@ -230,7 +230,8 @@
         lsp-typescript-format-enable nil
         lsp-typescript-preferences-import-module-specifier "relative"
         lsp-typescript-surveys-enabled nil
-        lsp-disabled-clients '(php-ls)))
+        lsp-disabled-clients '(php-ls)
+        lsp-intelephense-php-version "8.1.0"))
 
 ;; Haskell
 (use-package! shakespeare-mode)
