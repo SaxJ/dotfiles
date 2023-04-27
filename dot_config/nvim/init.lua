@@ -102,7 +102,9 @@ wk.register({
             "Lazy Git",
         },
         g = {
-            ":Neogit<CR>",
+            function()
+                lazyGit:toggle()
+            end,
             "Lazy Git",
         },
         f = {
