@@ -127,8 +127,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    sshfs \
 	    stylelint \
 	    stylua \
-	    task \
-	    taskwarrior-tui \
 	    terraform \
 	    texinfo \
 	    tidy \
