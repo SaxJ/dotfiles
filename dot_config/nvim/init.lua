@@ -17,7 +17,7 @@ local mail = Terminal:new({
 })
 local tasks = Terminal:new({
     dir = "~",
-    cmd = "vit",
+    cmd = "taskwarrior-tui",
     hidden = true,
     close_on_exit = true,
     direction = "float",
@@ -88,7 +88,7 @@ wk.register({
     },
     p = {
         name = "+project",
-        p = { ":Telescope projections<CR>", "Projects" },
+        p = { ":Telescope projects<CR>", "Projects" },
         f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
     },
     g = {
@@ -110,22 +110,18 @@ wk.register({
         },
     },
     t = {
-        name = "toggle",
+        name = "Tasks",
         t = {
             function()
                 tasks:toggle()
             end,
-            "Terminal",
+            "Toggle",
         },
     },
     n = {
         name = "+notes",
         j = {
             name = "+journal",
-            t = { ":Neorg journal today<CR>", "Today" },
-            n = { ":Neorg journal tomorrow<CR>", "Tomorrow" },
-            y = { ":Neorg journal yesterday<CR>", "Yesterday" },
-            i = { ":Neorg journal toc<CR>", "Index" },
         },
     },
     r = {

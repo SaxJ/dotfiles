@@ -50,9 +50,8 @@ set wildignore+=**/ios/*
 set wildignore+=**/.git/*
 ]])
 
--- Don't show diagnostics on the same line
 vim.diagnostic.config({
-    virtual_text = false
+    virtual_text = true
 })
 
 -- Autoread files when they're changed
@@ -60,10 +59,4 @@ vim.opt.autoread = true
 vim.api.nvim_create_autocmd({'VimEnter', 'FocusGained', 'BufEnter'}, {
     group = vim.api.nvim_create_augroup('ReloadFileOnChange', {}),
     command = 'checktime'
-})
-
-vim.api.nvim_create_autocmd({'CursorHold'}, {
-    callback = function ()
-        vim.diagnostic.open_float()
-    end
 })

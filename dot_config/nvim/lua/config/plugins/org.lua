@@ -1,5 +1,4 @@
 return {
-	enabled = false,
 	'nvim-orgmode/orgmode',
 	dependencies = {
 		'akinsho/org-bullets.nvim',
@@ -21,7 +20,7 @@ return {
 			}
 		})
 		require('org-bullets').setup({})
-		require('headlines').setup({})
+		-- require('headlines').setup({})
 		require('orgmode-multi-key').setup({
 			key = '<Tab>',
 		})

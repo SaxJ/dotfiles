@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	"nvim-neorg/neorg",
 	build = ":Neorg sync-parsers",
 	opts = {
