@@ -65,7 +65,7 @@ return {
 					frecency = {
 						default_workspace = "CWD",
 						ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
-						show_unindexed = false,
+						show_unindexed = true,
 					},
 				},
 			},
