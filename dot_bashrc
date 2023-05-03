@@ -45,6 +45,11 @@ alias lg="lazygit"
 alias gui="gitui"
 alias tt="taskwarrior-tui"
 
+# Journal
+alias j="jrnl"
+alias jy="jrnl -on yesterday"
+alias jt="jrnl -on today"
+
 # VPN
 alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
 alias vpnd="openvpn3 session-manage --disconnect --config ~/.config/office.ovpn"
