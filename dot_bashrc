@@ -98,41 +98,6 @@ function cast() {
 alias yt-audio="youtube-dl -x --audio-format vorbis --audio-quality 0"
 alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
 
-# Run something, muting output or redirecting it to the debug stream
-# depending on the value of _ARC_DEBUG.
-__python_argcomplete_run() {
-    if [[ -z "$_ARC_DEBUG" ]]; then
-        "$@" 8>&1 9>&2 1>/dev/null 2>&1
-    else
-        "$@" 8>&1 9>&2 1>&9 2>&1
-    fi
-}
-
-_python_argcomplete() {
-    local IFS=$'\013'
-    local SUPPRESS_SPACE=0
-    if compopt +o nospace 2>/dev/null; then
-        SUPPRESS_SPACE=1
-    fi
-    COMPREPLY=($(IFS="$IFS" \
-        COMP_LINE="$COMP_LINE" \
-        COMP_POINT="$COMP_POINT" \
-        COMP_TYPE="$COMP_TYPE" \
-        _ARGCOMPLETE_COMP_WORDBREAKS="$COMP_WORDBREAKS" \
-        _ARGCOMPLETE=1 \
-        _ARGCOMPLETE_SUPPRESS_SPACE=$SUPPRESS_SPACE \
-        __python_argcomplete_run "$1"))
-    if [[ $? != 0 ]]; then
-        unset COMPREPLY
-    elif [[ $SUPPRESS_SPACE == 1 ]] && [[ "$COMPREPLY" =~ [=/:]$ ]]; then
-        compopt -o nospace
-    fi
-}
-complete -o nospace -o default -F _python_argcomplete utt
-
-# GITHUB
-eval "$(hub alias -s)"
-
 # VOLUME
 alias vol_down="amixer set Master 5.0%-"
 alias vol_up="amixer set Master 5.0%+"
@@ -147,52 +112,6 @@ alias urldecode='python3 -c "import sys, urllib.parse as ul; \
 alias urlencode='python3 -c "import sys, urllib.parse as ul; \
     print (ul.quote_plus(sys.argv[1]))"'
 
-use_color=true
-
-# Set colorful PS1 only on colorful terminals.
-# dircolors --print-database uses its own built-in database
-# instead of using /etc/DIR_COLORS.  Try to use the external file
-# first to take advantage of user additions.  Use internal bash
-# globbing instead of external grep binary.
-safe_term=${TERM//[^[:alnum:]]/?} # sanitize TERM
-match_lhs=""
-[[ -f ~/.dir_colors ]] && match_lhs="${match_lhs}$(<~/.dir_colors)"
-[[ -f /etc/DIR_COLORS ]] && match_lhs="${match_lhs}$(</etc/DIR_COLORS)"
-[[ -z ${match_lhs} ]] &&
-    type -P dircolors >/dev/null &&
-    match_lhs=$(dircolors --print-database)
-[[ $'\n'${match_lhs} == *$'\n'"TERM "${safe_term}* ]] && use_color=true
-
-if ${use_color}; then
-    # Enable colors for ls, etc.  Prefer ~/.dir_colors #64489
-    if type -P dircolors >/dev/null; then
-        if [[ -f ~/.dir_colors ]]; then
-            eval $(dircolors -b ~/.dir_colors)
-        elif [[ -f /etc/DIR_COLORS ]]; then
-            eval $(dircolors -b /etc/DIR_COLORS)
-        fi
-    fi
-
-    if [[ ${EUID} == 0 ]]; then
-        PS1='\[\033[01;31m\][\h\[\033[01;36m\] \W\[\033[01;31m\]]\$\[\033[00m\] '
-    else
-        PS1='\[\033[01;32m\][\u@\h\[\033[01;37m\] \W\[\033[01;32m\]]\$\[\033[00m\] '
-    fi
-
-    alias ls='ls --color=auto'
-    alias grep='grep --colour=auto'
-    alias egrep='egrep --colour=auto'
-    alias fgrep='fgrep --colour=auto'
-else
-    if [[ ${EUID} == 0 ]]; then
-        # show root@ when we don't have colors
-        PS1='\u@\h \W \$ '
-    else
-        PS1='\u@\h \w \$ '
-    fi
-fi
-
-unset use_color safe_term match_lhs sh
 xhost +local:root >/dev/null 2>&1
 complete -cf sudo
 shopt -s checkwinsize
@@ -243,12 +162,13 @@ alias unfreeze_emacs="pkill -SIGUSR2 emacs"
 
 eval "$(direnv hook bash)"
 eval "$(zoxide init bash)"
+eval "$(starship init bash)"
+eval "$(hub alias -s)"
 
 function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
 }
 
-[ -f "/home/saxonj/.ghcup/env" ] && source "/home/saxonj/.ghcup/env" # ghcup-env
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 function git_sync() {
@@ -259,3 +179,4 @@ function git_sync() {
         scp "$f" ubuntu@minikube:/home/ubuntu/$dir/$f
     done
 }
+
