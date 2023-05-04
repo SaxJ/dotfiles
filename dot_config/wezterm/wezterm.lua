@@ -120,6 +120,7 @@ end)
 
 return {
     font = wezterm.font('FiraCode Nerd Font'),
+    default_prog = {"/usr/bin/bash"},
 	font_size = 13,
 	max_fps = 120,
 	enable_wayland = false,
