@@ -5,11 +5,21 @@ read -r -e -p "Install dev packages?" -N 1 install
 if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	printf "\n\nInstall my dev packages...\n\n"
 	paru -S --needed \
+		broot \
+		cronie \
+		racket \
+		starship \
+		taplo \
+		typescript-language-server \
+		vscode-css-languageserver \
+		vscode-html-languageserver \
+		yaml-language-server \
 	    aerc \
 	    aspell \
 	    aspell-en \
 	    aspnet-runtime \
 	    aspnet-targeting-pack \
+	    aspnet-targeting-pack-6.0 \
 	    atool \
 	    autoconf \
 	    automake \
@@ -21,8 +31,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    bat \
 	    bitwarden-cli \
 	    bitwarden-rofi \
-		broot \
-		cronie \
 	    calc \
 	    ccls \
 	    chezmoi \
@@ -52,12 +60,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    gobuster-bin \
 	    gomodifytags \
 	    gopass \
-			racket \
-			taplo \
-			typescript-language-server \
-			vscode-css-languageserver \
-			vscode-html-languageserver \
-			yaml-language-server \
 	    gopls \
 	    gore \
 	    gotests \
@@ -85,6 +87,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    moar \
 	    neovim \
 	    net-tools \
+	    netcoredbg \
 	    netstandard-targeting-pack-bin \
 	    networkmanager \
 	    newsboat \
@@ -141,7 +144,5 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	    yarn \
 	    zip \
 	    zoom \
-	    zoxide \
-	    netcoredbg \
-	    aspnet-targeting-pack-6.0
+	    zoxide
 fi
