@@ -233,6 +233,12 @@
         lsp-disabled-clients '(php-ls)
         lsp-intelephense-php-version "8.1.0"
         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+;; (use-package! eglot
+;;   :config
+;;   (add-to-list 'eglot-server-programs
+;;                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(php-mode . ("intelephense" "--stdio"))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -322,16 +328,6 @@
       :localleader
       :desc "Add a single reviewer"
       :n "ar" #'forge-edit-topic-review-requests)
-(map! :after magit
-      :map forge-topic-mode-map
-      :localleader
-      :desc "Add blob team"
-      :n "ab" #'forge-add-blob)
-(map! :after magit
-      :map forge-topic-mode-map
-      :localleader
-      :desc "Add shrek team"
-      :n "as" #'forge-add-shrek)
 (map! :map org-mode-map
       :localleader
       :desc "Reset cache"
@@ -393,33 +389,10 @@
 ;; ###############################
 ;; MAGIT
 ;; ###############################
-(defun forge-add-blob (n)
-  "Edit the review-requests of the current pull-request.
-If there is no current topic or with a prefix argument read a
-topic N and modify that instead."
-  (interactive (list (forge-read-pullreq "Request review for")))
-  (let* ((topic (forge-get-pullreq n))
-         (repo  (forge-get-repository topic))
-         (value (closql--iref topic 'review-requests))
-         (choices (mapcar #'cadr (oref repo assignees)))
-         (crm-separator ","))
-    (forge--set-topic-review-requests
-     repo topic
-     '("joshkulesza" "Zylo18" "macoto35"))))
+(use-package! magit
+  :config
+  (setq git-commit-summary-max-length 100))
 
-(defun forge-add-shrek (n)
-  "Edit the review-requests of the current pull-request.
-If there is no current topic or with a prefix argument read a
-topic N and modify that instead."
-  (interactive (list (forge-read-pullreq "Request review for")))
-  (let* ((topic (forge-get-pullreq n))
-         (repo  (forge-get-repository topic))
-         (value (closql--iref topic 'review-requests))
-         (choices (mapcar #'cadr (oref repo assignees)))
-         (crm-separator ","))
-    (forge--set-topic-review-requests
-     repo topic
-     '("Adriansyah" "Zylo18" "callumfrance" "BrendanPauleyHE" "lukeperson"))))
 
 ;; SQL CLIENT
 (setq sql-connection-alist
