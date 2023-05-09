@@ -231,7 +231,8 @@
         lsp-typescript-preferences-import-module-specifier "relative"
         lsp-typescript-surveys-enabled nil
         lsp-disabled-clients '(php-ls)
-        lsp-intelephense-php-version "8.1.0"))
+        lsp-intelephense-php-version "8.1.0"
+        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
 
 ;; Haskell
 (use-package! shakespeare-mode)
