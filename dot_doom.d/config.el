@@ -167,7 +167,7 @@
                                  ("IDEA" :foreground "#9C27B0")
                                  ("DONE" :foreground "white")
                                  ("KILL" . +org-todo-cancel))
-        org-log-done "time"
+        org-log-done nil
         org-capture-templates '(("t" "Personal todo" entry (file +org-capture-todo-file) "* TODO [#%^{A|B|C}] %? %t")
                                ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
                                ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file) "* %U %?\n%i\n%a" :prepend t)
