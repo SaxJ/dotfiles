@@ -17,3 +17,7 @@ config = {preferences.importModuleSpecifierPreference = "relative"}
 name = "typescript"
 config = {preferences.importModuleSpecifierPreference = "relative"}
 auto-format = true
+
+[[language]]
+name = "graphql"
+language-server = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
