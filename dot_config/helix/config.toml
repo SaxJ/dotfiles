@@ -20,7 +20,7 @@ render = true
 
 [editor.lsp]
 display-messages = true
-display-inlay-hints = true
+display-inlay-hints = false
 
 [editor.statusline]
 left = ["mode", "spinner", "file-name"]
@@ -40,3 +40,4 @@ right = ["diagnostics", "selections", "position", "version-control"]
 
 [keys.normal.space]
 g = {s = ":sh git_sync"}
+"." = "file_picker_in_current_buffer_directory"
