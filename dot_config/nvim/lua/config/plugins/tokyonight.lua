@@ -1,6 +1,6 @@
 return {
-	"folke/tokyonight.nvim",
+	"EdenEast/nightfox.nvim",
 	config = function()
-		vim.api.nvim_command("colorscheme tokyonight-storm")
+		vim.api.nvim_command("colorscheme duskfox")
 	end,
 }
