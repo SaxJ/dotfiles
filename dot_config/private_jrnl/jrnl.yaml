@@ -5,7 +5,7 @@ colors:
   title: none
 default_hour: 9
 default_minute: 0
-editor: /usr/bin/hx
+editor: /usr/bin/nvim
 encrypt: true
 highlight: true
 indent_character: '|'
