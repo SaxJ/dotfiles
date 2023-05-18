@@ -225,7 +225,7 @@
   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
         lsp-file-watch-threshold nil
         lsp-idle-delay 0.8
-        lsp-clients-typescript-max-ts-server-memory 6000
+        lsp-clients-typescript-max-ts-server-memory 10000
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
         lsp-typescript-preferences-import-module-specifier "relative"
@@ -238,7 +238,17 @@
 ;;   (add-to-list 'eglot-server-programs
 ;;                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
 ;;   (add-to-list 'eglot-server-programs
-;;                '(php-mode . ("intelephense" "--stdio"))))
+;;                '(php-mode . ("intelephense" "--stdio")))
+;;   (setq eglot-events-buffer-size 0)
+;;   (defadvice! +eglot--ensure-available-mode (fn)
+;;     "Run `eglot-ensure' if the current mode has support"
+;;     :around #'eglot-ensure
+;;     (when (alist-get major-mode eglot-server-programs nil nil
+;;                      (lambda (modes key)
+;;                        (if (listp modes)
+;;                            (member key modes)
+;;                          (eq key modes))))
+;;       (funcall fn))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -323,6 +333,9 @@
 (map! :leader
       :desc "Open kubernetes"
       :n "ok" #'kubernetes-overview)
+;; (map! :map eglot-mode-map
+;;       :desc "Goto references"
+;;       :n "gD" #'+lookup/references)
 (map! :after magit
       :map forge-topic-mode-map
       :localleader
