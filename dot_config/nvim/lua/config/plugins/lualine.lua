@@ -5,7 +5,7 @@ return {
 		require("lualine").setup({
 			options = {
 				globalstatus = true,
-				theme = "tokyonight",
+				theme = "duskfox",
 			},
 			sections = {
 				lualine_c = {
