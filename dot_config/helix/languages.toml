@@ -1,6 +1,13 @@
+[language-server]
+omnisharp = { command = "omnisharp", args = ["--languageserver"] }
+graphql-ls = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
+
+[language-server.typescript-language-server.config.preferences]
+importModuleSpecifierPreference = "relative"
+
 [[language]]
 name = "c-sharp"
-language-server = { command = "omnisharp", args = ["--languageserver"] }
+language-servers = ["omnisharp"]
 auto-format = true
 
 [[language]]
@@ -11,13 +18,11 @@ auto-format = true
 [[language]]
 name = "tsx"
 auto-format = true
-config = {preferences.importModuleSpecifierPreference = "relative"}
 
 [[language]]
 name = "typescript"
-config = {preferences.importModuleSpecifierPreference = "relative"}
 auto-format = true
 
 [[language]]
 name = "graphql"
-language-server = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
+language-servers = ["graphql-ls"]
