@@ -7,7 +7,9 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 	paru -S --needed \
 		broot \
 		cronie \
+		deadd-notification-center \
 		racket \
+		rofi-greenclip \
 		starship \
 		taplo \
 		typescript-language-server \
@@ -43,7 +45,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     dotnet-sdk \
     dotnet-sdk-6.0 \
     dropbox \
-		deadd-notification-center \
     editorconfig-core-c \
     efibootmgr \
     eslint \
@@ -114,7 +115,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     reflector \
     ripgrep \
     rofi \
-		rofi-greenclip \
     rsync \
     rust \
     rust-analyzer \
