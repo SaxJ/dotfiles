@@ -95,7 +95,7 @@ function cast() {
     ffmpeg -f alsa -ac 2 -f x11grab -r 30 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 "$1"
 }
 
-alias yt-audio="youtube-dl -x --audio-format vorbis --audio-quality 0"
+alias yt-audio="yt-dlp -x --audio-format mp3 --audio-quality 0"
 alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
 
 # VOLUME
