@@ -30,7 +30,7 @@ exec_always --no-startup-id $HOME/.config/polybar/launch.sh
 # workspace assignment
 assign [class="emacs"] 1
 assign [class="firefoxdeveloperedition"] 2
-assign [class="thunderbird"] 2
+assign [class="thunderbird"] 5
 assign [class="Slack"] 3
 assign [title="Spotify"] 3
 assign [class="discord"] 4
