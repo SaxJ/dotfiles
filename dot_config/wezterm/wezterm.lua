@@ -123,7 +123,7 @@ return {
     default_prog = {"/usr/bin/bash"},
 	font_size = 13,
 	max_fps = 120,
-	enable_wayland = false,
+	enable_wayland = true,
 	pane_focus_follows_mouse = false,
 	warn_about_missing_glyphs = false,
 	show_update_window = false,
