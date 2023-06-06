@@ -5,6 +5,9 @@ graphql-ls = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
 [language-server.typescript-language-server.config.preferences]
 importModuleSpecifierPreference = "relative"
 
+[language-server.typescript-language-server.config.tsserver]
+path = "/usr/bin/tsserver"
+
 [[language]]
 name = "c-sharp"
 language-servers = ["omnisharp"]
@@ -26,3 +29,7 @@ auto-format = true
 [[language]]
 name = "graphql"
 language-servers = ["graphql-ls"]
+
+[[language]]
+name = "javascript"
+auto-format = true
