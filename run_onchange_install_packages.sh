@@ -8,6 +8,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
 		broot \
 		cronie \
 		deadd-notification-center \
+		graphite-cli-git\
 		racket \
 		rofi-greenclip \
 		starship \
