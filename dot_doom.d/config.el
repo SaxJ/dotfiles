@@ -5,7 +5,7 @@
 
 ;;; Code:
 ;; Performance
-(setq read-process-output-max 1000000000)
+(setq read-process-output-max 3000000)
 (setq byte-compile-warnings (not 'docstrings))
 
 (setq doom-localleader-key ",")
@@ -225,7 +225,6 @@
   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
         lsp-file-watch-threshold nil
         lsp-idle-delay 0.8
-        lsp-clients-typescript-max-ts-server-memory 10000
         lsp-javascript-format-enable nil
         lsp-typescript-format-enable nil
         lsp-typescript-preferences-import-module-specifier "relative"
@@ -441,6 +440,28 @@
 (use-package! vterm
   :config
   (setq vterm-shell "/usr/bin/bash"))
+
+(defun my-review-list ()
+  "Query github for the things I need to review"
+  (interactive)
+  (let* ((command "gh status")
+         (output (shell-command-to-string command))
+         (regex "[[:alnum:]]*#[[:digit:]]*")
+         (matches (split-string (string-trim ouput) "\n"))
+         (filtered-matches (seq-filter (lambda (match) (string-match-p regex match)) matches))
+         (menu (make-sparse-keymap "Menu")))
+    (if (eq (length filtered-matches) 0)
+        (message "Nothing to see here")
+      (dolist (match filtered-matches)
+        (let* ((description match)
+               (menu-item (cons description `(lambda () (browse-url ,match)))))
+          (define-key menu (kbd description) menu-item))))
+    (if (eq (length menu) 0)
+        (message "No matches found")
+      (let ((key (lookup-key menu (kbd (completing-read "Choose item" (mapcar 'car menu))))))
+        (if key
+            (funcall (cdr key))
+          (message "invalid"))))))
 
 
 ;;; config.el ends here
