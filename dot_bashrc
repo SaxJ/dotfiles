@@ -84,6 +84,11 @@ alias pods="kubectl get pods"
 alias zr="zellij run"
 alias zrf="zellij run -f"
 
+function create_pr() {
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    commits=$(git log master..HEAD --oneline)
+}
+
 function cd() {
     z "$1"
     if [ -n "$ZELLIJ_SESSION_NAME" ]; then
