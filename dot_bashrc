@@ -44,6 +44,7 @@ alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
 alias gui="gitui"
 alias tt="taskwarrior-tui"
+alias tw="taskwarrior-tui"
 
 # Journal
 alias j="jrnl"
@@ -87,6 +88,8 @@ alias zrf="zellij run -f"
 function create_pr() {
     branch=$(git rev-parse --abbrev-ref HEAD)
     commits=$(git log master..HEAD --oneline)
+    title=$(tgpt "Make a PR title from the following commit messages: $commits" | tail -n 1)
+    gh pr create --title "$title"
 }
 
 function cd() {
