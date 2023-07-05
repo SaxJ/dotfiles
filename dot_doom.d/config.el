@@ -220,34 +220,26 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
-  :config
-  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-        lsp-file-watch-threshold nil
-        lsp-idle-delay 0.8
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil
-        lsp-disabled-clients '(php-ls)
-        lsp-intelephense-php-version "8.1.0"
-        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
-;; (use-package! eglot
+;; (use-package! lsp-mode
 ;;   :config
-;;   (add-to-list 'eglot-server-programs
-;;                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(php-mode . ("intelephense" "--stdio")))
-;;   (setq eglot-events-buffer-size 0)
-;;   (defadvice! +eglot--ensure-available-mode (fn)
-;;     "Run `eglot-ensure' if the current mode has support"
-;;     :around #'eglot-ensure
-;;     (when (alist-get major-mode eglot-server-programs nil nil
-;;                      (lambda (modes key)
-;;                        (if (listp modes)
-;;                            (member key modes)
-;;                          (eq key modes))))
-;;       (funcall fn))))
+;;   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
+;;         lsp-file-watch-threshold nil
+;;         lsp-idle-delay 0.8
+;;         lsp-javascript-format-enable nil
+;;         lsp-typescript-format-enable nil
+;;         lsp-typescript-preferences-import-module-specifier "relative"
+;;         lsp-typescript-surveys-enabled nil
+;;         lsp-disabled-clients '(php-ls)
+;;         lsp-intelephense-php-version "8.1.0"
+;;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+
+(use-package! eglot
+  :config
+  (add-to-list 'eglot-server-programs
+               '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(php-mode . ("intelephense" "--stdio")))
+  (setq eglot-events-buffer-size 0))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -420,7 +412,6 @@
       '(not yaml-mode php-mode))
 (setq +format-with-lsp nil)
 (set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
-(setq-hook! 'csharp-mode-hook +format-with-lsp t)
 (setq typescript-indent-level 2)
 
 (use-package! vimrc-mode
