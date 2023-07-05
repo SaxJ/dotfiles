@@ -29,8 +29,6 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;; Dumb Things
-(package! mastodon)
-(package! chezmoi)
 
 ;; Email
 (package! bbdb)
@@ -43,17 +41,13 @@
 
 ;; Tooling
 (package! string-inflection)
-(package! slack)
 (package! dash-functional)
 (package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 (package! multi-vterm)
-(package! org-ros)
-(package! spotify)
 (package! telega)
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
-(package! obsidian)
 
 
 ;; Filetypes
@@ -67,9 +61,6 @@
 (package! mermaid-mode)
 
 ;; Pin to non-broken packages
-(unpin! php-mode)
-(unpin! lsp-mode)
-(unpin! company)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
