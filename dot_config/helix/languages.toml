@@ -1,5 +1,6 @@
 [language-server]
 omnisharp = { command = "omnisharp", args = ["--languageserver"] }
+csharpls = { command = "csharp-ls", args = ["-l", "error"] }
 graphql-ls = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
 
 [language-server.typescript-language-server.config.preferences]
@@ -7,7 +8,7 @@ importModuleSpecifierPreference = "relative"
 
 [[language]]
 name = "c-sharp"
-language-servers = ["omnisharp"]
+language-servers = ["csharpls"]
 auto-format = true
 
 [[language]]
