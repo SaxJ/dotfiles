@@ -220,26 +220,20 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-;; (use-package! lsp-mode
-;;   :config
-;;   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-;;         lsp-file-watch-threshold nil
-;;         lsp-idle-delay 0.8
-;;         lsp-javascript-format-enable nil
-;;         lsp-typescript-format-enable nil
-;;         lsp-typescript-preferences-import-module-specifier "relative"
-;;         lsp-typescript-surveys-enabled nil
-;;         lsp-disabled-clients '(php-ls)
-;;         lsp-intelephense-php-version "8.1.0"
-;;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
-
-(use-package! eglot
+(use-package! lsp-mode
   :config
-  (add-to-list 'eglot-server-programs
-               '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(php-mode . ("intelephense" "--stdio")))
-  (setq eglot-events-buffer-size 0))
+  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
+        lsp-file-watch-threshold nil
+        lsp-idle-delay 0.8
+        lsp-javascript-format-enable nil
+        lsp-typescript-format-enable nil
+        lsp-typescript-preferences-import-module-specifier "relative"
+        lsp-typescript-surveys-enabled nil
+        lsp-disabled-clients '(php-ls omnisharp)
+        lsp-intelephense-php-version "8.1.0"
+        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+(add-hook! 'csharp-tree-sitter-mode-hook #'lsp!)
+
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -419,41 +413,9 @@
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
 
-(use-package! obsidian
-  :demand t
-  :config
-  (obsidian-specify-path "~/Documents/wiki/notes")
-  :bind
-  (:map obsidian-mode-map
-        ("C-c C-o" . obsidian-follow-link-at-point)
-        ("C-c C-l" . obsidian-insert-wikilink)))
-
 (use-package! vterm
   :config
   (setq vterm-shell "/usr/bin/bash"))
-
-(defun my-review-list ()
-  "Query github for the things I need to review"
-  (interactive)
-  (let* ((command "gh status")
-         (output (shell-command-to-string command))
-         (regex "[[:alnum:]]*#[[:digit:]]*")
-         (matches (split-string (string-trim ouput) "\n"))
-         (filtered-matches (seq-filter (lambda (match) (string-match-p regex match)) matches))
-         (menu (make-sparse-keymap "Menu")))
-    (if (eq (length filtered-matches) 0)
-        (message "Nothing to see here")
-      (dolist (match filtered-matches)
-        (let* ((description match)
-               (menu-item (cons description `(lambda () (browse-url ,match)))))
-          (define-key menu (kbd description) menu-item))))
-    (if (eq (length menu) 0)
-        (message "No matches found")
-      (let ((key (lookup-key menu (kbd (completing-read "Choose item" (mapcar 'car menu))))))
-        (if key
-            (funcall (cdr key))
-          (message "invalid"))))))
-
 
 ;;; config.el ends here
 ;;;
