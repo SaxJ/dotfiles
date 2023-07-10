@@ -39,7 +39,7 @@ end
 wk.register({
     b = {
         name = "+buffers",
-        b = { "<cmd>Telescope buffers<cr>", "Buffers" },
+        b = { ":Telescope buffers<cr>", "Buffers" },
         y = { ":%y+<CR>", "Yank" },
         f = {
             function()
@@ -65,7 +65,7 @@ wk.register({
         p = { ":NvimTreeToggle<cr>", "Project" },
         ["-"] = { require('oil').open, "Files" },
         t = {
-            ":ToggleTerm size=20<cr>",
+            ":ToggleTerm size=22<cr>",
             "Terminal Popup",
         },
         g = {
@@ -76,20 +76,26 @@ wk.register({
         },
         r = { ":IronRepl<cr>", "Repl" },
     },
-    ["<leader>"] = { ":Telescope find_files<cr>", "Recent Files" },
+    ["<leader>"] = { ":Telescope find_files<cr>", "Files" },
     f = {
         name = "+files",
-        f = { "<cmd>Telescope file_browser hidden=true<cr>", "Files" },
+        f = { ":Telescope find_files<cr>", "Files" },
         Y = { ":CopyRelPath<CR>", "Yank Path" },
     },
     s = {
         name = "+search",
-        p = { "<cmd>Telescope live_grep hidden=true<cr>", "Search Project" },
+        p = { ":Telescope live_grep hidden=true<cr>", "Search Project" },
     },
     p = {
         name = "+project",
-        p = { ":Telescope projects<CR>", "Projects" },
-        f = { ":Telescope file_browser hidden=true<CR>", "Project Files" },
+        p = {
+            function ()
+                require('telescope').extensions.repo.list({
+                    search_dirs = {"~/Documents", "~/.local/share/chezmoi"}
+                })
+            end,
+            "Switch Project"
+        },
     },
     g = {
         name = "+git",
@@ -102,7 +108,7 @@ wk.register({
             "Lazy Git",
         },
         g = {
-            function()
+            function ()
                 lazyGit:toggle()
             end,
             "Lazy Git",

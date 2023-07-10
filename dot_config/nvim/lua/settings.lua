@@ -51,7 +51,7 @@ set wildignore+=**/.git/*
 ]])
 
 vim.diagnostic.config({
-    virtual_text = true
+    virtual_text = false
 })
 
 -- Autoread files when they're changed

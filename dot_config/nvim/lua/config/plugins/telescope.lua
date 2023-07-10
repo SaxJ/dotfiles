@@ -1,5 +1,4 @@
 return {
-	enabled = false,
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
@@ -68,14 +67,19 @@ return {
 						ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
 						show_unindexed = true,
 					},
+					repo = {
+						search_dirs = {
+							"~/Documents",
+							"~/.local/share/chezmoi"
+						}
+					}
 				},
 			},
 		})
 
 		require("telescope").load_extension("yaml_schema")
-		require("telescope").load_extension("frecency")
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("file_browser")
-		require('telescope').load_extension('projects')
+		require('telescope').load_extension('repo')
 	end,
 }
