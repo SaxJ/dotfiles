@@ -3,20 +3,18 @@
 read -r -e -p "Install dev packages?" -N 1 install
 
 if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
-	printf "\n\nInstall my dev packages...\n\n"
-	paru -S --needed \
-		broot \
-		cronie \
-		deadd-notification-center \
-		graphite-cli-git\
-		racket \
-		rofi-greenclip \
-		starship \
-		taplo \
-		typescript-language-server \
-		vscode-css-languageserver \
-		vscode-html-languageserver \
-		yaml-language-server \
+    printf "\n\nInstall my dev packages...\n\n"
+    paru -S --needed \
+    broot \
+    cronie \
+    graphite-cli-git\
+    racket \
+    starship \
+    taplo \
+    typescript-language-server \
+    vscode-css-languageserver \
+    vscode-html-languageserver \
+    yaml-language-server \
     aerc \
     aspell \
     aspell-en \
@@ -33,7 +31,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     bash-language-server \
     bat \
     bitwarden-cli \
-    bitwarden-rofi \
     calc \
     ccls \
     chezmoi \
@@ -115,7 +112,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     qutebrowser \
     reflector \
     ripgrep \
-    rofi \
     rsync \
     rust \
     rust-analyzer \
@@ -140,6 +136,5 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     xdotool \
     yarn \
     zip \
-    zoom \
     zoxide
 fi
