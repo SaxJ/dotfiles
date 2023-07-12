@@ -128,7 +128,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     tidy \
     unzip \
     vim \
-    wezterm \
     wget \
     which \
     xclip \
