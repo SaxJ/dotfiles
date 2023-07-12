@@ -102,6 +102,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     php-sodium \
     php-sqlite \
     picom \
+    grim \
     pkgconf \
     procs \
     psysh \
