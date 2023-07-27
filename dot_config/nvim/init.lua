@@ -101,18 +101,7 @@ wk.register({
         name = "+git",
         b = { ":ToggleBlameLine<cr>", "Blame" },
         B = { ":ToggleBlameLine<cr>", "Blame" },
-        l = {
-            function()
-                lazyGit:toggle()
-            end,
-            "Lazy Git",
-        },
-        g = {
-            function ()
-                lazyGit:toggle()
-            end,
-            "Lazy Git",
-        },
+        g = { ":Neogit<CR>", "Git" },
         f = {
             name = "+forge",
         },
