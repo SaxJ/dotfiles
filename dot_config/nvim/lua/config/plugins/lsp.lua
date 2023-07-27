@@ -25,6 +25,7 @@ return {
         -- Enhanced servers
         { "MrcJkb/haskell-tools.nvim" },
         { "Hoffs/omnisharp-extended-lsp.nvim" },
+        { "someone-stole-my-name/yaml-companion.nvim" }
     },
     config = function()
         local luasnip = require("luasnip")
@@ -49,6 +50,7 @@ return {
                 on_attach = lsp_attach,
             }
         })
+        local yamlConfig = require('yaml-companion').setup({})
 
         cmp.setup({
             snippet = {
@@ -99,6 +101,9 @@ return {
                     on_attach = lsp_attach,
                     capabilities = lsp_capabilities,
                 })
+            end,
+            ["yamlls"] = function ()
+                lspconfig.yamlls.setup(yamlConfig)
             end,
             ["tsserver"] = function()
                 lspconfig.tsserver.setup({

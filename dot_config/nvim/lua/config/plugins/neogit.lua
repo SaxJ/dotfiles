@@ -9,7 +9,8 @@ return {
 			use_magit_keybindings = true,
 			disable_commit_confirmation = true,
 			integrations = {
-				diffview = true
+				diffview = true,
+				telescope = true
 			}
 		})
 	end,
