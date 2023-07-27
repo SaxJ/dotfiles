@@ -80,7 +80,7 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       ;;(syntax +childframe)              ; tasing you for every semicolon you forget
+       (syntax +childframe +flymake)              ; tasing you for every semicolon you forget
        (spell +aspell)             ; tasing you for misspelling mispelling
        ;;grammar           ; tasing grammar mistake every you make
 
@@ -95,7 +95,7 @@
        (eval +overlay)     ; run code, run (also, repls)
        gist              ; interacting with github gists
        (lookup +docsets)              ; navigate your code and its documentation
-       (lsp +peek)
+       (lsp +eglot)
        (magit +forge)             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        (pass +auth)              ; password manager for nerds
@@ -177,7 +177,7 @@
        ;;zig
 
        :email
-       ;;(mu4e +gmail)
+       (mu4e +gmail)
        ;;(notmuch)
        ;;(wanderlust +gmail)
 

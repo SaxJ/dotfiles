@@ -220,20 +220,28 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
+;; (use-package! lsp-mode
+;;   :config
+;;   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
+;;         lsp-file-watch-threshold nil
+;;         lsp-idle-delay 0.8
+;;         lsp-javascript-format-enable nil
+;;         lsp-typescript-format-enable nil
+;;         lsp-typescript-preferences-import-module-specifier "relative"
+;;         lsp-typescript-surveys-enabled nil
+;;         lsp-disabled-clients '(php-ls)
+;;         lsp-intelephense-php-version "8.1.0"
+;;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+(use-package! eglot
   :config
-  (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-        lsp-file-watch-threshold nil
-        lsp-idle-delay 0.8
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil
-        lsp-disabled-clients '(php-ls omnisharp)
-        lsp-intelephense-php-version "8.1.0"
-        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+  (add-to-list 'eglot-server-programs
+               '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(php-mode . ("intelephense" "--stdio")))
+  (setq eglot-events-buffer-size 0))
 (add-hook! 'csharp-tree-sitter-mode-hook #'lsp!)
 
+(set-electric! 'csharp-tree-sitter-mode :chars '(?\n ?\}))
 
 ;; Haskell
 (use-package! shakespeare-mode)
