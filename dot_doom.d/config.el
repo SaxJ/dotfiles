@@ -238,6 +238,8 @@
                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(csharp-mode . ("csharp-ls")))
   (setq eglot-events-buffer-size 0))
 (add-hook! 'csharp-tree-sitter-mode-hook #'lsp!)
 
