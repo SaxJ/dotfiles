@@ -159,7 +159,7 @@
                                      :recursive t))
         org-export-async-debug t
         org-export-async-init-file (concat doom-private-dir "async-org.el")
-        org-todo-keywords '((sequence "TODO(t!)" "PROG(p!)" "BLOCKED(b!)" "HOLD(h!)" "REVIEW(r!)" "IDEA(i)" "|" "DONE(d)" "KILL(k)"))
+        org-todo-keywords '((sequence "TODO(t!)" "PROG(p!)" "BLOCKED(b!)" "HOLD(h!)" "REVIEW(r!)" "IDEA(i)" "|" "DONE(d!)" "KILL(k)"))
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
                                  ("BLOCKED" :foreground "#F44336")
@@ -220,30 +220,24 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-;; (use-package! lsp-mode
-;;   :config
-;;   (setq lsp-csharp-server-path "/usr/bin/omnisharp"
-;;         lsp-file-watch-threshold nil
-;;         lsp-idle-delay 0.8
-;;         lsp-javascript-format-enable nil
-;;         lsp-typescript-format-enable nil
-;;         lsp-typescript-preferences-import-module-specifier "relative"
-;;         lsp-typescript-surveys-enabled nil
-;;         lsp-disabled-clients '(php-ls)
-;;         lsp-intelephense-php-version "8.1.0"
-;;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+; (use-package! lsp-mode
+;   :config
+;   (setq lsp-file-watch-threshold nil
+;         lsp-idle-delay 0.8
+;         lsp-javascript-format-enable nil
+;         lsp-typescript-format-enable nil
+;         lsp-typescript-preferences-import-module-specifier "relative"
+;         lsp-typescript-surveys-enabled nil
+;         lsp-disabled-clients '(php-ls)
+;         lsp-intelephense-php-version "8.1.0"
+;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
 (use-package! eglot
   :config
   (add-to-list 'eglot-server-programs
                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(php-mode . ("intelephense" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(csharp-mode . ("csharp-ls")))
   (setq eglot-events-buffer-size 0))
-(add-hook! 'csharp-tree-sitter-mode-hook #'lsp!)
-
-(set-electric! 'csharp-tree-sitter-mode :chars '(?\n ?\}))
 
 ;; Haskell
 (use-package! shakespeare-mode)
