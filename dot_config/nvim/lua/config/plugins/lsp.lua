@@ -23,7 +23,7 @@ return {
         { "ray-x/lsp_signature.nvim" },
 
         -- Enhanced servers
-        { "MrcJkb/haskell-tools.nvim" },
+        { "MrcJkb/haskell-tools.nvim", branch = '2.x.x' },
         { "Hoffs/omnisharp-extended-lsp.nvim" },
         { "someone-stole-my-name/yaml-companion.nvim" }
     },
@@ -44,12 +44,6 @@ return {
 
         -- Lua LSP
         require("neodev").setup()
-        require('haskell-tools').setup({
-            hls = {
-                autostart = true,
-                on_attach = lsp_attach,
-            }
-        })
         local yamlConfig = require('yaml-companion').setup({})
 
         cmp.setup({
