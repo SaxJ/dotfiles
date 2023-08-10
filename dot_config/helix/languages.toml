@@ -8,7 +8,7 @@ importModuleSpecifierPreference = "relative"
 
 [[language]]
 name = "c-sharp"
-language-servers = ["csharpls"]
+language-servers = ["omnisharp"]
 auto-format = true
 
 [[language]]
@@ -31,3 +31,7 @@ language-servers = ["graphql-ls"]
 [[language]]
 name = "javascript"
 auto-format = true
+
+[[language]]
+name = "xml"
+file-types = ["xml", "mobileconfig", "plist", "xib", "storyboard", "svg", "xsd", "gml", "xaml", "gir", "component"]

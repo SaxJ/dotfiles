@@ -1,3 +1,6 @@
 inherits = "dracula"
 
 "diagnostic.error" = { underline = { color = "red", style = "curl" } }
+"diagnostic.warning" = { underline = { color = "orange", style = "curl"}}
+"diagnostic.info" = { underline = { color = "blue", style = "curl"}}
+"diagnostic.hint" = { underline = { color = "green", style = "curl"}}
