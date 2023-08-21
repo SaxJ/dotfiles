@@ -5,6 +5,8 @@
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
    '("aec7b55f2a13307a55517fdf08438863d694550565dee23181d2ebd973ebd6b8" default))
+ '(magit-todos-insert-after '(bottom) nil nil "Changed by setter of obsolete option `magit-todos-insert-at'")
+ '(package-selected-packages '(eglot))
  '(safe-local-variable-values
    '((ssh-deploy-on-explicit-save . t)
      (ssh-deploy-on-explicit-save . f)
