@@ -29,6 +29,7 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;; Dumb Things
+(package! slack)
 
 ;; Email
 (package! bbdb)
@@ -43,12 +44,12 @@
 (package! string-inflection)
 (package! dash-functional)
 (package! ejira :recipe (:host github :repo "nyyManni/ejira"))
-(package! multi-vterm)
 (package! telega)
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
 (package! emacs-eat :recipe (:host codeberg :repo "akib/emacs-eat"))
+(package! todotxt)
 
 
 ;; Filetypes

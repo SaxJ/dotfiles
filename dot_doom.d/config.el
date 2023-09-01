@@ -220,17 +220,17 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-; (use-package! lsp-mode
-;   :config
-;   (setq lsp-file-watch-threshold nil
-;         lsp-idle-delay 0.8
-;         lsp-javascript-format-enable nil
-;         lsp-typescript-format-enable nil
-;         lsp-typescript-preferences-import-module-specifier "relative"
-;         lsp-typescript-surveys-enabled nil
-;         lsp-disabled-clients '(php-ls)
-;         lsp-intelephense-php-version "8.1.0"
-;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+;; (use-package! lsp-mode
+;;   :config
+;;   (setq lsp-file-watch-threshold nil
+;;         lsp-idle-delay 0.8
+;;         lsp-javascript-format-enable nil
+;;         lsp-typescript-format-enable nil
+;;         lsp-typescript-preferences-import-module-specifier "relative"
+;;         lsp-typescript-surveys-enabled nil
+;;         lsp-disabled-clients '(php-ls)
+;;         lsp-intelephense-php-version "8.1.0"
+;;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
 (use-package! eglot
   :config
   (add-to-list 'eglot-server-programs
@@ -263,7 +263,7 @@
 ;; ###############################
 ;; SLACK
 ;; ###############################
-(use-package slack
+(use-package! slack
   :commands (slack-start)
   :init (setq slack-buffer-emojify t
               slack-prefer-current-team t)
@@ -322,9 +322,6 @@
 (map! :leader
       :desc "Open kubernetes"
       :n "ok" #'kubernetes-overview)
-;; (map! :map eglot-mode-map
-;;       :desc "Goto references"
-;;       :n "gD" #'+lookup/references)
 (map! :after magit
       :map forge-topic-mode-map
       :localleader
