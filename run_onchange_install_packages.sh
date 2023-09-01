@@ -88,7 +88,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     newsboat \
     nmap \
     nodejs-intelephense \
-    nodejs-lts-gallium \
     npm \
     nvm \
     omnisharp-roslyn-bin \
@@ -101,8 +100,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     php-pgsql \
     php-sodium \
     php-sqlite \
-    picom \
-    grim \
     pkgconf \
     procs \
     psysh \
@@ -110,7 +107,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     python-adblock \
     python-lsp-server \
     python-pip \
-    qutebrowser \
     reflector \
     ripgrep \
     rsync \
@@ -131,9 +127,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     vim \
     wget \
     which \
-    xclip \
-    xdg-utils \
-    xdotool \
     yarn \
     zip \
     zoxide
