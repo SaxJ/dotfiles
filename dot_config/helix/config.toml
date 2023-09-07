@@ -6,6 +6,8 @@ mouse = false
 shell = ["bash", "-i", "-c"]
 idle-timeout = 400
 auto-format = true
+undercurl = true
+default-line-ending = "lf"
 
 [editor.cursor-shape]
 insert = "bar"
