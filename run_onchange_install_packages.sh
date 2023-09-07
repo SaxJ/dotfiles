@@ -7,6 +7,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     paru -S --needed \
     broot \
     cronie \
+    pnpm \
     graphite-cli-git\
     racket \
     starship \
