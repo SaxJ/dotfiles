@@ -220,24 +220,26 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-;; (use-package! lsp-mode
-;;   :config
-;;   (setq lsp-file-watch-threshold nil
-;;         lsp-idle-delay 0.8
-;;         lsp-javascript-format-enable nil
-;;         lsp-typescript-format-enable nil
-;;         lsp-typescript-preferences-import-module-specifier "relative"
-;;         lsp-typescript-surveys-enabled nil
-;;         lsp-disabled-clients '(php-ls)
-;;         lsp-intelephense-php-version "8.1.0"
-;;         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
-(use-package! eglot
+(use-package! lsp-mode
   :config
-  (add-to-list 'eglot-server-programs
-               '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(php-mode . ("intelephense" "--stdio")))
-  (setq eglot-events-buffer-size 0))
+  (setq lsp-file-watch-threshold nil
+        lsp-idle-delay 0.8
+        lsp-javascript-format-enable nil
+        lsp-typescript-format-enable nil
+        lsp-typescript-preferences-import-module-specifier "relative"
+        lsp-typescript-surveys-enabled nil
+        lsp-disabled-clients '(php-ls)
+        lsp-intelephense-php-version "8.1.0"
+        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+;; (use-package! eglot
+;;   :config
+;;   (add-to-list 'eglot-server-programs
+;;                '(csharp-ts-mode . ("csharp-ls")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(php-mode . ("intelephense" "--stdio")))
+;;   (setq eglot-events-buffer-size 0))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -417,6 +419,13 @@
 (use-package! vterm
   :config
   (setq vterm-shell "/usr/bin/bash"))
+
+(use-package! todotxt
+  :config
+  (setq todotxt-file "~/Dropbox/todo/todo.txt")
+  (map! :localleader
+        :map todotxt-mode-map
+        :n "td" #'todotxt-complete-toggle))
 
 ;;; config.el ends here
 ;;;
