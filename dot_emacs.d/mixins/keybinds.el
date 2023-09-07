@@ -18,7 +18,7 @@
   (general-nmap
    :prefix "SPC"
    "pp" 'project-switch-project
-   "f" 'project-find-file
+   "ff" 'find-file
    "pf" 'project-find-file
    "SPC" 'project-find-file
    
