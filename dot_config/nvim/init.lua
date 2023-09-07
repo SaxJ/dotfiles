@@ -15,13 +15,6 @@ local mail = Terminal:new({
     close_on_exit = true,
     direction = "float",
 })
-local tasks = Terminal:new({
-    dir = "~",
-    cmd = "taskwarrior-tui",
-    hidden = true,
-    close_on_exit = true,
-    direction = "float",
-})
 local lazyGit = Terminal:new({
     cmd = "lazygit",
     hidden = true,
@@ -79,7 +72,7 @@ wk.register({
     ["<leader>"] = { ":Telescope find_files<cr>", "Files" },
     f = {
         name = "+files",
-        f = { ":Telescope find_files<cr>", "Files" },
+        f = { ":Oil<cr>", "Files" },
         Y = { ":CopyRelPath<CR>", "Yank Path" },
     },
     s = {
@@ -88,14 +81,10 @@ wk.register({
     },
     p = {
         name = "+project",
-        p = {
-            function ()
-                require('telescope').extensions.repo.list({
-                    search_dirs = {"~/Documents", "~/.local/share/chezmoi"}
-                })
-            end,
-            "Switch Project"
-        },
+        p = { ":Telescope workspaces<CR>", "Switch Project" },
+        a = { ":WorkspacesAdd<CR>", "Add Project" },
+        d = { ":WorkspacesRemove<CR>", "Remove Project"},
+        r = { ":WorkspacesRename<CR>", "Rename Project"},
     },
     g = {
         name = "+git",
@@ -104,15 +93,6 @@ wk.register({
         g = { ":Neogit<CR>", "Git" },
         f = {
             name = "+forge",
-        },
-    },
-    t = {
-        name = "Tasks",
-        t = {
-            function()
-                tasks:toggle()
-            end,
-            "Toggle",
         },
     },
     n = {
@@ -135,9 +115,6 @@ wk.register({
     ["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
 
--- misc
-mapx.nnoremap("<C-e>", ":NvimTreeFindFileToggle<CR>")
-
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
@@ -147,8 +124,6 @@ mapx.nmap("<localleader>d", insertDate, "silent", {ft = "norg"})
 
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
-
-mapx.nmap('<localleader>p', ":lua require('image_preview').PreviewImage()<CR>", 'silent', {ft = "NvimTree"})
 
 -- Neogit
 mapx.nmap("@cp", ":! gh pr create --fill -w<CR>", "silent", { ft = "NeogitStatus" })

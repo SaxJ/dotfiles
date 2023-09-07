@@ -16,10 +16,10 @@ return {
     "fladson/vim-kitty",
     "tveskag/nvim-blame-line",
     "sheerun/vim-polyglot",
+    "jamessan/vim-gnupg",
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-frecency.nvim", dependencies = { { "kkharji/sqlite.lua" } } },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "cljoly/telescope-repo.nvim"},
 }

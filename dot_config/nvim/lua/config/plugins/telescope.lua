@@ -66,12 +66,6 @@ return {
 						default_workspace = "CWD",
 						ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
 						show_unindexed = true,
-					},
-					repo = {
-						search_dirs = {
-							"~/Documents",
-							"~/.local/share/chezmoi"
-						}
 					}
 				},
 			},
@@ -80,6 +74,6 @@ return {
 		require("telescope").load_extension("yaml_schema")
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("file_browser")
-		require('telescope').load_extension('repo')
+		-- require('telescope').load_extension('workspaces')
 	end,
 }

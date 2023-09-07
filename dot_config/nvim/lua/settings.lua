@@ -33,6 +33,7 @@ vim.opt.tabstop = indent
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 300
+vim.opt.signcolumn = 'yes'
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
