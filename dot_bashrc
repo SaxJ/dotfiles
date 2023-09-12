@@ -6,7 +6,7 @@
 
 export EDITOR=/usr/bin/hx
 export VISUAL=$EDITOR
-export PAGER=moar
+export PAGER=more
 
 export GOPATH=$HOME/go_packages
 export HELM_HOME=$HOME/helm
