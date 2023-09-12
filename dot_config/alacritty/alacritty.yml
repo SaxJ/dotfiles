@@ -135,11 +135,11 @@ colors:
 # Font configuration
 font:
   normal:
-      family: "Hack Nerd Font"
+      family: "FiraCode Nerd Font"
   bold:
-      family: "Hack Nerd Font"
+      family: "FiraCode Nerd Font"
   italic:
-      family: "Hack Nerd Font"
+      family: "FiraCode Nerd Font"
   size: 15
 
   # Offset is the extra space around each character. `offset.y` can be thought of
