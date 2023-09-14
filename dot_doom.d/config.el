@@ -1,5 +1,5 @@
 ;;; $DOOMDIR/config.el -*- lexical-binding: t; -*-
-;
+                                        ;
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
@@ -39,7 +39,10 @@
 ;; Autocomplete tweaking
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
-(setq telega-server-libs-prefix "/usr/include/td/telegram")
+
+(use-package! telega
+  :config
+  (setq telega-server-libs-prefix "/home/saxonj/Documents/td/tdlib"))
 
 (defun the-hello-snail ()
   "Prints an ascii snail."
@@ -169,16 +172,16 @@
                                  ("KILL" . +org-todo-cancel))
         org-log-done nil
         org-capture-templates '(("t" "Personal todo" entry (file +org-capture-todo-file) "* TODO [#%^{A|B|C}] %? %t")
-                               ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
-                               ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file) "* %U %?\n%i\n%a" :prepend t)
-                               ("p" "Templates for projects")
-                               ("pt" "Project-local todo" entry (file+headline +org-capture-project-todo-file "Inbox") "* TODO %?\n%i\n%a" :prepend t)
-                               ("pn" "Project-local notes" entry (file+headline +org-capture-project-notes-file "Inbox") "* %U %?\n%i\n%a" :prepend t)
-                               ("pc" "Project-local changelog" entry (file+headline +org-capture-project-changelog-file "Unreleased") "* %U %?\n%i\n%a" :prepend t)
-                               ("o" "Centralized templates for projects")
-                               ("ot" "Project todo" entry #'+org-capture-central-project-todo-file "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
-                               ("on" "Project notes" entry #'+org-capture-central-project-notes-file "* %U %?\n %i\n %a" :heading "Notes" :prepend t)
-                               ("oc" "Project changelog" entry #'+org-capture-central-project-changelog-file "* %U %?\n %i\n %a" :heading "Changelog" :prepend t))
+                                ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
+                                ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file) "* %U %?\n%i\n%a" :prepend t)
+                                ("p" "Templates for projects")
+                                ("pt" "Project-local todo" entry (file+headline +org-capture-project-todo-file "Inbox") "* TODO %?\n%i\n%a" :prepend t)
+                                ("pn" "Project-local notes" entry (file+headline +org-capture-project-notes-file "Inbox") "* %U %?\n%i\n%a" :prepend t)
+                                ("pc" "Project-local changelog" entry (file+headline +org-capture-project-changelog-file "Unreleased") "* %U %?\n%i\n%a" :prepend t)
+                                ("o" "Centralized templates for projects")
+                                ("ot" "Project todo" entry #'+org-capture-central-project-todo-file "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
+                                ("on" "Project notes" entry #'+org-capture-central-project-notes-file "* %U %?\n %i\n %a" :heading "Notes" :prepend t)
+                                ("oc" "Project changelog" entry #'+org-capture-central-project-changelog-file "* %U %?\n %i\n %a" :heading "Changelog" :prepend t))
         ))
 
 
@@ -231,15 +234,6 @@
         lsp-disabled-clients '(php-ls)
         lsp-intelephense-php-version "8.1.0"
         lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
-;; (use-package! eglot
-;;   :config
-;;   (add-to-list 'eglot-server-programs
-;;                '(csharp-ts-mode . ("csharp-ls")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(typescript-tsx-mode . ("typescript-language-server" "--stdio")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(php-mode . ("intelephense" "--stdio")))
-;;   (setq eglot-events-buffer-size 0))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -398,11 +392,11 @@
 ;; SQL CLIENT
 (setq sql-connection-alist
       '((pgsql-dev (sql-product 'postgres)
-                   (sql-port 5432)
-                   (sql-server "localhost")
-                   (sql-user "engine_master")
-                   (sql-password "he_dev")
-                   (sql-database "engine_data"))))
+         (sql-port 5432)
+         (sql-server "localhost")
+         (sql-user "engine_master")
+         (sql-password "he_dev")
+         (sql-database "engine_data"))))
 
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
