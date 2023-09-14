@@ -1,5 +1,5 @@
 [language-server]
-omnisharp = { command = "OmniSharp", args = ["--languageserver"] }
+omnisharp = { command = "omnisharp", args = ["--languageserver"] }
 csharpls = { command = "csharp-ls", args = ["-l", "error"] }
 graphql-ls = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
 
