@@ -17,10 +17,14 @@
   (general-evil-setup)
   (general-nmap
    :prefix "SPC"
-   "pp" 'project-switch-project
    "ff" 'find-file
-   "pf" 'project-find-file
    "SPC" 'project-find-file
+
+   ; project bindings
+   "pf" 'project-find-file
+   "pp" 'tabspaces-open-or-create-project-and-workspace
+   "pb" 'tabspaces-switch-to-buffer
+   "pd" 'tabspaces-close-workspace
    
    "cr" 'eglot-rename
    "ca" 'eglot-code-actions

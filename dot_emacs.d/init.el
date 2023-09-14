@@ -40,6 +40,8 @@
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
   (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t))
 
+(set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
+
 ;; If you want to turn off the welcome screen, uncomment this
 (setq inhibit-splash-screen t)
 
@@ -83,7 +85,7 @@ If the new path's directories does not exist, create them."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Show the help buffer after startup
-(add-hook 'after-init-hook 'help-quick)
+;(add-hook 'after-init-hook 'help-quick)
 
 ;; which-key: shows a popup of available keybindings when typing a long key
 ;; sequence (e.g. C-x ...)
@@ -143,8 +145,8 @@ If the new path's directories does not exist, create them."
 
 ;; We won't set these, but they're good to know about
 ;;
-;; (setq-default indent-tabs-mode nil)
-;; (setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
 
 ;; Misc. UI tweaks
 (blink-cursor-mode -1)                                ; Steady cursor
@@ -156,6 +158,7 @@ If the new path's directories does not exist, create them."
 ;; Display line numbers in programming mode
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (setq-default display-line-numbers-width 3)           ; Set a minimum width
+(setq-default display-line-numbers 'relative)
 
 ;; Nice line wrapping when working with text
 (add-hook 'text-mode-hook 'visual-line-mode)
@@ -233,7 +236,7 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(which-key))
+ '(package-selected-packages '(eglot which-key))
  '(safe-local-variable-values
    '((ssh-deploy-async-with-threads . 1)
      (ssh-deploy-async . 1)

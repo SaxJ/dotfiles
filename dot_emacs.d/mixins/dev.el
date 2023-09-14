@@ -38,7 +38,7 @@
           (bash-mode . bash-ts-mode)
           (js2-mode . js-ts-mode)
           (typescript-mode . typescript-ts-mode)
-	  (csharp-mode . csharp-ts-mode)
+          (csharp-mode . csharp-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)))
@@ -86,27 +86,46 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package eglot
-  ;; no :ensure t here because it's built-in
-
-  ;; Configure hooks to automatically turn-on eglot for selected modes
-  :hook
-  (((python-mode typescript-mode javascript-mode php-mode csharp-mode) . eglot))
-
-  :custom
-  (eglot-send-changes-idle-time 0.1)
+  ;:custom
+  ;(eglot-send-changes-idle-time 0.1)
 
   :config
-  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+  (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+  (add-hook 'javascript-mode 'eglot-ensure)
+  (add-hook 'tsx-ts-mode 'eglot-ensure)
+  (add-hook 'typescript-ts-mode 'eglot-ensure)
+  (add-hook 'php-mode 'eglot-ensure)
+  (add-hook 'json-ts-mode 'eglot-ensure)
+  (add-hook 'yaml-ts-mode 'eglot-ensure)
+
+  ;(fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
-	       '(php-mode . ("intelephense" "--stdio"))))
+	           '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(csharp-ts-mode . ("omnisharp" "--languageserver"))))
 
-(use-package apheleia
-  :ensure t
-  :config
-  (apheleia-global-mode +1))
+;;(use-package apheleia
+;;  :ensure t
+;;  :config
+;;  (apheleia-global-mode +1))
 
 (use-package eat
   :ensure t)
+
+(use-package treesit-auto
+  :ensure t
+  :config
+  (global-treesit-auto-mode))
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
+
+(use-package ssh-deploy
+  :ensure t
+  :config
+  (ssh-deploy-line-mode))
