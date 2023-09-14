@@ -8,6 +8,12 @@ vpn() {
     fi
 }
 
+ram() {
+    avail=$(cat /proc/meminfo | grep MemAvailable)
+    free=$(cat /proc/meminfo | grep MemFree)
+    echo "Mem: $free / $avail"
+}
+
 network() {
     eth="$(nmcli -t -c no c show --active | grep eth | head -n1)"
     wifi="$(nmcli -t -c no c show --active | grep wifi | head -n1)"
@@ -32,7 +38,7 @@ volume() {
 
 SLEEP_SEC=2
 while :; do
-    echo "$(date) | $(network) | $(vpn) | $(volume)"
+    echo "$(date) | $(network) | $(vpn) | $(volume) | $(ram)"
 
     sleep $SLEEP_SEC
 done
