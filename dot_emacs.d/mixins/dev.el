@@ -90,7 +90,7 @@
   ;(eglot-send-changes-idle-time 0.1)
 
   :config
-  (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+  ;(add-hook 'csharp-ts-mode-hook 'eglot-ensure)
   (add-hook 'javascript-mode 'eglot-ensure)
   (add-hook 'tsx-ts-mode 'eglot-ensure)
   (add-hook 'typescript-ts-mode 'eglot-ensure)
@@ -103,9 +103,7 @@
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
-	           '(php-mode . ("intelephense" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("omnisharp" "--languageserver"))))
+	           '(php-mode . ("intelephense" "--stdio"))))
 
 ;;(use-package apheleia
 ;;  :ensure t
