@@ -223,17 +223,21 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
+(use-package eglot
+  :custom
+  (eglot-send-changes-idle-time 0.1)
+  (eglot-events-buffer-size 0)
+
   :config
-  (setq lsp-file-watch-threshold nil
-        lsp-idle-delay 0.8
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil
-        lsp-disabled-clients '(php-ls)
-        lsp-intelephense-php-version "8.1.0"
-        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+  (fset #'jsonrpc--log-event #'ignore)
+  (add-to-list 'eglot-server-programs
+               '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '('(js-mode js-ts-mode tsx-ts-mode typescript-ts-mode typescript-mode) . ("typescript-language-server" "--stdio"
+                                                                                         :initializationOptions
+                                                                                         (:maxTsServerMemory 16384
+                                                                                          :preferences (:includeAutomaticOptionalChainCompletions t
+                                                                                                        :importModuleSpecifierPreference "relative"))))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
