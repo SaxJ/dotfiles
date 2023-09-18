@@ -50,6 +50,7 @@
 (package! org-remark)
 (package! emacs-eat :recipe (:host codeberg :repo "akib/emacs-eat"))
 (package! todotxt)
+(package! multi-vterm)
 
 
 ;; Filetypes
