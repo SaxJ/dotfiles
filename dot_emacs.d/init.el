@@ -1,26 +1,3 @@
-;;;  ________                                                _______                 __                            __
-;;; /        |                                              /       \               /  |                          /  |
-;;; $$$$$$$$/ _____  ____   ______   _______  _______       $$$$$$$  | ______   ____$$ | ______   ______   _______$$ |   __
-;;; $$ |__   /     \/    \ /      \ /       |/       |      $$ |__$$ |/      \ /    $$ |/      \ /      \ /       $$ |  /  |
-;;; $$    |  $$$$$$ $$$$  |$$$$$$  /$$$$$$$//$$$$$$$/       $$    $$</$$$$$$  /$$$$$$$ /$$$$$$  /$$$$$$  /$$$$$$$/$$ |_/$$/
-;;; $$$$$/   $$ | $$ | $$ |/    $$ $$ |     $$      \       $$$$$$$  $$    $$ $$ |  $$ $$ |  $$/$$ |  $$ $$ |     $$   $$<
-;;; $$ |_____$$ | $$ | $$ /$$$$$$$ $$ \_____ $$$$$$  |      $$ |__$$ $$$$$$$$/$$ \__$$ $$ |     $$ \__$$ $$ \_____$$$$$$  \
-;;; $$       $$ | $$ | $$ $$    $$ $$       /     $$/       $$    $$/$$       $$    $$ $$ |     $$    $$/$$       $$ | $$  |
-;;; $$$$$$$$/$$/  $$/  $$/ $$$$$$$/ $$$$$$$/$$$$$$$/        $$$$$$$/  $$$$$$$/ $$$$$$$/$$/       $$$$$$/  $$$$$$$/$$/   $$/
-
-;;; Minimal init.el
-
-;;; Contents:
-;;;
-;;;  - Basic settings
-;;;  - Discovery aids
-;;;  - Minibuffer/completion settings
-;;;  - Interface enhancements/defaults
-;;;  - Tab-bar configuration
-;;;  - Theme
-;;;  - Optional mixins
-;;;  - Built-in customization framework
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Basic settings
@@ -160,9 +137,6 @@ If the new path's directories does not exist, create them."
 (setq-default display-line-numbers-width 3)           ; Set a minimum width
 (setq-default display-line-numbers 'relative)
 
-;; Nice line wrapping when working with text
-(add-hook 'text-mode-hook 'visual-line-mode)
-
 ;; Modes to highlight the current line with
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
@@ -182,6 +156,7 @@ If the new path's directories does not exist, create them."
 (setq display-time-format "%a %F %T")
 (setq display-time-interval 1)
 (display-time-mode)
+(set-default 'truncate-partial-width-windows nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -189,9 +164,10 @@ If the new path's directories does not exist, create them."
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(use-package emacs
+(use-package doom-themes
+  :ensure t
   :config
-  (load-theme 'modus-vivendi))          ; for light theme, use modus-operandi
+  (load-theme 'doom-outrun-electric t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -202,7 +178,6 @@ If the new path's directories does not exist, create them."
 ;; Uncomment the (load-file …) lines or copy from the mixin/ files as desired
 
 ;; UI/UX enhancements mostly focused on minibuffer and autocompletion interfaces
-;; These ones are *strongly* recommended!
 (load-file (expand-file-name "mixins/base.el" user-emacs-directory))
 
 ;; Packages for software development
@@ -211,19 +186,6 @@ If the new path's directories does not exist, create them."
 ;; Vim-bindings in Emacs (evil-mode configuration)
 (load-file (expand-file-name "mixins/vim-like.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/keybinds.el" user-emacs-directory))
-
-;; Org-mode configuration
-;; WARNING: need to customize things inside the mixin file before use! See
-;; the file mixins/org-intro.txt for help.
-;(load-file (expand-file-name "mixins/org.el" user-emacs-directory))
-
-;; Email configuration in Emacs
-;; WARNING: needs the `mu' program installed; see the mixin file for more
-;; details.
-;(load-file (expand-file-name "mixins/email.el" user-emacs-directory))
-
-;; Tools for academic researchers
-;(load-file (expand-file-name "mixins/researcher.el" user-emacs-directory))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -236,9 +198,13 @@ If the new path's directories does not exist, create them."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(package-selected-packages '(eglot which-key))
+ '(custom-safe-themes
+   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
+ '(package-selected-packages
+   '(yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode general evil-collection embark-consult eglot editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
-   '((ssh-deploy-async-with-threads . 1)
+   '((ssh-deploy-on-explicit-save . t)
+     (ssh-deploy-async-with-threads . 1)
      (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
      (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")

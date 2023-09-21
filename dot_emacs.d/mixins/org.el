@@ -41,7 +41,7 @@
 ;;; Phase 2 variables
 
 ;; Agenda variables
-(setq org-directory "~/Documents/org/") ; Non-absolute paths for agenda and
+(setq org-directory "~/Documents/wiki/") ; Non-absolute paths for agenda and
                                         ; capture templates will look here.
 
 (setq org-agenda-files '("inbox.org" "work.org"))
