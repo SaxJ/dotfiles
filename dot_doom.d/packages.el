@@ -48,7 +48,6 @@
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
-(package! emacs-eat :recipe (:host codeberg :repo "akib/emacs-eat"))
 (package! todotxt)
 (package! multi-vterm)
 

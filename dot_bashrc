@@ -94,6 +94,10 @@ function create_pr() {
     gh pr create --title "$title"
 }
 
+if [ -n "$ZELLIJ_SESSION_NAME" ]; then
+    echo "HELLO"
+fi
+
 function cd() {
     z "$1"
     if [ -n "$ZELLIJ_SESSION_NAME" ]; then
