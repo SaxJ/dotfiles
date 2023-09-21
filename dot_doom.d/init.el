@@ -32,7 +32,7 @@
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       (emoji +github +unicode) ; :smile:
+       ;;(emoji +github +unicode) ; :smile:
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides     ; highlighted indent columns
@@ -94,8 +94,8 @@
        ;;ein               ; tame Jupyter notebooks with emacs
        (eval +overlay)     ; run code, run (also, repls)
        gist              ; interacting with github gists
-       (lookup +docsets)              ; navigate your code and its documentation
-       (lsp +eglot)
+       lookup              ; navigate your code and its documentation
+       (lsp +peek)
        (magit +forge)             ; a git porcelain for Emacs
        make              ; run make tasks from Emacs
        (pass +auth)              ; password manager for nerds
@@ -115,9 +115,9 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;beancount
-       (cc +lsp)                ; C/C++/Obj-C madness
+       ;;(cc +lsp)                ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
-       common-lisp       ; if you've seen one lisp, you've seen them all
+       ;;common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        (csharp +lsp +dotnet +tree-sitter)            ; unity, .NET, and mono shenanigans
@@ -132,7 +132,7 @@
        ;;factor
        ;;faust             ; dsp, but you get to keep your soul
        ;;fortran
-       (fsharp +lsp)            ; ML stands for Microsoft's Language
+       ;;(fsharp +lsp)            ; ML stands for Microsoft's Language
        ;;fstar             ; (dependent) types and (monadic) effects and Z3
        ;;gdscript          ; the language you waited for
        (go +lsp +tree-sitter)         ; the hipster dialect
@@ -153,11 +153,11 @@
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
        ;;ocaml             ; an objective camel
-       (org +pretty +roam2 +journal +gnuplot +present)
+       (org +pretty +journal +gnuplot +present)
        (php +lsp +tree-sitter)
        ;;plantuml          ; diagrams for confusing people more
        (purescript +lsp)        ; javascript, but functional
-       (python +lsp +pyenv +pyright +tree-sitter)            ; beautiful is better than ugly
+       ;;(python +lsp +pyenv +pyright +tree-sitter)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
        ;;raku              ; the artist formerly known as perl6

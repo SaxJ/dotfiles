@@ -223,21 +223,18 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package eglot
-  :custom
-  (eglot-send-changes-idle-time 0.1)
-  (eglot-events-buffer-size 0)
-
+(use-package! lsp-mode
   :config
-  (fset #'jsonrpc--log-event #'ignore)
-  (add-to-list 'eglot-server-programs
-               '(php-mode . ("intelephense" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '('(js-mode js-ts-mode tsx-ts-mode typescript-ts-mode typescript-mode) . ("typescript-language-server" "--stdio"
-                                                                                         :initializationOptions
-                                                                                         (:maxTsServerMemory 16384
-                                                                                          :preferences (:includeAutomaticOptionalChainCompletions t
-                                                                                                        :importModuleSpecifierPreference "relative"))))))
+  (setq lsp-file-watch-threshold nil
+        lsp-ui-sideline-enable nil
+        lsp-idle-delay 0.8
+        lsp-javascript-format-enable nil
+        lsp-typescript-format-enable nil
+        lsp-typescript-preferences-import-module-specifier "relative"
+        lsp-typescript-surveys-enabled nil
+        lsp-disabled-clients '(php-ls)
+        lsp-intelephense-php-version "8.1.0"
+        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -392,15 +389,6 @@
   :config
   (setq git-commit-summary-max-length 100))
 
-
-;; SQL CLIENT
-(setq sql-connection-alist
-      '((pgsql-dev (sql-product 'postgres)
-         (sql-port 5432)
-         (sql-server "localhost")
-         (sql-user "engine_master")
-         (sql-password "he_dev")
-         (sql-database "engine_data"))))
 
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
