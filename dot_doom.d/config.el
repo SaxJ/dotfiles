@@ -225,7 +225,8 @@
 ;; ###############################
 (use-package! lsp-mode
   :config
-  (setq lsp-file-watch-threshold nil
+  (setq lsp-file-watch-threshold 1000
+        lsp-enable-file-watchers nil
         lsp-ui-sideline-enable nil
         lsp-idle-delay 0.8
         lsp-javascript-format-enable nil
