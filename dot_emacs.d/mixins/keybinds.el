@@ -1,3 +1,11 @@
+(defun saxon/popup-term ()
+  (interactive)
+  (let ((buffer (multi-vterm-get-buffer)))
+    (when-let (window
+               (display-buffer-in-side-window
+                buffer `((side . bottom) (slot . 0)
+                         (window-width . -40))))
+    (select-window window))))
 
 (use-package general
   :ensure t
@@ -31,8 +39,8 @@
 
    "gg" 'magit
 
-   "oT" 'multi-vterm
-   "ot" 'multi-vterm-project)
+   "oT" 'multi-vterm-project
+   "ot" 'saxon/popup-term)
 
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
