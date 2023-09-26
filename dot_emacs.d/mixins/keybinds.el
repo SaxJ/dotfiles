@@ -1,3 +1,4 @@
+
 (use-package general
   :ensure t
   :config
@@ -9,11 +10,12 @@
    ":" 'execute-extended-command
 
    ;; project bindings
-   "pf" 'project-find-file
-   "pp" 'tabspaces-open-or-create-project-and-workspace
-   "pb" 'tabspaces-switch-to-buffer
-   "pd" 'tabspaces-close-workspace
-   "pa" 'project-remember-projects-under
+   "pf" 'projectile-find-file
+   "pp" 'projectile-persp-switch-project
+   "pb" 'projectile-switch-to-buffer
+   "pd" 'projectile-remove-known-project
+   "pa" 'projectile-discover-projects-in-directory
+   "p/" 'projectile-ripgrep
 
    ;; remote
    "ru" 'ssh-deploy-upload-handler-forced
@@ -24,13 +26,20 @@
    "hf" 'describe-function
    "hm" 'describe-mode
 
-   "TAB" 'tabspaces-command-map
+   "qq" 'kill-emacs
+   "qr" 'restart-emacs
 
    "gg" 'magit
 
    "oT" 'multi-vterm
    "ot" 'multi-vterm-project)
 
-  (general-def 'normal
-    lsp-mode :definer 'minor-mode
-    "gr" 'lsp-ui-peek-find-references))
+  (general-def 'normal 'eglot--managed-mode
+    :definer 'minor-mode
+    "gD" 'xref-find-references
+    "gr" 'xref-find-references)
+
+  (general-def 'insert 'vertico-map
+    :keymaps 'override
+    "C-k" 'vertico-previous
+    "C-j" 'vertico-next))

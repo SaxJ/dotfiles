@@ -77,6 +77,8 @@
   :ensure t)
 (use-package php-mode
   :ensure t)
+(use-package graphql-mode
+  :ensure t)
 
 
 ;; Emacs ships with a lot of popular programming language modes. If it's not
@@ -89,48 +91,48 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; (use-package eglot
-;;   :custom
-;;   (eglot-send-changes-idle-time 0.1)
-
-;;   :config
-;;   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'csharp-mode-hook 'eglot-ensure)
-;;   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'php-mode-hook 'eglot-ensure)
-;;   (add-hook 'json-mode-hook 'eglot-ensure)
-;;   (add-hook 'yaml-mode-hook 'eglot-ensure)
-
-;;   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
-;;   ;; Sometimes you need to tell Eglot where to find the language server
-;;   (add-to-list 'eglot-server-programs
-;;                '(csharp-ts-mode . ("csharp-ls")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
-;;   (add-to-list 'eglot-server-programs
-;; 	           '(php-mode . ("intelephense" "--stdio"))))
-
-(use-package lsp-mode
-  :ensure t
+(use-package eglot
   :custom
-  (lsp-completion-provider :none)
-  :init
-  (setq lsp-keymap-prefix "C-l")
-  (defun sax/lsp-mode-completion-style ()
-    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-          '(orderless)))
-  :hook
-  ((php-mode . lsp)
-   (tsx-ts-mode . lsp)
-   (typescript-ts-mode . lsp)
-   (csharp-mode . lsp)
-   (lsp-mode . lsp-enable-which-key-integration)
-   (lsp-completion-mode . sax/lsp-mode-completion-style))
-  :commands lsp)
+  (eglot-send-changes-idle-time 0.1)
 
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode)
+  :config
+  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+  (add-hook 'csharp-mode-hook 'eglot-ensure)
+  (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+  (add-hook 'php-mode-hook 'eglot-ensure)
+  (add-hook 'json-mode-hook 'eglot-ensure)
+  (add-hook 'yaml-mode-hook 'eglot-ensure)
+
+  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+  ;; Sometimes you need to tell Eglot where to find the language server
+  (add-to-list 'eglot-server-programs
+               '(csharp-ts-mode . ("csharp-ls")))
+  (add-to-list 'eglot-server-programs
+               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
+  (add-to-list 'eglot-server-programs
+	           '(php-mode . ("intelephense" "--stdio"))))
+
+;;(use-package lsp-mode
+;;  :ensure t
+;;  :custom
+;;  (lsp-completion-provider :none)
+;;  :init
+;;  (setq lsp-keymap-prefix "C-l")
+;;  (defun sax/lsp-mode-completion-style ()
+;;    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
+;;          '(orderless)))
+;;  :hook
+;;  ((php-mode . lsp)
+;;   (tsx-ts-mode . lsp)
+;;   (typescript-ts-mode . lsp)
+;;   (csharp-mode . lsp)
+;;   (lsp-mode . lsp-enable-which-key-integration)
+;;   (lsp-completion-mode . sax/lsp-mode-completion-style))
+;;  :commands lsp)
+;;
+;;(use-package lsp-ui
+;;  :ensure t
+;;  :commands lsp-ui-mode)
 
 (use-package apheleia
   :ensure t
@@ -159,5 +161,5 @@
   :ensure t
   :after magit)
 
-(use-package deadgrep
+(use-package ripgrep
   :ensure t)

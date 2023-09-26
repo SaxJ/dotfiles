@@ -133,9 +133,34 @@
 ;; Orderless: powerful completion style
 (use-package orderless
   :ensure t
+  :after prescient
   :config
-  (setq completion-styles '(orderless)))
+  (setq completion-styles '(orderless prescient)))
 
-(use-package tabspaces
+;;(use-package tabspaces
+;;  :ensure t
+;;  :hook (after-init . tabspaces-mode))
+
+(use-package prescient
+  :ensure t)
+
+(use-package projectile
   :ensure t
-  :hook (after-init . tabspaces-mode))
+  :init
+  (projectile-mode +1)
+  :config
+  (setq projectile-project-search-path '(("~/Documents" . 1))))
+
+(use-package perspective
+  :ensure t
+  :custom
+  (persp-suppress-no-prefix-key-warning t)
+  :init
+  (persp-mode))
+
+(use-package persp-projectile
+  :ensure t)
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))

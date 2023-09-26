@@ -137,6 +137,9 @@ If the new path's directories does not exist, create them."
 (setq-default display-line-numbers-width 3)           ; Set a minimum width
 (setq-default display-line-numbers 'relative)
 
+;; No line wrapping
+(setq-default truncate-lines t)
+
 ;; Modes to highlight the current line with
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
@@ -156,7 +159,6 @@ If the new path's directories does not exist, create them."
 (setq display-time-format "%a %F %T")
 (setq display-time-interval 1)
 (display-time-mode)
-(set-default 'truncate-partial-width-windows nil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -169,23 +171,12 @@ If the new path's directories does not exist, create them."
   :config
   (load-theme 'doom-outrun-electric t))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;;   Optional mixins
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Uncomment the (load-file …) lines or copy from the mixin/ files as desired
-
-;; UI/UX enhancements mostly focused on minibuffer and autocompletion interfaces
 (load-file (expand-file-name "mixins/base.el" user-emacs-directory))
-
-;; Packages for software development
 (load-file (expand-file-name "mixins/dev.el" user-emacs-directory))
-
-;; Vim-bindings in Emacs (evil-mode configuration)
 (load-file (expand-file-name "mixins/vim-like.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/keybinds.el" user-emacs-directory))
+(load-file (expand-file-name "mixins/org.el" user-emacs-directory))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -201,14 +192,15 @@ If the new path's directories does not exist, create them."
  '(custom-safe-themes
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(package-selected-packages
-   '(yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode general evil-collection embark-consult eglot editorconfig eat doom-themes corfu-terminal avy apheleia))
+   '(graphql-mode yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode general evil-collection embark-consult eglot editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
    '((ssh-deploy-on-explicit-save . t)
      (ssh-deploy-async-with-threads . 1)
      (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
      (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/"))))
+     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")))
+ '(truncate-lines t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

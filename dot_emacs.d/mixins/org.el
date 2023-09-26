@@ -44,7 +44,7 @@
 (setq org-directory "~/Documents/wiki/") ; Non-absolute paths for agenda and
                                         ; capture templates will look here.
 
-(setq org-agenda-files '("inbox.org" "work.org"))
+(setq org-agenda-files '("~/Documents/wiki/pages" "~/Documents/wiki/journals" "~/Documents/wiki"))
 
 ;; Default tags
 (setq org-tag-alist '(
@@ -52,7 +52,6 @@
                       (:startgroup)
                       ("home" . ?h)
                       ("work" . ?w)
-                      ("school" . ?s)
                       (:endgroup)
                       (:newline)
                       ;; scale
@@ -71,9 +70,19 @@
 
 ;;; Phase 3 variables
 
+      ;; Journal config
+(setq org-journal-file-type 'yearly
+      org-journal-dir (concat (file-name-as-directory org-directory) "journals/")
+      org-journal-date-prefix "* "
+      org-journal-time-prefix "** "
+      org-journal-date-format "%a, %Y-%m-%d"
+      org-journal-file-format "%Y_%m_%d.org"
+      org-journal-time-format "%I:%M %p")
+
 ;; Org-roam variables
-(setq org-roam-directory "~/Documents/org-roam/")
-(setq org-roam-index-file "~/Documents/org-roam/index.org")
+
+(setq org-roam-directory "~/Documents/wiki/pages")
+(setq org-roam-index-file "~/Documents/wiki/pages/index.org")
 
 ;;; Optional variables
 
@@ -104,8 +113,7 @@
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   ;; Make exporting quotes better
-  (setq org-export-with-smart-quotes t)
-  )
+  (setq org-export-with-smart-quotes t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -164,6 +172,9 @@
                  (side . right)
                  (window-width . 0.4)
                  (window-height . fit-window-to-buffer))))
+
+(use-package org-journal
+  :ensure t)
 
 ;; Pretty web interface for org-roam
 ;(use-package org-roam-ui
