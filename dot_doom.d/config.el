@@ -185,46 +185,13 @@
         ))
 
 
-;; ###############################
-;; CALENDAR
-;; ###############################
-(defun calendar-helper ()
-  "Define calendar sources to load."
-  (cfw:open-calendar-buffer
-   :contents-sources
-   (list
-    (cfw:org-create-source "Green")  ; org-agenda source
-    (cfw:ical-create-source "Work" (replace-regexp-in-string "\n\\'" "" (shell-command-to-string "pass calendar/work")) "DeepSkyBlue")
-    (cfw:ical-create-source "Comps" "https://calendar.google.com/calendar/ical/iu1iul1u3n8ic3s78f4df15u4o%40group.calendar.google.com/public/basic.ics" "Orange")
-    )))
-
-(defun calendar-init ()
-  "Switch to existing calendar buffer if its there."
-  (if-let (win (cl-find-if (lambda (b) (string-match-p "^\\*cfw:" (buffer-name b)))
-                           (doom-visible-windows)
-                           :key #'window-buffer))
-      (select-window win)
-    (calendar-helper)))
-
-(defun my-open-calendar ()
-  "Active or switch to my calendar."
-  (interactive)
-  (if (featurep! :ui workspaces)
-      (progn
-        (+workspace-switch "Calendar" t)
-        (doom/switch-to-scratch-buffer)
-        (calendar-init)
-        (+workspace/display))
-    (setq +calendar--wconf (current-window-configuration))
-    (delete-other-windows)
-    (switch-to-buffer (doom-fallback-buffer))
-    (calendar-init)))
 
 ;; ###############################
 ;; LSP
 ;; ###############################
 (use-package! lsp-mode
   :config
+  (add-hook! typescript-ts-mode-hook 'lsp!)
   (setq lsp-file-watch-threshold 1000
         lsp-enable-file-watchers nil
         lsp-ui-sideline-enable nil
@@ -305,9 +272,6 @@
 ;; ###############################
 ;; KEYBINDS
 ;; ###############################
-(map! :leader
-      :desc "Open Calendar"
-      :n "oc" #'my-open-calendar)
 (map! :leader
       :desc "Toggle auto-format"
       :n "taf" #'format-all-mode)

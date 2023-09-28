@@ -64,6 +64,8 @@
 
 ;; Unpin to non-broken packages
 (unpin! lsp-mode)
+(unpin! tree-sitter)
+(unpin! tree-sitter-langs)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify
