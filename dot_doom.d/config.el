@@ -60,6 +60,7 @@
                 (concat line (make-string (max 0 (- longest-line (length line))) 32)))
                "\n"))
      'face 'doom-dashboard-banner)))
+
 (setq +doom-dashboard-ascii-banner-fn #'the-hello-snail)
 
 (after! doom-modeline
@@ -104,6 +105,7 @@
       deft-directory "~/Documents/wiki")
 
 (use-package ejira
+  :defer t
   :init
   (setq jiralib2-url              "https://hejira.atlassian.net"
         jiralib2-auth             'basic
@@ -190,6 +192,7 @@
 ;; LSP
 ;; ###############################
 (use-package! lsp-mode
+  :defer t
   :config
   (add-hook! typescript-ts-mode-hook 'lsp!)
   (setq lsp-file-watch-threshold 1000
@@ -212,7 +215,7 @@
 
 ;; PHP
 (use-package! php-mode
-  :config
+  :init
   (setq php-mode-coding-style 'psr2))
 
 ;; Razor mode
@@ -229,6 +232,7 @@
 ;; SLACK
 ;; ###############################
 (use-package! slack
+  :defer t
   :commands (slack-start)
   :init (setq slack-buffer-emojify t
               slack-prefer-current-team t)
@@ -336,10 +340,12 @@
 (gnus-demon-add-handler 'gnus-daemon-scan 12 1)
 
 (use-package! all-the-icons-gnus
+  :defer t
   :config
   (all-the-icons-gnus-setup))
 
 (use-package! gnus-select-account
+  :defer t
   :config
   (gnus-select-account-enable))
 
@@ -351,6 +357,7 @@
 ;; MAGIT
 ;; ###############################
 (use-package! magit
+  :defer t
   :config
   (setq git-commit-summary-max-length 100))
 
@@ -367,11 +374,8 @@
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
 
-(use-package! vterm
-  :config
-  (setq vterm-shell "/usr/bin/bash"))
-
 (use-package! todotxt
+  :defer t
   :config
   (setq todotxt-file "~/Dropbox/todo/todo.txt")
   (map! :localleader
