@@ -63,7 +63,6 @@
 (package! mermaid-mode)
 
 ;; Unpin to non-broken packages
-(unpin! lsp-mode)
 (unpin! tree-sitter)
 (unpin! tree-sitter-langs)
 

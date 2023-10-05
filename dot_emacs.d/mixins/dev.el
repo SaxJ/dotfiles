@@ -112,6 +112,7 @@
 (use-package eglot
   :custom
   (eglot-send-changes-idle-time 0.1)
+  (eglot-confirm-server-initiated-edits nil)
 
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
@@ -124,7 +125,7 @@
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+               '(csharp-ts-mode . ("~/omnisharp/OmniSharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
@@ -157,5 +158,23 @@
   :ensure t
   :after magit)
 
-(use-package ripgrep
+(use-package deadgrep
   :ensure t)
+
+(use-package popper
+  :ensure t
+  :init
+  (setq popper-reference-buffers
+        '("\\*Messages\\*"
+          "Output\\*$"
+          "\\*Async Shell Command\\*"
+          help-mode
+          compilation-mode
+          "^\\*vterm.*\\*$" vterm-mode))
+  (popper-mode +1)
+  (popper-echo-mode +1))
+
+;;(use-package eldoc-box
+  ;;:ensure t
+  ;;:config
+  ;;(add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t))

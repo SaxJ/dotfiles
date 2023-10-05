@@ -51,14 +51,13 @@
    "fd" 'saxon/delete-file
 
    ;; project bindings
-   "pf" 'projectile-find-file
-   "pp" 'projectile-persp-switch-project
-   "pb" 'projectile-switch-to-buffer
-   "pd" 'projectile-remove-known-project
-   "pa" 'projectile-discover-projects-in-directory
-   "p/" 'projectile-ripgrep
+   "pf" 'project-find-file
+   "pp" 'tabspaces-open-or-create-project-and-workspace
+   "pb" 'tabspaces-switch-to-buffer
+   "pd" 'project-forget-project
+   "pa" 'project-remember-project
 
-   "sp" 'projectile-ripgrep
+   "ss" 'deadgrep
 
    ;; remote
    "ru" 'ssh-deploy-upload-handler-forced
@@ -72,15 +71,17 @@
    "qq" 'kill-emacs
    "qr" 'restart-emacs
 
-   "gg" 'magit
+   "gg" 'magit-project-status
 
-   "oT" 'multi-vterm-project
-   "ot" 'saxon/popup-term)
+   "ot" 'multi-vterm-project
+
+   "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
     "gD" 'xref-find-references
-    "gr" 'xref-find-references)
+    "gr" 'xref-find-references
+    "SPC ca" 'eglot-code-actions)
 
   (general-def 'insert 'vertico-map
     :keymaps 'override

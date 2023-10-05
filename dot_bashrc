@@ -19,7 +19,7 @@ export DOTNET_TOOLS=$HOME/.dotnet/tools
 # PATH
 export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin"
 
-export TERM=alacritty
+export TERM=kitty
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
@@ -171,7 +171,7 @@ eval "$(direnv hook bash)"
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 eval "$(hub alias -s)"
-eval "$(zellij setup --generate-auto-start bash)"
+# eval "$(zellij setup --generate-auto-start bash)"
 
 function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
