@@ -137,9 +137,9 @@
   :config
   (setq completion-styles '(orderless prescient)))
 
-;;(use-package tabspaces
-;;  :ensure t
-;;  :hook (after-init . tabspaces-mode))
+(use-package tabspaces
+  :ensure t
+  :hook (after-init . tabspaces-mode))
 
 (use-package prescient
   :ensure t)
