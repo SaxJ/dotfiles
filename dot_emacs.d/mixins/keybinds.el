@@ -7,23 +7,57 @@
                          (window-width . -40))))
     (select-window window))))
 
+(defun saxon/rename-file (new-name &optional force-p)
+  (interactive
+   (list (read-file-name "Rename to: ")
+         current-prefix-arg))
+  (let ((old-name (buffer-file-name)))
+    (progn
+      (rename-file old-name new-name (or force-p 1))
+      (rename-buffer new-name)
+      (set-visited-file-name new-name)
+      (set-buffer-modified-p nil))))
+
+(defun saxon/copy-file (new-name &optional force-p)
+  (interactive
+   (list (read-file-name "Copy to: ")
+         current-prefix-arg))
+  (let ((old-name (buffer-file-name)))
+    (progn
+      (make-directory (file-name-directory new-path) 't)
+      (copy-file old-name new-name)
+      (find-file new-name))))
+
+(defun saxon/delete-file ()
+  (interactive)
+  (let ((name (buffer-file-name)))
+    (progn
+      (delete-file name nil)
+      (kill-buffer-if-not-modified name))))
+
 (use-package general
   :ensure t
   :config
   (general-evil-setup)
   (general-nmap
    :prefix "SPC"
-   "ff" 'find-file
    "SPC" 'project-find-file
    ":" 'execute-extended-command
 
+   ;; file bindings
+   "ff" 'find-file
+   "fr" 'saxon/rename-file
+   "fc" 'saxon/copy-file
+   "fd" 'saxon/delete-file
+
    ;; project bindings
-   "pf" 'projectile-find-file
-   "pp" 'projectile-persp-switch-project
-   "pb" 'projectile-switch-to-buffer
-   "pd" 'projectile-remove-known-project
-   "pa" 'projectile-discover-projects-in-directory
-   "p/" 'projectile-ripgrep
+   "pf" 'project-find-file
+   "pp" 'tabspaces-open-or-create-project-and-workspace
+   "pb" 'tabspaces-switch-to-buffer
+   "pd" 'project-forget-project
+   "pa" 'project-remember-project
+
+   "ss" 'deadgrep
 
    ;; remote
    "ru" 'ssh-deploy-upload-handler-forced
@@ -39,10 +73,11 @@
    "qq" 'kill-emacs
    "qr" 'restart-emacs
 
-   "gg" 'magit
+   "gg" 'magit-project-status
 
-   "oT" 'multi-vterm-project
-   "ot" 'saxon/popup-term)
+   "ot" 'multi-vterm-project
+
+   "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode

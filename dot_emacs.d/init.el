@@ -21,7 +21,7 @@
 
 ;; If you want to turn off the welcome screen, uncomment this
 (setq inhibit-splash-screen t)
-
+(setq ring-bell-function 'ignore)
 (setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
 (setq display-time-default-load-average nil) ; this information is useless for most
 
@@ -197,7 +197,7 @@ If the new path's directories does not exist, create them."
  '(custom-safe-themes
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(package-selected-packages
-   '(graphql-mode yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode general evil-collection embark-consult eglot editorconfig eat doom-themes corfu-terminal avy apheleia))
+   '(org-journal org-roam ripgrep forge multi-vterm vterm doom-modeline persp-projectile perspective projectile prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult eglot editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
    '((ssh-deploy-on-explicit-save . t)
      (ssh-deploy-async-with-threads . 1)

@@ -19,7 +19,7 @@ export DOTNET_TOOLS=$HOME/.dotnet/tools
 # PATH
 export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin"
 
-export TERM=alacritty
+export TERM=kitty
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
@@ -93,10 +93,6 @@ function create_pr() {
     title=$(tgpt "Make a PR title from the following commit messages: $commits" | tail -n 1)
     gh pr create --title "$title"
 }
-
-if [ -n "$ZELLIJ_SESSION_NAME" ]; then
-    echo "HELLO"
-fi
 
 function cd() {
     z "$1"
