@@ -33,12 +33,30 @@
 
   ;; Tell Emacs to prefer the treesitter mode
   ;; You'll want to run the command `M-x treesit-install-language-grammar' before editing.
+(setq treesit-language-source-alist
+   '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+     (cmake "https://github.com/uyha/tree-sitter-cmake")
+     (css "https://github.com/tree-sitter/tree-sitter-css")
+     (elisp "https://github.com/Wilfred/tree-sitter-elisp")
+     (go "https://github.com/tree-sitter/tree-sitter-go")
+     (php "https://github.com/tree-sitter/tree-sitter-php")
+     (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+     (html "https://github.com/tree-sitter/tree-sitter-html")
+     (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+     (json "https://github.com/tree-sitter/tree-sitter-json")
+     (make "https://github.com/alemuller/tree-sitter-make")
+     (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+     (python "https://github.com/tree-sitter/tree-sitter-python")
+     (toml "https://github.com/tree-sitter/tree-sitter-toml")
+     (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
+     (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+     (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
           (bash-mode . bash-ts-mode)
           (js2-mode . js-ts-mode)
           (typescript-mode . typescript-ts-mode)
-          ;(csharp-mode . csharp-ts-mode) ; csharp-ts-mode is not ready
+          (csharp-mode . csharp-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)))
@@ -59,6 +77,8 @@
 ;; Magit: best Git client to ever exist
 (use-package magit
   :ensure t
+  :init
+  (setq forge-add-default-bindings t)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
 
@@ -97,7 +117,7 @@
 
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-  (add-hook 'csharp-mode-hook 'eglot-ensure)
+  (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
   (add-hook 'php-mode-hook 'eglot-ensure)
   (add-hook 'json-mode-hook 'eglot-ensure)
@@ -106,33 +126,9 @@
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("csharp-ls")))
-  (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
 	           '(php-mode . ("intelephense" "--stdio"))))
-
-;;(use-package lsp-mode
-;;  :ensure t
-;;  :custom
-;;  (lsp-completion-provider :none)
-;;  :init
-;;  (setq lsp-keymap-prefix "C-l")
-;;  (defun sax/lsp-mode-completion-style ()
-;;    (setf (alist-get 'styles (alist-get 'lsp-capf completion-category-defaults))
-;;          '(orderless)))
-;;  :hook
-;;  ((php-mode . lsp)
-;;   (tsx-ts-mode . lsp)
-;;   (typescript-ts-mode . lsp)
-;;   (csharp-mode . lsp)
-;;   (lsp-mode . lsp-enable-which-key-integration)
-;;   (lsp-completion-mode . sax/lsp-mode-completion-style))
-;;  :commands lsp)
-;;
-;;(use-package lsp-ui
-;;  :ensure t
-;;  :commands lsp-ui-mode)
 
 (use-package apheleia
   :ensure t
