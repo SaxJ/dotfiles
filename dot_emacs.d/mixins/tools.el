@@ -10,6 +10,7 @@
   (setq newsticker-url-list
         '(("Hackernews" "https://hnrss.org/frontpage")
           ("Console.dev" "https://kill-the-newsletter.com/feeds/2i8zjerit1iuplw0.xml"))))
+
 (use-package slack
   :ensure t
   :commands (slack-start)
