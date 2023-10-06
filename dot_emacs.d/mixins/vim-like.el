@@ -37,3 +37,11 @@
   :custom (evil-collection-setup-minibuffer t)
   :config
   (evil-collection-init))
+
+(use-package evil-org
+  :after org
+  :ensure t
+  :hook (org-mode . (lambda () (evil-org-mode)))
+  :config
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
