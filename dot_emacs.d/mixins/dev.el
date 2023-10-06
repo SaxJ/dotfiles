@@ -123,6 +123,10 @@
 ;; built in, you're almost certain to find a mode for the language you're
 ;; looking for with a quick Internet search.
 
+(use-package project
+  :config
+  (setq project-vc-extra-root-markers '(".project")))
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Eglot, the built-in LSP client for Emacs

@@ -76,7 +76,9 @@
    "gg" 'magit-project-status
 
    "ot" 'multi-vterm-project
+   "oa" 'org-agenda
 
+   "X" 'scratch-buffer
    "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
