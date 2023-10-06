@@ -172,11 +172,16 @@ If the new path's directories does not exist, create them."
   (load-theme 'doom-outrun-electric t))
 
 
+;;;;;;;;;;;;;;;;;;;;
+;; Config Modules ;;
+;;;;;;;;;;;;;;;;;;;;
+
 (load-file (expand-file-name "mixins/base.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/dev.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/vim-like.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/keybinds.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/org.el" user-emacs-directory))
+(load-file (expand-file-name "mixins/tools.el" user-emacs-directory))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
