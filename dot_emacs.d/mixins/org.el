@@ -1,44 +1,8 @@
-;;; Emacs Bedrock
-;;;
-;;; Mixin: Org-mode starter config
-
-;;; Usage: Append or require this file from init.el for some software
-;;; development-focused packages.
-;;;
-;;; Org-mode is a fantastically powerful package. It does a lot of things, which
-;;; makes it a little difficult to understand at first.
-;;;
-;;; We will configure Org-mode in phases. Work with each phase as you are
-;;; comfortable.
-;;;
-;;; YOU NEED TO CONFIGURE SOME VARIABLES! The most important variable is the
-;;; `org-directory', which tells org-mode where to look to find your agenda
-;;; files.
-
-;;; See "org-intro.txt" for a high-level overview.
-
-;;; Contents:
-;;;
-;;;  - Critical variables
-;;;  - Phase 1: editing and exporting files
-;;;  - Phase 2: todos, agenda generation, and task tracking
-;;;  - Phase 3: extensions (org-roam, etc.)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Critical variables
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-;;; These variables need to be set for Org-mode's full power to be unlocked!
-;;;
-;;; You can read the documentation for any variable with `C-h v'. If you have
-;;; Consult configured (see the `base.el' file) then it should help you find
-;;; what you're looking for.
-
-;;; Phase 1 variables
-
-;;; Phase 2 variables
 
 ;; Agenda variables
 (setq org-directory "~/Documents/wiki/") ; Non-absolute paths for agenda and
@@ -50,27 +14,24 @@
 (setq org-tag-alist '(
                       ;; locale
                       (:startgroup)
-                      ("home" . ?h)
+                      ("personal" . ?h)
                       ("work" . ?w)
                       (:endgroup)
                       (:newline)
                       ;; scale
                       (:startgroup)
-                      ("one-shot" . ?o)
                       ("project" . ?j)
                       ("tiny" . ?t)
                       (:endgroup)
                       ;; misc
-                      ("meta")
-                      ("review")
-                      ("reading")))
+                      ("read")))
 
 ;; Org-refile: where should org-refile look?
 (setq org-refile-targets 'FIXME)
 
 ;;; Phase 3 variables
 
-      ;; Journal config
+;; Journal config
 (setq org-journal-file-type 'yearly
       org-journal-dir (concat (file-name-as-directory org-directory) "journals/")
       org-journal-date-prefix "* "
@@ -90,7 +51,7 @@
 ;; This example is for linking a person's 7-character ID to their page on the
 ;; free genealogy website Family Search.
 (setq org-link-abbrev-alist
-      '(("family_search" . "https://www.familysearch.org/tree/person/details/%s")))
+      '(("google_search" . "https://www.google.com/search?q=%s")))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -106,7 +67,6 @@
               ("C-c l s" . org-store-link)          ; Mnemonic: link → store
               ("C-c l i" . org-insert-link-global)) ; Mnemonic: link → insert
   :config
-  (require 'oc-csl)                     ; citation support
   (add-to-list 'org-export-backends 'md)
 
   ;; Make org-open-at-point follow file links in the same window
@@ -126,34 +86,22 @@
 ;; config from Phase 1. I've broken it up here for the sake of clarity.
 (use-package org
   :config
-  ;; Instead of just two states (TODO, DONE) we set up a few different states
-  ;; that a task can be in.
   (setq org-todo-keywords
-        '((sequence "TODO(t)" "WAITING(w@/!)" "STARTED(s!)" "|" "DONE(d!)" "OBSOLETE(o@)")))
+        '((sequence "TODO(t!)" "PROG(p!)" "BLOCKED(b!)" "HOLD(h!)" "REVIEW(r!)" "|" "DONE(d!)")))
 
   ;; Refile configuration
   (setq org-outline-path-complete-in-steps nil)
   (setq org-refile-use-outline-path 'file)
 
   (setq org-capture-templates
-        '(("c" "Default Capture" entry (file "inbox.org")
-           "* TODO %?\n%U\n%i")
-          ;; Capture and keep an org-link to the thing we're currently working with
-          ("r" "Capture with Reference" entry (file "inbox.org")
-           "* TODO %?\n%U\n%i\n%a")
-          ;; Define a section
-          ("w" "Work")
-          ("wm" "Work meeting" entry (file+headline "work.org" "Meetings")
-           "** TODO %?\n%U\n%i\n%a")
-          ("wr" "Work report" entry (file+headline "work.org" "Reports")
-           "** TODO %?\n%U\n%i\n%a")))
+        '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t"))
 
-    (setq org-agenda-custom-commands
-          '(("n" "Agenda and All Todos"
-             ((agenda)
-              (todo)))
-            ("w" "Work" agenda ""
-             ((org-agenda-files '("work.org")))))))
+        org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
+                                 ("PROG" :foreground "#ff9800")
+                                 ("BLOCKED" :foreground "#F44336")
+                                 ("HOLD" :foreground "#F44336")
+                                 ("IDEA" :foreground "#9C27B0")
+                                 ("DONE" :foreground "white"))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -177,11 +125,11 @@
   :ensure t)
 
 ;; Pretty web interface for org-roam
-;(use-package org-roam-ui
-;  :ensure t
-;  :after org-roam
-;  :config
-;  (setq org-roam-ui-sync-theme t
-;        org-roam-ui-follow t
-;        org-roam-ui-update-on-save t
-;        org-roam-ui-open-on-start t))
+                                        ;(use-package org-roam-ui
+                                        ;  :ensure t
+                                        ;  :after org-roam
+                                        ;  :config
+                                        ;  (setq org-roam-ui-sync-theme t
+                                        ;        org-roam-ui-follow t
+                                        ;        org-roam-ui-update-on-save t
+                                        ;        org-roam-ui-open-on-start t))
