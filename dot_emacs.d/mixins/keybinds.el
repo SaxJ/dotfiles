@@ -29,6 +29,8 @@
    "ru" 'ssh-deploy-upload-handler-forced
    "rd" 'ssh-deploy-download-handler
 
+   "TAB" 'tabspaces-command-map
+
    ;; help
    "hv" 'describe-variable
    "hf" 'describe-function
@@ -45,7 +47,8 @@
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
     "gD" 'xref-find-references
-    "gr" 'xref-find-references)
+    "gr" 'xref-find-references
+    "SPC ca" 'eglot-code-actions)
 
   (general-def 'insert 'vertico-map
     :keymaps 'override
