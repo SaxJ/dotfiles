@@ -191,21 +191,6 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
-  :defer t
-  :config
-  (add-hook! typescript-ts-mode-hook 'lsp!)
-  (setq lsp-file-watch-threshold 1000
-        lsp-enable-file-watchers nil
-        lsp-ui-sideline-enable nil
-        lsp-idle-delay 0.8
-        lsp-javascript-format-enable nil
-        lsp-typescript-format-enable nil
-        lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-typescript-surveys-enabled nil
-        lsp-disabled-clients '(php-ls)
-        lsp-intelephense-php-version "8.1.0"
-        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
 
 ;; Haskell
 (use-package! shakespeare-mode)
