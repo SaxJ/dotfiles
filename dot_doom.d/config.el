@@ -191,6 +191,13 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
+(use-package! eglot
+  :defer t
+  :config
+  (add-to-list 'eglot-server-programs
+               '(csharp-ts-mode . ("~/omnisharp/OmniSharp" "--languageserver")))
+  (add-to-list 'eglot-server-programs
+               '(php-mode . ("intelephense" "--stdio"))))
 
 ;; Haskell
 (use-package! shakespeare-mode)
