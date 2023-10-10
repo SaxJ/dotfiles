@@ -63,6 +63,8 @@
    "ru" 'ssh-deploy-upload-handler-forced
    "rd" 'ssh-deploy-download-handler
 
+   "TAB" 'tabspaces-command-map
+
    ;; help
    "hv" 'describe-variable
    "hf" 'describe-function
@@ -74,7 +76,9 @@
    "gg" 'magit-project-status
 
    "ot" 'multi-vterm-project
+   "oa" 'org-agenda
 
+   "X" 'scratch-buffer
    "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
