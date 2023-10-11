@@ -195,6 +195,7 @@
           help-mode
           compilation-mode
           "^\\*vterm.*\\*$" vterm-mode))
+  (setq popper-window-height 20)
   (popper-mode +1)
   (popper-echo-mode +1))
 
