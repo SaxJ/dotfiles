@@ -1,4 +1,5 @@
 return {
+	enabled = false,
 	'nvimdev/lspsaga.nvim',
 	dependencies = {
       {"nvim-tree/nvim-web-devicons"},
@@ -6,6 +7,6 @@ return {
     },
     event = "LspAttach",
 	config = function ()
-		require("lspsaga").setup({})
+		require("lspsaga").setup({ })
 	end
 }

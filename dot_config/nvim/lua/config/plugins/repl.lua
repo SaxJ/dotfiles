@@ -1,9 +1,9 @@
-local deno = {
-    command = { "deno" },
+local bunRepl = {
+    command = { "bun", "repl" },
 }
 
 return {
-    "hkupty/iron.nvim",
+    "vigemus/iron.nvim",
     config = function()
         require("iron.core").setup({
             config = {
@@ -18,13 +18,14 @@ return {
                     php = {
                         command = { "psysh" },
                     },
-                    javascript = deno,
-                    typescript = deno,
-                    typescriptreact = deno,
+                    javascript = bunRepl,
+                    typescript = bunRepl,
+                    typescriptreact = bunRepl,
                     haskell = {
                         command = { "stack", "repl" },
                     },
                 },
+                repl_open_cmd = require('iron.view').bottom(20),
             },
             keymaps = {
                 visual_send = "<space>rs",

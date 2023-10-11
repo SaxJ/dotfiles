@@ -1,5 +1,4 @@
 return {
-	enabled = false,
 	'natecraddock/workspaces.nvim',
 	config = function ()
 		require('workspaces').setup({
