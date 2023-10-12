@@ -23,3 +23,7 @@
    :name "Work"
    :token (auth-source-pick-first-password :host "healthengine.slack.com" :user "saxon")
    :cookie (auth-source-pick-first-password :host "healthengine.slack.com" :user "saxon^cookie")))
+
+(use-package restclient
+  :ensure t
+  :defer t)
