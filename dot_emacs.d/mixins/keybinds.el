@@ -1,11 +1,8 @@
-(defun saxon/popup-term ()
+(defun saxon/repl (cmd)
   (interactive)
-  (let ((buffer (multi-vterm-get-buffer)))
-    (when-let (window
-               (display-buffer-in-side-window
-                buffer `((side . bottom) (slot . 0)
-                         (window-width . -40))))
-    (select-window window))))
+  (with-current-buffer (vterm (concat "*vterm-" cmd "*"))
+    (vterm-send-string cmd)
+    (vterm-send-return)))
 
 (defun saxon/rename-file (new-name &optional force-p)
   (interactive
@@ -59,6 +56,9 @@
 
    "ss" 'deadgrep
 
+   ;; notes
+   "nj" 'org-journal-new-entry
+
    ;; remote
    "ru" 'ssh-deploy-upload-handler-forced
    "rd" 'ssh-deploy-download-handler
@@ -85,7 +85,11 @@
     :definer 'minor-mode
     "gD" 'xref-find-references
     "gr" 'xref-find-references
+    "K" 'eldoc
     "SPC ca" 'eglot-code-actions)
+
+  (general-def 'normal 'typescript-ts-mode-map
+    "SPC or" (lambda () (interactive) (saxon/repl "bun repl")))
 
   (general-def 'insert 'vertico-map
     :keymaps 'override

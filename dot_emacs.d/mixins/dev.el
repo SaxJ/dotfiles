@@ -192,6 +192,7 @@
         '("\\*Messages\\*"
           "Output\\*$"
           "\\*Async Shell Command\\*"
+          "^.* repl\\&$"
           help-mode
           compilation-mode
           "^\\*vterm.*\\*$" vterm-mode))
