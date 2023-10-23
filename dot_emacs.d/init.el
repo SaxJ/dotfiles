@@ -165,12 +165,10 @@ If the new path's directories does not exist, create them."
 ;;;   Theme
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package doom-themes
+(use-package ef-themes
   :ensure t
   :config
-  (load-theme 'doom-outrun-electric t))
-
+  (load-theme 'ef-winter t))
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Config Modules ;;
