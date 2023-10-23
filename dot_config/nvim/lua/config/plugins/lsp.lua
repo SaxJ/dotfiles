@@ -43,7 +43,7 @@ return {
         end
 
         -- Lua LSP
-        require("neodev").setup()
+        -- require("neodev").setup()
         local yamlConfig = require('yaml-companion').setup({})
 
         cmp.setup({
