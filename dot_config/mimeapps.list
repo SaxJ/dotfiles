@@ -241,3 +241,4 @@ image/svg+xml-compressed=org.gnome.eog.desktop
 image/vnd.wap.wbmp=org.gnome.eog.desktop
 image/x-icns=org.gnome.eog.desktop
 x-scheme-handler/pie=httpie.desktop
+x-scheme-handler/logseq=appimagekit_55a91d503bfec492518e49ae69436b76-Logseq.desktop
