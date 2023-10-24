@@ -144,6 +144,8 @@
 (use-package prescient
   :ensure t)
 
-(use-package doom-modeline
+(use-package mood-line
   :ensure t
-  :hook (after-init . doom-modeline-mode))
+  :config
+  (mood-line-mode)
+  (setq mood-line-glyph-alist mood-line-glyphs-fira-code))
