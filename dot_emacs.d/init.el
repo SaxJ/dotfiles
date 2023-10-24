@@ -15,7 +15,8 @@
 ;;
 (with-eval-after-load 'package
   (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t))
+  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+  (add-to-list 'package-archives '("devel" . "https://elpa.gnu.org/devel/") t))
 
 (set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
 
@@ -195,7 +196,7 @@ If the new path's directories does not exist, create them."
  '(custom-safe-themes
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(package-selected-packages
-   '(org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult eglot editorconfig eat doom-themes corfu-terminal avy apheleia))
+   '(eglot org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
    '((ssh-deploy-on-explicit-save . t)
      (ssh-deploy-async-with-threads . 1)
