@@ -77,6 +77,7 @@
 
    "ot" 'multi-vterm-project
    "oa" 'org-agenda
+   "o-" 'project-dired
 
    "X" 'scratch-buffer
    "tt" 'popper-toggle-type)
