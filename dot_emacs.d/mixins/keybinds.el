@@ -92,6 +92,9 @@
   (general-def 'normal 'typescript-ts-mode-map
     "SPC or" (lambda () (interactive) (saxon/repl "bun repl")))
 
+  (general-def 'normal 'php-mode-map
+    "SPC or" (lambda () (interactive) (saxon/repl "psysh")))
+
   (general-def 'insert 'vertico-map
     :keymaps 'override
     "C-k" 'vertico-previous
