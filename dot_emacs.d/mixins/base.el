@@ -139,7 +139,10 @@
 
 (use-package tabspaces
   :ensure t
-  :hook (after-init . tabspaces-mode))
+  :hook (after-init . tabspaces-mode)
+  :config
+  (setq tabspaces-project-switch-commands 'project-find-file
+        tabspaces-initialize-project-with-todo nil))
 
 (use-package prescient
   :ensure t)
