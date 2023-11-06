@@ -68,7 +68,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     graphviz \
     hoogle \
     hub \
-    hurl \
+    hurl-bin \
     i3lock \
     isync \
     jdk-openjdk \
