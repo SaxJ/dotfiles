@@ -82,10 +82,7 @@ wk.register({
 	},
 	p = {
 		name = "+project",
-		p = { ":Telescope workspaces<CR>", "Switch Project" },
-		a = { ":WorkspacesAdd<CR>", "Add Project" },
-		d = { ":WorkspacesRemove<CR>", "Remove Project" },
-		r = { ":WorkspacesRename<CR>", "Rename Project" },
+		p = { ":Telescope projects<CR>", "Switch Project" },
 	},
 	g = {
 		name = "+git",
