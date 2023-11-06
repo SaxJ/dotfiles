@@ -63,7 +63,7 @@ If the new path's directories does not exist, create them."
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Show the help buffer after startup
-;(add-hook 'after-init-hook 'help-quick)
+                                        ;(add-hook 'after-init-hook 'help-quick)
 
 ;; which-key: shows a popup of available keybindings when typing a long key
 ;; sequence (e.g. C-x ...)
@@ -92,14 +92,14 @@ If the new path's directories does not exist, create them."
 (setq completions-format 'one-column)
 (setq completions-group t)
 (setq completion-auto-select 'second-tab)            ; Much more eager
-;(setq completion-auto-select t)                     ; See `C-h v completion-auto-select' for more possible values
+                                        ;(setq completion-auto-select t)                     ; See `C-h v completion-auto-select' for more possible values
 
 (keymap-set minibuffer-mode-map "TAB" 'minibuffer-complete) ; TAB acts more like how it does in the shell
 
 ;; For a fancier built-in completion option, try ido-mode or fido-mode. See also
 ;; the file mixins/base.el
-;(fido-vertical-mode)
-;(setq icomplete-delay-completions-threshold 4000)
+                                        ;(fido-vertical-mode)
+                                        ;(setq icomplete-delay-completions-threshold 4000)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -131,7 +131,7 @@ If the new path's directories does not exist, create them."
 (pixel-scroll-precision-mode)                         ; Smooth scrolling
 
 ;; Use common keystrokes by default
-(cua-mode)
+;;(cua-mode)
 
 ;; Display line numbers in programming mode
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
