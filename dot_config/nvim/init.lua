@@ -82,7 +82,7 @@ wk.register({
 	},
 	p = {
 		name = "+project",
-		p = { ":Telescope projects<CR>", "Switch Project" },
+		p = { ":Telescope projections<CR>", "Switch Project" },
 	},
 	g = {
 		name = "+git",
