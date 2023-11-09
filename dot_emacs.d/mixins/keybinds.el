@@ -32,55 +32,61 @@
       (delete-file name nil)
       (kill-buffer-if-not-modified name))))
 
+(defun saxon/open-dired-at-buffer ()
+  (interactive)
+  (dired default-directory))
+
 (use-package general
   :ensure t
   :config
   (general-evil-setup)
   (general-nmap
-   :prefix "SPC"
-   "SPC" 'project-find-file
-   ":" 'execute-extended-command
+    :prefix "SPC"
+    "SPC" 'project-find-file
+    ":" 'execute-extended-command
+    "X" 'org-capture
 
-   ;; file bindings
-   "ff" 'find-file
-   "fr" 'saxon/rename-file
-   "fc" 'saxon/copy-file
-   "fd" 'saxon/delete-file
+    ;; file bindings
+    "ff" 'find-file
+    "fr" 'saxon/rename-file
+    "fc" 'saxon/copy-file
+    "fd" 'saxon/delete-file
 
-   ;; project bindings
-   "pf" 'project-find-file
-   "pp" 'tabspaces-open-or-create-project-and-workspace
-   "pb" 'tabspaces-switch-to-buffer
-   "pd" 'project-forget-project
-   "pa" 'project-remember-project
+    ;; project bindings
+    "pf" 'project-find-file
+    "pp" 'tabspaces-open-or-create-project-and-workspace
+    "pb" 'tabspaces-switch-to-buffer
+    "pd" 'project-forget-project
+    "pa" 'project-remember-project
 
-   "ss" 'deadgrep
+    "ss" 'deadgrep
 
-   ;; notes
-   "nj" 'org-journal-new-entry
+    ;; notes
+    "nj" 'org-journal-new-entry
+    "nn" 'org-roam-capture
 
-   ;; remote
-   "ru" 'ssh-deploy-upload-handler-forced
-   "rd" 'ssh-deploy-download-handler
+    ;; remote
+    "ru" 'ssh-deploy-upload-handler-forced
+    "rd" 'ssh-deploy-download-handler
 
-   "TAB" 'tabspaces-command-map
+    "TAB" 'tabspaces-command-map
 
-   ;; help
-   "hv" 'describe-variable
-   "hf" 'describe-function
-   "hm" 'describe-mode
+    ;; help
+    "hv" 'describe-variable
+    "hf" 'describe-function
+    "hm" 'describe-mode
 
-   "qq" 'kill-emacs
-   "qr" 'restart-emacs
+    "qq" 'kill-emacs
+    "qr" 'restart-emacs
 
-   "gg" 'magit-project-status
+    "gg" 'magit-project-status
 
-   "ot" 'multi-vterm-project
-   "oa" 'org-agenda
-   "o-" 'project-dired
+    "ot" 'multi-vterm-project
+    "oa" 'org-agenda
+    "o-" 'saxon/open-dired-at-buffer
+    "os" 'scratch-buffer
 
-   "X" 'scratch-buffer
-   "tt" 'popper-toggle-type)
+    "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode

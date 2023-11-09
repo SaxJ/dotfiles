@@ -201,7 +201,8 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
-;;(use-package eldoc-box
-;;:ensure t
-;;:config
-;;(add-hook 'eglot-managed-mode-hook #'eldoc-box-hover-mode t))
+(quelpa
+ '(hurl-mode
+   :fetcher github
+   :repo "Orange-OpenSource/hurl"
+   :files ("contrib/emacs/hurl-mode.el")))

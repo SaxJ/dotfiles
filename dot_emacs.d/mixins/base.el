@@ -152,3 +152,6 @@
   :config
   (mood-line-mode)
   (setq mood-line-glyph-alist mood-line-glyphs-fira-code))
+
+(use-package quelpa
+  :ensure t)
