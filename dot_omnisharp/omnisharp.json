@@ -58,7 +58,7 @@
     "documentAnalysisTimeoutMs": 30000,
     "enableDecompilationSupport": true,
     "enableImportCompletion": true,
-    "enableAnalyzersSupport": true,
+    "enableAnalyzersSupport": false,
     "diagnosticWorkersThreadCount": 18,
     "inlayHintsOptions": {
       "enableForParameters": false,
