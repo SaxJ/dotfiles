@@ -4,8 +4,8 @@ application/x-extension-rss=userapp-Thunderbird-MYIJ31.desktop;
 inode/directory=org.kde.dolphin.desktop;
 x-scheme-handler/feed=userapp-Thunderbird-MYIJ31.desktop;
 x-scheme-handler/geo=qwant-maps-geo-handler.desktop;
-x-scheme-handler/http=vivaldi-stable.desktop;
-x-scheme-handler/https=vivaldi-stable.desktop;
+x-scheme-handler/http=vivaldi-stable.desktop;firefoxdeveloperedition.desktop;
+x-scheme-handler/https=vivaldi-stable.desktop;firefoxdeveloperedition.desktop;
 x-scheme-handler/mailto=org.kde.kmail2.desktop;vivaldi-stable.desktop;userapp-Thunderbird-B3O621.desktop;
 x-scheme-handler/mid=userapp-Thunderbird-B3O621.desktop;
 x-scheme-handler/news=userapp-Thunderbird-WFS421.desktop;
@@ -58,6 +58,7 @@ video/x-flc=vlc.desktop;
 video/x-fli=vlc.desktop;
 video/x-flv=vlc.desktop;
 application/zip=com.mattjakeman.ExtensionManager.desktop;
+text/html=firefoxdeveloperedition.desktop;
 
 [Default Applications]
 application/rss+xml=userapp-Thunderbird-MYIJ31.desktop
@@ -233,3 +234,5 @@ video/vnd.vivo=org.gnome.Totem.desktop
 video/x-flic=org.gnome.Totem.desktop
 video/x-mjpeg=org.gnome.Totem.desktop
 video/x-totem-stream=org.gnome.Totem.desktop
+x-scheme-handler/about=vivaldi-stable.desktop
+x-scheme-handler/unknown=vivaldi-stable.desktop
