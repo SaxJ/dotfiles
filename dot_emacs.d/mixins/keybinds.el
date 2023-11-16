@@ -36,6 +36,12 @@
   (interactive)
   (dired default-directory))
 
+(defun saxon/run-hurl-file ()
+  (interactive)
+  (let ((command "hurl"))
+    (shell-command-on-region (point-min) (point-max) command "*Output*")
+    (switch-to-buffer "*Output*")))
+
 (use-package general
   :ensure t
   :config
@@ -94,6 +100,9 @@
     "gr" 'xref-find-references
     "K" 'eldoc
     "SPC ca" 'eglot-code-actions)
+
+  (general-def 'normal 'hurl-mode-map
+    "C-c C-c" 'saxon/run-hurl-file)
 
   (general-def 'normal 'typescript-ts-mode-map
     "SPC or" (lambda () (interactive) (saxon/repl "bun repl")))
