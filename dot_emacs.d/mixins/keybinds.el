@@ -74,6 +74,7 @@
     ;; remote
     "ru" 'ssh-deploy-upload-handler-forced
     "rd" 'ssh-deploy-download-handler
+    "rs" 'ssh-deploy-remote-terminal-eshell-base-handler
 
     "TAB" 'tabspaces-command-map
 
