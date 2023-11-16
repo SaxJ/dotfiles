@@ -50,3 +50,8 @@
   :ensure t
   :config
   (global-evil-surround-mode 1))
+
+(use-package evil-commentary
+  :ensure t
+  :config
+  (evil-commentary-mode 1))
