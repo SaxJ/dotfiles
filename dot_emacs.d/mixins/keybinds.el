@@ -87,6 +87,7 @@
     "qr" 'restart-emacs
 
     "gg" 'magit-project-status
+    "gb" 'magit-blame
 
     "ot" 'multi-vterm-project
     "oa" 'org-agenda

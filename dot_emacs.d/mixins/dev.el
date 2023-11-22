@@ -95,7 +95,7 @@
 ;; Magit: best Git client to ever exist
 (use-package magit
   :ensure t
-  :init
+  :config
   (setq forge-add-default-bindings t)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
@@ -137,6 +137,7 @@
   :custom
   (eglot-send-changes-idle-time 0.1)
   (eglot-confirm-server-initiated-edits nil)
+  (eglot-inlay-hints-mode nil)
 
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
@@ -148,6 +149,10 @@
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
+  (add-to-list 'eglot-server-programs
+               '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+                                (:preferences
+                                 (:interactiveInlayHints nil)))))
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
@@ -196,6 +201,7 @@
           help-mode
           compilation-mode
           "^magit:.*"
+          "\\*xref\\*"
           "^\\*vterm.*\\*$" vterm-mode))
   (setq popper-window-height 20)
   (popper-mode +1)
