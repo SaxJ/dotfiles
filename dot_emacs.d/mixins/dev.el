@@ -68,6 +68,7 @@
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
           (bash-mode . bash-ts-mode)
@@ -79,8 +80,7 @@
           (python-mode . python-ts-mode)
           (yaml-mode . yaml-ts-mode)))
 
-  (add-to-list 'auto-mode-alist '("\\.ts\\'" . typescript-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . tsx-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
 
   :hook
   ;; Auto parenthesis matching
@@ -146,6 +146,7 @@
   (add-hook 'php-mode-hook 'eglot-ensure)
   (add-hook 'json-ts-mode-hook 'eglot-ensure)
   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
+  (add-hook 'fsharp-mode-hook 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
@@ -170,8 +171,8 @@
 (use-package multi-vterm
   :after vterm
   :ensure t
-  :config
-  (setq multi-vterm-dedicated-window-height 25))
+  :custom
+  (multi-vterm-dedicated-window-height-percent 30))
 
 (use-package editorconfig
   :ensure t
@@ -190,6 +191,11 @@
 (use-package deadgrep
   :ensure t)
 
+(use-package origami
+  :ensure t
+  :config
+  (global-origami-mode 1))
+
 (use-package popper
   :ensure t
   :init
@@ -201,14 +207,17 @@
           help-mode
           compilation-mode
           "^magit:.*"
-          "\\*xref\\*"
-          "^\\*vterm.*\\*$" vterm-mode))
+          "\\*xref\\*"))
   (setq popper-window-height 20)
   (popper-mode +1)
   (popper-echo-mode +1))
 
-(quelpa
- '(hurl-mode
-   :fetcher github
-   :repo "Orange-OpenSource/hurl"
-   :files ("contrib/emacs/hurl-mode.el")))
+(use-package hurl-mode
+  :quelpa ((hurl-mode :fetcher github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")) :upgrade nil))
+
+(use-package fsharp-mode
+  :defer t
+  :ensure t)
+
+(use-package eglot-fsharp
+  :ensure t)
