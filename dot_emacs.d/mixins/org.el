@@ -126,3 +126,9 @@
 
 (use-package epresent
   :ensure t)
+
+(use-package org-jira
+  :ensure t
+  :custom
+  (org-jira-working-dir "~/Documents/wiki/jira")
+  (jiralib-url "https://hejira.atlassian.net"))
