@@ -42,6 +42,12 @@
     (shell-command-on-region (point-min) (point-max) command "*Output*")
     (switch-to-buffer "*Output*")))
 
+(defun saxon/copt-file-name ()
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (when filename
+      (kill-new filename))))
+
 (use-package general
   :ensure t
   :config
@@ -57,13 +63,14 @@
     "fr" 'saxon/rename-file
     "fc" 'saxon/copy-file
     "fd" 'saxon/delete-file
+    "fY" 'saxon/copt-file-name
 
     ;; project bindings
     "pf" 'project-find-file
     "pp" 'tabspaces-open-or-create-project-and-workspace
     "pb" 'tabspaces-switch-to-buffer
     "pd" 'project-forget-project
-    "pa" 'project-remember-project
+    "pt" 'multi-vterm-project
 
     "ss" 'deadgrep
 
@@ -89,12 +96,16 @@
     "gg" 'magit-project-status
     "gb" 'magit-blame
 
-    "ot" 'multi-vterm-project
     "oa" 'org-agenda
     "o-" 'saxon/open-dired-at-buffer
     "os" 'scratch-buffer
+    "on" 'newsticker-show-news
 
-    "tt" 'popper-toggle-type)
+    ;; terminals
+    "ot" 'multi-vterm
+    "tt" 'multi-vterm-dedicated-toggle
+    "tn" 'multi-vterm-next
+    "tp" 'multi-vterm-prev)
 
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
