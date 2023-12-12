@@ -8,13 +8,6 @@ local wk = require("which-key")
 local mapx = require("mapx")
 
 local Terminal = require("toggleterm.terminal").Terminal
-local mail = Terminal:new({
-	dir = "~",
-	cmd = "neomutt",
-	hidden = true,
-	close_on_exit = true,
-	direction = "float",
-})
 local lazyGit = Terminal:new({
 	cmd = "lazygit",
 	hidden = true,
@@ -48,24 +41,12 @@ wk.register({
 	},
 	o = {
 		name = "+open",
-		m = {
-			function()
-				mail:toggle()
-			end,
-			"Mail",
-		},
 		T = { ":terminal<CR>", "Terminal Full" },
 		p = { ":NvimTreeToggle<cr>", "Project" },
 		["-"] = { require("oil").open, "Files" },
 		t = {
 			":ToggleTerm size=22<cr>",
 			"Terminal Popup",
-		},
-		g = {
-			function()
-				lazyGit:toggle()
-			end,
-			"Lazy Git",
 		},
 		r = { ":IronRepl<cr>", "Repl" },
 		o = { ":Oil<CR>", "Oil" },
@@ -89,8 +70,12 @@ wk.register({
 		b = { ":ToggleBlameLine<cr>", "Blame" },
 		B = { ":ToggleBlameLine<cr>", "Blame" },
 		g = { ":Neogit<CR>", "Git" },
-		f = {
-			name = "+forge",
+		h = {
+			name = "+github",
+			p = {
+				name = "+pullrequest",
+				c = { ":! gh pr create --fill -w --title $(git branch --show-current)<CR>", "Create PR" }
+			}
 		},
 	},
 	n = {
@@ -110,8 +95,17 @@ wk.register({
 		r = { vim.lsp.buf.rename, "Rename" },
 		g = { require("neogen").generate, "Generate Docs" },
 	},
+	t = {
+		name = "+terminal",
+		t = {function ()
+			local t = Terminal:new({direction = 'vertical'})
+			t:open()
+		end, "Toggle Terminal"}
+	},
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
+
+mapx.nmap("C-c", ":ccl<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
