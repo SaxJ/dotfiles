@@ -205,11 +205,6 @@
 ;; Salesforce
 (use-package! apex-mode)
 
-;; PHP
-(use-package! php-mode
-  :init
-  (setq php-mode-coding-style 'psr2))
-
 ;; Razor mode
 (defvar razor-mode-map)
 (define-derived-mode razor-mode web-mode "Razor")
