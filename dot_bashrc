@@ -39,11 +39,11 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 alias icat="kitty +kitten icat"
-alias prc="gh pr create --fill -w"
+alias prc="gh pr create --fill -w --title $(git branch --show-current)"
 alias prv="gh pr view --web"
 alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
-alias gui="gitui"
+alias yz="yazi"
 
 # Journal
 alias j="jrnl"
@@ -199,6 +199,10 @@ function git_sync() {
     done
 }
 
+function zellij_helix_file_man() {
+    zellij run -f -- yazi
+}
+
 
 PATH="/home/saxonj/perl5/bin${PATH:+:${PATH}}"; export PATH;
 PERL5LIB="/home/saxonj/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
@@ -206,3 +210,5 @@ PERL_LOCAL_LIB_ROOT="/home/saxonj/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_
 PERL_MB_OPT="--install_base \"/home/saxonj/perl5\""; export PERL_MB_OPT;
 PERL_MM_OPT="INSTALL_BASE=/home/saxonj/perl5"; export PERL_MM_OPT;
 source /usr/share/nvm/init-nvm.sh
+
+source /home/saxonj/.config/broot/launcher/bash/br
