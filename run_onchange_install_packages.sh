@@ -16,7 +16,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     vscode-css-languageserver \
     vscode-html-languageserver \
     yaml-language-server \
-    aerc \
     aspell \
     aspell-en \
     aspnet-runtime \
@@ -31,7 +30,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     bash-completion \
     bash-language-server \
     bat \
-    bitwarden-cli \
     calc \
     ccls \
     chezmoi \
@@ -39,7 +37,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     composer \
     devtools \
     direnv \
-    doctl \
     dotnet-runtime \
     dotnet-sdk \
     dotnet-sdk-6.0 \
@@ -74,7 +71,6 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     jdk-openjdk \
     jq \
     js-beautify \
-    keynav \
     lazygit \
     lua-language-server \
     make \
@@ -115,11 +111,9 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     rust \
     rust-analyzer \
     sbcl \
-    scrot \
     sed \
     shellcheck \
     slack-desktop \
-    sshfs \
     stylelint \
     stylua \
     terraform \
