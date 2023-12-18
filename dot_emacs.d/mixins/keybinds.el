@@ -84,6 +84,7 @@
     "rs" 'ssh-deploy-remote-terminal-eshell-base-handler
 
     "TAB" 'tabspaces-command-map
+    "." 'find-file
 
     ;; help
     "hv" 'describe-variable
