@@ -3,11 +3,10 @@ theme = "jellybeans"
 [editor]
 line-number = "relative"
 mouse = false
-shell = ["bash", "-i", "-c"]
+shell = ["bash", "-c"]
 idle-timeout = 400
 auto-format = true
 undercurl = true
-# default-line-ending = "lf"
 
 [editor.cursor-shape]
 insert = "bar"
@@ -44,3 +43,4 @@ right = ["diagnostics", "selections", "position", "version-control"]
 g = {s = ":sh git_sync"}
 "." = "file_picker_in_current_buffer_directory"
 "minus" = ":sh yazi-pane > /dev/null"
+"t" = {f = ":pipe ascii-table"}
