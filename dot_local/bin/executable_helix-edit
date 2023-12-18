@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+
+filename=$1
+
+if [ -n "$(pgrep hx)" ] 
+  then
+  zellij action toggle-floating-panes
+  zellij action write-chars ":o $filename"
+  zellij action write 13
+  zellij action toggle-floating-panes
+  zellij action close-pane
+else
+  hx "$filename"
+fi
