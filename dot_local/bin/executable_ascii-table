@@ -1,0 +1,17 @@
+#!/usr/bin/python
+import sys
+
+segmented_lines = []
+max_cell = 0
+for raw_line in sys.stdin:
+    line = raw_line.strip()
+    segmented = [' {}'.format(x.strip()) for x in line.split('|')]
+    for segment in segmented:
+        max_cell = max(max_cell, len(segment))
+
+    segmented_lines.append(segmented)
+
+for segmented_line in segmented_lines:
+    segments = [segment.ljust(max_cell + 1) for segment in segmented_line]
+    line = '|{}|'.format('|'.join(segments))
+    print(line)
