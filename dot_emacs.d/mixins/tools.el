@@ -28,3 +28,6 @@
   :ensure t
   :config
   (add-to-list 'auto-mode-alist '("\\.http\\'" . restclient-mode)))
+
+(use-package chezmoi
+  :ensure t)
