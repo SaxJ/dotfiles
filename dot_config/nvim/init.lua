@@ -50,6 +50,7 @@ wk.register({
 		},
 		r = { ":IronRepl<cr>", "Repl" },
 		o = { ":Oil<CR>", "Oil" },
+		d = { ":Trouble<CR>", "Diagnostics" },
 	},
 	["<leader>"] = { ":Telescope find_files<cr>", "Files" },
 	f = {
@@ -63,7 +64,7 @@ wk.register({
 	},
 	p = {
 		name = "+project",
-		p = { ":Telescope projections<CR>", "Switch Project" },
+		p = { ":Telescope projections<cr>", "Switch Project" },
 	},
 	g = {
 		name = "+git",
@@ -119,3 +120,6 @@ mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
 
 -- Neogit
 mapx.nmap("@cp", ":! gh pr create --fill -w<CR>", "silent", { ft = "NeogitStatus" })
+
+mapx.inoremap("C-j", "<Down>", "silent", { ft = "TelescopePrompt" })
+mapx.inoremap("C-k", "<Up>", "silent", { ft = "TelescopePrompt" })
