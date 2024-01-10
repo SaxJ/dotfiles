@@ -1,4 +1,5 @@
 return {
+	enabled = true,
 	'gnikdroy/projections.nvim',
 	branch = 'pre_release',
 	config = function ()

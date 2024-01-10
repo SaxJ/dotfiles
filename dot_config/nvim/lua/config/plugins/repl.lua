@@ -25,7 +25,7 @@ return {
                         command = { "stack", "repl" },
                     },
                 },
-                repl_open_cmd = require('iron.view').bottom(20),
+                repl_open_cmd = "horizontal 20 split",
             },
             keymaps = {
                 visual_send = "<space>rs",
