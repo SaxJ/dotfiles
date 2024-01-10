@@ -2,6 +2,7 @@ return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
+		{ "nvim-telescope/telescope-project.nvim" }
 	},
 	config = function()
 		require("telescope").setup({
@@ -66,6 +67,12 @@ return {
 						default_workspace = "CWD",
 						ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
 						show_unindexed = true,
+					},
+					project = {
+						base_dirs = { { path = '~/Documents', max_depth = 2 } }
+					},
+					whaler = {
+						directories = { "~/Documents/megatron" }
 					}
 				},
 			},
@@ -74,6 +81,8 @@ return {
 		require("telescope").load_extension("yaml_schema")
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("file_browser")
-		require("telescope").load_extension("projections")
+		require('telescope').load_extension("projections")
+		require('telescope').load_extension('project')
+		require('telescope').load_extension('whaler')
 	end,
 }
