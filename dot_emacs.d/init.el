@@ -34,6 +34,9 @@
 (setq auto-revert-check-vc-info t)
 (global-auto-revert-mode)
 
+;; Fix GPG
+(fset 'epg-wait-for-status 'ignore)
+
 ;; Save history of minibuffer
 (savehist-mode)
 
