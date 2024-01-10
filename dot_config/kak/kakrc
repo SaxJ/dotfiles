@@ -132,3 +132,15 @@ plug "andreyorst/kaktree" config %{
     set-option global kaktree_file_icon      '⠀'
     set-face global kaktree_icon_face function
 }
+
+# LSP
+plug "kak-lsp/kak-lsp" do %{
+    cargo install --locked --force --path .
+    # optional: if you want to use specific language servers
+    mkdir -p ~/.config/kak-lsp
+    cp -n kak-lsp.toml ~/.config/kak-lsp/
+}
+hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp) %{
+    lsp-enable-window
+}
+map global normal K ': lsp-hover<ret>' -docstring 'lsp hover'
