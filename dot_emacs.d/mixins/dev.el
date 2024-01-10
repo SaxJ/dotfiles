@@ -167,7 +167,9 @@
   (apheleia-global-mode +1))
 
 (use-package vterm
-  :ensure t)
+  :ensure t
+  :config
+  (setq vterm-timer-delay nil))
 (use-package multi-vterm
   :after vterm
   :ensure t
