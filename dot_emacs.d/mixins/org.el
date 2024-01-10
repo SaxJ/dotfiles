@@ -132,3 +132,8 @@
   :custom
   (org-jira-working-dir "~/Documents/wiki/jira")
   (jiralib-url "https://hejira.atlassian.net"))
+
+(use-package org-modern
+  :ensure t
+  :hook ((org-mode . org-modern-mode)
+         (org-agenda-finalize . org-modern-agenda)))
