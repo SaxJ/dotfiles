@@ -84,7 +84,6 @@
     "rs" 'ssh-deploy-remote-terminal-eshell-base-handler
 
     "TAB" 'tabspaces-command-map
-    "." 'find-file
 
     ;; help
     "hv" 'describe-variable
@@ -97,10 +96,17 @@
     "gg" 'magit-project-status
     "gb" 'magit-blame
 
+    ;; openers
     "oa" 'org-agenda
     "o-" 'saxon/open-dired-at-buffer
     "os" 'scratch-buffer
     "on" 'newsticker-show-news
+    "om" 'mu4e
+
+    ;; chezmoi
+    "cf" 'chezmoi-find
+    "cd" 'chezmoi-diff
+    "cw" 'chezmoi-write
 
     ;; terminals
     "ot" 'multi-vterm
@@ -123,6 +129,9 @@
 
   (general-def 'normal 'php-mode-map
     "SPC or" (lambda () (interactive) (saxon/repl "psysh")))
+
+  (general-def 'normal 'org-mode-map
+    ", t" 'org-todo)
 
   (general-def 'insert 'vertico-map
     :keymaps 'override
