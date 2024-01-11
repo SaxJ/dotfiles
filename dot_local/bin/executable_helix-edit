@@ -9,6 +9,7 @@ if [ -n "$(pgrep hx)" ]
   zellij action write 13
   zellij action toggle-floating-panes
   zellij action close-pane
+  zellij action toggle-floating-panes
 else
   hx "$filename"
 fi
