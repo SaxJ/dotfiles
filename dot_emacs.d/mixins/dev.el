@@ -223,3 +223,6 @@
 
 (use-package eglot-fsharp
   :ensure t)
+
+(use-package yuck-mode
+  :ensure t)
