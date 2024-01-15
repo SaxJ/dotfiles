@@ -56,6 +56,7 @@
     :prefix "SPC"
     "SPC" 'project-find-file
     ":" 'execute-extended-command
+    "." 'find-file
     "X" 'org-capture
 
     ;; file bindings
