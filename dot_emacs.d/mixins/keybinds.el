@@ -48,6 +48,13 @@
     (when filename
       (kill-new filename))))
 
+(defun saxon/open-news ()
+  (interactive)
+  (progn
+    (tab-bar-new-tab-to -1)
+    (tab-bar-rename-tab "Newsticker")
+    (newsticker-show-news)))
+
 (use-package general
   :ensure t
   :config
@@ -101,8 +108,7 @@
     "oa" 'org-agenda
     "o-" 'saxon/open-dired-at-buffer
     "os" 'scratch-buffer
-    "on" 'newsticker-show-news
-    "om" 'mu4e
+    "on" 'saxon/open-news
 
     ;; chezmoi
     "cf" 'chezmoi-find
