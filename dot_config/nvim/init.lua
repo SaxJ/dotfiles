@@ -64,7 +64,7 @@ wk.register({
 	},
 	p = {
 		name = "+project",
-		p = { ":Telescope projections<cr>", "Switch Project" },
+		p = { ":Telescope project<cr>", "Switch Project" },
 	},
 	g = {
 		name = "+git",
@@ -96,17 +96,12 @@ wk.register({
 		r = { vim.lsp.buf.rename, "Rename" },
 		g = { require("neogen").generate, "Generate Docs" },
 	},
-	t = {
-		name = "+terminal",
-		t = {function ()
-			local t = Terminal:new({direction = 'vertical'})
-			t:open()
-		end, "Toggle Terminal"}
-	},
+	t = { ":terminal<CR>", "+terminal"},
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
 
 mapx.nmap("C-c", ":ccl<CR>")
+mapx.nmap("C-t", ":Terminal<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")

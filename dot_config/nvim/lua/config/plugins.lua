@@ -22,5 +22,4 @@ return {
     { "nvim-telescope/telescope-file-browser.nvim" },
     { "nvim-telescope/telescope-frecency.nvim", dependencies = { { "kkharji/sqlite.lua" } } },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-    { "SalOrak/whaler.nvim" },
 }

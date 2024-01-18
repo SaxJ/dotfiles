@@ -5,6 +5,7 @@ return {
 		{ "nvim-telescope/telescope-project.nvim" }
 	},
 	config = function()
+		local project_actions = require("telescope._extensions.project.actions")
 		require("telescope").setup({
 			defaults = {
 				mappings = {
@@ -13,15 +14,6 @@ return {
 						["<C-k>"] = "move_selection_previous",
 						["<esc>"] = "close",
 					},
-				},
-				vimgrep_arguments = {
-					"rg",
-					"--color=never",
-					"--no-heading",
-					"--with-filename",
-					"--line-number",
-					"--column",
-					"--smart-case",
 				},
 				prompt_prefix = "> ",
 				selection_caret = "> ",
@@ -69,10 +61,12 @@ return {
 						show_unindexed = true,
 					},
 					project = {
-						base_dirs = { { path = '~/Documents', max_depth = 2 } }
-					},
-					whaler = {
-						directories = { "~/Documents/megatron" }
+						base_dirs = {
+							{ "~/Documents", max_depth = 2 }
+						},
+						on_project_selected = function(prompt_bufnr)
+							project_actions.change_working_directory(prompt_bufnr, false)
+						end
 					}
 				},
 			},
@@ -81,8 +75,6 @@ return {
 		require("telescope").load_extension("yaml_schema")
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("file_browser")
-		require('telescope').load_extension("projections")
 		require('telescope').load_extension('project')
-		require('telescope').load_extension('whaler')
 	end,
 }
