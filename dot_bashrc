@@ -184,11 +184,13 @@ function sf() {
     local dir=$(basename $PWD)
     scp "$1" ubuntu@minikube:/home/ubuntu/$dir/$1
 }
+export -f sf
 
 function sfd() {
     local dir=$(basename $PWD)
     scp ubuntu@minikube:/home/ubuntu/$dir/$1 "$1"
 }
+export -f sfd
 
 function git_sync() {
     local files=$(git st --porcelain | cut -c 1-3 --complement)
@@ -198,6 +200,7 @@ function git_sync() {
         scp "$f" ubuntu@minikube:/home/ubuntu/$dir/$f
     done
 }
+export -f git_sync
 
 function zellij_helix_file_man() {
     zellij run -f -- yazi
