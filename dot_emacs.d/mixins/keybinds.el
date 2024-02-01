@@ -79,6 +79,7 @@
     "pb" 'tabspaces-switch-to-buffer
     "pd" 'project-forget-project
     "pt" 'multi-vterm-project
+    "pa" 'project-remember-project
 
     "ss" 'deadgrep
 
@@ -121,12 +122,18 @@
     "tn" 'multi-vterm-next
     "tp" 'multi-vterm-prev)
 
-  (general-def 'normal 'eglot--managed-mode
+  ;; (general-def 'normal 'eglot--managed-mode
+  ;;   :definer 'minor-mode
+  ;;   "gD" 'xref-find-references
+  ;;   "gr" 'xref-find-references
+  ;;   "K" 'eldoc
+  ;;   "SPC ca" 'eglot-code-actions)
+  (general-def 'normal 'lsp-managed-mode
     :definer 'minor-mode
-    "gD" 'xref-find-references
-    "gr" 'xref-find-references
-    "K" 'eldoc
-    "SPC ca" 'eglot-code-actions)
+    "gD" 'lsp-find-references
+    "gr" 'lsp-find-references
+    "K" 'lsp-ui-doc-glance
+    "SPC ca" 'lsp-code-actions-at-point)
 
   (general-def 'normal 'hurl-mode-map
     "C-c C-c" 'saxon/run-hurl-file)
