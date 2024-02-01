@@ -1,6 +1,6 @@
 TZ='Australia/Perth'; export TZ
 
-export EDITOR=/usr/bin/hx
+export EDITOR="$(which hx)"
 export VISUAL=$EDITOR
 export PAGER=more
 
@@ -13,7 +13,7 @@ export DOOM=$HOME/.config/emacs/bin
 export DOTNET_TOOLS=$HOME/.dotnet/tools
 
 # PATH
-export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin"
+export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin:~/.npm-global/bin"
 
 export TERM=kitty
 export AWS_PROFILE=hedev
