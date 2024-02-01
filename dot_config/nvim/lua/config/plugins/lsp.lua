@@ -39,7 +39,7 @@ return {
             vim.keymap.set("n", "K", vim.lsp.buf.hover, bufopts)
             vim.keymap.set("n", "gI", vim.lsp.buf.implementation, bufopts)
 
-            require('lsp_signature').on_attach({}, bufnr)
+            -- require('lsp_signature').on_attach({}, bufnr)
         end
 
         -- Lua LSP
