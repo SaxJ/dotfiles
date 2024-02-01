@@ -29,27 +29,17 @@
                                         ;  :recipe (:host github :repo "username/repo"))
 
 ;; Dumb Things
-(package! slack)
-
-;; Email
-(package! bbdb)
-(package! dianyou)
-(package! gnus-select-account)
-(package! gnus-summary-ext)
-(package! gnus-desktop-notify)
-(package! all-the-icons-gnus)
-(package! nnhackernews)
 
 ;; Tooling
 (package! string-inflection)
 (package! dash-functional)
-(package! ejira :recipe (:host github :repo "nyyManni/ejira"))
 (package! telega)
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
 (package! todotxt)
 (package! multi-vterm)
+(package! org-jira)
 
 
 ;; Filetypes
