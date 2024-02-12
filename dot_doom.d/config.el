@@ -156,10 +156,11 @@
 ;; ###############################
 ;; LSP
 ;; ###############################
-(use-package! lsp-mode
-  :defer t
-  :config
-  (setq lsp-enable-file-watchers nil))
+(after! lsp-mode
+  (setq lsp-enable-file-watchers nil
+        lsp-typescript-surveys-enabled nil
+        lsp-typescript-preferences-import-module-specifier "relative"
+        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
 
 ;; Haskell
 (use-package! shakespeare-mode)
