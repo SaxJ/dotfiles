@@ -31,3 +31,6 @@
 
 (use-package chezmoi
   :ensure t)
+
+(use-package pocket-reader
+  :ensure t)

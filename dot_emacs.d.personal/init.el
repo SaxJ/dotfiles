@@ -23,12 +23,9 @@
 
 ;; If you want to turn off the welcome screen, uncomment this
 (setq inhibit-splash-screen t)
-(setq make-backup-files nil)
 (setq ring-bell-function 'ignore)
 (setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
 (setq display-time-default-load-average nil) ; this information is useless for most
-(setq backup-directory-alist
-      `(("." . ,(concat user-emacs-directory "backups"))))
 
 ;; Automatically reread from disk if the underlying file changes
 (setq auto-revert-interval 1)
@@ -51,17 +48,11 @@
 (when (display-graphic-p)
   (context-menu-mode))
 
-;; Don't litter file system with *~ backup files; put them all inside
-;; ~/.emacs.d/backup or wherever
-(defun bedrock--backup-file-name (fpath)
-  "Return a new file path of a given file path.
-If the new path's directories does not exist, create them."
-  (let* ((backupRootDir "~/.emacs.d/emacs-backup/")
-         (filePath (replace-regexp-in-string "[A-Za-z]:" "" fpath )) ; remove Windows driver letter in path
-         (backupFilePath (replace-regexp-in-string "//" "/" (concat backupRootDir filePath "~") )))
-    (make-directory (file-name-directory backupFilePath) (file-name-directory backupFilePath))
-    backupFilePath))
-(setq make-backup-file-name-function 'bedrock--backup-file-name)
+;; Don't litter file system with *~ backup files; put them in temp
+(setq backup-directory-alist
+      `((".*" . ,temporary-file-directory)))
+(setq auto-save-file-name-transforms
+      `((".*" ,temporary-file-directory t)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -204,7 +195,7 @@ If the new path's directories does not exist, create them."
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(eglot css-in-js-mode origami org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
+   '(mct eglot css-in-js-mode origami org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
    '((ssh-deploy-on-explicit-save . t)
      (ssh-deploy-async-with-threads . 1)

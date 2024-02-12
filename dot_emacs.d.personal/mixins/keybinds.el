@@ -30,7 +30,7 @@
   (let ((name (buffer-file-name)))
     (progn
       (delete-file name nil)
-      (kill-buffer-if-not-modified name))))
+      (kill-buffer-ask))))
 
 (defun saxon/open-dired-at-buffer ()
   (interactive)
@@ -42,11 +42,12 @@
     (shell-command-on-region (point-min) (point-max) command "*Output*")
     (switch-to-buffer "*Output*")))
 
-(defun saxon/copt-file-name ()
+(defun saxon/copy-file-name ()
   (interactive)
   (let ((filename (buffer-file-name)))
     (when filename
-      (kill-new filename))))
+      (kill-new filename)
+      (message "Copied file name"))))
 
 (defun saxon/open-news ()
   (interactive)
@@ -54,6 +55,13 @@
     (tab-bar-new-tab-to -1)
     (tab-bar-rename-tab "Newsticker")
     (newsticker-show-news)))
+
+(defun saxon/project-terminal ()
+  (interactive)
+  (progn
+    (multi-vterm)
+    (vterm-send-string (concat "cd " (multi-vterm-project-root)))
+    (vterm-send-return)))
 
 (use-package general
   :ensure t
@@ -65,23 +73,28 @@
     ":" 'execute-extended-command
     "." 'find-file
     "X" 'org-capture
+    "/" 'consult-ripgrep
+
+    ;; buffer bindings
+    "bb" 'consult-project-buffer
 
     ;; file bindings
     "ff" 'find-file
     "fr" 'saxon/rename-file
     "fc" 'saxon/copy-file
     "fd" 'saxon/delete-file
-    "fY" 'saxon/copt-file-name
+    "fY" 'saxon/copy-file-name
 
     ;; project bindings
     "pf" 'project-find-file
     "pp" 'tabspaces-open-or-create-project-and-workspace
-    "pb" 'tabspaces-switch-to-buffer
+    "pb" 'consult-project-buffer
     "pd" 'project-forget-project
     "pt" 'multi-vterm-project
     "pa" 'project-remember-project
 
     "ss" 'deadgrep
+    "sp" 'consult-ripgrep
 
     ;; notes
     "nj" 'org-journal-new-entry
@@ -122,21 +135,16 @@
     "tn" 'multi-vterm-next
     "tp" 'multi-vterm-prev)
 
-  ;; (general-def 'normal 'eglot--managed-mode
-  ;;   :definer 'minor-mode
-  ;;   "gD" 'xref-find-references
-  ;;   "gr" 'xref-find-references
-  ;;   "K" 'eldoc
-  ;;   "SPC ca" 'eglot-code-actions)
-  (general-def 'normal 'lsp-managed-mode
+  (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
-    "gD" 'lsp-find-references
-    "gr" 'lsp-find-references
-    "K" 'lsp-ui-doc-glance
-    "SPC ca" 'lsp-code-actions-at-point)
+    "gD" 'xref-find-references
+    "gr" 'xref-find-references
+    "K" 'eldoc
+    "SPC ca" 'eglot-code-actions)
 
   (general-def 'normal 'hurl-mode-map
-    "C-c C-c" 'saxon/run-hurl-file)
+    "C-c C-c" 'saxon/run-hurl-file
+    ",x" 'saxon/run-hurl-file)
 
   (general-def 'normal 'typescript-ts-mode-map
     "SPC or" (lambda () (interactive) (saxon/repl "bun repl")))
@@ -145,7 +153,8 @@
     "SPC or" (lambda () (interactive) (saxon/repl "psysh")))
 
   (general-def 'normal 'org-mode-map
-    ", t" 'org-todo)
+    ", t" 'org-todo
+    ", x" 'org-toggle-checkbox)
 
   (general-def 'insert 'vertico-map
     :keymaps 'override

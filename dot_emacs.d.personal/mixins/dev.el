@@ -127,63 +127,36 @@
   :config
   (setq project-vc-extra-root-markers '(".project")))
 
-(use-package lsp-mode
-  :ensure t
-  :hook
-  ((tsx-ts-mode . lsp-deferred)
-   (csharp-ts-mode . lsp-deferred)
-   (typescript-ts-mode . lsp-deferred)
-   (php-mode . lsp-deferred)
-   (json-ts-mode . lsp-deferred)
-   (yaml-ts-mode . lsp-deferred)
-   (fsharp-mode . lsp-deferred)
-   (vue-mode . lsp-deferred))
-  :commands lsp lsp-deferred)
-(use-package lsp-ui
-  :ensure t
-  :commands lsp-ui-mode
+(use-package eglot
+  :custom
+  (eglot-send-changes-idle-time 0.1)
+  (eglot-confirm-server-initiated-edits nil)
+  (eglot-inlay-hints-mode nil)
+
   :config
-  (setq lsp-ui-sideline-show-hover nil
-        lsp-ui-sideline-show-diagnostics t
-        lsp-ui-doc-enable t
-        lsp-ui-doc-show-with-cursor nil
-        lsp-ui-peek-enable t
-        lsp-headerline-breadcrumb-enable nil
-        lsp-file-watch-threshold 3000)
-  (add-to-list 'lsp-file-watch-ignored-directories "node_modules")
-  (add-to-list 'lsp-file-watch-ignored-directories "tmp")
-  (add-to-list 'lsp-file-watch-ignored-directories "vendor"))
+  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+  (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+  (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+  (add-hook 'php-mode-hook 'eglot-ensure)
+  (add-hook 'json-ts-mode-hook 'eglot-ensure)
+  (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
+  (add-hook 'fsharp-mode-hook 'eglot-ensure)
+  (add-hook 'vue-mode-hook 'eglot-ensure)
 
-;; (use-package eglot
-;;   :custom
-;;   (eglot-send-changes-idle-time 0.1)
-;;   (eglot-confirm-server-initiated-edits nil)
-;;   (eglot-inlay-hints-mode nil)
-
-;;   :config
-;;   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'php-mode-hook 'eglot-ensure)
-;;   (add-hook 'json-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
-;;   (add-hook 'fsharp-mode-hook 'eglot-ensure)
-;;   (add-hook 'vue-mode-hook 'eglot-ensure)
-
-;;   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
-;;   ;; Sometimes you need to tell Eglot where to find the language server
-;;   (add-to-list 'eglot-server-programs
-;;                '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-;;                                 (:preferences
-;;                                  (:interactiveInlayHints nil)))))
-;;   (add-to-list 'eglot-server-programs
-;;                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
-;;   (add-to-list 'eglot-server-programs
-;; 	           '(php-mode . ("intelephense" "--stdio")))
-;;   (add-to-list 'eglot-server-programs
-;;                '(vue-mode . ("vue-language-server" "--stdio"))))
+  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+  ;; Sometimes you need to tell Eglot where to find the language server
+  (add-to-list 'eglot-server-programs
+               '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+                                (:preferences
+                                 (:interactiveInlayHints nil)))))
+  (add-to-list 'eglot-server-programs
+               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+  (add-to-list 'eglot-server-programs
+               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
+  (add-to-list 'eglot-server-programs
+	           '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(vue-mode . ("vue-language-server" "--stdio"))))
 
 (use-package apheleia
   :ensure t
@@ -227,7 +200,9 @@
   :init
   (setq popper-reference-buffers
         '("\\*Messages\\*"
+          "\\*eldoc\\*"
           "Output\\*$"
+          "\\*vterminal<\\([0-9]+\\)>\\*"
           "\\*Async Shell Command\\*"
           "^.* repl\\&$"
           help-mode
