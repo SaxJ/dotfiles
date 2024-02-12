@@ -7,6 +7,7 @@
 export EDITOR="$(which hx)"
 export VISUAL=$EDITOR
 export PAGER=more
+export TERM=alacritty
 
 export GOPATH=$HOME/go_packages
 export HELM_HOME=$HOME/helm
@@ -17,9 +18,16 @@ export DOOM=$HOME/.config/emacs/bin
 export DOTNET_TOOLS=$HOME/.dotnet/tools
 
 # PATH
-export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin"
+export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin:~/.npm-global/bin:/home/saxonj/Documents/ulysses"
 
-export TERM=kitty
+export AWS_PROFILE=hedev
+export LSP_USE_PLISTS=true
+export ZELLIJ_AUTO_ATTACH=true
+export LLAMA_EDITOR=hx
+export NNN_OPTS="e"
+export NNN_OPENER="/usr/share/nnn/plugins/nuke"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
@@ -28,6 +36,8 @@ export NNN_OPTS="e"
 export NNN_OPENER="/usr/share/nnn/plugins/nuke"
 export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export ULYSSES_VAULT="$HOME/Documents/ulysses_notes"
+
+export PATH="$PATH:$HOME/.cargo/bin"
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -40,7 +50,7 @@ if [ -x "$(command -v nvim)" ]; then
 fi
 
 alias icat="kitty +kitten icat"
-alias prc="gh pr create --fill -w --title $(git branch --show-current)"
+alias prc="gh pr create --fill -w --title "$(git branch --show-current)""
 alias prv="gh pr view --web"
 alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
@@ -222,11 +232,5 @@ function zellij_helix_file_man() {
     zellij run -f -- yazi
 }
 
-PATH="/home/saxonj/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/home/saxonj/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/home/saxonj/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/home/saxonj/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/home/saxonj/perl5"; export PERL_MM_OPT;
 source /usr/share/nvm/init-nvm.sh
-
 source /home/saxonj/.config/broot/launcher/bash/br
