@@ -1,25 +1,2 @@
 TZ='Australia/Perth'; export TZ
 
-export EDITOR="$(which hx)"
-export VISUAL=$EDITOR
-export PAGER=more
-
-export GOPATH=$HOME/go_packages
-export HELM_HOME=$HOME/helm
-export CARGO_PATH=$HOME/.cargo/bin
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export PIP_INSTALL=$HOME/global-pip/bin
-export DOOM=$HOME/.config/emacs/bin
-export DOTNET_TOOLS=$HOME/.dotnet/tools
-
-# PATH
-export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin:~/.npm-global/bin"
-
-export TERM=kitty
-export AWS_PROFILE=hedev
-export LSP_USE_PLISTS=true
-export ZELLIJ_AUTO_ATTACH=true
-export LLAMA_EDITOR=hx
-export NNN_OPTS="e"
-export NNN_OPENER="/usr/share/nnn/plugins/nuke"
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
