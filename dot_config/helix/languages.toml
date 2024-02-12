@@ -16,7 +16,7 @@ auto-format = true
 [[language]]
 name = "php"
 roots = ["composer.json"]
-auto-format = true
+auto-format = false
 
 [[language]]
 name = "tsx"
