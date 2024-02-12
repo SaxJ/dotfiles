@@ -6,7 +6,7 @@ keybinds clear-defaults=true {
         bind "Ctrl t" { SwitchToMode "tab"; }
         bind "Ctrl s" { SwitchToMode "scroll"; }
         bind "Ctrl h" { SwitchToMode "move"; }
-        bind "Ctrl b" { SwitchToMode "tmux"; }
+        // bind "Ctrl p" { SwitchToMode "session"; }
         bind "Ctrl q" { Quit; }
         // bind "Alt n" { NewPane; }
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
@@ -160,26 +160,19 @@ keybinds clear-defaults=true {
         bind "Alt -" { Resize "Decrease"; }
         bind "s" { SwitchToMode "entersearch"; SearchInput 0; }
     }
+
     session {
-        bind "Ctrl g" { SwitchToMode "locked"; }
-        bind "Ctrl n" { SwitchToMode "resize"; }
-        bind "Ctrl p" { SwitchToMode "pane"; }
-        bind "Ctrl h" { SwitchToMode "move"; }
-        bind "Ctrl b" { SwitchToMode "tmux"; }
-        bind "Ctrl t" { SwitchToMode "tab"; }
-        bind "Ctrl o" "Enter" "Space" "Esc" { SwitchToMode "normal"; }
-        bind "Ctrl s" { SwitchToMode "scroll"; }
-        bind "Ctrl q" { Quit; }
+        bind "Ctrl o" { SwitchToMode "Normal"; }
+        bind "Ctrl s" { SwitchToMode "Scroll"; }
         bind "d" { Detach; }
-        // bind "Alt n" { NewPane; }
-        bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Alt j" "Alt Down" { MoveFocus "Down"; }
-        bind "Alt k" "Alt Up" { MoveFocus "Up"; }
-        bind "Alt =" { Resize "Increase"; }
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
-    }
+        bind "w" {
+            LaunchOrFocusPlugin "zellij:session-manager" {
+                floating true
+                move_to_focused_tab true
+            };
+            SwitchToMode "Normal"
+        }
+    }    
     search {
         bind "Ctrl s" "Space" "Enter" "Esc" { SwitchToMode "normal"; }
         bind "Ctrl t" { SwitchToMode "tab"; }
@@ -394,6 +387,7 @@ plugins {
     status-bar { path "status-bar"; }
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
+    session-manager { path "session-manager"; }
 }
 
 
