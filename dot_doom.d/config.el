@@ -160,7 +160,8 @@
   (setq lsp-enable-file-watchers nil
         lsp-typescript-surveys-enabled nil
         lsp-typescript-preferences-import-module-specifier "relative"
-        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")))
+        lsp-clients-typescript-preferences '(:importModuleSpecifierPreference "relative")
+        lsp-intelephense-php-version "8.2.0"))
 
 ;; Haskell
 (use-package! shakespeare-mode)
@@ -330,6 +331,9 @@
   (map! :localleader
         :map todotxt-mode-map
         :n "td" #'todotxt-complete-toggle))
+
+(use-package! hurl-mode
+  :defer t)
 
 ;;; config.el ends here
 ;;;
