@@ -1,12 +1,7 @@
-;;; Emacs Bedrock
-;;;
 ;;; Mixin: Development tools
 
 ;;; Usage: Append or require this file from init.el for some software
 ;;; development-focused packages.
-;;;
-;;; It is **STRONGLY** recommended that you use the base.el mixin if you want to
-;;; use Eglot. Lots of completion things will work better.
 ;;;
 ;;; This will try to use tree-sitter modes for many languages. Please run
 ;;;
@@ -29,24 +24,6 @@
 
 (use-package emacs
   :config
-  ;; Treesitter config
-  (setq treesit-language-source-alist
-        '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-          (cmake "https://github.com/uyha/tree-sitter-cmake")
-          (css "https://github.com/tree-sitter/tree-sitter-css")
-          (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-          (go "https://github.com/tree-sitter/tree-sitter-go")
-          (html "https://github.com/tree-sitter/tree-sitter-html")
-          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
-          (json "https://github.com/tree-sitter/tree-sitter-json")
-          (make "https://github.com/alemuller/tree-sitter-make")
-          (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-          (python "https://github.com/tree-sitter/tree-sitter-python")
-          (toml "https://github.com/tree-sitter/tree-sitter-toml")
-          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
-          (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")))
 
   ;; Tell Emacs to prefer the treesitter mode
   ;; You'll want to run the command `M-x treesit-install-language-grammar' before editing.
@@ -54,9 +31,12 @@
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
           (cmake "https://github.com/uyha/tree-sitter-cmake")
           (css "https://github.com/tree-sitter/tree-sitter-css")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+          (c "https://github.com/tree-sitter/tree-sitter-c")
           (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-          (go "https://github.com/tree-sitter/tree-sitter-go")
           (php "https://github.com/tree-sitter/tree-sitter-php")
+          (go "https://github.com/tree-sitter/tree-sitter-go")
+          (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
           (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
@@ -78,9 +58,12 @@
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
+          (c-mode . c-ts-mode)
+          (c++-mode . c++-ts-mode)
           (yaml-mode . yaml-ts-mode)))
 
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
 
   :hook
   ;; Auto parenthesis matching
@@ -142,6 +125,11 @@
   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
   (add-hook 'fsharp-mode-hook 'eglot-ensure)
   (add-hook 'vue-mode-hook 'eglot-ensure)
+  (add-hook 'python-ts-mode-hook 'eglot-ensure)
+  (add-hook 'c-ts-mode 'eglot-ensure)
+  (add-hook 'c++-ts-mode 'eglot-ensure)
+  (add-hook 'go-ts-mode 'eglot-ensure)
+  (add-hook 'graphql-mode 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
@@ -156,7 +144,9 @@
   (add-to-list 'eglot-server-programs
 	           '(php-mode . ("intelephense" "--stdio")))
   (add-to-list 'eglot-server-programs
-               '(vue-mode . ("vue-language-server" "--stdio"))))
+               '(vue-mode . ("vue-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
+               '(graphql-mode . ("graphql-lsp" "server" "-m" "stream"))))
 
 (use-package apheleia
   :ensure t

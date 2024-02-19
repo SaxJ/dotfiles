@@ -91,9 +91,8 @@
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
     "pt" 'multi-vterm-project
-    "pa" 'project-remember-project
+    "pa" 'project-remember-projects-under
 
-    "ss" 'deadgrep
     "sp" 'consult-ripgrep
 
     ;; notes
@@ -154,7 +153,8 @@
 
   (general-def 'normal 'org-mode-map
     ", t" 'org-todo
-    ", x" 'org-toggle-checkbox)
+    ", x" 'org-toggle-checkbox
+    ", p" 'epresent-run)
 
   (general-def 'insert 'vertico-map
     :keymaps 'override
