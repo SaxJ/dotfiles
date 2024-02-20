@@ -187,6 +187,7 @@
 (load-file (expand-file-name "mixins/keybinds.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/org.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/tools.el" user-emacs-directory))
+(load-file (expand-file-name "mixins/email.el" user-emacs-directory))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
