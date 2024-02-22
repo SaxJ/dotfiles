@@ -218,3 +218,6 @@
 
 (use-package vue-mode
   :ensure t)
+
+(use-package web-mode
+  :ensure t)
