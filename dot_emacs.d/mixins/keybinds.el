@@ -129,8 +129,8 @@
     "cw" 'chezmoi-write
 
     ;; terminals
-    "ot" 'multi-vterm
-    "tt" 'multi-vterm-dedicated-toggle
+    "ot" 'saxon/project-terminal
+    "tt" 'popper-toggle-type
     "tn" 'multi-vterm-next
     "tp" 'multi-vterm-prev)
 
