@@ -39,9 +39,6 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.insert]
 "C-space" = "completion"
 
-[keys.goto]
-"x" = "goto_file"
-
 [keys.normal.space]
 g = {s = ":sh git_sync"}
 "." = "file_picker_in_current_buffer_directory"
