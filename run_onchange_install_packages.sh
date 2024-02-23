@@ -66,6 +66,9 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     hoogle \
     hub \
     hurl-bin \
+    hyprland \
+    hyprpaper \
+    hyprshot \
     i3lock \
     isync \
     jdk-openjdk \
