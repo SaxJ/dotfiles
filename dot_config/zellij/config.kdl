@@ -314,7 +314,7 @@ theme "dracula"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-default_layout "compact"
+default_layout "default"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal
@@ -388,8 +388,8 @@ plugins {
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
     session-manager { path "session-manager"; }
+    zjstatus { path "https://github.com/dj95/zjstatus/releases/download/v0.12.0/zjstatus.wasm"; }
 }
-
 
 themes {
    dracula {
