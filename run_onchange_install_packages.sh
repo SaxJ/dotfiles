@@ -77,6 +77,7 @@ if [[ "$NAME" = "Arch Linux" && "$install" == [Yy]* ]]; then
     lazygit \
     lua-language-server \
     make \
+    mako \
     man-db \
     marked \
     mermaid-cli \
