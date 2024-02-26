@@ -221,3 +221,6 @@
 
 (use-package web-mode
   :ensure t)
+
+(use-package jq-mode
+  :ensure t)

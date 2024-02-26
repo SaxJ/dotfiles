@@ -145,6 +145,9 @@
     "C-c C-c" 'saxon/run-hurl-file
     ",x" 'saxon/run-hurl-file)
 
+  (general-def 'normal 'json-ts-mode-map
+    ",jq" 'jq-interactively)
+
   (general-def 'normal 'typescript-ts-mode-map
     "SPC or" (lambda () (interactive) (saxon/repl "bun repl")))
 
