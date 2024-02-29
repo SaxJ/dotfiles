@@ -29,21 +29,22 @@
   ;; You'll want to run the command `M-x treesit-install-language-grammar' before editing.
   (setq treesit-language-source-alist
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
-          (cmake "https://github.com/uyha/tree-sitter-cmake")
-          (css "https://github.com/tree-sitter/tree-sitter-css")
-          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
           (c "https://github.com/tree-sitter/tree-sitter-c")
+          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+          (cmake "https://github.com/uyha/tree-sitter-cmake")
+          (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
+          (css "https://github.com/tree-sitter/tree-sitter-css")
           (elisp "https://github.com/Wilfred/tree-sitter-elisp")
-          (php "https://github.com/tree-sitter/tree-sitter-php")
           (go "https://github.com/tree-sitter/tree-sitter-go")
           (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
-          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (php "https://github.com/tree-sitter/tree-sitter-php")
           (python "https://github.com/tree-sitter/tree-sitter-python")
+          (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
@@ -64,6 +65,7 @@
 
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
   :hook
   ;; Auto parenthesis matching
@@ -130,6 +132,7 @@
   (add-hook 'c++-ts-mode 'eglot-ensure)
   (add-hook 'go-ts-mode 'eglot-ensure)
   (add-hook 'graphql-mode 'eglot-ensure)
+  (add-hook 'rust-ts-mode 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
