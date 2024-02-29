@@ -34,3 +34,10 @@
 
 (use-package pocket-reader
   :ensure t)
+
+(use-package wakatime-mode
+  :ensure t
+  :config
+  (setq wakatime-cli-path "/usr/bin/wakatime"
+        wakatime-api-key (auth-source-pick-first-password :host "wakatime"))
+  (global-wakatime-mode 1))
