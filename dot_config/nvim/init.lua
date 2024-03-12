@@ -7,20 +7,6 @@ require("config.lazy")
 local wk = require("which-key")
 local mapx = require("mapx")
 
-local Terminal = require("toggleterm.terminal").Terminal
-local lazyGit = Terminal:new({
-	cmd = "lazygit",
-	hidden = true,
-	direction = "tab",
-})
-
-local insertDate = function()
-	local pos = vim.api.nvim_win_get_cursor(0)[2]
-	local line = vim.api.nvim_get_current_line()
-	local nline = line:sub(0, pos) .. os.date("%a, %Y-%m-%d") .. line:sub(pos + 1)
-	vim.api.nvim_set_current_line(nline)
-end
-
 -- Misc
 wk.register({
 	b = {
@@ -28,28 +14,19 @@ wk.register({
 		b = { ":Telescope buffers<cr>", "Buffers" },
 		y = { ":%y+<CR>", "Yank" },
 		f = {
-			function()
-				vim.lsp.buf.format()
-			end,
+			vim.lsp.buf.format,
 			"Format",
 		},
 	},
 	i = {
 		name = "+insert",
 		u = { ":r! uuidgen<CR>", "UUID" },
-		d = { insertDate, "Date" },
+		d = { ":r! date<cr>", "Date" },
 	},
 	o = {
 		name = "+open",
 		T = { ":terminal<CR>", "Terminal Full" },
-		p = { ":NvimTreeToggle<cr>", "Project" },
-		["-"] = { require("oil").open, "Files" },
-		t = {
-			":ToggleTerm size=22<cr>",
-			"Terminal Popup",
-		},
-		r = { ":IronRepl<cr>", "Repl" },
-		o = { ":Oil<CR>", "Oil" },
+		t = { ":! zellij ac new-pane -f<CR>", "Terminal" },
 		d = { ":Trouble<CR>", "Diagnostics" },
 	},
 	["<leader>"] = { ":Telescope find_files<cr>", "Files" },
@@ -69,15 +46,7 @@ wk.register({
 	g = {
 		name = "+git",
 		b = { ":ToggleBlameLine<cr>", "Blame" },
-		B = { ":ToggleBlameLine<cr>", "Blame" },
-		g = { ":Neogit<CR>", "Git" },
-		h = {
-			name = "+github",
-			p = {
-				name = "+pullrequest",
-				c = { ":! gh pr create --fill -w --title $(git branch --show-current)<CR>", "Create PR" }
-			}
-		},
+		g = { ":! zellij run -ci -- lazygit<CR>", "Git" },
 	},
 	n = {
 		name = "+notes",
@@ -96,12 +65,11 @@ wk.register({
 		r = { vim.lsp.buf.rename, "Rename" },
 		g = { require("neogen").generate, "Generate Docs" },
 	},
-	t = { ":terminal<CR>", "+terminal"},
+	t = { ":terminal<CR>", "+terminal" },
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 }, { prefix = "<leader>" })
 
 mapx.nmap("C-c", ":ccl<CR>")
-mapx.nmap("C-t", ":Terminal<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
