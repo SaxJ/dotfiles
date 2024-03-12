@@ -122,6 +122,7 @@
     "o-" 'saxon/open-dired-at-buffer
     "os" 'scratch-buffer
     "on" 'saxon/open-news
+    "oz" 'zone
 
     ;; chezmoi
     "cf" 'chezmoi-find
