@@ -66,7 +66,7 @@ keybinds clear-defaults=true {
         bind "l" "Right" "Down" "j" { GoToNextTab; }
         bind "n" { NewTab; SwitchToMode "normal"; }
         bind "x" { CloseTab; SwitchToMode "normal"; }
-        bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
+        // bind "s" { ToggleActiveSyncTab; SwitchToMode "normal"; }
         bind "1" { GoToTab 1; SwitchToMode "normal"; }
         bind "2" { GoToTab 2; SwitchToMode "normal"; }
         bind "3" { GoToTab 3; SwitchToMode "normal"; }
@@ -85,6 +85,13 @@ keybinds clear-defaults=true {
         bind "Alt =" { Resize "Increase"; }
         bind "Alt +" { Resize "Increase"; }
         bind "Alt -" { Resize "Decrease"; }
+
+        bind "s" {
+            LaunchOrFocusPlugin "file:~/.config/zellij/plugins/room.wasm" {
+                floating true
+                ignore_case true
+            }
+        }
     }
     resize {
         bind "Ctrl g" { SwitchToMode "locked"; }
