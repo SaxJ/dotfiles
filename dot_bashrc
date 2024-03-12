@@ -4,7 +4,7 @@
 # ~/.bashrc
 #
 
-export EDITOR=hx
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=more
 export TERM=alacritty
