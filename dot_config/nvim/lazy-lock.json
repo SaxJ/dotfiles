@@ -69,6 +69,6 @@
   "vim-table-mode": { "branch": "master", "commit": "4ff8de2ac93431ee6d85a9e04177012752e6abdc" },
   "vim-wakatime": { "branch": "master", "commit": "285c2e4e48fb0c63ced233c00fb10a2edb3b6c94" },
   "which-key.nvim": { "branch": "main", "commit": "4433e5ec9a507e5097571ed55c02ea9658fb268a" },
+  "workspaces.nvim": { "branch": "master", "commit": "43e8402816a23f4e2573b054220e27934ddf50d5" },
   "yaml-companion.nvim": { "branch": "main", "commit": "4de1e1546abc461f62dee02fcac6a02debd6eb9e" },
   "zen-mode.nvim": { "branch": "main", "commit": "78557d972b4bfbb7488e17b5703d25164ae64e6a" }
-}
