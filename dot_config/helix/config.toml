@@ -40,7 +40,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 "C-space" = "completion"
 
 [keys.normal.space]
-g = {s = ":sh git_sync"}
+g = { s = ":sh git_sync", g = ":sh zellij run -f -c -- lazygit" }
 "." = "file_picker_in_current_buffer_directory"
 "minus" = ":sh yazi-pane > /dev/null"
 "t" = {f = ":pipe ascii-table"}
