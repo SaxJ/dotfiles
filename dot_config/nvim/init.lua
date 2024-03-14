@@ -29,7 +29,6 @@ wk.register({
 		t = { ":! zellij ac new-pane -f<CR>", "Terminal" },
 		d = { ":Trouble<CR>", "Diagnostics" },
 	},
-	["<leader>"] = { ":Telescope find_files<cr>", "Files" },
 	f = {
 		name = "+files",
 		f = { ":Oil<cr>", "Files" },
@@ -67,6 +66,7 @@ wk.register({
 	},
 	t = { ":terminal<CR>", "+terminal" },
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
+	["<leader>"] = { ":Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>", "Files" },
 }, { prefix = "<leader>" })
 
 mapx.nmap("C-c", ":ccl<CR>")
