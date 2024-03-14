@@ -41,3 +41,16 @@
   (setq wakatime-cli-path "/usr/bin/wakatime"
         wakatime-api-key (auth-source-pick-first-password :host "wakatime"))
   (global-wakatime-mode 1))
+
+(use-package zone-rainbow
+  :ensure t)
+(use-package zone-nyan
+  :ensure t)
+
+;; Zoning out
+(use-package zone
+  :ensure nil
+  :after (zone-rainbow zone-nyan)
+  :config
+  (setq zone-programs [zone-pgm-rotate zone-pgm-rainbow zone-nyan])
+  (zone-when-idle 20))
