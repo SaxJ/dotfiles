@@ -54,11 +54,13 @@
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
 
+;; Get the path from bashrc
 (use-package exec-path-from-shell
   :ensure t
   :config
   (exec-path-from-shell-initialize))
 
+;; Auto update packages
 (use-package auto-package-update
   :ensure t)
 
