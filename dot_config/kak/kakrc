@@ -1,6 +1,6 @@
 # init plugin manager
-source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
-bundle-noload kak-bundle https://github.com/jdugan6240/kak-bundle
+# source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
+# bundle-noload kak-bundle https://github.com/jdugan6240/kak-bundle
 
 # helpers
 def suspend-and-resume \
@@ -27,6 +27,14 @@ def suspend-and-resume \
     fi
 }}
 
+def wakatime-heartbeat -params 0..1 -docstring 'sends a heartbeat to wakatime' %{
+  nop %sh{
+    [ $1 ] && flag="--write" || flag=""
+		command="wakatime --cursorpos $kak_cursor_byte_offset --plugin \"kakoune/$kak_version kakoune/version\" --entity $kak_buffile $flag"
+    (eval "$command") < /dev/null > /dev/null 2> /dev/null &
+  }
+}
+
 # general
 set global indentwidth 2
 set global ui_options terminal_assistant=none
@@ -41,22 +49,12 @@ add-highlighter global/hl-col-120 column 120 default,black+d
 # better grep
 set-option global grepcmd 'rg --column --smart-case --sort path'
 
-# swiper
-bundle swiper https://github.com/hadronized/swiper.kak %{
-  set-option global swiper_cmd 'rg -in'
-  set-option global swiper_reduce_cmd 'rg -i'
-  set-face global Swiper green+r
-}
-
-bundle wakatime https://github.com/WhatNodyn/kakoune-wakatime %{
-}
-
 # git
 declare-option str git_branch_name %sh{
   git branch --show-current
 }
 
-def tig-blame -override -docstring 'Open blame in tig for current file and line' %{
+def tig-blame -override -docstring 'Open blame in tig -params for current file and line' %{
     # Note here we aren't passing any command on resume of kakoune
     suspend-and-resume "tig blame +%val{cursor_line} %val{buffile}" 
 }
@@ -69,7 +67,7 @@ def git-open -override -docstring 'Open git interface' %{
 
 def project-open -override -docstring 'Open project searcher' %{
   nop %sh{
-    zellij run -cf -- prj
+    prj
   }
 }
 
@@ -194,7 +192,7 @@ define-command -hidden open_buffer_picker %{
 }
 
 define-command -hidden open_file_picker %{
-  prompt file: -menu -shell-script-candidates 'fd --type=file' %{
+  prompt file: -menu -shell-script-candidates 'fd -H --type=file' %{
     edit -existing %val{text}
   }
 }
@@ -268,6 +266,13 @@ define-command -hidden update-bufname-abbrev %{
 
 hook global -group bufname-abbrev WinDisplay .* update-bufname-abbrev
 hook global -group bufname-abbrev WinResize .* update-bufname-abbrev
+
+# wakatime hooks
+hook -group WakaTime global InsertKey .* wakatime-heartbeat
+hook -group WakaTime global ModeChange push:.*:insert wakatime-heartbeat
+hook -group WakaTime global BufWritePost .* %{ wakatime-heartbeat write }
+hook -group WakaTime global BufCreate .* wakatime-heartbeat
+
 
 declare-option str modeline_swiper ''
 
