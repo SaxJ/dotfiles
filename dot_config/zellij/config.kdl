@@ -395,7 +395,6 @@ plugins {
     strider { path "strider"; }
     compact-bar { path "compact-bar"; }
     session-manager { path "session-manager"; }
-    zjstatus { path "https://github.com/dj95/zjstatus/releases/download/v0.12.0/zjstatus.wasm"; }
 }
 
 themes {
