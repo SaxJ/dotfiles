@@ -53,4 +53,4 @@
   :after (zone-rainbow zone-nyan)
   :config
   (setq zone-programs [zone-pgm-rotate zone-pgm-rainbow zone-nyan])
-  (zone-when-idle 20))
+  (zone-when-idle 200))

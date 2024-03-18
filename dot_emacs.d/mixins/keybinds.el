@@ -163,4 +163,5 @@
   (general-def 'insert 'vertico-map
     :keymaps 'override
     "C-k" 'vertico-previous
-    "C-j" 'vertico-next))
+    "C-j" 'vertico-next
+    "<backspace>" 'vertico-directory-delete-word))
