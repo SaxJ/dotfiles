@@ -33,7 +33,6 @@
 ;; Tooling
 (package! string-inflection)
 (package! dash-functional)
-(package! telega)
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
@@ -51,10 +50,6 @@
 (package! vimrc-mode)
 (package! caddyfile-mode)
 (package! mermaid-mode)
-
-;; Unpin to non-broken packages
-(unpin! tree-sitter)
-(unpin! tree-sitter-langs)
 
 ;; If the package you are trying to install does not contain a PACKAGENAME.el
 ;; file, or is located in a subdirectory of the repo, you'll need to specify

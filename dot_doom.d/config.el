@@ -40,10 +40,6 @@
 (setq company-idle-delay 0.1
       company-minimum-prefix-length 2)
 
-(use-package! telega
-  :config
-  (setq telega-server-libs-prefix "/home/saxonj/Documents/td/tdlib"))
-
 (defun the-hello-snail ()
   "Prints an ascii snail."
   (let* ((banner '(" ───▄▄▄     "
@@ -104,7 +100,7 @@
 (setq deft-recursive t
       deft-directory "~/Documents/wiki")
 
-(use-package! org-jira
+(after! org-jira
   :defer t
   :config
   (setq jiralib-url "https://hejira.atlassian.net"
