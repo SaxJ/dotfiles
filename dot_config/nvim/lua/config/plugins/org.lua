@@ -1,5 +1,6 @@
 return {
 	'nvim-orgmode/orgmode',
+	event = 'VeryLazy',
 	dependencies = {
 		'akinsho/org-bullets.nvim',
 		'lukas-reineke/headlines.nvim',
@@ -13,8 +14,11 @@ return {
 			org_default_notes_file = '~/Documents/wiki/notes.org',
 			org_capture_templates = {
 				j = {
-					description = "Journal",
-					template = '\n* %<%a, %Y-%m-%d>\n** %<%I:%M %p>\n*** %?',
+					description = "New Journal",
+					datetree = {
+						tree_type = 'day',
+					},
+					template = '** %<%I:%M %p>\n- %?',
 					target = os.date('~/Documents/wiki/journals/%Y_01_01.org'),
 				}
 			}
