@@ -19,6 +19,10 @@ line_number=$(echo "$status_line" | awk '{ print $2}')
 extension="${filename##*.}"
 
 case $1 in
+  "waka")
+    wakatime --entity "$filename" --plugin "Helix/version Helix/version" --write &
+    prettier <&0
+    ;;
   "files")
     zellij run -fc --name yazi -- yazi "$filename"
     ;;
