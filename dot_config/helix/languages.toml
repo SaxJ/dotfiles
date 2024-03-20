@@ -12,36 +12,44 @@ importModuleSpecifierPreference = "relative"
 name = "c-sharp"
 language-servers = ["omnisharp"]
 auto-format = true
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[language]]
 name = "php"
 roots = ["composer.json"]
-auto-format = false
+auto-format = true
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[language]]
 name = "tsx"
 auto-format = true
-formatter = { command = "prettier" }
+# formatter = { command = "prettier" }
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[language]]
 name = "typescript"
 auto-format = true
-formatter = { command = "prettier" }
+# formatter = { command = "prettier" }
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[language]]
 name = "graphql"
 language-servers = ["graphql-ls"]
-formatter = { command = "prettier" }
+# formatter = { command = "prettier" }
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[language]]
 name = "javascript"
 auto-format = true
-formatter = { command = "prettier" }
+# formatter = { command = "prettier" }
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[language]]
 name = "xml"
 file-types = ["xml", "mobileconfig", "plist", "xib", "storyboard", "svg", "xsd", "gml", "xaml", "gir", "component"]
+formatter = { command = "helix-zellij", args = ["waka"] }
 
 [[langauge]]
 name = "haskell"
 language-servers = [ "haskell-language-server" ]
+formatter = { command = "helix-zellij", args = ["waka"] }

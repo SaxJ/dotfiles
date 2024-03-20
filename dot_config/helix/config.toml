@@ -47,11 +47,11 @@ right = ["diagnostics", "selections", "position", "version-control"]
 "t" = ":pipe ascii-table"
 
 [keys.normal.space.o]
-"minus" = ":sh helix-zellij.sh files"
-"r" = ":sh helix-zellij.sh repl"
+"minus" = ":sh helix-zellij files"
+"r" = ":sh helix-zellij repl"
 
 [keys.normal.space.g]
 s = ":sh git_sync"
-g = [":sh helix-zellij.sh git"]
-b = ":sh helix-zellij.sh blame"
-o = ":sh helix-zellij.sh browse"
+g = [":sh helix-zellij git"]
+b = ":sh helix-zellij blame"
+o = ":sh helix-zellij browse"
