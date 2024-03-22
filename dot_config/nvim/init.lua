@@ -28,6 +28,7 @@ wk.register({
 		T = { ":terminal<CR>", "Terminal Full" },
 		t = { ":! zellij ac new-pane -f<CR>", "Terminal" },
 		d = { ":Trouble<CR>", "Diagnostics" },
+		["-"] = { ":Oil<CR>", "File Browser" },
 	},
 	f = {
 		name = "+files",
@@ -46,6 +47,7 @@ wk.register({
 		name = "+git",
 		b = { ":ToggleBlameLine<cr>", "Blame" },
 		g = { ":! zellij run -ci -- lazygit<CR>", "Git" },
+		f = { ":Telescope git_status<CR>", "Changed Files" },
 	},
 	n = {
 		name = "+notes",
