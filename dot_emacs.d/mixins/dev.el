@@ -134,6 +134,7 @@
   (add-hook 'graphql-mode 'eglot-ensure)
   (add-hook 'rust-ts-mode 'eglot-ensure)
   (add-hook 'haskell-mode 'eglot-ensure)
+  (add-hook 'elm-mode 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
@@ -161,6 +162,7 @@
   :ensure t
   :config
   (setq vterm-timer-delay nil))
+
 (use-package multi-vterm
   :after vterm
   :ensure t
@@ -180,9 +182,6 @@
 (use-package forge
   :ensure t
   :after magit)
-
-(use-package deadgrep
-  :ensure t)
 
 (use-package origami
   :ensure t
