@@ -133,6 +133,7 @@
   (add-hook 'go-ts-mode 'eglot-ensure)
   (add-hook 'graphql-mode 'eglot-ensure)
   (add-hook 'rust-ts-mode 'eglot-ensure)
+  (add-hook 'haskell-mode 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
@@ -226,4 +227,10 @@
   :ensure t)
 
 (use-package jq-mode
+  :ensure t)
+
+(use-package haskell-mode
+  :ensure t)
+
+(use-package elm-mode
   :ensure t)
