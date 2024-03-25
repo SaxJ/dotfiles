@@ -23,7 +23,6 @@ return {
         { "ray-x/lsp_signature.nvim" },
 
         -- Enhanced servers
-        { "MrcJkb/haskell-tools.nvim", branch = '2.x.x' },
         { "Hoffs/omnisharp-extended-lsp.nvim" },
         { "someone-stole-my-name/yaml-companion.nvim" }
     },
@@ -113,6 +112,11 @@ return {
                     cmd = { "omnisharp", "--languageserver", "--hostPID", tostring(vim.fn.getpid()) },
                     on_attach = lsp_attach,
                     capabilities = lsp_capabilities,
+                })
+            end,
+            ["hls"] = function()
+                lspconfig.hls.setup({
+                    cmd = { 'haskell-language-server-wrapper', '--lsp' },
                 })
             end,
         })
