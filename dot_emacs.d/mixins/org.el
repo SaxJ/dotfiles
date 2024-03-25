@@ -29,17 +29,6 @@
 ;; Org-refile: where should org-refile look?
 (setq org-refile-targets 'FIXME)
 
-;;; Phase 3 variables
-
-;; Journal config
-(setq org-journal-file-type 'yearly
-      org-journal-dir (concat (file-name-as-directory org-directory) "journals/")
-      org-journal-date-prefix "* "
-      org-journal-time-prefix "** "
-      org-journal-date-format "%a, %Y-%m-%d"
-      org-journal-file-format "%Y_%m_%d.org"
-      org-journal-time-format "%I:%M %p")
-
 ;; Org-roam variables
 
 (setq org-roam-directory "~/Documents/wiki/pages")
@@ -48,8 +37,6 @@
 ;;; Optional variables
 
 ;; Advanced: Custom link types
-;; This example is for linking a person's 7-character ID to their page on the
-;; free genealogy website Family Search.
 (setq org-link-abbrev-alist
       '(("google_search" . "https://www.google.com/search?q=%s")))
 
@@ -94,7 +81,8 @@
   (setq org-refile-use-outline-path 'file)
 
   (setq org-capture-templates
-        '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t"))
+        '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
+          ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?"))
 
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
@@ -120,9 +108,6 @@
                  (side . right)
                  (window-width . 0.4)
                  (window-height . fit-window-to-buffer))))
-
-(use-package org-journal
-  :ensure t)
 
 (use-package epresent
   :ensure t)
