@@ -42,7 +42,7 @@ return {
         end
 
         -- Lua LSP
-        -- require("neodev").setup()
+        require("neodev").setup({})
         local yamlConfig = require('yaml-companion').setup({})
 
         cmp.setup({
@@ -102,6 +102,14 @@ return {
                     init_options = {preferences = {importModuleSpecifierPreference = 'relative'}},
                     on_attach = lsp_attach,
                     capabilities = lsp_capabilities,
+                    root_dir = lspconfig.util.root_pattern('package.json'),
+                })
+            end,
+            ["denols"] = function ()
+                lspconfig.denols.setup({
+                    on_attach = lsp_attach,
+                    capabilities = lsp_capabilities,
+                    root_dir = lspconfig.util.root_pattern('deno.json'),
                 })
             end,
             ["omnisharp"] = function()
