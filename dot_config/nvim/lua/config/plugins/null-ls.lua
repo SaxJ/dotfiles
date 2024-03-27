@@ -1,12 +1,14 @@
 return {
-	"nvimtools/none-ls.nvim",
+	"jay-babu/mason-null-ls.nvim",
+	event = { "BufReadPre", "BufNewFile" },
+	dependencies = {
+		"williamboman/mason.nvim",
+		"nvimtools/none-ls.nvim",
+	},
 	config = function()
-		require("null-ls").setup({
-			sources = {
-				require("null-ls").builtins.formatting.stylua,
-				require('null-ls').builtins.formatting.prettier,
-				require("null-ls").builtins.formatting.phpcsfixer,
-			},
+		require("mason").setup()
+		require("mason-null-ls").setup({
+			handlers = {},
 		})
 	end,
 }
