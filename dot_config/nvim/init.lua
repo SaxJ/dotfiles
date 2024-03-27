@@ -77,9 +77,6 @@ mapx.nmap("C-c", ":ccl<CR>")
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
 -- FileType Specific --
--- Neorg
-mapx.nmap("<localleader>d", insertDate, "silent", { ft = "norg" })
-
 -- HTTP
 mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
 
