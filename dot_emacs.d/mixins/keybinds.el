@@ -160,8 +160,11 @@
     ", x" 'org-toggle-checkbox
     ", p" 'epresent-run)
 
+  (general-def 'insert 'vterm-mode-map
+    "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
+    "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
+
   (general-def 'insert 'vertico-map
     :keymaps 'override
     "C-k" 'vertico-previous
-    "C-j" 'vertico-next
-    "<backspace>" 'vertico-directory-delete-word))
+    "C-j" 'vertico-next))
