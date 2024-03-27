@@ -19,7 +19,7 @@ return {
 						tree_type = 'day',
 					},
 					template = '** %<%I:%M %p>\n- %?',
-					target = os.date('~/Documents/wiki/journals/%Y_01_01.org'),
+					target = '~/Documents/wiki/journal.org',
 				}
 			}
 		})
