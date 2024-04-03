@@ -1,7 +1,6 @@
 return {
     "b0o/mapx.nvim",
     "arkav/lualine-lsp-progress",
-    "samjwill/nvim-unception",
     "imsnif/kdl.vim",
     "mracos/mermaid.vim",
     "amadeus/vim-mjml",
@@ -9,16 +8,13 @@ return {
     "jparise/vim-graphql",
     "pbrisbin/vim-syntax-shakespeare",
     "folke/neodev.nvim",
-    "b0o/schemastore.nvim",
     "eshion/vim-sync",
     "jghauser/mkdir.nvim",
     "airblade/vim-rooter",
-    "fladson/vim-kitty",
     "tveskag/nvim-blame-line",
     "jamessan/vim-gnupg",
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
-    { "nvim-telescope/telescope-frecency.nvim", dependencies = { { "kkharji/sqlite.lua" } } },
     { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
 }
