@@ -1,6 +1,19 @@
 # init plugin manager
-# source "%val{config}/bundle/kak-bundle/rc/kak-bundle.kak"
-# bundle-noload kak-bundle https://github.com/jdugan6240/kak-bundle
+evaluate-commands %sh{
+    plugins="$kak_config/plugins"
+    mkdir -p "$plugins"
+    [ ! -e "$plugins/plug.kak" ] && \
+        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
+    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
+}
+
+### PLUGINS
+plug "andreyorst/plug.kak" noload
+plug "WhatNodyn/kakoune-wakatime"
+plug "evanrelf/byline.kak" config %{
+  require-module "byline"
+}
+
 
 # helpers
 def suspend-and-resume \
@@ -27,13 +40,13 @@ def suspend-and-resume \
     fi
 }}
 
-def wakatime-heartbeat -params 0..1 -docstring 'sends a heartbeat to wakatime' %{
-  nop %sh{
-    [ $1 ] && flag="--write" || flag=""
-		command="wakatime --cursorpos $kak_cursor_byte_offset --plugin \"kakoune/$kak_version kakoune/version\" --entity $kak_buffile $flag"
-    (eval "$command") < /dev/null > /dev/null 2> /dev/null &
-  }
-}
+# def wakatime-heartbeat -params 0..1 -docstring 'sends a heartbeat to wakatime' %{
+#   nop %sh{
+#     [ $1 ] && flag="--write" || flag=""
+# 		command="wakatime --cursorpos $kak_cursor_byte_offset --plugin \"kakoune/$kak_version kakoune/version\" --entity $kak_buffile $flag"
+#     (eval "$command") < /dev/null > /dev/null 2> /dev/null &
+#   }
+# }
 
 # general
 set global indentwidth 2
@@ -55,13 +68,14 @@ declare-option str git_branch_name %sh{
 }
 
 def tig-blame -override -docstring 'Open blame in tig -params for current file and line' %{
-    # Note here we aren't passing any command on resume of kakoune
-    suspend-and-resume "tig blame +%val{cursor_line} %val{buffile}" 
+  nop %sh{
+    zellij run -ci -- tig blame +$kak_cursor_line $kak_buffile
+  }
 }
 
 def git-open -override -docstring 'Open git interface' %{
   nop %sh{
-    zellij run -cf -- lazygit
+    zellij run -ci -- lazygit
   }
 }
 
@@ -268,10 +282,10 @@ hook global -group bufname-abbrev WinDisplay .* update-bufname-abbrev
 hook global -group bufname-abbrev WinResize .* update-bufname-abbrev
 
 # wakatime hooks
-hook -group WakaTime global InsertKey .* wakatime-heartbeat
-hook -group WakaTime global ModeChange push:.*:insert wakatime-heartbeat
-hook -group WakaTime global BufWritePost .* %{ wakatime-heartbeat write }
-hook -group WakaTime global BufCreate .* wakatime-heartbeat
+# hook -group WakaTime global InsertKey .* wakatime-heartbeat
+# hook -group WakaTime global ModeChange push:.*:insert wakatime-heartbeat
+# hook -group WakaTime global BufWritePost .* %{ wakatime-heartbeat write }
+# hook -group WakaTime global BufCreate .* wakatime-heartbeat
 
 
 declare-option str modeline_swiper ''
@@ -309,9 +323,9 @@ hook global WinSetOption filetype=(rust|python|go|javascript|typescript|c|cpp|ph
   hook window -group semantic-tokens BufReload .* lsp-semantic-tokens
   hook window -group semantic-tokens NormalIdle .* lsp-semantic-tokens
   hook window -group semantic-tokens InsertIdle .* lsp-semantic-tokens
-  #hook -once -always window WinSetOption filetype=.* %{
-  #    remove-hooks window semantic-tokens
-  #}
+  hook -once -always window WinSetOption filetype=.* %{
+      remove-hooks window semantic-tokens
+  }
 }
 
 # Progress report
@@ -335,11 +349,16 @@ map global user F ':open_rg_picker<ret>'     -docstring 'search project'
 ## match
 map global normal M ':enter-user-mode match-extend<ret>' -docstring 'match mode (extend)'
 map global normal m ':enter-user-mode match<ret>'        -docstring 'match mode'
+map global normal <c-c> ':comment-line<ret>' -docstring 'Comment line'
 
 ## windows
 map global normal <c-w> ':enter-user-mode window-zellij<ret>' -docstring 'window'
 
 ## LSP
+map global user k ':lsp-hover<ret>' -docstring 'lsp hover docs'
+
+declare-user-mode code-actions
+
 declare-user-mode user-lsp
 map global user l ':enter-user-mode user-lsp<ret>'      -docstring 'lsp mode'
 map global user-lsp a ':lsp-code-actions<ret>'          -docstring 'code action'
@@ -378,14 +397,10 @@ hook global InsertCompletionShow .* %{
     }
 }
 
+# GIT BINDINGS
 declare-user-mode git
 map global user g ':enter-user-mode git<ret>' -docstring 'git mode'
 map global git b ':tig-blame<ret>' -docstring 'git blame'
 map global git g ':git-open<ret>' -docstring 'lazygit'
-
-declare-user-mode tig
-map global tig b ': tig-blame<ret>' -docstring 'show blame (with tig)'
-map global tig s ': suspend-and-resume "tig status"<ret>' -docstring 'show git status (with tig)'
-map global tig m ': suspend-and-resume "tig"<ret>' -docstring 'show main view (with tig)'
 
 map global user t ': enter-user-mode tig<ret>' -docstring 'tig commands'

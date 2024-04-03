@@ -378,7 +378,7 @@ args = ["serve"]
 
 [language.typescriptreact]
 filetypes = ["typescript"]
-roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+roots = ["package.json", "tsconfig.json"]
 command = "typescript-language-server"
 args = ["--stdio"]
 settings_section = "_"
@@ -386,14 +386,14 @@ settings_section = "_"
 # quotePreference = "double"
 # typescript.format.semicolons = "insert"
 
-# [language.typescript]
-# filetypes = ["typescript"]
-# roots = ["package.json", "tsconfig.json", ".git", ".hg"]
-# command = "deno"
-# args = ["lsp"]
-# [language.typescript.settings.deno]
-# enable = true
-# lint = true
+[language.typescript]
+filetypes = ["typescript"]
+roots = ["deno.json"]
+command = "deno"
+args = ["lsp"]
+[language.typescript.settings.deno]
+enable = true
+lint = true
 
 [language.yaml]
 filetypes = ["yaml"]
