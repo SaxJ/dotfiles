@@ -21,13 +21,13 @@ extension="${filename##*.}"
 case $1 in
   "waka")
     wakatime --entity "$filename" --plugin "Helix/version Helix/version" --write &
-    prettier <&0
+    [ -n "$2" ] && "$2" <&0
     ;;
   "files")
-    zellij run -fc --name yazi -- yazi "$filename"
+    zellij run -ic --name yazi -- yazi "$filename"
     ;;
   "git")
-    zellij run -fc --name git -- lazygit
+    zellij run -ic --name git -- lazygit
     ;;
   "blame")
     zellij run -ic --name tig -- tig "$filename"
