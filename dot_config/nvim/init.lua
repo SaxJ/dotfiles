@@ -77,11 +77,7 @@ mapx.nmap("C-c", ":ccl<CR>")
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
 
 -- FileType Specific --
--- HTTP
-mapx.nmap("<localleader>e", "<Plug>RestNvim", "silent", { ft = "http" })
-
--- Neogit
-mapx.nmap("@cp", ":! gh pr create --fill -w<CR>", "silent", { ft = "NeogitStatus" })
+mapx.nmap("<localleader>r", ":HurlRunner<CR>", "silent", { ft = "hurl" })
 
 mapx.inoremap("C-j", "<Down>", "silent", { ft = "TelescopePrompt" })
 mapx.inoremap("C-k", "<Up>", "silent", { ft = "TelescopePrompt" })

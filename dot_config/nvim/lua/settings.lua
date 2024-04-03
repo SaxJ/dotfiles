@@ -4,6 +4,13 @@ local indent = 4
 -- Leader/local leader
 vim.g.mapleader = [[ ]]
 vim.g.maplocalleader = [[,]]
+vim.g.do_filetype_lua = 1
+
+vim.filetype.add({
+    extension = {
+        hurl = 'hurl'
+    }
+})
 
 cmd("syntax enable")
 cmd("filetype plugin indent on")

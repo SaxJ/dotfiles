@@ -15,7 +15,6 @@ return {
     "airblade/vim-rooter",
     "fladson/vim-kitty",
     "tveskag/nvim-blame-line",
-    "sheerun/vim-polyglot",
     "jamessan/vim-gnupg",
 
     -- telescope extensions
