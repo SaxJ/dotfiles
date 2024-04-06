@@ -7,6 +7,14 @@ require("config.lazy")
 local wk = require("which-key")
 local mapx = require("mapx")
 
+local project_terminal_toggle = function()
+	local current_project = require("projectmgr.file_adapter").get_current_project()
+	local size = vim.o.columns * 0.5
+	local terminal_cmd =
+		string.format([[ToggleTerm direction=vertical size=%s name="project:%s"<CR>]], size, current_project)
+	vim.cmd(terminal_cmd)
+end
+
 -- Misc
 wk.register({
 	b = {
@@ -41,7 +49,8 @@ wk.register({
 	},
 	p = {
 		name = "+project",
-		p = { ":Telescope project<cr>", "Switch Project" },
+		p = { ":ProjectMgr<cr>", "Switch Project" },
+		t = { project_terminal_toggle, "Project Terminal" },
 	},
 	g = {
 		name = "+git",
@@ -64,9 +73,13 @@ wk.register({
 		name = "+code",
 		a = { vim.lsp.buf.code_action, "Code Action" },
 		r = { vim.lsp.buf.rename, "Rename" },
-		g = { require("neogen").generate, "Generate Docs" },
+		d = { require("neogen").generate, "Generate Docs" },
 	},
-	t = { ":terminal<CR>", "+terminal" },
+	t = {
+		name = "+terminal",
+		t = { ":terminal<CR>", "Terminal" },
+		s = { ":TermSelect<CR>", "Switch Terminal" },
+	},
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 	["<leader>"] = { ":Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>", "Files" },
 }, { prefix = "<leader>" })
