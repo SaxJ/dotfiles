@@ -4,7 +4,7 @@ return {
 	dependencies = {
 		'akinsho/org-bullets.nvim',
 		'lukas-reineke/headlines.nvim',
-		'dhruvasagar/vim-table-mode',
+		-- 'dhruvasagar/vim-table-mode',
 		'andreadev-it/orgmode-multi-key',
 	},
 	config = function ()
