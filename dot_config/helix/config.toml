@@ -55,3 +55,4 @@ s = ":sh git_sync"
 g = [":sh helix-zellij git"]
 b = ":sh helix-zellij blame"
 o = ":sh helix-zellij browse"
+d = "changed_file_picker"
