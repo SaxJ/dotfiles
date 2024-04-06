@@ -13,6 +13,7 @@ return {
     "airblade/vim-rooter",
     "tveskag/nvim-blame-line",
     "jamessan/vim-gnupg",
+    "jrop/jq.nvim",
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
