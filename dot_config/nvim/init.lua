@@ -55,8 +55,12 @@ wk.register({
 	g = {
 		name = "+git",
 		b = { ":ToggleBlameLine<cr>", "Blame" },
-		g = { ":! zellij run -ci -- lazygit<CR>", "Git" },
+		g = { ":Neogit<CR>", "Git" },
 		d = { ":Telescope git_status<CR>", "Changed Files" },
+		h = {
+		    name = "+github",
+		    r = { ":GHRequestedReview<CR>", "To Review" },
+		},
 	},
 	n = {
 		name = "+notes",
@@ -94,5 +98,5 @@ mapx.tnoremap("<C-j>", "<Down>")
 -- FileType Specific --
 mapx.nmap("<localleader>r", ":HurlRunner<CR>", "silent", { ft = "hurl" })
 
-mapx.inoremap("C-j", "<Down>", "silent", { ft = "TelescopePrompt" })
-mapx.inoremap("C-k", "<Up>", "silent", { ft = "TelescopePrompt" })
+mapx.inoremap("C-j", "<C-n>", "silent", { ft = "TelescopePrompt" })
+mapx.inoremap("C-k", "<C-p>", "silent", { ft = "TelescopePrompt" })
