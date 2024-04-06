@@ -56,7 +56,7 @@ wk.register({
 		name = "+git",
 		b = { ":ToggleBlameLine<cr>", "Blame" },
 		g = { ":! zellij run -ci -- lazygit<CR>", "Git" },
-		f = { ":Telescope git_status<CR>", "Changed Files" },
+		d = { ":Telescope git_status<CR>", "Changed Files" },
 	},
 	n = {
 		name = "+notes",
@@ -88,6 +88,8 @@ mapx.nmap("C-c", ":ccl<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
+mapx.tnoremap("<C-k>", "<Up>")
+mapx.tnoremap("<C-j>", "<Down>")
 
 -- FileType Specific --
 mapx.nmap("<localleader>r", ":HurlRunner<CR>", "silent", { ft = "hurl" })
