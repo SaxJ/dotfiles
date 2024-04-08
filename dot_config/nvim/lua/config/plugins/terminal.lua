@@ -1,6 +1,11 @@
 return {
     'akinsho/toggleterm.nvim',
     config = function ()
-        require('toggleterm').setup({})
+        require('toggleterm').setup({
+            winbar = {
+                enabled = true,
+            },
+            open_mapping = "<leader>ot",
+        })
     end
 }

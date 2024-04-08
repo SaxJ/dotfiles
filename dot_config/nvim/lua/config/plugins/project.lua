@@ -3,7 +3,7 @@ return {
     lazy = false,
     config = function()
         require('projectmgr').setup({
-            session = { enabled = true, file = ".session.vim" }
+            session = { enabled = true, file = ".idea" }
         })
     end
 }
