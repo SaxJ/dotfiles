@@ -34,7 +34,6 @@ wk.register({
 	o = {
 		name = "+open",
 		T = { ":terminal<CR>", "Terminal Full" },
-		t = { ":! zellij ac new-pane -f<CR>", "Terminal" },
 		d = { ":Trouble<CR>", "Diagnostics" },
 		["-"] = { ":Oil<CR>", "File Browser" },
 	},
@@ -88,7 +87,7 @@ wk.register({
 	["<leader>"] = { ":Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>", "Files" },
 }, { prefix = "<leader>" })
 
-mapx.nmap("C-c", ":ccl<CR>")
+mapx.nmap("<C-c>", ":ccl<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
