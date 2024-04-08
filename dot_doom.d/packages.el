@@ -31,12 +31,12 @@
 ;; Dumb Things
 
 ;; Tooling
+(package! wakatime-mode)
 (package! string-inflection)
 (package! dash-functional)
 (package! org-kanban)
 (package! ob-mermaid)
 (package! org-remark)
-(package! todotxt)
 (package! multi-vterm)
 (package! org-jira)
 

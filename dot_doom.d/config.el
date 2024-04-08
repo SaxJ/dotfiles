@@ -136,15 +136,7 @@
         org-log-done nil
         org-capture-templates '(("t" "Personal todo" entry (file +org-capture-todo-file) "* TODO [#%^{A|B|C}] %? %t")
                                 ("n" "Personal notes" entry (file+headline +org-capture-notes-file "Inbox") "* %u %?\n%i\n%a" :prepend t)
-                                ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file) "* %U %?\n%i\n%a" :prepend t)
-                                ("p" "Templates for projects")
-                                ("pt" "Project-local todo" entry (file+headline +org-capture-project-todo-file "Inbox") "* TODO %?\n%i\n%a" :prepend t)
-                                ("pn" "Project-local notes" entry (file+headline +org-capture-project-notes-file "Inbox") "* %U %?\n%i\n%a" :prepend t)
-                                ("pc" "Project-local changelog" entry (file+headline +org-capture-project-changelog-file "Unreleased") "* %U %?\n%i\n%a" :prepend t)
-                                ("o" "Centralized templates for projects")
-                                ("ot" "Project todo" entry #'+org-capture-central-project-todo-file "* TODO %?\n %i\n %a" :heading "Tasks" :prepend nil)
-                                ("on" "Project notes" entry #'+org-capture-central-project-notes-file "* %U %?\n %i\n %a" :heading "Notes" :prepend t)
-                                ("oc" "Project changelog" entry #'+org-capture-central-project-changelog-file "* %U %?\n %i\n %a" :heading "Changelog" :prepend t))
+                                ("j" "Journal" entry (file+olp+datetree +org-capture-journal-file) "* %<%l:%M %p>\n%i%?"))
         ))
 
 
@@ -176,65 +168,8 @@
 (add-to-list 'auto-mode-alist '("\\.mjml\\'" . mjml-mode))
 
 ;; ###############################
-;; SLACK
-;; ###############################
-(use-package! slack
-  :defer t
-  :commands (slack-start)
-  :init (setq slack-buffer-emojify t
-              slack-prefer-current-team t)
-  :config
-  (slack-register-team
-   :name "Healthengine"
-   :default t
-   :token (auth-source-pick-first-password
-           :host "healthengine.slack.com"
-           :user "saxon.jensen@healthengine.com.au")
-   :cookie (auth-source-pick-first-password
-            :host "healthengine.slack.com"
-            :user "saxon.jensen@healthengine.com.au^cookie")
-   :subscribed-channels '(shrek2)
-   :full-and-display-names t)
-
-  (evil-define-key 'normal slack-info-mode-map
-    ",u" 'slack-room-update-messages)
-  (evil-define-key 'normal slack-mode-map
-    ",c" 'slack-buffer-kill
-    ",ra" 'slack-message-add-reaction
-    ",rr" 'slack-message-remove-reaction
-    ",rs" 'slack-message-show-reaction-users
-    ",pl" 'slack-room-pins-list
-    ",pa" 'slack-message-pins-add
-    ",pr" 'slack-message-pins-remove
-    ",mm" 'slack-message-write-another-buffer
-    ",me" 'slack-message-edit
-    ",md" 'slack-message-delete
-    ",u" 'slack-room-update-messages
-    ",2" 'slack-message-embed-mention
-    ",3" 'slack-message-embed-channel
-    "\C-n" 'slack-buffer-goto-next-message
-    "\C-p" 'slack-buffer-goto-prev-message)
-  (evil-define-key 'normal slack-edit-message-mode-map
-    ",k" 'slack-message-cancel-edit
-    ",s" 'slack-message-send-from-buffer
-    ",2" 'slack-message-embed-mention
-    ",3" 'slack-message-embed-channel))
-
-;; ###############################
 ;; KEYBINDS
 ;; ###############################
-(map! :leader
-      :desc "Toggle auto-format"
-      :n "taf" #'format-all-mode)
-(map! :leader
-      :desc "Open SQL Client"
-      :n "os" #'sql-connect)
-(map! :leader
-      :desc "Open slack channel"
-      :n "oS" #'slack-channel-select)
-(map! :leader
-      :desc "Open kubernetes"
-      :n "ok" #'kubernetes-overview)
 (map! :after magit
       :map forge-topic-mode-map
       :localleader
@@ -266,39 +201,9 @@
       :localleader
       :desc "Add File"
       :n "a" #'dired-create-empty-file)
-
-(defun gnus-daemon-scan ()
-  (let ((win (current-window-configuration))
-        (gnus-read-active-file 'some)
-        (gnus-check-new-newsgroups nil)
-        (gnus-verbose 2)
-        (gnus-verbose-backends 5)
-        (level 3)
-        )
-    (while-no-input
-      (unwind-protect
-          (save-window-excursion
-            (when (gnus-alive-p)
-              (with-current-buffer gnus-group-buffer
-                (gnus-group-get-new-news))))
-        (set-window-configuration win)))))
-
-(setq gnus-demon-timestep 10)
-(gnus-demon-add-handler 'gnus-daemon-scan 12 1)
-
-(use-package! all-the-icons-gnus
-  :defer t
-  :config
-  (all-the-icons-gnus-setup))
-
-(use-package! gnus-select-account
-  :defer t
-  :config
-  (gnus-select-account-enable))
-
-(after! forge
-  (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
-
+(map! :map corfu-map
+      :g "TAB" #'corfu-next
+      :g [tab] #'corfu-next)
 
 ;; ###############################
 ;; MAGIT
@@ -308,6 +213,8 @@
   :config
   (setq git-commit-summary-max-length 100))
 
+(after! forge
+  (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
 
 ;; FORMATTING
 (setq +format-on-save-enabled-modes
@@ -320,16 +227,11 @@
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
 
-(use-package! todotxt
-  :defer t
-  :config
-  (setq todotxt-file "~/Dropbox/todo/todo.txt")
-  (map! :localleader
-        :map todotxt-mode-map
-        :n "td" #'todotxt-complete-toggle))
-
 (use-package! hurl-mode
   :defer t)
+
+(after! wakatime-mode
+  (global-wakatime-mode))
 
 ;;; config.el ends here
 ;;;

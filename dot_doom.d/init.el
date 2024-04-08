@@ -21,7 +21,8 @@
        ;;layout
 
        :completion
-       (company)           ; the ultimate code completion backend
+       ;;(company)           ; the ultimate code completion backend
+       (corfu +orderless +icons)
        ;;helm              ; the *other* search engine for love and life
        ;;ido               ; the other *other* search engine...
        ;;(ivy +fuzzy +prescient +icons)               ; a search engine for love and life
@@ -32,7 +33,7 @@
        doom              ; what makes DOOM look the way it does
        doom-dashboard    ; a nifty splash screen for Emacs
        doom-quit         ; DOOM quit-message prompts when you quit Emacs
-       ;;(emoji +github +unicode) ; :smile:
+       (emoji +unicode) ; :smile:
        hl-todo           ; highlight TODO/FIXME/NOTE/DEPRECATED/HACK/REVIEW
        ;;hydra
        indent-guides     ; highlighted indent columns
@@ -80,7 +81,7 @@
        vterm             ; the best terminal emulation in Emacs
 
        :checkers
-       ;;(syntax +childframe +flymake)              ; tasing you for every semicolon you forget
+       (syntax +childframe +flymake)              ; tasing you for every semicolon you forget
        (spell +aspell)             ; tasing you for misspelling mispelling
        grammar           ; tasing grammar mistake every you make
 
@@ -100,8 +101,7 @@
        make              ; run make tasks from Emacs
        pass              ; password manager for nerds
        pdf               ; pdf enhancements
-       prodigy           ; FIXME managing external services & code builders
-       rgb               ; creating color strings
+       ;;prodigy           ; FIXME managing external services & code builders
        ;;taskrunner        ; taskrunner for all your projects
        ;;terraform         ; infrastructure as code
        ;;tmux              ; an API for interacting with tmux
@@ -115,17 +115,17 @@
        :lang
        ;;agda              ; types of types of types of types...
        ;;beancount
-       ;;(cc +lsp)                ; C/C++/Obj-C madness
+       (cc +lsp +tree-sitter)                ; C/C++/Obj-C madness
        ;;clojure           ; java with a lisp
-       ;;common-lisp       ; if you've seen one lisp, you've seen them all
+       common-lisp       ; if you've seen one lisp, you've seen them all
        ;;coq               ; proofs-as-programs
        ;;crystal           ; ruby at the speed of c
        (csharp +lsp +tree-sitter)            ; unity, .NET, and mono shenanigans
        data              ; config/data formats
        ;;(dart +flutter)   ; paint ui and not much else
        ;;dhall
-       elixir            ; erlang done right
-       ;;(elm +lsp)               ; care for a cup of TEA?
+       (elixir +lsp +tree-sitter)            ; erlang done right
+       (elm +lsp +tree-sitter)               ; care for a cup of TEA?
        emacs-lisp        ; drown in parentheses
        ;;erlang            ; an elegant language for a more civilized age
        ;;ess               ; emacs speaks statistics
@@ -137,7 +137,7 @@
        ;;gdscript          ; the language you waited for
        (go +lsp +tree-sitter)         ; the hipster dialect
        (graphql +lsp)
-       (haskell +lsp)  ; a language that's lazier than I am
+       (haskell +lsp +tree-sitter)  ; a language that's lazier than I am
        ;;hy                ; readability of scheme w/ speed of python
        ;;idris             ;
        (json +lsp +tree-sitter)              ; At least it ain't XML
@@ -148,7 +148,7 @@
        (latex +lsp +fold)             ; writing papers in Emacs has never been so fun
        ;;lean
        ;;ledger            ; an accounting system in Emacs
-       (lua +lsp)               ; one-based indices? one-based indices
+       (lua +lsp +tree-sitter)               ; one-based indices? one-based indices
        (markdown +grip)          ; writing docs for people to ignore
        ;;nim               ; python + lisp at the speed of c
        ;;nix               ; I hereby declare "nix geht mehr!"
@@ -156,7 +156,7 @@
        (org +pretty +journal +gnuplot +present)
        (php +lsp +tree-sitter)
        ;;plantuml          ; diagrams for confusing people more
-       (purescript +lsp)        ; javascript, but functional
+       ;;(purescript +lsp)        ; javascript, but functional
        (python +lsp +pyenv +pyright +tree-sitter)            ; beautiful is better than ugly
        ;;qt                ; the 'cutest' gui framework ever
        ;;racket            ; a DSL for DSLs
@@ -177,7 +177,7 @@
        ;;zig
 
        :email
-       ;;(mu4e +gmail)
+       (mu4e +gmail)
        ;;(notmuch)
        ;;(wanderlust +gmail)
 
@@ -186,7 +186,7 @@
        ;;emms
        ;;everywhere
        ;;irc               ; how neckbeards socialize
-       (rss +org)        ; emacs as an RSS reader
+       rss        ; emacs as an RSS reader
        ;;twitter           ; twitter client https://twitter.com/vnought
 
        :config
