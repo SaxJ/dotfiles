@@ -170,11 +170,6 @@
 ;; ###############################
 ;; KEYBINDS
 ;; ###############################
-(map! :after magit
-      :map forge-topic-mode-map
-      :localleader
-      :desc "Add a single reviewer"
-      :n "ar" #'forge-edit-topic-review-requests)
 (map! :map org-mode-map
       :localleader
       :desc "Reset cache"
@@ -194,16 +189,14 @@
 (map! :leader
       :desc "Previous terminal"
       :n "Tp" #'multi-vterm-prev)
-(map! :leader
-      :desc "Insert UUID"
-      :n "iu" #'uuidgen)
 (map! :map dired-mode-map
       :localleader
       :desc "Add File"
       :n "a" #'dired-create-empty-file)
-(map! :map corfu-map
-      :g "TAB" #'corfu-next
-      :g [tab] #'corfu-next)
+(map! :mode vterm-mode
+      :in "C-k" #'vterm-send-up
+      :in "C-j" #'vterm-send-down)
+
 
 ;; ###############################
 ;; MAGIT
@@ -232,6 +225,31 @@
 
 (after! wakatime-mode
   (global-wakatime-mode))
+
+(set-email-account! "Personal Gmail"
+                    '((mu4e-sent-folder . "/saxon.jensen@gmail.com/[Gmail]/Sent Mail")
+                      (mu4e-drafts-folder . "/saxon.jensen@gmail.com/[Gmail]/Drafts")
+                      (mu4e-trash-folder . "/saxon.jensen@gmail.com/[Gmail]/Trash")
+                      (mu4e-refile-folder . "/saxon.jensen@gmail.com/[Gmail]/All Mail")
+                      (smtpmail-smtp-user . "saxon.jensen@gmail.com")))
+(set-email-account! "Work"
+                    '((mu4e-sent-folder . "/saxon.jensen@healthengine.com.au/[Gmail]/Sent Mail")
+                      (mu4e-drafts-folder . "/saxon.jensen@healthengine.com.au/[Gmail]/Drafts")
+                      (mu4e-trash-folder . "/saxon.jensen@healthengine.com.au/[Gmail]/Trash")
+                      (mu4e-refile-folder . "/saxon.jensen@healthengine.com.au/[Gmail]/All Mail")
+                      (smtpmail-smtp-user . "saxon.jensen@healthengine.com.au")))
+(set-email-account! "Gaming"
+                    '((mu4e-sent-folder . "/speedemon999@gmail.com/[Gmail]/Sent Mail")
+                      (mu4e-drafts-folder . "/speedemon999@gmail.com/[Gmail]/Drafts")
+                      (mu4e-trash-folder . "/speedemon999@gmail.com/[Gmail]/Trash")
+                      (mu4e-refile-folder . "/speedemon999@gmail.com/[Gmail]/All Mail")
+                      (smtpmail-smtp-user . "speedemon999@gmail.com")))
+(set-email-account! "Mailbox"
+                    '((mu4e-sent-folder . "/saxonj@mailbox.org/Sent")
+                      (mu4e-drafts-folder . "/saxonj@mailbox.org/Drafts")
+                      (mu4e-trash-folder . "/saxonj@mailbox.org/Trash")
+                      (mu4e-refile-folder . "/saxonj@mailbox.org/Archive")
+                      (smtpmail-smtp-user . "saxonj@mailbox.org")))
 
 ;;; config.el ends here
 ;;;

@@ -40,6 +40,11 @@
 (package! multi-vterm)
 (package! org-jira)
 
+(package! hurl-mode :recipe
+  (:host github
+   :repo "Orange-OpenSource/hurl"
+   :files ("contrib/emacs/*.el")))
+
 
 ;; Filetypes
 (package! submode :recipe (:host github :repo "nxtr/submode"))
