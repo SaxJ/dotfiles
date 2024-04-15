@@ -113,6 +113,16 @@
 
 (after! org
   (map! :map org-mode-map
+        :localleader
+        :desc "Reset cache"
+        :n "Pr" #'org-publish-reset-cache)
+  (map! :leader
+        :desc "Push Org to mobile"
+        :n "nP" #'org-mobile-push)
+  (map! :leader
+        :desc "Pull Org from mobile"
+        :n "np" #'org-mobile-pull)
+  (map! :map org-mode-map
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup)
   (setq org-publish-project-alist '(("wiki"
@@ -167,64 +177,44 @@
 (define-derived-mode mjml-mode web-mode "MJML")
 (add-to-list 'auto-mode-alist '("\\.mjml\\'" . mjml-mode))
 
-;; ###############################
-;; KEYBINDS
-;; ###############################
-(map! :map org-mode-map
-      :localleader
-      :desc "Reset cache"
-      :n "Pr" #'org-publish-reset-cache)
-(map! :leader
-      :desc "Push Org to mobile"
-      :n "nP" #'org-mobile-push)
-(map! :leader
-      :desc "Pull Org from mobile"
-      :n "np" #'org-mobile-pull)
-(map! :leader
-      :desc "Create new terminal"
-      :n "Tc" #'multi-vterm)
-(map! :leader
-      :desc "Next terminal"
-      :n "Tn" #'multi-vterm-next)
-(map! :leader
-      :desc "Previous terminal"
-      :n "Tp" #'multi-vterm-prev)
-(map! :map dired-mode-map
-      :localleader
-      :desc "Add File"
-      :n "a" #'dired-create-empty-file)
-(map! :mode vterm-mode
-      :in "C-k" #'vterm-send-up
-      :in "C-j" #'vterm-send-down)
+(after! vterm
+  (map! :mode vterm-mode
+        :in "C-k" #'vterm-send-up
+        :in "C-j" #'vterm-send-down))
+(after! multi-vterm
+  (map! :leader
+        :desc "Create new terminal"
+        :n "Tc" #'multi-vterm)
+  (map! :leader
+        :desc "Next terminal"
+        :n "Tn" #'multi-vterm-next)
+  (map! :leader
+        :desc "Previous terminal"
+        :n "Tp" #'multi-vterm-prev))
 
 
-;; ###############################
-;; MAGIT
-;; ###############################
-(use-package! magit
-  :defer t
-  :config
+;;;;;;;;;;;
+;; MAGIT ;;
+;;;;;;;;;;;
+(after! magit
   (setq git-commit-summary-max-length 100))
-
 (after! forge
   (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
 
-;; FORMATTING
+;;;;;;;;;;;;;;;;
+;; FORMATTING ;;
+;;;;;;;;;;;;;;;;
 (setq +format-on-save-enabled-modes
       '(not yaml-mode php-mode))
-(set-formatter! 'fantomas "dotnet fantomas --stdin" :modes '(fsharp-mode))
 (setq typescript-indent-level 2)
 
-(use-package! vimrc-mode
+(use-package vimrc-mode
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
-
-(use-package! hurl-mode
-  :defer t)
-
-(after! wakatime-mode
-  (global-wakatime-mode))
+(use-package hurl-mode)
+(use-package wakatime-mode
+  :hook (doom-after-init . global-wakatime-mode))
 
 (set-email-account! "Personal Gmail"
                     '((mu4e-sent-folder . "/saxon.jensen@gmail.com/[Gmail]/Sent Mail")

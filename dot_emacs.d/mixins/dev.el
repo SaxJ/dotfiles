@@ -38,7 +38,7 @@
           (go "https://github.com/tree-sitter/tree-sitter-go")
           (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
           (html "https://github.com/tree-sitter/tree-sitter-html")
-          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "master" "src")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.3" "src")
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
@@ -46,8 +46,8 @@
           (python "https://github.com/tree-sitter/tree-sitter-python")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
-          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "master" "tsx/src")
-          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "master" "typescript/src")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
 
   (setq major-mode-remap-alist
@@ -208,6 +208,11 @@
 
 (use-package hurl-mode
   :quelpa ((hurl-mode :fetcher github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")) :upgrade nil))
+
+(use-package eglot-booster
+  :after eglot
+  :config (eglot-booster-mode)
+  :quelpa ((eglot-booster :fetcher github :repo "jdtsmith/eglot-booster") :upgrade nil))
 
 (use-package fsharp-mode
   :defer t
