@@ -120,5 +120,9 @@
 
 (use-package org-modern
   :ensure t
+  :config
+  (setq org-modern-todo-faces
+        (quote (("PROG" :background "#419398"
+                 :foreground "white"))))
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda)))
