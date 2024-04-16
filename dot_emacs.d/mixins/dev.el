@@ -238,3 +238,6 @@
 
 (use-package elm-mode
   :ensure t)
+
+(use-package rainbow-mode
+  :ensure t)
