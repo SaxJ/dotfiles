@@ -140,7 +140,8 @@
     "gD" 'xref-find-references
     "gr" 'xref-find-references
     "K" 'eldoc
-    "SPC ca" 'eglot-code-actions)
+    "SPC ca" 'eglot-code-actions
+    "SPC cr" 'eglot-rename)
 
   (general-def 'normal 'hurl-mode-map
     "C-c C-c" 'saxon/run-hurl-file

@@ -4,7 +4,7 @@
 # ~/.bashrc
 #
 
-export EDITOR=nvim
+export EDITOR=hx
 export VISUAL=$EDITOR
 export PAGER=more
 export TERM=alacritty
@@ -64,6 +64,8 @@ alias jt="jrnl -on today"
 alias t="todo.sh"
 alias td="todo.sh done"
 alias ta="todo.sh add"
+
+alias tw="timew"
 
 # VPN
 alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"

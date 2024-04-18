@@ -16,7 +16,7 @@ plug "evanrelf/byline.kak" config %{
 }
 
 hook global BufCreate .+\.cs %{
-  set-option buffer filetype c-sharp
+  set-option buffer filetype csharp
 }
 
 # helpers
