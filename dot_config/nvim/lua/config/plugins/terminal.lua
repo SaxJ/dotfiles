@@ -5,7 +5,6 @@ return {
             winbar = {
                 enabled = true,
             },
-            open_mapping = "<leader>ot",
         })
     end
 }
