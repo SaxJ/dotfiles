@@ -54,3 +54,9 @@
   :config
   (setq zone-programs [zone-pgm-rotate zone-pgm-rainbow zone-nyan])
   (zone-when-idle 200))
+
+(use-package git-auto-commit-mode
+  :ensure t
+  :config
+  (setq gac-automatically-push-p t
+        gac-automatically-add-new-files-p t))
