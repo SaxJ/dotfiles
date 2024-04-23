@@ -129,6 +129,9 @@
     "cd" 'chezmoi-diff
     "cw" 'chezmoi-write
 
+    ;; todotxt
+    "oT" 'todotxt
+
     ;; terminals
     "ot" 'saxon/project-terminal
     "tt" 'popper-toggle-type
