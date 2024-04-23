@@ -156,12 +156,15 @@
 (use-package apheleia
   :ensure t
   :config
+  (setf (alist-get 'prettier apheleia-formatters)
+        '("apheleia-npx" "prettier"))
+  (add-to-list 'apheleia-mode-alist '(php-mode . prettier))
   (apheleia-global-mode +1))
 
 (use-package vterm
   :ensure t
   :config
-  (setq vterm-timer-delay nil))
+  (setq vterm-timer-delay 0.01))
 
 (use-package multi-vterm
   :after vterm
