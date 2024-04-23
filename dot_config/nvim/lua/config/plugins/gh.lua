@@ -1,4 +1,5 @@
 return {
+    enabled = false,
     "ldelossa/gh.nvim",
     dependencies = {
         {

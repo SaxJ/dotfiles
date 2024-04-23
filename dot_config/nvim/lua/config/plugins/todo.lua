@@ -6,6 +6,10 @@ return {
 	config = function ()
 		require('todotxt-nvim').setup({
 			todo_file = '~/Dropbox/todo/todo.txt',
+			sidebar = {
+			    width = 100,
+			    position = 'right',
+			},
 		})
 	end
 }

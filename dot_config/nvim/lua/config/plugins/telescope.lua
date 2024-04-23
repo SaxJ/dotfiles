@@ -2,7 +2,8 @@ return {
 	"nvim-telescope/telescope.nvim",
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
-		{ "nvim-telescope/telescope-project.nvim" }
+		{ "nvim-telescope/telescope-project.nvim" },
+        { "nvim-telescope/telescope-github.nvim" },
 	},
 	config = function()
 		local project_actions = require("telescope._extensions.project.actions")
@@ -67,7 +68,7 @@ return {
 						on_project_selected = function(prompt_bufnr)
 							project_actions.change_working_directory(prompt_bufnr, false)
 						end
-					}
+					},
 				},
 			},
 		})
@@ -76,5 +77,6 @@ return {
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("file_browser")
 		require('telescope').load_extension('project')
+		require('telescope').load_extension('gh')
 	end,
 }

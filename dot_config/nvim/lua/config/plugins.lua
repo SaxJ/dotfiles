@@ -14,6 +14,7 @@ return {
     "tveskag/nvim-blame-line",
     "jamessan/vim-gnupg",
     "jrop/jq.nvim",
+    'freitass/todo.txt-vim',
 
     -- telescope extensions
     { "nvim-telescope/telescope-file-browser.nvim" },
