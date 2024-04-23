@@ -144,7 +144,7 @@
 ;; Display line numbers in programming mode
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (setq-default display-line-numbers-width 3)           ; Set a minimum width
-(setq-default display-line-numbers 'relative)
+(setq-default display-line-numbers-type 'relative)
 
 ;; No line wrapping
 (setq-default truncate-lines t)
