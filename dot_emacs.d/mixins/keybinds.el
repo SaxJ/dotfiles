@@ -63,6 +63,20 @@
     (vterm-send-string (concat "cd " (multi-vterm-project-root)))
     (vterm-send-return)))
 
+(defun saxon/open-mail ()
+  (interactive)
+  (progn
+    (tab-bar-new-tab-to -1)
+    (tab-bar-rename-tab "Mail")
+    (mu4e)))
+
+(defun saxon/open-kube ()
+  (interactive)
+  (progn
+    (tab-bar-new-tab-to -1)
+    (tab-bar-rename-tab "Kubernetes")
+    (kubernetes-overview)))
+
 (use-package general
   :ensure t
   :config
@@ -123,6 +137,8 @@
     "os" 'scratch-buffer
     "on" 'saxon/open-news
     "oz" 'zone
+    "om" 'saxon/open-mail
+    "ok" 'saxon/open-kube
 
     ;; chezmoi
     "cf" 'chezmoi-find

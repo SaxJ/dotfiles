@@ -60,3 +60,6 @@
   :config
   (setq gac-automatically-push-p t
         gac-automatically-add-new-files-p t))
+
+(use-package kubernetes
+  :ensure t)
