@@ -2,9 +2,10 @@
 # vi: ft=sh
 #
 # ~/.bashrc
-#
 
-export EDITOR=hx
+set -o vi
+
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=more
 export TERM=alacritty
