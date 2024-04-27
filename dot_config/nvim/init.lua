@@ -7,20 +7,6 @@ require("config.lazy")
 local wk = require("which-key")
 local mapx = require("mapx")
 
-local project_terminal_toggle = function()
-    local current_project = require("projectmgr.file_adapter").get_current_project()
-    local size = vim.o.columns * 0.5
-    local terminal_cmd =
-        string.format([[ToggleTerm direction=vertical size=%s name="project:%s"<CR>]], size, current_project)
-    vim.cmd(terminal_cmd)
-end
-
-local capture_todo = function()
-    local todo_text = vim.fn.input("> ")
-    local cmd = ([[todo.sh add "%s"]]).format(todo_text)
-    vim.cmd(("! %s").format(cmd))
-end
-
 -- Misc
 wk.register({
     b = {
@@ -45,28 +31,20 @@ wk.register({
     },
     f = {
         name = "+files",
-        f = { ":Oil<cr>", "Files" },
         Y = { ":CopyRelPath<CR>", "Yank Path" },
     },
     s = {
         name = "+search",
         p = { ":Telescope live_grep hidden=true<cr>", "Search Project" },
     },
-    p = {
-        name = "+project",
-        p = { ":ProjectMgr<cr>", "Switch Project" },
-        t = { project_terminal_toggle, "Project Terminal" },
-    },
     g = {
         name = "+git",
         b = { ":ToggleBlameLine<cr>", "Blame" },
-        g = { ":Neogit<CR>", "Git" },
+        g = { ":! zellij run -ci -- lazygit<CR>", "Git" },
         d = { ":Telescope git_status<CR>", "Changed Files" },
-    },
-    n = {
-        name = "+notes",
-        j = {
-            name = "+journal",
+        h = {
+            name = "+github",
+            p = { ":!gh create pr --web<CR>", "Pull Request" },
         },
     },
     r = {
@@ -80,16 +58,12 @@ wk.register({
         r = { vim.lsp.buf.rename, "Rename" },
         d = { require("neogen").generate, "Generate Docs" },
     },
-    t = {
-        name = "+terminal",
-        t = { ":Telescope toggleterm_manager<CR>", "Terminal" },
-    },
     ["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
     ["<leader>"] = { ":Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>", "Files" },
 }, { prefix = "<leader>" })
 
 mapx.nmap("<C-c>", ":ccl<CR>")
-mapx.nmap("<C-t>", ":terminal<CR>")
+mapx.nmap("<localleader>t", ":terminal<CR>")
 
 -- Terminal
 mapx.tnoremap("<Esc>", "<C-\\><C-n>")
