@@ -125,6 +125,7 @@
   (map! :map org-mode-map
         :n "M-j" #'org-metadown
         :n "M-k" #'org-metaup)
+
   (setq org-publish-project-alist '(("wiki"
                                      :base-directory "~/Documents/wiki"
                                      :publishing-function org-org-publish-to-org
