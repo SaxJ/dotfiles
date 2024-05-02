@@ -5,13 +5,13 @@ colors:
   title: none
 default_hour: 9
 default_minute: 0
-editor: /usr/bin/nvim
+editor: /home/saxonj/.cargo/bin/hx
 encrypt: false
 highlight: true
 indent_character: '|'
 journals:
   default:
-    journal: /home/saxonj/.local/share/jrnl/journal.txt
+    journal: /home/saxonj/Dropbox/journal.txt
 linewrap: 79
 tagsymbols: '#@'
 template: false
