@@ -35,6 +35,9 @@ case $1 in
   "browse")
     gh browse "$filename:$line_number"
     ;;
+  "fix")
+    zellij run -fc --name fix -- nvm use && yarn fix
+    ;;
   "repl")
     case $extension in
       "ts")
