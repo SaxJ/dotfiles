@@ -9,7 +9,10 @@
   :init
   (setq newsticker-url-list
         '(("Hackernews" "https://hnrss.org/frontpage")
-          ("Console.dev" "https://kill-the-newsletter.com/feeds/2i8zjerit1iuplw0.xml"))))
+          ("Console.dev" "https://kill-the-newsletter.com/feeds/2i8zjerit1iuplw0.xml")
+          ("WIRED" "https://www.wired.com/feed/rss")
+          ("Ars Technica" "https://feeds.arstechnica.com/arstechnica/technology-lab")
+          ("DW News" "http://rss.dw.com/rdf/rss-en-top"))))
 
 (use-package slack
   :ensure t
@@ -62,4 +65,15 @@
         gac-automatically-add-new-files-p t))
 
 (use-package kubernetes
+  :ensure t)
+
+(use-package sudo-edit
+  :ensure t)
+
+(use-package todotxt
+  :ensure t
+  :config
+  (setq todotxt-file "~/Dropbox/todo.txt"))
+
+(use-package csv-mode
   :ensure t)

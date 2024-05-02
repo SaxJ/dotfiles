@@ -187,4 +187,14 @@
   (general-def 'insert 'vertico-map
     :keymaps 'override
     "C-k" 'vertico-previous
-    "C-j" 'vertico-next))
+    "C-j" 'vertico-next)
+
+  (general-def 'normal 'todotxt-mode-map
+    :keymaps 'override
+    ", t" 'todotxt-tag-item
+    ", a" 'todotxt-add-item
+    ", p" 'todotxt-add-priority
+    ", d" 'todotxt-add-due-date
+    ", D" 'todotxt-nuke-item
+    ", c" 'todotxt-complete-toggle
+    ", e" 'todotxt-edit-item))
