@@ -32,9 +32,12 @@ right = ["diagnostics", "selections", "position", "version-control"]
 "$" = "goto_line_end"
 "^" = "goto_line_start"
 "C-e" = "file_picker_in_current_buffer_directory"
+"C-r" = ":reload-all"
+"C-m" = "save_selection"
 
 [keys.select]
 "$" = "goto_line_end"
+"C-m" = "save_selection"
 
 [keys.insert]
 "C-space" = "completion"
@@ -43,7 +46,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 "." = "file_picker_in_current_buffer_directory"
 
 [keys.normal."C-f"]
-"f" = ":fmt"
+"f" = ":sh helix-zellij fix"
 "t" = ":pipe ascii-table"
 
 [keys.normal.space.o]
@@ -52,7 +55,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 
 [keys.normal.space.g]
 s = ":sh git_sync"
-g = [":sh helix-zellij git"]
+g = [":sh helix-zellij git", ":reload-all"]
 b = ":sh helix-zellij blame"
 o = ":sh helix-zellij browse"
 d = "changed_file_picker"
