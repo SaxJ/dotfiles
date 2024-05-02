@@ -1,4 +1,6 @@
-# shell = {program = "nu", args = ["--login", "--interactive"]}
+[shell]
+program = "zellij"
+args = ["-l", "welcome"]
 
 [colors]
 draw_bold_text_with_bright_colors = true
