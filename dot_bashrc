@@ -97,8 +97,10 @@ alias silence='play  -n synth brownnoise vol'
 alias pods="kubectl get pods"
 
 # Zellij
-alias zr="zellij run"
-alias zrf="zellij run -f"
+alias zr="zellij run --"
+alias zrf="zellij run -f --"
+alias zri="zellij run --in-place --"
+alias zric="zellij run --in-place --close-on-exit --"
 
 function create_pr() {
     branch=$(git rev-parse --abbrev-ref HEAD)

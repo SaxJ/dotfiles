@@ -9,7 +9,7 @@ keybinds {
         bind "Ctrl s" { SwitchToMode "scroll"; }
         bind "Ctrl x" { SwitchToMode "locked"; }
         bind "Ctrl m" { SwitchToMode "move"; }
-        bind "Ctrl s" { SwitchToMode "session"; }
+        bind "Ctrl [" { SwitchToMode "session"; }
 
         bind "Alt n" { NewPane; }
 
