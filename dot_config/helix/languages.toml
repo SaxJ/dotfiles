@@ -50,8 +50,12 @@ name = "xml"
 file-types = ["xml", "mobileconfig", "plist", "xib", "storyboard", "svg", "xsd", "gml", "xaml", "gir", "component"]
 auto-format = true
 
-[[langauge]]
+[[language]]
 name = "haskell"
 language-servers = [ "haskell-language-server" ]
 auto-format = true
 formatter = { command = "ormolu" }
+
+[[language]]
+name = "elm"
+formatter = { command = "elm-format", args = ["--stdin"]}
