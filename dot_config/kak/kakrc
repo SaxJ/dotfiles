@@ -255,7 +255,7 @@ map global user p ':extra-paste-system<ret>' -docstring 'paste selections from s
 map global user y ':extra-yank-system<ret>'  -docstring 'yank to system clipboard'
 
 # Tree-sitter
-eval %sh{ kak-tree-sitter -dks --with-highlighting --with-text-objects --session $kak_session }
+eval %sh{ kak-tree-sitter -dks --with-highlighting --with-text-objects --session $kak_session -vvvvv }
 colorscheme catppuccin_macchiato
 define-command -override kak-tree-sitter-set-lang %{
   set-option buffer kts_lang %opt{filetype}
