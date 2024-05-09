@@ -6,6 +6,9 @@ require("config.lazy")
 
 local wk = require("which-key")
 local mapx = require("mapx")
+local Terminal = require('toggleterm.terminal').Terminal
+
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
 local function inflection()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -50,7 +53,9 @@ wk.register({
     g = {
         name = "+git",
         b = { ":ToggleBlameLine<cr>", "Blame" },
-        g = { ":! zellij run -ci -- lazygit<CR>", "Git" },
+        g = { function()
+            lazygit:toggle()
+        end, "Git" },
         d = { ":Telescope git_status<CR>", "Changed Files" },
         h = {
             name = "+github",
