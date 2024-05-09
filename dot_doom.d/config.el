@@ -199,8 +199,6 @@
 ;;;;;;;;;;;
 (after! magit
   (setq git-commit-summary-max-length 100))
-(after! forge
-  (define-key forge-topic-mode-map (kbd "C-c r") 'code-review-forge-pr-at-point))
 
 ;;;;;;;;;;;;;;;;
 ;; FORMATTING ;;
@@ -213,7 +211,7 @@
   :config
   (add-to-list 'auto-mode-alist '("\\.vim\\(rc\\)?\\'" . vimrc-mode))
   (add-to-list 'auto-mode-alist '("\\viebrc\\'" . vimrc-mode)))
-(use-package hurl-mode)
+
 (use-package wakatime-mode
   :hook (doom-after-init . global-wakatime-mode))
 
@@ -241,6 +239,10 @@
                       (mu4e-trash-folder . "/saxonj@mailbox.org/Trash")
                       (mu4e-refile-folder . "/saxonj@mailbox.org/Archive")
                       (smtpmail-smtp-user . "saxonj@mailbox.org")))
+
+(use-package! todotxt
+  :config
+  (setq todotxt-file "~/Dropbox/todo.txt"))
 
 ;;; config.el ends here
 ;;;

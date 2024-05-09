@@ -39,6 +39,8 @@
 (package! org-remark)
 (package! multi-vterm)
 (package! org-jira)
+(package! todotxt)
+(package! jq-mode)
 
 (package! hurl-mode :recipe
   (:host github
