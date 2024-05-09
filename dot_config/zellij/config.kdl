@@ -4,7 +4,7 @@ keybinds {
 
         // modes
         bind "Ctrl p" { SwitchToMode "pane"; }
-        bind "Ctrl r" { SwitchToMode "resize"; }
+        // bind "Ctrl r" { SwitchToMode "resize"; }
         bind "Ctrl t" { SwitchToMode "tab"; }
         bind "Ctrl s" { SwitchToMode "scroll"; }
         bind "Ctrl x" { SwitchToMode "locked"; }
