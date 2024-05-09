@@ -102,6 +102,10 @@ alias zrf="zellij run -f --"
 alias zri="zellij run --in-place --"
 alias zric="zellij run --in-place --close-on-exit --"
 
+function ijq() {
+    echo '' | fzf --print-query --preview "cat $1 | jq {q}"
+}
+
 function create_pr() {
     branch=$(git rev-parse --abbrev-ref HEAD)
     commits=$(git log master..HEAD --oneline)
@@ -186,7 +190,7 @@ eval "$(direnv hook bash)"
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 eval "$(hub alias -s)"
-eval "$(zellij setup --generate-auto-start bash)"
+# eval "$(zellij setup --generate-auto-start bash)"
 
 function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
