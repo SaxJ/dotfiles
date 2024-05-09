@@ -208,7 +208,8 @@
  '(package-selected-packages
    '(jirascope kubernetes rainbow-mode wakatime-mode jq-mode web-mode mct eglot css-in-js-mode origami org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
-   '((eglot-server-programs
+   '((gac-automatically-add-new-files-p . t)
+     (eglot-server-programs
       ((typescript-ts-mode tsx-ts-mode)
        "deno" "lsp" :initializationOptions
        (:enable t :lint t)))
