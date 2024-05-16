@@ -126,3 +126,6 @@
                  :foreground "white"))))
   :hook ((org-mode . org-modern-mode)
          (org-agenda-finalize . org-modern-agenda)))
+
+(use-package org-super-agenda
+  :ensure t)

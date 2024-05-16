@@ -77,3 +77,6 @@
 
 (use-package csv-mode
   :ensure t)
+
+(use-package prodigy
+  :ensure t)

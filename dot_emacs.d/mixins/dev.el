@@ -81,7 +81,7 @@
 (use-package magit
   :ensure t
   :config
-  (setq forge-add-default-bindings t)
+  (setq forge-add-default-bindings nil)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
 
@@ -156,15 +156,15 @@
 (use-package apheleia
   :ensure t
   :config
-  (setf (alist-get 'prettier apheleia-formatters)
-        '("apheleia-npx" "prettier"))
-  (add-to-list 'apheleia-mode-alist '(php-mode . prettier))
   (apheleia-global-mode +1))
 
 (use-package vterm
   :ensure t
   :config
   (setq vterm-timer-delay 0.01))
+
+(use-package eat
+  :ensure t)
 
 (use-package multi-vterm
   :after vterm

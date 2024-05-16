@@ -40,7 +40,9 @@
   (interactive)
   (let ((command "hurl"))
     (shell-command-on-region (point-min) (point-max) command "*Output*")
-    (switch-to-buffer "*Output*")))
+    (switch-to-buffer "*Output*")
+    (json-pretty-print-buffer)
+    (json-ts-mode)))
 
 (defun saxon/copy-file-name ()
   (interactive)
