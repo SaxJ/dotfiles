@@ -106,7 +106,7 @@
     "pp" 'tabspaces-open-or-create-project-and-workspace
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
-    "pt" 'multi-vterm-project
+    "pt" 'eat-project-other-window
     "pa" 'project-remember-projects-under
 
     "sp" 'consult-ripgrep
@@ -151,10 +151,8 @@
     "oT" 'todotxt
 
     ;; terminals
-    "ot" 'saxon/project-terminal
-    "tt" 'popper-toggle-type
-    "tn" 'multi-vterm-next
-    "tp" 'multi-vterm-prev)
+    "ot" 'eat
+    "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode

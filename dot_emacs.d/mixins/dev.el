@@ -164,7 +164,10 @@
   (setq vterm-timer-delay 0.01))
 
 (use-package eat
-  :ensure t)
+  :ensure t
+  :config
+  (add-hook 'eshell-load-hook #'eat-eshell-mode)
+  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
 
 (use-package multi-vterm
   :after vterm
@@ -204,6 +207,7 @@
           help-mode
           compilation-mode
           "^magit:.*"
+          "\\*eat.*\\*"
           "\\*xref\\*"))
   (setq popper-window-height 20)
   (popper-mode +1)
