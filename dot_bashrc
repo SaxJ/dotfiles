@@ -240,3 +240,7 @@ function zellij_helix_file_man() {
 }
 
 source /usr/share/nvm/init-nvm.sh
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  source "$EAT_SHELL_INTEGRATION_DIR/bash"
+
