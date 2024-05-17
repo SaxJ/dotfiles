@@ -80,3 +80,6 @@
 
 (use-package prodigy
   :ensure t)
+
+(use-package insecure-lock
+  :ensure t)
