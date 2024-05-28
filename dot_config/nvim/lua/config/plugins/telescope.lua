@@ -3,7 +3,7 @@ return {
 	dependencies = {
 		{ "nvim-lua/plenary.nvim" },
 		{ "nvim-telescope/telescope-project.nvim" },
-        { "nvim-telescope/telescope-github.nvim" },
+		{ "nvim-telescope/telescope-github.nvim" },
 	},
 	config = function()
 		local project_actions = require("telescope._extensions.project.actions")
@@ -56,18 +56,13 @@ return {
 					file_browser = {
 						hijack_netrw = true,
 					},
-					frecency = {
-						default_workspace = "CWD",
-						ignore_patterns = { "*.git/*", "*/tmp/*", "*/node_modules/*" },
-						show_unindexed = true,
-					},
 					project = {
 						base_dirs = {
-							{ "~/Documents", max_depth = 2 }
+							{ "~/Documents", max_depth = 2 },
 						},
 						on_project_selected = function(prompt_bufnr)
 							project_actions.change_working_directory(prompt_bufnr, false)
-						end
+						end,
 					},
 				},
 			},
@@ -76,7 +71,7 @@ return {
 		require("telescope").load_extension("yaml_schema")
 		require("telescope").load_extension("fzf")
 		require("telescope").load_extension("file_browser")
-		require('telescope').load_extension('project')
-		require('telescope').load_extension('gh')
+		require("telescope").load_extension("project")
+		require("telescope").load_extension("gh")
 	end,
 }
