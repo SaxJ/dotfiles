@@ -22,6 +22,7 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+
 (use-package emacs
   :config
 
@@ -53,9 +54,8 @@
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
           (bash-mode . bash-ts-mode)
-          (js2-mode . js-ts-mode)
           (typescript-mode . typescript-ts-mode)
-          (csharp-mode . csharp-ts-mode)
+          ;; (csharp-mode . csharp-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
@@ -85,24 +85,6 @@
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;;   Common file types
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package markdown-mode
-  :ensure t
-  :hook ((markdown-mode . visual-line-mode)))
-(use-package yaml-mode
-  :ensure t)
-(use-package json-mode
-  :ensure t)
-(use-package php-mode
-  :ensure t)
-(use-package graphql-mode
-  :ensure t)
-
 
 ;; Emacs ships with a lot of popular programming language modes. If it's not
 ;; built in, you're almost certain to find a mode for the language you're
@@ -121,6 +103,7 @@
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
   (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+  (add-hook 'csharp-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
   (add-hook 'php-mode-hook 'eglot-ensure)
   (add-hook 'json-ts-mode-hook 'eglot-ensure)
@@ -145,6 +128,8 @@
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
+               '(csharp-mode . ("omnisharp" "--languageserver")))
+  (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
 	           '(php-mode . ("intelephense" "--stdio")))
@@ -153,9 +138,13 @@
   (add-to-list 'eglot-server-programs
                '(graphql-mode . ("graphql-lsp" "server" "-m" "stream"))))
 
+(defun saxon/no-format-p ()
+  (member major-mode '("php-mode")))
+
 (use-package apheleia
   :ensure t
   :config
+  (setq gpheleia-inhibit-functions '(saxon/no-format-p))
   (apheleia-global-mode +1))
 
 (use-package vterm
@@ -167,7 +156,8 @@
   :ensure t
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
-  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode))
+  (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
+  (setq eat-enable-auto-line-mode t))
 
 (use-package multi-vterm
   :after vterm
@@ -213,16 +203,22 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
-(use-package hurl-mode
-  :quelpa ((hurl-mode :fetcher github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")) :upgrade nil))
 
 (use-package eglot-booster
   :after eglot
   :config (eglot-booster-mode)
   :quelpa ((eglot-booster :fetcher github :repo "jdtsmith/eglot-booster") :upgrade nil))
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
+;;;   Common file types
+;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(use-package hurl-mode
+  :quelpa ((hurl-mode :fetcher github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")) :upgrade nil))
+
 (use-package fsharp-mode
-  :defer t
   :ensure t)
 
 (use-package eglot-fsharp
@@ -247,4 +243,20 @@
   :ensure t)
 
 (use-package rainbow-mode
+  :ensure t)
+
+(use-package markdown-mode
+  :ensure t
+  :hook ((markdown-mode . visual-line-mode)))
+
+(use-package yaml-mode
+  :ensure t)
+
+(use-package json-mode
+  :ensure t)
+
+(use-package php-mode
+  :ensure t)
+
+(use-package graphql-mode
   :ensure t)
