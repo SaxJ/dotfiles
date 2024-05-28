@@ -67,6 +67,11 @@
 (use-package kubernetes
   :ensure t)
 
+(use-package kele
+  :ensure t
+  :config
+  (kele-mode 1))
+
 (use-package sudo-edit
   :ensure t)
 
@@ -81,5 +86,8 @@
 (use-package prodigy
   :ensure t)
 
-(use-package insecure-lock
-  :ensure t)
+(use-package zoom
+  :ensure t
+  :config
+  (setq zoom-size '(0.618 . 0.618))
+  (zoom-mode t))
