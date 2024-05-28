@@ -6,9 +6,6 @@ require("config.lazy")
 
 local wk = require("which-key")
 local mapx = require("mapx")
-local Terminal = require("toggleterm.terminal").Terminal
-
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true, direction = "float" })
 
 local function inflection()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -55,17 +52,13 @@ wk.register({
 	g = {
 		name = "+git",
 		b = { ":ToggleBlameLine<cr>", "Blame" },
-		g = {
-			function()
-				lazygit:toggle()
-			end,
-			"Git",
-		},
+		g = { ":Neogit<CR>", "Git" },
 		d = { ":Telescope git_status<CR>", "Changed Files" },
 		h = {
 			name = "+github",
-			p = { ":!gh create pr --web<CR>", "Pull Request" },
+			p = { ":!gh pr create --web<CR>", "Pull Request" },
 		},
+		s = { ":Git status<CR>" },
 	},
 	i = {
 		name = "+insert",
@@ -76,7 +69,7 @@ wk.register({
 		name = "+open",
 		T = { ":terminal<CR>", "Terminal Full" },
 		d = { ":Trouble<CR>", "Diagnostics" },
-		["-"] = { ":Oil<CR>", "File Browser" },
+		t = { ":split<CR>:terminal<CR>", "Split Terminal" },
 	},
 	p = {
 		name = "+project",
@@ -93,6 +86,12 @@ wk.register({
 	},
 	["."] = { ":Telescope file_browser path=%:p:h hidden=true<CR>", "Files" },
 	["<leader>"] = { ":Telescope find_files find_command=rg,--ignore,--hidden,--files prompt_prefix=🔍<cr>", "Files" },
+	["-"] = {
+		function()
+			require("mini.files").open(vim.api.nvim_buf_get_name(0))
+		end,
+		"Files",
+	},
 }, { prefix = "<leader>" })
 
 mapx.nmap("<C-c>", ":ccl<CR>")
