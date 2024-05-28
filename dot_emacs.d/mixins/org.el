@@ -128,4 +128,11 @@
          (org-agenda-finalize . org-modern-agenda)))
 
 (use-package org-super-agenda
-  :ensure t)
+  :ensure t
+  :config
+  (setq org-super-agenda-groups
+        '((:name "In Progress" :todo "PROG")
+          (:name "Important" :priority "A")
+          (:name "Next" :priority "B")
+          (:name "Nice" :priority>= "C")))
+  (org-super-agenda-mode 1))
