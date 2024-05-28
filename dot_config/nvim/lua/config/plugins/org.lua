@@ -1,36 +1,44 @@
 return {
-	'nvim-orgmode/orgmode',
-	event = 'VeryLazy',
+	"nvim-orgmode/orgmode",
+	event = "VeryLazy",
 	dependencies = {
-		'akinsho/org-bullets.nvim',
-		'lukas-reineke/headlines.nvim',
+		"akinsho/org-bullets.nvim",
+		"lukas-reineke/headlines.nvim",
 		-- 'dhruvasagar/vim-table-mode',
-		'andreadev-it/orgmode-multi-key',
+		"andreadev-it/orgmode-multi-key",
 	},
-	config = function ()
-		require('orgmode').setup({
-			org_agenda_files = {'~/Documents/wiki/**/*'},
-			org_default_notes_file = '~/Documents/wiki/notes.org',
+	config = function()
+		require("orgmode").setup({
+			org_agenda_files = { "~/Documents/wiki/**/*" },
+			org_default_notes_file = "~/Documents/wiki/notes.org",
+			org_todo_keywords = { "TODO(t)", "PROG(p)", "BLOCKED(b)", "HOLD(h)", "REVIEW(r)", "|", "DONE(d)" },
+			org_todo_keyword_faces = {
+				TODO = ":foreground #4CAF50",
+				PROG = ":foreground #ff9800",
+				BLOCKED = ":foreground #F44336",
+				HOLD = ":foreground #F44336",
+				DONE = ":foreground white",
+			},
 			org_capture_templates = {
 				t = {
 					description = "New Todo",
-					template = '* TODO [#%^{A|B|C}] %? %t',
-					target = '~/Documents/wiki/todo.org',
+					template = "* TODO [#%^{A|B|C}] %? %t",
+					target = "~/Documents/wiki/todo.org",
 				},
 				j = {
 					description = "New Journal",
 					datetree = {
-						tree_type = 'day',
+						tree_type = "day",
 					},
-					template = '** %<%I:%M %p>\n- %?',
-					target = '~/Documents/wiki/journal.org',
-				}
-			}
+					template = "** %<%I:%M %p>\n- %?",
+					target = "~/Documents/wiki/journal.org",
+				},
+			},
 		})
-		require('org-bullets').setup({})
+		require("org-bullets").setup({})
 		-- require('headlines').setup({})
-		require('orgmode-multi-key').setup({
-			key = '<Tab>',
+		require("orgmode-multi-key").setup({
+			key = "<Tab>",
 		})
-	end
+	end,
 }
