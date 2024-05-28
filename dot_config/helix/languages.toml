@@ -25,25 +25,25 @@ auto-format = true
 [[language]]
 name = "tsx"
 auto-format = true
-formatter = { command = "prettier" }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
 language-servers = ["typescript-language-server", "deno"]
 
 [[language]]
 name = "typescript"
 auto-format = true
-formatter = { command = "prettier" }
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
 language-servers = ["typescript-language-server", "deno"]
 roots = ["deno.json", "deno.jsonc", "package.json"]
 
 [[language]]
 name = "graphql"
 language-servers = ["graphql-ls"]
-formatter = { command = "prettier" }
+formatter = { command = "prettier", args = ["--parser", "graphql"] }
 
 [[language]]
 name = "javascript"
 auto-format = true
-formatter = { command = "prettier" }
+formatter = { command = "prettier", args = ["--parser", "javascript"] }
 
 [[language]]
 name = "xml"
