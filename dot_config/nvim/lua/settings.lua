@@ -7,9 +7,9 @@ vim.g.maplocalleader = [[,]]
 vim.g.do_filetype_lua = 1
 
 vim.filetype.add({
-    extension = {
-        hurl = 'hurl'
-    }
+	extension = {
+		hurl = "hurl",
+	},
 })
 
 cmd("syntax enable")
@@ -40,7 +40,9 @@ vim.opt.tabstop = indent
 vim.opt.termguicolors = true
 vim.opt.timeoutlen = 500
 vim.opt.updatetime = 300
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
+vim.opt.title = true
+vim.opt.titlestring = [[%{luaeval("vim.fn.getcwd()")}]]
 
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
@@ -59,7 +61,7 @@ set wildignore+=**/.git/*
 ]])
 
 vim.diagnostic.config({
-    virtual_text = false
+	virtual_text = false,
 })
 
 -- Autoread files when they're changed
