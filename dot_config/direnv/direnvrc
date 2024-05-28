@@ -1,3 +1,4 @@
+#!/bin/bash
 use_nvm() {
   local node_version=$1
 
