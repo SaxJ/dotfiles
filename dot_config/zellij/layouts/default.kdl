@@ -5,8 +5,4 @@ layout {
             plugin location="zellij:compact-bar"
         }
     }
-    tab name="News" split_direction="vertical" {
-        pane command="aerc"
-        pane command="newsboat"
-    }
 }
