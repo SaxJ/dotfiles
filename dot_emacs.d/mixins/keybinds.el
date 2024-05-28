@@ -106,7 +106,7 @@
     "pp" 'tabspaces-open-or-create-project-and-workspace
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
-    "pt" 'eat-project-other-window
+    "pt" 'multi-vterm-project
     "pa" 'project-remember-projects-under
 
     "sp" 'consult-ripgrep
@@ -151,7 +151,7 @@
     "oT" 'todotxt
 
     ;; terminals
-    "ot" 'eat
+    "ot" 'multi-vterm
     "tt" 'popper-toggle-type)
 
   (general-def 'normal 'eglot--managed-mode
@@ -183,6 +183,10 @@
   (general-def 'insert 'vterm-mode-map
     "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
     "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
+
+  (general-def 'insert 'eat-mode-map
+    "C-k" (lambda () (interactive) (eat-input-char "<up>" 1))
+    "C-j" (lambda () (interactive) (eat-input-char "<down>" 1)))
 
   (general-def 'insert 'vertico-map
     :keymaps 'override
