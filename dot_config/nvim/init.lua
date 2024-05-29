@@ -69,7 +69,7 @@ wk.register({
 		name = "+open",
 		T = { ":terminal<CR>", "Terminal Full" },
 		d = { ":Trouble<CR>", "Diagnostics" },
-		t = { ":split<CR>:terminal<CR>", "Split Terminal" },
+		t = { ":split<CR>:terminal<CR>i", "Split Terminal" },
 	},
 	p = {
 		name = "+project",
