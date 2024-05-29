@@ -87,7 +87,23 @@ return {
 		local lspconfig = require("lspconfig")
 
 		lspconfig.tsserver.setup({})
-		lspconfig.intelephense.setup({})
+		lspconfig.intelephense.setup({
+			init_options = {
+				licenceKey = "/home/saxonj/intelephense/licence.txt",
+			},
+			settings = {
+				intelephense = {
+					runtime = "/usr/bin/node",
+					maxMemory = 2000,
+					environment = {
+						phpVersion = "8.2.0",
+					},
+					telemetry = {
+						enabled = false,
+					},
+				},
+			},
+		})
 		lspconfig.omnisharp.setup({})
 		lspconfig.bashls.setup({})
 		lspconfig.hls.setup({})
