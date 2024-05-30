@@ -43,7 +43,7 @@ keybinds {
 // Choose the path to the default shell that zellij will use for opening new panes
 // Default: $SHELL
 //
-//  default_shell "nu"
+// default_shell "nu"
 
 // Toggle between having pane frames around the panes
 // Options:
