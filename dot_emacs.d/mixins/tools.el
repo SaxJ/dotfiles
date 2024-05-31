@@ -64,14 +64,6 @@
   (setq gac-automatically-push-p t
         gac-automatically-add-new-files-p t))
 
-(use-package kubernetes
-  :ensure t)
-
-(use-package kele
-  :ensure t
-  :config
-  (kele-mode 1))
-
 (use-package sudo-edit
   :ensure t)
 
