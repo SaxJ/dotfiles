@@ -157,7 +157,7 @@ wezterm.on("format-tab-title", function(tab)
 		"ResetAttributes",
 		{ Text = get_process(tab) },
 		{ Text = " " },
-		{ Text = get_current_working_dir(tab) },
+		-- { Text = get_current_working_dir(tab) },
 		{ Text = "  ▕" },
 	})
 end)
