@@ -15,7 +15,6 @@ return {
 	"jamessan/vim-gnupg",
 	"jrop/jq.nvim",
 	"freitass/todo.txt-vim",
-	"dosimple/workspace.vim",
 
 	-- telescope extensions
 	{ "nvim-telescope/telescope-file-browser.nvim" },
