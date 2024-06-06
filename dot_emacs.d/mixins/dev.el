@@ -67,6 +67,8 @@
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
+  (setq vc-handled-backends '(Git))
+
   :hook
   ;; Auto parenthesis matching
   ((prog-mode . electric-pair-mode)))

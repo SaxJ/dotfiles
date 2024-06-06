@@ -4,6 +4,12 @@
     (vterm-send-string cmd)
     (vterm-send-return)))
 
+(defun saxon/restart-eglot ()
+  (interactive)
+  (progn
+    (eglot-shutdown-all)
+    (eglot)))
+
 (defun saxon/rename-file (new-name &optional force-p)
   (interactive
    (list (read-file-name "Rename to: ")
@@ -93,6 +99,7 @@
 
     ;; buffer bindings
     "bb" 'consult-project-buffer
+    "bc" 'clone-indirect-buffer
 
     ;; file bindings
     "ff" 'find-file
@@ -146,6 +153,9 @@
     "cf" 'chezmoi-find
     "cd" 'chezmoi-diff
     "cw" 'chezmoi-write
+
+    ;; LSP helpers
+    "lr" 'saxon/restart-eglot
 
     ;; todotxt
     "oT" 'todotxt

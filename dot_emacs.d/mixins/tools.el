@@ -61,8 +61,7 @@
 (use-package git-auto-commit-mode
   :ensure t
   :config
-  (setq gac-automatically-push-p t
-        gac-automatically-add-new-files-p t))
+  (setq gac-automatically-add-new-files-p t))
 
 (use-package sudo-edit
   :ensure t)

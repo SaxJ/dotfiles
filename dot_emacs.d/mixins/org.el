@@ -4,6 +4,26 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun saxon/jira-update-heading ()
+  "Update jira issue heading"
+  (interactive)
+  (when-let* ((pt (point))
+              (issue-key (and (org-at-heading-p)
+                              (org-entry-get pt "JIRAISSUEKEY"))))
+    ;; TODO
+    (let-alist (jiralib2-get-issue issue-key)
+      (let ((headline (format "%s %s" .key .fields.summary)))
+        (message "Updating %s" headline)
+        (org-edit-headline headline))
+      (cl-loop
+       for (property value)
+       on (list
+           "JiraCreated" .fields.created
+           "JiraIssueKey" .key
+           "JiraStatus" .fields.status.name)
+       by #'cddr
+       do (org-entry-put pt property value)))))
+
 ;; Agenda variables
 (setq org-directory "~/Documents/wiki/") ; Non-absolute paths for agenda and
                                         ; capture templates will look here.
@@ -60,7 +80,8 @@
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   ;; Make exporting quotes better
-  (setq org-export-with-smart-quotes t))
+  (setq org-export-with-smart-quotes t)
+  (add-hook 'org-capture-before-finalize-hook #'saxon/jira-update-heading))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -82,7 +103,8 @@
 
   (setq org-capture-templates
         '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
-          ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?"))
+          ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?")
+          ("w" "Work" entry (file "todo.org") "* TODO %^{JiraIssueKey}p" :jump-to-captured t :immediate-finish t :empty-lines-after 1))
 
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
@@ -117,6 +139,14 @@
   :custom
   (org-jira-working-dir "~/Documents/wiki/jira")
   (jiralib-url "https://hejira.atlassian.net"))
+
+(use-package jiralib2
+  :ensure t
+  :config
+  (setq jiralib2-auth 'token
+        jiralib2-url "https://hejira.atlassian.net"
+        jiralib2-user-login-name "saxon.jensen@healthengine.com.au"
+        jiralib2-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
 
 (use-package org-modern
   :ensure t
