@@ -1,0 +1,74 @@
+# pack-refs with: peeled fully-peeled sorted 
+fa9992587a0e6b9ef367ada5d5df0aa0c045c36f refs/remotes/origin/deprecate-powerline
+aaa7074db58e4c05cdaa206f9e698ab61e3f6829 refs/remotes/origin/dolmen/feature/GIT_HIDE_UNTRACKED_DIR-option
+f829d7f667aa642482ecffba379bf5d37a59c465 refs/remotes/origin/dolmen/terminfo-compiler
+473a766d86d8c8a9c9a2c7f8307b585821142c25 refs/remotes/origin/feat+presets
+4278f3caa1057ee0cfccf7f626cb437e9be9da41 refs/remotes/origin/feat+url-links
+256e47c234023ab842a075b429b345a2570dcbd9 refs/remotes/origin/feature/control-chars
+8235f668fed0d706afb726ed5e0c7edce31ca024 refs/remotes/origin/feature/ipython
+e756ef16ef60e31296918ab1676e9403df33a515 refs/remotes/origin/feature/maildir
+4b03cda07a68cfe24906553612ff40baddd15264 refs/remotes/origin/feature/pre-post-title
+4ed7077e385ecb4c793838e01e22c77b5e55750d refs/remotes/origin/master
+b77afb36d390cb198c54e133325998dcca6f40f9 refs/remotes/origin/mine
+f8d3147d9c0ac1f7eb72f3c10f0bd43d2c3b2fcc refs/remotes/origin/refactor/default-theme
+1be449efd380c998fa23a150e1c683371210c525 refs/remotes/origin/rework/preexec
+da2aebc7e9635c54763b046a08f7231be5b7d980 refs/remotes/origin/stable
+8deeac6d6d19b814e2adb1507b5d99b6590b9279 refs/remotes/origin/theme+dotmatrix
+6236f763e8df34577a84114c1a774ae3a93ae39f refs/remotes/origin/theme+neon
+38d0120861e43f6bdcf07509415ee449098f569c refs/remotes/origin/theme+powerpuff
+9b810f3f0249ad51c33d0ee09e48dfa9dd883787 refs/tags/v1.12-beta.1
+^5f9bb675c10023ddf578ec1f4c0a79d6a1193ba4
+3e8bda2a7a84bf7fb776a0848c140ac7a2d13a81 refs/tags/v1.12-rc.1
+^4a9169ee7fbe1ca5a94549dfe97b73b63baae9c7
+cecd6071f1fd713a5391820fdd71a6309044fd4d refs/tags/v1.12.0
+^deff598f30f097279d6f6959ba49441923dec041
+9ded5f2a5192bb30932dd60a4a4a7241afb4d203 refs/tags/v1.12.1
+^ec891eaada5cd427292055603c7dbe977d478e67
+7655c0090e6b4048b029e971bee6ee2bd505fdb1 refs/tags/v2.0.0
+^c1d7299596e01980dfb4e38a99a1e901ee21c24e
+dc480b57c7d935fbf3022476dfbec31c104f84df refs/tags/v2.0.0-beta.1
+^6e7f4c77044bea7ab92970e820997601926bcbea
+dc1d07b71e86949ae253bf4a10dc280b123ddb80 refs/tags/v2.0.0-beta.2
+^edad38ff186feb9e9c3050932d1d0ff6bc08ee14
+fbff5776a355996ecfb84f8386d74a6c1cbbc77a refs/tags/v2.0.0-rc.1
+^2daf0e453039950d79dcf0eec5a04931e363a92a
+9d931930b3fe9da9e3c6481ed32825d1a025006b refs/tags/v2.0.1
+^f0157aa73b86762c4c5a4fe0c83ecc2f97233f30
+5bd96984165684fff574fb86e4701939da2e352b refs/tags/v2.0.2
+^a5ecd88e52d83de37cb6b4fb598c2e53748d1f2f
+63b1b9182181579a8c121a44ebb3b28ec56279b5 refs/tags/v2.0.3
+^8778261b1c34f0c33e840c0f3e098ec4000c09b0
+322c1e842fb6a63759e376dfe2c08be8abf6060d refs/tags/v2.0.4
+^1a0fc6ebfbf6201b3595bdd7f2464b52250eaa89
+8ab15e1f22a02440b18f1c762b4f16efe6e963ea refs/tags/v2.0.5
+^242d78b7348b78d4295e782493949c9c96560649
+8020c83012a96d30f3494b041fac5dacbea0c6cb refs/tags/v2.1.0
+^40ab167bb772a9bc65e5ece571b7d74b46663c23
+eb9f1955d0d696a347db3717f261190e9d2456eb refs/tags/v2.1.0-beta.1
+^7fd7cf7a0a4d7f45813aec301d7df260d855dcb8
+696d2923fd3bdf208f31c951821ce7cc01624b71 refs/tags/v2.1.0-rc.1
+^962439525f9687de8428817a21230bc602150a9a
+a4e9f820c0040e710a774f61c9fe444e37875b5d refs/tags/v2.1.1
+^7f80a545fb3eb3083f79c610bfc5694d16133ea7
+9990357fcff93bfc64cb13dff073a30e1326fef6 refs/tags/v2.1.2
+^6f0dc9f7dda99fe98c6dce26be5e461692782c6d
+18bc741feea54cd0ed20011d7c49cbe9be697e96 refs/tags/v2.2.0
+^da2aebc7e9635c54763b046a08f7231be5b7d980
+1f60f28846aca7726de6410450258c2f47800fc5 refs/tags/v2.2.0-rc.1
+^6544c785da22e30c250aa4b920ef25569b4e7003
+00ff7e4a4c1dd3cd4ea664bc0b73b4508e87e55e refs/tags/v2.2.0-rc.2
+^bbe576bd03c070c7f10ad8866a7fd789eda0ceb5
+45bfd4d866c51dd57e370737bbdf9223611512ec refs/tags/v_1.0
+0692501ad157846ecdba11856160e63b8a3e1040 refs/tags/v_1.1
+e78d9e4ea3b390a8336b2ddd30f3335630d48540 refs/tags/v_1.10
+488bb5975db9fa8be0b795019f0b6d99ec792f50 refs/tags/v_1.11
+209f9765d7e6b4759214cd23812cba0ca5fd73b6 refs/tags/v_1.2
+3d711323d5e1640db7867e4079c4847b5cc5c389 refs/tags/v_1.3
+42af71d3f17e294369840b14feb816cadc7afdc0 refs/tags/v_1.4
+f483697fda79d551cb638540b4322991f0746bcc refs/tags/v_1.5
+fe6d9f3ebe0fb6ec23c82257991c4a8909e6d718 refs/tags/v_1.6
+8f149fd892fe560fd7d539b4fbceb61a75243f2b refs/tags/v_1.7
+d09982e0e66bc62ce38840871c05a39975ea8cfb refs/tags/v_1.8
+^0921e720c220881771652f9f7fc9cd9a63bfbdf7
+46fa70e43ded424597cf2b91fa7eaf30cd9d3ec1 refs/tags/v_1.9
+^6c6e1f5e7645473efca0697150b01e50cd3055d4
