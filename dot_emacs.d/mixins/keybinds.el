@@ -54,7 +54,7 @@
   (interactive)
   (let ((filename (buffer-file-name)))
     (when filename
-      (kill-new filename)
+      (kill-new (file-relative-name filename (project-root (project-current))))
       (message "Copied file name"))))
 
 (defun saxon/open-news ()
