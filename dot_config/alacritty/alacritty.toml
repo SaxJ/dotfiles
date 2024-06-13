@@ -52,8 +52,3 @@ family = "FiraCode Nerd Font"
 [font.offset]
 x = 0
 y = 0
-
-[[keyboard.bindings]]
-action = "CreateNewWindow"
-key = "N"
-mods = "Alt"

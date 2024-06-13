@@ -1,27 +1,23 @@
 keybinds {
     normal clear-defaults=true {
         bind "Ctrl q" { Quit; }
+        bind "Ctrl Space" { SwitchToMode "tmux"; }
 
-        // modes
-        bind "Ctrl p" { SwitchToMode "pane"; }
-        // bind "Ctrl r" { SwitchToMode "resize"; }
-        bind "Ctrl t" { SwitchToMode "tab"; }
-        bind "Ctrl s" { SwitchToMode "scroll"; }
-        bind "Ctrl x" { SwitchToMode "locked"; }
-        bind "Ctrl m" { SwitchToMode "move"; }
-        bind "Ctrl [" { SwitchToMode "session"; }
-
+        // Quick panes
         bind "Alt n" { NewPane; }
-
-        // moving focus
         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
         bind "Alt k" "Alt Up" { MoveFocus "Up"; }
 
-        // font size
-        bind "Alt +" { Resize "Increase"; }
-        bind "Alt -" { Resize "Decrease"; }
+    }
+    tmux clear-defaults=true {
+        bind "g" {
+            Run "gitu" { direction "Down"; }; SwitchToMode "normal";
+        }
+        bind "t" { SwitchToMode "tab"; }
+        bind "s" { SwitchToMode "scroll"; }
+        bind "p" { SwitchToMode "pane"; }
     }
 }
 
@@ -60,7 +56,7 @@ theme "dracula"
 // The name of the default layout to load on startup
 // Default: "default"
 //
-// default_layout "default"
+default_layout "compact"
 
 // Choose the mode that zellij uses when starting up.
 // Default: normal

@@ -6,7 +6,6 @@
 # Set terminal title
 PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 
-export PS1="[\W]\$ "
 export EDITOR=hx
 export VISUAL=$EDITOR
 export PAGER=more
@@ -59,6 +58,7 @@ alias prv="gh pr view --web"
 alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
 alias yz="yazi"
+alias gu="gitu"
 
 # Journal
 alias j="jrnl"
@@ -191,9 +191,11 @@ function pac-search() {
 
 eval "$(direnv hook bash)"
 eval "$(zoxide init bash)"
-eval "$(starship init bash)"
+# eval "$(starship init bash)"
 eval "$(hub alias -s)"
 # eval "$(zellij setup --generate-auto-start bash)"
+source /usr/share/nvm/init-nvm.sh
+[[ $- = *i* ]] && source ~/liquidprompt/liquidprompt
 
 function bash-stats() {
     fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
@@ -244,22 +246,16 @@ function zellij_helix_file_man() {
 
 function ta() {
     read -rp "Todo: " input
-    select pri in A B C D
-    do
-        if [ -n "$pri" ]; then
-            todo.sh add "($pri) $input"
-        fi
-        break
-    done
+    read -rp "Priority: " priority
+    if [[ "$input" =~ ^[a-zA-Z]+-[0-9]+$ ]]; then
+        todo.sh add "($priority) jiraIssue:$input"
+    else
+        todo.sh add "($priority) $input"
+    fi
 }
 
 function td() {
     act_upon=$(todo.sh ls | fzf | awk '{ print $1 }')
     todo.sh done "$act_upon"
 }
-
-source /usr/share/nvm/init-nvm.sh
-
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/bash"
 

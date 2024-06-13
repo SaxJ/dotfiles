@@ -1,4 +1,4 @@
-# Catppuccin theme for Kakoune
+# Catppuccin Macchiato theme for Kakoune
 #
 # Taken and adapted from
 # <https://github.com/catppuccin/kakoune/blob/e52fb5c95f70c297fea1fd58613284817b5a50bd/colors/catppuccin_macchiato.kak>
@@ -88,7 +88,7 @@ set-face global documentation  comment
 set-face global meta           "%opt{pink}"
 set-face global builtin        "%opt{lavender}+b"
 
-# Tree-sitter (<https://github.com/hadronized/kak-tree-sitter>)
+# Tree-sitter (<https://git.sr.ht/~hadronized/kak-tree-sitter>)
 set-face global ts_attribute                    "%opt{blue}"
 set-face global ts_comment                      "%opt{overlay0}+i"
 set-face global ts_conceal                      "%opt{mauve}+i"
@@ -161,4 +161,3 @@ set-face global ts_variable_builtin             "%opt{red}"
 set-face global ts_variable_other_member        "%opt{teal}"
 set-face global ts_variable_parameter           "%opt{maroon}+i"
 set-face global ts_warning                      "%opt{orange}+b"
-
