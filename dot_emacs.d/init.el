@@ -206,7 +206,7 @@
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(jiralib2 zoom golden-ratio dark-souls kele insecure-lock org-super-agenda prodigy jirascope kubernetes rainbow-mode wakatime-mode jq-mode web-mode mct eglot css-in-js-mode origami org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
+   '(hammy yasnippet jiralib2 zoom golden-ratio dark-souls kele insecure-lock org-super-agenda prodigy jirascope kubernetes rainbow-mode wakatime-mode jq-mode web-mode mct eglot css-in-js-mode origami org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
  '(safe-local-variable-values
    '((gac-automatically-add-new-files-p . t)
      (eglot-server-programs
@@ -244,7 +244,8 @@
      (ssh-deploy-on-explicit-save . 0)
      (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")))
- '(truncate-lines t))
+ '(truncate-lines t)
+ '(vterm-max-scrollback 100000))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

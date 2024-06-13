@@ -164,6 +164,13 @@
     "ot" 'multi-vterm
     "tt" 'popper-toggle-type)
 
+  (general-nmap
+    "gD" 'xref-find-references
+    "gr" 'xref-find-references
+    "K" 'eldoc
+    "SPC ca" 'lspce-code-actions
+    "SPC cr" 'lspce-rename)
+
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
     "gD" 'xref-find-references

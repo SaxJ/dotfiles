@@ -38,14 +38,6 @@
   :config
   (evil-collection-init))
 
-(use-package evil-org
-  :after org
-  :ensure t
-  :hook (org-mode . (lambda () (evil-org-mode)))
-  :config
-  (require 'evil-org-agenda)
-  (evil-org-agenda-set-keys))
-
 (use-package evil-surround
   :ensure t
   :config
@@ -55,3 +47,14 @@
   :ensure t
   :config
   (evil-commentary-mode 1))
+
+(use-package evil-org
+  :diminish evil-org-mode
+  :after org
+  :config
+  (add-hook 'org-mode-hook 'evil-org-mode)
+  (add-hook 'evil-org-mode-hook
+            (lambda () (evil-org-set-key-theme))))
+
+(require 'evil-org-agenda)
+(evil-org-agenda-set-keys)

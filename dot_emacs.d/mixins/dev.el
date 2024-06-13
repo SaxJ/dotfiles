@@ -96,49 +96,105 @@
   :config
   (setq project-vc-extra-root-markers '(".project")))
 
-(use-package eglot
-  :custom
-  (eglot-send-changes-idle-time 0.1)
-  (eglot-confirm-server-initiated-edits nil)
-  (eglot-inlay-hints-mode nil)
+;; (use-package eglot
+;;   :custom
+;;   (eglot-send-changes-idle-time 0.1)
+;;   (eglot-confirm-server-initiated-edits nil)
+;;   (eglot-inlay-hints-mode nil)
 
+;;   :config
+;;   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
+;;   (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
+;;   (add-hook 'csharp-mode-hook 'eglot-ensure)
+;;   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
+;;   (add-hook 'php-mode-hook 'eglot-ensure)
+;;   (add-hook 'json-ts-mode-hook 'eglot-ensure)
+;;   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
+;;   (add-hook 'fsharp-mode-hook 'eglot-ensure)
+;;   (add-hook 'vue-mode-hook 'eglot-ensure)
+;;   (add-hook 'python-ts-mode-hook 'eglot-ensure)
+;;   (add-hook 'c-ts-mode 'eglot-ensure)
+;;   (add-hook 'c++-ts-mode 'eglot-ensure)
+;;   (add-hook 'go-ts-mode 'eglot-ensure)
+;;   (add-hook 'graphql-mode 'eglot-ensure)
+;;   (add-hook 'rust-ts-mode 'eglot-ensure)
+;;   (add-hook 'haskell-mode 'eglot-ensure)
+;;   (add-hook 'elm-mode 'eglot-ensure)
+
+;;   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+;;   ;; Sometimes you need to tell Eglot where to find the language server
+;;   (add-to-list 'eglot-server-programs
+;;                '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+;;                                 (:preferences
+;;                                  (:interactiveInlayHints nil)))))
+;;   (add-to-list 'eglot-server-programs
+;;                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(csharp-mode . ("omnisharp" "--languageserver")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
+;;   (add-to-list 'eglot-server-programs
+;; 	           '(php-mode . ("intelephense" "--stdio")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(vue-mode . ("vue-language-server" "--stdio")))
+;;   (add-to-list 'eglot-server-programs
+;;                '(graphql-mode . ("graphql-lsp" "server" "-m" "stream"))))
+
+(use-package lspce
+  :quelpa (lspce :fetcher github :repo "zbelial/lspce" :files ("*"))
+  :init
+  (let ((default-directory (file-name-directory (locate-library "lspce"))))
+    (message "Entering %s" (pwd))
+    (unless (or (file-exists-p "lspce-module.so")
+		        (file-exists-p "lspce-module.d")
+                (file-exists-p "lspce-module.dll"))
+      (shell-command "cargo build --release")
+      (cond ((eq system-type 'gnu/linux)
+	         (progn (copy-file "target/release/liblspce_module.so"
+			                   "lspce-module.so" t)
+		            (copy-file "target/release/liblspce_module.d"
+			                   "lspce-module.d" t)))
+	        ((eq system-type 'windows-nt)
+	         (progn (copy-file "target/release/lspce_module.dll"
+			                   "lspce-module.dll" t)
+		            (copy-file "target/release/lspce_module.d"
+			                   "lspce-module.d" t))))
+      (message "Done.")))
+  (require 'lspce)
   :config
-  (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
-  (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
-  (add-hook 'csharp-mode-hook 'eglot-ensure)
-  (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-  (add-hook 'php-mode-hook 'eglot-ensure)
-  (add-hook 'json-ts-mode-hook 'eglot-ensure)
-  (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
-  (add-hook 'fsharp-mode-hook 'eglot-ensure)
-  (add-hook 'vue-mode-hook 'eglot-ensure)
-  (add-hook 'python-ts-mode-hook 'eglot-ensure)
-  (add-hook 'c-ts-mode 'eglot-ensure)
-  (add-hook 'c++-ts-mode 'eglot-ensure)
-  (add-hook 'go-ts-mode 'eglot-ensure)
-  (add-hook 'graphql-mode 'eglot-ensure)
-  (add-hook 'rust-ts-mode 'eglot-ensure)
-  (add-hook 'haskell-mode 'eglot-ensure)
-  (add-hook 'elm-mode 'eglot-ensure)
+  (setq lspce-server-programs `(("rust"  "rust-analyzer" "")
+                                ("python" "pylsp" "" )
+                                ("python" "pyright-langserver" "--stdio")
+                                ("C" "clangd" "")
+                                ("sh" "bash-language-server" "start")
+                                ("go" "gopls" "")
+                                ("typescript" "typescript-language-server" "--stdio")
+                                ("js" "typescript-language-server" "--stdio")
+                                ("typescriptreact" "typescript-language-server" "--stdio")
+                                ("php" "intelephense" "--stdio")
+                                ("csharp" "omnisharp" "-lsp")
+                                ("haskell" "haskell-language-server-wrapper" "--lsp")
+                                ("elm" "elm-language-server" "")
+                                ("graphql" "graphql-lsp" "server" "-m" "stream")))
 
-  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
-  ;; Sometimes you need to tell Eglot where to find the language server
-  (add-to-list 'eglot-server-programs
-               '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-                                (:preferences
-                                 (:interactiveInlayHints nil)))))
-  (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
-  (add-to-list 'eglot-server-programs
-               '(csharp-mode . ("omnisharp" "--languageserver")))
-  (add-to-list 'eglot-server-programs
-               '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
-  (add-to-list 'eglot-server-programs
-	           '(php-mode . ("intelephense" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(vue-mode . ("vue-language-server" "--stdio")))
-  (add-to-list 'eglot-server-programs
-               '(graphql-mode . ("graphql-lsp" "server" "-m" "stream"))))
+  (add-hook 'tsx-ts-mode-hook 'lspce-mode)
+  (add-hook 'csharp-ts-mode-hook 'lspce-mode)
+  (add-hook 'csharp-mode-hook 'lspce-mode)
+  (add-hook 'typescript-ts-mode-hook 'lspce-mode)
+  (add-hook 'php-mode-hook 'lspce-mode)
+  (add-hook 'json-ts-mode-hook 'lspce-mode)
+  (add-hook 'yaml-ts-mode-hook 'lspce-mode)
+  (add-hook 'fsharp-mode-hook 'lspce-mode)
+  (add-hook 'vue-mode-hook 'lspce-mode)
+  (add-hook 'python-ts-mode-hook 'lspce-mode)
+  (add-hook 'c-ts-mode 'lspce-mode)
+  (add-hook 'c++-ts-mode 'lspce-mode)
+  (add-hook 'go-ts-mode 'lspce-mode)
+  (add-hook 'graphql-mode 'lspce-mode)
+  (add-hook 'rust-ts-mode 'lspce-mode)
+  (add-hook 'haskell-mode 'lspce-mode)
+  (add-hook 'elm-mode 'lspce-mode))
+
 
 (defun saxon/no-format-p ()
   (member major-mode '("php-mode")))

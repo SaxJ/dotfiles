@@ -82,3 +82,22 @@
   :config
   (setq zoom-size '(0.618 . 0.618))
   (zoom-mode t))
+
+(use-package hammy
+  :quelpa (hammy :fetcher github :repo "alphapapa/hammy.el")
+  :config
+  (let ((org-hamster (hammy-define (propertize "Org Sync")
+                       :documentation "Regularly sync my org to git"
+                       :intervals
+                       (list
+                        (interval :name "Syncer"
+                                  :duration "30 minutes"
+                                  :before (run (concat
+                                                "bash "
+                                                "-c "
+                                                "'cd "
+                                                org-directory
+                                                " && git pull && git add -A && (git diff-index --quiet HEAD || git commit -am Auto) && git push'"))
+                                  :advance nil)))))
+    (hammy-mode 1)
+    (hammy-start org-hamster)))

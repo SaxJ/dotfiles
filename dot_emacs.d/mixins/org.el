@@ -165,4 +165,7 @@
           (:name "Important" :priority "A")
           (:name "Next" :priority "B")
           (:name "Nice" :priority>= "C")))
+
+  ;; Fix bindings disappearing on super-agenda headers
+  (setq org-super-agenda-header-map (make-sparse-keymap))
   (org-super-agenda-mode 1))
