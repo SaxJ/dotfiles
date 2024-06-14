@@ -36,7 +36,7 @@
   (let ((name (buffer-file-name)))
     (progn
       (delete-file name nil)
-      (kill-buffer-ask))))
+      (kill-buffer-ask (current-buffer)))))
 
 (defun saxon/open-dired-at-buffer ()
   (interactive)
