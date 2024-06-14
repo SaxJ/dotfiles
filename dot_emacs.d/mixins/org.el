@@ -71,8 +71,8 @@
          (org-mode . flyspell-mode))    ; spell checking!
 
   :bind (:map global-map
-              ("C-c l s" . org-store-link)          ; Mnemonic: link → store
-              ("C-c l i" . org-insert-link-global)) ; Mnemonic: link → insert
+              ("C-c l s" . org-store-link)          ; Mnemonic: link   store
+              ("C-c l i" . org-insert-link-global)) ; Mnemonic: link   insert
   :config
   (add-to-list 'org-export-backends 'md)
 
@@ -104,11 +104,12 @@
   (setq org-capture-templates
         '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
           ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?")
-          ("w" "Work" entry (file "todo.org") "* TODO %^{JiraIssueKey}p" :jump-to-captured t :immediate-finish t :empty-lines-after 1))
+          ("w" "Work" entry (file "todo.org") "* TODO [#%^{A|B|C}] %^{JiraIssueKey}p" :jump-to-captured t :immediate-finish t :empty-lines-after 1))
 
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
                                  ("BLOCKED" :foreground "#F44336")
+                                 ("REVIEW" :foreground "#9C27B0")
                                  ("HOLD" :foreground "#F44336")
                                  ("IDEA" :foreground "#9C27B0")
                                  ("DONE" :foreground "white"))))
@@ -162,6 +163,7 @@
   :config
   (setq org-super-agenda-groups
         '((:name "In Progress" :todo "PROG")
+          (:name "In Review" :todo "REVIEW")
           (:name "Important" :priority "A")
           (:name "Next" :priority "B")
           (:name "Nice" :priority>= "C")))
