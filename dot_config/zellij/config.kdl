@@ -13,7 +13,7 @@ keybinds {
     }
     tmux clear-defaults=true {
         bind "g" {
-            Run "gitu" { direction "Down"; }; SwitchToMode "normal";
+            Run "lazygit" { direction "Down"; }; SwitchToMode "normal";
         }
         bind "t" { SwitchToMode "tab"; }
         bind "s" { SwitchToMode "scroll"; }
