@@ -199,6 +199,10 @@
     ", j" 'saxon/jira-update-heading
     ", J" 'saxon/jira-update-all-headings)
 
+  (general-def 'normal 'dired-mode-map
+    ", cf" 'dired-create-empty-file
+    ", cd" 'dired-create-directory)
+
   (general-def 'insert 'vterm-mode-map
     "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
     "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
