@@ -208,8 +208,6 @@
  '(custom-safe-themes
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages
-   '(language-detection ox-jira php-ts-mode apheleia avy corfu-terminal css-in-js-mode dark-souls doom-themes eat editorconfig eglot ejira embark-consult evil-collection forge general golden-ratio graphql-mode hammy insecure-lock jiralib2 jirascope jq-mode json-mode kele kind-icon kubernetes magit marginalia markdown-mode mct multi-vterm orderless org-journal org-ql org-roam org-super-agenda origami php-mode prescient prodigy rainbow-mode ripgrep ssh-deploy tabspaces treesit-auto vertico vterm wakatime-mode web-mode which-key yaml-mode yasnippet zoom))
  '(safe-local-variable-values
    '((gac-automatically-add-new-files-p . t)
      (eglot-server-programs
