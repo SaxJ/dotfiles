@@ -43,7 +43,6 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 vim.opt.title = true
 vim.opt.titlestring = [[%{luaeval("vim.fn.getcwd()")}]]
-
 vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
 
 cmd([[
@@ -66,7 +65,7 @@ vim.diagnostic.config({
 
 -- Autoread files when they're changed
 vim.opt.autoread = true
--- vim.api.nvim_create_autocmd({'VimEnter', 'FocusGained', 'BufEnter'}, {
---     group = vim.api.nvim_create_augroup('ReloadFileOnChange', {}),
---     command = 'checktime'
--- })
+vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained", "BufEnter" }, {
+	group = vim.api.nvim_create_augroup("ReloadFileOnChange", {}),
+	command = "checktime",
+})
