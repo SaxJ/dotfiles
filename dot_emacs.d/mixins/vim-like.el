@@ -49,12 +49,13 @@
   (evil-commentary-mode 1))
 
 (use-package evil-org
+  :ensure t
   :diminish evil-org-mode
   :after org
   :config
   (add-hook 'org-mode-hook 'evil-org-mode)
   (add-hook 'evil-org-mode-hook
-            (lambda () (evil-org-set-key-theme))))
+            (lambda () (evil-org-set-key-theme)))
 
-(require 'evil-org-agenda)
-(evil-org-agenda-set-keys)
+  (require 'evil-org-agenda)
+  (evil-org-agenda-set-keys))
