@@ -23,6 +23,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 
+(defun saxon/treesit-install-all ()
+  (interactive)
+  (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist)))
+
 (use-package emacs
   :config
 
@@ -56,7 +60,6 @@
           (bash-mode . bash-ts-mode)
           (typescript-mode . typescript-ts-mode)
           ;; (csharp-mode . csharp-ts-mode)
-          (php-mode . php-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
@@ -67,7 +70,6 @@
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
 
   (setq vc-handled-backends '(Git))
 
@@ -110,7 +112,6 @@
   (add-hook 'csharp-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
   (add-hook 'php-mode-hook 'eglot-ensure)
-  (add-hook 'php-ts-mode-hook 'eglot-ensure)
   (add-hook 'json-ts-mode-hook 'eglot-ensure)
   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
   (add-hook 'fsharp-mode-hook 'eglot-ensure)
@@ -138,6 +139,8 @@
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
 	           '(php-mode . ("intelephense" "--stdio")))
+  (add-to-list 'eglot-server-programs
+	           '(php-ts-mode . ("intelephense" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(vue-mode . ("vue-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
