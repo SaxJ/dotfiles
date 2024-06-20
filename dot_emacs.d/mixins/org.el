@@ -159,10 +159,8 @@
         jiralib2-user-login-name "saxon.jensen@healthengine.com.au"
         jiralib2-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
 
-;; (use-package ejira
-;;   :ensure t
-;;   :init
-;;   (setq ejira-org-directory))
+(use-package ejira
+  :quelpa (ejira :fetcher github :repo "nyyManni/ejira"))
 
 (use-package org-modern
   :ensure t
