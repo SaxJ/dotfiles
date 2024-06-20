@@ -84,8 +84,8 @@
          (org-mode . flyspell-mode))    ; spell checking!
 
   :bind (:map global-map
-              ("C-c l s" . org-store-link)          ; Mnemonic: link → store
-              ("C-c l i" . org-insert-link-global)) ; Mnemonic: link → insert
+              ("C-c l s" . org-store-link)          ; Mnemonic: link   store
+              ("C-c l i" . org-insert-link-global)) ; Mnemonic: link   insert
   :config
   (add-to-list 'org-export-backends 'md)
 
@@ -121,6 +121,7 @@
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
                                  ("BLOCKED" :foreground "#F44336")
+                                 ("REVIEW" :foreground "#9C27B0")
                                  ("HOLD" :foreground "#F44336")
                                  ("IDEA" :foreground "#9C27B0")
                                  ("DONE" :foreground "white"))))
