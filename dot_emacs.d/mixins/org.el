@@ -4,6 +4,19 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defvar saxon/jira-org-headings-query
+  '(and (property "JiraIssueKey") (not (tags "ARCHIVE")))
+  "Org-ql query to find headings for jira issues")
+
+(defun saxon/jira-update-all-headings ()
+  "Update all jira headings in current buffer"
+  (interactive)
+  (org-ql-select
+    (current-buffer)
+    saxon/jira-org-headings-query
+    :action #'saxon/jira-update-heading)
+  (message "Updated jira headings."))
+
 (defun saxon/jira-update-heading ()
   "Update jira issue heading"
   (interactive)
@@ -80,8 +93,7 @@
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   ;; Make exporting quotes better
-  (setq org-export-with-smart-quotes t)
-  (add-hook 'org-capture-before-finalize-hook #'saxon/jira-update-heading))
+  (setq org-export-with-smart-quotes t))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -104,7 +116,7 @@
   (setq org-capture-templates
         '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
           ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?")
-          ("w" "Work" entry (file "todo.org") "* TODO %^{JiraIssueKey}p" :jump-to-captured t :immediate-finish t :empty-lines-after 1))
+          ("w" "Work" entry (file "todo.org") "* TODO [#%^{A|B|C}] %^{JiraIssueKey}p"))
 
         org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
@@ -131,14 +143,12 @@
                  (window-width . 0.4)
                  (window-height . fit-window-to-buffer))))
 
+(use-package org-ql
+  :quelpa (org-ql :fetcher github :repo "alphapapa/org-ql"
+                  :files (:defaults (:exclude "helm-org-ql.el"))))
+
 (use-package epresent
   :ensure t)
-
-(use-package org-jira
-  :ensure t
-  :custom
-  (org-jira-working-dir "~/Documents/wiki/jira")
-  (jiralib-url "https://hejira.atlassian.net"))
 
 (use-package jiralib2
   :ensure t
@@ -147,6 +157,11 @@
         jiralib2-url "https://hejira.atlassian.net"
         jiralib2-user-login-name "saxon.jensen@healthengine.com.au"
         jiralib2-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
+
+;; (use-package ejira
+;;   :ensure t
+;;   :init
+;;   (setq ejira-org-directory))
 
 (use-package org-modern
   :ensure t
@@ -162,9 +177,10 @@
   :config
   (setq org-super-agenda-groups
         '((:name "In Progress" :todo "PROG")
-          (:name "Important" :priority "A")
-          (:name "Next" :priority "B")
-          (:name "Nice" :priority>= "C")))
+          (:name "Important" :and (:priority "A" :not (:todo "REVIEW" :todo "DONE")))
+          (:name "In Review" :todo "REVIEW")
+          (:name "Less Urgent" :and (:priority "B" :not (:todo "REVIEW" :todo "DONE")))
+          (:name "Nice To Have" :and (:priority>= "C" :not (:todo "REVIEW" :todo "DONE")))))
 
   ;; Fix bindings disappearing on super-agenda headers
   (setq org-super-agenda-header-map (make-sparse-keymap))
