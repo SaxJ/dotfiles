@@ -10,7 +10,7 @@ evaluate-commands %sh{
 ### PLUGINS
 plug "andreyorst/plug.kak" noload
 plug "WhatNodyn/kakoune-wakatime"
-# plug "mspielberg/csharp.kak"
+plug "mspielberg/csharp.kak"
 plug "evanrelf/byline.kak" config %{
   require-module "byline"
 }
