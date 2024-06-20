@@ -32,6 +32,9 @@
 (setq auto-revert-check-vc-info t)
 (global-auto-revert-mode)
 
+;; Spelling
+(setq ispell-alternate-dictionary "/usr/share/dict/words")
+
 ;; Fix GPG
 (fset 'epg-wait-for-status 'ignore)
 
@@ -203,46 +206,52 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
+   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828"
+     default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(hammy yasnippet jiralib2 zoom golden-ratio dark-souls kele insecure-lock org-super-agenda prodigy jirascope kubernetes rainbow-mode wakatime-mode jq-mode web-mode mct eglot css-in-js-mode origami org-journal org-roam ripgrep forge multi-vterm vterm prescient yaml-mode which-key vertico treesit-auto tabspaces ssh-deploy php-mode orderless markdown-mode marginalia magit kind-icon json-mode graphql-mode general evil-collection embark-consult editorconfig eat doom-themes corfu-terminal avy apheleia))
+   '(apheleia avy corfu-terminal css-in-js-mode dark-souls doom-themes
+              eat editorconfig eglot ejira embark-consult
+              evil-collection forge general golden-ratio graphql-mode
+              hammy insecure-lock jiralib2 jirascope jq-mode json-mode
+              kele kind-icon kubernetes magit marginalia markdown-mode
+              mct multi-vterm orderless org-journal org-ql org-roam
+              org-super-agenda origami php-mode prescient prodigy
+              rainbow-mode ripgrep ssh-deploy tabspaces treesit-auto
+              vertico vterm wakatime-mode web-mode which-key yaml-mode
+              yasnippet zoom))
  '(safe-local-variable-values
    '((gac-automatically-add-new-files-p . t)
      (eglot-server-programs
-      ((typescript-ts-mode tsx-ts-mode)
-       "deno" "lsp" :initializationOptions
-       (:enable t :lint t)))
+      ((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
+       :initializationOptions (:enable t :lint t)))
      (eglot-server-programs quote
-                            (((typescript-ts-mode tsx-ts-mode)
-                              "deno" "lsp" :initializationOptions
+                            (((typescript-ts-mode tsx-ts-mode) "deno"
+                              "lsp" :initializationOptions
                               (:enable t :lint t))))
      (eglot-server-programs \`
-                            (((typescript-ts-mode tsx-ts-mode)
-                              "deno" "lsp" :initializationOptions
+                            (((typescript-ts-mode tsx-ts-mode) "deno"
+                              "lsp" :initializationOptions
                               (:enable t :lint t))))
-     (eglot-server-programs
-      (typescript-ts-mode tsx-ts-mode)
-      "deno" "lsp" :initializationOptions
-      (:enable t :lint t))
+     (eglot-server-programs (typescript-ts-mode tsx-ts-mode) "deno"
+                            "lsp" :initializationOptions
+                            (:enable t :lint t))
      (eglot-server-programs quote
-                            ((typescript-ts-mode tsx-ts-mode)
-                             "deno" "lsp" :initializationOptions
+                            ((typescript-ts-mode tsx-ts-mode) "deno"
+                             "lsp" :initializationOptions
                              (:enable t :lint t)))
      (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode)
-             "deno" "lsp" :initializationOptions
-             (:enable t :lint t)))
+           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
+             :initializationOptions (:enable t :lint t)))
      (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode)
-             "deno" "lsp"))
+           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"))
      (eval add-to-list 'eglot-server-programs
            '(typescript-ts-mode "deno" "lsp"))
      (ssh-deploy-on-explicit-save . t)
-     (ssh-deploy-async-with-threads . 1)
-     (ssh-deploy-async . 1)
+     (ssh-deploy-async-with-threads . 1) (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")))
  '(truncate-lines t)
  '(vterm-max-scrollback 100000))
