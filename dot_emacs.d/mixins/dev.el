@@ -43,7 +43,7 @@
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-          (php "https://github.com/tree-sitter/tree-sitter-php")
+          (php "https://github.com/tree-sitter/tree-sitter-php" "master" "php/src")
           (python "https://github.com/tree-sitter/tree-sitter-python")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
@@ -56,6 +56,7 @@
           (bash-mode . bash-ts-mode)
           (typescript-mode . typescript-ts-mode)
           ;; (csharp-mode . csharp-ts-mode)
+          (php-mode . php-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
@@ -66,6 +67,7 @@
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
 
   (setq vc-handled-backends '(Git))
 
@@ -108,6 +110,7 @@
   (add-hook 'csharp-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
   (add-hook 'php-mode-hook 'eglot-ensure)
+  (add-hook 'php-ts-mode-hook 'eglot-ensure)
   (add-hook 'json-ts-mode-hook 'eglot-ensure)
   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
   (add-hook 'fsharp-mode-hook 'eglot-ensure)
@@ -138,7 +141,11 @@
   (add-to-list 'eglot-server-programs
                '(vue-mode . ("vue-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
-               '(graphql-mode . ("graphql-lsp" "server" "-m" "stream"))))
+               '(graphql-mode . ("graphql-lsp" "server" "-m" "stream")))
+
+  (setq-default eglot-workspace-configuration
+                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.1.0"))))
+  )
 
 (defun saxon/no-format-p ()
   (member major-mode '("php-mode")))
