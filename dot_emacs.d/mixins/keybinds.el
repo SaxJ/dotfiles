@@ -195,7 +195,9 @@
   (general-def 'normal 'org-mode-map
     ", t" 'org-todo
     ", x" 'org-toggle-checkbox
-    ", p" 'epresent-run)
+    ", p" 'epresent-run
+    ", j" 'saxon/jira-update-heading
+    ", J" 'saxon/jira-update-all-headings)
 
   (general-def 'insert 'vterm-mode-map
     "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
