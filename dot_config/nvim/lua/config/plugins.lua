@@ -1,5 +1,4 @@
 return {
-	"b0o/mapx.nvim",
 	"arkav/lualine-lsp-progress",
 	"imsnif/kdl.vim",
 	"mracos/mermaid.vim",

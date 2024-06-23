@@ -12,13 +12,12 @@ vim.filetype.add({
 	},
 })
 
-cmd("syntax enable")
-cmd("filetype plugin indent on")
 cmd("command! CopyRelPath call setreg('+', expand('%'))")
 
+vim.opt.autoread = true
 vim.opt.autoindent = true
 vim.opt.breakindent = true
-vim.opt.completeopt = "menuone,noselect"
+vim.opt.completeopt = { "menuone", "noselect" }
 vim.opt.copyindent = true
 vim.opt.clipboard = "unnamedplus"
 vim.opt.cmdheight = 1
@@ -43,29 +42,23 @@ vim.opt.updatetime = 300
 vim.opt.signcolumn = "yes"
 vim.opt.title = true
 vim.opt.titlestring = [[%{luaeval("vim.fn.getcwd()")}]]
-vim.o.sessionoptions = "blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
-
-cmd([[
-set expandtab smarttab shiftround autoindent smartindent smartcase nowrap
-set path+=**
-set wildmode=longest,list,full
-set wildmenu
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=**/coverage/*
-set wildignore+=**/node_modules/*
-set wildignore+=**/android/*
-set wildignore+=**/ios/*
-set wildignore+=**/.git/*
-]])
+vim.opt.sessionoptions =
+	{ "blank", "buffers", "curdir", "folds", "help", "tabpages", "winsize", "winpos", "terminal", "localoptions" }
+vim.opt.smartindent = true
+vim.opt.smartcase = true
+vim.opt.wildmenu = true
+vim.opt.wildmode = { "longest", "list", "full" }
+vim.opt.path:append({ "**" })
+vim.opt.wildignore:append({
+	"*.pyc",
+	"*_build/*",
+	"**/coverage/*",
+	"**/node_modules/*",
+	"**/android/*",
+	"**/ios/*",
+	"**/.git/*",
+})
 
 vim.diagnostic.config({
 	virtual_text = false,
-})
-
--- Autoread files when they're changed
-vim.opt.autoread = true
-vim.api.nvim_create_autocmd({ "VimEnter", "FocusGained", "BufEnter" }, {
-	group = vim.api.nvim_create_augroup("ReloadFileOnChange", {}),
-	command = "checktime",
 })

@@ -5,7 +5,6 @@ require("settings")
 require("config.lazy")
 
 local wk = require("which-key")
-local mapx = require("mapx")
 
 local function inflection()
 	local line, col = unpack(vim.api.nvim_win_get_cursor(0))
@@ -94,20 +93,30 @@ wk.register({
 	},
 }, { prefix = "<leader>" })
 
-mapx.nmap("<C-c>", ":ccl<CR>")
-mapx.nmap("<localleader>t", ":terminal<CR>")
+vim.keymap.set("i", "<TAB>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-n>"
+	elseif vim.snippet.jumpable(1) then
+		return "<cmd>lua vim.snippet.jump(1)<cr>"
+	else
+		return "<TAB>"
+	end
+end, { expr = true })
+
+vim.keymap.set("i", "<S-TAB>", function()
+	if vim.fn.pumvisible() == 1 then
+		return "<C-p>"
+	elseif vim.snippet.jumpable(-1) then
+		return "<cmd>lua vim.snippet.jump(-1)<CR>"
+	else
+		return "<S-TAB>"
+	end
+end, { expr = true })
+
+vim.keymap.set("n", "<C-c>", ":ccl<CR>")
 
 -- Terminal
-mapx.tnoremap("<Esc>", "<C-\\><C-n>")
-mapx.tnoremap("<C-k>", "<Up>")
-mapx.tnoremap("<C-j>", "<Down>")
-
--- FileType Specific --
--- Hurl
-mapx.nmap("<localleader>e", ":HurlRunner<CR>", "silent", { ft = "hurl" })
-
--- Json
-mapx.nmap("<localleader>jq", ":Jq<CR>", "silent", { ft = "json" })
-
-mapx.inoremap("C-j", "<C-n>", "silent", { ft = "TelescopePrompt" })
-mapx.inoremap("C-k", "<C-p>", "silent", { ft = "TelescopePrompt" })
+vim.keymap.set("n", "<localleader>t", ":terminal<CR>")
+vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set("t", "<C-k>", "<Up>")
+vim.keymap.set("t", "<C-j>", "<Down>")

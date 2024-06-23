@@ -15,5 +15,8 @@ return {
 		require("mini.pairs").setup({})
 		require("mini.git").setup({})
 		require("mini.visits").setup({})
+
+		-- Completion
+		require("mini.completion").setup({})
 	end,
 }
