@@ -1,4 +1,5 @@
 return {
+	enabled = true,
 	"NeogitOrg/neogit",
 	dependencies = {
 		"nvim-lua/plenary.nvim", -- required
