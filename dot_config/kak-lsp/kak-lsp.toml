@@ -25,7 +25,7 @@ command = "omnisharp"
 args = ["--languageserver"]
 
 [language_server.bash-language-server]
-filetypes = ["sh"]
+filetypes = ["sh", "bash"]
 roots = [".git", ".hg"]
 command = "bash-language-server"
 args = ["start"]
