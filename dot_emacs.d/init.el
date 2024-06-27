@@ -206,46 +206,55 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
+   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828"
+     default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-selected-packages
-   '(zoom zone-rainbow zone-nyan yuck-mode yaml-mode which-key web-mode wakatime-mode vue-mode vertico todotxt telega tabspaces sudo-edit ssh-deploy slack restclient rainbow-mode quelpa-use-package prodigy prescient popper pocket-reader php-ts-mode php-mode origami org-roam org-ql org-modern orderless multi-vterm mood-line marginalia kind-icon json-mode jq-mode hurl-mode haskell-mode graphql-mode git-auto-commit-mode general forge exec-path-from-shell evil-surround evil-org evil-commentary evil-collection epresent embark-consult elm-mode ejira eglot-fsharp eglot-booster ef-themes editorconfig eat csv-mode corfu-terminal chezmoi avy auto-package-update apheleia))
+   '(apheleia auto-package-update avy chezmoi corfu-terminal csv-mode
+              editorconfig ef-themes eglot-booster eglot-fsharp
+              elm-mode embark-consult epresent evil-collection
+              evil-commentary evil-org evil-surround
+              exec-path-from-shell forge general git-auto-commit-mode
+              graphql-mode haskell-mode hurl-mode jq-mode json-mode
+              kind-icon language-detection marginalia mood-line
+              multi-vterm orderless org-modern org-ql org-roam origami
+              ox-jira php-mode php-ts-mode pocket-reader popper
+              prescient prodigy quelpa-use-package rainbow-mode
+              restclient ssh-deploy sudo-edit tabspaces telega todotxt
+              vertico vue-mode wakatime-mode web-mode which-key
+              yaml-mode yuck-mode zone-nyan zone-rainbow zoom))
  '(safe-local-variable-values
    '((gac-automatically-add-new-files-p . t)
      (eglot-server-programs
-      ((typescript-ts-mode tsx-ts-mode)
-       "deno" "lsp" :initializationOptions
-       (:enable t :lint t)))
+      ((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
+       :initializationOptions (:enable t :lint t)))
      (eglot-server-programs quote
-                            (((typescript-ts-mode tsx-ts-mode)
-                              "deno" "lsp" :initializationOptions
+                            (((typescript-ts-mode tsx-ts-mode) "deno"
+                              "lsp" :initializationOptions
                               (:enable t :lint t))))
      (eglot-server-programs \`
-                            (((typescript-ts-mode tsx-ts-mode)
-                              "deno" "lsp" :initializationOptions
+                            (((typescript-ts-mode tsx-ts-mode) "deno"
+                              "lsp" :initializationOptions
                               (:enable t :lint t))))
-     (eglot-server-programs
-      (typescript-ts-mode tsx-ts-mode)
-      "deno" "lsp" :initializationOptions
-      (:enable t :lint t))
+     (eglot-server-programs (typescript-ts-mode tsx-ts-mode) "deno"
+                            "lsp" :initializationOptions
+                            (:enable t :lint t))
      (eglot-server-programs quote
-                            ((typescript-ts-mode tsx-ts-mode)
-                             "deno" "lsp" :initializationOptions
+                            ((typescript-ts-mode tsx-ts-mode) "deno"
+                             "lsp" :initializationOptions
                              (:enable t :lint t)))
      (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode)
-             "deno" "lsp" :initializationOptions
-             (:enable t :lint t)))
+           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
+             :initializationOptions (:enable t :lint t)))
      (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode)
-             "deno" "lsp"))
+           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"))
      (eval add-to-list 'eglot-server-programs
            '(typescript-ts-mode "deno" "lsp"))
      (ssh-deploy-on-explicit-save . t)
-     (ssh-deploy-async-with-threads . 1)
-     (ssh-deploy-async . 1)
+     (ssh-deploy-async-with-threads . 1) (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")))
  '(truncate-lines t)
  '(vterm-max-scrollback 100000))
