@@ -19,30 +19,11 @@ hook global BufCreate .+\.cs %{
   set-option buffer filetype csharp
 }
 
-# helpers
-def suspend-and-resume \
-    -params 1..2 \
-    -docstring 'suspend-and-resume <cli command> [<kak command after resume>]: backgrounds current kakoune client and runs specified cli command.  Upon exit of command the optional kak command is executed.' \
-    %{ evaluate-commands %sh{
-
-    # Note we are adding '&& fg' which resumes the kakoune client process after the cli command exits
-    cli_cmd="$1 && fg"
-    post_resume_cmd="$2"
-
-		automate_cmd="sleep 0.2; zellij ac write-chars '$cli_cmd'; zellij ac write 13;"
-
-    # Uses platforms automation to schedule the typing of our cli command
-    nohup sh -c "$automate_cmd"  > /dev/null 2>&1 &
-    # Send kakoune client to the background
-    $kill_cmd -SIGTSTP $kak_client_pid
-
-    # ...At this point the kakoune client is paused until the " && fg " gets run in the $automate_cmd
-
-    # Upon resume, run the kak command is specified
-    if [ ! -z "$post_resume_cmd" ]; then
-        echo "$post_resume_cmd"
-    fi
-}}
+# Windowing
+set-option global windowing_modules ''
+require-module kitty
+set-option global kitty_window_type 'window'
+alias global popup kitty-terminal
 
 # general
 set global indentwidth 2
@@ -63,6 +44,12 @@ declare-option str git_branch_name %sh{
   git branch --show-current
 }
 
+def project-search -override -docstring 'Search for text in project' %{
+  nop %sh{
+    kitty @ launch irg "kak-run {1}"
+  }
+}
+
 def tig-blame -override -docstring 'Open blame in tig -params for current file and line' %{
   nop %sh{
     zellij run -ci -- tig blame +$kak_cursor_line $kak_buffile
@@ -71,7 +58,7 @@ def tig-blame -override -docstring 'Open blame in tig -params for current file a
 
 def git-open -override -docstring 'Open git interface' %{
   nop %sh{
-    zellij run -ci -- lazygit
+    zellij run -ci -- lazygit 
   }
 }
 
@@ -94,15 +81,9 @@ define-command -hidden zellij-move-focus -params 1 %{
   }
 }
 
-declare-user-mode window-zellij
-map global window-zellij Q ':q!<ret>'                  -docstring 'close window (force)'
-map global window-zellij q ':q<ret>'                   -docstring 'close window'
-map global window-zellij h ':zellij-move-focus left<ret>' -docstring 'move left'
-map global window-zellij j ':zellij-move-focus down<ret>' -docstring 'move down'
-map global window-zellij k ':zellij-move-focus up<ret>' -docstring 'move up'
-map global window-zellij l ':zellij-move-focus right<ret>' -docstring 'move right'
-map global window-zellij s ':zellij-split down<ret>'       -docstring 'horizontal split'
-map global window-zellij v ':zellij-split right<ret>'       -docstring 'vertical split'
+declare-user-mode window-manage
+map global window-manage s ':zellij-split down<ret>'       -docstring 'horizontal split'
+map global window-manage v ':zellij-split right<ret>'       -docstring 'vertical split'
 
 ## match mode
 define-command -hidden match-delete-surround -docstring 'delete surrounding key' %{
@@ -351,7 +332,7 @@ map global normal m ':enter-user-mode match<ret>'        -docstring 'match mode'
 map global normal <c-x> ':comment-line<ret>' -docstring 'Comment line'
 
 ## windows
-map global normal <c-w> ':enter-user-mode window-zellij<ret>' -docstring 'window'
+# map global normal <c-w> ':enter-user-mode window-zellij<ret>' -docstring 'window'
 
 ## LSP
 map global user k ':lsp-hover<ret>' -docstring 'lsp hover docs'
