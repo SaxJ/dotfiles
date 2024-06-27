@@ -1,25 +1,25 @@
-keybinds {
-    normal clear-defaults=true {
-        bind "Ctrl q" { Quit; }
-        bind "Ctrl Space" { SwitchToMode "tmux"; }
+// keybinds {
+//     normal clear-defaults=true {
+//         bind "Ctrl q" { Quit; }
+//         bind "Ctrl Space" { SwitchToMode "tmux"; }
 
-        // Quick panes
-        bind "Alt n" { NewPane; }
-        bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
-        bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
-        bind "Alt j" "Alt Down" { MoveFocus "Down"; }
-        bind "Alt k" "Alt Up" { MoveFocus "Up"; }
+//         // Quick panes
+//         bind "Alt n" { NewPane; }
+//         bind "Alt h" "Alt Left" { MoveFocusOrTab "Left"; }
+//         bind "Alt l" "Alt Right" { MoveFocusOrTab "Right"; }
+//         bind "Alt j" "Alt Down" { MoveFocus "Down"; }
+//         bind "Alt k" "Alt Up" { MoveFocus "Up"; }
 
-    }
-    tmux clear-defaults=true {
-        bind "g" {
-            Run "lazygit" { direction "Down"; }; SwitchToMode "normal";
-        }
-        bind "t" { SwitchToMode "tab"; }
-        bind "s" { SwitchToMode "scroll"; }
-        bind "p" { SwitchToMode "pane"; }
-    }
-}
+//     }
+//     tmux clear-defaults=true {
+//         bind "g" {
+//             Run "lazygit" { direction "Down"; }; SwitchToMode "normal";
+//         }
+//         bind "t" { SwitchToMode "tab"; }
+//         bind "s" { SwitchToMode "scroll"; }
+//         bind "p" { SwitchToMode "pane"; }
+//     }
+// }
 
 // Choose what to do when zellij receives SIGTERM, SIGINT, SIGQUIT or SIGHUP
 // eg. when terminal window with an active zellij session is closed
