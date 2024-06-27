@@ -6,6 +6,7 @@
 # Set terminal title
 PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 
+export SSH_ASKPASS=ksshaskpass
 export EDITOR=hx
 export VISUAL=$EDITOR
 export PAGER=more
@@ -59,14 +60,16 @@ alias hepg="pgcli -U engine_master -d engine_data -h localhost"
 alias lg="lazygit"
 alias yz="yazi"
 alias gu="gitu"
+alias k="kak-run"
+alias jira_mine="jira issue list -q '(assignee = currentUser() OR creator = currentUser()) AND status != Done' --order-by status"
 
 # Journal
 alias j="jrnl"
 alias jy="jrnl -on yesterday"
 alias jt="jrnl -on today"
 
+# TODOs
 alias t="todo.sh"
-
 alias tw="timew"
 
 # VPN
@@ -256,6 +259,10 @@ function ta() {
 
 function td() {
     act_upon=$(todo.sh ls | fzf | awk '{ print $1 }')
-    todo.sh done "$act_upon"
+    todo.sh 'done' "$act_upon"
 }
 
+function fzj() {
+    job=$(tidy_jobs | fzf | awk '{ print $1 }')
+    echo ">>> $job"
+}
