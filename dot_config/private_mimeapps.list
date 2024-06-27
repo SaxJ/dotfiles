@@ -1,6 +1,6 @@
 [Added Associations]
 application/json=nvim.desktop;
-application/pdf=firefoxdeveloperedition.desktop;vivaldi-stable.desktop;
+application/pdf=firefox-developer-edition.desktop;firefoxdeveloperedition.desktop;vivaldi-stable.desktop;
 application/rss+xml=userapp-Thunderbird-MYIJ31.desktop;
 application/x-docbook+xml=nvim.desktop;
 application/x-extension-rss=userapp-Thunderbird-MYIJ31.desktop;
@@ -89,17 +89,10 @@ x-scheme-handler/snews=userapp-Thunderbird-WFS421.desktop;
 x-scheme-handler/tel=org.kde.kdeconnect.handler.desktop;Zoom.desktop;org.gnome.Shell.Extensions.GSConnect.desktop;
 x-scheme-handler/webcal=userapp-Thunderbird-WYBK31.desktop;userapp-Thunderbird-W8UAH2.desktop;
 x-scheme-handler/webcals=userapp-Thunderbird-WYBK31.desktop;userapp-Thunderbird-W8UAH2.desktop;
-x-scheme-handler/chrome=firefox-developer-edition.desktop;
-application/x-extension-htm=firefox-developer-edition.desktop;
-application/x-extension-html=firefox-developer-edition.desktop;
-application/x-extension-shtml=firefox-developer-edition.desktop;
-application/xhtml+xml=firefox-developer-edition.desktop;
-application/x-extension-xhtml=firefox-developer-edition.desktop;
-application/x-extension-xht=firefox-developer-edition.desktop;
 
 [Default Applications]
 application/json=nvim.desktop;
-application/pdf=firefoxdeveloperedition.desktop;
+application/pdf=firefox-developer-edition.desktop;
 application/rss+xml=userapp-Thunderbird-MYIJ31.desktop
 application/x-directory=doom-dired.desktop
 application/x-docbook+xml=nvim.desktop;
