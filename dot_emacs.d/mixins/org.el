@@ -4,6 +4,10 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun saxon/pull-jira-todos ()
+  (interactive)
+  )
+
 (defvar saxon/jira-org-headings-query
   '(and (property "JiraIssueKey") (not (tags "ARCHIVE")))
   "Org-ql query to find headings for jira issues")
@@ -158,9 +162,6 @@
         jiralib2-url "https://hejira.atlassian.net"
         jiralib2-user-login-name "saxon.jensen@healthengine.com.au"
         jiralib2-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
-
-(use-package ejira
-  :quelpa (ejira :fetcher github :repo "nyyManni/ejira"))
 
 (use-package org-modern
   :ensure t

@@ -71,6 +71,7 @@
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
 
+  ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
 
   :hook
