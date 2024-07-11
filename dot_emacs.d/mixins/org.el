@@ -4,9 +4,45 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defvar saxon/jira-status-mappings
+  '(("Backlog" . "TODO")
+    ("Blocked" . "BLOCKED")
+    ("Closed" . "DONE")
+    ("Code Review" . "REVIEW")
+    ("Done" . "DONE")
+    ("For Release" . "REVIEW")
+    ("In Progress" . "PROG")
+    ("In progress" . "PROG")
+    ("OPEN" . "TODO")
+    ("Progressing" . "PROG")
+    ("Released" . "REVIEW")
+    ("To Do" . "TODO"))
+  "Defines mappings of jira statuses to org statuses")
+
+(defvar saxon/jira-interested-projects
+  '("CPT" "HEAL" "NOOT")
+  "Defines the projects to sync with org")
+
 (defun saxon/pull-jira-todos ()
   (interactive)
-  )
+  (progn (notifications-notify :title "Org Jira" :body "Syncing Jira")
+         (with-temp-file "~/Documents/wiki/jira.org"
+           (dolist (issue (jiralib2-jql-search (format "assignee = currentUser() AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
+             (let-alist issue
+               (let ((summary .fields.summary)
+                     (created (format-time-string "%Y-%m-%d %a" (floor (float-time (date-to-time .fields.created)))))
+                     (key .key)
+                     (status (or (cdr (assoc .fields.status.name saxon/jira-status-mappings)) (format "BLOCKED (%s)" .fields.status.name)))
+                     (project .fields.project.key))
+                 (insert (format "* %s %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:END:\n" status key summary project created key))))))))
+
+(defun saxon/browse-jira-issue ()
+  (interactive)
+  (when-let* ((pt (point))
+              (issue-key (and (org-at-heading-p)
+                              (org-entry-get pt "JIRAISSUEKEY"))))
+    (browse-url (format "https://hejira.atlassian.net/browse/%s" issue-key))))
+
 
 (defvar saxon/jira-org-headings-query
   '(and (property "JiraIssueKey") (not (tags "ARCHIVE")))
