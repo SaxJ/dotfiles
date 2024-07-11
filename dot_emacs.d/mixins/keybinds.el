@@ -122,6 +122,9 @@
     "nj" 'org-journal-new-entry
     "nn" 'org-roam-capture
 
+    ;; jira
+    "js" 'saxon/pull-jira-todos
+
     ;; remote
     "ru" 'ssh-deploy-upload-handler-forced
     "rd" 'ssh-deploy-download-handler
@@ -196,20 +199,20 @@
     ", t" 'org-todo
     ", x" 'org-toggle-checkbox
     ", p" 'epresent-run
-    ", j" 'saxon/jira-update-heading
-    ", J" 'saxon/jira-update-all-headings)
+    ", ju" 'saxon/jira-update-heading
+    ", jU" 'saxon/jira-update-all-headings
+    ", jb" 'saxon/browse-jira-issue)
 
   (general-def 'normal 'dired-mode-map
     ", cf" 'dired-create-empty-file
     ", cd" 'dired-create-directory)
 
   (general-def 'insert 'vterm-mode-map
+    "C-c" 'vterm-send-next-key)
+
+  (general-def 'insert 'vterm-mode-map
     "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
     "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
-
-  (general-def 'insert 'eat-mode-map
-    "C-k" (lambda () (interactive) (eat-input-char "<up>" 1))
-    "C-j" (lambda () (interactive) (eat-input-char "<down>" 1)))
 
   (general-def 'insert 'vertico-map
     :keymaps 'override
