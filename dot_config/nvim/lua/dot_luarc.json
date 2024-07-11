@@ -1,8 +1,0 @@
-{
-    "workspace.library": [
-        "/home/saxonj/.local/share/nvim/lazy/neodev.nvim/types/stable",
-        "/usr/share/nvim/runtime/lua",
-        "/home/saxonj/.config/nvim/lua",
-        "${3rd}/luv/library"
-    ]
-}
