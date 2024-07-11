@@ -133,9 +133,9 @@
                                 (:preferences
                                  (:interactiveInlayHints nil)))))
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("/home/saxonj/.dotnet/tools/csharp-ls")))
+               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
-               '(csharp-mode . ("/home/saxonj/.dotnet/tools/csharp-ls")))
+               '(csharp-mode . ("omnisharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
