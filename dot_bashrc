@@ -6,6 +6,7 @@
 # Set terminal title
 PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 
+export STOW_DIR=/home/saxonj/dotfiles
 export SSH_ASKPASS=ksshaskpass
 export EDITOR=hx
 export VISUAL=$EDITOR
@@ -255,11 +256,6 @@ function ta() {
     else
         todo.sh add "($priority) $input"
     fi
-}
-
-function td() {
-    act_upon=$(todo.sh ls | fzf | awk '{ print $1 }')
-    todo.sh 'done' "$act_upon"
 }
 
 function fzj() {
