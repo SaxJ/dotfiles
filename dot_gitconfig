@@ -24,6 +24,7 @@
 	user = SaxJ
 [push]
 	default = simple
+  autoSetupRemote = true
 [gpg]
     program = gpg2
 [url "https://invent.kde.org/"]
