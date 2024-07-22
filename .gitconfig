@@ -1,0 +1,34 @@
+[user]
+	name = Saxon Jensen
+	email = saxon.jensen@healthengine.com.au
+    signingkey = C098FCCC1C3D04E8D905FCA7678A2B9027A59690
+[core]
+	editor = nvim
+	compression = 0
+[alias]
+    co = checkout
+    cob = checkout -b
+    ci = commit -S
+    st = status
+    br = branch
+    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+    type = cat-file -t
+    dump = cat-file -p
+[color]
+    ui = auto
+[init]
+	templateDir = /home/saxonj/.git-templates
+	defaultBranch = master
+[pull]
+	rebase = false
+[github]
+	user = SaxJ
+[push]
+	default = simple
+  autoSetupRemote = true
+[gpg]
+    program = gpg2
+[url "https://invent.kde.org/"]
+	insteadOf = kde:
+[url "ssh://git@invent.kde.org/"]
+	pushInsteadOf = kde:

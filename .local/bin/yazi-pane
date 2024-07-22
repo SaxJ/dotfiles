@@ -1,0 +1,3 @@
+#!/usr/bin/bash
+
+zellij run -f -- yazi

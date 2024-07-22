@@ -1,0 +1,61 @@
+[language-server]
+omnisharp = { command = "omnisharp", args = ["--languageserver"] }
+csharpls = { command = "csharp-ls", args = ["-l", "error"] }
+graphql-ls = { command = "graphql-lsp", args = ["server", "-m", "stream"]}
+haskell-language-server = { command = "haskell-language-server-wrapper", args = ["--lsp"] }
+deno = { command = "deno", args = ["lsp"], config = {deno = {enable = true, lint = true}}, required-root-patterns = ["deno.jsonc", "deno.json"]}
+
+[language-server.typescript-language-server]
+required-root-patterns = ["package.json"]
+
+[language-server.typescript-language-server.config.preferences]
+importModuleSpecifierPreference = "relative"
+
+[[language]]
+name = "c-sharp"
+language-servers = ["omnisharp"]
+auto-format = true
+formatter = { command = "dotnet", args = ["csharpier"] }
+
+[[language]]
+name = "php"
+roots = ["composer.json"]
+auto-format = true
+
+[[language]]
+name = "tsx"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = ["typescript-language-server", "deno"]
+
+[[language]]
+name = "typescript"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "typescript"] }
+language-servers = ["typescript-language-server", "deno"]
+roots = ["deno.json", "deno.jsonc", "package.json"]
+
+[[language]]
+name = "graphql"
+language-servers = ["graphql-ls"]
+formatter = { command = "prettier", args = ["--parser", "graphql"] }
+
+[[language]]
+name = "javascript"
+auto-format = true
+formatter = { command = "prettier", args = ["--parser", "javascript"] }
+
+[[language]]
+name = "xml"
+file-types = ["xml", "mobileconfig", "plist", "xib", "storyboard", "svg", "xsd", "gml", "xaml", "gir", "component"]
+auto-format = true
+
+[[language]]
+name = "haskell"
+language-servers = [ "haskell-language-server" ]
+auto-format = true
+formatter = { command = "ormolu" }
+
+[[language]]
+name = "elm"
+formatter = { command = "elm-format", args = ["--stdin"]}

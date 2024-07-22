@@ -1,0 +1,263 @@
+#!/usr/bin/bash
+# vi: ft=sh
+#
+# ~/.bashrc
+
+# Set terminal title
+PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
+
+export STOW_DIR=/home/saxonj/dotfiles
+export SSH_ASKPASS=ksshaskpass
+export EDITOR=hx
+export VISUAL=$EDITOR
+export PAGER=more
+export TERM=alacritty
+
+export GOPATH=$HOME/go_packages
+export HELM_HOME=$HOME/helm
+export CARGO_PATH=$HOME/.cargo/bin
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export PIP_INSTALL=$HOME/global-pip/bin
+export DOOM=$HOME/.config/emacs/bin
+export DOTNET_TOOLS=$HOME/.dotnet/tools
+
+# PATH
+export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin:~/.npm-global/bin:/home/saxonj/Documents/ulysses"
+
+export AWS_PROFILE=hedev
+export LSP_USE_PLISTS=true
+export ZELLIJ_AUTO_ATTACH=true
+export LLAMA_EDITOR=hx
+export NNN_OPTS="e"
+export NNN_OPENER="/usr/share/nnn/plugins/nuke"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export NODE_OPTIONS="--huge-max-old-generation-size"
+
+export AWS_PROFILE=hedev
+export LSP_USE_PLISTS=true
+export ZELLIJ_AUTO_ATTACH=true
+export LLAMA_EDITOR=hx
+export NNN_OPTS="e"
+export NNN_OPENER="/usr/share/nnn/plugins/nuke"
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
+export ULYSSES_VAULT="$HOME/Documents/ulysses_notes"
+
+export PATH="$PATH:$HOME/.cargo/bin"
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+if [ -x "$(command -v nvim)" ]; then
+    alias vim="nvim"
+    alias vi="nvim"
+    alias vimdiff="nvim -d"
+fi
+
+alias icat="kitty +kitten icat"
+alias prc="gh pr create --fill -w --title "$(git branch --show-current)""
+alias prv="gh pr view --web"
+alias hepg="pgcli -U engine_master -d engine_data -h localhost"
+alias lg="lazygit"
+alias yz="yazi"
+alias gu="gitu"
+alias k="kak-run"
+alias jira_mine="jira issue list -q '(assignee = currentUser() OR creator = currentUser()) AND status != Done' --order-by status"
+
+# Journal
+alias j="jrnl"
+alias jy="jrnl -on yesterday"
+alias jt="jrnl -on today"
+
+# TODOs
+alias t="todo.sh"
+alias tw="timew"
+
+# VPN
+alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
+alias vpnd="openvpn3 session-manage --disconnect --config ~/.config/office.ovpn"
+
+# GIT GOOD
+alias ga='git add -i'
+alias gc='git ci'
+alias gp='git pull'
+alias gpu='git push'
+alias resolve='grep -lr "<<<<<<<" . | xargs git checkout'
+
+# DOCKER
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias pacman-clean='sudo pacman -Rns $(pacman -Qtdq)'
+
+# RANDOM
+alias cp="cp -i"     # confirm before overwriting something
+alias df='df -h'     # human-readable sizes
+alias free='free -m' # show sizes in MB
+alias np='nano -w PKGBUILD'
+alias more=less
+alias timesync="sudo ntpdate -u pool.ntp.org"
+
+# Noise Generation
+alias silence='play  -n synth brownnoise vol'
+
+# TASKBOOK
+alias pods="kubectl get pods"
+
+# Zellij
+alias zr="zellij run --"
+alias zrf="zellij run -f --"
+alias zri="zellij run --in-place --"
+alias zric="zellij run --in-place --close-on-exit --"
+
+function ijq() {
+    echo '' | fzf --print-query --preview "cat $1 | jq {q}"
+}
+
+function create_pr() {
+    branch=$(git rev-parse --abbrev-ref HEAD)
+    commits=$(git log master..HEAD --oneline)
+    title=$(tgpt "Make a PR title from the following commit messages: $commits" | tail -n 1)
+    gh pr create --title "$title"
+}
+
+function cd() {
+    z "$1"
+    if [ -n "$ZELLIJ_SESSION_NAME" ]; then
+        zellij action rename-tab "${PWD##*/}"
+    fi
+}
+
+function cast() {
+    ffmpeg -f alsa -ac 2 -f x11grab -r 30 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 "$1"
+}
+
+alias yt-audio="yt-dlp -x --audio-format mp3 --audio-quality 0"
+alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
+
+# VOLUME
+alias vol_down="amixer set Master 5.0%-"
+alias vol_up="amixer set Master 5.0%+"
+
+export GPG_TTY=$(tty)
+export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
+
+# TOOLS
+alias urldecode='python3 -c "import sys, urllib.parse as ul; \
+    print(ul.unquote_plus(sys.argv[1]))"'
+
+alias urlencode='python3 -c "import sys, urllib.parse as ul; \
+    print (ul.quote_plus(sys.argv[1]))"'
+
+xhost +local:root >/dev/null 2>&1
+complete -cf sudo
+shopt -s checkwinsize
+shopt -s expand_aliases
+
+# Enable history appending instead of overwriting.  #139609
+shopt -s histappend
+
+#
+# # ex - archive extractor
+# # usage: ex <file>
+ex() {
+    if [ -f $1 ]; then
+        case $1 in
+        *.tar.bz2) tar xjf $1 ;;
+        *.tar.gz) tar xzf $1 ;;
+        *.bz2) bunzip2 $1 ;;
+        *.rar) unrar x $1 ;;
+        *.gz) gunzip $1 ;;
+        *.tar) tar xf $1 ;;
+        *.tbz2) tar xjf $1 ;;
+        *.tgz) tar xzf $1 ;;
+        *.zip) unzip $1 ;;
+        *.Z) uncompress $1 ;;
+        *.7z) 7z x $1 ;;
+        *) echo "'$1' cannot be extracted via ex()" ;;
+        esac
+    else
+        echo "'$1' is not a valid file"
+    fi
+}
+
+# JQ Magic
+function jq_contains() {
+    jq -c ".[] | select(.[\"@message\"] | contains(\"$1\"))"
+}
+
+function hejq() {
+    stern -o raw heweb | egrep --line-buffered '^{' | jq .
+}
+
+function pac-search() {
+    pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
+}
+
+eval "$(direnv hook bash)"
+eval "$(zoxide init bash)"
+eval "$(starship init bash)"
+eval "$(hub alias -s)"
+# eval "$(zellij setup --generate-auto-start bash)"
+source /usr/share/nvm/init-nvm.sh
+
+function bash-stats() {
+    fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
+}
+
+[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
+
+function rpush() {
+    local dir=$(basename $PWD)
+    scp "$1" ubuntu@minikube:/home/ubuntu/$dir/$1
+}
+export -f rpush
+
+function rpull() {
+    local dir=$(basename $PWD)
+    scp ubuntu@minikube:/home/ubuntu/$dir/$1 "$1"
+}
+export -f rpull
+
+function git_sync() {
+    local files=$(git st --porcelain | cut -c 1-3 --complement)
+    local dir=$(basename $PWD)
+
+    for f in $files; do
+        scp "$f" ubuntu@minikube:/home/ubuntu/$dir/$f
+    done
+}
+export -f git_sync
+
+function review() {
+    local branch="$(git branch --show-current)"
+    jira issue move "$branch" "Code Review"
+}
+export -f review
+
+function ticket_done() {
+    if [[ $# == 0 ]]; then
+        current_branch=$(git branch --show-current)
+        [[ $current_branch =~ ^[[:alpha:]]+-[[:digit:]]+$ ]] && jira issue move "$current_branch" Done
+    else
+        [[ "$1" =~ ^[[:alpha:]]+-[[:digit:]]+$ ]] && jira issue move "$1" Done
+    fi
+}
+
+function zellij_helix_file_man() {
+    zellij run -f -- yazi
+}
+
+function ta() {
+    read -rp "Todo: " input
+    read -rp "Priority: " priority
+    if [[ "$input" =~ ^[a-zA-Z]+-[0-9]+$ ]]; then
+        todo.sh add "($priority) jiraIssue:$input"
+    else
+        todo.sh add "($priority) $input"
+    fi
+}
+
+function fzj() {
+    job=$(tidy_jobs | fzf | awk '{ print $1 }')
+    echo ">>> $job"
+}
