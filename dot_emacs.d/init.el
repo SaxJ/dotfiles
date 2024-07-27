@@ -3,21 +3,48 @@
 ;;;   Basic settings
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defvar elpaca-installer-version 0.7)
+(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                              :ref nil :depth 1
+                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                              :build (:not elpaca--activate-package)))
+(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+       (build (expand-file-name "elpaca/" elpaca-builds-directory))
+       (order (cdr elpaca-order))
+       (default-directory repo))
+  (add-to-list 'load-path (if (file-exists-p build) build repo))
+  (unless (file-exists-p repo)
+    (make-directory repo t)
+    (when (< emacs-major-version 28) (require 'subr-x))
+    (condition-case-unless-debug err
+        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                 ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                 ,@(when-let ((depth (plist-get order :depth)))
+                                                     (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                 ,(plist-get order :repo) ,repo))))
+                 ((zerop (call-process "git" nil buffer t "checkout"
+                                       (or (plist-get order :ref) "--"))))
+                 (emacs (concat invocation-directory invocation-name))
+                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                 ((require 'elpaca))
+                 ((elpaca-generate-autoloads "elpaca" repo)))
+            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+          (error "%s" (with-current-buffer buffer (buffer-string))))
+      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+  (unless (require 'elpaca-autoloads nil t)
+    (require 'elpaca)
+    (elpaca-generate-autoloads "elpaca" repo)
+    (load "./elpaca-autoloads")))
+(add-hook 'after-init-hook #'elpaca-process-queues)
+(elpaca `(,@elpaca-order))
 
-;; Package initialization
-;;
-;; We'll stick to the built-in GNU and non-GNU ELPAs (Emacs Lisp Package
-;; Archive) for the base install, but there are some other ELPAs you could look
-;; at if you want more packages. MELPA in particular is very popular. See
-;; instructions at:
-;;
-;;    https://melpa.org/#/getting-started
-;;
-(with-eval-after-load 'package
-  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
-  (add-to-list 'package-archives '("devel" . "https://elpa.gnu.org/devel/") t))
-(add-to-list 'load-path "~/.emacs.d/lisp/")
+;; Enable use-package :ensure support for Elpaca.
+(elpaca elpaca-use-package
+  (elpaca-use-package-mode))
 
 (set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
 
@@ -62,10 +89,6 @@
   :ensure t
   :config
   (exec-path-from-shell-initialize))
-
-;; Auto update packages
-(use-package auto-package-update
-  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -208,8 +231,6 @@
  '(custom-safe-themes
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(package-selected-packages
-   '(apheleia auto-package-update avy chezmoi corfu-terminal csv-mode editorconfig ef-themes eglot eglot-booster eglot-fsharp elm-mode embark-consult epresent evil-collection evil-commentary evil-org evil-surround exec-path-from-shell forge general git-auto-commit-mode graphql-mode haskell-mode hurl-mode jq-mode json-mode kind-icon language-detection marginalia mood-line multi-vterm orderless org-modern org-ql org-roam origami ox-jira php-mode php-ts-mode pocket-reader popper prescient prodigy quelpa-use-package rainbow-mode restclient ssh-deploy sudo-edit tabspaces telega todotxt vertico vue-mode wakatime-mode web-mode which-key yaml-mode yuck-mode zone-nyan zone-rainbow zoom))
  '(safe-local-variable-values
    '((gac-automatically-add-new-files-p . t)
      (eglot-server-programs

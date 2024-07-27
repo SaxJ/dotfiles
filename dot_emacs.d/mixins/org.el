@@ -185,7 +185,7 @@
                  (window-height . fit-window-to-buffer))))
 
 (use-package org-ql
-  :quelpa (org-ql :fetcher github :repo "alphapapa/org-ql"
+  :ensure (org-ql :fetcher github :repo "alphapapa/org-ql"
                   :files (:defaults (:exclude "helm-org-ql.el"))))
 
 (use-package epresent

@@ -220,7 +220,7 @@
 (use-package eglot-booster
   :after eglot
   :config (eglot-booster-mode)
-  :quelpa ((eglot-booster :fetcher github :repo "jdtsmith/eglot-booster") :upgrade nil))
+  :ensure (eglot-booster :fetcher github :repo "jdtsmith/eglot-booster"))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -229,7 +229,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package hurl-mode
-  :quelpa ((hurl-mode :fetcher github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")) :upgrade nil))
+  :ensure (hurl-mode :host github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")))
 
 (use-package fsharp-mode
   :ensure t)
