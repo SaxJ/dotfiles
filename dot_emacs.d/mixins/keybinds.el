@@ -156,6 +156,7 @@
     "cd" 'chezmoi-diff
     "cw" 'chezmoi-write
     "cg" 'chezmoi-magit-status
+    "cs" 'chezmoi-sync-files
 
     ;; LSP helpers
     "lr" 'saxon/restart-eglot
