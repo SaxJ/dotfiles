@@ -232,7 +232,8 @@
    '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(safe-local-variable-values
-   '((gac-automatically-add-new-files-p . t)
+   '((ssh-deploy-async . t)
+     (gac-automatically-add-new-files-p . t)
      (eglot-server-programs
       ((typescript-ts-mode tsx-ts-mode)
        "deno" "lsp" :initializationOptions
