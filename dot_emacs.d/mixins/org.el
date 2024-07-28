@@ -23,10 +23,33 @@
   '("CPT" "HEAL" "NOOT")
   "Defines the projects to sync with org")
 
-(defun saxon/pull-jira-todos ()
+(defun saxon/jira-assign-to-me ()
+  "Assign the issue under point to myself."
   (interactive)
-  (progn (notifications-notify :title "Org Jira" :body "Syncing Jira")
-         (with-temp-file "~/Documents/wiki/jira.org"
+  (when-let* ((issue-key (saxon/jira-issue-under-point)))
+    (let-alist (jiralib2-get-user-info)
+      (let ((my-account .accountId))
+        (jiralib2-update-issue issue-key `(assignee . ((accountId . ,my-account))))))))
+
+(defun saxon/pull-jira-unassigned ()
+  "Pull all unassigned jira issues in interested projects."
+  (interactive)
+  (progn (notifications-notify :title "Org Jira" :body "Syncing Unassigned Jira")
+         (with-temp-file "~/Documents/wiki/jira_unassigned.org"
+           (dolist (issue (jiralib2-jql-search (format "assignee = empty AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
+             (let-alist issue
+               (let ((summary .fields.summary)
+                     (created (format-time-string "%Y-%m-%d %a" (floor (float-time (date-to-time .fields.created)))))
+                     (key .key)
+                     (status (or (cdr (assoc .fields.status.name saxon/jira-status-mappings)) (format "BLOCKED (%s)" .fields.status.name)))
+                     (project .fields.project.key))
+                 (insert (format "* %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:END:\n" key summary project created key))))))))
+
+(defun saxon/pull-jira-todos ()
+  "Pull all assigned jira issues"
+  (interactive)
+  (progn (notifications-notify :title "Org Jira" :body "Syncing Assigned Jira")
+         (with-temp-file "~/Documents/wiki/jira_assigned.org"
            (dolist (issue (jiralib2-jql-search (format "assignee = currentUser() AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
              (let-alist issue
                (let ((summary .fields.summary)
@@ -36,13 +59,19 @@
                      (project .fields.project.key))
                  (insert (format "* %s %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:END:\n" status key summary project created key))))))))
 
-(defun saxon/browse-jira-issue ()
+(defun saxon/jira-issue-under-point ()
+  "Return the jira issue key under point."
   (interactive)
   (when-let* ((pt (point))
               (issue-key (and (org-at-heading-p)
                               (org-entry-get pt "JIRAISSUEKEY"))))
-    (browse-url (format "https://hejira.atlassian.net/browse/%s" issue-key))))
+    (message issue-key)))
 
+(defun saxon/jira-issue-browse ()
+  "Open the jira issue under point in the browser."
+  (interactive)
+  (when-let* ((issue-key (saxon/jira-issue-under-point)))
+    (browse-url (format "https://hejira.atlassian.net/browse/%s" issue-key))))
 
 (defvar saxon/jira-org-headings-query
   '(and (property "JiraIssueKey") (not (tags "ARCHIVE")))
