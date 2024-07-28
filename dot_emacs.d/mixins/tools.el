@@ -8,11 +8,12 @@
         wakatime-api-key (auth-source-pick-first-password :host "wakatime"))
   (global-wakatime-mode 1))
 
-;; Kinda useless
 (use-package zone-rainbow
   :ensure t)
 (use-package zone-nyan
   :ensure t)
+
+;; Zoning out
 (use-package zone
   :ensure nil
   :after (zone-rainbow zone-nyan)
@@ -44,3 +45,6 @@
   :config
   (setq zoom-size '(0.618 . 0.618))
   (zoom-mode t))
+
+(use-package chezmoi
+  :ensure t)

@@ -107,6 +107,7 @@
     "fc" 'saxon/copy-file
     "fd" 'saxon/delete-file
     "fY" 'saxon/copy-file-name
+    "fU" 'sudo-edit
 
     ;; project bindings
     "pf" 'project-find-file
@@ -154,6 +155,7 @@
     "cf" 'chezmoi-find
     "cd" 'chezmoi-diff
     "cw" 'chezmoi-write
+    "cg" 'chezmoi-magit-status
 
     ;; LSP helpers
     "lr" 'saxon/restart-eglot
@@ -199,7 +201,8 @@
     ", p" 'epresent-run
     ", ju" 'saxon/jira-update-heading
     ", jU" 'saxon/jira-update-all-headings
-    ", jb" 'saxon/browse-jira-issue)
+    ", jb" 'saxon/browse-jira-issue
+    ", ja" 'saxon/jira-assign-to-me)
 
   (general-def 'normal 'dired-mode-map
     ", cf" 'dired-create-empty-file
