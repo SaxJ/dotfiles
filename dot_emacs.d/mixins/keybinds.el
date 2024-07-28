@@ -110,7 +110,7 @@
 
     ;; project bindings
     "pf" 'project-find-file
-    "pp" 'tabspaces-open-or-create-project-and-workspace
+    "pp" 'project-switch-project
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
     "pt" 'multi-vterm-project
@@ -129,8 +129,6 @@
     "ru" 'ssh-deploy-upload-handler-forced
     "rd" 'ssh-deploy-download-handler
     "rs" 'ssh-deploy-remote-terminal-eshell-base-handler
-
-    "TAB" 'tabspaces-command-map
 
     ;; help
     "hv" 'describe-variable

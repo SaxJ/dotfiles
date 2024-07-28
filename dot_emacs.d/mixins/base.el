@@ -39,22 +39,7 @@
          ("C-s" . consult-line))
   :config
   ;; Narrowing lets you restrict results to certain groups of candidates
-  (setq consult-narrow-key "<")
-  (consult-customize consult--source-buffer :hidden t :default nil)
-  (defvar consult--source-workspace
-    (list :name "Workspace Buffers"
-          :narrow ?w
-          :history 'buffer-name-history
-          :category 'buffer
-          :state #'consult--buffer-state
-          :default t
-          :items (lambda () (consult--buffer-query
-                             :predicate #'tabspaces--local-buffer-p
-                             :sort 'visibility
-                             :as #'buffer-name)))
-
-    "Set workspace buffer list for consult-buffer")
-  (add-to-list 'consult-buffer-sources 'consult--source-workspace))
+  (setq consult-narrow-key "<"))
 
 (use-package embark
   :ensure t
@@ -158,13 +143,22 @@
   :config
   (setq completion-styles '(orderless prescient)))
 
-(use-package tabspaces
-  :ensure t
-  :hook (after-init . tabspaces-mode)
-  :config
-  (setq tabspaces-project-switch-commands 'project-find-file
-        tabspaces-initialize-project-with-todo nil
-        tabspaces-use-filtered-buffers-as-default t))
+;; (use-package tabspaces
+;;   :ensure t
+;;   :hook (after-init . tabspaces-mode)
+;;   :config
+;;   (setq tabspaces-project-switch-commands 'project-find-file
+;;         tabspaces-initialize-project-with-todo nil
+;;         tabspaces-use-filtered-buffers-as-default t))
+
+(use-package one-tab-per-project
+  :ensure (:host github :repo "abougouffa/one-tab-per-project")
+  :after project
+  :init
+  (otpp-mode 1)
+  ;; If you want to advice the commands in `otpp-override-commands`
+  ;; to be run in the current's tab (so, current project's) root directory
+  (otpp-override-mode 1))
 
 (use-package prescient
   :ensure t)
