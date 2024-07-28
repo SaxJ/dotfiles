@@ -85,6 +85,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Magit: best Git client to ever exist
+(use-package transient
+  :ensure t)
 (use-package magit
   :ensure t
   :config
