@@ -62,6 +62,9 @@
 ;; Spelling
 (setq ispell-alternate-dictionary "/usr/share/dict/words")
 
+;; Turn off lock files
+(setq create-lockfiles nil)
+
 ;; Fix GPG
 (fset 'epg-wait-for-status 'ignore)
 
