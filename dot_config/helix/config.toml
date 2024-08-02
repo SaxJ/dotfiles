@@ -44,18 +44,22 @@ right = ["diagnostics", "selections", "position", "version-control"]
 
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
+"space" = "file_picker"
 
 [keys.normal."C-f"]
-"f" = ":sh helix-zellij fix"
 "t" = ":pipe ascii-table"
 
 [keys.normal.space.o]
-"minus" = ":sh helix-zellij files"
-"r" = ":sh helix-zellij repl"
+"minus" = ":sh zellij run -cf -- yazi %{dirname}"
 
 [keys.normal.space.g]
-s = ":sh git_sync"
-g = [":sh helix-zellij git", ":reload-all"]
-b = ":sh helix-zellij blame"
-o = ":sh helix-zellij browse"
+g = [":sh zellij run -cf -- lazygit", ":reload-all"]
 d = "changed_file_picker"
+
+[keys.normal.space.r]
+u = ":sh rpush $(realpath --relative-to=\"%{cwd}\" %{filename})"
+d = ":sh rpull $(realpath --relative-to=\"%{cwd}\" %{filename})"
+
+[keys.normal.space.f]
+f = "file_picker"
+Y = ":sh wl-copy $(realpath --relative-to=\"%{cwd}\" %{filename})"
