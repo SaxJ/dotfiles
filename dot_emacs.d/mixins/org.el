@@ -4,24 +4,35 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defvar saxon/jira-status-mappings
-  '(("Backlog" . "TODO")
-    ("Blocked" . "BLOCKED")
-    ("Closed" . "DONE")
-    ("Code Review" . "REVIEW")
-    ("Done" . "DONE")
-    ("For Release" . "REVIEW")
-    ("In Progress" . "PROG")
-    ("In progress" . "PROG")
-    ("OPEN" . "TODO")
-    ("Progressing" . "PROG")
-    ("Released" . "REVIEW")
-    ("To Do" . "TODO"))
-  "Defines mappings of jira statuses to org statuses")
+(defun saxon/jira-status-to-org-status (jira-status)
+  "Map a jira status to an org status"
+  (cond
+   ((s-contains-p "backlog" jira-status t) "TODO")
+   ((s-contains-p "review" jira-status t) "REVIEW")
+   ((s-contains-p "closed" jira-status t) "DONE")
+   ((s-contains-p "done" jira-status t) "DONE")
+   ((s-contains-p "prog" jira-status t) "PROG")
+   ((s-contains-p "released" jira-status t) "DONE")
+   ((s-contains-p "todo" jira-status t) "TODO")
+   ((s-contains-p "to do" jira-status t) "TODO")
+   (t "BLOCKED")))
 
 (defvar saxon/jira-interested-projects
-  '("CPT" "HEAL" "NOOT")
+  '("CPT" "HEAL" "NOOT" "MKT")
   "Defines the projects to sync with org")
+
+(defun saxon/jira-perform-action ()
+  (interactive)
+  (let* ((completion-ignore-case t)
+         (key (saxon/jira-issue-under-point))
+         (options (jiralib2-get-actions key))
+         (swapped (mapcar (lambda (cell)
+                            (cons (cdr cell) (car cell)))
+                          options))
+         (choices (mapcar #'car swapped))
+         (choice (completing-read "Action: " choices nil t))
+         (result (assoc choice swapped)))
+    (jiralib2-do-action key (cdr result))))
 
 (defun saxon/jira-assign-to-me ()
   "Assign the issue under point to myself."
@@ -36,28 +47,30 @@
   (interactive)
   (progn (notifications-notify :title "Org Jira" :body "Syncing Unassigned Jira")
          (with-temp-file "~/Documents/wiki/jira_unassigned.org"
+           (set-buffer-file-coding-system 'utf-8)
            (dolist (issue (jiralib2-jql-search (format "assignee = empty AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
              (let-alist issue
                (let ((summary .fields.summary)
                      (created (format-time-string "%Y-%m-%d %a" (floor (float-time (date-to-time .fields.created)))))
                      (key .key)
-                     (status (or (cdr (assoc .fields.status.name saxon/jira-status-mappings)) (format "BLOCKED (%s)" .fields.status.name)))
+                     (status (saxon/jira-status-to-org-status .fields.status.name))
                      (project .fields.project.key))
-                 (insert (format "* %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:END:\n" key summary project created key))))))))
+                 (insert (format "* %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:JiraStatus: %s\n:END:\n" key summary project created key .fields.status.name))))))))
 
 (defun saxon/pull-jira-todos ()
   "Pull all assigned jira issues"
   (interactive)
   (progn (notifications-notify :title "Org Jira" :body "Syncing Assigned Jira")
          (with-temp-file "~/Documents/wiki/jira_assigned.org"
+           (set-buffer-file-coding-system 'utf-8)
            (dolist (issue (jiralib2-jql-search (format "assignee = currentUser() AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
              (let-alist issue
                (let ((summary .fields.summary)
                      (created (format-time-string "%Y-%m-%d %a" (floor (float-time (date-to-time .fields.created)))))
                      (key .key)
-                     (status (or (cdr (assoc .fields.status.name saxon/jira-status-mappings)) (format "BLOCKED (%s)" .fields.status.name)))
+                     (status (saxon/jira-status-to-org-status .fields.status.name))
                      (project .fields.project.key))
-                 (insert (format "* %s %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:END:\n" status key summary project created key))))))))
+                 (insert (format "* %s %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:JiraStatus: %s\n:END:\n" status key summary project created key .fields.status.name))))))))
 
 (defun saxon/jira-issue-under-point ()
   "Return the jira issue key under point."
