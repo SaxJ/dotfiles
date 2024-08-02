@@ -26,7 +26,18 @@
   :config
   (setq gac-automatically-add-new-files-p t))
 
+(use-package emacs
+  :ensure nil
+  :config
+  (midnight-mode 1)
+  (midnight-delay-set 'midnight-delay 1)
+  (setq midnight-period 3600)
+  (add-hook 'midnight-hook 'saxon/pull-jira-unassigned))
+
 (use-package sudo-edit
+  :ensure t)
+
+(use-package string-inflection
   :ensure t)
 
 (use-package todotxt
