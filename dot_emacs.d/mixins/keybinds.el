@@ -135,6 +135,7 @@
     "hv" 'describe-variable
     "hf" 'describe-function
     "hm" 'describe-mode
+    "hi" 'info
 
     "qq" 'kill-emacs
     "qr" 'restart-emacs
@@ -202,8 +203,9 @@
     ", p" 'epresent-run
     ", ju" 'saxon/jira-update-heading
     ", jU" 'saxon/jira-update-all-headings
-    ", jb" 'saxon/browse-jira-issue
-    ", ja" 'saxon/jira-assign-to-me)
+    ", jb" 'saxon/jira-issue-browse
+    ", ja" 'saxon/jira-assign-to-me
+    ", jp" 'saxon/jira-perform-action)
 
   (general-def 'normal 'dired-mode-map
     ", cf" 'dired-create-empty-file
