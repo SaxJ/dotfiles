@@ -59,3 +59,8 @@
 
 (use-package chezmoi
   :ensure t)
+
+(use-package claude-shell
+  :ensure t
+  :config
+  (setq claude-shell-api-token (lambda () (auth-source-pick-first-password :host "api.anthropic.com"))))
