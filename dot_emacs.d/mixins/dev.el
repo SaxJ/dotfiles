@@ -35,7 +35,7 @@
   (setq treesit-language-source-alist
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
           (c "https://github.com/tree-sitter/tree-sitter-c")
-          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp")
+          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp.git" "v0.20.0")
           (cmake "https://github.com/uyha/tree-sitter-cmake")
           (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
           (css "https://github.com/tree-sitter/tree-sitter-css")
@@ -59,7 +59,7 @@
         '((yaml-mode . yaml-ts-mode)
           (bash-mode . bash-ts-mode)
           (typescript-mode . typescript-ts-mode)
-          ;; (csharp-mode . csharp-ts-mode)
+          (csharp-mode . csharp-ts-mode)
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
