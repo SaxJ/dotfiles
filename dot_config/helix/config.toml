@@ -49,11 +49,15 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal."C-f"]
 "t" = ":pipe ascii-table"
 
+[keys.normal.space.c]
+r = "rename_symbol"
+a = "code_action"
+
 [keys.normal.space.o]
 "minus" = ":sh zellij run -cf -- yazi %{dirname}"
 
 [keys.normal.space.g]
-g = [":sh zellij run -cf -- lazygit", ":reload-all"]
+g = [":sh zellij run -cf -- lazygit", ":reload-all", ":echo reloading"]
 d = "changed_file_picker"
 
 [keys.normal.space.r]
@@ -62,4 +66,4 @@ d = ":sh rpull $(realpath --relative-to=\"%{cwd}\" %{filename})"
 
 [keys.normal.space.f]
 f = "file_picker"
-Y = ":sh wl-copy $(realpath --relative-to=\"%{cwd}\" %{filename})"
+Y = ":sh realpath --relative-to=\"%{cwd}\" %{filename} | wl-copy"
