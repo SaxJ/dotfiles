@@ -10,6 +10,7 @@
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq package-enable-at-startup nil)
+(setq load-prefer-newer t)
 
 ;; Silence stupid startup message
 (setq inhibit-startup-echo-area-message (user-login-name))
