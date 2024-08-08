@@ -199,7 +199,6 @@ eval "$(direnv hook bash)"
 eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 eval "$(hub alias -s)"
-# eval "$(zellij setup --generate-auto-start bash)"
 source /usr/share/nvm/init-nvm.sh
 
 function bash-stats() {
