@@ -101,6 +101,11 @@
 
 (use-package project
   :config
+  (setq project-switch-commands 
+        '((project-find-file "Find file" ?f)
+          (project-eshell "Eshell" ?e)
+          (multi-vterm-project "Shell" ?s)
+          (magit-project-status "Magit" ?g)))
   (setq project-vc-extra-root-markers '(".project")))
 
 (use-package eglot
@@ -135,9 +140,9 @@
                                 (:preferences
                                  (:interactiveInlayHints nil)))))
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+               '(csharp-ts-mode . ("csharp-ls")))
   (add-to-list 'eglot-server-programs
-               '(csharp-mode . ("omnisharp" "--languageserver")))
+               '(csharp-mode . ("csharp-ls")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
@@ -159,7 +164,14 @@
 (use-package apheleia
   :ensure t
   :config
-  (setq gpheleia-inhibit-functions '(saxon/no-format-p))
+  ;; formatters
+  (add-to-list 'apheleia-formatters '(csharpier "dotnet" "csharpier"))
+
+  ;; file types to formatters
+  (add-to-list 'apheleia-mode-alist '(csharp-ts-mode . csharpier))
+
+  ;; disabling formatting
+  (setq apheleia-inhibit-functions '(saxon/no-format-p))
   (apheleia-global-mode +1))
 
 (use-package vterm
