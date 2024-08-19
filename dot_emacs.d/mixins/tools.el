@@ -64,3 +64,6 @@
   :ensure t
   :config
   (setq claude-shell-api-token (lambda () (auth-source-pick-first-password :host "api.anthropic.com"))))
+
+(use-package graphviz-dot-mode
+  :ensure t)
