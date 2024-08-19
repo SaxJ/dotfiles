@@ -97,6 +97,10 @@
     "X" 'org-capture
     "/" 'consult-ripgrep
 
+    ;; tab bindings
+    "TAB c" 'tab-close
+    "TAB o" 'tab-close-other
+
     ;; buffer bindings
     "bb" 'consult-project-buffer
     "bc" 'clone-indirect-buffer
