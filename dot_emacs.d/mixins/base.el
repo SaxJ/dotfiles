@@ -167,7 +167,15 @@
   :ensure t
   :config
   (mood-line-mode)
-  (setq mood-line-glyph-alist mood-line-glyphs-fira-code))
+  (setq mood-line-glyph-alist mood-line-glyphs-fira-code
+        mood-line-format (mood-line-defformat
+                          :left
+                          (((mood-line-segment-modal) . " ")
+                           ((mood-line-segment-buffer-status) . " ")
+                           ((mood-line-segment-buffer-name) . " : "))
+                          :right
+                          (((mood-line-segment-vc) . " ")
+                           ((mood-line-segment-major-mode) . "")))))
 
 (use-package quelpa
   :ensure t)
