@@ -6,7 +6,7 @@
 # Set terminal title
 PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 
-export JIRA_API_TOKEN=$(pass jira)
+export JIRA_API_TOKEN="$(pass jira)"
 
 export STOW_DIR=/home/saxonj/dotfiles
 export SSH_ASKPASS=ksshaskpass
@@ -261,4 +261,8 @@ function ta() {
 function fzj() {
     job=$(tidy_jobs | fzf | awk '{ print $1 }')
     echo ">>> $job"
+}
+
+function ji() {
+    jira issue list
 }
