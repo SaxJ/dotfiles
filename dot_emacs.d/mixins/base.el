@@ -151,7 +151,7 @@
 ;;         tabspaces-initialize-project-with-todo nil
 ;;         tabspaces-use-filtered-buffers-as-default t))
 
-(use-package one-tab-per-project
+(use-package otpp
   :ensure (:host github :repo "abougouffa/one-tab-per-project")
   :after project
   :init
