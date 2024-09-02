@@ -67,3 +67,11 @@
 
 (use-package graphviz-dot-mode
   :ensure t)
+
+(use-package rsync-mode
+  :ensure t
+  :config
+  (rsync-mode 1))
+
+(use-package restclient
+  :ensure t)
