@@ -3,48 +3,10 @@
 ;;;   Basic settings
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defvar elpaca-installer-version 0.7)
-(defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-(defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-(defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
-(defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-                              :ref nil :depth 1
-                              :files (:defaults "elpaca-test.el" (:exclude "extensions"))
-                              :build (:not elpaca--activate-package)))
-(let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
-       (build (expand-file-name "elpaca/" elpaca-builds-directory))
-       (order (cdr elpaca-order))
-       (default-directory repo))
-  (add-to-list 'load-path (if (file-exists-p build) build repo))
-  (unless (file-exists-p repo)
-    (make-directory repo t)
-    (when (< emacs-major-version 28) (require 'subr-x))
-    (condition-case-unless-debug err
-        (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-                 ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-                                                 ,@(when-let ((depth (plist-get order :depth)))
-                                                     (list (format "--depth=%d" depth) "--no-single-branch"))
-                                                 ,(plist-get order :repo) ,repo))))
-                 ((zerop (call-process "git" nil buffer t "checkout"
-                                       (or (plist-get order :ref) "--"))))
-                 (emacs (concat invocation-directory invocation-name))
-                 ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-                                       "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-                 ((require 'elpaca))
-                 ((elpaca-generate-autoloads "elpaca" repo)))
-            (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-          (error "%s" (with-current-buffer buffer (buffer-string))))
-      ((error) (warn "%s" err) (delete-directory repo 'recursive))))
-  (unless (require 'elpaca-autoloads nil t)
-    (require 'elpaca)
-    (elpaca-generate-autoloads "elpaca" repo)
-    (load "./elpaca-autoloads")))
-(add-hook 'after-init-hook #'elpaca-process-queues)
-(elpaca `(,@elpaca-order))
-
-;; Enable use-package :ensure support for Elpaca.
-(elpaca elpaca-use-package
-  (elpaca-use-package-mode))
+(with-eval-after-load 'package
+  (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+  (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
+  (add-to-list 'package-archives '("devel" . "https://elpa.gnu.org/devel/") t))
 
 (set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
 
@@ -232,46 +194,61 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(custom-safe-themes
-   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828" default))
+   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828"
+     default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
+ '(helm-minibuffer-history-key "M-p")
+ '(package-selected-packages nil)
+ '(package-vc-selected-packages
+   '((otpp :url "https://github.com/abougouffa/one-tab-per-project")))
  '(safe-local-variable-values
-   '((ssh-deploy-async . t)
-     (gac-automatically-add-new-files-p . t)
+   '((rsync-local-path . "/home/saxonj/Documents/unicron/")
+     (rsync-remote-paths "minikube:/home/ubuntu/unicron")
+     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
+     (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/unicron/")
+     (ssh-deploy-root-local . "/home/saxonj/Documents/unicron/")
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/hannibal/")
+     (ssh-deploy-root-local . "/home/saxonj/Documents/hannibal/")
+     (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
+     (rsync-local-path . "/home/saxonj/Documents/megatron/")
+     (rsync-remote-paths "minikube:/home/ubuntu/megatron")
+     (evil-shift-width . 4) (evil-shift-width . 2)
+     (ssh-deploy-async . t) (gac-automatically-add-new-files-p . t)
      (eglot-server-programs
-      ((typescript-ts-mode tsx-ts-mode)
-       "deno" "lsp" :initializationOptions
-       (:enable t :lint t)))
+      ((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
+       :initializationOptions (:enable t :lint t)))
      (eglot-server-programs quote
-                            (((typescript-ts-mode tsx-ts-mode)
-                              "deno" "lsp" :initializationOptions
+                            (((typescript-ts-mode tsx-ts-mode) "deno"
+                              "lsp" :initializationOptions
                               (:enable t :lint t))))
      (eglot-server-programs \`
-                            (((typescript-ts-mode tsx-ts-mode)
-                              "deno" "lsp" :initializationOptions
+                            (((typescript-ts-mode tsx-ts-mode) "deno"
+                              "lsp" :initializationOptions
                               (:enable t :lint t))))
-     (eglot-server-programs
-      (typescript-ts-mode tsx-ts-mode)
-      "deno" "lsp" :initializationOptions
-      (:enable t :lint t))
+     (eglot-server-programs (typescript-ts-mode tsx-ts-mode) "deno"
+                            "lsp" :initializationOptions
+                            (:enable t :lint t))
      (eglot-server-programs quote
-                            ((typescript-ts-mode tsx-ts-mode)
-                             "deno" "lsp" :initializationOptions
+                            ((typescript-ts-mode tsx-ts-mode) "deno"
+                             "lsp" :initializationOptions
                              (:enable t :lint t)))
      (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode)
-             "deno" "lsp" :initializationOptions
-             (:enable t :lint t)))
+           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
+             :initializationOptions (:enable t :lint t)))
      (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode)
-             "deno" "lsp"))
+           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"))
      (eval add-to-list 'eglot-server-programs
            '(typescript-ts-mode "deno" "lsp"))
      (ssh-deploy-on-explicit-save . t)
-     (ssh-deploy-async-with-threads . 1)
-     (ssh-deploy-async . 1)
+     (ssh-deploy-async-with-threads . 1) (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")))
+ '(tramp-verbose 6)
  '(truncate-lines t)
  '(vterm-max-scrollback 100000))
 (custom-set-faces

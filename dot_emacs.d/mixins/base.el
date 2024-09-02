@@ -152,7 +152,8 @@
 ;;         tabspaces-use-filtered-buffers-as-default t))
 
 (use-package otpp
-  :ensure (:host github :repo "abougouffa/one-tab-per-project")
+  :vc (:url "https://github.com/abougouffa/one-tab-per-project" :rev :newest)
+  :ensure t
   :after project
   :init
   (otpp-mode 1)
@@ -172,13 +173,7 @@
                           :left
                           (((mood-line-segment-modal) . " ")
                            ((mood-line-segment-buffer-status) . " ")
-                           ((mood-line-segment-buffer-name) . " : "))
+                           ((mood-line-segment-buffer-name) . ""))
                           :right
                           (((mood-line-segment-vc) . " ")
                            ((mood-line-segment-major-mode) . "")))))
-
-(use-package quelpa
-  :ensure t)
-(use-package quelpa-use-package
-  :ensure t
-  :after quelpa)
