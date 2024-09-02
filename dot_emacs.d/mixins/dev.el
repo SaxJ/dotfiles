@@ -47,13 +47,25 @@
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-          (php "https://github.com/tree-sitter/tree-sitter-php" "master" "php/src")
+          (php "https://github.com/tree-sitter/tree-sitter-php" "v0.22.8" "php/src")
           (python "https://github.com/tree-sitter/tree-sitter-python")
+          (jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+
+  ;; (setq php-ts-mode--language-source-alist
+  ;;       '((php "https://github.com/tree-sitter/tree-sitter-php" "v0.22.8"
+  ;;              "php/src")
+  ;;         (phpdoc "https://github.com/claytonrcarter/tree-sitter-phpdoc")
+  ;;         (html "https://github.com/tree-sitter/tree-sitter-html" "v0.20.3")
+  ;;         (javascript "https://github.com/tree-sitter/tree-sitter-javascript"
+  ;;                     "v0.21.2")
+  ;;         (jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc" "v0.21.0")
+  ;;         (css "https://github.com/tree-sitter/tree-sitter-css" "v0.21.0")))
 
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
@@ -63,6 +75,7 @@
           (json-mode . json-ts-mode)
           (css-mode . css-ts-mode)
           (python-mode . python-ts-mode)
+          (php-mode . php-ts-mode)
           (c-mode . c-ts-mode)
           (c++-mode . c++-ts-mode)
           (yaml-mode . yaml-ts-mode)))
@@ -70,6 +83,7 @@
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
 
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
@@ -85,9 +99,8 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Magit: best Git client to ever exist
-(use-package transient
-  :ensure t)
 (use-package magit
+  :after git-commit
   :ensure t
   :config
   (setq forge-add-default-bindings nil)
@@ -117,9 +130,10 @@
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
   (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
-  (add-hook 'csharp-mode-hook 'eglot-ensure)
+  ;; (add-hook 'csharp-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-  (add-hook 'php-mode-hook 'eglot-ensure)
+  ;;(add-hook 'php-mode-hook 'eglot-ensure)
+  (add-hook 'php-ts-mode-hook 'eglot-ensure)
   (add-hook 'json-ts-mode-hook 'eglot-ensure)
   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
   (add-hook 'fsharp-mode-hook 'eglot-ensure)
@@ -140,13 +154,13 @@
                                 (:preferences
                                  (:interactiveInlayHints nil)))))
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("csharp-ls")))
-  (add-to-list 'eglot-server-programs
-               '(csharp-mode . ("csharp-ls")))
+               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(csharp-mode . ("csharp-ls")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
-	           '(php-mode . ("intelephense" "--stdio")))
+               '(php-mode . ("intelephense" "--stdio")))
   (add-to-list 'eglot-server-programs
 	           '(php-ts-mode . ("intelephense" "--stdio")))
   (add-to-list 'eglot-server-programs
@@ -159,7 +173,7 @@
   )
 
 (defun saxon/no-format-p ()
-  (member major-mode '("php-mode")))
+  (member major-mode '("php-ts-mode")))
 
 (use-package apheleia
   :ensure t
@@ -197,11 +211,6 @@
   :config
   (editorconfig-mode 1))
 
-(use-package ssh-deploy
-  :ensure t
-  :config
-  (ssh-deploy-line-mode))
-
 (use-package forge
   :ensure t
   :after magit)
@@ -232,9 +241,10 @@
 
 
 (use-package eglot-booster
+  :vc (:url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
   :after eglot
   :config (eglot-booster-mode)
-  :ensure (eglot-booster :fetcher github :repo "jdtsmith/eglot-booster"))
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -243,7 +253,9 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package hurl-mode
-  :ensure (hurl-mode :host github :repo "Orange-OpenSource/hurl" :files ("contrib/emacs/hurl-mode.el")))
+  :vc (:url "https://github.com/Orange-OpenSource/hurl"
+            :rev :newest
+            :lisp-dir "contrib/emacs/"))
 
 (use-package fsharp-mode
   :ensure t)
@@ -282,8 +294,11 @@
 (use-package json-mode
   :ensure t)
 
-(use-package php-mode
+(use-package graphql-mode
   :ensure t)
 
-(use-package graphql-mode
+(use-package csproj-mode
+  :ensure t)
+
+(use-package git-timemachine
   :ensure t)
