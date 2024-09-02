@@ -227,8 +227,7 @@
                  (window-height . fit-window-to-buffer))))
 
 (use-package org-ql
-  :ensure (org-ql :fetcher github :repo "alphapapa/org-ql"
-                  :files (:defaults (:exclude "helm-org-ql.el"))))
+  :vc (:url "https://github.com/alphapapa/org-ql" :branch "main"))
 
 (use-package epresent
   :ensure t)
