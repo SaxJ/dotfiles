@@ -198,7 +198,20 @@
      default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(apheleia avy cape chezmoi claude-shell corfu-terminal csproj-mode
+              csv-mode eat ef-themes eglot-booster eglot-fsharp
+              elm-mode embark-consult epresent evil-collection
+              evil-commentary evil-org evil-surround
+              exec-path-from-shell forge general git-auto-commit-mode
+              git-timemachine graphql-mode graphviz-dot-mode
+              haskell-mode helm-org hurl-mode jiralib2 jq-mode
+              json-mode kind-icon marginalia meow mood-line
+              multi-vterm orderless org-modern org-ql org-roam origami
+              otpp pocket-reader popper prescient prodigy rainbow-mode
+              restclient rsync-mode string-inflection sudo-edit
+              svelte-mode todotxt vertico vue-mode wakatime-mode
+              web-mode yaml-mode yuck-mode zone-nyan zone-rainbow zoom))
  '(package-vc-selected-packages
    '((otpp :url "https://github.com/abougouffa/one-tab-per-project")))
  '(safe-local-variable-values
