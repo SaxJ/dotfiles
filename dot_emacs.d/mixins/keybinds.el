@@ -104,6 +104,7 @@
     ;; buffer bindings
     "bb" 'consult-project-buffer
     "bc" 'clone-indirect-buffer
+    "by" (lambda () (interactive) (progn (mark-whole-buffer) (kill-ring-save)))
 
     ;; file bindings
     "ff" 'find-file
