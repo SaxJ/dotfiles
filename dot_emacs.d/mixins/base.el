@@ -152,7 +152,7 @@
 ;;         tabspaces-use-filtered-buffers-as-default t))
 
 (use-package otpp
-  :vc (:url "https://github.com/abougouffa/one-tab-per-project" :rev :newest)
+  :vc (otpp :url "https://github.com/abougouffa/one-tab-per-project" :rev :newest)
   :ensure t
   :after project
   :init

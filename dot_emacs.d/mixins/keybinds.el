@@ -180,6 +180,14 @@
     "SPC ca" 'lspce-code-actions
     "SPC cr" 'lspce-rename)
 
+  (general-def 'normal 'lsp-managed-mode
+    :definer 'minor-mode
+    "gD" 'lsp-ui-peek-find-references
+    "gr" 'lsp-ui-peek-find-references
+    "K" 'lsp-ui-doc-glance
+    "SPC ca" 'lsp-execute-code-action
+    "SPC cr" 'lsp-rename)
+
   (general-def 'normal 'eglot--managed-mode
     :definer 'minor-mode
     "gD" 'xref-find-references

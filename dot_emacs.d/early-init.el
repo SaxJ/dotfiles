@@ -5,11 +5,13 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 ;; Startup speed, annoyance suppression
-(setq gc-cons-threshold 40000000)
+(setq gc-cons-threshold 100000000)
+(setq read-process-output-max (* 1024 1024))
 (setq byte-compile-warnings '(not obsolete))
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq load-prefer-newer t)
+(setenv "LSP_USE_PLISTS" "true")
 
 ;; Silence stupid startup message
 (setq inhibit-startup-echo-area-message (user-login-name))

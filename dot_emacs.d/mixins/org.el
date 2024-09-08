@@ -94,9 +94,9 @@
   "Update all jira headings in current buffer"
   (interactive)
   (org-ql-select
-    (current-buffer)
-    saxon/jira-org-headings-query
-    :action #'saxon/jira-update-heading)
+   (current-buffer)
+   saxon/jira-org-headings-query
+   :action #'saxon/jira-update-heading)
   (message "Updated jira headings."))
 
 (defun saxon/jira-update-heading ()
@@ -227,7 +227,7 @@
                  (window-height . fit-window-to-buffer))))
 
 (use-package org-ql
-  :vc (:url "https://github.com/alphapapa/org-ql" :branch "main"))
+  :vc (org-ql :url "https://github.com/alphapapa/org-ql" :branch "master"))
 
 (use-package epresent
   :ensure t)
