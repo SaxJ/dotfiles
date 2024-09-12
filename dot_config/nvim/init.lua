@@ -264,7 +264,7 @@ require("lazy").setup({
 						"eslint",
 						"html",
 						"jsonls",
-						"tsserver",
+						"ts_ls",
 						"pyright",
 						"tailwindcss",
 					},
@@ -294,17 +294,6 @@ require("lazy").setup({
 								vim.lsp.buf.format()
 							end,
 						})
-
-						local opts = { buffer = bufnr }
-
-						vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-						vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-						vim.keymap.set("n", "gD", vim.lsp.buf.references, opts)
-						vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-						vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-						vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-						vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, opts)
-						vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
 					end
 				end
 
@@ -323,7 +312,7 @@ require("lazy").setup({
 							capabilities = capabilities,
 						})
 					end,
-					["tsserver"] = function()
+					["ts_ls"] = function()
 						nvim_lsp["ts_ls"].setup({
 							on_attach = on_attach,
 							capabilities = capabilities,
@@ -581,7 +570,6 @@ require("lazy").setup({
 				require("mini.surround").setup()
 			end,
 		},
-
 		{
 			"folke/which-key.nvim",
 			event = "VeryLazy",
@@ -605,14 +593,16 @@ require("lazy").setup({
 				},
 				{ "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
 				{ "<leader>-", ":lua MiniFiles.open()<CR>", desc = "File Browser" },
+				{ "<leader>/", "<cmd>Telescope grep_string<cr>", desc = "Project Search" },
 				{ "<leader>p", group = "Project" },
 				{ "<leader>pp", "<cmd>Telescope projects<cr>", desc = "Switch Project" },
+				{ "<leader>ps", "<cmd>Telescope grep_string<cr>", desc = "Project Search" },
 				{ "<leader>g", group = "Git" },
 				{
 					"<leader>gg",
 					function()
 						local cwd = vim.fn.getcwd()
-						vim.cmd(string.format("FloatermNew (cd %s && gitu)", cwd))
+						vim.cmd(string.format("FloatermNew (cd %s && lazygit)", cwd))
 					end,
 					desc = "Git status",
 				},
@@ -627,4 +617,18 @@ require("lazy").setup({
 	install = { colorscheme = { "habamax" } },
 	-- automatically check for plugin updates
 	checker = { enabled = true },
+})
+
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP Actions",
+	callback = function(event)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = event.buf })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
+		vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation", buffer = event.buf })
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto references", buffer = event.buf })
+		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
+		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
+	end,
 })
