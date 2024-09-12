@@ -105,6 +105,7 @@
     "bb" 'consult-project-buffer
     "bc" 'clone-indirect-buffer
     "by" (lambda () (interactive) (progn (mark-whole-buffer) (kill-ring-save)))
+    "bd" 'vc-diff
 
     ;; file bindings
     "ff" 'find-file
@@ -182,8 +183,8 @@
 
   (general-def 'normal 'lsp-managed-mode
     :definer 'minor-mode
-    "gD" 'lsp-ui-peek-find-references
-    "gr" 'lsp-ui-peek-find-references
+    "gD" 'lsp-find-references
+    "gr" 'lsp-find-references
     "K" 'lsp-ui-doc-glance
     "SPC ca" 'lsp-execute-code-action
     "SPC cr" 'lsp-rename)
