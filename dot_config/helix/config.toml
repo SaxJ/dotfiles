@@ -58,8 +58,9 @@ a = "code_action"
 "minus" = ":sh zellij run -n yazi -cf -- yazi %{dirname}"
 
 [keys.normal.space.g]
-g = [":sh zellij run -n lazygit -cf -- cmd_and_float lazygit", ":reload-all", ":echo reloading"]
+g = ":sh zellij run -n lazygit -cf -- lazygit"
 d = "changed_file_picker"
+l = ":sh zellij run -i -- tig %{filename}"
 
 [keys.normal.space.r]
 u = ":sh rpush $(realpath --relative-to=\"%{cwd}\" %{filename})"
