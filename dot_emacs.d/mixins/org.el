@@ -42,10 +42,17 @@
       (let ((my-account .accountId))
         (jiralib2-update-issue issue-key `(assignee . ((accountId . ,my-account))))))))
 
+(defun saxon/notify (title body)
+  "Notify me with a desktop notification or status message"
+  (interactive)
+  (progn
+    (when (featurep 'dbus) (notifications-notify :title title :body body))
+    (message body)))
+
 (defun saxon/pull-jira-unassigned ()
   "Pull all unassigned jira issues in interested projects."
   (interactive)
-  (progn (notifications-notify :title "Org Jira" :body "Syncing Unassigned Jira")
+  (progn (saxon/notify "Org Jira" "Syncing Unassigned Jira")
          (with-temp-file "~/Documents/wiki/jira_unassigned.org"
            (set-buffer-file-coding-system 'utf-8)
            (dolist (issue (jiralib2-jql-search (format "assignee = empty AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
@@ -60,7 +67,7 @@
 (defun saxon/pull-jira-todos ()
   "Pull all assigned jira issues"
   (interactive)
-  (progn (notifications-notify :title "Org Jira" :body "Syncing Assigned Jira")
+  (progn (saxon/notify "Org Jira" "Syncing Assigned Jira")
          (with-temp-file "~/Documents/wiki/jira_assigned.org"
            (set-buffer-file-coding-system 'utf-8)
            (dolist (issue (jiralib2-jql-search (format "assignee = currentUser() AND project IN (%s)" (s-join "," saxon/jira-interested-projects)) "summary" "status" "created" "project"))
@@ -94,9 +101,9 @@
   "Update all jira headings in current buffer"
   (interactive)
   (org-ql-select
-   (current-buffer)
-   saxon/jira-org-headings-query
-   :action #'saxon/jira-update-heading)
+    (current-buffer)
+    saxon/jira-org-headings-query
+    :action #'saxon/jira-update-heading)
   (message "Updated jira headings."))
 
 (defun saxon/jira-update-heading ()
