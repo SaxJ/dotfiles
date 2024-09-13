@@ -241,7 +241,7 @@
 
 
 (use-package eglot-booster
-  :vc (:url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
+  :vc (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
   :after eglot
   :config (eglot-booster-mode)
   :ensure t)
@@ -253,15 +253,15 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package hurl-mode
-  :vc (:url "https://github.com/Orange-OpenSource/hurl"
-            :rev :newest
-            :lisp-dir "contrib/emacs/"))
+  :vc (hurl-mode :url "https://github.com/Orange-OpenSource/hurl"
+                 :rev :newest
+                 :lisp-dir "contrib/emacs/"))
 
 (use-package fsharp-mode
   :ensure t)
 
-(use-package eglot-fsharp
-  :ensure t)
+;; (use-package eglot-fsharp
+;;   :ensure t)
 
 (use-package yuck-mode
   :ensure t)
@@ -279,7 +279,9 @@
   :ensure t)
 
 (use-package elm-mode
-  :ensure t)
+  :ensure t
+  :config
+  (setq elm-mode-hook '(elm-indent-simple-mode)))
 
 (use-package rainbow-mode
   :ensure t)
@@ -302,3 +304,7 @@
 
 (use-package git-timemachine
   :ensure t)
+
+(use-package php-ts-mode
+  :ensure t
+  :vc (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode"))

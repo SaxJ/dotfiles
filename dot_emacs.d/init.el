@@ -8,6 +8,11 @@
   (add-to-list 'package-archives '("nongnu" . "https://elpa.nongnu.org/nongnu/") t)
   (add-to-list 'package-archives '("devel" . "https://elpa.gnu.org/devel/") t))
 
+;; Not needed for emacs-30
+(unless (package-installed-p 'vc-use-package)
+  (package-vc-install "https://github.com/slotThe/vc-use-package"))
+(require 'vc-use-package)
+
 (set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
 
 ;; If you want to turn off the welcome screen, uncomment this
@@ -48,12 +53,6 @@
       `((".*" . ,temporary-file-directory)))
 (setq auto-save-file-name-transforms
       `((".*" ,temporary-file-directory t)))
-
-;; Get the path from bashrc
-(use-package exec-path-from-shell
-  :ensure t
-  :config
-  (exec-path-from-shell-initialize))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -193,77 +192,29 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(custom-safe-themes
-   '("9dccdccfeb236623d5c7cf0250a92308cf307afde4ebdaf173b59e8bbbae1828"
-     default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(apheleia avy cape chezmoi claude-shell corfu-terminal csproj-mode
-              csv-mode eat ef-themes eglot-booster eglot-fsharp
-              elm-mode embark-consult epresent evil-collection
-              evil-commentary evil-org evil-surround
-              exec-path-from-shell forge general git-auto-commit-mode
-              git-timemachine graphql-mode graphviz-dot-mode
-              haskell-mode helm-org hurl-mode jiralib2 jq-mode
-              json-mode kind-icon marginalia meow mood-line
-              multi-vterm orderless org-modern org-ql org-roam origami
-              otpp pocket-reader popper prescient prodigy rainbow-mode
-              restclient rsync-mode string-inflection sudo-edit
-              svelte-mode todotxt vertico vue-mode wakatime-mode
-              web-mode yaml-mode yuck-mode zone-nyan zone-rainbow zoom))
+   '(ssh-deploy eglot eglot-booster hurl-mode php-ts-mode vc-use-package org-ql))
  '(package-vc-selected-packages
-   '((otpp :url "https://github.com/abougouffa/one-tab-per-project")))
+   '((php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
+     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")
+     (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)))
  '(safe-local-variable-values
-   '((rsync-local-path . "/home/saxonj/Documents/unicron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/unicron")
+   '((ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
+     (ssh-deploy-async . 1)
+     (ssh-deploy-on-explicit-save . 0)
+     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron")
+     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron")
+     (gac-automatically-add-new-files-p . t)
      (rsync-local-path . "/home/saxonj/Documents/hannibal/")
      (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
-     (ssh-deploy-root-remote
-      . "/ssh:ubuntu@minikube:/home/ubuntu/unicron/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/unicron/")
-     (ssh-deploy-root-remote
-      . "/ssh:ubuntu@minikube:/home/ubuntu/hannibal/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/hannibal/")
+     (rsync-local-path . "/home/saxonj/Documents/unicron/")
+     (rsync-remote-paths "minikube:/home/ubuntu/unicron")
      (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
      (rsync-local-path . "/home/saxonj/Documents/megatron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/megatron")
-     (evil-shift-width . 4) (evil-shift-width . 2)
-     (ssh-deploy-async . t) (gac-automatically-add-new-files-p . t)
-     (eglot-server-programs
-      ((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
-       :initializationOptions (:enable t :lint t)))
-     (eglot-server-programs quote
-                            (((typescript-ts-mode tsx-ts-mode) "deno"
-                              "lsp" :initializationOptions
-                              (:enable t :lint t))))
-     (eglot-server-programs \`
-                            (((typescript-ts-mode tsx-ts-mode) "deno"
-                              "lsp" :initializationOptions
-                              (:enable t :lint t))))
-     (eglot-server-programs (typescript-ts-mode tsx-ts-mode) "deno"
-                            "lsp" :initializationOptions
-                            (:enable t :lint t))
-     (eglot-server-programs quote
-                            ((typescript-ts-mode tsx-ts-mode) "deno"
-                             "lsp" :initializationOptions
-                             (:enable t :lint t)))
-     (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"
-             :initializationOptions (:enable t :lint t)))
-     (eval add-to-list 'eglot-server-programs
-           '((typescript-ts-mode tsx-ts-mode) "deno" "lsp"))
-     (eval add-to-list 'eglot-server-programs
-           '(typescript-ts-mode "deno" "lsp"))
-     (ssh-deploy-on-explicit-save . t)
-     (ssh-deploy-async-with-threads . 1) (ssh-deploy-async . 1)
-     (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote
-      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")))
- '(tramp-verbose 6)
- '(truncate-lines t)
- '(vterm-max-scrollback 100000))
+     (rsync-remote-paths "minikube:/home/ubuntu/megatron"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

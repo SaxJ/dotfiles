@@ -149,7 +149,7 @@ require("lazy").setup({
 			opts = {},
 			keys = {
 				{
-					"<leader>p",
+					"<leader>y",
 					function()
 						require("telescope").extensions.yank_history.yank_history({})
 					end,
@@ -264,10 +264,9 @@ require("lazy").setup({
 						"eslint",
 						"html",
 						"jsonls",
-						"tsserver",
+						"ts_ls",
 						"pyright",
 						"tailwindcss",
-						"csharp_ls",
 					},
 				})
 			end,
@@ -306,8 +305,15 @@ require("lazy").setup({
 							capabilities = capabilities,
 						})
 					end,
-					["tsserver"] = function()
-						nvim_lsp["tsserver"].setup({
+					["omnisharp"] = function()
+						nvim_lsp["omnisharp"].setup({
+							cmd = { "omnisharp" },
+							on_attach = on_attach,
+							capabilities = capabilities,
+						})
+					end,
+					["ts_ls"] = function()
+						nvim_lsp["ts_ls"].setup({
 							on_attach = on_attach,
 							capabilities = capabilities,
 						})
@@ -537,8 +543,9 @@ require("lazy").setup({
 					fugitive_sync = false,
 					sync_on_save = false,
 					reload_file_after_sync = true,
-					-- on_exit = function(code, command) end,
+					-- on_exit = function(code, _command) end,
 					-- on_stderr = function(data, command) end,
+					project_config_path = ".nvim/rsync.toml",
 				})
 			end,
 		},
@@ -554,18 +561,55 @@ require("lazy").setup({
 		},
 
 		{
-			"linrongbin16/fzfx.nvim",
-			dependencies = { "nvim-tree/nvim-web-devicons", "junegunn/fzf" },
-
+			"echasnovski/mini.nvim",
+			version = false,
 			config = function()
-				require("fzfx").setup()
-				require("fzfx").register("todo", {
-					command = {
-						name = "Fzfxtodo",
-						desc = "List todos",
-					},
-				})
+				require("mini.ai").setup()
+				require("mini.basics").setup()
+				require("mini.files").setup()
+				require("mini.surround").setup()
 			end,
+		},
+		{
+			"folke/which-key.nvim",
+			event = "VeryLazy",
+			opts = {
+				preset = "modern",
+			},
+			keys = {
+				{
+					"<leader>?",
+					function()
+						require("which-key").show({ global = false })
+					end,
+					desc = "Buffer Local Keymaps (which-key)",
+				},
+				{
+					"<leader>.",
+					function()
+						require("telescope.builtin").find_files({ cwd = vim.fn.expand("%:p:h") })
+					end,
+					desc = "Siblings",
+				},
+				{ "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "Find files" },
+				{ "<leader>-", ":lua MiniFiles.open()<CR>", desc = "File Browser" },
+				{ "<leader>/", "<cmd>Telescope grep_string<cr>", desc = "Project Search" },
+				{ "<leader>p", group = "Project" },
+				{ "<leader>pp", "<cmd>Telescope projects<cr>", desc = "Switch Project" },
+				{ "<leader>ps", "<cmd>Telescope grep_string<cr>", desc = "Project Search" },
+				{ "<leader>g", group = "Git" },
+				{
+					"<leader>gg",
+					function()
+						local cwd = vim.fn.getcwd()
+						vim.cmd(string.format("FloatermNew (cd %s && lazygit)", cwd))
+					end,
+					desc = "Git status",
+				},
+				{ "<leader>r", group = "Remote" },
+				{ "<leader>ru", ":RsyncUpFile<cr>", desc = "Upload File" },
+				{ "<leader>rd", ":RsyncDownFile<cr>", desc = "Download File" },
+			},
 		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
@@ -575,9 +619,16 @@ require("lazy").setup({
 	checker = { enabled = true },
 })
 
-local km = vim.keymap
-km.set("n", "<leader>pp", ":Telescope projects<cr>")
-km.set("n", "<leader><leader>", ":Telescope find_files<cr>")
-km.set("n", "<leader>gg", ":FloatermNew gitu<cr>")
-km.set("n", "<leader>ru", ":RsyncUpFile<cr>")
-km.set("n", "<leader>rd", ":RsyncDownFile<cr>")
+vim.api.nvim_create_autocmd("LspAttach", {
+	desc = "LSP Actions",
+	callback = function(event)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = event.buf })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
+		vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation", buffer = event.buf })
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto references", buffer = event.buf })
+		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
+		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
+	end,
+})

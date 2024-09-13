@@ -49,7 +49,16 @@
   :ensure t)
 
 (use-package prodigy
-  :ensure t)
+  :ensure t
+  :config
+  (prodigy-define-service
+    :name "Unicron"
+    :command "yarn"
+    :args '("dev" "-p" "3000")
+    :cwd "~/Documents/unicron"
+    :tags '(work)
+    :stop-signal 'sigkill
+    :kil-process-buffer-on-stop t))
 
 (use-package zoom
   :ensure t
