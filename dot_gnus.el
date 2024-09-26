@@ -30,7 +30,7 @@
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)
                       (nnir-search-engine imap)
-                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                                        ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
                       ;; press 'E' to expire email
                       (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
                       (nnmail-expiry-wait 90)))
@@ -40,7 +40,7 @@
                       (nnimap-server-port 993)
                       (nnimap-stream ssl)
                       (nnir-search-engine imap)
-                      ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
+                                        ; @see http://www.gnu.org/software/emacs/manual/html_node/gnus/Expiring-Mail.html
                       ;; press 'E' to expire email
                       (nnmail-expiry-target "nnimap+gmail:[Gmail]/Trash")
                       (nnmail-expiry-wait 90)))
@@ -52,13 +52,13 @@
                       (nnir-search-engine imap)
                       (nnmail-expiry-target 'delete)
                       (nnmail-expiry-wait 90)))
-(add-to-list 'gnus-secondary-select-methods '(nnhackernews ""))
+;; (add-to-list 'gnus-secondary-select-methods '(nnhackernews ""))
 
 (setq gnus-thread-sort-functions
       '(gnus-thread-sort-by-most-recent-date
         (not gnus-thread-sort-by-number)))
 
-; NO 'passive
+                                        ; NO 'passive
 (setq gnus-use-cache t)
 
 ;; {{ press "o" to view all groups
@@ -68,8 +68,8 @@
   (gnus-group-list-all-groups 5))
 
 (define-key gnus-group-mode-map
-  ;; list all the subscribed groups even they contain zero un-read messages
-  (kbd "o") 'my-gnus-group-list-subscribed-groups)
+            ;; list all the subscribed groups even they contain zero un-read messages
+            (kbd "o") 'my-gnus-group-list-subscribed-groups)
 
 ;; BBDB: Address list
 (require 'bbdb)
