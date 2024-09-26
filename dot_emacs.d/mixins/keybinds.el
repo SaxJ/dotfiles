@@ -165,7 +165,7 @@
     "cs" 'chezmoi-sync-files
 
     ;; LSP helpers
-    "lr" 'saxon/restart-eglot
+    "lr" 'eglot-reconnect
 
     ;; todotxt
     "oT" 'todotxt
