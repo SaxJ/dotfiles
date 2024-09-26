@@ -6,7 +6,7 @@
 [alias]
     co = checkout
     cob = checkout -b
-    ci = commit -S
+    ci = commit
     st = status
     br = branch
     hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
