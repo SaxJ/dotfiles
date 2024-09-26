@@ -45,7 +45,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
 "space" = "file_picker"
-"minus" = ":sh zellij run -n yazi -cf -- yazi %{dirname}"
+"minus" = ":sh zellij run -ci -- yazi %{dirname}"
 
 [keys.normal."C-f"]
 "t" = ":pipe ascii-table"
@@ -55,17 +55,18 @@ r = "rename_symbol"
 a = "code_action"
 
 [keys.normal.space.o]
-"minus" = ":sh zellij run -n yazi -cf -- yazi %{dirname}"
+"minus" = ":sh zellij run -ci -- yazi %{dirname}"
+T = ":sh zellij run -cf -- pter ~/Dropbox/todo.txt"
 
 [keys.normal.space.g]
-g = ":sh zellij run -n lazygit -cf -- lazygit"
+g = ":sh zellij run -ci -- lazygit"
+l = ":sh zellij run -ci -- tig %{filename}"
 d = "changed_file_picker"
-l = ":sh zellij run -i -- tig %{filename}"
 
 [keys.normal.space.r]
-u = ":sh rpush $(realpath --relative-to=\"%{cwd}\" %{filename})"
-d = ":sh rpull $(realpath --relative-to=\"%{cwd}\" %{filename})"
+u = ":sh rpush %{filename:rel}"
+d = ":sh rpull %{filename:rel}"
 
 [keys.normal.space.f]
 f = "file_picker"
-Y = ":sh realpath --relative-to=\"%{cwd}\" %{filename} | wl-copy"
+Y = ":sh wl-copy '%{filename:rel}'"
