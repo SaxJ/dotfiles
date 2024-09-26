@@ -195,13 +195,14 @@
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(ssh-deploy eglot eglot-booster hurl-mode php-ts-mode vc-use-package org-ql))
+   '(bbdb eglot-booster ssh-deploy eglot hurl-mode php-ts-mode vc-use-package org-ql))
  '(package-vc-selected-packages
-   '((php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
-     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")
-     (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)))
+   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
+     (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
+     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")))
  '(safe-local-variable-values
-   '((ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+   '((ssh-deploy-root-remote . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
      (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
@@ -214,7 +215,8 @@
      (rsync-remote-paths "minikube:/home/ubuntu/unicron")
      (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
      (rsync-local-path . "/home/saxonj/Documents/megatron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/megatron"))))
+     (rsync-remote-paths "minikube:/home/ubuntu/megatron")))
+ '(tramp-terminal-type "tramp"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
