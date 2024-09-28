@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+for job in $(jobs -l | awk '{print $2}'); do
+    # Get the job ID
+    job_id=$(jobs -l | grep " $job " | awk '{print $1}' | tr -d '[]+')
+    # Get the working directory of the job
+    work_dir=$(readlink -e /proc/"$job"/cwd)
+    # Print the job ID and working directory
+    echo "$job_id    $work_dir"
+done
