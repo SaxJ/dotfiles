@@ -56,6 +56,13 @@ require("lazy").setup({
 		{ "voldikss/vim-floaterm" },
 		-- optional for icons
 		{ "nvim-tree/nvim-web-devicons" },
+		{ "stevearc/dressing.nvim", opts = {} },
+		{ "stevearc/overseer.nvim", opts = {} },
+		{ "mistweaverco/kulala.nvim", opts = {} },
+		{
+			"danymat/neogen",
+			config = true,
+		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
