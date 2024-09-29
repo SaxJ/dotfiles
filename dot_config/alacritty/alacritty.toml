@@ -1,5 +1,5 @@
 [shell]
-program = "bash"
+program = "tmux"
 # program = "zellij"
 # args = ["-l", "welcome"]
 
