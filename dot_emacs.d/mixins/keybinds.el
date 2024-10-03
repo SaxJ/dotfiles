@@ -85,6 +85,10 @@
     (tab-bar-rename-tab "Kubernetes")
     (kubernetes-overview)))
 
+(defun saxon/shell-replace-region ()
+  (interactive)
+  (shell-command-on-region (point-min) (point-max) (read-shell-command "Command: ") (current-buffer) t "*Command Errors*" nil))
+
 (use-package general
   :ensure t
   :config
@@ -173,6 +177,9 @@
     ;; terminals
     "ot" 'multi-vterm
     "tt" 'popper-toggle-type)
+
+  (general-vmap
+    "|" 'saxon/shell-replace-region)
 
   (general-nmap
     "gD" 'xref-find-references
