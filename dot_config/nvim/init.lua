@@ -24,6 +24,7 @@ o.splitright = true
 o.splitbelow = true -- When on, splitting a window will put the new window below the current one
 o.termguicolors = true
 o.wrap = false -- disable line wrapping
+o.titlestring = "%{fnamemodify(getcwd(), ':t')} %m"
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -86,4 +87,69 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
+local function get_pass(pass_name)
+	local handle = io.popen("pass " .. pass_name)
+	if handle == nil then
+		return "error"
+	end
+
+	local result = handle:read("*a")
+	handle:close()
+	return string.gsub(result, "^%s*(.-)%s*$", "%1")
+end
+
+local function get_jira_assigned()
+	local auth_token = get_pass("jira")
+	local payload = string.format('{"jql": "%s", "startAt": 0}', "")
+	local url = "https://hejira.atlassian.net/rest/api/2/search"
+	local curl_cmd = string.format(
+		"curl -s -X POST -H 'Authorization: Bearer %s' -H 'Content-Type: application/json' -d '%s' '%s'",
+		auth_token,
+		payload,
+		url
+	)
+	return curl_cmd
+end
+
+-- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+
+-- general
+vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>.", ":Pick files cwd=%:p:h<CR>", { desc = "Siblings" })
+vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
+
+-- git
+vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
+vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
+
+-- project
+vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
+vim.keymap.set("n", "<leader>pt", ":FloatermToggle<CR>", { desc = "Project Terminal" })
+
+-- open
+vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
+vim.keymap.set("n", "<leader>o-", function()
+	local files = require("mini.files")
+	if not files.close() then
+		files.open(vim.api.nvim_buf_get_name(0), false)
+	end
+end, { desc = "Files" })
+vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>ob", ":OverseerToggle<CR>", { desc = "Build" })
+
+-- neogit
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "NeogitStatus",
+	callback = function()
+		vim.api.nvim_buf_set_keymap(
+			0,
+			"n",
+			"<localleader>cp",
+			":! gh pr create --web<CR>",
+			{ noremap = true, silent = true }
+		)
+	end,
+})

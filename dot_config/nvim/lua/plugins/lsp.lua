@@ -35,9 +35,11 @@ return {
 		end
 
 		mason_lspconfig.setup_handlers({
-			function(server)
-				nvim_lsp[server].setup({})
-			end,
+			-- function(server)
+			-- 	nvim_lsp[server].setup({})
+			-- end,
+			["lua_ls"] = nvim_lsp["lua_ls"].setup({}),
+			["intelephense"] = nvim_lsp["intelephense"].setup({}),
 			["omnisharp"] = function()
 				nvim_lsp["omnisharp"].setup({
 					cmd = { "omnisharp" },
