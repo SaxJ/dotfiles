@@ -1,6 +1,8 @@
 local wezterm = require("wezterm")
 local is_dark = true
 
+local workspace_switcher = wezterm.plugin.require("https://github.com/MLFlexer/smart_workspace_switcher.wezterm")
+
 local function is_vi_process(pane)
 	return pane:get_foreground_process_name():find("n?vim") ~= nil
 end
@@ -36,7 +38,7 @@ function dirs(directory)
 	local pfile = popen('find -type d -maxdepth 1 "' .. directory .. '"')
 	for filename in pfile:lines() do
 		i = i + 1
-		t[i] = {id = filename, label = filename}
+		t[i] = { id = filename, label = filename }
 	end
 	pfile:close()
 	return t
@@ -44,35 +46,33 @@ end
 
 wezterm.on("NewWorkspace", function(window, pane)
 	local home = wezterm.home_dir
-	local workspaces = dirs(home .. '/Documents')
+	local workspaces = dirs(home .. "/Documents")
 
 	window:perform_action(
-		wezterm.action.InputSelector {
-			action = wezterm.action_callback(
-				function(inner_window, inner_pane, id, label)
-					if not id and not label then
-						wezterm.log_info 'cancelled'
-					else
-						wezterm.log_info('id = ' .. id)
-						wezterm.log_info('label = ' .. label)
-						inner_window:perform_action(
-							wezterm.action.SwitchToWorkspace {
-								name = label,
-								spawn = {
-									label = 'Workspace: ' .. label,
-									cwd = id,
-								},
+		wezterm.action.InputSelector({
+			action = wezterm.action_callback(function(inner_window, inner_pane, id, label)
+				if not id and not label then
+					wezterm.log_info("cancelled")
+				else
+					wezterm.log_info("id = " .. id)
+					wezterm.log_info("label = " .. label)
+					inner_window:perform_action(
+						wezterm.action.SwitchToWorkspace({
+							name = label,
+							spawn = {
+								label = "Workspace: " .. label,
+								cwd = id,
 							},
-							inner_pane
-						)
-					end
+						}),
+						inner_pane
+					)
 				end
-			),
-			title = 'Choose Workspace',
+			end),
+			title = "Choose Workspace",
 			choices = workspaces,
 			fuzzy = true,
-			fuzzy_description = 'Fuzzy find and/or make a workspace',
-		},
+			fuzzy_description = "Fuzzy find and/or make a workspace",
+		}),
 		pane
 	)
 end)
@@ -137,10 +137,7 @@ local function get_process(tab)
 
 	local process_name = string.gsub(tab.active_pane.foreground_process_name, "(.*[/\\])(.*)", "%2")
 
-	return wezterm.format(
-		process_icons[process_name]
-		or { { Text = string.format("[%s]", process_name) } }
-	)
+	return wezterm.format(process_icons[process_name] or { { Text = string.format("[%s]", process_name) } })
 end
 
 local function get_current_working_dir(tab)
@@ -169,8 +166,8 @@ wezterm.on("update-right-status", function(window)
 	}))
 end)
 
-return {
-	font = wezterm.font('FiraCode Nerd Font'),
+local config = {
+	font = wezterm.font("FiraCode Nerd Font"),
 	default_prog = { "/usr/bin/bash" },
 	font_size = 13,
 	max_fps = 120,
@@ -230,49 +227,48 @@ return {
 			mods = "ALT",
 			action = wezterm.action({ CloseCurrentTab = { confirm = false } }),
 		},
-		{ key = "q",   mods = "ALT",        action = wezterm.action.CloseCurrentPane({ confirm = false }) },
-		{ key = "z",   mods = "ALT",        action = wezterm.action.TogglePaneZoomState },
-		{ key = "F11", mods = "",           action = wezterm.action.ToggleFullScreen },
+		{ key = "q", mods = "ALT", action = wezterm.action.CloseCurrentPane({ confirm = false }) },
+		{ key = "z", mods = "ALT", action = wezterm.action.TogglePaneZoomState },
+		{ key = "F11", mods = "", action = wezterm.action.ToggleFullScreen },
 
 		-- workspaces
-		{ key = "w",   mods = "ALT",        action = wezterm.action.EmitEvent("NewWorkspace") },
+		{ key = "w", mods = "ALT", action = wezterm.action.EmitEvent("NewWorkspace") },
 
 		-- resize panes
-		{ key = "h",   mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
-		{ key = "j",   mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
-		{ key = "k",   mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
-		{ key = "l",   mods = "ALT|SHIFT",  action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
+		{ key = "h", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
+		{ key = "j", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Down", 1 }) },
+		{ key = "k", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Up", 1 }) },
+		{ key = "l", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Right", 1 }) },
 
 		-- navigate panes
-		{ key = "h",   mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
-		{ key = "j",   mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
-		{ key = "k",   mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
-		{ key = "l",   mods = "ALT",        action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
+		{ key = "h", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-left") },
+		{ key = "j", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-down") },
+		{ key = "k", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-up") },
+		{ key = "l", mods = "ALT", action = wezterm.action.EmitEvent("ActivatePaneDirection-right") },
 
 		-- navigate tabs
-		{ key = "[",   mods = "ALT",        action = wezterm.action({ ActivateTabRelative = -1 }) },
-		{ key = "]",   mods = "ALT",        action = wezterm.action({ ActivateTabRelative = 1 }) },
-		{ key = "{",   mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative(-1) },
-		{ key = "}",   mods = "SHIFT|ALT",  action = wezterm.action.MoveTabRelative(1) },
-		{ key = "1",   mods = "ALT",        action = wezterm.action({ ActivateTab = 0 }) },
-		{ key = "2",   mods = "ALT",        action = wezterm.action({ ActivateTab = 1 }) },
-		{ key = "3",   mods = "ALT",        action = wezterm.action({ ActivateTab = 2 }) },
-		{ key = "4",   mods = "ALT",        action = wezterm.action({ ActivateTab = 3 }) },
-		{ key = "5",   mods = "ALT",        action = wezterm.action({ ActivateTab = 4 }) },
-		{ key = "6",   mods = "ALT",        action = wezterm.action({ ActivateTab = 5 }) },
-		{ key = "7",   mods = "ALT",        action = wezterm.action({ ActivateTab = 6 }) },
-		{ key = "8",   mods = "ALT",        action = wezterm.action({ ActivateTab = 7 }) },
-		{ key = "9",   mods = "ALT",        action = wezterm.action({ ActivateTab = 8 }) },
-
+		{ key = "[", mods = "ALT", action = wezterm.action({ ActivateTabRelative = -1 }) },
+		{ key = "]", mods = "ALT", action = wezterm.action({ ActivateTabRelative = 1 }) },
+		{ key = "{", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(-1) },
+		{ key = "}", mods = "SHIFT|ALT", action = wezterm.action.MoveTabRelative(1) },
+		{ key = "1", mods = "ALT", action = wezterm.action({ ActivateTab = 0 }) },
+		{ key = "2", mods = "ALT", action = wezterm.action({ ActivateTab = 1 }) },
+		{ key = "3", mods = "ALT", action = wezterm.action({ ActivateTab = 2 }) },
+		{ key = "4", mods = "ALT", action = wezterm.action({ ActivateTab = 3 }) },
+		{ key = "5", mods = "ALT", action = wezterm.action({ ActivateTab = 4 }) },
+		{ key = "6", mods = "ALT", action = wezterm.action({ ActivateTab = 5 }) },
+		{ key = "7", mods = "ALT", action = wezterm.action({ ActivateTab = 6 }) },
+		{ key = "8", mods = "ALT", action = wezterm.action({ ActivateTab = 7 }) },
+		{ key = "9", mods = "ALT", action = wezterm.action({ ActivateTab = 8 }) },
 
 		-- copy/paste
-		{ key = "v",   mods = "ALT",        action = wezterm.action.ActivateCopyMode },
-		{ key = "c",   mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
-		{ key = "v",   mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
+		{ key = "v", mods = "ALT", action = wezterm.action.ActivateCopyMode },
+		{ key = "c", mods = "CTRL|SHIFT", action = wezterm.action({ CopyTo = "Clipboard" }) },
+		{ key = "v", mods = "CTRL|SHIFT", action = wezterm.action({ PasteFrom = "Clipboard" }) },
 
 		-- zooming
-		{ key = "=",   mods = "CTRL",       action = wezterm.action.IncreaseFontSize },
-		{ key = "-",   mods = "CTRL",       action = wezterm.action.DecreaseFontSize },
+		{ key = "=", mods = "CTRL", action = wezterm.action.IncreaseFontSize },
+		{ key = "-", mods = "CTRL", action = wezterm.action.DecreaseFontSize },
 	},
 	hyperlink_rules = {
 		{
@@ -301,3 +297,6 @@ return {
 		},
 	},
 }
+workspace_switcher.apply_to_config(config)
+
+return config
