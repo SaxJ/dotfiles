@@ -25,6 +25,7 @@ o.splitbelow = true -- When on, splitting a window will put the new window below
 o.termguicolors = true
 o.wrap = false -- disable line wrapping
 o.titlestring = "%{fnamemodify(getcwd(), ':t')} %m"
+o.autoread = true
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -119,6 +120,11 @@ vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>.", ":Pick files cwd=%:p:h<CR>", { desc = "Siblings" })
 vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
 
+-- files
+vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
+vim.keymap.set("n", "<leader>ff", ":Pick files<CR>", { desc = "Find" })
+vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Name" })
+
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
@@ -127,6 +133,11 @@ vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
 vim.keymap.set("n", "<leader>pt", ":FloatermToggle<CR>", { desc = "Project Terminal" })
+
+-- remote
+vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
+vim.keymap.set("n", "<leader>ru", ":RsyncUpFile<CR>", { desc = "Upload" })
+vim.keymap.set("n", "<leader>rd", ":RsyncDownFile<CR>", { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
@@ -138,18 +149,40 @@ vim.keymap.set("n", "<leader>o-", function()
 end, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
-vim.keymap.set("n", "<leader>ob", ":OverseerToggle<CR>", { desc = "Build" })
+
+-- build system
+vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
+vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
+vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
 
 -- neogit
 vim.api.nvim_create_autocmd("FileType", {
 	pattern = "NeogitStatus",
 	callback = function()
-		vim.api.nvim_buf_set_keymap(
-			0,
+		vim.keymap.set(
 			"n",
 			"<localleader>cp",
 			":! gh pr create --web<CR>",
-			{ noremap = true, silent = true }
+			{ noremap = true, silent = true, buffer = true }
 		)
+	end,
+})
+
+-- hurl
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "hurl",
+	callback = function()
+		vim.keymap.set("n", "<localleader>X", "<cmd>HurlRunner<CR>", { noremap = true, silent = true, buffer = true })
+		vim.keymap.set("n", "<localleader>x", "<cmd>HurlRunnerAt<CR>", { noremap = true, silent = true, buffer = true })
+	end,
+})
+
+-- json
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "json",
+	callback = function()
+		vim.keymap.set("n", "<localleader>jq", function()
+			require("jq").run()
+		end, { noremap = true, silent = true, buffer = true })
 	end,
 })
