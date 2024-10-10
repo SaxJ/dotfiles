@@ -57,9 +57,10 @@
         "format-disconnected": "Disconnected ⚠"
     },
     "wireplumber": {
-        "format": "{volume}% {icon}",
+        "format": "{volume}%  {icon}",
         "format-bluetooth": "{volume}% {icon}",
         "format-muted": "",
+        "on-click": "killall pavucontrol || pavucontrol",
         "format-icons": {
             "headphones": "",
             "handsfree": "",
