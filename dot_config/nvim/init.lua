@@ -61,9 +61,14 @@ require("lazy").setup({
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
 		{ "mistweaverco/kulala.nvim", opts = {} },
+		{ "danymat/neogen", config = true },
+		{ "arecarn/vim-auto-autoread" },
 		{
-			"danymat/neogen",
+			"windwp/nvim-autopairs",
+			event = "InsertEnter",
 			config = true,
+			-- use opts = {} for passing setup options
+			-- this is equivalent to setup({}) function
 		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
@@ -118,7 +123,14 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 -- general
 vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>.", ":Pick files cwd=%:p:h<CR>", { desc = "Siblings" })
-vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
+-- vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader><leader>", function()
+	require("telescope").extensions.smart_open.smart_open({ cwd_only = true })
+end, { noremap = true, silent = true })
+
+-- buffers
+vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
+vim.keymap.set("n", "<leader>bb", ":Pick buffers<CR>", { desc = "Buffers" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
