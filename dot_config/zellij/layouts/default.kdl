@@ -13,6 +13,9 @@ layout {
             pane focus=true { x 10; y 10; width "90%"; height "90%"; }
         }
     }
+    new_tab_template {
+        standard
+    }
     pane_template name="standard" {
         pane split_direction="vertical" {
             children
