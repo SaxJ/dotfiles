@@ -10,7 +10,7 @@ export JIRA_API_TOKEN="$(pass jira)"
 
 export STOW_DIR=/home/saxonj/dotfiles
 export SSH_ASKPASS=ksshaskpass
-export EDITOR=nvim
+export EDITOR=hx
 export VISUAL=$EDITOR
 export PAGER=more
 export TERM=alacritty
