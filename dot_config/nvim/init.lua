@@ -122,11 +122,8 @@ vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- general
 vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>.", ":Pick files cwd=%:p:h<CR>", { desc = "Siblings" })
--- vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
-vim.keymap.set("n", "<leader><leader>", function()
-	require("telescope").extensions.smart_open.smart_open({ cwd_only = true })
-end, { noremap = true, silent = true })
+vim.keymap.set("n", "<leader>.", ":Pick files cwd='%:p:h'<CR>", { desc = "Siblings" })
+vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -144,7 +141,7 @@ vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
-vim.keymap.set("n", "<leader>pt", ":FloatermToggle<CR>", { desc = "Project Terminal" })
+vim.keymap.set("n", "<leader>pt", ":FloatermToggle getcwd()<CR>", { desc = "Project Terminal" })
 
 -- remote
 vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
@@ -153,6 +150,12 @@ vim.keymap.set("n", "<leader>rd", ":RsyncDownFile<CR>", { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
+vim.keymap.set("n", "<leader>-", function()
+	local files = require("mini.files")
+	if not files.close() then
+		files.open(vim.api.nvim_buf_get_name(0), false)
+	end
+end, { desc = "Files" })
 vim.keymap.set("n", "<leader>o-", function()
 	local files = require("mini.files")
 	if not files.close() then
