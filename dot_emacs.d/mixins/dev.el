@@ -308,3 +308,7 @@
 (use-package php-ts-mode
   :ensure t
   :vc (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode"))
+
+(use-package build
+  :ensure t
+  :vc (build :url "https://github.com/27justin/build.el"))
