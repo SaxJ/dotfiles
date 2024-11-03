@@ -44,6 +44,7 @@
           (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.3" "src")
+          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
@@ -78,12 +79,14 @@
           (php-mode . php-ts-mode)
           (c-mode . c-ts-mode)
           (c++-mode . c++-ts-mode)
+          (dockerfile-mode . dockerfile-ts-mode)
           (yaml-mode . yaml-ts-mode)))
 
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
 
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
@@ -97,6 +100,9 @@
 ;;;   Version Control
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun saxon/on-create-pr (value _headers _status _req)
+  (when-let ((url (alist-get 'html_url value)))
+    ((shell-command (format "%s %s > /dev/null" browse-url-firefox-program url)))))
 
 ;; Magit: best Git client to ever exist
 (use-package magit
@@ -104,6 +110,7 @@
   :ensure t
   :config
   (setq forge-add-default-bindings nil)
+  (add-hook 'forge-post-submit-callback-hook 'saxon/on-create-pr)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
 
@@ -213,7 +220,9 @@
 
 (use-package forge
   :ensure t
-  :after magit)
+  :after magit
+  :config
+  (add-hook 'forge-post-mode-hook #'(lambda () (setq forge-buffer-draft-p t))))
 
 (use-package origami
   :ensure t
