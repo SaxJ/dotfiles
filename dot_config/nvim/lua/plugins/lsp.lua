@@ -3,6 +3,7 @@ return {
 	"neovim/nvim-lspconfig",
 	event = { "BufReadPre", "BufNewFile" },
 	dependencies = {
+		"saghen/blink.cmp",
 		{
 			"folke/lazydev.nvim",
 			ft = "lua",

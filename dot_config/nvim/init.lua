@@ -27,6 +27,8 @@ o.wrap = false -- disable line wrapping
 o.titlestring = "%{fnamemodify(getcwd(), ':t')} %m"
 o.autoread = true
 
+vim.diagnostic.config({ virtual_text = false })
+
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not (vim.uv or vim.loop).fs_stat(lazypath) then
@@ -69,6 +71,13 @@ require("lazy").setup({
 			config = true,
 			-- use opts = {} for passing setup options
 			-- this is equivalent to setup({}) function
+		},
+		{
+			"rachartier/tiny-inline-diagnostic.nvim",
+			event = "VeryLazy", -- Or `LspAttach`
+			config = function()
+				require("tiny-inline-diagnostic").setup()
+			end,
 		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
@@ -121,26 +130,28 @@ end
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
 -- general
-vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>.", ":Pick files cwd='%:p:h'<CR>", { desc = "Siblings" })
-vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader>/", ":Telescope grep_string<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>.", ":Telescope find_files cwd=%:p:h<CR>", { desc = "Siblings" })
+vim.keymap.set("n", "<leader><leader>", ":Telescope find_files<CR>", { desc = "Files" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", ":Pick buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", ":Telescope buffers<CR>", { desc = "Buffers" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
-vim.keymap.set("n", "<leader>ff", ":Pick files<CR>", { desc = "Find" })
+vim.keymap.set("n", "<leader>ff", ":Telescope find_files<CR>", { desc = "Find" })
 vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Name" })
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
 vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
+vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
 
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
+vim.keymap.set("n", "<leader>pp", ":Telescope zoxide list<CR>", { desc = "Projects" })
 vim.keymap.set("n", "<leader>pt", ":FloatermToggle getcwd()<CR>", { desc = "Project Terminal" })
 
 -- remote
@@ -150,12 +161,6 @@ vim.keymap.set("n", "<leader>rd", ":RsyncDownFile<CR>", { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
-vim.keymap.set("n", "<leader>-", function()
-	local files = require("mini.files")
-	if not files.close() then
-		files.open(vim.api.nvim_buf_get_name(0), false)
-	end
-end, { desc = "Files" })
 vim.keymap.set("n", "<leader>o-", function()
 	local files = require("mini.files")
 	if not files.close() then
