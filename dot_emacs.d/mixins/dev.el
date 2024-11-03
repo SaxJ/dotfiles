@@ -240,11 +240,11 @@
   (popper-echo-mode +1))
 
 
-(use-package eglot-booster
-  :vc (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
-  :after eglot
-  :config (eglot-booster-mode)
-  :ensure t)
+;; (use-package eglot-booster
+;;   :vc (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
+;;   :after eglot
+;;   :config (eglot-booster-mode)
+;;   :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -308,3 +308,10 @@
 (use-package php-ts-mode
   :ensure t
   :vc (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode"))
+
+(use-package build
+  :ensure t
+  :vc (build :url "https://github.com/27justin/build.el"))
+
+(use-package terraform-mode
+  :ensure t)

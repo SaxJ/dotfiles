@@ -194,19 +194,22 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(bbdb eglot-booster ssh-deploy eglot hurl-mode php-ts-mode vc-use-package org-ql))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
-   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
+   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev
+                    :newest)
      (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
-     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")))
+     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev
+                :newest :lisp-dir "contrib/emacs/")))
  '(safe-local-variable-values
-   '((ssh-deploy-root-remote . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+   '((ssh-deploy-root-remote
+      . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
-     (ssh-deploy-async . 1)
-     (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron")
+     (ssh-deploy-async . 1) (ssh-deploy-on-explicit-save . 0)
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron")
      (gac-automatically-add-new-files-p . t)
      (rsync-local-path . "/home/saxonj/Documents/hannibal/")
