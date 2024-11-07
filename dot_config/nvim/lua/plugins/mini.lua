@@ -23,6 +23,10 @@ return {
 				{ mode = "n", keys = "<Leader>" },
 				{ mode = "x", keys = "<Leader>" },
 
+				-- Local leader
+				{ mode = "n", keys = "<localleader>" },
+				{ mode = "x", keys = "<loacalleader>" },
+
 				-- Built-in completion
 				{ mode = "i", keys = "<C-x>" },
 
