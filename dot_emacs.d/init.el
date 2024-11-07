@@ -26,6 +26,8 @@
 (setq auto-revert-check-vc-info t)
 (global-auto-revert-mode)
 
+(setq tramp-default-method "sshfs")
+
 ;; Spelling
 (setq ispell-alternate-dictionary "/usr/share/dict/words")
 
@@ -147,6 +149,8 @@
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
 
+(add-hook 'after-init-hook 'saxon/add-to-work-log)
+
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Tab-bar configuration
@@ -198,28 +202,26 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages '(build eglot-booster hurl-mode php-ts-mode vc-use-package))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
-   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
-     (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
-     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")))
+   '((org-ql :url "https://github.com/alphapapa/org-ql" :branch "master")))
  '(safe-local-variable-values
-   '((ssh-deploy-root-remote . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
-     (ssh-deploy-async . 1)
+   '((evil-shift-width . 4) (ssh-deploy-async . 1)
      (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote . "/ssh:ubuntu@minikube:/home/ubuntu/megatron")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron")
+     (ssh-deploy-root-remote
+      . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
+     (rsync-local-path . "/home/saxonj/Documents/megatron/")
+     (rsync-remote-paths "minikube:/home/ubuntu/megatron")
      (gac-automatically-add-new-files-p . t)
-     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
-     (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
      (rsync-local-path . "/home/saxonj/Documents/unicron/")
      (rsync-remote-paths "minikube:/home/ubuntu/unicron")
+     (evil-shift-width . 8) (evil-shift-width . 2)
      (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
-     (rsync-local-path . "/home/saxonj/Documents/megatron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/megatron")))
- '(tramp-terminal-type "tramp"))
+     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
+     (rsync-remote-paths "minikube:/home/ubuntu/hannibal")))
+ '(tramp-encoding-shell "/bin/bash")
+ '(tramp-verbose 6))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

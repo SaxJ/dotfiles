@@ -64,6 +64,21 @@
                      (project .fields.project.key))
                  (insert (format "* %s %s :%s: <%s>\n:PROPERTIES:\n:JiraIssueKey: %s\n:JiraStatus: %s\n:END:\n" key summary project created key .fields.status.name))))))))
 
+(defun saxon/add-to-work-log ()
+  "Add an entry to the work log for tax purposes."
+  (interactive)
+  (with-temp-buffer
+    (set-visited-file-name "~/Documents/wiki/log.org" nil)
+    (insert-file-contents (buffer-name))
+    (let ((date (format-time-string "%Y-%m-%d"))
+          (hostname (system-name)))
+      (progn
+        (goto-char (point-min))
+        (unless (search-forward date nil t)
+          (goto-char (point-max))
+          (insert (format "* %s :%s:" date hostname)))
+        (save-buffer)))))
+
 (defun saxon/pull-jira-todos ()
   "Pull all assigned jira issues"
   (interactive)
