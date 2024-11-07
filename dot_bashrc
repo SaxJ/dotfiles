@@ -3,17 +3,24 @@
 #
 # ~/.bashrc
 
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+# Fix for TRAMP
+if [ $TERM = "dumb" ]; then
+    export PS1='$ '
+    return
+fi
+
 # Set terminal title
 PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 
 export JIRA_API_TOKEN="$(pass jira)"
 
 export STOW_DIR=/home/saxonj/dotfiles
-export SSH_ASKPASS=ksshaskpass
 export EDITOR=hx
 export VISUAL=$EDITOR
 export PAGER=more
-export TERM=alacritty
 
 export GOPATH=$HOME/go_packages
 export HELM_HOME=$HOME/helm
@@ -45,9 +52,6 @@ export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export ULYSSES_VAULT="$HOME/Documents/ulysses_notes"
 
 export PATH="$PATH:$HOME/.cargo/bin"
-
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
 
 alias ls='ls --color=auto'
 if [ -x "$(command -v nvim)" ]; then
