@@ -1,4 +1,4 @@
-[shell]
+[terminal.shell]
 program = "zellij"
 # args = ["-l", "welcome"]
 
@@ -52,3 +52,5 @@ family = "FiraCode Nerd Font"
 [font.offset]
 x = 0
 y = 0
+
+[terminal]
