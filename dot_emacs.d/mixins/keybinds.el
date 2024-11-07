@@ -89,6 +89,10 @@
   (interactive)
   (shell-command-on-region (point-min) (point-max) (read-shell-command "Command: ") (current-buffer) t "*Command Errors*" nil))
 
+(defun saxon/shell-command-output ()
+  (interactive)
+  (insert (shell-command-to-string (read-shell-command "Command: "))))
+
 (use-package general
   :ensure t
   :config
@@ -100,6 +104,7 @@
     "." 'find-file
     "X" 'org-capture
     "/" 'consult-ripgrep
+    "|" 'saxon/shell-command-output
 
     ;; tab bindings
     "TAB c" 'tab-close
@@ -252,6 +257,7 @@
     ", D" 'todotxt-nuke-item
     ", c" 'todotxt-complete-toggle
     ", e" 'todotxt-edit-item))
+
 
 (use-package meow
   :ensure t
