@@ -44,7 +44,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
-"space" = "file_picker"
+"space" = "file_picker_in_current_directory"
 "minus" = ":sh zellij run -ci -- yazi %{dirname}"
 
 [keys.normal."C-f"]
