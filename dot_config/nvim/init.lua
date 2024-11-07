@@ -174,35 +174,3 @@ vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
-
--- neogit
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "NeogitStatus",
-	callback = function()
-		vim.keymap.set(
-			"n",
-			"<localleader>cp",
-			":! gh pr create --web<CR>",
-			{ noremap = true, silent = true, buffer = true }
-		)
-	end,
-})
-
--- hurl
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "hurl",
-	callback = function()
-		vim.keymap.set("n", "<localleader>X", "<cmd>HurlRunner<CR>", { noremap = true, silent = true, buffer = true })
-		vim.keymap.set("n", "<localleader>x", "<cmd>HurlRunnerAt<CR>", { noremap = true, silent = true, buffer = true })
-	end,
-})
-
--- json
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = "json",
-	callback = function()
-		vim.keymap.set("n", "<localleader>jq", function()
-			require("jq").run()
-		end, { noremap = true, silent = true, buffer = true })
-	end,
-})
