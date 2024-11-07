@@ -129,6 +129,16 @@ end
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
+-- links
+vim.keymap.set("n", "gx", function()
+	local path = vim.fn.expand("<cfile>")
+	if path:match("^[A-Za-z]+%-[0-9]+") then
+		vim.ui.open(string.format("https://hejira.atlassian.net/browse/%s", path))
+	else
+		vim.ui.open(path)
+	end
+end, { desc = "Open Link" })
+
 -- general
 vim.keymap.set("n", "<leader>/", ":Telescope grep_string<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>.", ":Telescope find_files cwd=%:p:h<CR>", { desc = "Siblings" })
