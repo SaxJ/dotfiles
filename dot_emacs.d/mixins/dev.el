@@ -102,7 +102,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun saxon/on-create-pr (value _headers _status _req)
   (when-let ((url (alist-get 'html_url value)))
-    ((shell-command (format "%s %s > /dev/null" browse-url-firefox-program url)))))
+    (shell-command (format "%s %s > /dev/null" browse-url-firefox-program url))))
 
 ;; Magit: best Git client to ever exist
 (use-package magit
