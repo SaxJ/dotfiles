@@ -126,6 +126,60 @@ local function get_jira_assigned()
 	return curl_cmd
 end
 
+-- SCP Functions
+vim.g.scp_projects = {
+	["megatron"] = "/home/ubuntu/megatron",
+}
+
+local get_project = function()
+	local pwd = vim.uv.cwd() or ""
+	return vim.fn.fnamemodify(pwd, ":t")
+end
+
+local scp_on_exit = function(obj)
+	-- print(obj.code)
+	-- print(obj.signal)
+	-- print(obj.stdout)
+	-- print(obj.stderr)
+	vim.notify("SCP transfer complete", vim.log.levels.INFO)
+end
+
+local scp_upload = function()
+	local project = get_project()
+	local remote_path = vim.g.scp_projects[project]
+	if remote_path == nil then
+		vim.notify("Project not configured for SCP", vim.log.levels.ERROR)
+		return
+	end
+
+	local local_relative_filename = vim.fn.expand("%:p:.")
+	local scp_cmd = {
+		"scp",
+		local_relative_filename,
+		string.format("ubuntu@minikube:%s/%s", remote_path, local_relative_filename),
+	}
+
+	vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
+end
+
+local scp_download = function()
+	local project = get_project()
+	local remote_path = vim.g.scp_projects[project]
+	if remote_path == nil then
+		vim.notify("Project not configured for SCP", vim.log.levels.ERROR)
+		return
+	end
+
+	local local_relative_filename = vim.fn.expand("%:p:.")
+	local scp_cmd = {
+		"scp",
+		string.format("ubuntu@minikube:%s/%s", remote_path, local_relative_filename),
+		local_relative_filename,
+	}
+
+	vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
+end
+
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
@@ -147,6 +201,9 @@ vim.keymap.set("n", "<leader><leader>", ":Telescope find_files<CR>", { desc = "F
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
 vim.keymap.set("n", "<leader>bb", ":Telescope buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bf", function()
+	require("conform").format({ lsp_fallback = true, async = false })
+end, { desc = "Format Buffer" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
@@ -162,12 +219,15 @@ vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
 vim.keymap.set("n", "<leader>pp", ":Telescope zoxide list<CR>", { desc = "Projects" })
-vim.keymap.set("n", "<leader>pt", ":FloatermToggle getcwd()<CR>", { desc = "Project Terminal" })
+vim.keymap.set("n", "<leader>pt", function()
+	local pwd = vim.uv.cwd()
+	vim.api.nvim_command(string.format("FloatermToggle '%s'", pwd))
+end, { desc = "Project Terminal" })
 
 -- remote
 vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
-vim.keymap.set("n", "<leader>ru", ":RsyncUpFile<CR>", { desc = "Upload" })
-vim.keymap.set("n", "<leader>rd", ":RsyncDownFile<CR>", { desc = "Download" })
+vim.keymap.set("n", "<leader>ru", scp_upload, { desc = "Upload" })
+vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })

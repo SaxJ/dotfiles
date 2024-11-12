@@ -19,19 +19,7 @@ return {
 				python = { "isort", "black" },
 				cs = { "csharpier" },
 			},
-			format_on_save = {
-				lsp_fallback = true,
-				async = false,
-				timeout_ms = 1000,
-			},
+			format_on_save = nil,
 		})
-
-		vim.keymap.set({ "n", "v" }, "<leader>f", function()
-			conform.format({
-				lsp_fallback = true,
-				async = false,
-				timeout_ms = 1000,
-			})
-		end, { desc = "Format file or range (in visual mode)" })
 	end,
 }
