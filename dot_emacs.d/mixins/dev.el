@@ -102,7 +102,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun saxon/on-create-pr (value _headers _status _req)
   (when-let ((url (alist-get 'html_url value)))
-    (shell-command (format "%s %s > /dev/null" browse-url-firefox-program url))))
+    (browse-url url)))
 
 ;; Magit: best Git client to ever exist
 (use-package magit
@@ -318,9 +318,13 @@
   :ensure t
   :vc (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode"))
 
+;; (use-package build
+;;   :ensure t
+;;   :vc (build :url "https://github.com/27justin/build.el"))
+
 (use-package build
-  :ensure t
-  :vc (build :url "https://github.com/27justin/build.el"))
+  :vc t
+  :load-path "/home/saxonj/Documents/build.el/")
 
 (use-package terraform-mode
   :ensure t)

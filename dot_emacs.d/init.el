@@ -201,27 +201,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(php-ts-mode editorconfig which-key zone-rainbow zone-nyan yuck-mode yaml-mode web-mode wakatime-mode vue-mode vertico vc-use-package todotxt terraform-mode sudo-edit string-inflection rsync-mode restclient rainbow-mode prodigy prescient popper pocket-reader otpp origami org-roam org-modern orderless multi-vterm mood-line meow marginalia kind-icon json-mode jq-mode jiralib2 hurl-mode haskell-mode graphviz-dot-mode graphql-mode git-timemachine git-auto-commit-mode general forge evil-surround evil-org evil-commentary evil-collection epresent embark-consult elm-mode eglot-fsharp ef-themes eat csv-mode csproj-mode corfu-terminal claude-shell chezmoi cape build avy apheleia))
  '(package-vc-selected-packages
-   '((org-ql :url "https://github.com/alphapapa/org-ql" :branch "master")))
- '(safe-local-variable-values
-   '((evil-shift-width . 4) (ssh-deploy-async . 1)
-     (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote
-      . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
-     (rsync-local-path . "/home/saxonj/Documents/megatron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/megatron")
-     (gac-automatically-add-new-files-p . t)
-     (rsync-local-path . "/home/saxonj/Documents/unicron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/unicron")
-     (evil-shift-width . 8) (evil-shift-width . 2)
-     (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
-     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
-     (rsync-remote-paths "minikube:/home/ubuntu/hannibal")))
- '(tramp-encoding-shell "/bin/bash")
- '(tramp-verbose 6))
+   '((org-ql :url "https://github.com/alphapapa/org-ql" :branch "master"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
