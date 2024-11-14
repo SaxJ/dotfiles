@@ -62,6 +62,7 @@ T = ":sh zellij run -cf -- pter ~/Dropbox/todo.txt"
 g = ":sh zellij run -ci -- lazygit"
 l = ":sh zellij run -ci -- tig %{filename}"
 d = "changed_file_picker"
+p = ":sh gh pr create --web"
 
 [keys.normal.space.r]
 u = ":sh rpush %{filename:rel}"
