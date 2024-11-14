@@ -200,11 +200,26 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
+ '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
-   '(php-ts-mode editorconfig which-key zone-rainbow zone-nyan yuck-mode yaml-mode web-mode wakatime-mode vue-mode vertico vc-use-package todotxt terraform-mode sudo-edit string-inflection rsync-mode restclient rainbow-mode prodigy prescient popper pocket-reader otpp origami org-roam org-modern orderless multi-vterm mood-line meow marginalia kind-icon json-mode jq-mode jiralib2 hurl-mode haskell-mode graphviz-dot-mode graphql-mode git-timemachine git-auto-commit-mode general forge evil-surround evil-org evil-commentary evil-collection epresent embark-consult elm-mode eglot-fsharp ef-themes eat csv-mode csproj-mode corfu-terminal claude-shell chezmoi cape build avy apheleia))
+   '(eglot restclient rsync-mode graphviz-dot-mode claude-shell chezmoi prodigy csv-mode todotxt string-inflection sudo-edit git-auto-commit-mode zone-nyan zone-rainbow wakatime-mode pocket-reader org-modern jiralib2 epresent org-ql org-roam meow general evil-org evil-commentary evil-surround evil-collection evil terraform-mode yuck-mode yaml-mode which-key web-mode vue-mode vertico vc-use-package rainbow-mode prescient popper php-ts-mode otpp origami orderless multi-vterm mood-line marginalia kind-icon json-mode jq-mode hurl-mode haskell-mode graphql-mode git-timemachine forge embark-consult elm-mode eglot-fsharp ef-themes editorconfig eat csproj-mode corfu-terminal cape avy apheleia))
  '(package-vc-selected-packages
-   '((org-ql :url "https://github.com/alphapapa/org-ql" :branch "master"))))
+   '((php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
+     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")
+     (vc-use-package :vc-backend Git :url "https://github.com/slotThe/vc-use-package")))
+ '(safe-local-variable-values
+   '((rsync-local-path . "/home/saxonj/Documents/hannibal/")
+     (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
+     (rsync-local-path . "/home/saxonj/Documents/unicron/")
+     (rsync-remote-paths "minikube:/home/ubuntu/unicron")
+     (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
+     (ssh-deploy-async . 1)
+     (ssh-deploy-on-explicit-save . 0)
+     (ssh-deploy-root-remote . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
+     (rsync-local-path . "/home/saxonj/Documents/megatron/")
+     (rsync-remote-paths "minikube:/home/ubuntu/megatron")
+     (gac-automatically-add-new-files-p . t))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
