@@ -322,9 +322,10 @@
 ;;   :ensure t
 ;;   :vc (build :url "https://github.com/27justin/build.el"))
 
-(use-package build
-  :vc t
-  :load-path "/home/saxonj/Documents/build.el/")
+                                        ; (use-package build
+                                        ;   :vc t
+                                        ;   :load-path "/home/saxonj/Documents/build.el/")
 
 (use-package terraform-mode
   :ensure t)
+

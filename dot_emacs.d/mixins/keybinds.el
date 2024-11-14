@@ -93,6 +93,12 @@
   (interactive)
   (insert (shell-command-to-string (read-shell-command "Command: "))))
 
+(defun saxon/yank-whole-buffer ()
+  (interactive)
+  (progn
+    (message "Copied buffer")
+    (kill-new (buffer-string))))
+
 (use-package general
   :ensure t
   :config
@@ -113,7 +119,7 @@
     ;; buffer bindings
     "bb" 'consult-project-buffer
     "bc" 'clone-indirect-buffer
-    "by" (lambda () (interactive) (progn (mark-whole-buffer) (kill-ring-save)))
+    "by" 'saxon/yank-whole-buffer
     "bd" 'vc-diff
 
     ;; file bindings
