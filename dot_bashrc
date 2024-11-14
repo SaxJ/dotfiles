@@ -39,7 +39,6 @@ export ZELLIJ_AUTO_ATTACH=true
 export LLAMA_EDITOR=hx
 export NNN_OPTS="e"
 export NNN_OPENER="/usr/share/nnn/plugins/nuke"
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export NODE_OPTIONS="--huge-max-old-generation-size"
 
 export AWS_PROFILE=hedev
@@ -48,7 +47,6 @@ export ZELLIJ_AUTO_ATTACH=true
 export LLAMA_EDITOR=hx
 export NNN_OPTS="e"
 export NNN_OPENER="/usr/share/nnn/plugins/nuke"
-export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 export ULYSSES_VAULT="$HOME/Documents/ulysses_notes"
 
 export PATH="$PATH:$HOME/.cargo/bin"
