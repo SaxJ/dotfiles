@@ -60,6 +60,7 @@ require("lazy").setup({
 		{ "voldikss/vim-floaterm" },
 		-- optional for icons
 		{ "nvim-tree/nvim-web-devicons" },
+		{ "tiagovla/scope.nvim", config = true },
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
 		{ "mistweaverco/kulala.nvim", opts = {} },
@@ -185,7 +186,22 @@ local project_select = function()
 		prompt = "Zoxide❯ ",
 		actions = {
 			["default"] = function(selected)
-				vim.cmd("cd " .. selected[1])
+        local new_name = vim.fn.fnamemodify(selected[1], ":t")
+
+        local tabs = require('tabby.tab')
+        local tab_api = require('tabby.module.api')
+
+        local tab_list = tab_api.get_tabs()
+        for _, tabid in ipairs(tab_list) do
+          if tabs.get_name(tabid) == new_name then
+            vim.api.nvim_set_current_tabpage(tabid)
+            return
+          end
+        end
+
+        vim.cmd('tabnew')
+				vim.cmd("tcd " .. selected[1])
+        tabs.set_current_name(new_name)
 			end,
 		},
 	})
@@ -206,6 +222,8 @@ end, { desc = "Open Link" })
 
 -- general
 vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
+
 vim.keymap.set("n", "<leader>.", ":FzfLua find_files cwd=%:p:h<CR>", { desc = "Siblings" })
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
 

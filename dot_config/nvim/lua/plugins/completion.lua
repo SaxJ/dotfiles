@@ -6,10 +6,6 @@ return {
 
 	-- use a release tag to download pre-built binaries
 	version = "v0.*",
-	-- OR build from source, requires nightly: https://rust-lang.github.io/rustup/concepts/channels.html#working-with-nightly-rust
-	-- build = 'cargo build --release',
-	-- If you use nix, you can build from source using latest nightly rust with:
-	-- build = 'nix run .#build-plugin',
 
 	---@module 'blink.cmp'
 	---@type blink.cmp.Config
@@ -19,7 +15,19 @@ return {
 		-- 'enter' for mappings similar to 'super-tab' but with 'enter' to accept
 		-- see the "default configuration" section below for full documentation on how to define
 		-- your own keymap.
-		keymap = "enter",
+		keymap = {
+			preset = "enter",
+			["<Tab>"] = {
+        function(cmp)
+          if cmp.is_in_snippet() then cmp.snippet_forward() else cmp.select_next() end
+        end
+      },
+      ["<S-Tab>"] = {
+        function (cmp)
+          if cmp.is_in_snippet() then cmp.snippet_backward() else cmp.select_prev() end
+        end
+      }
+		},
 
 		highlight = {
 			-- sets the fallback highlight groups to nvim-cmp's highlight groups
@@ -36,5 +44,10 @@ return {
 
 		-- experimental signature help support
 		trigger = { signature_help = { enabled = true } },
+		windows = {
+			autocomplete = {
+				selection = "manual",
+			},
+		},
 	},
 }
