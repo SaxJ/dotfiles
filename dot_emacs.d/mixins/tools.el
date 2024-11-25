@@ -78,3 +78,9 @@
 
 (use-package restclient
   :ensure t)
+
+(use-package emms
+  :config
+  (emms-all)
+  (setq emms-player-list '(emms-player-vlc)
+        emms-info-functions '(emms-info-native)))

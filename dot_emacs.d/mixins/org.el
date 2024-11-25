@@ -205,6 +205,10 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun saxon/project-relative-file-name (filename)
+  (when filename
+    (format "%s/%s" (project-name (project-current)) (file-relative-name filename (project-root (project-current))))))
+
 ;; Yes, you can have multiple use-package declarations. It's best if their
 ;; configs don't overlap. Once you've reached Phase 2, I'd recommend merging the
 ;; config from Phase 1. I've broken it up here for the sake of clarity.
@@ -220,9 +224,10 @@
   (setq org-capture-templates
         '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
           ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?")
-          ("w" "Work" entry (file "todo.org") "* TODO [#%^{A|B|C}] %^{JiraIssueKey}p"))
+          ("w" "Work" entry (file "todo.org") "* TODO [#%^{A|B|C}] %^{JiraIssueKey}p")
+          ("f" "File Context" entry (file+headline "notes.org" "Working notes") "** [[%L][%(saxon/project-relative-file-name \"%F\")]] %^{prompt}\n%?")))
 
-        org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
+  (setq org-todo-keyword-faces '(("TODO" :foreground "#4CAF50")
                                  ("PROG" :foreground "#ff9800")
                                  ("BLOCKED" :foreground "#F44336")
                                  ("REVIEW" :foreground "#9C27B0")
@@ -284,3 +289,17 @@
   ;; Fix bindings disappearing on super-agenda headers
   (setq org-super-agenda-header-map (make-sparse-keymap))
   (org-super-agenda-mode 1))
+
+(use-package org-music
+  :ensure t
+  :vc (org-music :url "https://github.com/debanjum/org-music" :branch "master")
+  :after (org emms)
+  :config
+  (progn
+    (setq org-music-file "~/Documents/wiki/music.org"
+          org-music-media-directory "~/Music/"
+          org-music-operating-system "linux"
+          org-music-youtube-downloader "yt-dlp")
+    (add-hook 'org-mode-hook (lambda ()
+                               (if (equal buffer-file-name (expand-file-name org-music-file))
+                                   (org-music-mode))))))

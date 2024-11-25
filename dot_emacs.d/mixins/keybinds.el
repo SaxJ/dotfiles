@@ -50,11 +50,14 @@
     (json-pretty-print-buffer)
     (json-ts-mode)))
 
+(defun saxon/project-relative-path (filename)
+  (file-relative-name filename (project-root (project-current))))
+
 (defun saxon/copy-file-name ()
   (interactive)
   (let ((filename (buffer-file-name)))
     (when filename
-      (kill-new (file-relative-name filename (project-root (project-current))))
+      (kill-new (saxon/project-relative-path filename))
       (message "Copied file name"))))
 
 (defun saxon/open-news ()
@@ -98,6 +101,12 @@
   (progn
     (message "Copied buffer")
     (kill-new (buffer-string))))
+
+(defun saxon/open-remote-file ()
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (project (project-name (project-current))))
+    (find-file (format "/sshfs:ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)))))
 
 (use-package general
   :ensure t
@@ -148,6 +157,7 @@
     "js" 'saxon/pull-jira-todos
 
     ;; remote
+    "ro" 'saxon/open-remote-file
     "ru" (lambda () (interactive) (rsync-all nil (file-relative-name (buffer-file-name) (project-root (project-current)))))
     "rs" 'ssh-deploy-remote-terminal-eshell-base-handler
 

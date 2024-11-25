@@ -200,6 +200,7 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
  '(package-selected-packages
    '(eglot restclient rsync-mode graphviz-dot-mode claude-shell chezmoi prodigy csv-mode todotxt string-inflection sudo-edit git-auto-commit-mode zone-nyan zone-rainbow wakatime-mode pocket-reader org-modern jiralib2 epresent org-ql org-roam meow general evil-org evil-commentary evil-surround evil-collection evil terraform-mode yuck-mode yaml-mode which-key web-mode vue-mode vertico vc-use-package rainbow-mode prescient popper php-ts-mode otpp origami orderless multi-vterm mood-line marginalia kind-icon json-mode jq-mode hurl-mode haskell-mode graphql-mode git-timemachine forge embark-consult elm-mode eglot-fsharp ef-themes editorconfig eat csproj-mode corfu-terminal cape avy apheleia))
