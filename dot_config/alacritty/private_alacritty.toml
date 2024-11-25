@@ -1,5 +1,5 @@
-# [terminal.shell]
-# program = "zellij"
+[terminal.shell]
+program = "zellij"
 # args = ["-l", "welcome"]
 
 [colors]
