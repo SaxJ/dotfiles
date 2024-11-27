@@ -66,6 +66,7 @@ require("lazy").setup({
 		{ "mistweaverco/kulala.nvim", opts = {} },
 		{ "danymat/neogen", config = true },
 		{ "arecarn/vim-auto-autoread" },
+		{ "ii14/neorepl.nvim" },
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
@@ -103,33 +104,11 @@ vim.api.nvim_create_autocmd("LspAttach", {
 	end,
 })
 
-local function get_pass(pass_name)
-	local handle = io.popen("pass " .. pass_name)
-	if handle == nil then
-		return "error"
-	end
-
-	local result = handle:read("*a")
-	handle:close()
-	return string.gsub(result, "^%s*(.-)%s*$", "%1")
-end
-
-local function get_jira_assigned()
-	local auth_token = get_pass("jira")
-	local payload = string.format('{"jql": "%s", "startAt": 0}', "")
-	local url = "https://hejira.atlassian.net/rest/api/2/search"
-	local curl_cmd = string.format(
-		"curl -s -X POST -H 'Authorization: Bearer %s' -H 'Content-Type: application/json' -d '%s' '%s'",
-		auth_token,
-		payload,
-		url
-	)
-	return curl_cmd
-end
-
 -- SCP Functions
 vim.g.scp_projects = {
 	["megatron"] = "/home/ubuntu/megatron",
+	["hannibal"] = "/home/ubuntu/hannibal",
+	["unicron"] = "/home/ubuntu/unicron",
 }
 
 local get_project = function()
@@ -181,30 +160,70 @@ local scp_download = function()
 	vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
 end
 
+local frecent_files = function()
+	local project = get_project()
+	local cmd = string.format("cat <(fre --sorted --store_name %s) <(fd -t f) | awk '!seen[$0]++'", project)
+  require('fzf-lua').fzf_exec(cmd, {
+    prompt = "File❯ ",
+    actions = {
+      ['default'] = function (selected)
+        vim.system({"fre", "--store_name", project, "--add", selected[1]})
+        if vim.fn.bufexists(selected[1]) == 1 then
+          vim.cmd.buf(selected[1])
+        else
+          vim.cmd.edit(selected[1])
+        end
+      end
+    },
+  })
+end
+
 local project_select = function()
 	require("fzf-lua").fzf_exec("zoxide query -l", {
 		prompt = "Zoxide❯ ",
 		actions = {
 			["default"] = function(selected)
-        local new_name = vim.fn.fnamemodify(selected[1], ":t")
+				local new_name = vim.fn.fnamemodify(selected[1], ":t")
 
-        local tabs = require('tabby.tab')
-        local tab_api = require('tabby.module.api')
+				local tabs = require("tabby.tab")
+				local tab_api = require("tabby.module.api")
 
-        local tab_list = tab_api.get_tabs()
-        for _, tabid in ipairs(tab_list) do
-          if tabs.get_name(tabid) == new_name then
-            vim.api.nvim_set_current_tabpage(tabid)
-            return
-          end
-        end
+				local tab_list = tab_api.get_tabs()
+				for _, tabid in ipairs(tab_list) do
+					if tabs.get_name(tabid) == new_name then
+						vim.api.nvim_set_current_tabpage(tabid)
+						return
+					end
+				end
 
-        vim.cmd('tabnew')
+				vim.cmd("tabnew")
 				vim.cmd("tcd " .. selected[1])
-        tabs.set_current_name(new_name)
+				tabs.set_current_name(new_name)
 			end,
 		},
 	})
+end
+
+local open_file_browser = function()
+	local files = require("mini.files")
+	if not files.close() then
+		files.open(vim.api.nvim_buf_get_name(0), false)
+	end
+end
+
+local play_headers = function()
+	local header_query = vim.treesitter.query.parse("markdown", "((atx_heading) @header)")
+	local root = vim.treesitter.get_parser():parse()[1]:root()
+	local cmd = { "mpv" }
+	for _, node, _, _ in header_query:iter_captures(root, 0, 0, -1) do
+		local text = vim.treesitter.get_node_text(node, 0)
+		local clean_text = string.gsub(text, "#+%s+", "")
+		table.insert(cmd, "ytdl://ytsearch:" .. clean_text)
+	end
+
+	-- local buf = vim.api.nvim_create_buf(true, true)
+	-- vim.api.nvim_buf_set_lines(buf, 0, -1, false, headers)
+	vim.system(cmd, { detach = true })
 end
 
 -- terminal
@@ -225,7 +244,11 @@ vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 
 vim.keymap.set("n", "<leader>.", ":FzfLua find_files cwd=%:p:h<CR>", { desc = "Siblings" })
-vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
+vim.keymap.set("n", "<leader><leader>", frecent_files, { desc = "Files" })
+
+-- testing
+vim.keymap.set("n", "<leader>tt", play_headers, { desc = "testing" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -260,12 +283,7 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
-vim.keymap.set("n", "<leader>o-", function()
-	local files = require("mini.files")
-	if not files.close() then
-		files.open(vim.api.nvim_buf_get_name(0), false)
-	end
-end, { desc = "Files" })
+vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
 

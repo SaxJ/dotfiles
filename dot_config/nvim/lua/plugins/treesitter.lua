@@ -26,7 +26,7 @@ return {
 			indent = { enable = true },
 			modules = {},
 			auto_install = true,
-			ignore_install = {},
+			ignore_install = {'org'},
 		})
 	end,
 }
