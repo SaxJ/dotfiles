@@ -256,9 +256,6 @@
 (use-package org-ql
   :vc (org-ql :url "https://github.com/alphapapa/org-ql" :branch "master"))
 
-(use-package epresent
-  :ensure t)
-
 (use-package jiralib2
   :ensure t
   :config
@@ -303,3 +300,7 @@
     (add-hook 'org-mode-hook (lambda ()
                                (if (equal buffer-file-name (expand-file-name org-music-file))
                                    (org-music-mode))))))
+
+(use-package dslide
+  :ensure t
+  :after org)

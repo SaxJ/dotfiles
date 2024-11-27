@@ -90,6 +90,7 @@
 
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
+  (setq treesit-font-lock-level 4)
 
   :hook
   ;; Auto parenthesis matching
@@ -328,4 +329,3 @@
 
 (use-package terraform-mode
   :ensure t)
-

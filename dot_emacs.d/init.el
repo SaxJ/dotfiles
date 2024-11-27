@@ -202,21 +202,28 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages
-   '(eglot restclient rsync-mode graphviz-dot-mode claude-shell chezmoi prodigy csv-mode todotxt string-inflection sudo-edit git-auto-commit-mode zone-nyan zone-rainbow wakatime-mode pocket-reader org-modern jiralib2 epresent org-ql org-roam meow general evil-org evil-commentary evil-surround evil-collection evil terraform-mode yuck-mode yaml-mode which-key web-mode vue-mode vertico vc-use-package rainbow-mode prescient popper php-ts-mode otpp origami orderless multi-vterm mood-line marginalia kind-icon json-mode jq-mode hurl-mode haskell-mode graphql-mode git-timemachine forge embark-consult elm-mode eglot-fsharp ef-themes editorconfig eat csproj-mode corfu-terminal cape avy apheleia))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
-     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev :newest :lisp-dir "contrib/emacs/")
-     (vc-use-package :vc-backend Git :url "https://github.com/slotThe/vc-use-package")))
+     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev
+                :newest :lisp-dir "contrib/emacs/")
+     (vc-use-package :vc-backend Git :url
+                     "https://github.com/slotThe/vc-use-package")))
  '(safe-local-variable-values
-   '((rsync-local-path . "/home/saxonj/Documents/hannibal/")
+   '((evil-shift-width . 2) (evil-shift-width . 4)
+     (vc-default-patch-addressee . "bug-gnu-emacs@gnu.org")
+     (etags-regen-ignores "test/manual/etags/")
+     (etags-regen-regexp-alist
+      (("c" "objc") "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/"
+       "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
+     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
      (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
      (rsync-local-path . "/home/saxonj/Documents/unicron/")
      (rsync-remote-paths "minikube:/home/ubuntu/unicron")
      (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
-     (ssh-deploy-async . 1)
-     (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
+     (ssh-deploy-async . 1) (ssh-deploy-on-explicit-save . 0)
+     (ssh-deploy-root-remote
+      . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
      (rsync-local-path . "/home/saxonj/Documents/megatron/")
      (rsync-remote-paths "minikube:/home/ubuntu/megatron")

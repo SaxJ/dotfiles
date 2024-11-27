@@ -108,6 +108,22 @@
         (project (project-name (project-current))))
     (find-file (format "/sshfs:ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)))))
 
+(defun saxon/scp-upload()
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (project (project-name (project-current))))
+    (progn
+      (call-process "scp" nil nil nil filename (format "ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)))
+      (message "Uploaded"))))
+
+(defun saxon/scp-download()
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (project (project-name (project-current))))
+    (progn
+      (call-process "scp" nil nil nil (format "ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)) filename)
+      (message "Uploaded"))))
+
 (use-package general
   :ensure t
   :config
@@ -149,6 +165,11 @@
 
     "sp" 'consult-ripgrep
 
+    ;; music
+    "mn" 'emms-next
+    "mp" 'emms-previous
+    "mt" 'emms-pause
+
     ;; notes
     "nj" 'org-journal-new-entry
     "nn" 'org-roam-capture
@@ -158,7 +179,8 @@
 
     ;; remote
     "ro" 'saxon/open-remote-file
-    "ru" (lambda () (interactive) (rsync-all nil (file-relative-name (buffer-file-name) (project-root (project-current)))))
+    "ru" 'saxon/scp-upload
+    "rd" 'saxon/scp-download
     "rs" 'ssh-deploy-remote-terminal-eshell-base-handler
 
     ;; help
