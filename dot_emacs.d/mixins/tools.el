@@ -81,6 +81,6 @@
 
 (use-package emms
   :config
-  (emms-all)
-  (setq emms-player-list '(emms-player-vlc)
+  (emms-minimalistic)
+  (setq emms-player-list '(emms-player-mpv)
         emms-info-functions '(emms-info-native)))

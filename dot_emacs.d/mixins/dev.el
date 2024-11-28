@@ -35,7 +35,7 @@
   (setq treesit-language-source-alist
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
           (c "https://github.com/tree-sitter/tree-sitter-c")
-          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp.git" "v0.20.0")
+          (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp.git")
           (cmake "https://github.com/uyha/tree-sitter-cmake")
           (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
           (css "https://github.com/tree-sitter/tree-sitter-css")
@@ -43,30 +43,20 @@
           (go "https://github.com/tree-sitter/tree-sitter-go")
           (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
           (html "https://github.com/tree-sitter/tree-sitter-html")
-          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.20.3" "src")
+          (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.23.1" "src")
           (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
-          (php "https://github.com/tree-sitter/tree-sitter-php" "v0.22.8" "php/src")
+          (php "https://github.com/tree-sitter/tree-sitter-php" "v0.23.11" "php/src")
           (python "https://github.com/tree-sitter/tree-sitter-python")
           (jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
           (html "https://github.com/tree-sitter/tree-sitter-html")
-          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "tsx/src")
-          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.20.3" "typescript/src")
+          (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src")
+          (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
-
-  ;; (setq php-ts-mode--language-source-alist
-  ;;       '((php "https://github.com/tree-sitter/tree-sitter-php" "v0.22.8"
-  ;;              "php/src")
-  ;;         (phpdoc "https://github.com/claytonrcarter/tree-sitter-phpdoc")
-  ;;         (html "https://github.com/tree-sitter/tree-sitter-html" "v0.20.3")
-  ;;         (javascript "https://github.com/tree-sitter/tree-sitter-javascript"
-  ;;                     "v0.21.2")
-  ;;         (jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc" "v0.21.0")
-  ;;         (css "https://github.com/tree-sitter/tree-sitter-css" "v0.21.0")))
 
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
@@ -81,6 +71,8 @@
           (c++-mode . c++-ts-mode)
           (dockerfile-mode . dockerfile-ts-mode)
           (yaml-mode . yaml-ts-mode)))
+
+  (add-hook 'php-ts-mode-hook (lambda () (setq comment-use-syntax t)))
 
   (add-to-list 'auto-mode-alist '("\\.[jt]s[x]?\\'" . tsx-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
