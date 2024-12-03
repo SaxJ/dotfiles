@@ -27,6 +27,24 @@
   (interactive)
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist)))
 
+(defun saxon/treesit-language-at-point-tsx (pos)
+  (if (equal (treesit-node-type (treesit-node-at pos 'graphql)) "ERROR") 'tsx 'graphql))
+
+(defun saxon/add-typescript-font-lock ()
+  (treesit-parser-create 'graphql)
+  (setq-local treesit-font-lock-feature-list
+              '((comment declaration definition)
+                (keyword string escape-sequence type variable)
+                (constant expression identifier number pattern property)
+                (operator function bracket delimiter)))
+  (setq-local treesit-range-settings (treesit-range-rules
+                                      :embed 'graphql
+                                      :host 'tsx
+                                      :local t
+                                      ;;:offset '(1 . -1)
+                                      "((call_expression function: (identifier) @_fn arguments: (template_string) @capture) (#equal @_fn \"gql\"))"))
+  (setq-local treesit-language-at-point-function #'saxon/treesit-language-at-point-tsx))
+
 (use-package emacs
   :config
 
@@ -56,7 +74,8 @@
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
-          (yaml "https://github.com/ikatyang/tree-sitter-yaml")))
+          (yaml "https://github.com/ikatyang/tree-sitter-yaml")
+          (graphql "https://github.com/bkegley/tree-sitter-graphql")))
 
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
@@ -83,6 +102,8 @@
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
   (setq treesit-font-lock-level 4)
+
+  (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
 
   :hook
   ;; Auto parenthesis matching
@@ -142,7 +163,7 @@
   (add-hook 'c-ts-mode 'eglot-ensure)
   (add-hook 'c++-ts-mode 'eglot-ensure)
   (add-hook 'go-ts-mode 'eglot-ensure)
-  (add-hook 'graphql-mode 'eglot-ensure)
+  (add-hook 'graphql-ts-mode 'eglot-ensure)
   (add-hook 'rust-ts-mode 'eglot-ensure)
   (add-hook 'haskell-mode 'eglot-ensure)
   (add-hook 'elm-mode 'eglot-ensure)
@@ -166,7 +187,7 @@
   (add-to-list 'eglot-server-programs
                '(vue-mode . ("vue-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
-               '(graphql-mode . ("graphql-lsp" "server" "-m" "stream")))
+               '(graphql-ts-mode . ("graphql-lsp" "server" "-m" "stream")))
 
   (setq-default eglot-workspace-configuration
                 '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.1.0"))))
@@ -298,9 +319,6 @@
 (use-package json-mode
   :ensure t)
 
-(use-package graphql-mode
-  :ensure t)
-
 (use-package csproj-mode
   :ensure t)
 
@@ -321,3 +339,10 @@
 
 (use-package terraform-mode
   :ensure t)
+
+(use-package graphql-ts-mode
+  :ensure t
+  :mode ("\\.graphql\\'" "\\.gql\\'"))
+
+;;(defvar saxon/range '(((template_string) @graphql-mode (:match "^gql`" @graphql-mode))))
+;;(add-to-list 'treesit-range-settings (treesit-range-rules :embed 'graphql :host 'typescript saxon/range))

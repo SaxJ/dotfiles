@@ -84,3 +84,6 @@
   (emms-minimalistic)
   (setq emms-player-list '(emms-player-mpv)
         emms-info-functions '(emms-info-native)))
+
+(use-package soundcloud
+  :ensure t)
