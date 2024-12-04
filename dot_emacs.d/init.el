@@ -227,7 +227,8 @@
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
      (rsync-local-path . "/home/saxonj/Documents/megatron/")
      (rsync-remote-paths "minikube:/home/ubuntu/megatron")
-     (gac-automatically-add-new-files-p . t))))
+     (gac-automatically-add-new-files-p . t)))
+ '(treesit-font-lock-level 4))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
