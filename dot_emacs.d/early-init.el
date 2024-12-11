@@ -33,3 +33,5 @@
                             (ns-appearance . dark)
                             (ns-transparent-titlebar . t)))
 
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp")
