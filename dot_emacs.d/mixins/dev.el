@@ -345,7 +345,7 @@
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
 
-  (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
+  ;; (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
 
   :hook
   ;; Auto parenthesis matching
@@ -383,6 +383,34 @@
           (multi-vterm-project "Shell" ?s)
           (magit-project-status "Magit" ?g)))
   (setq project-vc-extra-root-markers '(".project")))
+
+;; (use-package lsp-mode
+;;   :ensure t
+;;   :init
+;;   (setq lsp-keymap-prefix "C-c l")
+;;   :hook
+;;   ((tsx-ts-mode . lsp)
+;;    (csharp-ts-mode . lsp)
+;;    (typescript-ts-mode . lsp)
+;;    (php-ts-mode . lsp)
+;;    (json-ts-mode . lsp)
+;;    (yaml-ts-mode . lsp)
+;;    (c-ts-mode . lsp)
+;;    (c++-ts-mode . lsp)
+;;    (python-ts-mode . lsp)
+;;    (go-ts-mode . lsp)
+;;    (graphql-ts-mode . lsp)
+;;    (rust-ts-mode . lsp))
+;;   :commands lsp
+;;   :config
+;;   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor")
+;;   (setq lsp-file-watch-threshold nil
+;;         lsp-headerline-breadcrumb-enable nil
+;;         lsp-modeline-code-actions-enable nil
+;;         lsp-modeline-diagnostics-enable nil
+;;         lsp-eldoc-enable-hover nil))
+;; (use-package lsp-ui
+;;   :ensure t)
 
 (use-package eglot
   :custom
@@ -432,8 +460,7 @@
                '(graphql-ts-mode . ("graphql-lsp" "server" "-m" "stream")))
 
   (setq-default eglot-workspace-configuration
-                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.1.0"))))
-  )
+                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.1.0")))))
 
 (defun saxon/no-format-p ()
   (member major-mode '("php-ts-mode")))
@@ -499,6 +526,7 @@
           compilation-mode
           "^magit:.*"
           "\\*eat.*\\*"
+          ;; "\\*eldoc.*\\*"
           "\\*xref\\*"))
   (setq popper-window-height 20)
   (popper-mode +1)
