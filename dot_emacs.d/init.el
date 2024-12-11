@@ -202,7 +202,7 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages nil)
+ '(package-selected-packages '(hurl-mode org-music otpp vc-use-package))
  '(package-vc-selected-packages
    '((php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
      (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev
