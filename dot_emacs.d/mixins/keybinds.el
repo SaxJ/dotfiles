@@ -218,7 +218,7 @@
     "oT" 'todotxt
 
     ;; terminals
-    "ot" 'multi-vterm
+    "ot" 'saxon/project-terminal
     "tt" 'popper-toggle-type)
 
   (general-vmap
