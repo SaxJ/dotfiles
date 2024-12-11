@@ -63,10 +63,16 @@ require("lazy").setup({
 		{ "tiagovla/scope.nvim", config = true },
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
+		{ "airglow923/suda.nvim" },
 		{ "mistweaverco/kulala.nvim", opts = {} },
 		{ "danymat/neogen", config = true },
 		{ "ii14/neorepl.nvim" },
-		{ "karloskar/poetry-nvim" },
+    {
+      "karloskar/poetry-nvim",
+      config = function ()
+        require('poetry-nvim').setup()
+      end
+    },
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",

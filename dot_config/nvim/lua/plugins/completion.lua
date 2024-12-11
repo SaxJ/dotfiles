@@ -19,12 +19,12 @@ return {
 			preset = "enter",
 			["<Tab>"] = {
         function(cmp)
-          if cmp.is_in_snippet() then cmp.snippet_forward() else cmp.select_next() end
+          if cmp.snippet_active() then cmp.snippet_forward() else cmp.select_next() end
         end
       },
       ["<S-Tab>"] = {
         function (cmp)
-          if cmp.is_in_snippet() then cmp.snippet_backward() else cmp.select_prev() end
+          if cmp.snippet_active() then cmp.snippet_backward() else cmp.select_prev() end
         end
       }
 		},
