@@ -65,8 +65,8 @@ require("lazy").setup({
 		{ "stevearc/overseer.nvim", opts = {} },
 		{ "mistweaverco/kulala.nvim", opts = {} },
 		{ "danymat/neogen", config = true },
-		{ "arecarn/vim-auto-autoread" },
 		{ "ii14/neorepl.nvim" },
+		{ "karloskar/poetry-nvim" },
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
@@ -163,19 +163,19 @@ end
 local frecent_files = function()
 	local project = get_project()
 	local cmd = string.format("cat <(fre --sorted --store_name %s) <(fd -t f) | awk '!seen[$0]++'", project)
-  require('fzf-lua').fzf_exec(cmd, {
-    prompt = "File❯ ",
-    actions = {
-      ['default'] = function (selected)
-        vim.system({"fre", "--store_name", project, "--add", selected[1]})
-        if vim.fn.bufexists(selected[1]) == 1 then
-          vim.cmd.buf(selected[1])
-        else
-          vim.cmd.edit(selected[1])
-        end
-      end
-    },
-  })
+	require("fzf-lua").fzf_exec(cmd, {
+		prompt = "File❯ ",
+		actions = {
+			["default"] = function(selected)
+				vim.system({ "fre", "--store_name", project, "--add", selected[1] })
+				if vim.fn.bufexists(selected[1]) == 1 then
+					vim.cmd.buf(selected[1])
+				else
+					vim.cmd.edit(selected[1])
+				end
+			end,
+		},
+	})
 end
 
 local project_select = function()
