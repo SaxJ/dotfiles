@@ -63,16 +63,21 @@ require("lazy").setup({
 		{ "tiagovla/scope.nvim", config = true },
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
-		{ "airglow923/suda.nvim" },
+		{
+			"airglow923/suda.nvim",
+			config = function()
+				require("suda").setup()
+			end,
+		},
 		{ "mistweaverco/kulala.nvim", opts = {} },
 		{ "danymat/neogen", config = true },
 		{ "ii14/neorepl.nvim" },
-    {
-      "karloskar/poetry-nvim",
-      config = function ()
-        require('poetry-nvim').setup()
-      end
-    },
+		{
+			"karloskar/poetry-nvim",
+			config = function()
+				require("poetry-nvim").setup()
+			end,
+		},
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
@@ -252,6 +257,7 @@ vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>.", ":FzfLua find_files cwd=%:p:h<CR>", { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", frecent_files, { desc = "Files" })
+vim.keymap.set("n", "<leader>cc", ":checktime<CR>", { desc = "Check files" })
 
 -- testing
 vim.keymap.set("n", "<leader>tt", play_headers, { desc = "testing" })
