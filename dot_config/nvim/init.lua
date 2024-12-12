@@ -26,8 +26,19 @@ o.termguicolors = true
 o.wrap = false -- disable line wrapping
 o.titlestring = "%{fnamemodify(getcwd(), ':t')} %m"
 o.autoread = true
+o.updatetime = 1000
 
-vim.diagnostic.config({ virtual_text = false })
+vim.diagnostic.config({
+	virtual_text = false,
+	signs = true,
+	update_in_insert = false,
+	severity_sort = true,
+  underline = true,
+	float = {
+		border = 'rounded',
+    severity_sort = true,
+	},
+})
 
 -- Bootstrap lazy.nvim
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
@@ -85,13 +96,13 @@ require("lazy").setup({
 			-- use opts = {} for passing setup options
 			-- this is equivalent to setup({}) function
 		},
-		{
-			"rachartier/tiny-inline-diagnostic.nvim",
-			event = "VeryLazy", -- Or `LspAttach`
-			config = function()
-				require("tiny-inline-diagnostic").setup()
-			end,
-		},
+		-- {
+		-- 	"rachartier/tiny-inline-diagnostic.nvim",
+		-- 	event = "VeryLazy", -- Or `LspAttach`
+		-- 	config = function()
+		-- 		require("tiny-inline-diagnostic").setup()
+		-- 	end,
+		-- },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
@@ -112,6 +123,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
+
+    vim.api.nvim_create_autocmd('CursorHold', {
+      callback = function ()
+        vim.diagnostic.open_float({border = 'rounded'})
+      end
+    })
 	end,
 })
 

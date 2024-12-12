@@ -7,14 +7,6 @@ return {
 		require("mini.files").setup()
 		require("mini.surround").setup()
 		require("mini.icons").setup()
-		-- require("mini.pairs").setup()
-		-- require("mini.statusline").setup()
-		-- require("mini.pick").setup({
-		-- 	mappings = {
-		-- 		move_up = "<C-k>",
-		-- 		move_down = "<C-j>",
-		-- 	},
-		-- })
 
 		local miniclue = require("mini.clue")
 		miniclue.setup({
