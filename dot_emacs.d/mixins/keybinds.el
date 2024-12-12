@@ -69,10 +69,8 @@
 
 (defun saxon/project-terminal ()
   (interactive)
-  (progn
-    (multi-vterm)
-    (vterm-send-string (concat "cd " (multi-vterm-project-root)))
-    (vterm-send-return)))
+  (let ((default-directory (project-root (project-current))))
+    (multi-vterm)))
 
 (defun saxon/open-mail ()
   (interactive)
