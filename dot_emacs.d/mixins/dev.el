@@ -370,11 +370,6 @@
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
 
-
-;; Emacs ships with a lot of popular programming language modes. If it's not
-;; built in, you're almost certain to find a mode for the language you're
-;; looking for with a quick Internet search.
-
 (use-package project
   :config
   (setq project-switch-commands 
@@ -383,34 +378,6 @@
           (multi-vterm-project "Shell" ?s)
           (magit-project-status "Magit" ?g)))
   (setq project-vc-extra-root-markers '(".project")))
-
-;; (use-package lsp-mode
-;;   :ensure t
-;;   :init
-;;   (setq lsp-keymap-prefix "C-c l")
-;;   :hook
-;;   ((tsx-ts-mode . lsp)
-;;    (csharp-ts-mode . lsp)
-;;    (typescript-ts-mode . lsp)
-;;    (php-ts-mode . lsp)
-;;    (json-ts-mode . lsp)
-;;    (yaml-ts-mode . lsp)
-;;    (c-ts-mode . lsp)
-;;    (c++-ts-mode . lsp)
-;;    (python-ts-mode . lsp)
-;;    (go-ts-mode . lsp)
-;;    (graphql-ts-mode . lsp)
-;;    (rust-ts-mode . lsp))
-;;   :commands lsp
-;;   :config
-;;   (add-to-list 'lsp-file-watch-ignored-directories "[/\\\\]vendor")
-;;   (setq lsp-file-watch-threshold nil
-;;         lsp-headerline-breadcrumb-enable nil
-;;         lsp-modeline-code-actions-enable nil
-;;         lsp-modeline-diagnostics-enable nil
-;;         lsp-eldoc-enable-hover nil))
-;; (use-package lsp-ui
-;;   :ensure t)
 
 (use-package eglot
   :custom
@@ -443,7 +410,7 @@
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
                                 (:preferences
-                                 (:interactiveInlayHints nil)))))
+                                 (:interactiveInlayHints nil :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on")))))
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
   ;; (add-to-list 'eglot-server-programs
@@ -460,7 +427,7 @@
                '(graphql-ts-mode . ("graphql-lsp" "server" "-m" "stream")))
 
   (setq-default eglot-workspace-configuration
-                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.1.0")))))
+                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.3.0")))))
 
 (defun saxon/no-format-p ()
   (member major-mode '("php-ts-mode")))
