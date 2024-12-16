@@ -32,261 +32,52 @@
 
 (defun saxon/add-typescript-font-lock ()
   (setq-local treesit-language-at-point-function #'saxon/treesit-language-at-point-tsx)
-  (setq-local treesit-font-lock-feature-list
-              '((comment declaration definition)
-                (keyword string escape-sequence type variable)
-                (constant expression identifier number pattern property)
-                (operator function bracket delimiter)))
   (setq-local treesit-range-settings
               (treesit-range-rules
                :embed 'graphql
                :host 'tsx
                :local t
                "((call_expression function: (identifier) @_fn arguments: (template_string) @capture) (#equal @_fn \"gql\"))"))
-  (setq-local treesit-font-lock-settings
-              (treesit-font-lock-rules
-               :language 'tsx
-               :feature 'comment
-               `([(comment) (hash_bang_line)] @font-lock-comment-face)
+  (treesit-add-font-lock-rules
+   (treesit-font-lock-rules
+    :language 'graphql
+    :feature 'comment
+    '((comment) @font-lock-comment-face)
 
-               :language 'tsx
-               :feature 'constant
-               `(((identifier) @font-lock-constant-face
-                  (:match "\\`[A-Z_][0-9A-Z_]*\\'" @font-lock-constant-face))
-                 [(true) (false) (null)] @font-lock-constant-face)
+    :language 'graphql
+    :feature 'bracket
+    '((["(" ")" "{" "}" "[" "]"]) @font-lock-bracket-face)
 
-               :language 'tsx
-               :feature 'keyword
-               `([,@typescript-ts-mode--keywords] @font-lock-keyword-face
-                 [(this) (super)] @font-lock-keyword-face)
+    :language 'graphql
+    :feature 'delimiter
+    '((":") @font-lock-delimiter-face)
 
-               :language 'tsx
-               :feature 'string
-               `((regex pattern: (regex_pattern)) @font-lock-regexp-face
-                 (string) @font-lock-string-face
-                 (template_string) @js--fontify-template-string
-                 (template_substitution ["${" "}"] @font-lock-misc-punctuation-face))
+    :language 'graphql
+    :feature 'constant
+    '([([(boolean_value) (null_value)] @font-lock-constant-face)
+       ((directive_location) @font-lock-constant-face)])
 
-               :language 'tsx
-               :override t ;; for functions assigned to variables
-               :feature 'declaration
-               `((,func-exp
-                  name: (identifier) @font-lock-function-name-face)
-                 (function_declaration
-                  name: (identifier) @font-lock-function-name-face)
-                 (function_signature
-                  name: (identifier) @font-lock-function-name-face)
+    :language 'graphql
+    :feature 'string
+    '([((string_value) @font-lock-string-face)
+       ((description) @font-lock-doc-face)])
 
-                 (method_definition
-                  name: (property_identifier) @font-lock-function-name-face)
-                 (method_signature
-                  name: (property_identifier) @font-lock-function-name-face)
-                 (required_parameter (identifier) @font-lock-variable-name-face)
-                 (optional_parameter (identifier) @font-lock-variable-name-face)
+    :language 'graphql
+    :feature 'number
+    '([(int_value) (float_value)] @font-lock-number-face)
 
-                 (variable_declarator
-                  name: (identifier) @font-lock-function-name-face
-                  value: [(,func-exp) (arrow_function)])
+    :language 'graphql
+    :feature 'variable
+    '([((variable) @font-lock-variable-use-face)
+       (input_value_definition (name) @font-lock-variable-name-face)
+       (argument (name) @font-lock-variable-name-face)
+       (object_field (name) @font-lock-property-name-face)])
 
-                 (variable_declarator
-                  name: (identifier) @font-lock-variable-name-face)
-
-                 (enum_declaration (identifier) @font-lock-type-face)
-
-                 (extends_clause value: (identifier) @font-lock-type-face)
-                 ;; extends React.Component<T>
-                 (extends_clause value: (member_expression
-                                         object: (identifier) @font-lock-type-face
-                                         property: (property_identifier) @font-lock-type-face))
-
-                 (arrow_function
-                  parameter: (identifier) @font-lock-variable-name-face)
-
-                 (variable_declarator
-                  name: (array_pattern
-                         (identifier)
-                         (identifier) @font-lock-function-name-face)
-                  value: (array (number) (,func-exp)))
-
-                 (catch_clause
-                  parameter: (identifier) @font-lock-variable-name-face)
-
-                 ;; full module imports
-                 (import_clause (identifier) @font-lock-variable-name-face)
-                 ;; named imports with aliasing
-                 (import_clause (named_imports (import_specifier
-                                                alias: (identifier) @font-lock-variable-name-face)))
-                 ;; named imports without aliasing
-                 (import_clause (named_imports (import_specifier
-                                                !alias
-                                                name: (identifier) @font-lock-variable-name-face)))
-
-                 ;; full namespace import (* as alias)
-                 (import_clause (namespace_import (identifier) @font-lock-variable-name-face)))
-
-               :language 'tsx
-               :feature 'identifier
-               `((nested_type_identifier
-                  module: (identifier) @font-lock-type-face)
-
-                 (type_identifier) @font-lock-type-face
-
-                 (predefined_type) @font-lock-type-face
-
-                 (new_expression
-                  constructor: (identifier) @font-lock-type-face)
-
-                 (enum_body (property_identifier) @font-lock-type-face)
-
-                 (enum_assignment name: (property_identifier) @font-lock-type-face)
-
-                 (variable_declarator
-                  name: (identifier) @font-lock-variable-name-face)
-
-                 (for_in_statement
-                  left: (identifier) @font-lock-variable-name-face)
-
-                 (arrow_function
-                  parameters:
-                  [(_ (identifier) @font-lock-variable-name-face)
-                   (_ (_ (identifier) @font-lock-variable-name-face))
-                   (_ (_ (_ (identifier) @font-lock-variable-name-face)))]))
-
-               :language 'tsx
-               :feature 'property
-               `((property_signature
-                  name: (property_identifier) @font-lock-property-name-face)
-                 (public_field_definition
-                  name: (property_identifier) @font-lock-property-name-face)
-
-                 (pair key: (property_identifier) @font-lock-property-use-face)
-
-                 ((shorthand_property_identifier) @font-lock-property-use-face))
-
-               :language 'tsx
-               :feature 'expression
-               `((assignment_expression
-                  left: [(identifier) @font-lock-function-name-face
-                         (member_expression
-                          property: (property_identifier) @font-lock-function-name-face)]
-                  right: [(,func-exp) (arrow_function)]))
-
-               :language 'tsx
-               :feature 'function
-               '((call_expression
-                  function:
-                  [(identifier) @font-lock-function-call-face
-                   (member_expression
-                    property: (property_identifier) @font-lock-function-call-face)]))
-
-               :language 'tsx
-               :feature 'pattern
-               `((pair_pattern
-                  key: (property_identifier) @font-lock-property-use-face
-                  value: [(identifier) @font-lock-variable-name-face
-                          (assignment_pattern left: (identifier) @font-lock-variable-name-face)])
-
-                 (array_pattern (identifier) @font-lock-variable-name-face)
-
-                 ((shorthand_property_identifier_pattern) @font-lock-variable-name-face))
-
-               :language 'tsx
-               :feature 'jsx
-               (append (tsx-ts-mode--font-lock-compatibility-bb1f97b language)
-	                   `((jsx_attribute (property_identifier) @typescript-ts-jsx-attribute-face)))
-
-               :language 'tsx
-               :feature 'number
-               `((number) @font-lock-number-face
-                 ((identifier) @font-lock-number-face
-                  (:match "\\`\\(?:NaN\\|Infinity\\)\\'" @font-lock-number-face)))
-
-               :language 'tsx
-               :feature 'operator
-               `([,@typescript-ts-mode--operators] @font-lock-operator-face
-                 (ternary_expression ["?" ":"] @font-lock-operator-face))
-
-               :language 'tsx
-               :feature 'bracket
-               '((["(" ")" "[" "]" "{" "}"]) @font-lock-bracket-face)
-
-               :language 'tsx
-               :feature 'delimiter
-               '((["," "." ";" ":"]) @font-lock-delimiter-face)
-
-               :language 'tsx
-               :feature 'escape-sequence
-               :override t
-               '((escape_sequence) @font-lock-escape-face)
-
-               :language 'graphql
-               :override t
-               :feature 'comment
-               '((comment) @font-lock-comment-face)
-
-               :language 'graphql
-               :override t
-               :feature 'bracket
-               '((["(" ")" "{" "}" "[" "]"]) @font-lock-bracket-face)
-
-               :language 'graphql
-               :override t
-               :feature 'delimiter
-               '((":") @font-lock-delimiter-face)
-
-               :language 'graphql
-               :override t
-               :feature 'constant
-               '([([(boolean_value) (null_value)] @font-lock-constant-face)
-                  ((directive_location) @font-lock-constant-face)])
-
-               :language 'graphql
-               :override t
-               :feature 'string
-               '([((string_value) @font-lock-string-face)
-                  ((description) @font-lock-doc-face)])
-
-               :language 'graphql
-               :override t
-               :feature 'number
-               '([(int_value) (float_value)] @font-lock-number-face)
-
-               :language 'graphql
-               :override t
-               :feature 'variable
-               '([((variable) @font-lock-variable-use-face)
-                  (input_value_definition (name) @font-lock-variable-name-face)
-                  (argument (name) @font-lock-variable-name-face)
-                  (object_field (name) @font-lock-property-name-face)])
-
-               :language 'graphql
-               :override t
-               :feature 'type
-               '([((type) @font-lock-type-face)
-                  ((named_type) @font-lock-type-face)])
-
-               :language 'graphql
-               :override t
-               :feature 'keyword
-               `([,@graphql-ts-mode--keywords] @font-lock-keyword-face)
-
-               :language 'graphql
-               :override t
-               :feature 'keyword
-               '((directive "@" @font-lock-builtin-face (name) @font-lock-builtin-face))
-
-               :language 'graphql
-               :override t
-               :feature 'definition
-               '([(object_type_definition (name) @font-lock-function-name-face)
-                  (enum_type_definition (name) @font-lock-function-name-face)
-                  (input_object_type_definition (name) @font-lock-function-name-face)
-                  (union_type_definition (name) @font-lock-function-name-face)
-                  (interface_type_definition (name) @font-lock-function-name-face)
-                  (scalar_type_definition (name) @font-lock-function-name-face)
-                  (fragment_definition (fragment_name) @font-lock-function-name-face)
-                  (directive_definition ("@" @font-lock-function-name-face
-                                         (name) @font-lock-function-name-face))]))))
+    :language 'graphql
+    :feature 'type
+    '([((type) @font-lock-type-face)
+       ((named_type) @font-lock-type-face)])
+    ) :before nil))
 
 (use-package emacs
   :config
@@ -345,7 +136,7 @@
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
 
-  ;; (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
+  (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
 
   :hook
   ;; Auto parenthesis matching
@@ -578,8 +369,5 @@
   :ensure t)
 
 (use-package graphql-ts-mode
-  :ensure t
+ :ensure t
   :mode ("\\.graphql\\'" "\\.gql\\'"))
-
-;;(defvar saxon/range '(((template_string) @graphql-mode (:match "^gql`" @graphql-mode))))
-;;(add-to-list 'treesit-range-settings (treesit-range-rules :embed 'graphql :host 'typescript saxon/range))
