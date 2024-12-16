@@ -123,12 +123,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
-
-    vim.api.nvim_create_autocmd('CursorHold', {
-      callback = function ()
-        vim.diagnostic.open_float({border = 'rounded'})
-      end
-    })
+    --
+    -- vim.api.nvim_create_autocmd('CursorHold', {
+    --   callback = function ()
+    --     vim.diagnostic.open_float({border = 'rounded'})
+    --   end
+    -- })
 	end,
 })
 
