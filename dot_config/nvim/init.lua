@@ -33,10 +33,10 @@ vim.diagnostic.config({
 	signs = true,
 	update_in_insert = false,
 	severity_sort = true,
-  underline = true,
+	underline = true,
 	float = {
-		border = 'rounded',
-    severity_sort = true,
+		border = "rounded",
+		severity_sort = true,
 	},
 })
 
@@ -89,6 +89,7 @@ require("lazy").setup({
 				require("poetry-nvim").setup()
 			end,
 		},
+		{ "actionshrimp/direnv.nvim", opts = {} },
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
@@ -123,12 +124,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
-    --
-    -- vim.api.nvim_create_autocmd('CursorHold', {
-    --   callback = function ()
-    --     vim.diagnostic.open_float({border = 'rounded'})
-    --   end
-    -- })
 	end,
 })
 
@@ -145,10 +140,6 @@ local get_project = function()
 end
 
 local scp_on_exit = function(obj)
-	-- print(obj.code)
-	-- print(obj.signal)
-	-- print(obj.stdout)
-	-- print(obj.stderr)
 	vim.notify("SCP transfer complete", vim.log.levels.INFO)
 end
 
@@ -320,3 +311,12 @@ vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
+
+local function log_work_date()
+	local date_cmd = vim.system({'date', '+%Y-%m-%d'}, {text = true}):wait()
+  local hostname_cmd = vim.system({'hostname'}, {text = true}):wait()
+  local line = string.format('* %s :%s:', date_cmd.stdout, hostname_cmd.stdout)
+
+  os.execute(string.format("grep -qxF '%s' ~/Documents/wiki/log.org || echo '%s' >> ~/Documents/wiki/log.org", line, line))
+end
+log_work_date()
