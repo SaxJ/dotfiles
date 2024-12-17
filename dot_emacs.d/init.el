@@ -187,51 +187,7 @@
 (load-file (expand-file-name "mixins/keybinds.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/org.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/tools.el" user-emacs-directory))
-;; (load-file (expand-file-name "mixins/email.el" user-emacs-directory))
+(load-file (expand-file-name "mixins/mail.el" user-emacs-directory))
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;;;
-;;;   Built-in customization framework
-;;;
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(helm-minibuffer-history-key "M-p")
- '(package-selected-packages '(hurl-mode org-music otpp vc-use-package))
- '(package-vc-selected-packages
-   '((php-ts-mode :url "https://github.com/emacs-php/php-ts-mode")
-     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev
-                :newest :lisp-dir "contrib/emacs/")
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package")))
- '(safe-local-variable-values
-   '((evil-shift-width . 2) (evil-shift-width . 4)
-     (vc-default-patch-addressee . "bug-gnu-emacs@gnu.org")
-     (etags-regen-ignores "test/manual/etags/")
-     (etags-regen-regexp-alist
-      (("c" "objc") "/[ \11]*DEFVAR_[A-Z_ \11(]+\"\\([^\"]+\\)\"/\\1/"
-       "/[ \11]*DEFVAR_[A-Z_ \11(]+\"[^\"]+\",[ \11]\\([A-Za-z0-9_]+\\)/\\1/"))
-     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
-     (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
-     (rsync-local-path . "/home/saxonj/Documents/unicron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/unicron")
-     (rsync-excluded-dirs ".git" ".direnv" "node_modules" "vendor")
-     (ssh-deploy-async . 1) (ssh-deploy-on-explicit-save . 0)
-     (ssh-deploy-root-remote
-      . "/sshfs:ubuntu@minikube:/home/ubuntu/megatron/")
-     (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
-     (rsync-local-path . "/home/saxonj/Documents/megatron/")
-     (rsync-remote-paths "minikube:/home/ubuntu/megatron")
-     (gac-automatically-add-new-files-p . t)))
- '(treesit-font-lock-level 4))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+(setq custom-file (locate-user-emacs-file "custom.el"))
+(load custom-file :no-error-if-file-is-missing)

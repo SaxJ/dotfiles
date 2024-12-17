@@ -38,46 +38,44 @@
                :host 'tsx
                :local t
                "((call_expression function: (identifier) @_fn arguments: (template_string) @capture) (#equal @_fn \"gql\"))"))
-  (treesit-add-font-lock-rules
-   (treesit-font-lock-rules
-    :language 'graphql
-    :feature 'comment
-    '((comment) @font-lock-comment-face)
+  (treesit-add-font-lock-rules (treesit-font-lock-rules
+                                :language 'graphql
+                                :feature 'comment
+                                '((comment) @font-lock-comment-face)
 
-    :language 'graphql
-    :feature 'bracket
-    '((["(" ")" "{" "}" "[" "]"]) @font-lock-bracket-face)
+                                :language 'graphql
+                                :feature 'bracket
+                                '((["(" ")" "{" "}" "[" "]"]) @font-lock-bracket-face)
 
-    :language 'graphql
-    :feature 'delimiter
-    '((":") @font-lock-delimiter-face)
+                                :language 'graphql
+                                :feature 'delimiter
+                                '((":") @font-lock-delimiter-face)
 
-    :language 'graphql
-    :feature 'constant
-    '([([(boolean_value) (null_value)] @font-lock-constant-face)
-       ((directive_location) @font-lock-constant-face)])
+                                :language 'graphql
+                                :feature 'constant
+                                '([([(boolean_value) (null_value)] @font-lock-constant-face)
+                                   ((directive_location) @font-lock-constant-face)])
 
-    :language 'graphql
-    :feature 'string
-    '([((string_value) @font-lock-string-face)
-       ((description) @font-lock-doc-face)])
+                                :language 'graphql
+                                :feature 'string
+                                '([((string_value) @font-lock-string-face)
+                                   ((description) @font-lock-doc-face)])
 
-    :language 'graphql
-    :feature 'number
-    '([(int_value) (float_value)] @font-lock-number-face)
+                                :language 'graphql
+                                :feature 'number
+                                '([(int_value) (float_value)] @font-lock-number-face)
 
-    :language 'graphql
-    :feature 'variable
-    '([((variable) @font-lock-variable-use-face)
-       (input_value_definition (name) @font-lock-variable-name-face)
-       (argument (name) @font-lock-variable-name-face)
-       (object_field (name) @font-lock-property-name-face)])
+                                :language 'graphql
+                                :feature 'variable
+                                '([((variable) @font-lock-variable-use-face)
+                                   (input_value_definition (name) @font-lock-variable-name-face)
+                                   (argument (name) @font-lock-variable-name-face)
+                                   (object_field (name) @font-lock-property-name-face)])
 
-    :language 'graphql
-    :feature 'type
-    '([((type) @font-lock-type-face)
-       ((named_type) @font-lock-type-face)])
-    ) :before nil))
+                                :language 'graphql
+                                :feature 'type
+                                '([((type) @font-lock-type-face)
+                                   ((named_type) @font-lock-type-face)])) :before nil))
 
 (use-package emacs
   :config
@@ -136,7 +134,7 @@
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
 
-  (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
+  ;; (add-hook 'tsx-ts-mode-hook 'saxon/add-typescript-font-lock)
 
   :hook
   ;; Auto parenthesis matching
@@ -200,8 +198,10 @@
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-                                (:preferences
-                                 (:interactiveInlayHints nil :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on")))))
+                                (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
+  (add-to-list 'eglot-server-programs
+               '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+                                       (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
   ;; (add-to-list 'eglot-server-programs
@@ -369,5 +369,5 @@
   :ensure t)
 
 (use-package graphql-ts-mode
- :ensure t
+  :ensure t
   :mode ("\\.graphql\\'" "\\.gql\\'"))
