@@ -312,11 +312,8 @@ vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
 
-local function log_work_date()
-	local date_cmd = vim.system({'date', '+%Y-%m-%d'}, {text = true}):wait()
-  local hostname_cmd = vim.system({'hostname'}, {text = true}):wait()
-  local line = string.format('* %s :%s:', date_cmd.stdout, hostname_cmd.stdout)
-
-  os.execute(string.format("grep -qxF '%s' ~/Documents/wiki/log.org || echo '%s' >> ~/Documents/wiki/log.org", line, line))
-end
-log_work_date()
+local funcs = require('functions')
+vim.api.nvim_create_autocmd('VimEnter', {callback = function ()
+  funcs.util.log_work_date()
+  funcs.system.notify_send('Logged Work', 'Added to work log', 3)
+end})
