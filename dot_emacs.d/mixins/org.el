@@ -79,7 +79,7 @@
           (insert (format "* %s :%s:" date hostname)))
         (save-buffer)))))
 
-(defun saxon/pull-jira-todos ()
+(defun saxon/pull-jira-assigned ()
   "Pull all assigned jira issues"
   (interactive)
   (progn (saxon/notify "Org Jira" "Syncing Assigned Jira")
@@ -233,7 +233,9 @@
                                  ("REVIEW" :foreground "#9C27B0")
                                  ("HOLD" :foreground "#F44336")
                                  ("IDEA" :foreground "#9C27B0")
-                                 ("DONE" :foreground "white"))))
+                                 ("DONE" :foreground "white")))
+  (add-hook 'after-init-hook #'saxon/pull-jira-assigned)
+  (add-hook 'after-init-hook #'saxon/pull-jira-unassigned))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -292,14 +294,13 @@
   :vc (org-music :url "https://github.com/debanjum/org-music" :branch "master")
   :after (org emms)
   :config
-  (progn
-    (setq org-music-file "~/Documents/wiki/music.org"
-          org-music-media-directory "~/Music/"
-          org-music-operating-system "linux"
-          org-music-youtube-downloader "yt-dlp")
-    (add-hook 'org-mode-hook (lambda ()
-                               (if (equal buffer-file-name (expand-file-name org-music-file))
-                                   (org-music-mode))))))
+  (setq org-music-file "~/Documents/wiki/music.org"
+        org-music-media-directory "~/Music/"
+        org-music-operating-system "linux"
+        org-music-youtube-downloader "yt-dlp")
+  (add-hook 'org-mode-hook (lambda ()
+                             (if (equal buffer-file-name (expand-file-name org-music-file))
+                                 (org-music-mode)))))
 
 (use-package dslide
   :ensure t

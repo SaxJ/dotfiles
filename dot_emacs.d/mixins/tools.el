@@ -26,14 +26,6 @@
   :config
   (setq gac-automatically-add-new-files-p t))
 
-(use-package emacs
-  :ensure nil
-  :config
-  (midnight-mode 1)
-  (midnight-delay-set 'midnight-delay 1)
-  (setq midnight-period 3600)
-  (add-hook 'midnight-hook 'saxon/pull-jira-unassigned))
-
 (use-package sudo-edit
   :ensure t)
 
@@ -79,3 +71,20 @@
 
 (use-package soundcloud
   :ensure t)
+
+(use-package lastfm
+  :ensure t)
+
+(defun saxon/generate-similar-playlist ()
+  (interactive)
+  (when (org-at-heading-p)
+    (let* ((heading (nth 4 (org-heading-components)))
+           (split-heading (s-split "-" heading))
+           (artist (s-trim (nth 0 split-heading)))
+           (song (s-trim (nth 1 split-heading)))
+           (similar (lastfm-track-get-similar artist song)))
+      (dolist (similar-entry similar)
+        (progn
+          (org-insert-heading-after-current)
+          (insert (format "%s - %s" (car similar-entry) (cadr similar-entry)))
+          (org-entry-put nil "TYPE" "song"))))))

@@ -173,7 +173,7 @@
     "nn" 'org-roam-capture
 
     ;; jira
-    "js" 'saxon/pull-jira-todos
+    "js" 'saxon/pull-jira-assigned
 
     ;; remote
     "ro" 'saxon/open-remote-file
