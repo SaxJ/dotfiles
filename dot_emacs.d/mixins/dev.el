@@ -150,11 +150,12 @@
     (browse-url url)))
 
 ;; Magit: best Git client to ever exist
+(setq forge-add-default-bindings nil)
 (use-package magit
   :after git-commit
   :ensure t
   :config
-  (setq forge-add-default-bindings nil)
+  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
   (add-hook 'forge-post-submit-callback-hook 'saxon/on-create-pr)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
@@ -282,7 +283,6 @@
           "^.* repl\\&$"
           help-mode
           compilation-mode
-          "^magit:.*"
           "\\*eat.*\\*"
           ;; "\\*eldoc.*\\*"
           "\\*xref\\*"))

@@ -234,6 +234,12 @@
                                  ("HOLD" :foreground "#F44336")
                                  ("IDEA" :foreground "#9C27B0")
                                  ("DONE" :foreground "white")))
+
+  (setq org-mobile-directory "~/orgmobile"
+        org-mobile-inbox-for-pull "~/Documents/wiki/from-mobile.org"
+        org-mobile-files '("todo.org"))
+  ;; (add-hook 'org-mobile-post-push-hook #'saxon/org-mobile-push)
+
   (add-hook 'after-init-hook #'saxon/pull-jira-assigned)
   (add-hook 'after-init-hook #'saxon/pull-jira-unassigned))
 
