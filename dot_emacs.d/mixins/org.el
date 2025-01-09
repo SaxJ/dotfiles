@@ -3,6 +3,7 @@
 ;;;   Critical variables
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(require 'org-protocol)
 
 (defun saxon/jira-status-to-org-status (jira-status)
   "Map a jira status to an org status"
@@ -223,6 +224,7 @@
 
   (setq org-capture-templates
         '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
+          ("s" "Slack" entry (file "inbox.org") "* %?\n%i\n%a\n%U" :kill-buffer t)
           ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?")
           ("w" "Work" entry (file "todo.org") "* TODO [#%^{A|B|C}] %^{JiraIssueKey}p")
           ("f" "File Context" entry (file+headline "notes.org" "Working notes") "** [[%L][%(saxon/project-relative-file-name \"%F\")]] %^{prompt}\n%?")))
@@ -235,10 +237,10 @@
                                  ("IDEA" :foreground "#9C27B0")
                                  ("DONE" :foreground "white")))
 
-  (setq org-mobile-directory "~/orgmobile"
+  (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg"
         org-mobile-inbox-for-pull "~/Documents/wiki/from-mobile.org"
-        org-mobile-files '("todo.org"))
-  ;; (add-hook 'org-mobile-post-push-hook #'saxon/org-mobile-push)
+        org-mobile-files (org-agenda-files)
+        org-protocol-default-template-key "s")
 
   (add-hook 'after-init-hook #'saxon/pull-jira-assigned)
   (add-hook 'after-init-hook #'saxon/pull-jira-unassigned))

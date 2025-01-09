@@ -147,7 +147,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun saxon/on-create-pr (value _headers _status _req)
   (when-let ((url (alist-get 'html_url value)))
-    (browse-url url)))
+    (kill-new url)))
 
 ;; Magit: best Git client to ever exist
 (setq forge-add-default-bindings nil)
@@ -155,7 +155,10 @@
   :after git-commit
   :ensure t
   :config
-  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1)
+  (setq magit-display-buffer-function #'magit-display-buffer-same-window-except-diff-v1
+        magit-status-initial-section '(2)
+        magit-section-initial-visibility-alist '((stashes . hide)
+                                                 (untracked . hide)))
   (add-hook 'forge-post-submit-callback-hook 'saxon/on-create-pr)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
