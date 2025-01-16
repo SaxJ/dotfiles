@@ -74,6 +74,7 @@ require("lazy").setup({
 		{ "tiagovla/scope.nvim", config = true },
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
+    {"pimalaya/himalaya-vim"},
 		{
 			"airglow923/suda.nvim",
 			config = function()
