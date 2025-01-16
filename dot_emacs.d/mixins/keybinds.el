@@ -138,6 +138,7 @@
     ;; tab bindings
     "TAB c" 'tab-close
     "TAB o" 'tab-close-other
+    "TAB TAB" 'tab-switch
 
     ;; buffer bindings
     "bb" 'consult-project-buffer
@@ -167,6 +168,7 @@
     "mn" 'emms-next
     "mp" 'emms-previous
     "mt" 'emms-pause
+    "ms" 'emms-show
 
     ;; notes
     "nj" 'org-journal-new-entry
