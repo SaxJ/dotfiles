@@ -71,7 +71,6 @@ require("lazy").setup({
 		{ "voldikss/vim-floaterm" },
 		-- optional for icons
 		{ "nvim-tree/nvim-web-devicons" },
-		{ "tiagovla/scope.nvim", config = true },
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
     {"pimalaya/himalaya-vim"},
@@ -203,22 +202,7 @@ local project_select = function()
 		prompt = "Zoxide❯ ",
 		actions = {
 			["default"] = function(selected)
-				local new_name = vim.fn.fnamemodify(selected[1], ":t")
-
-				local tabs = require("tabby.tab")
-				local tab_api = require("tabby.module.api")
-
-				local tab_list = tab_api.get_tabs()
-				for _, tabid in ipairs(tab_list) do
-					if tabs.get_name(tabid) == new_name then
-						vim.api.nvim_set_current_tabpage(tabid)
-						return
-					end
-				end
-
-				vim.cmd("tabnew")
-				vim.cmd("tcd " .. selected[1])
-				tabs.set_current_name(new_name)
+				vim.cmd("cd " .. selected[1])
 			end,
 		},
 	})
