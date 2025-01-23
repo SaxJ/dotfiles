@@ -18,14 +18,31 @@
    ((s-contains-p "to do" jira-status t) "TODO")
    (t "BLOCKED")))
 
+(defun saxon/jira-read-from-current-tickets ()
+  (interactive)
+  (let* ((issues (jiralib2-jql-search "assignee = currentUser() AND project = MKT AND status != \"✅ Done\" ORDER BY created DESC" "key" "summary"))
+         (keys (mapcar (lambda (issue) (let-alist issue (cons .key .fields.summary))) issues))
+         (completion-extra-properties
+          '(:annotation-function
+            (lambda (k)
+              (let ((desc (alist-get k minibuffer-completion-table nil nil #'string=)))
+                (format "\t%s" desc))))))
+    (completing-read "Issue: " keys)))
+
+(defun saxon/jira-act-on-current-ticket ()
+  (interactive)
+  (let ((selected (saxon/jira-read-from-current-tickets)))
+    (progn
+      (saxon/jira-perform-action-on selected)
+      (message "Updated %s" selected))))
+
 (defvar saxon/jira-interested-projects
   '("CPT" "HEAL" "NOOT" "MKT")
   "Defines the projects to sync with org")
 
-(defun saxon/jira-perform-action ()
+(defun saxon/jira-perform-action-on (key)
   (interactive)
   (let* ((completion-ignore-case t)
-         (key (saxon/jira-issue-under-point))
          (options (jiralib2-get-actions key))
          (swapped (mapcar (lambda (cell)
                             (cons (cdr cell) (car cell)))
@@ -34,6 +51,11 @@
          (choice (completing-read "Action: " choices nil t))
          (result (assoc choice swapped)))
     (jiralib2-do-action key (cdr result))))
+
+(defun saxon/jira-perform-action ()
+  (interactive)
+  (let ((key (saxon/jira-issue-under-point)))
+    (saxon/jira-perform-action-on key)))
 
 (defun saxon/jira-assign-to-me ()
   "Assign the issue under point to myself."

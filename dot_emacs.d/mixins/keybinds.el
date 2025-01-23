@@ -176,6 +176,7 @@
 
     ;; jira
     "js" 'saxon/pull-jira-assigned
+    "jj" 'saxon/jira-act-on-current-ticket
 
     ;; remote
     "ro" 'saxon/open-remote-file

@@ -107,7 +107,8 @@
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-          (graphql "https://github.com/bkegley/tree-sitter-graphql")))
+          (graphql "https://github.com/bkegley/tree-sitter-graphql")
+          (ocaml "https://github.com/tree-sitter/tree-sitter-ocaml" "v0.21.0" "ocaml/src")))
 
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
@@ -198,6 +199,7 @@
   (add-hook 'haskell-mode 'eglot-ensure)
   (add-hook 'elm-mode 'eglot-ensure)
   (add-hook 'go-ts-mode 'eglot-ensure)
+  (add-hook 'tuareg-mode 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
@@ -209,8 +211,6 @@
                                        (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("omnisharp" "--languageserver")))
-  ;; (add-to-list 'eglot-server-programs
-  ;;              '(csharp-mode . ("csharp-ls")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
@@ -221,6 +221,8 @@
                '(vue-mode . ("vue-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(graphql-ts-mode . ("graphql-lsp" "server" "-m" "stream")))
+  (add-to-list 'eglot-server-programs
+               '(tuareg-mode . ("opam" "exec" "--" "ocamllsp")))
 
   (setq-default eglot-workspace-configuration
                 '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.3.0")))))
@@ -379,3 +381,11 @@
 (use-package go-ts-mode
   :config
   (setq go-ts-mode-indent-offset 4))
+
+(use-package tuareg
+  :ensure t
+  :config
+  (setq tuareg-opam-insinuate t))
+
+(add-to-list 'load-path "~/.emacs.d/site-lisp/build.el")
+(use-package build)
