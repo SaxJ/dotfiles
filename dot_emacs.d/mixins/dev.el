@@ -387,5 +387,8 @@
   :config
   (setq tuareg-opam-insinuate t))
 
+(use-package dune
+  :ensure t)
+
 (add-to-list 'load-path "~/.emacs.d/site-lisp/build.el")
 (use-package build)
