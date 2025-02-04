@@ -38,9 +38,62 @@ local notify_send = function(title, msg, log_level)
 	vim.system(command)
 end
 
+local table_contains = function(key, table)
+	return table[key] ~= nil
+end
+
+local file_watcher_map = {}
+local on_fs_change = function(err, fname, status)
+	vim.api.nvim_cmd({ "checktime", fname })
+end
+local watch_file = function(fname)
+	if not table_contains(fname, file_watcher_map) then
+		file_watcher_map[fname] = vim.uv.new_fs_event()
+	end
+	local watcher = file_watcher_map[fname]
+	watcher:start(
+		fname,
+		{},
+		vim.schedule_wrap(function(...)
+			on_fs_change(...)
+		end)
+	)
+end
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = { "*" },
+	callback = function(event)
+		local fname = event["match"]
+		watch_file(fname)
+	end,
+})
+
+vim.api.nvim_create_autocmd("BufRead", {
+	pattern = { "*" },
+	callback = function(event)
+		local fname = event["match"]
+		if table_contains(fname, file_watcher_map) then
+			file_watcher_map[fname]:stop()
+		end
+
+		file_watcher_map[fname] = nil
+	end,
+})
+
+local function map(t, func)
+	local result = {}
+	for i, v in ipairs(t) do
+		result[i] = func(v)
+	end
+	return result
+end
+
 return {
 	string = {
 		trim = trim,
+	},
+	table = {
+		table_contains = table_contains,
+		map = map,
 	},
 	util = {
 		log_work_date = log_work_date,
