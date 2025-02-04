@@ -29,7 +29,7 @@ o.autoread = true
 o.updatetime = 1000
 
 vim.diagnostic.config({
-	virtual_text = false,
+	virtual_text = true,
 	signs = true,
 	update_in_insert = false,
 	severity_sort = true,
@@ -247,7 +247,7 @@ end, { desc = "Open Link" })
 vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 
-vim.keymap.set("n", "<leader>.", ":FzfLua find_files cwd=%:p:h<CR>", { desc = "Siblings" })
+vim.keymap.set("n", "<leader>.", ":FzfLua files cwd=%:p:h<CR>", { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", frecent_files, { desc = "Files" })
 vim.keymap.set("n", "<leader>cc", ":checktime<CR>", { desc = "Check files" })
@@ -302,3 +302,6 @@ vim.api.nvim_create_autocmd('VimEnter', {callback = function ()
   funcs.util.log_work_date()
   funcs.system.notify_send('Logged Work', 'Added to work log', 3)
 end})
+
+local jira = require('jira')
+vim.keymap.set("n", "<leader>jj", jira.jira_action)
