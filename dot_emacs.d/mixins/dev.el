@@ -193,7 +193,6 @@
   (add-hook 'python-ts-mode-hook 'eglot-ensure)
   (add-hook 'c-ts-mode 'eglot-ensure)
   (add-hook 'c++-ts-mode 'eglot-ensure)
-  (add-hook 'go-ts-mode 'eglot-ensure)
   (add-hook 'graphql-ts-mode 'eglot-ensure)
   (add-hook 'rust-ts-mode 'eglot-ensure)
   (add-hook 'haskell-mode 'eglot-ensure)
@@ -390,5 +389,5 @@
 (use-package dune
   :ensure t)
 
-(add-to-list 'load-path "~/.emacs.d/site-lisp/build.el")
-(use-package build)
+(use-package templ-ts-mode
+  :ensure t)

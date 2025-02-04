@@ -144,14 +144,6 @@
   :config
   (setq completion-styles '(orderless prescient)))
 
-;; (use-package tabspaces
-;;   :ensure t
-;;   :hook (after-init . tabspaces-mode)
-;;   :config
-;;   (setq tabspaces-project-switch-commands 'project-find-file
-;;         tabspaces-initialize-project-with-todo nil
-;;         tabspaces-use-filtered-buffers-as-default t))
-
 (use-package otpp
   :vc (otpp :url "https://github.com/abougouffa/one-tab-per-project" :rev :newest)
   :ensure t

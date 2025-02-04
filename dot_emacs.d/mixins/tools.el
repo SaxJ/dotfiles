@@ -88,3 +88,12 @@
           (org-insert-heading-after-current)
           (insert (format "%s - %s" (car similar-entry) (cadr similar-entry)))
           (org-entry-put nil "TYPE" "song"))))))
+
+(use-package yeetube
+  :ensure t
+  :init (define-prefix-command 'my/yeetube-map)
+  :config
+  (setf yeetube-mpv-disable-video t))
+
+(use-package casual
+  :ensure t)
