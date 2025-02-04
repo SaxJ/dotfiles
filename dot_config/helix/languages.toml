@@ -20,7 +20,7 @@ formatter = { command = "dotnet", args = ["csharpier"] }
 [[language]]
 name = "php"
 roots = ["composer.json"]
-auto-format = true
+auto-format = false
 
 [[language]]
 name = "tsx"

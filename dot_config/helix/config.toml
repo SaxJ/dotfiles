@@ -45,7 +45,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
 "space" = "file_picker_in_current_directory"
-"minus" = ":sh zellij run -ci -- yazi %{dirname}"
+"minus" = ":sh kitty @ launch --type=overlay --no-response --cwd=current yazi %{dirname}"
 
 [keys.normal."C-f"]
 "t" = ":pipe ascii-table"
@@ -55,12 +55,11 @@ r = "rename_symbol"
 a = "code_action"
 
 [keys.normal.space.o]
-"minus" = ":sh zellij run -ci -- yazi %{dirname}"
-T = ":sh zellij run -cf -- pter ~/Dropbox/todo.txt"
+"minus" = ":sh kitty @ launch --type=overlay --no-response --cwd=current yazi %{dirname}"
 
 [keys.normal.space.g]
-g = ":sh zellij run -ci -- lazygit"
-l = ":sh zellij run -ci -- tig %{filename}"
+g = ":sh kitty @ launch --type=overlay --no-response --cwd=current lazygit"
+l = ":sh kitty @ launch --type=overlay --no-response --cwd=current tig %{filename}"
 d = "changed_file_picker"
 p = ":sh gh pr create --web"
 
