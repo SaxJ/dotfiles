@@ -20,7 +20,7 @@
 (setq ring-bell-function 'ignore)
 (setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
 (setq display-time-default-load-average nil) ; this information is useless for most
-(setq initial-buffer-choice #'vterm)
+(setq initial-buffer-choice #'eshell)
 
 ;; Automatically reread from disk if the underlying file changes
 (setq auto-revert-interval 1)
