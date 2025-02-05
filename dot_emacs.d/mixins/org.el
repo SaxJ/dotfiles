@@ -36,6 +36,23 @@
       (saxon/jira-perform-action-on selected)
       (message "Updated %s" selected))))
 
+(defun saxon/jira-describe-ticket (key)
+  (let-alist (jiralib2-get-issue key)
+    (let ((summary .fields.summary)
+          (issue-key .key)
+          (buf (get-buffer-create "*jira-detail*")))
+      (with-current-buffer buf
+        (progn
+          (delete-region (point-min) (point-max))
+          (insert (format "# %s - %s\n%s" issue-key summary .fields.description))
+          (markdown-mode)
+          (popper-lower-to-popup))))))
+
+(defun saxon/jira-describe-current-ticket ()
+  (interactive)
+  (let ((selected (saxon/jira-read-from-current-tickets)))
+    (saxon/jira-describe-ticket selected)))
+
 (defvar saxon/jira-interested-projects
   '("CPT" "HEAL" "NOOT" "MKT")
   "Defines the projects to sync with org")
