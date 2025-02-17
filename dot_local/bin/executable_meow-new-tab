@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+
+cwd="$1"
+name=$(basename "$1")
+existing_tabs=$(kitty @ ls | jq -c '.[].tabs.[].title')
+
+if [[ $existing_tabs == *"$name"* ]]; then
+  kitty @ focus-tab --match "title:$name"
+else
+  kitty @ launch --cwd="$cwd" --type=tab --tab-title="$name"
+fi

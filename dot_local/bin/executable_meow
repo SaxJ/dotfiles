@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+zoxide query --list | fzf \
+  --prompt="Project: " \
+  --bind="enter:execute(~/.local/bin/meow-new-tab {})+abort"
