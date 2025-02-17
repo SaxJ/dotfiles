@@ -10,19 +10,18 @@ evaluate-commands %sh{
 ### PLUGINS
 plug "andreyorst/plug.kak" noload
 plug "WhatNodyn/kakoune-wakatime"
-plug "mspielberg/csharp.kak"
 plug "evanrelf/byline.kak" config %{
   require-module "byline"
 }
 
 hook global BufCreate .+\.cs %{
-  set-option buffer filetype csharp
+  set-option buffer filetype c-sharp
 }
 
 # Windowing
 set-option global windowing_modules ''
 require-module kitty
-set-option global kitty_window_type 'window'
+set-option global kitty_window_type 'overlay'
 alias global popup kitty-terminal
 
 # general
@@ -58,32 +57,15 @@ def tig-blame -override -docstring 'Open blame in tig -params for current file a
 
 def git-open -override -docstring 'Open git interface' %{
   nop %sh{
-    zellij run -ci -- lazygit 
+    kitty-terminal-window lazygit
   }
 }
 
-def project-open -override -docstring 'Open project searcher' %{
-  nop %sh{
-    prj
+define-command -override open_project %{
+  prompt project: -menu -shell-script-candidates 'zoxide query --list' %{
+    kitty-terminal-tab kak -s %val{session} -e "cd %val{text}"
   }
 }
-
-# window management in zellij
-define-command -hidden zellij-split -params 1 -docstring 'split (down / right)' %{
-  nop %sh{
-    zellij action new-pane -cd $1 -- kak -c $kak_session
-  }
-}
-
-define-command -hidden zellij-move-focus -params 1 %{
-  nop %sh{
-    zellij action move-focus $1
-  }
-}
-
-declare-user-mode window-manage
-map global window-manage s ':zellij-split down<ret>'       -docstring 'horizontal split'
-map global window-manage v ':zellij-split right<ret>'       -docstring 'vertical split'
 
 ## match mode
 define-command -hidden match-delete-surround -docstring 'delete surrounding key' %{
@@ -236,18 +218,12 @@ map global user p ':extra-paste-system<ret>' -docstring 'paste selections from s
 map global user y ':extra-yank-system<ret>'  -docstring 'yank to system clipboard'
 
 # Tree-sitter
-eval %sh{ kak-tree-sitter -dks --init $kak_session --with-highlighting -vvvvv }
+eval %sh{ kak-tree-sitter -dks --init $kak_session -vvvvv }
+
 colorscheme catppuccin_macchiato
-define-command -override kak-tree-sitter-set-lang %{
-  set-option buffer kts_lang %opt{filetype}
-}
-define-command -override tree-sitter-user-after-highlighter %{
-  add-highlighter buffer/show-matching show-matching
-}
 
 # Modeline
 set-face global StatusLineBlack black
-# set-face global StatusLineGit "%opt{red}"
 
 declare-option str bufname_abbrev
 
@@ -319,7 +295,6 @@ define-command -hidden -params 6 -override lsp-handle-progress %{
 }
 
 ####### Keybindings ########
-
 ## pickers
 map global user / ':grep '                   -docstring 'grep'
 map global user b ':open_buffer_picker<ret>' -docstring 'pick buffer'
@@ -329,7 +304,7 @@ map global user F ':open_rg_picker<ret>'     -docstring 'search project'
 ## match
 map global normal M ':enter-user-mode match-extend<ret>' -docstring 'match mode (extend)'
 map global normal m ':enter-user-mode match<ret>'        -docstring 'match mode'
-map global normal <c-x> ':comment-line<ret>' -docstring 'Comment line'
+map global normal <c-c> ':comment-line<ret>' -docstring 'Comment line'
 
 ## windows
 # map global normal <c-w> ':enter-user-mode window-zellij<ret>' -docstring 'window'
