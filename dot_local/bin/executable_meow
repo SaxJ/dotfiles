@@ -2,4 +2,5 @@
 
 zoxide query --list | fzf \
   --prompt="Project: " \
-  --bind="enter:execute(~/.local/bin/meow-new-tab {})+abort"
+  --bind="enter:execute(~/.local/bin/meow-new-tab {})+abort" \
+  --preview="eza -T {} --icons=always -L 1"
