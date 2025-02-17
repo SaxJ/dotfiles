@@ -44,7 +44,7 @@ end
 
 local file_watcher_map = {}
 local on_fs_change = function(err, fname, status)
-	vim.api.nvim_cmd({ "checktime", fname })
+  vim.cmd('bufdo checktime')
 end
 local watch_file = function(fname)
 	if not table_contains(fname, file_watcher_map) then
@@ -59,25 +59,6 @@ local watch_file = function(fname)
 		end)
 	)
 end
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = { "*" },
-	callback = function(event)
-		local fname = event["match"]
-		watch_file(fname)
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = { "*" },
-	callback = function(event)
-		local fname = event["match"]
-		if table_contains(fname, file_watcher_map) then
-			file_watcher_map[fname]:stop()
-		end
-
-		file_watcher_map[fname] = nil
-	end,
-})
 
 local function map(t, func)
 	local result = {}
@@ -100,5 +81,6 @@ return {
 	},
 	system = {
 		notify_send = notify_send,
+    watch_file = watch_file,
 	},
 }
