@@ -139,6 +139,8 @@
     "TAB c" 'tab-close
     "TAB o" 'tab-close-other
     "TAB TAB" 'tab-switch
+    "TAB n" 'tab-next
+    "TAB p" 'tab-previous
 
     ;; buffer bindings
     "bb" 'consult-project-buffer
@@ -231,6 +233,9 @@
     "SPC" 'yeetube-play
     "p" 'yeetube-mpv-toggle-pause
     "v" 'yeetube-mpv-toggle-video)
+
+  (general-def 'normal 'magit-status-mode
+    "b" 'forge-browse)
 
   (general-vmap
     "|" 'saxon/shell-replace-region)
