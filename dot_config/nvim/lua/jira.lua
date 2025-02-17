@@ -34,6 +34,26 @@ local function jql_query(query)
 	end
 end
 
+local function get_issue(key)
+	local curl_cmd = vim.system({
+		"curl",
+		"-s",
+		"-G",
+		"--user",
+		string.format("%s:%s", vim.g.jira_user, vim.g.jira_api_key),
+		"-H",
+		"Accept: application/json",
+		string.format("%s/rest/api/3/issue/%s", vim.g.jira_host, key),
+	}, { text = true })
+
+	local curl_result = curl_cmd:wait()
+	if curl_result.code == 0 then
+		return vim.json.decode(curl_result.stdout)
+	else
+		return nil
+	end
+end
+
 local function issue_transitions(key)
 	local curl_cmd = vim.system({
 		"curl",
