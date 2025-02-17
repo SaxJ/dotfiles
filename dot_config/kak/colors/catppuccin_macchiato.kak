@@ -88,9 +88,10 @@ set-face global documentation  comment
 set-face global meta           "%opt{pink}"
 set-face global builtin        "%opt{lavender}+b"
 
-# Tree-sitter (<https://git.sr.ht/~hadronized/kak-tree-sitter>)
+# Tree-sitter (<https://github.com/hadronized/kak-tree-sitter>)
 set-face global ts_attribute                    "%opt{blue}"
 set-face global ts_comment                      "%opt{overlay0}+i"
+set-face global ts_comment_unused               "%opt{overlay0}+is"
 set-face global ts_conceal                      "%opt{mauve}+i"
 set-face global ts_constant                     "%opt{orange}"
 set-face global ts_constant_builtin_boolean     "%opt{sky}"
@@ -113,6 +114,10 @@ set-face global ts_keyword_control_conditional  "%opt{mauve}+i"
 set-face global ts_keyword_control_directive    "%opt{mauve}+i"
 set-face global ts_keyword_control_import       "%opt{mauve}+i"
 set-face global ts_keyword_directive            "%opt{mauve}+i"
+set-face global ts_keyword_storage              "%opt{mauve}"
+set-face global ts_keyword_storage_modifier     "%opt{mauve}"
+set-face global ts_keyword_storage_modifier_mut "%opt{mauve}"
+set-face global ts_keyword_storage_modifier_ref "%opt{teal}"
 set-face global ts_label                        "%opt{cyan}+i"
 set-face global ts_markup_bold                  "%opt{orange}+b"
 set-face global ts_markup_heading               "%opt{red}"
@@ -161,3 +166,5 @@ set-face global ts_variable_builtin             "%opt{red}"
 set-face global ts_variable_other_member        "%opt{teal}"
 set-face global ts_variable_parameter           "%opt{maroon}+i"
 set-face global ts_warning                      "%opt{orange}+b"
+
+
