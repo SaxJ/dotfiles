@@ -179,35 +179,6 @@ local scp_download = function()
 	vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
 end
 
-local frecent_files = function()
-	local project = get_project()
-	local cmd = string.format("cat <(fre --sorted --store_name %s) <(fd -t f) | awk '!seen[$0]++'", project)
-	require("fzf-lua").fzf_exec(cmd, {
-		prompt = "File❯ ",
-		actions = {
-			["default"] = function(selected)
-				vim.system({ "fre", "--store_name", project, "--add", selected[1] })
-				if vim.fn.bufexists(selected[1]) == 1 then
-					vim.cmd.buf(selected[1])
-				else
-					vim.cmd.edit(selected[1])
-				end
-			end,
-		},
-	})
-end
-
-local project_select = function()
-	require("fzf-lua").fzf_exec("zoxide query -l", {
-		prompt = "Zoxide❯ ",
-		actions = {
-			["default"] = function(selected)
-				vim.cmd("cd " .. selected[1])
-			end,
-		},
-	})
-end
-
 local open_file_browser = function()
 	local files = require("mini.files")
 	if not files.close() then
@@ -244,27 +215,30 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open Link" })
 
 -- general
-vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
 
-vim.keymap.set("n", "<leader>.", ":FzfLua files cwd=%:p:h<CR>", { desc = "Siblings" })
+vim.keymap.set("n", "<leader>.", function ()
+  Snacks.picker.files({
+    cwd = vim.fn.expand("%:p:.")
+  })
+end, { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
-vim.keymap.set("n", "<leader><leader>", frecent_files, { desc = "Files" })
-vim.keymap.set("n", "<leader>cc", ":checktime<CR>", { desc = "Check files" })
+vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
 
 -- testing
 vim.keymap.set("n", "<leader>tt", play_headers, { desc = "testing" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
 	require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
-vim.keymap.set("n", "<leader>ff", ":FzfLua files<CR>", { desc = "Find" })
+vim.keymap.set("n", "<leader>ff", Snacks.picker.files, { desc = "Find" })
 vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Name" })
 
 -- git
@@ -275,7 +249,11 @@ vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
 
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
-vim.keymap.set("n", "<leader>pp", project_select, { desc = "Switch Project" })
+vim.keymap.set("n", "<leader>pp", function ()
+  Snacks.picker.zoxide({
+    confirm = Snacks.picker.actions.cd
+  })
+end, { desc = "Switch Project" })
 vim.keymap.set("n", "<leader>pt", function()
 	local pwd = vim.uv.cwd()
 	vim.api.nvim_command(string.format("FloatermToggle '%s'", pwd))
@@ -298,10 +276,18 @@ vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
 
 local funcs = require('functions')
+
 vim.api.nvim_create_autocmd('VimEnter', {callback = function ()
   funcs.util.log_work_date()
   funcs.system.notify_send('Logged Work', 'Added to work log', 3)
 end})
+
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'FocusGained'}, {
+	pattern = { "*" },
+	callback = function()
+    vim.cmd('checktime')
+	end,
+})
 
 local jira = require('jira')
 vim.keymap.set("n", "<leader>jj", jira.jira_action)
