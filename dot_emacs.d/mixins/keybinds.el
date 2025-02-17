@@ -205,6 +205,7 @@
     "oz" 'zone
     "om" 'saxon/open-mail
     "ok" 'saxon/open-kube
+    "ob" 'build-menu
 
     ;; chezmoi
     "cf" 'chezmoi-find
