@@ -44,13 +44,21 @@
   :ensure t
   :config
   (prodigy-define-service
-    :name "Unicron"
-    :command "yarn"
-    :args '("dev" "-p" "3000")
+    :name "Unicron Dev Server"
+    :command "npm"
+    :args '("run" "dev" "--" "-p" "3000")
     :cwd "~/Documents/unicron"
     :tags '(work)
     :stop-signal 'sigkill
-    :kil-process-buffer-on-stop t))
+    :kill-process-buffer-on-stop t)
+  (prodigy-define-service
+    :name "Hannibal Dev Server"
+    :command "yarn"
+    :args '("dev")
+    :cwd "~/Documents/hannibal"
+    :tags '(work)
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t))
 
 (use-package chezmoi
   :ensure t)
@@ -96,4 +104,7 @@
   (setf yeetube-mpv-disable-video t))
 
 (use-package casual
+  :ensure t)
+
+(use-package pr-review
   :ensure t)
