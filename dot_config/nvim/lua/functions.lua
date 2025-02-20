@@ -79,6 +79,10 @@ return {
 	util = {
 		log_work_date = log_work_date,
 	},
+  windows = {
+    float = nil,
+    popup = nil,
+  },
 	system = {
 		notify_send = notify_send,
     watch_file = watch_file,
