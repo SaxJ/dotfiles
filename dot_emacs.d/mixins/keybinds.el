@@ -134,6 +134,7 @@
     "X" 'org-capture
     "/" 'consult-ripgrep
     "|" 'saxon/shell-command-output
+    "-" 'project-dired
 
     ;; tab bindings
     "TAB c" 'tab-close
@@ -180,6 +181,7 @@
     "js" 'saxon/pull-jira-assigned
     "jj" 'saxon/jira-act-on-current-ticket
     "jd" 'saxon/jira-describe-current-ticket
+    "jb" 'saxon/jira-act-on-board-ticket
 
     ;; remote
     "ro" 'saxon/open-remote-file
