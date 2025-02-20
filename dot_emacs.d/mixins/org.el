@@ -20,7 +20,18 @@
 
 (defun saxon/jira-read-from-current-tickets ()
   (interactive)
-  (let* ((issues (jiralib2-jql-search "assignee = currentUser() AND project = MKT AND status != \"✅ Done\" ORDER BY created DESC" "key" "summary"))
+  (let* ((issues (jiralib2-jql-search "assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC" "key" "summary"))
+         (keys (mapcar (lambda (issue) (let-alist issue (cons .key .fields.summary))) issues))
+         (completion-extra-properties
+          '(:annotation-function
+            (lambda (k)
+              (let ((desc (alist-get k minibuffer-completion-table nil nil #'string=)))
+                (format "\t%s" desc))))))
+    (completing-read "Issue: " keys)))
+
+(defun saxon/jira-read-from-board-tickets ()
+  (interactive)
+  (let* ((issues (jiralib2-board-issues 259 "key,summary"))
          (keys (mapcar (lambda (issue) (let-alist issue (cons .key .fields.summary))) issues))
          (completion-extra-properties
           '(:annotation-function
@@ -32,6 +43,13 @@
 (defun saxon/jira-act-on-current-ticket ()
   (interactive)
   (let ((selected (saxon/jira-read-from-current-tickets)))
+    (progn
+      (saxon/jira-perform-action-on selected)
+      (message "Updated %s" selected))))
+
+(defun saxon/jira-act-on-board-ticket ()
+  (interactive)
+  (let ((selected (saxon/jira-read-from-board-tickets)))
     (progn
       (saxon/jira-perform-action-on selected)
       (message "Updated %s" selected))))
@@ -108,7 +126,7 @@
   "Add an entry to the work log for tax purposes."
   (interactive)
   (with-temp-buffer
-    (set-visited-file-name "~/Documents/wiki/log.org" nil)
+    (set-visited-file-name "~/Dropbox/log.org" nil)
     (insert-file-contents (buffer-name))
     (let ((date (format-time-string "%Y-%m-%d"))
           (hostname (system-name)))
