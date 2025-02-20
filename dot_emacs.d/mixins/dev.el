@@ -148,7 +148,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun saxon/on-create-pr (value _headers _status _req)
   (when-let ((url (alist-get 'html_url value)))
-    (kill-new url)))
+    (browse-url url)))
 
 ;; Magit: best Git client to ever exist
 (setq forge-add-default-bindings nil)
