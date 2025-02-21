@@ -148,7 +148,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun saxon/on-create-pr (value _headers _status _req)
   (when-let ((url (alist-get 'html_url value)))
-    (kill-new url)))
+    (browse-url url)))
 
 ;; Magit: best Git client to ever exist
 (setq forge-add-default-bindings nil)
@@ -209,7 +209,7 @@
                '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
                                        (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+               '(csharp-ts-mode . ("~/.dotnet/tools/csharp-ls")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
@@ -362,13 +362,9 @@
   :ensure t
   :vc (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode"))
 
-;; (use-package build
-;;   :ensure t
-;;   :vc (build :url "https://github.com/27justin/build.el"))
-
-                                        ; (use-package build
-                                        ;   :vc t
-                                        ;   :load-path "/home/saxonj/Documents/build.el/")
+(use-package build
+  :ensure t
+  :vc (build :url "https://github.com/27justin/build.el"))
 
 (use-package terraform-mode
   :ensure t)

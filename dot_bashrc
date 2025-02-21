@@ -198,73 +198,9 @@ function pac-search() {
 }
 
 eval "$(direnv hook bash)"
-eval "$(zoxide init bash)"
 eval "$(starship init bash)"
 eval "$(hub alias -s)"
-source /usr/share/nvm/init-nvm.sh
-
-function bash-stats() {
-    fc -l 1 | awk '{CMD[$2]++;count++;}END { for (a in CMD)print CMD[a] " " CMD[a]/count*100 "% " a;}' | grep -v "./" | column -c3 -s " " -t | sort -nr | nl | head -n25
-}
-
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
-function rpush() {
-    local dir=$(basename $PWD)
-    scp "$1" ubuntu@minikube:/home/ubuntu/$dir/$1
-}
-export -f rpush
-
-function rpull() {
-    local dir=$(basename $PWD)
-    scp ubuntu@minikube:/home/ubuntu/$dir/$1 "$1"
-}
-export -f rpull
-
-function git_sync() {
-    local files=$(git st --porcelain | cut -c 1-3 --complement)
-    local dir=$(basename $PWD)
-
-    for f in $files; do
-        scp "$f" ubuntu@minikube:/home/ubuntu/$dir/$f
-    done
-}
-export -f git_sync
-
-function review() {
-    local branch="$(git branch --show-current)"
-    jira issue move "$branch" "Code Review"
-}
-export -f review
-
-function ticket_done() {
-    if [[ $# == 0 ]]; then
-        current_branch=$(git branch --show-current)
-        [[ $current_branch =~ ^[[:alpha:]]+-[[:digit:]]+$ ]] && jira issue move "$current_branch" Done
-    else
-        [[ "$1" =~ ^[[:alpha:]]+-[[:digit:]]+$ ]] && jira issue move "$1" Done
-    fi
-}
-
-function zellij_helix_file_man() {
-    zellij run -f -- yazi
-}
-
-function ta() {
-    read -rp "Todo: " input
-    read -rp "Priority: " priority
-    if [[ "$input" =~ ^[a-zA-Z]+-[0-9]+$ ]]; then
-        todo.sh add "($priority) jiraIssue:$input"
-    else
-        todo.sh add "($priority) $input"
-    fi
-}
-
-function fzj() {
-    job=$(tidy_jobs | fzf | awk '{ print $1 }')
-    echo ">>> $job"
-}
-
-function ji() {
-    jira issue list
-}
+eval "$(zoxide init bash)"
+source /usr/share/nvm/init-nvm.sh

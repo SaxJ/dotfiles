@@ -125,25 +125,6 @@ local watch_file = function(fname)
 		end)
 	)
 end
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = { "*" },
-	callback = function(event)
-		local fname = event["match"]
-		watch_file(fname)
-	end,
-})
-
-vim.api.nvim_create_autocmd("BufRead", {
-	pattern = { "*" },
-	callback = function(event)
-		local fname = event["match"]
-		if table_contains(fname, file_watcher_map) then
-			file_watcher_map[fname]:stop()
-		end
-
-		file_watcher_map[fname] = nil
-	end,
-})
 
 local function map(t, func)
 	local result = {}
@@ -166,8 +147,13 @@ return {
 	util = {
 		log_work_date = log_work_date,
 	},
+  windows = {
+    float = nil,
+    popup = nil,
+  },
 	system = {
 		notify_send = notify_send,
+    watch_file = watch_file,
 	},
   windows = {
     open_float = open_float,

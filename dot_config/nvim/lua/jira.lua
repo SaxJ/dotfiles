@@ -1,4 +1,3 @@
-local fzf = require("fzf-lua")
 local f = require("functions")
 
 vim.g.jira_api_key = f.string.trim(vim.system({ "pass", "jira" }, { text = true }):wait().stdout)
@@ -29,7 +28,7 @@ local function jql_query(query)
 	if curl_result.code == 0 then
 		local results = vim.json.decode(curl_result.stdout)
 		return f.table.map(results["issues"], function(issue)
-			return string.format("%s\t%s", issue["key"], issue["fields"]["summary"])
+			return { key = issue["key"], summary = issue["fields"]["summary"] }
 		end)
 	else
 		return {}
@@ -127,39 +126,60 @@ end
 local function jira_action()
 	local results =
 		jql_query('assignee = currentUser() AND project = MKT AND status != "✅ Done" ORDER BY created DESC')
-	fzf.fzf_exec(results, {
-		actions = {
-			["default"] = function(selection)
-				local selected = selection[1]
-				local key = string.match(selected, "^(%a+-%d+)")
-				local transitions = issue_transitions(key)
-				local transition_map = {}
-				for _, v in ipairs(transitions) do
-					transition_map[v["name"]] = v["id"]
-				end
 
-				fzf.fzf_exec(
-					f.table.map(transitions, function(t)
-						return t["name"]
-					end),
-					{
-						actions = {
-							["default"] = function(selected_transition)
-								local transition_id = transition_map[selected_transition[1]]
-								local success = perform_transition(key, transition_id)
+	local items = {}
+	for i, item in ipairs(results) do
+		table.insert(items, {
+			idx = i,
+			score = i,
+			key = item["key"],
+			summary = item["summary"],
+			text = string.format("%s %s", item["key"], item["summary"]),
+		})
+	end
 
-								local notification_title = string.format("Issue %s", key)
-								if success then
-									f.system.notify_send(notification_title, selected_transition[1], 1)
-								else
-									f.system.notify_send(notification_title, "Did not transition", 1)
-								end
-							end,
-						},
-					}
-				)
-			end,
+	Snacks.picker({
+		items = items,
+		format = function(item)
+			local ret = {}
+			ret[#ret + 1] = { item.key, "SnacksPickerLabel" }
+			ret[#ret + 1] = { string.rep(" ", 24 - #item.key), virtual = true }
+			ret[#ret + 1] = { item.summary, "SnacksPickerComment" }
+			return ret
+		end,
+		matcher = {
+			ignorecase = true,
 		},
+		confirm = function(picker, item)
+			Snacks.picker({
+				items = f.table.map(issue_transitions(item.key), function (t)
+          return {
+            name = t.name,
+            text = t.name,
+            id = t.id,
+          }
+				end),
+				format = function(tran)
+					return { { tran.name, "SnacksPickerLabel" } }
+				end,
+				matcher = {
+					ignorecase = true,
+				},
+				confirm = function(picker2, tran)
+					local success = perform_transition(item.key, tran.id)
+
+					local notification_title = string.format("Issue %s", item.key)
+					if success then
+						f.system.notify_send(notification_title, tran.name, 1)
+					else
+						f.system.notify_send(notification_title, "Did not transition", 1)
+					end
+					picker2:close()
+				end,
+
+				picker:close(),
+			})
+		end,
 	})
 end
 

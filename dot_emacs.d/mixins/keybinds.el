@@ -134,11 +134,14 @@
     "X" 'org-capture
     "/" 'consult-ripgrep
     "|" 'saxon/shell-command-output
+    "-" 'project-dired
 
     ;; tab bindings
     "TAB c" 'tab-close
     "TAB o" 'tab-close-other
     "TAB TAB" 'tab-switch
+    "TAB n" 'tab-next
+    "TAB p" 'tab-previous
 
     ;; buffer bindings
     "bb" 'consult-project-buffer
@@ -178,6 +181,7 @@
     "js" 'saxon/pull-jira-assigned
     "jj" 'saxon/jira-act-on-current-ticket
     "jd" 'saxon/jira-describe-current-ticket
+    "jb" 'saxon/jira-act-on-board-ticket
 
     ;; remote
     "ro" 'saxon/open-remote-file
@@ -205,6 +209,7 @@
     "oz" 'zone
     "om" 'saxon/open-mail
     "ok" 'saxon/open-kube
+    "ob" 'build-menu
 
     ;; chezmoi
     "cf" 'chezmoi-find
@@ -230,6 +235,9 @@
     "SPC" 'yeetube-play
     "p" 'yeetube-mpv-toggle-pause
     "v" 'yeetube-mpv-toggle-video)
+
+  (general-def 'normal 'magit-status-mode
+    "b" 'forge-browse)
 
   (general-vmap
     "|" 'saxon/shell-replace-region)
