@@ -109,7 +109,7 @@ local function get_issue_details(issue_key)
       description = f.string.lines(raw_description)
     end
 
-		local buf, win = f.windows.open_float(f.table.concat_tables({
+		local buf, win = f.windows.open_popup(f.table.concat_tables({
 			string.format("# %s - %s", key, summary),
 			"",
 		}, description))
@@ -122,10 +122,10 @@ local function get_issue_details(issue_key)
 	end
 end
 
---- Display current jira issues in a fzf popup
+--- Display current jira issues in a popup
 local function jira_action()
 	local results =
-		jql_query('assignee = currentUser() AND project = MKT AND status != "✅ Done" ORDER BY created DESC')
+		jql_query('assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC')
 
 	local items = {}
 	for i, item in ipairs(results) do
@@ -185,16 +185,35 @@ end
 
 local function jira_display_details()
 	local results =
-		jql_query('assignee = currentUser() AND project = MKT AND status != "✅ Done" ORDER BY created DESC')
-	fzf.fzf_exec(results, {
-		actions = {
-			["default"] = function(selection)
-				local selected = selection[1]
-				local key = string.match(selected, "^(%a+-%d+)")
+		jql_query('assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC')
 
-				get_issue_details(key)
-			end,
+	local items = {}
+	for i, item in ipairs(results) do
+		table.insert(items, {
+			idx = i,
+			score = i,
+			key = item["key"],
+			summary = item["summary"],
+			text = string.format("%s %s", item["key"], item["summary"]),
+		})
+	end
+
+	Snacks.picker({
+		items = results,
+		format = function(item)
+			local ret = {}
+			ret[#ret + 1] = { item.key, "SnacksPickerLabel" }
+			ret[#ret + 1] = { string.rep(" ", 24 - #item.key), virtual = true }
+			ret[#ret + 1] = { item.summary, "SnacksPickerComment" }
+			return ret
+		end,
+		matcher = {
+			ignorecase = true,
 		},
+		confirm = function(picker, item)
+      get_issue_details(item.key)
+      picker:close()
+		end,
 	})
 end
 

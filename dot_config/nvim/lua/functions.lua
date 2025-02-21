@@ -51,7 +51,7 @@ local log_work_date = function()
 	)
 end
 
---- Opena floating window
+--- Open a floating window
 ---@param content string[]
 ---@return integer,integer
 local function open_float(content)
@@ -76,6 +76,49 @@ local function open_float(content)
   })
 
   vim.api.nvim_set_option_value('ft', 'markdown', {buf = buf})
+  vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '', {
+    callback = function ()
+      vim.api.nvim_win_close(win, true)
+      vim.api.nvim_buf_delete(buf, {
+        force = true,
+        unload = true
+      })
+    end,
+    noremap = true,
+    silent = true,
+  })
+
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
+
+  return buf, win
+end
+
+--- Open a popup window
+---@param content string[]
+---@return integer,integer
+local function open_popup(content)
+  local editor_width = vim.o.columns
+  local editor_height = vim.o.lines
+
+  local width = editor_width
+  local height = math.floor(editor_height * 0.25)
+
+  local row = editor_height - height - 1
+  local col = 0
+
+  local buf = vim.api.nvim_create_buf(false, true)
+  local win = vim.api.nvim_open_win(buf, true, {
+    relative = 'editor',
+    row = row,
+    col = col,
+    width = width,
+    height = height,
+    style = 'minimal',
+    border = 'single'
+  })
+
+  vim.api.nvim_set_option_value('ft', 'markdown', {buf = buf})
+
   vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '', {
     callback = function ()
       vim.api.nvim_win_close(win, true)
@@ -147,15 +190,12 @@ return {
 	util = {
 		log_work_date = log_work_date,
 	},
-  windows = {
-    float = nil,
-    popup = nil,
-  },
 	system = {
 		notify_send = notify_send,
     watch_file = watch_file,
 	},
   windows = {
     open_float = open_float,
+    open_popup = open_popup,
   }
 }

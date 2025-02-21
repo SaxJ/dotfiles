@@ -291,3 +291,4 @@ vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'FocusGained'}, {
 
 local jira = require('jira')
 vim.keymap.set("n", "<leader>jj", jira.jira_action)
+vim.keymap.set('n', "<leader>jd", jira.jira_display_details)
