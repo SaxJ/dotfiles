@@ -177,6 +177,25 @@ local function map(t, func)
 	return result
 end
 
+--- Runs a callback every <interval> seconds
+---@param interval integer
+---@param callback function
+---@return uv_timer_t
+local function at_interval(interval, callback)
+  local timer = vim.uv.new_timer()
+  timer:start(interval * 1000, interval * 1000, function ()
+    callback()
+  end)
+  return timer
+end
+
+--- Stops the supplied timer and releases resources
+---@param timer uv_timer_t
+local function stop_interval(timer)
+  timer:stop()
+  timer:close()
+end
+
 return {
 	string = {
 		trim = trim,
@@ -189,6 +208,8 @@ return {
 	},
 	util = {
 		log_work_date = log_work_date,
+    at_interval = at_interval,
+    stop_interval = stop_interval,
 	},
 	system = {
 		notify_send = notify_send,
