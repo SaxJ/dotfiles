@@ -138,6 +138,7 @@
 
     ;; tab bindings
     "TAB c" 'tab-close
+    "TAB k" 'project-kill-buffers
     "TAB o" 'tab-close-other
     "TAB TAB" 'tab-switch
     "TAB n" 'tab-next
@@ -164,6 +165,7 @@
     "pd" 'project-forget-project
     "pt" 'multi-vterm-project
     "pa" 'project-remember-projects-under
+    "pk" 'project-kill-buffers
 
     "sp" 'consult-ripgrep
 
@@ -200,6 +202,7 @@
 
     "gg" 'magit-project-status
     "gb" 'magit-blame
+    "gh" 'git-timemachine
 
     ;; openers
     "oa" 'org-agenda
@@ -277,6 +280,9 @@
 
   (general-def 'normal 'php-mode-map
     "SPC or" (lambda () (interactive) (saxon/repl "psysh")))
+
+  (general-def 'normal 'prog-mode-map
+    ", is" 'string-inflection-underscore)
 
   (general-def 'normal 'org-mode-map
     ", t" 'org-todo
