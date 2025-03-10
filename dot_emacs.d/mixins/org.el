@@ -40,6 +40,12 @@
                 (format "\t%s" desc))))))
     (completing-read "Issue: " keys)))
 
+(defun saxon/start-ticket ()
+  (interactive)
+  (let ((selected (saxon/jira-read-from-board-tickets)))
+    (progn
+      (magit-branch-create selected "master"))))
+
 (defun saxon/jira-act-on-current-ticket ()
   (interactive)
   (let ((selected (saxon/jira-read-from-current-tickets)))
@@ -64,6 +70,8 @@
           (delete-region (point-min) (point-max))
           (insert (format "# %s - %s\n%s" issue-key summary .fields.description))
           (markdown-mode)
+          ;; (markdown-preview "*jira-detail-render*")
+          ;; (shr-render-buffer (get-buffer "*jira-detail-render*"))
           (popper-lower-to-popup))))))
 
 (defun saxon/jira-describe-current-ticket ()
@@ -297,10 +305,10 @@
   (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg"
         org-mobile-inbox-for-pull "~/Documents/wiki/from-mobile.org"
         org-mobile-files (org-agenda-files)
-        org-protocol-default-template-key "s")
+        org-protocol-default-template-key "s"))
 
-  (add-hook 'after-init-hook #'saxon/pull-jira-assigned)
-  (add-hook 'after-init-hook #'saxon/pull-jira-unassigned))
+;; (add-hook 'after-init-hook #'saxon/pull-jira-assigned)
+;; (add-hook 'after-init-hook #'saxon/pull-jira-unassigned))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
