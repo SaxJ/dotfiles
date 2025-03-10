@@ -37,12 +37,29 @@ return {
 			},
 		},
 
+    cmdline = {
+      keymap = {
+        ['<Tab>'] = {'show_and_insert'},
+      }
+    },
+    signature = {
+      enabled = true,
+    },
 		completion = {
 			list = {
 				selection = {
-          preselect = false,
-          auto_insert = false,
-        },
+					preselect = false,
+					auto_insert = false,
+				},
+			},
+      documentation = {
+        auto_show = true,
+      },
+			menu = {
+				draw = {
+					columns = { { "label", "label_description", gap = 2 }, { "kind_icon", "kind" } },
+					treesitter = { "lsp" },
+				},
 			},
 		},
 	},
