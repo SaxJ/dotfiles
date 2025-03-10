@@ -33,50 +33,6 @@ wezterm.on("ActivatePaneDirection-down", function(window, pane)
 	conditional_activate_pane(window, pane, "Down", "j")
 end)
 
-function dirs(directory)
-	local i, t, popen = 0, {}, io.popen
-	local pfile = popen('find -type d -maxdepth 1 "' .. directory .. '"')
-	for filename in pfile:lines() do
-		i = i + 1
-		t[i] = { id = filename, label = filename }
-	end
-	pfile:close()
-	return t
-end
-
-wezterm.on("NewWorkspace", function(window, pane)
-	local home = wezterm.home_dir
-	local workspaces = dirs(home .. "/Documents")
-
-	window:perform_action(
-		wezterm.action.InputSelector({
-			action = wezterm.action_callback(function(inner_window, inner_pane, id, label)
-				if not id and not label then
-					wezterm.log_info("cancelled")
-				else
-					wezterm.log_info("id = " .. id)
-					wezterm.log_info("label = " .. label)
-					inner_window:perform_action(
-						wezterm.action.SwitchToWorkspace({
-							name = label,
-							spawn = {
-								label = "Workspace: " .. label,
-								cwd = id,
-							},
-						}),
-						inner_pane
-					)
-				end
-			end),
-			title = "Choose Workspace",
-			choices = workspaces,
-			fuzzy = true,
-			fuzzy_description = "Fuzzy find and/or make a workspace",
-		}),
-		pane
-	)
-end)
-
 local function get_process(tab)
 	local process_icons = {
 		["docker"] = {
@@ -232,7 +188,7 @@ local config = {
 		{ key = "F11", mods = "", action = wezterm.action.ToggleFullScreen },
 
 		-- workspaces
-		{ key = "w", mods = "ALT", action = wezterm.action.EmitEvent("NewWorkspace") },
+		{ key = "w", mods = "ALT", action = workspace_switcher.switch_workspace() },
 
 		-- resize panes
 		{ key = "h", mods = "ALT|SHIFT", action = wezterm.action.AdjustPaneSize({ "Left", 1 }) },
