@@ -1,3 +1,7 @@
+local funcs = require("functions")
+local jira = require("jira")
+local bk = require("buildkite")
+
 local o = vim.opt
 
 -- Editor options
@@ -73,7 +77,7 @@ require("lazy").setup({
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "stevearc/dressing.nvim", opts = {} },
 		{ "stevearc/overseer.nvim", opts = {} },
-    {"pimalaya/himalaya-vim"},
+		{ "pimalaya/himalaya-vim" },
 		{
 			"airglow923/suda.nvim",
 			config = function()
@@ -89,7 +93,6 @@ require("lazy").setup({
 				require("poetry-nvim").setup()
 			end,
 		},
-		{ "actionshrimp/direnv.nvim", opts = {} },
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
@@ -196,8 +199,6 @@ local play_headers = function()
 		table.insert(cmd, "ytdl://ytsearch:" .. clean_text)
 	end
 
-	-- local buf = vim.api.nvim_create_buf(true, true)
-	-- vim.api.nvim_buf_set_lines(buf, 0, -1, false, headers)
 	vim.system(cmd, { detach = true })
 end
 
@@ -218,16 +219,16 @@ end, { desc = "Open Link" })
 vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
 
-vim.keymap.set("n", "<leader>.", function ()
-  Snacks.picker.files({
-    cwd = vim.fn.expand("%:p:.")
-  })
+vim.keymap.set("n", "<leader>.", function()
+	Snacks.picker.files({
+		cwd = vim.fn.expand("%:p:."),
+	})
 end, { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
 
 -- testing
-vim.keymap.set("n", "<leader>tt", play_headers, { desc = "testing" })
+vim.keymap.set("n", "<leader>tt", bk.buildkite_notify, { desc = "testing" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -246,13 +247,17 @@ vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
 vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
+vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
-vim.keymap.set("n", "<leader>pp", function ()
-  Snacks.picker.zoxide({
-    confirm = Snacks.picker.actions.cd
-  })
+vim.keymap.set("n", "<leader>pp", function()
+	Snacks.picker.zoxide({
+		confirm = function(picker, item)
+			Snacks.picker.actions.cd(picker, item)
+			picker:close()
+		end,
+	})
 end, { desc = "Switch Project" })
 vim.keymap.set("n", "<leader>pt", function()
 	local pwd = vim.uv.cwd()
@@ -275,20 +280,24 @@ vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
 
-local funcs = require('functions')
-
-vim.api.nvim_create_autocmd('VimEnter', {callback = function ()
-  funcs.util.log_work_date()
-  funcs.system.notify_send('Logged Work', 'Added to work log', 3)
-end})
-
-vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter', 'FocusGained'}, {
-	pattern = { "*" },
+vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
-    vim.cmd('checktime')
+		funcs.util.log_work_date()
+		funcs.system.notify_send("Logged Work", "Added to work log", 3)
 	end,
 })
 
-local jira = require('jira')
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "FocusGained" }, {
+	pattern = { "*" },
+	callback = function()
+		vim.cmd("checktime")
+	end,
+})
+
 vim.keymap.set("n", "<leader>jj", jira.jira_action)
-vim.keymap.set('n', "<leader>jd", jira.jira_display_details)
+vim.keymap.set("n", "<leader>jd", jira.jira_display_details)
+
+funcs.util.at_interval(60, function()
+	vim.schedule_wrap(bk.buildkite_notify)
+	funcs.system.notify_send("check", "check", 1)
+end)
