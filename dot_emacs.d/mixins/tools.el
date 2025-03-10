@@ -10,6 +10,7 @@
 
 (use-package zone-rainbow
   :ensure t)
+
 (use-package zone-nyan
   :ensure t)
 
@@ -21,21 +22,11 @@
   (setq zone-programs [zone-pgm-rotate zone-pgm-rainbow zone-nyan])
   (zone-when-idle 200))
 
-(use-package git-auto-commit-mode
-  :ensure t
-  :config
-  (setq gac-automatically-add-new-files-p t))
-
 (use-package sudo-edit
   :ensure t)
 
 (use-package string-inflection
   :ensure t)
-
-(use-package todotxt
-  :ensure t
-  :config
-  (setq todotxt-file "~/Dropbox/todo.txt"))
 
 (use-package csv-mode
   :ensure t)
@@ -62,11 +53,6 @@
 
 (use-package chezmoi
   :ensure t)
-
-(use-package claude-shell
-  :ensure t
-  :config
-  (setq claude-shell-api-token (lambda () (auth-source-pick-first-password :host "api.anthropic.com"))))
 
 (use-package graphviz-dot-mode
   :ensure t)
@@ -108,3 +94,57 @@
 
 (use-package pr-review
   :ensure t)
+
+(use-package buffer-terminator
+  :ensure t
+  :custom
+  (buffer-terminator-verbose nil)
+  :config
+  (buffer-terminator-mode 1))
+
+(defun saxon/get-lat-lng ()
+  (interactive)
+  (let* ((location (read-string "Location: "))
+         (url (format "https://nominatim.openstreetmap.org/search?format=json&q=%s" (url-encode-url location)))
+         (response (plz 'get url :as #'json-read))
+         (best-match (aref response 0)))
+    (let-alist best-match
+      (cons .lat .lon))))
+
+(defun saxon/copy-lat-lng ()
+  (interactive)
+  (let ((loc (saxon/get-lat-lng)))
+    (kill-new (format "%s, %s" (car loc) (cdr loc)))))
+
+(defun saxon/get-random-giphy-image ()
+  (interactive)
+  (let* ((search (read-string "Search: "))
+         (api-key (auth-source-pick-first-password :host "giphy"))
+         (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=1" api-key search))
+         (response (plz 'get url :headers '(("Content-Type" . "application/json")) :as #'json-read)))
+    (let-alist response
+      (when-let ((gif (aref .data 0)))
+        (let-alist gif
+          (message .images.downsized_large.url))))))
+
+(defun saxon/get-random-giphy-markdown ()
+  (interactive)
+  (when-let ((link (saxon/get-random-giphy-image)))
+    (kill-new (format "![image](%s)" link))))
+
+
+(defun saxon/list-running-buildkite ()
+  (let* ((from-time (format-time-string "%Y-%m-%dT%H:%M:%SZ" (time-subtract (current-time) (seconds-to-time 60)) t))
+         (url (format "https://api.buildkite.com/v2/organizations/healthengineau/builds?finished_from=%s&branch[]=main&branch[]=master&creator=%s" (url-encode-url from-time) "1e948d32-0633-4293-9619-9e8550c91aa1"))
+         (auth (auth-source-pick-first-password :host "buildkite"))
+         (auth-header (format "Bearer %s" auth)))
+    (plz 'get url
+      :headers `(("Content-Type" . "application/json")
+                 ("Authorization" . ,auth-header))
+      :as #'json-read
+      :then (lambda (response)
+              (seq-do (lambda (item)
+                        (let-alist item
+                          (saxon/notify "Buildkite" (format "%s done" .message)))) response)))))
+
+(run-with-timer 60 60 'saxon/list-running-buildkite)
