@@ -70,3 +70,6 @@ d = ":sh rpull %{filename:rel}"
 [keys.normal.space.f]
 f = "file_picker"
 Y = ":sh wl-copy '%{filename:rel}'"
+
+[keys.normal.space.p]
+p = ":sh kitty @ launch --type=overlay --no-response ~/.local/bin/meow"
