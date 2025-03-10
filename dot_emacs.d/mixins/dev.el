@@ -161,6 +161,7 @@
         magit-section-initial-visibility-alist '((stashes . hide)
                                                  (untracked . hide)))
   (add-hook 'forge-post-submit-callback-hook 'saxon/on-create-pr)
+  (keymap-set magit-status-mode-map "C-c C-o" 'forge-browse-this-topic)
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)))
 
@@ -204,7 +205,9 @@
   ;; Sometimes you need to tell Eglot where to find the language server
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-                                (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
+                                (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
+                                              :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
+                                              :tsserver (:logVerbosity "off")))))
   (add-to-list 'eglot-server-programs
                '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
                                        (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
@@ -358,13 +361,9 @@
 (use-package git-timemachine
   :ensure t)
 
-(use-package php-ts-mode
-  :ensure t
-  :vc (php-ts-mode :url "https://github.com/emacs-php/php-ts-mode"))
-
-(use-package build
-  :ensure t
-  :vc (build :url "https://github.com/27justin/build.el"))
+                                        ;(use-package build
+                                        ;  :ensure t
+                                        ;  :vc (build :url "https://github.com/27justin/build.el"))
 
 (use-package terraform-mode
   :ensure t)
