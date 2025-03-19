@@ -18,7 +18,7 @@ PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 export JIRA_API_TOKEN="$(pass jira)"
 
 export STOW_DIR=/home/saxonj/dotfiles
-export EDITOR=hx
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=more
 
@@ -36,7 +36,7 @@ export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.loca
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
-export LLAMA_EDITOR=hx
+export LLAMA_EDITOR=nvim
 export NNN_OPTS="e"
 export NNN_OPENER="/usr/share/nnn/plugins/nuke"
 export NODE_OPTIONS="--huge-max-old-generation-size"
@@ -44,7 +44,7 @@ export NODE_OPTIONS="--huge-max-old-generation-size"
 export AWS_PROFILE=hedev
 export LSP_USE_PLISTS=true
 export ZELLIJ_AUTO_ATTACH=true
-export LLAMA_EDITOR=hx
+export LLAMA_EDITOR=nvim
 export NNN_OPTS="e"
 export NNN_OPENER="/usr/share/nnn/plugins/nuke"
 export ULYSSES_VAULT="$HOME/Documents/ulysses_notes"
