@@ -1,6 +1,5 @@
 local funcs = require("functions")
 local jira = require("jira")
-local bk = require("buildkite")
 
 local o = vim.opt
 
@@ -227,9 +226,6 @@ end, { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
 
--- testing
-vim.keymap.set("n", "<leader>tt", bk.buildkite_notify, { desc = "testing" })
-
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
 vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
@@ -274,16 +270,16 @@ vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
-
--- build system
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
+vim.keymap.set("n", "<leader>ok", function()
+	require("kubectl").toggle()
+end, { noremap = true, silent = true, desc = "Kubectl" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
 	callback = function()
 		funcs.util.log_work_date()
-		funcs.system.notify_send("Logged Work", "Added to work log", 3)
 	end,
 })
 
@@ -296,8 +292,3 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "FocusGained" }, {
 
 vim.keymap.set("n", "<leader>jj", jira.jira_action)
 vim.keymap.set("n", "<leader>jd", jira.jira_display_details)
-
-funcs.util.at_interval(60, function()
-	vim.schedule_wrap(bk.buildkite_notify)
-	funcs.system.notify_send("check", "check", 1)
-end)
