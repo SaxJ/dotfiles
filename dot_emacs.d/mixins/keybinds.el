@@ -84,7 +84,7 @@
   (progn
     (tab-bar-new-tab-to -1)
     (tab-bar-rename-tab "Kubernetes")
-    (kubernetes-overview)))
+    (kubel)))
 
 (defun saxon/shell-replace-region ()
   (interactive)
@@ -250,7 +250,8 @@
     "gr" 'xref-find-references
     "K" 'eldoc
     "SPC ca" 'lspce-code-actions
-    "SPC cr" 'lspce-rename)
+    "SPC cr" 'lspce-rename
+    ",l" 'ffap-other-window)
 
   (general-def 'normal 'lsp-managed-mode
     :definer 'minor-mode
@@ -318,4 +319,9 @@
     ", d" 'todotxt-add-due-date
     ", D" 'todotxt-nuke-item
     ", c" 'todotxt-complete-toggle
-    ", e" 'todotxt-edit-item))
+    ", e" 'todotxt-edit-item)
+
+  (general-def 'normal 'kubel-mode-map
+    :keymaps 'override
+    ", t" 'kubel-exec-vterm-pod
+    ", e" 'kubel-exec-eshell-pod))

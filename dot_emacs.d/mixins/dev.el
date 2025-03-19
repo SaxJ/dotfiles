@@ -113,6 +113,8 @@
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
           (bash-mode . bash-ts-mode)
+          (shell-script-mode . bash-ts-mode)
+          (sh-mode . bash-ts-mode)
           (typescript-mode . typescript-ts-mode)
           (csharp-mode . csharp-ts-mode)
           (json-mode . json-ts-mode)
@@ -130,6 +132,7 @@
   (add-to-list 'auto-mode-alist '("\\.go\\'" . go-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
   (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
 
   ;; Optimisation to reduce number of version control systems to check
@@ -139,7 +142,8 @@
 
   :hook
   ;; Auto parenthesis matching
-  ((prog-mode . electric-pair-mode)))
+  ((prog-mode . electric-pair-mode)
+   (prog-mode . electric-indent-mode)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -248,7 +252,9 @@
 (use-package vterm
   :ensure t
   :config
-  (setq vterm-timer-delay 0.01))
+  (setq vterm-timer-delay 0.01)
+  :hook
+  ((vterm-mode . toggle-truncate-lines)))
 
 (use-package eat
   :ensure t

@@ -31,6 +31,9 @@
 (use-package csv-mode
   :ensure t)
 
+(use-package nvm
+  :ensure t)
+
 (use-package prodigy
   :ensure t
   :config
@@ -48,8 +51,19 @@
     :args '("dev")
     :cwd "~/Documents/hannibal"
     :tags '(work)
+    :init-async (lambda (done)
+                  (nvm-use-for "~/Documents/hannibal" done))
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
+
+(use-package kubel
+  :ensure t
+  :after (vterm)
+  :config (kubel-vterm-setup))
+
+(use-package kubel-evil
+  :ensure t
+  :after (kubel))
 
 (use-package chezmoi
   :ensure t)
@@ -77,11 +91,12 @@
            (artist (s-trim (nth 0 split-heading)))
            (song (s-trim (nth 1 split-heading)))
            (similar (lastfm-track-get-similar artist song)))
-      (dolist (similar-entry similar)
-        (progn
-          (org-insert-heading-after-current)
-          (insert (format "%s - %s" (car similar-entry) (cadr similar-entry)))
-          (org-entry-put nil "TYPE" "song"))))))
+      (if (seq-empty-p similar) (saxon/notify "Emacs" "No similar songs")
+        (dolist (similar-entry similar)
+          (progn
+            (org-insert-heading-after-current)
+            (insert (format "%s - %s" (car similar-entry) (cadr similar-entry)))
+            (org-entry-put nil "TYPE" "song")))))))
 
 (use-package yeetube
   :ensure t
