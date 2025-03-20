@@ -45,7 +45,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
 "space" = "file_picker_in_current_directory"
-"minus" = ":sh zellij run -ci -- yazi %{dirname}"
+"minus" = ":sh zellij run -ci -- nnn %{buffer_name}"
 
 [keys.normal."C-f"]
 "t" = ":pipe ascii-table"
@@ -54,19 +54,16 @@ right = ["diagnostics", "selections", "position", "version-control"]
 r = "rename_symbol"
 a = "code_action"
 
-[keys.normal.space.o]
-"minus" = ":sh kitty @ launch --type=overlay --no-response --cwd=current yazi %{dirname}"
-
 [keys.normal.space.g]
 g = ":sh zellij run -ci -- lazygit"
-l = ":sh zellij run -ci -- tig %{filename}"
+l = ":sh zellij run -ci -- tig %{buffer_name}"
 d = "changed_file_picker"
 p = ":sh gh pr create --web"
 
 [keys.normal.space.r]
-u = ":sh rpush %{filename:rel}"
-d = ":sh rpull %{filename:rel}"
+u = ":sh rpush %{buffer_name}"
+d = ":sh rpull %{buffer_name}"
 
 [keys.normal.space.f]
 f = "file_picker"
-Y = ":sh wl-copy '%{filename:rel}'"
+Y = ":sh wl-copy '%{buffer_name}'"

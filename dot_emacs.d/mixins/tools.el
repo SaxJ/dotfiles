@@ -46,6 +46,14 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t)
   (prodigy-define-service
+    :name "Catalyst Dev"
+    :command "yarn"
+    :args '("dev")
+    :cwd "~/Documents/catalyst"
+    :tags '(work)
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t)
+  (prodigy-define-service
     :name "Hannibal Dev Server"
     :command "yarn"
     :args '("dev")
