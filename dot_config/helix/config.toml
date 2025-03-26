@@ -45,7 +45,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
 "space" = "file_picker_in_current_directory"
-"minus" = ":sh zellij run -ci -- nnn %{buffer_name}"
+"minus" = ":sh zellij run -ci -- nnn $(dirname %{buffer_name})"
 
 [keys.normal."C-f"]
 "t" = ":pipe ascii-table"
