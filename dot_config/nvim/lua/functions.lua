@@ -94,9 +94,8 @@ local function open_float(content)
 end
 
 --- Open a popup window
----@param content string[]
 ---@return integer,integer
-local function open_popup(content)
+local function open_popup()
   local editor_width = vim.o.columns
   local editor_height = vim.o.lines
 
@@ -117,21 +116,6 @@ local function open_popup(content)
     border = 'single'
   })
 
-  vim.api.nvim_set_option_value('ft', 'markdown', {buf = buf})
-
-  vim.api.nvim_buf_set_keymap(buf, 'n', 'q', '', {
-    callback = function ()
-      vim.api.nvim_win_close(win, true)
-      vim.api.nvim_buf_delete(buf, {
-        force = true,
-        unload = true
-      })
-    end,
-    noremap = true,
-    silent = true,
-  })
-
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
 
   return buf, win
 end

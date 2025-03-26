@@ -102,17 +102,36 @@ local function get_issue_details(issue_key)
 		local result = vim.json.decode(curl_result.stdout)
 		local summary = result["fields"]["summary"]
 		local key = result["key"]
-    local raw_description = result["fields"]["description"]
+		local raw_description = result["fields"]["description"]
 
-    local description = {'No description :('}
-    if type(raw_description) == 'string' then
-      description = f.string.lines(raw_description)
-    end
+		local description = { "No description :(" }
+		if type(raw_description) == "string" then
+			description = f.string.lines(raw_description)
+		end
 
-		local buf, win = f.windows.open_popup(f.table.concat_tables({
+		local buf, win = f.windows.open_popup()
+
+		local content = f.table.concat_tables({
 			string.format("# %s - %s", key, summary),
 			"",
-		}, description))
+		}, description)
+
+		vim.api.nvim_set_option_value("ft", "markdown", { buf = buf })
+		vim.api.nvim_set_option_value("wrap", true, { buf = buf })
+
+		vim.api.nvim_buf_set_keymap(buf, "n", "q", "", {
+			callback = function()
+				vim.api.nvim_win_close(win, true)
+				vim.api.nvim_buf_delete(buf, {
+					force = true,
+					unload = true,
+				})
+			end,
+			noremap = true,
+			silent = true,
+		})
+
+		vim.api.nvim_buf_set_lines(buf, 0, -1, false, content)
 
 		vim.api.nvim_set_option_value("modifiable", false, { buf = buf })
 		vim.api.nvim_set_option_value("readonly", true, { buf = buf })
@@ -125,7 +144,7 @@ end
 --- Display current jira issues in a popup
 local function jira_action()
 	local results =
-		jql_query('assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC')
+		jql_query("assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC")
 
 	local items = {}
 	for i, item in ipairs(results) do
@@ -152,12 +171,12 @@ local function jira_action()
 		},
 		confirm = function(picker, item)
 			Snacks.picker({
-				items = f.table.map(issue_transitions(item.key), function (t)
-          return {
-            name = t.name,
-            text = t.name,
-            id = t.id,
-          }
+				items = f.table.map(issue_transitions(item.key), function(t)
+					return {
+						name = t.name,
+						text = t.name,
+						id = t.id,
+					}
 				end),
 				format = function(tran)
 					return { { tran.name, "SnacksPickerLabel" } }
@@ -185,7 +204,7 @@ end
 
 local function jira_display_details()
 	local results =
-		jql_query('assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC')
+		jql_query("assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC")
 
 	local items = {}
 	for i, item in ipairs(results) do
@@ -211,8 +230,8 @@ local function jira_display_details()
 			ignorecase = true,
 		},
 		confirm = function(picker, item)
-      get_issue_details(item.key)
-      picker:close()
+			get_issue_details(item.key)
+			picker:close()
 		end,
 	})
 end

@@ -75,7 +75,24 @@ require("lazy").setup({
 		-- optional for icons
 		{ "nvim-tree/nvim-web-devicons" },
 		{ "stevearc/dressing.nvim", opts = {} },
-		{ "stevearc/overseer.nvim", opts = {} },
+		{ "stevearc/overseer.nvim", config = function ()
+		  local seer = require('overseer')
+      seer.setup({})
+      seer.register_template({
+        name = "Run Unicron",
+        builder = function ()
+          return {
+            cmd = {'npm'},
+            args = {'run', 'dev', '--', '-p', '3000'},
+            name = "Unicron",
+            cwd = "/home/saxonj/Documents/unicron"
+          }
+        end,
+        condition = {
+          dir = "/home/saxonj/Documents/unicron",
+        }
+      })
+		end },
 		{ "pimalaya/himalaya-vim" },
 		{
 			"airglow923/suda.nvim",
@@ -220,7 +237,7 @@ vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
 
 vim.keymap.set("n", "<leader>.", function()
 	Snacks.picker.files({
-		cwd = vim.fn.expand("%:p:."),
+		cwd = vim.fn.expand("%:p:h"),
 	})
 end, { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
@@ -240,7 +257,7 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Neogit" })
+vim.keymap.set("n", "<leader>gg", Snacks.lazygit.open, { desc = "Git" })
 vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
@@ -269,12 +286,14 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>ot", ":terminal<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>ot", function ()
+	vim.api.nvim_command("FloatermNew --wintype=split --name=popup --autoclose=0 bash")
+end, { desc = "Terminal" })
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
 vim.keymap.set("n", "<leader>ok", function()
-	require("kubectl").toggle()
+	require("kubectl").toggle({tab = true})
 end, { noremap = true, silent = true, desc = "Kubectl" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
