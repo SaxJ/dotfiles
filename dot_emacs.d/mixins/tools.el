@@ -171,3 +171,7 @@
                           (saxon/notify "Buildkite" (format "%s done" .message)))) response)))))
 
 (run-with-timer 60 60 'saxon/list-running-buildkite)
+
+(use-package build
+  :vc (build :url "https://github.com/SaxJ/build.el" :branch "master")
+  :ensure t)
