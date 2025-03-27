@@ -1,9 +1,3 @@
-(defun saxon/repl (cmd)
-  (interactive)
-  (with-current-buffer (vterm (concat "*vterm-" cmd "*"))
-    (vterm-send-string cmd)
-    (vterm-send-return)))
-
 (defun saxon/restart-eglot ()
   (interactive)
   (progn
@@ -67,11 +61,6 @@
     (tab-bar-rename-tab "Newsticker")
     (newsticker-show-news)))
 
-(defun saxon/project-terminal ()
-  (interactive)
-  (let ((default-directory (project-root (project-current))))
-    (multi-vterm)))
-
 (defun saxon/open-mail ()
   (interactive)
   (progn
@@ -122,6 +111,12 @@
       (call-process "scp" nil nil nil (format "ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)) filename)
       (message "Uploaded"))))
 
+(defun saxon/popup-term ()
+  (interactive)
+  (let* ((current-tab (alist-get 'current-tab (tab-bar-tabs)))
+         (name (alist-get 'name current-tab)))
+    (vterm (format "*vterm-pop<%s>*" name))))
+
 (use-package general
   :ensure t
   :config
@@ -163,7 +158,7 @@
     "pp" 'project-switch-project
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
-    "pt" 'multi-vterm-project
+    "pt" 'eat-project-other-window
     "pa" 'project-remember-projects-under
     "pk" 'project-kill-buffers
 
@@ -224,11 +219,8 @@
     ;; LSP helpers
     "lr" 'eglot-reconnect
 
-    ;; todotxt
-    "oT" 'todotxt
-
     ;; terminals
-    "ot" 'saxon/project-terminal
+    "ot" 'saxon/popup-term
     "tt" 'popper-toggle-type
 
     "ys" 'yeetube-search
@@ -244,6 +236,13 @@
 
   (general-vmap
     "|" 'saxon/shell-replace-region)
+
+  (general-def 'insert 'vterm-mode-map
+    "C-c" 'vterm-send-next-key)
+
+  (general-def 'insert 'vterm-mode-map
+    "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
+    "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
 
   (general-nmap
     "gD" 'xref-find-references
@@ -298,13 +297,6 @@
   (general-def 'normal 'dired-mode-map
     ", cf" 'dired-create-empty-file
     ", cd" 'dired-create-directory)
-
-  (general-def 'insert 'vterm-mode-map
-    "C-c" 'vterm-send-next-key)
-
-  (general-def 'insert 'vterm-mode-map
-    "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
-    "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
 
   (general-def 'insert 'vertico-map
     :keymaps 'override

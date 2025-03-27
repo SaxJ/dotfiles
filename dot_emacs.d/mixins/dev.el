@@ -174,9 +174,14 @@
   (setq project-switch-commands 
         '((project-find-file "Find file" ?f)
           (project-eshell "Eshell" ?e)
-          (multi-vterm-project "Shell" ?s)
+          (eat-project "Shell" ?s)
           (magit-project-status "Magit" ?g)))
   (setq project-vc-extra-root-markers '(".project")))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode 1))
 
 (use-package eglot
   :custom
@@ -207,14 +212,14 @@
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   ;; Sometimes you need to tell Eglot where to find the language server
-  (add-to-list 'eglot-server-programs
-               '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-                                (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
-                                              :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
-                                              :tsserver (:logVerbosity "off")))))
-  (add-to-list 'eglot-server-programs
-               '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-                                       (:preferences (:interactiveInlayHints :json-false :importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+  ;;                               (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
+  ;;                                             :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
+  ;;                                             :tsserver (:logVerbosity "off")))))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+  ;;                                      (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("~/.dotnet/tools/csharp-ls")))
   (add-to-list 'eglot-server-programs
@@ -249,25 +254,16 @@
   (setq apheleia-inhibit-functions '(saxon/no-format-p))
   (apheleia-global-mode +1))
 
-(use-package vterm
-  :ensure t
-  :config
-  (setq vterm-timer-delay 0.01)
-  :hook
-  ((vterm-mode . toggle-truncate-lines)))
-
 (use-package eat
   :ensure t
   :config
   (add-hook 'eshell-load-hook #'eat-eshell-mode)
   (add-hook 'eshell-load-hook #'eat-eshell-visual-command-mode)
-  (setq eat-enable-auto-line-mode t))
+  (setq eat-enable-auto-line-mode t
+        eat-kill-buffer-on-exit t))
 
-(use-package multi-vterm
-  :after vterm
-  :ensure t
-  :custom
-  (multi-vterm-dedicated-window-height-percent 30))
+(use-package vterm
+  :ensure t)
 
 (use-package editorconfig
   :ensure t
@@ -293,6 +289,7 @@
           "\\*eldoc\\*"
           "Output\\*$"
           "\\*vterminal<\\([0-9]+\\)>\\*"
+          "\\*vterm-pop.*\\*"
           "\\*Async Shell Command\\*"
           "^.* repl\\&$"
           help-mode
@@ -305,11 +302,11 @@
   (popper-echo-mode +1))
 
 
-;; (use-package eglot-booster
-;;   :vc (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
-;;   :after eglot
-;;   :config (eglot-booster-mode)
-;;   :ensure t)
+(use-package eglot-booster
+  :vc (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
+  :after eglot
+  :config (eglot-booster-mode)
+  :ensure t)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -392,3 +389,11 @@
 
 (use-package templ-ts-mode
   :ensure t)
+
+(use-package compile
+  :ensure nil
+  :config
+  (setq compilation-always-kill t
+        compilation-scroll-output t
+        ansi-color-for-compilation-mode t)
+  (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter))

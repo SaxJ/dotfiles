@@ -66,8 +66,8 @@
 
 (use-package kubel
   :ensure t
-  :after (vterm)
-  :config (kubel-vterm-setup))
+  :config
+  (kubel-vterm-setup))
 
 (use-package kubel-evil
   :ensure t
