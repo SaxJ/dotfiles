@@ -198,9 +198,11 @@ function pac-search() {
 }
 
 eval "$(direnv hook bash)"
-eval "$(starship init bash)"
 eval "$(hub alias -s)"
 [ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
 
 eval "$(zoxide init bash)"
 source /usr/share/nvm/init-nvm.sh
+
+[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
+  source "$EAT_SHELL_INTEGRATION_DIR/bash"
