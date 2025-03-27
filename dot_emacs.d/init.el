@@ -15,7 +15,6 @@
 
 (set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
 
-;; If you want to turn off the welcome screen, uncomment this
 (setq inhibit-splash-screen t)
 (setq ring-bell-function 'ignore)
 (setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
@@ -65,11 +64,6 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Show the help buffer after startup
-                                        ;(add-hook 'after-init-hook 'help-quick)
-
-;; which-key: shows a popup of available keybindings when typing a long key
-;; sequence (e.g. C-x ...)
 (use-package which-key
   :config
   (which-key-mode))
@@ -132,9 +126,6 @@
 (blink-cursor-mode -1)                                ; Steady cursor
 (pixel-scroll-precision-mode)                         ; Smooth scrolling
 
-;; Use common keystrokes by default
-;;(cua-mode)
-
 ;; Display line numbers in programming mode
 (add-hook 'prog-mode-hook 'display-line-numbers-mode)
 (setq-default display-line-numbers-width 3)           ; Set a minimum width
@@ -146,6 +137,12 @@
 ;; Modes to highlight the current line with
 (let ((hl-line-hooks '(text-mode-hook prog-mode-hook)))
   (mapc (lambda (hook) (add-hook hook 'hl-line-mode)) hl-line-hooks))
+
+(setq initial-scratch-message ""
+      shr-use-colors nil
+      tab-bar-close-button-show nil
+      tab-bar-new-button-show nil
+      tab-bar-tab-hints t)
 
 (add-hook 'after-init-hook 'saxon/add-to-work-log)
 
@@ -204,7 +201,8 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-vc-selected-packages
-   '((build :url "https://github.com/SaxJ/build.el" :branch "master"))))
+   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev
+                    :newest))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
