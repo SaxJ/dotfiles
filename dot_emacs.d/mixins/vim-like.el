@@ -26,10 +26,7 @@
 
   (setq evil-want-C-u-scroll t)
   :config
-  (evil-mode)
-
-  ;; Configuring initial major mode for some modes
-  (evil-set-initial-state 'vterm-mode 'emacs))
+  (evil-mode))
 
 (use-package evil-collection
   :after evil
