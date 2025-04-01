@@ -32,7 +32,10 @@ o.autoread = true
 o.updatetime = 1000
 
 vim.diagnostic.config({
-	virtual_text = true,
+	virtual_text = {
+    current_line = true,
+  },
+  virtual_lines = true,
 	signs = true,
 	update_in_insert = false,
 	severity_sort = true,
