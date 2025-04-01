@@ -8,19 +8,24 @@
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(apheleia avy buffer-terminator build cape casual chezmoi
+              corfu-terminal csproj-mode csv-mode dslide dune eat
+              ef-themes eglot-booster eglot-fsharp elm-mode
+              embark-consult evil-collection evil-commentary evil-org
+              evil-surround forge general git-timemachine
+              graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
+              hurl-mode jiralib2 jq-mode json-mode kele kind-icon
+              lastfm marginalia mood-line mu4e-alert nvm orderless
+              org-modern org-music org-ql org-roam origami otpp
+              pocket-reader popper pr-review prescient prodigy
+              rainbow-mode soundcloud string-inflection sudo-edit
+              templ-ts-mode terraform-mode tuareg vc-use-package
+              vertico vue-mode wakatime-mode web-mode yasnippet
+              yeetube yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
-   '((build :url "https://github.com/SaxJ/build.el" :branch "master")
-     (org-music :url "https://github.com/debanjum/org-music" :branch
-                "master")
-     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
-             "master")
-     (hurl-mode :url "https://github.com/Orange-OpenSource/hurl" :rev
-                :newest :lisp-dir "contrib/emacs/")
-     (otpp :url "https://github.com/abougouffa/one-tab-per-project"
-           :rev :newest)
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package")))
+   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev
+                    :newest)))
  '(safe-local-variable-values
    '((rsync-local-path . "/home/saxonj/Documents/hannibal/")
      (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
