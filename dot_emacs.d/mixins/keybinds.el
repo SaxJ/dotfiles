@@ -68,13 +68,6 @@
     (tab-bar-rename-tab "Mail")
     (mu4e)))
 
-(defun saxon/open-kube ()
-  (interactive)
-  (progn
-    (tab-bar-new-tab-to -1)
-    (tab-bar-rename-tab "Kubernetes")
-    (kubel)))
-
 (defun saxon/shell-replace-region ()
   (interactive)
   (shell-command-on-region (point-min) (point-max) (read-shell-command "Command: ") (current-buffer) t "*Command Errors*" nil))
@@ -117,6 +110,11 @@
          (name (alist-get 'name current-tab)))
     (vterm (format "*vterm-pop<%s>*" name))))
 
+(defun saxon/project-vterm ()
+  (interactive)
+  (let* ((project (project-name (project-current t))))
+    (vterm-other-window (format "*vterm-<%s>*" project))))
+
 (use-package general
   :ensure t
   :config
@@ -158,7 +156,7 @@
     "pp" 'project-switch-project
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
-    "pt" 'eat-project-other-window
+    "pt" 'saxon/project-vterm
     "pa" 'project-remember-projects-under
     "pk" 'project-kill-buffers
 
@@ -206,7 +204,7 @@
     "on" 'saxon/open-news
     "oz" 'zone
     "om" 'saxon/open-mail
-    "ok" 'saxon/open-kube
+    "ok" 'kele-dispatch
     "ob" 'build-menu
 
     ;; chezmoi

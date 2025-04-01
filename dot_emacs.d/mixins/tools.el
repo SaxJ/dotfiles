@@ -64,14 +64,10 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
-(use-package kubel
+(use-package kele
   :ensure t
   :config
-  (kubel-vterm-setup))
-
-(use-package kubel-evil
-  :ensure t
-  :after (kubel))
+  (kele-mode 1))
 
 (use-package chezmoi
   :ensure t)
