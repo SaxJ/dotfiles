@@ -275,9 +275,6 @@
   (when filename
     (format "%s/%s" (project-name (project-current)) (file-relative-name filename (project-root (project-current))))))
 
-;; Yes, you can have multiple use-package declarations. It's best if their
-;; configs don't overlap. Once you've reached Phase 2, I'd recommend merging the
-;; config from Phase 1. I've broken it up here for the sake of clarity.
 (use-package org
   :config
   (setq org-todo-keywords
