@@ -8,21 +8,7 @@
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
- '(package-selected-packages
-   '(apheleia avy buffer-terminator build cape casual chezmoi
-              corfu-terminal csproj-mode csv-mode dslide dune eat
-              ef-themes eglot-booster eglot-fsharp elm-mode
-              embark-consult evil-collection evil-commentary evil-org
-              evil-surround forge general git-timemachine
-              graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
-              hurl-mode jiralib2 jq-mode json-mode kele kind-icon
-              lastfm marginalia mood-line mu4e-alert nvm orderless
-              org-modern org-music org-ql org-roam origami otpp
-              pocket-reader popper pr-review prescient prodigy
-              rainbow-mode soundcloud string-inflection sudo-edit
-              templ-ts-mode terraform-mode tuareg vc-use-package
-              vertico vue-mode wakatime-mode web-mode yasnippet
-              yeetube yuck-mode zone-nyan zone-rainbow))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev
                     :newest)))
