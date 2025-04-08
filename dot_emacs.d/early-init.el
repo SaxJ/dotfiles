@@ -11,6 +11,7 @@
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq load-prefer-newer t)
+(setq gnus-init-file (expand-file-name "gnus.el" user-emacs-directory))
 (setenv "LSP_USE_PLISTS" "true")
 
 ;; Silence stupid startup message
