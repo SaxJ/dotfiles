@@ -64,10 +64,10 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
-(use-package kele
-  :ensure t
-  :config
-  (kele-mode 1))
+;; (use-package kele
+;;   :ensure t
+;;   :config
+;;   (kele-mode 1))
 
 (use-package chezmoi
   :ensure t)
@@ -171,3 +171,8 @@
 (use-package build
   :vc (build :url "https://github.com/SaxJ/build.el" :branch "master")
   :ensure t)
+
+(use-package elfeed-org
+  :ensure t
+  :config
+  (elfeed-org))
