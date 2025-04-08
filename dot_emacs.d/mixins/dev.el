@@ -211,15 +211,14 @@
   (add-hook 'tuareg-mode 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
-  ;; Sometimes you need to tell Eglot where to find the language server
-  ;; (add-to-list 'eglot-server-programs
-  ;;              '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-  ;;                               (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
-  ;;                                             :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
-  ;;                                             :tsserver (:logVerbosity "off")))))
-  ;; (add-to-list 'eglot-server-programs
-  ;;              '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
-  ;;                                      (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
+  (add-to-list 'eglot-server-programs
+               '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+                                (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
+                                              :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
+                                              :tsserver (:logVerbosity "off")))))
+  (add-to-list 'eglot-server-programs
+               '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+                                       (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
                '(csharp-ts-mode . ("~/.dotnet/tools/csharp-ls")))
   (add-to-list 'eglot-server-programs
@@ -301,13 +300,6 @@
   (popper-mode +1)
   (popper-echo-mode +1))
 
-
-(use-package eglot-booster
-  :vc (eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev :newest)
-  :after eglot
-  :config (eglot-booster-mode)
-  :ensure t)
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
 ;;;   Common file types
@@ -315,9 +307,10 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (use-package hurl-mode
-  :vc (hurl-mode :url "https://github.com/Orange-OpenSource/hurl"
-                 :rev :newest
-                 :lisp-dir "contrib/emacs/"))
+  :ensure t
+  :vc (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
+  :config
+  (add-to-list 'auto-mode-alist '("\\.hurl\\'" . hurl-mode)))
 
 (use-package fsharp-mode
   :ensure t)
