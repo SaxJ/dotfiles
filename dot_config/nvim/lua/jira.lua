@@ -117,7 +117,7 @@ local function get_issue_details(issue_key)
 		}, description)
 
 		vim.api.nvim_set_option_value("ft", "markdown", { buf = buf })
-		vim.api.nvim_set_option_value("wrap", true, { buf = buf })
+		vim.api.nvim_set_option_value("wrap", true, { win = win })
 
 		vim.api.nvim_buf_set_keymap(buf, "n", "q", "", {
 			callback = function()

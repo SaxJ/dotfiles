@@ -1,3 +1,8 @@
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'gra')
+vim.keymap.del('n', 'gri')
+
 local funcs = require("functions")
 local jira = require("jira")
 
@@ -33,9 +38,9 @@ o.updatetime = 1000
 
 vim.diagnostic.config({
 	virtual_text = {
-    current_line = true,
-  },
-  virtual_lines = true,
+		current_line = true,
+	},
+	virtual_lines = true,
 	signs = true,
 	update_in_insert = false,
 	severity_sort = true,
@@ -77,26 +82,27 @@ require("lazy").setup({
 		{ "voldikss/vim-floaterm" },
 		-- optional for icons
 		{ "nvim-tree/nvim-web-devicons" },
-		{ "stevearc/dressing.nvim", opts = {} },
-		{ "stevearc/overseer.nvim", config = function ()
-		  local seer = require('overseer')
-      seer.setup({})
-      seer.register_template({
-        name = "Run Unicron",
-        builder = function ()
-          return {
-            cmd = {'npm'},
-            args = {'run', 'dev', '--', '-p', '3000'},
-            name = "Unicron",
-            cwd = "/home/saxonj/Documents/unicron"
-          }
-        end,
-        condition = {
-          dir = "/home/saxonj/Documents/unicron",
-        }
-      })
-		end },
-		{ "pimalaya/himalaya-vim" },
+		{
+			"stevearc/overseer.nvim",
+			config = function()
+				local seer = require("overseer")
+				seer.setup({})
+				seer.register_template({
+					name = "Run Unicron",
+					builder = function()
+						return {
+							cmd = { "npm" },
+							args = { "run", "dev", "--", "-p", "3000" },
+							name = "Unicron",
+							cwd = "/home/saxonj/Documents/unicron",
+						}
+					end,
+					condition = {
+						dir = "/home/saxonj/Documents/unicron",
+					},
+				})
+			end,
+		},
 		{
 			"airglow923/suda.nvim",
 			config = function()
@@ -107,25 +113,12 @@ require("lazy").setup({
 		{ "danymat/neogen", config = true },
 		{ "ii14/neorepl.nvim" },
 		{
-			"karloskar/poetry-nvim",
-			config = function()
-				require("poetry-nvim").setup()
-			end,
-		},
-		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
 			config = true,
 			-- use opts = {} for passing setup options
 			-- this is equivalent to setup({}) function
 		},
-		-- {
-		-- 	"rachartier/tiny-inline-diagnostic.nvim",
-		-- 	event = "VeryLazy", -- Or `LspAttach`
-		-- 	config = function()
-		-- 		require("tiny-inline-diagnostic").setup()
-		-- 	end,
-		-- },
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
@@ -142,7 +135,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
 		vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation", buffer = event.buf })
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto references", buffer = event.buf })
+		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto references", buffer = event.buf, noremap = true, nowait = true })
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
@@ -161,7 +154,7 @@ local get_project = function()
 	return vim.fn.fnamemodify(pwd, ":t")
 end
 
-local scp_on_exit = function(obj)
+local scp_on_exit = function()
 	vim.notify("SCP transfer complete", vim.log.levels.INFO)
 end
 
@@ -260,7 +253,9 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", Snacks.lazygit.open, { desc = "Git" })
+vim.keymap.set("n", "<leader>gg", function()
+	require("neogit").open()
+end, { desc = "Git" })
 vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
@@ -289,14 +284,14 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>ot", function ()
+vim.keymap.set("n", "<leader>ot", function()
 	vim.api.nvim_command("FloatermNew --wintype=split --name=popup --autoclose=0 bash")
 end, { desc = "Terminal" })
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
 vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
 vim.keymap.set("n", "<leader>ok", function()
-	require("kubectl").toggle({tab = true})
+	require("kubectl").toggle({ tab = true })
 end, { noremap = true, silent = true, desc = "Kubectl" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
