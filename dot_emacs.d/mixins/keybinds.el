@@ -96,7 +96,7 @@
       (call-process "scp" nil nil nil filename (format "ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)))
       (message "Uploaded"))))
 
-(defun saxon/scp-download()
+(defun saxon/scp-download ()
   (interactive)
   (let ((filename (buffer-file-name))
         (project (project-name (project-current))))
@@ -108,12 +108,20 @@
   (interactive)
   (let* ((current-tab (alist-get 'current-tab (tab-bar-tabs)))
          (name (alist-get 'name current-tab)))
-    (vterm (format "*vterm-pop<%s>*" name))))
+    (progn
+      (setq default-directory (project-root (project-current)))
+      (vterm (format "*vterm-pop<%s>*" name)))))
 
 (defun saxon/project-vterm ()
   (interactive)
-  (let* ((project (project-name (project-current t))))
-    (vterm-other-window (format "*vterm-<%s>*" project))))
+  (let* ((project (project-name (project-current t)))
+         (buffer-name (format "*vterm<%s>*" project))
+         (existing (match-buffers "\\*vterm<.*>\\*")))
+    (if existing
+        (switch-to-buffer-other-window buffer-name)
+      (progn
+        (setq default-directory (project-root (project-current)))
+        (vterm-other-window buffer-name)))))
 
 (use-package general
   :ensure t
@@ -206,6 +214,8 @@
     "om" 'saxon/open-mail
     "ok" 'kele-dispatch
     "ob" 'build-menu
+    "ot" 'saxon/popup-term
+    "op" 'prodigy
 
     ;; chezmoi
     "cf" 'chezmoi-find
@@ -218,7 +228,6 @@
     "lr" 'eglot-reconnect
 
     ;; terminals
-    "ot" 'saxon/popup-term
     "tt" 'popper-toggle-type
 
     "ys" 'yeetube-search
@@ -264,7 +273,10 @@
     "gr" 'xref-find-references
     "K" 'eldoc
     "SPC ca" 'eglot-code-actions
-    "SPC cr" 'eglot-rename)
+    "SPC cr" 'eglot-rename
+
+    "]d" 'evil-collection-unimpaired-next-error
+    "[d" 'evil-collection-unimpaired-previous-error)
 
   (general-def 'normal 'hurl-mode-map
     "C-c C-c" 'saxon/run-hurl-file
