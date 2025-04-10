@@ -59,7 +59,7 @@
   (progn
     (tab-bar-new-tab-to -1)
     (tab-bar-rename-tab "Newsticker")
-    (newsticker-show-news)))
+    (elfeed)))
 
 (defun saxon/open-mail ()
   (interactive)
@@ -123,13 +123,17 @@
         (setq default-directory (project-root (project-current)))
         (vterm-other-window buffer-name)))))
 
+(defun saxon/project-find-file ()
+  (interactive)
+  (if (project-current) (call-interactively 'project-find-file) (call-interactively 'find-file)))
+
 (use-package general
   :ensure t
   :config
   (general-evil-setup)
   (general-nmap
     :prefix "SPC"
-    "SPC" 'project-find-file
+    "SPC" 'saxon/project-find-file
     ":" 'execute-extended-command
     "." 'find-file
     "X" 'org-capture
