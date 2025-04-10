@@ -176,3 +176,6 @@
   :ensure t
   :config
   (elfeed-org))
+
+(use-package httprepl
+  :ensure t)
