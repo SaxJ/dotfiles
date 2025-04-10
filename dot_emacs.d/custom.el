@@ -8,10 +8,23 @@
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(apheleia avy buffer-terminator build cape casual chezmoi
+              corfu-terminal csproj-mode csv-mode dslide dune eat
+              ef-themes eglot-fsharp elfeed-org elm-mode
+              embark-consult evil-collection evil-commentary evil-org
+              evil-surround forge general git-timemachine
+              graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
+              httprepl hurl-mode jiralib2 jq-mode json-mode kele
+              kind-icon lastfm marginalia mood-line mu4e-alert nvm
+              orderless org-modern org-music org-ql org-roam origami
+              otpp pocket-reader popper pr-review prescient prodigy
+              rainbow-mode soundcloud string-inflection sudo-edit
+              templ-ts-mode terraform-mode tuareg vc-use-package
+              vertico vterm vue-mode wakatime-mode web-mode yaml-mode
+              yasnippet yeetube yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
-   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster" :rev
-                    :newest)))
+   '((build :url "https://github.com/SaxJ/build.el" :branch "master")))
  '(safe-local-variable-values
    '((rsync-local-path . "/home/saxonj/Documents/hannibal/")
      (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
