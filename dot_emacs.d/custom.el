@@ -4,29 +4,35 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(custom-safe-themes
+   '("ac893acecb0f1cf2b6ccea5c70ea97516c13c2b80c07f3292c21d6eb0cb45239"
+     default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
  '(package-selected-packages
    '(apheleia avy buffer-terminator build cape casual chezmoi
-              corfu-terminal csproj-mode csv-mode dslide dune eat
-              ef-themes eglot-fsharp elfeed-org elm-mode
-              embark-consult evil-collection evil-commentary evil-org
-              evil-surround forge general git-timemachine
-              graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
-              httprepl hurl-mode jiralib2 jq-mode json-mode kele
-              kind-icon lastfm marginalia mood-line mu4e-alert nvm
-              orderless org-modern org-music org-ql org-roam origami
-              otpp pocket-reader popper pr-review prescient prodigy
-              rainbow-mode soundcloud string-inflection sudo-edit
-              templ-ts-mode terraform-mode tuareg vc-use-package
-              vertico vterm vue-mode wakatime-mode web-mode yaml-mode
-              yasnippet yeetube yuck-mode zone-nyan zone-rainbow))
+              claude-shell corfu-terminal csproj-mode csv-mode dslide
+              dune eat ef-themes eglot-booster eglot-fsharp elfeed-org
+              elm-mode embark-consult evil-collection evil-commentary
+              evil-org evil-surround forge general
+              git-auto-commit-mode git-timemachine graphql-ts-mode
+              graphviz-dot-mode haskell-mode helm-org httprepl
+              hurl-mode jiralib2 jq-mode json-mode kind-icon
+              kubel-evil lastfm marginalia meow mood-line mu4e-alert
+              multi-vterm nvm orderless org-modern org-music org-ql
+              org-roam origami otpp pocket-reader popper pr-review
+              prescient prodigy rainbow-mode restclient rsync-mode
+              soundcloud string-inflection sudo-edit templ-ts-mode
+              terraform-mode todotxt tuareg vc-use-package vertico
+              vue-mode wakatime-mode web-mode yasnippet yeetube
+              yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
    '((build :url "https://github.com/SaxJ/build.el" :branch "master")))
  '(safe-local-variable-values
-   '((rsync-local-path . "/home/saxonj/Documents/hannibal/")
+   '((gac-automatically-add-new-files-p . t)
+     (rsync-local-path . "/home/saxonj/Documents/hannibal/")
      (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
      (evil-shift-width . 2)
      (rsync-local-path . "/home/saxonj/Documents/unicron/")

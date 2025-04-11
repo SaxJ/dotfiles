@@ -173,10 +173,11 @@
 ;;;   Theme
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(use-package ef-themes
-  :ensure t
-  :config
-  (load-theme 'ef-winter t))
+;; (use-package ef-themes
+;;   :ensure t
+;;   :config
+;;   (load-theme 'ef-winter t))
+(load-theme 'modus-vivendi t)
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Config Modules ;;
