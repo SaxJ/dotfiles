@@ -227,28 +227,25 @@ vim.keymap.set("n", "gx", function()
 	end
 end, { desc = "Open Link" })
 
--- general
-vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
+local fzf = require('fzf-lua')
 
-vim.keymap.set("n", "<leader>.", function()
-	Snacks.picker.files({
-		cwd = vim.fn.expand("%:p:h"),
-	})
-end, { desc = "Siblings" })
+-- general
+vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", fzf.live_grep, { desc = "Grep" })
+vim.keymap.set("n", "<leader>.", "<cmd>FzfLua files cwd=%:p:h<CR>", { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
-vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
+vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Files" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", fzf.buffers, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
 	require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
-vim.keymap.set("n", "<leader>ff", Snacks.picker.files, { desc = "Find" })
+vim.keymap.set("n", "<leader>ff", "<cmd>FzfLua files cwd=%:p:h<CR>", { desc = "Find" })
 vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Name" })
 
 -- git
@@ -262,14 +259,7 @@ vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
-vim.keymap.set("n", "<leader>pp", function()
-	Snacks.picker.zoxide({
-		confirm = function(picker, item)
-			Snacks.picker.actions.cd(picker, item)
-			picker:close()
-		end,
-	})
-end, { desc = "Switch Project" })
+vim.keymap.set("n", "<leader>pp", fzf.zoxide, { desc = "Switch Project" })
 vim.keymap.set("n", "<leader>pt", function()
 	local pwd = vim.uv.cwd()
 	vim.api.nvim_command(string.format("FloatermToggle '%s'", pwd))
