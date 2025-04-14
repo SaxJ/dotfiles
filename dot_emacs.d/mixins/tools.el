@@ -179,3 +179,6 @@
 
 (use-package httprepl
   :ensure t)
+
+(use-package emira
+  :ensure nil)
