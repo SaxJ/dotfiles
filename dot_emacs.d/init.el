@@ -177,7 +177,7 @@
 ;;   :ensure t
 ;;   :config
 ;;   (load-theme 'ef-winter t))
-(load-theme 'modus-vivendi t)
+(load-theme 'modus-vivendi-tinted t)
 
 ;;;;;;;;;;;;;;;;;;;;
 ;; Config Modules ;;
