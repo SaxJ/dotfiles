@@ -46,6 +46,14 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t)
   (prodigy-define-service
+    :name "Unicron Storybook"
+    :command "npm"
+    :args '("run" "storybook")
+    :cwd "~/Documents/unicron"
+    :tags '(work)
+    :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t)
+  (prodigy-define-service
     :name "Catalyst Dev"
     :command "yarn"
     :args '("dev")
@@ -64,10 +72,10 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
-;; (use-package kele
-;;   :ensure t
-;;   :config
-;;   (kele-mode 1))
+(use-package kele
+  :ensure t
+  :config
+  (kele-mode 1))
 
 (use-package chezmoi
   :ensure t)
@@ -114,12 +122,12 @@
 (use-package pr-review
   :ensure t)
 
-(use-package buffer-terminator
-  :ensure t
-  :custom
-  (buffer-terminator-verbose nil)
-  :config
-  (buffer-terminator-mode 1))
+;; (use-package buffer-terminator
+;;   :ensure t
+;;   :custom
+;;   (buffer-terminator-verbose nil)
+;;   :config
+;;   (buffer-terminator-mode 1))
 
 (defun saxon/get-lat-lng ()
   (interactive)
