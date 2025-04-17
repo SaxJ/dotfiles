@@ -134,6 +134,7 @@
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
   (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\.gotmpl\\'" nil t))
 
   ;; Optimisation to reduce number of version control systems to check
   (setq vc-handled-backends '(Git))
