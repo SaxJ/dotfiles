@@ -221,7 +221,7 @@
                '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
                                        (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("~/.dotnet/tools/csharp-ls")))
+               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
