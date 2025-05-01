@@ -133,7 +133,7 @@
   (general-evil-setup)
   (general-nmap
     :prefix "SPC"
-    "SPC" 'saxon/project-find-file
+    "SPC" 'project-find-file
     ":" 'execute-extended-command
     "." 'find-file
     "X" 'org-capture
@@ -220,6 +220,7 @@
     "ob" 'build-menu
     "ot" 'saxon/popup-term
     "op" 'prodigy
+    "oj" 'emira
 
     ;; chezmoi
     "cf" 'chezmoi-find
@@ -227,6 +228,10 @@
     "cw" 'chezmoi-write
     "cg" 'chezmoi-magit-status
     "cs" 'chezmoi-sync-files
+
+    ;; clocking
+    "ti" 'timeclock-in
+    "to" 'timeclock-out
 
     ;; LSP helpers
     "lr" 'eglot-reconnect

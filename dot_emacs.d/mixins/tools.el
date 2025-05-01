@@ -72,10 +72,16 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
-(use-package kele
+(use-package kubernetes
+  :ensure t)
+(use-package kubernetes-evil
   :ensure t
-  :config
-  (kele-mode 1))
+  :after kubernetes)
+
+(use-package kubel
+  :after vterm
+  :ensure t
+  :config (kubel-vterm-setup))
 
 (use-package chezmoi
   :ensure t)
@@ -190,3 +196,8 @@
 
 (use-package emira
   :ensure nil)
+
+(use-package confluence-markup-mode
+  :ensure t
+  :vc (confluence-markup-mode :url "https://github.com/rmloveland/confluence-markup-mode" :branch "master"))
+(require 'confluence-markup)
