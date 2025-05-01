@@ -13,7 +13,7 @@ importModuleSpecifierPreference = "relative"
 
 [[language]]
 name = "c-sharp"
-language-servers = ["csharp-ls"]
+language-servers = ["omnisharp"]
 auto-format = true
 formatter = { command = "dotnet", args = ["csharpier"] }
 
