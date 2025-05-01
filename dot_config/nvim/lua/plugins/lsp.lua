@@ -71,7 +71,8 @@ return {
 			},
 		})
 		nvim_lsp["intelephense"].setup({})
-		nvim_lsp["csharp_ls"].setup({
+		nvim_lsp["omnisharp"].setup({
+      cmd = {"omnisharp"},
 			on_attach = on_attach,
 		})
 		nvim_lsp["ts_ls"].setup({
@@ -99,5 +100,8 @@ return {
 		nvim_lsp["gopls"].setup({
 			on_attach = on_attach,
 		})
+    nvim_lsp["bashls"].setup({
+			on_attach = on_attach,
+    })
 	end,
 }

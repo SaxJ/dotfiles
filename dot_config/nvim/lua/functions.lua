@@ -120,6 +120,16 @@ local function open_popup()
   return buf, win
 end
 
+local function open_split()
+  local buf = vim.api.nvim_create_buf(true, true)
+  local win = vim.api.nvim_open_win(buf, true, {
+    win = -1,
+  split = 'below',
+  })
+
+  return buf, win
+end
+
 --- Send a system notification
 ---@param title string Notification title
 ---@param msg string Notification content
@@ -202,5 +212,6 @@ return {
   windows = {
     open_float = open_float,
     open_popup = open_popup,
+    open_split = open_split,
   }
 }

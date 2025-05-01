@@ -1,7 +1,7 @@
-vim.keymap.del('n', 'grr')
-vim.keymap.del('n', 'grn')
-vim.keymap.del('n', 'gra')
-vim.keymap.del('n', 'gri')
+vim.keymap.del("n", "grr")
+vim.keymap.del("n", "grn")
+vim.keymap.del("n", "gra")
+vim.keymap.del("n", "gri")
 
 local funcs = require("functions")
 local jira = require("jira")
@@ -37,10 +37,8 @@ o.autoread = true
 o.updatetime = 1000
 
 vim.diagnostic.config({
-	virtual_text = {
-		current_line = true,
-	},
-	virtual_lines = true,
+	virtual_text = false,
+	virtual_lines = false,
 	signs = true,
 	update_in_insert = false,
 	severity_sort = true,
@@ -80,29 +78,9 @@ require("lazy").setup({
 		{ import = "plugins" },
 
 		{ "voldikss/vim-floaterm" },
+
 		-- optional for icons
 		{ "nvim-tree/nvim-web-devicons" },
-		{
-			"stevearc/overseer.nvim",
-			config = function()
-				local seer = require("overseer")
-				seer.setup({})
-				seer.register_template({
-					name = "Run Unicron",
-					builder = function()
-						return {
-							cmd = { "npm" },
-							args = { "run", "dev", "--", "-p", "3000" },
-							name = "Unicron",
-							cwd = "/home/saxonj/Documents/unicron",
-						}
-					end,
-					condition = {
-						dir = "/home/saxonj/Documents/unicron",
-					},
-				})
-			end,
-		},
 		{
 			"airglow923/suda.nvim",
 			config = function()
@@ -135,7 +113,12 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
 		vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
 		vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation", buffer = event.buf })
-		vim.keymap.set("n", "gr", vim.lsp.buf.references, { desc = "Goto references", buffer = event.buf, noremap = true, nowait = true })
+		vim.keymap.set(
+			"n",
+			"gr",
+			vim.lsp.buf.references,
+			{ desc = "Goto references", buffer = event.buf, noremap = true, nowait = true }
+		)
 		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
@@ -201,19 +184,6 @@ local open_file_browser = function()
 	end
 end
 
-local play_headers = function()
-	local header_query = vim.treesitter.query.parse("markdown", "((atx_heading) @header)")
-	local root = vim.treesitter.get_parser():parse()[1]:root()
-	local cmd = { "mpv" }
-	for _, node, _, _ in header_query:iter_captures(root, 0, 0, -1) do
-		local text = vim.treesitter.get_node_text(node, 0)
-		local clean_text = string.gsub(text, "#+%s+", "")
-		table.insert(cmd, "ytdl://ytsearch:" .. clean_text)
-	end
-
-	vim.system(cmd, { detach = true })
-end
-
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
@@ -227,7 +197,7 @@ vim.keymap.set("n", "gx", function()
 	end
 end, { desc = "Open Link" })
 
-local fzf = require('fzf-lua')
+local fzf = require("fzf-lua")
 
 -- general
 vim.keymap.set("n", "<leader>/", fzf.live_grep, { desc = "Grep" })
@@ -235,6 +205,9 @@ vim.keymap.set("n", "<leader>sp", fzf.live_grep, { desc = "Grep" })
 vim.keymap.set("n", "<leader>.", "<cmd>FzfLua files cwd=%:p:h<CR>", { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", fzf.files, { desc = "Files" })
+
+-- testing
+vim.keymap.set("n", "<leader>qq", jira.display_issues_table, { desc = "Files" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -251,7 +224,7 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
 vim.keymap.set("n", "<leader>gg", function()
-	require("neogit").open()
+	Snacks.lazygit.open()
 end, { desc = "Git" })
 vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
@@ -270,6 +243,13 @@ vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
 vim.keymap.set("n", "<leader>ru", scp_upload, { desc = "Upload" })
 vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 
+-- terminal
+-- vim.keymap.set("n", "<leader>t", "", { desc = "Terminal" })
+-- vim.keymap.set("n", "<leader>ta", "FloatermNew --wintype=split --name=popup --autoclose=0 bash<CR>", { desc = "Add" })
+-- vim.keymap.set("n", "<leader>tt", "FloatermToggle!<CR>", { desc = "Toggle" })
+-- vim.keymap.set("n", "<leader>tn", "FloatermNext<CR>", { desc = "Next" })
+-- vim.keymap.set("n", "<leader>tp", "FloatermPrev<CR>", { desc = "Prev" })
+
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
@@ -277,9 +257,9 @@ vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnost
 vim.keymap.set("n", "<leader>ot", function()
 	vim.api.nvim_command("FloatermNew --wintype=split --name=popup --autoclose=0 bash")
 end, { desc = "Terminal" })
+
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
-vim.keymap.set("n", "<leader>obs", ":OverseerToggle<CR>", { desc = "Status" })
-vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "Run" })
+
 vim.keymap.set("n", "<leader>ok", function()
 	require("kubectl").toggle({ tab = true })
 end, { noremap = true, silent = true, desc = "Kubectl" })
@@ -297,5 +277,29 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "FocusGained" }, {
 	end,
 })
 
-vim.keymap.set("n", "<leader>jj", jira.jira_action)
-vim.keymap.set("n", "<leader>jd", jira.jira_display_details)
+function Diag_if_no_float()
+	for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.api.nvim_win_get_config(winid).zindex then
+			return
+		end
+	end
+	vim.diagnostic.open_float({
+		scope = "cursor",
+		focusable = true,
+		close_events = {
+			"CursorMoved",
+			"CursorMovedI",
+			"BufHidden",
+			"InsertCharPre",
+			"WinLeave",
+		},
+	})
+end
+vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
+vim.api.nvim_create_autocmd({ "CursorHold" }, {
+	pattern = "*",
+	callback = Diag_if_no_float,
+})
+
+-- vim.keymap.set("n", "<leader>jj", jira.jira_action)
+-- vim.keymap.set("n", "<leader>jd", jira.jira_display_details)
