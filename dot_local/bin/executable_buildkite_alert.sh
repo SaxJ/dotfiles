@@ -15,10 +15,8 @@ platform=$(uname | tr '[:upper:]' '[:lower:]')
 
 echo "$messages" | while read -r line
 do
-    if [[ $platform == 'linux' ]]; then
-        notify-send "Buildkite done" "$line"
-    elif [[ $platform == 'darwin' ]]; then
-        script=$(printf 'display notification "%s" with title "Buildkite done"' $line)
-        osascript -e $script
-    fi
+  # handle blank lines
+  [[ "${#line}" -eq 0 ]] && continue
+
+  notify-send "Buildkite done" "$line"
 done
