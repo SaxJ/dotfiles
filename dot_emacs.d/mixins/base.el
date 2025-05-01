@@ -127,12 +127,12 @@
   (corfu-terminal-mode))
 
 ;; Pretty icons for corfu
-(use-package kind-icon
-  :if (display-graphic-p)
-  :ensure t
-  :after corfu
-  :config
-  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+;; (use-package kind-icon
+;;   :if (display-graphic-p)
+;;   :ensure t
+;;   :after corfu
+;;   :config
+;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 
 (use-package eshell
   :bind (("C-r" . consult-history)))
@@ -145,7 +145,6 @@
   (setq completion-styles '(orderless prescient)))
 
 (use-package otpp
-  :vc (otpp :url "https://github.com/abougouffa/one-tab-per-project" :rev :newest)
   :ensure t
   :after project
   :init
