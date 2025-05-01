@@ -18,7 +18,7 @@ PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
 export JIRA_API_TOKEN="$(pass jira)"
 
 export STOW_DIR=/home/saxonj/dotfiles
-export EDITOR=hx
+export EDITOR=nvim
 export VISUAL=$EDITOR
 export PAGER=more
 
