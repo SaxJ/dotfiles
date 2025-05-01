@@ -11,23 +11,7 @@
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
- '(package-selected-packages
-   '(apheleia avy buffer-terminator build cape casual chezmoi
-              claude-shell corfu-terminal csproj-mode csv-mode dslide
-              dune eat ef-themes eglot-booster eglot-fsharp elfeed-org
-              elm-mode embark-consult evil-collection evil-commentary
-              evil-org evil-surround forge general
-              git-auto-commit-mode git-timemachine graphql-ts-mode
-              graphviz-dot-mode haskell-mode helm-org httprepl
-              hurl-mode jiralib2 jq-mode json-mode kind-icon
-              kubel-evil lastfm marginalia meow mood-line mu4e-alert
-              multi-vterm nvm orderless org-modern org-music org-ql
-              org-roam origami otpp pocket-reader popper pr-review
-              prescient prodigy rainbow-mode restclient rsync-mode
-              soundcloud string-inflection sudo-edit templ-ts-mode
-              terraform-mode todotxt tuareg vc-use-package vertico
-              vue-mode wakatime-mode web-mode yasnippet yeetube
-              yuck-mode zone-nyan zone-rainbow))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((build :url "https://github.com/SaxJ/build.el" :branch "master")))
  '(safe-local-variable-values
