@@ -6,7 +6,7 @@
 ;; Maintainer: Saxon Jensen <saxonj@mailbox.org>
 ;; Package-Version: 0.1
 ;; URL: http://github.com/SaxJ/emira.el
-;; Package-Requires: ((s "1.8.0") (dash "2.4.0") (f "0.14.0") (emacs "30.1") (jiralib2 "1.0"))
+;; Package-Requires: ((emacs "30.1") (jiralib2 "1.0") (plz "0.9.1"))
 
 ;; This file is NOT part of GNU Emacs.
 
@@ -31,22 +31,31 @@
 
 ;;; Code:
 
-(require 's)
-(require 'dash)
-(require 'f)
-(require 'ansi-color)
 (require 'tabulated-list)
-(require 'easymenu)
-(require 'hl-line)
+(require 'plz)
+(require 'jiralib2)
+(require 'iimage)
 
 (defconst emira-buffer-name "*emira*"
   "Name of emira buffer.")
 
+(defvar emira-image-cache-location
+  (expand-file-name "emira_image_cache" user-emacs-directory)
+  "Emira image cache location.")
+
 (defconst emira-list-format
   [("Key" 8 t)
    ("Summary" 70 nil)
-   ("Status" 10 t)]
+   ("Status" 10 t)
+   ("Created" 10 t)]
   "List format.")
+
+(defun emira--download-image (name url)
+  "Downloads the Jira attachment of given name and URL."
+  (unless (file-exists-p (expand-file-name name emira-image-cache-location))
+    (plz 'get url
+      :headers `(("Authorization" . ,(format "Basic %s" jiralib2--session)))
+      :as `(file ,(expand-file-name name emira-image-cache-location)))))
 
 (defun emira--insert-content (header description)
   ""
@@ -57,17 +66,69 @@
     (insert description)
     (goto-char (point-min))))
 
-(defun emira-get-issue-details (&optional pos)
+(defun emira--read-ticket-action (key)
+  (interactive)
+  (let* ((completion-ignore-case t)
+         (options (jiralib2-get-actions key))
+         (swapped (mapcar (lambda (cell)
+                            (cons (cdr cell) (car cell)))
+                          options))
+         (choices (mapcar #'car swapped))
+         (choice (completing-read "Action: " choices nil t))
+         (result (assoc choice swapped)))
+    (jiralib2-do-action key (cdr result))))
+
+(defun emira--download-all-attachments (issue)
+  (let-alist issue
+    (dolist (attachment .fields.attachment)
+      (let-alist attachment
+        (emira--download-image .filename .content)))))
+
+(defun emira-view-issue-details (&optional pos)
+  (interactive)
   "Display details of the jira issue."
-  (let-alist (jiralib2-get-issue (tabulated-list-get-id pos))
-    (with-current-buffer (get-buffer-create "*emira-view*")
-      (emira-view-mode)
-      (emira--insert-content .fields.summary .fields.description)
-      (pop-to-buffer (current-buffer)))))
+  (let* ((issue (jiralib2-get-issue (tabulated-list-get-id pos))))
+    (emira--download-all-attachments issue)
+    (let-alist issue
+      (with-current-buffer (get-buffer-create "*emira-view*")
+        (emira-view-mode)
+        (emira--insert-content .fields.summary .fields.description)
+        (iimage-mode-buffer 1)
+        (pop-to-buffer (current-buffer))))))
+
+(defun emira-act-on-issue (&optional pos)
+  (interactive)
+  "Act on the jira issue."
+  (let* ((key (tabulated-list-get-id pos)))
+    (progn
+      (emira--read-ticket-action key)
+      (tabulated-list-print))))
+
+(defun emira-browse-issue (&optional pos)
+  (interactive)
+  "Browse the issue in your browser."
+  (let* ((key (tabulated-list-get-id pos)))
+    (browse-url (format "%s/browse/%s" jiralib2-url key))))
+
+(defvar emira-board-jql
+  "assignee = currentUser() AND project = MKT AND statusCategory != Done ORDER BY created DESC"
+  "The JQL query used to fetch board issues.")
+
+(defun emira-clock-in (&optional arg)
+  (interactive
+   (list (and current-prefix-arg
+	          (if (numberp current-prefix-arg)
+		          (* current-prefix-arg 60 60)
+		        0))))
+  (timeclock-in arg (tabulated-list-get-id (point))))
 
 (defvar emira-mode-map
   (let ((map (make-sparse-keymap)))
-    (define-key map (kbd "RET") 'emira-get-issue-details)
+    (define-key map (kbd "C-c v") 'emira-view-issue-details)
+    (define-key map (kbd "C-c a") 'emira-act-on-issue)
+    (define-key map (kbd "C-c r") 'tabulated-list-print)
+    (define-key map (kbd "C-c b") 'emira-browse-issue)
+    (define-key map (kbd "C-c t") 'emira-clock-in)
     map)
   "Keymap for `emira-mode'.")
 
@@ -85,16 +146,21 @@
             (vector
              (propertize .key 'face `(:foreground ,colour))
              (propertize .fields.summary 'face `(:foreground ,colour))
-             (propertize .fields.status.name 'face `(:foreground ,colour)))))))
+             (propertize .fields.status.name 'face `(:foreground ,colour))
+             (propertize .fields.created 'face `(:foregroud ,colour)))))))
 
 (defun emira-list-entries ()
-  (let* ((issues (jiralib2-board-issues 259 "key,summary,created,status,project")))
+  (let* ((issues (jiralib2-jql-search emira-board-jql "key" "summary" "created" "status" "project")))
     (mapcar #'emira--make-list-entry issues)))
 
 ;;;###autoload
-(define-derived-mode emira-view-mode special-mode "Emira-view"
+(define-derived-mode emira-view-mode confluence-markup-mode "Emira-view"
   "Mode for viewing Jira issue details."
   (view-mode 1)
+  (visual-line-mode 1)
+  (iimage-mode 1)
+  (setq iimage-mode-image-search-path (list emira-image-cache-location)
+        iimage-mode-image-regex-alist '(("!\\(.*\\)|\\(.*\\)?!" . 1)))
   (font-lock-mode 1))
 
 ;;;###autoload
@@ -105,6 +171,7 @@
         tabulated-list-format emira-list-format
         tabulated-list-entries 'emira-list-entries
         tabulated-list-sort-key '("Status" . nil))
+  (use-local-map emira-mode-map)
   (tabulated-list-init-header)
   (tabulated-list-print))
 
