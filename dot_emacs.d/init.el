@@ -202,7 +202,7 @@
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(package-vc-selected-packages
-   '((build :url "https://github.com/SaxJ/build.el" :branch "master"))))
+   '((org-ql :url "https://github.com/alphapapa/org-ql" :branch "master"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

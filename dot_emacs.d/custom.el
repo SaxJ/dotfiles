@@ -11,11 +11,16 @@
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
- '(package-selected-packages nil)
+ '(package-selected-packages '(hurl-mode org-music otpp vc-use-package))
  '(package-vc-selected-packages
-   '((build :url "https://github.com/SaxJ/build.el" :branch "master")))
+   '((confluence-markup-mode :url
+                             "https://github.com/rmloveland/confluence-markup-mode"
+                             :branch "master")))
  '(safe-local-variable-values
-   '((gac-automatically-add-new-files-p . t)
+   '((ssh-deploy-async . 0)
+     (ssh-deploy-root-remote
+      . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
+     (gac-automatically-add-new-files-p . t)
      (rsync-local-path . "/home/saxonj/Documents/hannibal/")
      (rsync-remote-paths "minikube:/home/ubuntu/hannibal")
      (evil-shift-width . 2)
