@@ -3,7 +3,7 @@ return {
 	version = "*",
 	config = function()
 		require("toggleterm").setup({
-			open_mapping = "<leader>t",
+			open_mapping = "<leader>ot",
       insert_mappings = false,
       terminal_mappings = false,
 			size = function(term)

@@ -7,6 +7,7 @@ return {
 		require("mini.files").setup()
 		require("mini.surround").setup()
 		require("mini.icons").setup()
+		require("mini.sessions").setup()
 
 		local miniclue = require("mini.clue")
 		miniclue.setup({

@@ -4,6 +4,69 @@ vim.g.jira_api_key = f.string.trim(vim.system({ "pass", "jira" }, { text = true 
 vim.g.jira_host = "https://hejira.atlassian.net"
 vim.g.jira_user = f.string.trim(vim.system({ "jira", "me" }, { text = true }):wait().stdout)
 
+local function get_issue(issue_key)
+	local curl_cmd = vim.system({
+		"curl",
+		"-s",
+		"-G",
+		"--user",
+		string.format("%s:%s", vim.g.jira_user, vim.g.jira_api_key),
+		"-H",
+		"Accept: application/json",
+		string.format("%s/rest/api/2/issue/%s", vim.g.jira_host, issue_key),
+	}, { text = true })
+
+	local curl_result = curl_cmd:wait()
+	if curl_result.code == 0 then
+		return vim.json.decode(curl_result.stdout)
+  else
+    return nil
+  end
+end
+
+local function download_images(issue)
+  vim.fn.mkdir("~/.local/state/nvim/image_cache")
+
+  local attachments = issue['attachment']
+  for _, att in ipairs(attachments) do
+    local curl_cmd = vim.system({
+      "curl",
+      "-s",
+      "-G",
+      "--user",
+      string.format("%s:%s", vim.g.jira_user, vim.g.jira_api_key),
+      "-H",
+      "Accept: application/json",
+      "-L",
+      "--output",
+      string.format("~/.local/state/nvim/image_cache/%s", att['filename']),
+    })
+
+    curl_cmd:wait()
+  end
+end
+
+local function display_issue(issue_key)
+  local issue = get_issue(issue_key)
+  if issue == nil then
+    return
+  end
+
+  download_images(issue)
+
+  local buf, win = f.windows.open_split()
+
+  -- Set issue information in jira wiki format
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, f.string.lines(issue['fields']['description']))
+
+  -- convert to markdown
+  vim.api.nvim_command("%! pandoc --from jira --to markdown")
+
+  -- set buffer properties
+  vim.api.nvim_buf_set_option_value('modifiable', false, {buf = buf})
+  vim.api.nvim_buf_set_option_value('wrap', true, {buf = buf})
+end
+
 --- Runs the given JQL query, returning the results
 ---@param query string The JQL query to execute
 local function jql_query(query)
@@ -43,11 +106,7 @@ end
 
 local function issues_to_tsv(issues)
   return f.table.map(issues, function (issue)
-    local values = {}
-    for _, v in pairs(issue) do
-      table.insert(values, v)
-    end
-
+    local values = {issue['key'],issue['status'],issue['summary']}
     return table.concat(values, '||')
   end)
 end
@@ -56,10 +115,18 @@ local function display_issues_table()
   local issues = jql_query("project = MKT")
   local tsv = issues_to_tsv(issues)
 
-  buf, win = f.windows.open_split()
+  local buf, win = f.windows.open_split()
   vim.api.nvim_buf_set_lines(buf, 0, -1, false, tsv)
+  vim.api.nvim_buf_set_option_value('modifiable', false, {buf = buf})
 
-  vim.api.nvim_command("%! column --table -s '||' --table-columns KEY,CREATED,STATUS_CAT,SUMMARY,STATUS")
+  vim.api.nvim_command("%! column --table -s '||' --table-columns 'KEY,STATUS,SUMMARY'")
+
+  -- keymaps on this buffer
+  vim.keymap.set("n", "v", function ()
+    local word = vim.fn.expand("<cname>")
+    vim.cmd(string.format([[echo "%s"]], word))
+    -- display_issue()
+  end, {buffer = buf})
 end
 
 --- Gets a list of valid jira issue transitions
@@ -110,66 +177,6 @@ local function perform_transition(issue_key, transition_id)
 	return curl_result.code == 0
 end
 
-local function get_issue(issue_key)
-	local curl_cmd = vim.system({
-		"curl",
-		"-s",
-		"-G",
-		"--user",
-		string.format("%s:%s", vim.g.jira_user, vim.g.jira_api_key),
-		"-H",
-		"Accept: application/json",
-		string.format("%s/rest/api/2/issue/%s", vim.g.jira_host, issue_key),
-	}, { text = true })
-
-	local curl_result = curl_cmd:wait()
-	if curl_result.code == 0 then
-		return vim.json.decode(curl_result.stdout)
-  else
-    return nil
-  end
-end
-
-local function download_images(issue)
-  local attachments = issue['attachment']
-  for _, att in ipairs(attachments) do
-    local curl_cmd = vim.system({
-      "curl",
-      "-s",
-      "-G",
-      "--user",
-      string.format("%s:%s", vim.g.jira_user, vim.g.jira_api_key),
-      "-H",
-      "Accept: application/json",
-      "-L",
-      "--output",
-      string.format("/home/saxonj/.emacs.d/emira_image_cache/%s", att['filename']),
-    })
-
-    curl_cmd:wait()
-  end
-end
-
-local function display_issue(issue_key)
-  local issue = get_issue(issue_key)
-  if issue == nil then
-    return
-  end
-
-  download_images(issue)
-
-  local buf, win = f.windows.open_split()
-
-  -- Set issue information in jira wiki format
-  vim.api.nvim_buf_set_lines(buf, 0, -1, false, f.string.lines(issue['fields']['description']))
-
-  -- convert to markdown
-  vim.api.nvim_command("%! pandoc --from jira --to markdown")
-
-  -- set buffer properties
-  vim.api.nvim_buf_set_option_value('modifiable', false, {buf = buf})
-  vim.api.nvim_buf_set_option_value('wrap', true, {buf = buf})
-end
 
 return {
 	jql_query = jql_query,
