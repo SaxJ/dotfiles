@@ -23,5 +23,8 @@ return {
 			enabled = true,
 			configure = true,
 		},
+    picker = {
+      -- defaults
+    }
 	},
 }

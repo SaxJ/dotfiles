@@ -1,7 +1,0 @@
-browser firefox-developer-edition
-
-unbind-key DOWN
-bind-key j down
-
-unbind-key UP
-bind-key k up

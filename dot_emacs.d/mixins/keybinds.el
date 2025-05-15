@@ -59,7 +59,7 @@
   (progn
     (tab-bar-new-tab-to -1)
     (tab-bar-rename-tab "Newsticker")
-    (elfeed)))
+    (newsticker-show-news)))
 
 (defun saxon/open-mail ()
   (interactive)
@@ -108,24 +108,24 @@
   (interactive)
   (let* ((current-tab (alist-get 'current-tab (tab-bar-tabs)))
          (name (alist-get 'name current-tab)))
-    (progn
-      (setq default-directory (project-root (project-current)))
-      (vterm (format "*vterm-pop<%s>*" name)))))
-
-(defun saxon/project-vterm ()
-  (interactive)
-  (let* ((project (project-name (project-current t)))
-         (buffer-name (format "*vterm<%s>*" project))
-         (existing (match-buffers "\\*vterm<.*>\\*")))
-    (if existing
-        (switch-to-buffer-other-window buffer-name)
-      (progn
-        (setq default-directory (project-root (project-current)))
-        (vterm-other-window buffer-name)))))
+    (vterm (format "*vterm-pop<%s>*" name))))
 
 (defun saxon/project-find-file ()
   (interactive)
   (if (project-current) (call-interactively 'project-find-file) (call-interactively 'find-file)))
+
+(defun saxon/buffer-backed-by-file-p (buffer)
+  "Nil if a buffer is not backed by an existing file or is a non-file buffer."
+  (let ((backing-file (buffer-file-name buffer)))
+    (if (buffer-modified-p buffer)
+        t
+      (if backing-file
+          (file-exists-p (buffer-file-name buffer))
+        t))))
+
+(defun saxon/kill-all-deleted-file-buffers ()
+  (interactive)
+  (mapc 'kill-buffer (-remove 'saxon/buffer-backed-by-file-p (buffer-list))))
 
 (use-package general
   :ensure t
@@ -154,6 +154,7 @@
     "bc" 'clone-indirect-buffer
     "by" 'saxon/yank-whole-buffer
     "bd" 'vc-diff
+    "bD" 'saxon/kill-all-deleted-file-buffers
 
     ;; file bindings
     "ff" 'find-file
@@ -168,9 +169,10 @@
     "pp" 'project-switch-project
     "pb" 'consult-project-buffer
     "pd" 'project-forget-project
-    "pt" 'saxon/project-vterm
+    "pt" 'multi-vterm-project
     "pa" 'project-remember-projects-under
     "pk" 'project-kill-buffers
+    "pc" 'project-compile
 
     "sp" 'consult-ripgrep
 
@@ -259,6 +261,12 @@
   (general-def 'insert 'vterm-mode-map
     "C-k" (lambda () (interactive) (vterm-send-key "<up>"))
     "C-j" (lambda () (interactive) (vterm-send-key "<down>")))
+
+  (general-def 'normal 'jira-issues-mode-map
+    "?" 'jira-issues-actions-menu
+    "gi" (lambda () (interactive)
+           (jira-detail-show-issue (jira-utils-marked-item)))
+    "gl" 'jira-issues-menu)
 
   (general-nmap
     "gD" 'xref-find-references

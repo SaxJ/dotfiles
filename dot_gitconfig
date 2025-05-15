@@ -1,28 +1,15 @@
+[github]
+	user = SaxJ
 [user]
-	name = Saxon Jensen
-	email = saxon.jensen@healthengine.com.au
+	email = saxon.jensen@gmail.com
+	name = SaxJ
 [core]
-	editor = hx
+	editor = nvim
 [alias]
     co = checkout
     cob = checkout -b
     ci = commit
     st = status
     br = branch
-    hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
-    type = cat-file -t
-    dump = cat-file -p
 [color]
     ui = auto
-[init]
-	templateDir = /home/saxonj/.git-templates
-	defaultBranch = master
-[pull]
-	rebase = false
-[github]
-	user = SaxJ
-[push]
-	default = simple
-    autoSetupRemote = true
-[gpg]
-    program = gpg2

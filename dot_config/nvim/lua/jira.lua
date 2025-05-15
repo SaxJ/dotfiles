@@ -2,7 +2,8 @@ local f = require("functions")
 
 vim.g.jira_api_key = f.string.trim(vim.system({ "pass", "jira" }, { text = true }):wait().stdout)
 vim.g.jira_host = "https://hejira.atlassian.net"
-vim.g.jira_user = f.string.trim(vim.system({ "jira", "me" }, { text = true }):wait().stdout)
+vim.g.jira_user = "saxon.jensen@healthengine.com.au"
+-- vim.g.jira_user = f.string.trim(vim.system({ "jira", "me" }, { text = true }):wait().stdout)
 
 local function get_issue(issue_key)
 	local curl_cmd = vim.system({

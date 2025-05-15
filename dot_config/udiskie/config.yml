@@ -1,5 +1,0 @@
-program_options:
-  tray: true
-  notify: true
-  automount: true
-  file_manager: emacsclient -c -n 

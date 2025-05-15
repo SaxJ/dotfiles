@@ -11,11 +11,32 @@
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(mu4e-search-results-limit -1)
- '(package-selected-packages '(hurl-mode org-music otpp vc-use-package))
+ '(package-selected-packages
+   '(apheleia avy build cape casual chezmoi confluence-markup-mode
+              corfu-terminal csproj-mode csv-mode dslide dune eat
+              ef-themes eglot-fsharp elfeed-org elm-mode
+              embark-consult evil-collection evil-commentary evil-org
+              evil-surround forge general git-timemachine
+              graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
+              httprepl hurl-mode jira jiralib2 jq-mode json-mode kubel
+              kubernetes-evil lastfm marginalia mood-line mu4e-alert
+              multi-vterm nvm orderless org-modern org-music org-ql
+              org-roam origami otpp pocket-reader popper pr-review
+              prescient prodigy rainbow-mode soundcloud
+              string-inflection sudo-edit templ-ts-mode terraform-mode
+              tuareg vc-use-package vertico vue-mode wakatime-mode
+              web-mode yasnippet yeetube yuck-mode zone-nyan
+              zone-rainbow))
  '(package-vc-selected-packages
    '((confluence-markup-mode :url
                              "https://github.com/rmloveland/confluence-markup-mode"
-                             :branch "master")))
+                             :branch "master")
+     (build :url "https://github.com/SaxJ/build.el" :branch "master")
+     (org-music :url "https://github.com/debanjum/org-music" :branch
+                "master")
+     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
+             "master")
+     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")))
  '(safe-local-variable-values
    '((ssh-deploy-async . 0)
      (ssh-deploy-root-remote

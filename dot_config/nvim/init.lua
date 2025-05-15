@@ -90,6 +90,7 @@ require("lazy").setup({
 		{ "mistweaverco/kulala.nvim", opts = {} },
 		{ "danymat/neogen", config = true },
 		{ "ii14/neorepl.nvim" },
+    "tpope/vim-fugitive",
 		{
 			"windwp/nvim-autopairs",
 			event = "InsertEnter",
@@ -178,10 +179,7 @@ local scp_download = function()
 end
 
 local open_file_browser = function()
-	local files = require("mini.files")
-	if not files.close() then
-		files.open(vim.api.nvim_buf_get_name(0), false)
-	end
+  vim.cmd("Oil " .. vim.fn.expand('%:p:h'))
 end
 
 -- terminal
@@ -225,11 +223,14 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", function()
-	Snacks.lazygit.open()
-end, { desc = "Git" })
-vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
-vim.keymap.set("n", "<leader>gp", ":!gh pr create --web<CR>", { desc = "PR" })
+vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Git Status" })
+vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
+vim.keymap.set("n", "<leader>gb", function ()
+  Snacks.picker.git_branches({all = true})
+end, { desc = "Blame" })
+vim.keymap.set("n", "<leader>gp", ":Git pull<CR>", { desc = "Pull" })
+vim.keymap.set("n", "<leader>gf", ":Git fetch<CR>", { desc = "Fetch" })
+vim.keymap.set("n", "<leader>gF", ":Git pull<CR>", { desc = "Pull" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
 -- project
@@ -241,13 +242,6 @@ vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
 vim.keymap.set("n", "<leader>ru", scp_upload, { desc = "Upload" })
 vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 
--- terminal
--- vim.keymap.set("n", "<leader>t", "", { desc = "Terminal" })
--- vim.keymap.set("n", "<leader>ta", "FloatermNew --wintype=split --name=popup --autoclose=0 bash<CR>", { desc = "Add" })
--- vim.keymap.set("n", "<leader>tt", "FloatermToggle!<CR>", { desc = "Toggle" })
--- vim.keymap.set("n", "<leader>tn", "FloatermNext<CR>", { desc = "Next" })
--- vim.keymap.set("n", "<leader>tp", "FloatermPrev<CR>", { desc = "Prev" })
-
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
@@ -255,6 +249,8 @@ vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnost
 vim.keymap.set("n", "<leader>oj", jira.display_issues_table, {desc = "Open jira"})
 
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
+vim.keymap.set("n", "<leader>obb", ":OverseerToggle<CR>", { desc = "+build" })
+vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "+build" })
 
 vim.keymap.set("n", "<leader>ok", function()
 	require("kubectl").toggle({ tab = true })
@@ -296,6 +292,5 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 	pattern = "*",
 	callback = Diag_if_no_float,
 })
-
 -- vim.keymap.set("n", "<leader>jj", jira.jira_action)
 -- vim.keymap.set("n", "<leader>jd", jira.jira_display_details)

@@ -1,208 +1,26 @@
-#!/usr/bin/bash
-# vi: ft=sh
-#
-# ~/.bashrc
+# .bashrc
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
-
-# Fix for TRAMP
-if [ $TERM = "dumb" ]; then
-    export PS1='$ '
-    return
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+    . /etc/bashrc
 fi
 
-# Set terminal title
-PROMPT_COMMAND='echo -en "\033]0; $(basename $("pwd")) \a"'
-
-export JIRA_API_TOKEN="$(pass jira)"
-
-export STOW_DIR=/home/saxonj/dotfiles
-export EDITOR=nvim
-export VISUAL=$EDITOR
-export PAGER=more
-
-export GOPATH=$HOME/go_packages
-export HELM_HOME=$HOME/helm
-export CARGO_PATH=$HOME/.cargo/bin
-export DOTNET_CLI_TELEMETRY_OPTOUT=1
-export PIP_INSTALL=$HOME/global-pip/bin
-export DOOM=$HOME/.config/emacs/bin
-export DOTNET_TOOLS=$HOME/.dotnet/tools
-export HELIX_RUNTIME=$HOME/Documents/helix/runtime
-
-# PATH
-export PATH="$PATH:/usr/local/bin:$HOME/.bin:$GOPATH/bin:$CARGO_PATH:$HOME/.local/bin:$HOME/.node/bin:$PIP_INSTALL:$(yarn global bin):$DOOM:$HOME/.dotnet:$DOTNET_TOOLS:/home/saxonj/.ghcup/bin:~/.npm-global/bin:/home/saxonj/Documents/ulysses"
-
-export AWS_PROFILE=hedev
-export LSP_USE_PLISTS=true
-export ZELLIJ_AUTO_ATTACH=true
-export LLAMA_EDITOR=hx
-export NNN_OPTS="e"
-export NNN_OPENER="/usr/share/nnn/plugins/nuke"
-export NODE_OPTIONS="--huge-max-old-generation-size"
-
-export AWS_PROFILE=hedev
-export LSP_USE_PLISTS=true
-export ZELLIJ_AUTO_ATTACH=true
-export NNN_OPTS="e"
-export NNN_OPENER="/usr/share/nnn/plugins/nuke"
-export ULYSSES_VAULT="$HOME/Documents/ulysses_notes"
-
-export PATH="$PATH:$HOME/.cargo/bin"
-
-alias ls='ls --color=auto'
-if [ -x "$(command -v nvim)" ]; then
-    alias vim="nvim"
-    alias vi="nvim"
-    alias vimdiff="nvim -d"
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]; then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
 fi
+export PATH
 
-alias icat="kitty +kitten icat"
-alias prc="gh pr create --fill -w --title "$(git branch --show-current)""
-alias prv="gh pr view --web"
-alias hepg="pgcli -U engine_master -d engine_data -h localhost"
-alias lg="lazygit"
-alias yz="yazi"
-alias gu="gitu"
-alias k="kak-run"
-alias jira_mine="jira issue list -q '(assignee = currentUser() OR creator = currentUser()) AND project IN (CPT, MKT, NOOT, HEAL) AND status != Done' --order-by status"
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
 
-# Journal
-alias j="jrnl"
-alias jy="jrnl -on yesterday"
-alias jt="jrnl -on today"
-
-# TODOs
-alias t="todo.sh"
-alias tw="timew"
-
-# VPN
-alias vpnc="openvpn3 session-start --config ~/.config/office.ovpn"
-alias vpnd="openvpn3 session-manage --disconnect --config ~/.config/office.ovpn"
-
-# GIT GOOD
-alias ga='git add -i'
-alias gc='git ci'
-alias gp='git pull'
-alias gpu='git push'
-alias resolve='grep -lr "<<<<<<<" . | xargs git checkout'
-
-# DOCKER
-alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
-alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
-alias pacman-clean='sudo pacman -Rns $(pacman -Qtdq)'
-
-# RANDOM
-alias cp="cp -i"     # confirm before overwriting something
-alias df='df -h'     # human-readable sizes
-alias free='free -m' # show sizes in MB
-alias np='nano -w PKGBUILD'
-alias more=less
-alias timesync="sudo ntpdate -u pool.ntp.org"
-
-# Noise Generation
-alias silence='play  -n synth brownnoise vol'
-
-# TASKBOOK
-alias pods="kubectl get pods"
-
-# Zellij
-alias zr="zellij run --"
-alias zrf="zellij run -f --"
-alias zri="zellij run --in-place --"
-alias zric="zellij run --in-place --close-on-exit --"
-
-function ijq() {
-    echo '' | fzf --print-query --preview "cat $1 | jq {q}"
-}
-
-function create_pr() {
-    branch=$(git rev-parse --abbrev-ref HEAD)
-    commits=$(git log master..HEAD --oneline)
-    title=$(tgpt "Make a PR title from the following commit messages: $commits" | tail -n 1)
-    gh pr create --title "$title"
-}
-
-function cd() {
-    z "$1"
-    if [ -n "$ZELLIJ_SESSION_NAME" ]; then
-        zellij action rename-tab "${PWD##*/}"
-    fi
-}
-
-function cast() {
-    ffmpeg -f alsa -ac 2 -f x11grab -r 30 -acodec pcm_s16le -vcodec libx264 -preset ultrafast -crf 0 -threads 0 "$1"
-}
-
-alias yt-audio="yt-dlp -x --audio-format mp3 --audio-quality 0"
-alias phpqa='sudo docker run --init -it --rm -v $(pwd):/project -v $(pwd)/tmp-phpqa:/tmp -w /project jakzal/phpqa:alpine'
-
-# VOLUME
-alias vol_down="amixer set Master 5.0%-"
-alias vol_up="amixer set Master 5.0%+"
-
-export GPG_TTY=$(tty)
-export JAVA_HOME=/usr/lib/jvm/java-8-openjdk
-
-# TOOLS
-alias urldecode='python3 -c "import sys, urllib.parse as ul; \
-    print(ul.unquote_plus(sys.argv[1]))"'
-
-alias urlencode='python3 -c "import sys, urllib.parse as ul; \
-    print (ul.quote_plus(sys.argv[1]))"'
-
-xhost +local:root >/dev/null 2>&1
-complete -cf sudo
-shopt -s checkwinsize
-shopt -s expand_aliases
-
-# Enable history appending instead of overwriting.  #139609
-shopt -s histappend
-
-#
-# # ex - archive extractor
-# # usage: ex <file>
-ex() {
-    if [ -f $1 ]; then
-        case $1 in
-        *.tar.bz2) tar xjf $1 ;;
-        *.tar.gz) tar xzf $1 ;;
-        *.bz2) bunzip2 $1 ;;
-        *.rar) unrar x $1 ;;
-        *.gz) gunzip $1 ;;
-        *.tar) tar xf $1 ;;
-        *.tbz2) tar xjf $1 ;;
-        *.tgz) tar xzf $1 ;;
-        *.zip) unzip $1 ;;
-        *.Z) uncompress $1 ;;
-        *.7z) 7z x $1 ;;
-        *) echo "'$1' cannot be extracted via ex()" ;;
-        esac
-    else
-        echo "'$1' is not a valid file"
-    fi
-}
-
-# JQ Magic
-function jq_contains() {
-    jq -c ".[] | select(.[\"@message\"] | contains(\"$1\"))"
-}
-
-function hejq() {
-    stern -o raw heweb | egrep --line-buffered '^{' | jq .
-}
-
-function pac-search() {
-    pacman -Ss | fzf --preview 'pacman -Qil {}' --layout=reverse --bind 'enter:execute(pacman -Qil {} | less)'
-}
-
-eval "$(direnv hook bash)"
-eval "$(hub alias -s)"
-[ -r /usr/share/bash-completion/bash_completion ] && . /usr/share/bash-completion/bash_completion
-eval "$(starship init bash)"
-eval "$(zoxide init bash)"
-source /usr/share/nvm/init-nvm.sh
-
-[ -n "$EAT_SHELL_INTEGRATION_DIR" ] && \
-  source "$EAT_SHELL_INTEGRATION_DIR/bash"
+# User specific aliases and functions
+if [ -d ~/.bashrc.d ]; then
+    for rc in ~/.bashrc.d/*; do
+        if [ -f "$rc" ]; then
+            . "$rc"
+        fi
+    done
+fi
+unset rc
+. "$HOME/.cargo/env"

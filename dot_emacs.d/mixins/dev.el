@@ -22,6 +22,18 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun saxon/install-language-server ()
+  "Install a language server for the current buffer."
+  (interactive)
+  (let* ((lspdir (expand-file-name "lsp" user-emacs-directory))
+         (mode (cl-find-if #'derived-mode-p '(csharp-mode))))
+    (cl-case mode
+      (csharp-mode (progn
+                     (plz 'get "https://github.com/OmniSharp/omnisharp-roslyn/releases/download/v1.39.13/omnisharp-linux-x64-net6.0.tar.gz" :as `(file ,(expand-file-name "omnisharp_dl.tar.gz" lspdir)))
+                     (mkdir (expand-file-name "omnisharp" lspdir))
+                     (shell-command (format "tar -xzf %s -C %s" (expand-file-name "omnisharp_dl.tar.gz" lspdir) (expand-file-name "omnisharp" lspdir)))
+                     (delete-file (expand-file-name "omnisharp_dl.tar.gz" lspdir)))))))
+
 (defun saxon/treesit-install-all ()
   (interactive)
   (mapc #'treesit-install-language-grammar (mapcar #'car treesit-language-source-alist)))
@@ -75,6 +87,16 @@
                                 :feature 'type
                                 '([((type) @font-lock-type-face)
                                    ((named_type) @font-lock-type-face)])) :before nil))
+
+(defun saxon/setup-git-commit ()
+  "Setup the commit buffer with common git content."
+  (interactive)
+  (let* ((branch (car (vc-git-branches))))
+    (if (string-match-p "[[:alpha:]]+-[[:digit:]]+" branch)
+        (progn
+          (insert (format "%s: " branch))
+          (evil-insert-state))
+      (evil-insert-state))))
 
 (use-package emacs
   :config
@@ -165,10 +187,13 @@
         magit-status-initial-section '(2)
         magit-section-initial-visibility-alist '((stashes . hide)
                                                  (untracked . hide)))
+
   (add-hook 'forge-post-submit-callback-hook 'saxon/on-create-pr)
-  (keymap-set magit-status-mode-map "C-c C-o" 'forge-browse-this-topic)
+  (add-hook 'git-commit-setup-hook 'saxon/setup-git-commit)
+
   :bind (("s-g" . magit-status)
-         ("C-c g" . magit-status)))
+         ("C-c g" . magit-status)
+         ("C-c C-o" . 'forge-browse-this-topic)))
 
 (use-package project
   :config
@@ -221,7 +246,7 @@
                '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
                                        (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
-               '(csharp-ts-mode . ("omnisharp" "--languageserver")))
+               `(csharp-ts-mode . (,(expand-file-name "lsp/omnisharp/OmniSharp" user-emacs-directory) "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs

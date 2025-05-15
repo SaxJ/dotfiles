@@ -1,13 +1,6 @@
 (use-package pocket-reader
   :ensure t)
 
-(use-package wakatime-mode
-  :ensure t
-  :config
-  (setq wakatime-cli-path "/usr/bin/wakatime"
-        wakatime-api-key (auth-source-pick-first-password :host "wakatime"))
-  (global-wakatime-mode 1))
-
 (use-package zone-rainbow
   :ensure t)
 
@@ -78,10 +71,10 @@
   :ensure t
   :after kubernetes)
 
-(use-package kubel
-  :after vterm
-  :ensure t
-  :config (kubel-vterm-setup))
+;; (use-package kubel
+;;   :after vterm
+;;   :ensure t
+;;   :config (kubel-vterm-setup))
 
 (use-package chezmoi
   :ensure t)
@@ -127,13 +120,6 @@
 
 (use-package pr-review
   :ensure t)
-
-;; (use-package buffer-terminator
-;;   :ensure t
-;;   :custom
-;;   (buffer-terminator-verbose nil)
-;;   :config
-;;   (buffer-terminator-mode 1))
 
 (defun saxon/get-lat-lng ()
   (interactive)
@@ -186,11 +172,6 @@
   :vc (build :url "https://github.com/SaxJ/build.el" :branch "master")
   :ensure t)
 
-(use-package elfeed-org
-  :ensure t
-  :config
-  (elfeed-org))
-
 (use-package httprepl
   :ensure t)
 
@@ -201,3 +182,27 @@
   :ensure t
   :vc (confluence-markup-mode :url "https://github.com/rmloveland/confluence-markup-mode" :branch "master"))
 (require 'confluence-markup)
+
+(use-package jira
+  :ensure t
+  :config
+  (setq jira-base-url "https://hejira.atlassian.net"
+        jira-username "saxon.jensen@healthengine.com.au"
+        jira-token (auth-source-pick-first-password :host "hejira.atlassian.net")
+        jira-token-is-personal-access-token nil
+        jira-api-version 3))
+
+(use-package newsticker
+  :config
+  (setq newsticker-url-list-defaults nil
+        newsticker-url-list '(("Console.dev" "https://console.dev/rss.xml")
+                              ("Shiey" "https://www.youtube.com/feeds/videos.xml?channel_id=UCpXwMqnXfJzazKS5fJ8nrVw")
+                              ("Liveoverflow" "https://www.youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w")
+                              ("Hato" "https://www.youtube.com/feeds/videos.xml?channel_id=UCDqTWzgcXxQZxbLjTLj8qhQ")
+                              ("EWU" "https://www.youtube.com/feeds/videos.xml?channel_id=UCJWKjrrUh2KL1d3zXQW79cQ")
+                              ("OG Crew" "https://www.youtube.com/feeds/videos.xml?channel_id=UCEEYC7-n3iCQSyZBAZOmpEg")
+                              ("Gameranx" "https://www.youtube.com/feeds/videos.xml?channel_id=UCNvzD7Z-g64bPXxGzaQaa4g")
+                              ("Systemcrafters" "https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ")
+                              ("Dashcams" "https://www.youtube.com/feeds/videos.xml?channel_id=UCvfqpaehdaqtkXPNhvJRyGA")
+                              ("F1 News" "https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg")))
+  (add-hook 'after-init-hook 'newsticker-start))

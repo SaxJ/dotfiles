@@ -6,6 +6,7 @@ return {
 			open_mapping = "<leader>ot",
       insert_mappings = false,
       terminal_mappings = false,
+      auto_scroll = false,
 			size = function(term)
 				if term.direction == "horizontal" then
 					return vim.o.lines * 0.35
