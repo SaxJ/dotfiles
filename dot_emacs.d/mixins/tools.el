@@ -183,15 +183,6 @@
   :vc (confluence-markup-mode :url "https://github.com/rmloveland/confluence-markup-mode" :branch "master"))
 (require 'confluence-markup)
 
-(use-package jira
-  :ensure t
-  :config
-  (setq jira-base-url "https://hejira.atlassian.net"
-        jira-username "saxon.jensen@healthengine.com.au"
-        jira-token (auth-source-pick-first-password :host "hejira.atlassian.net")
-        jira-token-is-personal-access-token nil
-        jira-api-version 3))
-
 (use-package newsticker
   :config
   (setq newsticker-url-list-defaults nil
@@ -204,5 +195,16 @@
                               ("Gameranx" "https://www.youtube.com/feeds/videos.xml?channel_id=UCNvzD7Z-g64bPXxGzaQaa4g")
                               ("Systemcrafters" "https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ")
                               ("Dashcams" "https://www.youtube.com/feeds/videos.xml?channel_id=UCvfqpaehdaqtkXPNhvJRyGA")
-                              ("F1 News" "https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg")))
+                              ("F1 News" "https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg")
+                              ("Emacs News" "https://sachachua.com/blog/category/emacs-news/feed")))
   (add-hook 'after-init-hook 'newsticker-start))
+
+(defun saxon/vpn-connect ()
+  "Connect to vpn"
+  (interactive)
+  (shell-command "openvpn3 session-start --config ~/office.ovpn"))
+
+(defun saxon/vpn-disconnect ()
+  "Disconnect from vpn"
+  (interactive)
+  (shell-command "openvpn3 session-manage --disconnect --config ~/office.ovpn"))
