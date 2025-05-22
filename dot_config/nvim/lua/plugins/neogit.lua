@@ -6,7 +6,7 @@ return {
 
 		-- Only one of these is needed.
 		--"nvim-telescope/telescope.nvim", -- optional
-		"ibhagwan/fzf-lua", -- optional
+		--"ibhagwan/fzf-lua", -- optional
 		-- "echasnovski/mini.pick", -- optional
 	},
 	config = function()
@@ -164,12 +164,15 @@ return {
 				-- If enabled, uses fzf-lua for menu selection. If the telescope integration
 				-- is also selected then telescope is used instead
 				-- Requires you to have `ibhagwan/fzf-lua` installed.
-				fzf_lua = true,
+				fzf_lua = false,
 
 				-- If enabled, uses mini.pick for menu selection. If the telescope integration
 				-- is also selected then telescope is used instead
 				-- Requires you to have `echasnovski/mini.pick` installed.
 				mini_pick = false,
+
+        -- Use snacks picker
+        snacks = true
 			},
 			sections = {
 				-- Reverting/Cherry Picking

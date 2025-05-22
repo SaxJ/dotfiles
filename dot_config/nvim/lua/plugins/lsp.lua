@@ -3,7 +3,6 @@ return {
   "neovim/nvim-lspconfig",
   -- event = { "BufReadPre", "BufNewFile" },
   dependencies = {
-    "saghen/blink.cmp",
     {
       "Bilal2453/luvit-meta",
       lazy = true,

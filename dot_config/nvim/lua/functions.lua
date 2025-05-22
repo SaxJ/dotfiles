@@ -41,8 +41,7 @@ local log_work_date = function()
 	local date_cmd = vim.system({ "date", "+%Y-%m-%d" }, { text = true }):wait()
 	local date = trim(date_cmd.stdout)
 
-	local hostname_cmd = vim.system({ "hostname" }, { text = true }):wait()
-	local hostname = trim(hostname_cmd.stdout)
+  local hostname = "arch"
 
 	local line = string.format("* %s :%s:", date, hostname)
 
@@ -163,6 +162,10 @@ local watch_file = function(fname)
 	)
 end
 
+--- Maps each value of a table throught func
+---@param t table
+---@param func function
+---@return table
 local function map(t, func)
 	local result = {}
 	for i, v in ipairs(t) do
@@ -190,6 +193,22 @@ local function stop_interval(timer)
   timer:close()
 end
 
+--- Filters a table to have unique values
+---@param t table
+local function unique(t)
+  local seen = {}
+  for _, val in ipairs(t) do
+    seen[val] = true
+  end
+
+  local ret = {}
+  for k,_ in pairs(seen) do
+    table.insert(ret, k)
+  end
+
+  return ret
+end
+
 return {
 	string = {
 		trim = trim,
@@ -199,6 +218,7 @@ return {
 		table_contains = table_contains,
 		map = map,
     concat_tables = concat_tables,
+    unique = unique,
 	},
 	util = {
 		log_work_date = log_work_date,

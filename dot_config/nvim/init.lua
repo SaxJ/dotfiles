@@ -6,6 +6,8 @@ vim.keymap.del("n", "gri")
 local funcs = require("functions")
 local jira = require("jira")
 
+require('timelog')
+
 local o = vim.opt
 
 -- Editor options
@@ -90,14 +92,6 @@ require("lazy").setup({
 		{ "mistweaverco/kulala.nvim", opts = {} },
 		{ "danymat/neogen", config = true },
 		{ "ii14/neorepl.nvim" },
-    "tpope/vim-fugitive",
-		{
-			"windwp/nvim-autopairs",
-			event = "InsertEnter",
-			config = true,
-			-- use opts = {} for passing setup options
-			-- this is equivalent to setup({}) function
-		},
 	},
 	-- Configure any other settings here. See the documentation for more details.
 	-- colorscheme that will be used when installing plugins.
@@ -132,6 +126,8 @@ vim.g.scp_projects = {
 	["hannibal"] = "/home/ubuntu/hannibal",
 	["unicron"] = "/home/ubuntu/unicron",
 }
+
+vim.g.timelog_file = "/home/saxonj/.emacs.d/timelog"
 
 local get_project = function()
 	local pwd = vim.uv.cwd() or ""
@@ -204,9 +200,6 @@ end, { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
 
--- testing
-vim.keymap.set("n", "<leader>qq", jira.display_issues_table, { desc = "Files" })
-
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
 vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
@@ -223,14 +216,8 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", ":Git<CR>", { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Git Status" })
 vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
-vim.keymap.set("n", "<leader>gb", function ()
-  Snacks.picker.git_branches({all = true})
-end, { desc = "Blame" })
-vim.keymap.set("n", "<leader>gp", ":Git pull<CR>", { desc = "Pull" })
-vim.keymap.set("n", "<leader>gf", ":Git fetch<CR>", { desc = "Fetch" })
-vim.keymap.set("n", "<leader>gF", ":Git pull<CR>", { desc = "Pull" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
 -- project
@@ -246,7 +233,6 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>oj", jira.display_issues_table, {desc = "Open jira"})
 
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obb", ":OverseerToggle<CR>", { desc = "+build" })
@@ -292,5 +278,3 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
 	pattern = "*",
 	callback = Diag_if_no_float,
 })
--- vim.keymap.set("n", "<leader>jj", jira.jira_action)
--- vim.keymap.set("n", "<leader>jd", jira.jira_display_details)

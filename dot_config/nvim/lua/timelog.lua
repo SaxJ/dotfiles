@@ -1,7 +1,16 @@
-local function timeclock_in(note)
+local funcs = require('functions')
+
+local function open_log_file(mode)
   local cache_dir = vim.fn.stdpath("data")
   local log_file = cache_dir .. '/timelog'
-  local file = io.open(log_file, "a+")
+  if vim.g.timelog_file ~= nil then
+    log_file = vim.g.timelog_file
+  end
+  return io.open(log_file, mode)
+end
+
+local function timeclock_in(note)
+  local file = open_log_file("a+")
   local last_in = false
   if file ~= nil then
     for line in file:lines() do
@@ -21,9 +30,7 @@ local function timeclock_in(note)
 end
 
 local function timeclock_out(note)
-  local cache_dir = vim.fn.stdpath("data")
-  local log_file = cache_dir .. '/timelog'
-  local file = io.open(log_file, "a+")
+  local file = open_log_file("a+")
   local last_in = false
   if file ~= nil then
     for line in file:lines() do
@@ -41,10 +48,35 @@ local function timeclock_out(note)
   end
 end
 
-vim.api.nvim_create_user_command("ClockIn", function (args)
+vim.api.nvim_create_user_command("ClockIn", function(args)
   timeclock_in(args['args'])
-end, {})
+end, {
+  desc = "Clock in",
+  nargs = 1,
+  complete = function()
+    local file = open_log_file("r")
+    local suggestions = {}
+    if file ~= nil then
+      local lines = {}
+      for line in file:lines() do
+        table.insert(lines, line)
+      end
 
-vim.api.nvim_create_user_command("ClockOut", function (args)
+      for _, line in ipairs(lines) do
+        local m = ""
+        for match in string.gmatch(line, "%a %d+/%d+/%d+ %d+:%d+:%d+ (.*)") do
+          m = funcs.string.trim(match)
+        end
+
+        if m ~= "" then
+          table.insert(suggestions, m)
+        end
+      end
+    end
+    return funcs.table.unique(suggestions)
+  end
+})
+
+vim.api.nvim_create_user_command("ClockOut", function(args)
   timeclock_out(args['args'])
-end, {})
+end, { desc = "Clock in", nargs = 1 })
