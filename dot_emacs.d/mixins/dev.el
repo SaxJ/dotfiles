@@ -155,7 +155,7 @@
   (add-to-list 'auto-mode-alist '("\\.rs\\'" . rust-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.php\\'" . php-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.sh\\'" . bash-ts-mode))
-  (add-to-list 'auto-mode-alist '("\\Dockerfile\\'" . dockerfile-ts-mode))
+  (add-to-list 'auto-mode-alist '("\\Dockerfile.*\\'" . dockerfile-ts-mode))
   (add-to-list 'auto-mode-alist '("\\.gotmpl\\'" nil t))
 
   ;; Optimisation to reduce number of version control systems to check
@@ -288,6 +288,10 @@
         eat-kill-buffer-on-exit t))
 
 (use-package vterm
+  :ensure t)
+
+(use-package multi-vterm
+  :after vterm
   :ensure t)
 
 (use-package editorconfig
