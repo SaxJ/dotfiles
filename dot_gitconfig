@@ -13,3 +13,5 @@
     br = branch
 [color]
     ui = auto
+[init]
+	defaultBranch = master
