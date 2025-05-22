@@ -302,10 +302,8 @@
   (setq org-mobile-directory "~/Dropbox/Apps/MobileOrg"
         org-mobile-inbox-for-pull "~/Documents/wiki/from-mobile.org"
         org-mobile-files (org-agenda-files)
-        org-protocol-default-template-key "s"))
-
-;; (add-hook 'after-init-hook #'saxon/pull-jira-assigned)
-;; (add-hook 'after-init-hook #'saxon/pull-jira-unassigned))
+        org-protocol-default-template-key "s"
+        org-protocol-protocol-alist '(("youtube" :protocol "youtube" :function org-protocol-capture))))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
