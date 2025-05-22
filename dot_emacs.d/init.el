@@ -13,7 +13,7 @@
   (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
-(set-face-attribute 'default nil :font "Fira Code-14")
+(set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
 
 (setq inhibit-splash-screen t)
 (setq ring-bell-function 'ignore)
@@ -145,6 +145,7 @@
       tab-bar-tab-hints t)
 
 (add-hook 'after-init-hook 'saxon/add-to-work-log)
+(add-hook 'after-init-hook 'server-start)
 
 (add-to-list 'display-buffer-alist
              '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
@@ -194,7 +195,6 @@
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
 
-(server-start)
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

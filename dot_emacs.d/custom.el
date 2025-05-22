@@ -10,22 +10,23 @@
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
+ '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
  '(package-selected-packages
    '(apheleia avy build cape casual chezmoi confluence-markup-mode
               corfu-terminal csproj-mode csv-mode dslide dune eat
-              ef-themes eglot-fsharp elfeed-org elm-mode
-              embark-consult evil-collection evil-commentary evil-org
-              evil-surround forge general git-timemachine
-              graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
-              httprepl hurl-mode jira jiralib2 jq-mode json-mode kubel
+              ef-themes eglot-fsharp elm-mode embark-consult
+              evil-collection evil-commentary evil-org evil-surround
+              forge general git-timemachine graphql-ts-mode
+              graphviz-dot-mode haskell-mode helm-org httprepl
+              hurl-mode jira jiralib2 jq-mode json-mode
               kubernetes-evil lastfm marginalia mood-line mu4e-alert
               multi-vterm nvm orderless org-modern org-music org-ql
               org-roam origami otpp pocket-reader popper pr-review
               prescient prodigy rainbow-mode soundcloud
               string-inflection sudo-edit templ-ts-mode terraform-mode
-              tuareg vc-use-package vertico vue-mode wakatime-mode
-              web-mode yasnippet yeetube yuck-mode zone-nyan
+              tuareg vc-use-package vertico vterm vue-mode web-mode
+              yaml-mode yasnippet yeetube yuck-mode zone-nyan
               zone-rainbow))
  '(package-vc-selected-packages
    '((confluence-markup-mode :url
