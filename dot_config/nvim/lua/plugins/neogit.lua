@@ -169,10 +169,10 @@ return {
 				-- If enabled, uses mini.pick for menu selection. If the telescope integration
 				-- is also selected then telescope is used instead
 				-- Requires you to have `echasnovski/mini.pick` installed.
-				mini_pick = false,
+				mini_pick = true,
 
         -- Use snacks picker
-        snacks = true
+        snacks = false
 			},
 			sections = {
 				-- Reverting/Cherry Picking
@@ -316,6 +316,9 @@ return {
 					["]c"] = "OpenOrScrollDown",
 					["<c-k>"] = "PeekUp",
 					["<c-j>"] = "PeekDown",
+          ["!"] = function ()
+            vim.cmd([[!gh pr create --fill --web]])
+          end
 				},
 			},
 		})
