@@ -211,7 +211,9 @@
                 "master")
      (org-ql :url "https://github.com/alphapapa/org-ql" :branch
              "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode"))))
+     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
+     (vc-use-package :vc-backend Git :url
+                     "https://github.com/slotThe/vc-use-package"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.

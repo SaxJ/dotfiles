@@ -12,22 +12,7 @@
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
- '(package-selected-packages
-   '(apheleia avy build cape casual chezmoi confluence-markup-mode
-              corfu-terminal csproj-mode csv-mode dslide dune eat
-              ef-themes eglot-fsharp elm-mode embark-consult
-              evil-collection evil-commentary evil-org evil-surround
-              forge general git-timemachine graphql-ts-mode
-              graphviz-dot-mode haskell-mode helm-org httprepl
-              hurl-mode jira jiralib2 jq-mode json-mode
-              kubernetes-evil lastfm marginalia mood-line mu4e-alert
-              multi-vterm nvm orderless org-modern org-music org-ql
-              org-roam origami otpp pocket-reader popper pr-review
-              prescient prodigy rainbow-mode soundcloud
-              string-inflection sudo-edit templ-ts-mode terraform-mode
-              tuareg vc-use-package vertico vterm vue-mode web-mode
-              yaml-mode yasnippet yeetube yuck-mode zone-nyan
-              zone-rainbow))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
    '((confluence-markup-mode :url
                              "https://github.com/rmloveland/confluence-markup-mode"
@@ -37,7 +22,9 @@
                 "master")
      (org-ql :url "https://github.com/alphapapa/org-ql" :branch
              "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")))
+     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
+     (vc-use-package :vc-backend Git :url
+                     "https://github.com/slotThe/vc-use-package")))
  '(safe-local-variable-values
    '((ssh-deploy-async . 0)
      (ssh-deploy-root-remote
