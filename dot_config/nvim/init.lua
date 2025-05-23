@@ -6,7 +6,7 @@ vim.keymap.del("n", "gri")
 local funcs = require("functions")
 local jira = require("jira")
 
-require('timelog')
+require("timelog")
 
 local o = vim.opt
 
@@ -175,7 +175,7 @@ local scp_download = function()
 end
 
 local open_file_browser = function()
-  vim.cmd("Oil " .. vim.fn.expand('%:p:h'))
+	vim.cmd("Oil " .. vim.fn.expand("%:p:h"))
 end
 
 -- terminal
@@ -192,26 +192,23 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open Link" })
 
 -- general
-vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
-vim.keymap.set("n", "<leader>.", function ()
-  Snacks.picker.files({cwd = vim.fn.expand('%:p:h')})
+vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", ":Pick grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>.", function()
+	require("mini.pick").builtin.files({}, { source = { cwd = vim.fn.expand("%:p:h") } })
 end, { desc = "Siblings" })
 vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
-vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
+vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", ":Pick buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
 	require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
-vim.keymap.set("n", "<leader>ff", function ()
-  Snacks.picker.files({})
-end, { desc = "Find" })
 vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Name" })
 
 -- git
