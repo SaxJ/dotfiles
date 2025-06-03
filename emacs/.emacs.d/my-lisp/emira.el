@@ -1,10 +1,10 @@
-;;; emira.el --- Manage external services -*- lexical-binding: t; -*-
+;;; emira.el --- Manage jira issues -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2025 Saxon Jensen
 
 ;; Author: Saxon Jensen <saxonj@mailbox.org>
 ;; Maintainer: Saxon Jensen <saxonj@mailbox.org>
-;; Package-Version: 0.1
+;; Package-Version: 0.2
 ;; URL: http://github.com/SaxJ/emira.el
 ;; Package-Requires: ((emacs "30.1") (jiralib2 "1.0") (plz "0.9.1"))
 
