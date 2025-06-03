@@ -1,0 +1,24 @@
+[github]
+	user = SaxJ
+[user]
+	email = saxon.jensen@gmail.com
+	name = SaxJ
+[core]
+	editor = nvim
+	pager = delta
+[alias]
+    co = checkout
+    cob = checkout -b
+    ci = commit
+    st = status
+    br = branch
+[color]
+    ui = auto
+[init]
+	defaultBranch = master
+[interactive]
+	diffFilter = delta --color-only
+[delta]
+	navigate = true
+[merge]
+	conflictStyle = zdiff3
