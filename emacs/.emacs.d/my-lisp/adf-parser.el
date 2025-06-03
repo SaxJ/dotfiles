@@ -2,6 +2,32 @@
   "Parse all children"
   (cl-mapcar 'adf-parser-to-org children))
 
+(defun adf-parser--apply-mark (text mark)
+  "Apply mark to the text."
+  (let-alist mark
+    (cond ((string= .type "backgroundColor")
+           text)
+          ((string= .type "code")
+           (format "~%s~" text))
+          ((string= .type "em")
+           (format "/%s/" text))
+          ((string= .type "link")
+           (format "[[%s][%s]]" .attrs.href text))
+          ((string= .type "strike")
+           (format "+%s+" text))
+          ((string= .type "strong")
+           (format "*%s*" text))
+          ((string= .type "subsup")
+           (format "%s{%s}" (if (string= "sub" .attrs.type) "_" "^") text))
+          ((string= .type "textColor")
+           text)
+          ((string= .type "underline")
+           (format "_%s_" text)))))
+
+(defun adf-parser--apply-many-marks (text marks)
+  "Apply the list of marks in order"
+  (cl-reduce 'adf-parser--apply-mark marks :initial-value text))
+
 (defun adf-parser-to-org (node)
   "Parses an ADF tree to org-mode style text."
   (let-alist node
@@ -43,9 +69,21 @@
            .attr.text)
           ((string= .type "orderedList")
            (string-join (adf-parser--children .content) "\n"))
-          ((string= .type "rule")
-           "\n-----\n")
+          ((string= .type "panel")
+           (string-join (adf-parser--children .content) " "))
           ((string= .type "paragraph")
            (format "%s\n" (string-join (adf-parser--children .content) " ")))
+          ((string= .type "rule")
+           "\n-----\n")
+          ((string= .type "status")
+           (format "[%s]" .attrs.text))
+          ((string= .type "table")
+           (string-join (adf-parser--children .content) "\n"))
+          ((string= .type "tableCell")
+           (format "| %s " (string-join (adf-parser--children .content) "")))
+          ((string= .type "tableHeader")
+           (format "| %s " (string-join (adf-parser--children .content) "")))
+          ((string= .type "tableRow")
+           (string-join (adf-parser--children .content) ""))
           ((string= .type "text")
-           .text))))
+           (adf-parser--apply-many-marks .text .marks)))))
