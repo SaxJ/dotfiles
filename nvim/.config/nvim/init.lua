@@ -7,6 +7,7 @@ local funcs = require("functions")
 
 require("jira")
 require("timelog")
+require('terminal')
 
 local o = vim.opt
 
@@ -82,18 +83,10 @@ require("lazy").setup({
   spec = {
     { import = "plugins" },
 
-    { "voldikss/vim-floaterm" },
-
     -- optional for icons
     { "nvim-tree/nvim-web-devicons" },
-    {
-      "airglow923/suda.nvim",
-      config = function()
-        require("suda").setup()
-      end,
-    },
-    { "mistweaverco/kulala.nvim", opts = {} },
-    { "danymat/neogen",           config = true },
+    { "mistweaverco/kulala.nvim",   opts = {} },
+    { "danymat/neogen",             config = true },
     { "ii14/neorepl.nvim" },
   },
   -- Configure any other settings here. See the documentation for more details.
@@ -177,10 +170,6 @@ local scp_download = function()
   vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
 end
 
-local open_file_browser = function()
-  vim.cmd("Oil " .. vim.fn.expand("%:p:h"))
-end
-
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
@@ -200,7 +189,7 @@ vim.keymap.set("n", "<leader>sp", ":Pick grep_live<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>.", function()
   require("mini.pick").builtin.files({}, { source = { cwd = vim.fn.expand("%:p:h") } })
 end, { desc = "Siblings" })
-vim.keymap.set("n", "<leader>-", open_file_browser, { desc = "Files" })
+vim.keymap.set("n", "<leader>-", MiniFiles.open, { desc = "Files" })
 vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
 
 -- buffers
@@ -231,8 +220,8 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
-vim.keymap.set("n", "<leader>o-", open_file_browser, { desc = "Files" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
+vim.keymap.set("n", "<leader>oj", ":JiraList<CR>", { desc = "Jira" })
 
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obb", ":OverseerToggle<CR>", { desc = "+build" })
@@ -309,12 +298,14 @@ end, {
   desc = "Revert a file to the version on the given branch.",
   nargs = 1,
   complete = function(lead, _, _)
-      vim.fn.printf(lead)
-      local branches = vim.system({'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format("*%s*", lead)}, {text = true}):wait()
-      if branches.code == 0 then
-        return vim.split(branches.stdout, '\n')
-      else
-        return  {}
-      end
+    vim.fn.printf(lead)
+    local branches = vim.system(
+    { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format("*%s*", lead) }, { text = true })
+    :wait()
+    if branches.code == 0 then
+      return vim.split(branches.stdout, '\n')
+    else
+      return {}
+    end
   end
 })
