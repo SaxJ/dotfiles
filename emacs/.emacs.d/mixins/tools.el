@@ -219,3 +219,9 @@
 (use-package mpris
   :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch "master")
   :ensure t)
+
+(use-package jira
+  :config
+  (setq jira-base-url "https://hejira.atlassian.net") ;; Jira instance URL
+  (setq jira-username "saxon.jensen@healthengine.com.au") ;; Jira username (usually, an email)
+  (setq jira-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
