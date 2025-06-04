@@ -35,6 +35,7 @@
 (require 'plz)
 (require 'jiralib2)
 (require 'iimage)
+(require 'adf-parser)
 
 (defconst emira-buffer-name "*emira*"
   "Name of emira buffer.")
@@ -92,6 +93,18 @@
     (let-alist issue
       (with-current-buffer (get-buffer-create "*emira-view*")
         (emira-view-mode)
+        (emira--insert-content .fields.summary .fields.description)
+        (iimage-mode-buffer 1)
+        (pop-to-buffer (current-buffer))))))
+
+(defun emira-view-issue-details-org (&optional pos)
+  (interactive)
+  "Display details of the jira issue."
+  (let* ((issue (jiralib2-session-call (format "/rest/api/3/issue/%s" (tabulated-list-get-id pos)))))
+    (emira--download-all-attachments issue)
+    (let-alist issue
+      (with-current-buffer (get-buffer-create "*emira-view*")
+        (emira-org-view-mode)
         (emira--insert-content .fields.summary .fields.description)
         (iimage-mode-buffer 1)
         (pop-to-buffer (current-buffer))))))
@@ -161,6 +174,14 @@
   (iimage-mode 1)
   (setq iimage-mode-image-search-path (list emira-image-cache-location)
         iimage-mode-image-regex-alist '(("!\\(.*\\)|\\(.*\\)?!" . 1)))
+  (font-lock-mode 1))
+
+;;;###autoload
+(define-derived-mode emira-org-view-mode org-mode "Emira-org-view"
+  "Mode for viewing Jira issue details."
+  (view-mode 1)
+  (visual-line-mode 1)
+  (iimage-mode 1)
   (font-lock-mode 1))
 
 ;;;###autoload

@@ -46,7 +46,7 @@
             "%a %e %b %Y %R\n"
             (string-to-number .attr.timestamp)))
           ((string= .type "doc")
-           (string-join (adf-parser--children .content) ""))
+           (string-join (adf-parser--children .content) "\n"))
           ((string= .type "emoji")
            "")
           ((string= .type "expand")
@@ -87,3 +87,5 @@
            (string-join (adf-parser--children .content) ""))
           ((string= .type "text")
            (adf-parser--apply-many-marks .text .marks)))))
+
+(provide 'adf-parser)
