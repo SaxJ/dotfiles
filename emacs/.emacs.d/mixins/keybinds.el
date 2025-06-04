@@ -228,7 +228,7 @@
     "ob" 'build-menu
     "ot" 'multi-vterm
     "op" 'prodigy
-    "oj" 'emira
+    "oj" 'jira-issues
 
     ;; chezmoi
     "cf" 'chezmoi-find
@@ -272,7 +272,8 @@
     "?" 'jira-issues-actions-menu
     "gi" (lambda () (interactive)
            (jira-detail-show-issue (jira-utils-marked-item)))
-    "gl" 'jira-issues-menu)
+    "gl" 'jira-issues-menu
+    "ga" 'jira-issues-actions-menu)
 
   (general-nmap
     "gD" 'xref-find-references
