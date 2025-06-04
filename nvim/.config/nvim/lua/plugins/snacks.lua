@@ -3,13 +3,10 @@ return {
   ---@type snacks.Config
   opts = {
     image = {
-      enabled = true,
+      enabled = false,
       resolve = function(file, src)
         return string.format("/home/saxonj/.emacs.d/emira_image_cache/%s", src)
       end,
-      -- your image configuration comes here
-      -- or leave it empty to use the default settings
-      -- refer to the configuration section below
     },
     input = {
       enabled = true,
