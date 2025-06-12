@@ -1,0 +1,32 @@
+#!/usr/bin/bash
+if [[ -z "$TIMELOG_FILE" ]]; then
+  echo "Set env var \$TIMELOG_FILE"
+  exit 1
+fi
+
+last_line=$(tail -n1 "$TIMELOG_FILE")
+last_datetime=$(echo "$last_line" | awk '{ printf "%s %s", $2, $3}')
+current_timestamp=$(date +%s)
+last_timestamp=$(date -d "$last_datetime" +%s)
+
+seconds=$((current_timestamp - last_timestamp))
+mins=$((seconds / 60))
+hours=$((mins / 60))
+
+if [[ "$hours" == "0" ]]; then
+  if [[ "$mins" == "0" ]]; then
+    time=$(printf "%ss" $seconds)
+  else
+    time=$(printf "%sm" $mins)
+  fi
+else
+  time=$(printf "%sh" $hours)
+fi
+
+if [[ "$last_line" =~ ^i ]]; then
+  current_task=$(echo "$last_line" | awk '{ for(i=4;i<=NF;i++) printf "%s ", $i}')
+  printf "%s(%s)" "$current_task" "$time"
+  exit 0
+else
+  exit 1
+fi

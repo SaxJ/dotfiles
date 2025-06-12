@@ -1,0 +1,14 @@
+#!/usr/bin/bash
+if [[ -z "$TIMELOG_FILE" ]]; then
+  echo "Set env var \$TIMELOG_FILE"
+  exit 1
+fi
+
+datetime=$(date "+%Y/%m/%d %T")
+last_line=$(tail -n1 "$TIMELOG_FILE")
+if [[ "$last_line" =~ ^o ]]; then
+  echo "Already clocked out."
+else
+  echo "o $datetime" >> "$TIMELOG_FILE"
+  echo "Clocked out."
+fi
