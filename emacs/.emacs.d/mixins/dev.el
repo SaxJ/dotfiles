@@ -387,9 +387,6 @@
 (use-package git-timemachine
   :ensure t)
 
-                                        ;(use-package build
-                                        ;  :ensure t
-                                        ;  :vc (build :url "https://github.com/27justin/build.el"))
 
 (use-package terraform-mode
   :ensure t)

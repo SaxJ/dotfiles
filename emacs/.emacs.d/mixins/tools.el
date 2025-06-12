@@ -179,9 +179,6 @@
   :vc (build :url "https://github.com/SaxJ/build.el" :branch "master")
   :ensure t)
 
-(use-package httprepl
-  :ensure t)
-
 (use-package emira
   :ensure nil)
 
@@ -221,6 +218,7 @@
   :ensure t)
 
 (use-package jira
+  :ensure t
   :config
   (setq jira-base-url "https://hejira.atlassian.net") ;; Jira instance URL
   (setq jira-username "saxon.jensen@healthengine.com.au") ;; Jira username (usually, an email)
