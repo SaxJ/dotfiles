@@ -12,5 +12,7 @@ alias vpnd="openvpn3 session-manage --disconnect --config ~/office.ovpn"
 
 function cd() {
   z "$1"
-  zellij action rename-tab "$(basename "$(pwd)")"
+  if [[ -n "$ZELLIJ_SESSION_NAME" ]]; then
+    zellij action rename-tab "$(basename "$(pwd)")"
+  fi
 }
