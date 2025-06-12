@@ -45,7 +45,8 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
 "space" = "file_picker_in_current_directory"
-"minus" = ":sh zellij run -ci -- nnn $(dirname %{buffer_name})"
+"minus" = ":sh zellij run -ci -- yazi %sh{realpath $(dirname %{buffer_name})}"
+"t" = ":echo %sh{realpath $(dirname %{buffer_name})}"
 
 [keys.normal."C-f"]
 "t" = ":pipe ascii-table"
@@ -56,13 +57,14 @@ a = "code_action"
 
 [keys.normal.space.g]
 g = ":sh zellij run -ci -- lazygit"
-l = ":sh zellij run -ci -- tig %{buffer_name}"
+l = ":sh zellij run -ci -- lazygit log --filter %{buffer_name}"
+b = ":echo %sh{git blame -L %{cursor_line},+1 %{buffer_name}}"
 d = "changed_file_picker"
 p = ":sh gh pr create --web"
 
 [keys.normal.space.r]
-u = ":sh rpush %{buffer_name}"
-d = ":sh rpull %{buffer_name}"
+u = ":sh scp %{buffer_name} ubuntu@minikube:/home/ubuntu/%sh{basename $(pwd)}/%{buffer_name}"
+d = ":sh scp ubuntu@minikube:/home/ubuntu/%sh{basename $(pwd)}/%{buffer_name} %{buffer_name}"
 
 [keys.normal.space.f]
 f = "file_picker"
