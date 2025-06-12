@@ -156,6 +156,21 @@
 (use-package prescient
   :ensure t)
 
+(defun saxon/get-mpris-track-title ()
+  "Get the title of the currently playing track"
+  (unless (eq (mpris-get-metadata) 'no-player)
+    (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist))))
+
+(use-package emacs
+  :ensure nil
+  :config
+  (setq global-mode-string '("🎵 " (:eval (saxon/get-mpris-track-title))
+                             (:eval (mu4e--modeline-string))
+                             ""
+                             display-time-string
+                             emms-playing-time-string
+                             (:eval mu4e-alert-mode-line))))
+
 (use-package mood-line
   :ensure t
   :config
@@ -165,7 +180,7 @@
                           :left
                           (((mood-line-segment-modal) . " ")
                            ((mood-line-segment-buffer-status) . " ")
-                           ((mood-line-segment-buffer-name) . ""))
+                           ((mood-line-segment-buffer-name) . " "))
                           :right
                           (((mood-line-segment-vc) . " ")
                            ((mood-line-segment-major-mode) . "")))))
