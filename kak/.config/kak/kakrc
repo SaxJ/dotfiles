@@ -1,28 +1,7 @@
-# init plugin manager
-evaluate-commands %sh{
-    plugins="$kak_config/plugins"
-    mkdir -p "$plugins"
-    [ ! -e "$plugins/plug.kak" ] && \
-        git clone -q https://github.com/andreyorst/plug.kak.git "$plugins/plug.kak"
-    printf "%s\n" "source '$plugins/plug.kak/rc/plug.kak'"
-}
-
-### PLUGINS
-plug "andreyorst/plug.kak" noload
-plug "WhatNodyn/kakoune-wakatime"
-plug "evanrelf/byline.kak" config %{
-  require-module "byline"
-}
-
-hook global BufCreate .+\.cs %{
-  set-option buffer filetype c-sharp
-}
+colorscheme ef-winter
 
 # Windowing
-set-option global windowing_modules ''
 require-module kitty
-set-option global kitty_window_type 'overlay'
-alias global popup kitty-terminal
 
 # general
 set global indentwidth 2
@@ -41,30 +20,6 @@ set-option global grepcmd 'rg --column --smart-case --sort path'
 # git
 declare-option str git_branch_name %sh{
   git branch --show-current
-}
-
-def project-search -override -docstring 'Search for text in project' %{
-  nop %sh{
-    kitty @ launch irg "kak-run {1}"
-  }
-}
-
-def tig-blame -override -docstring 'Open blame in tig -params for current file and line' %{
-  nop %sh{
-    zellij run -ci -- tig blame +$kak_cursor_line $kak_buffile
-  }
-}
-
-def git-open -override -docstring 'Open git interface' %{
-  nop %sh{
-    kitty-terminal-window lazygit
-  }
-}
-
-define-command -override open_project %{
-  prompt project: -menu -shell-script-candidates 'zoxide query --list' %{
-    kitty-terminal-tab kak -s %val{session} -e "cd %val{text}"
-  }
 }
 
 ## match mode
@@ -217,11 +172,6 @@ define-command extra-paste-system -docstring 'paste from the system clipboard' %
 map global user p ':extra-paste-system<ret>' -docstring 'paste selections from system clipboard'
 map global user y ':extra-yank-system<ret>'  -docstring 'yank to system clipboard'
 
-# Tree-sitter
-eval %sh{ kak-tree-sitter -dks --init $kak_session -vvvvv }
-
-colorscheme catppuccin_macchiato
-
 # Modeline
 set-face global StatusLineBlack black
 
@@ -253,7 +203,6 @@ hook global WinSetOption swiper_enabled=false %{
 set-option global modelinefmt '{DiagnosticError} %opt{lsp_diagnostic_error_count} {DiagnosticWarning} %opt{lsp_diagnostic_warning_count} {DiagnosticInfo} %opt{lsp_diagnostic_info_count} {DiagnosticHint} %opt{lsp_diagnostic_hint_count} {StatusLineGit}%opt{git_branch_name} {Swiper}%opt{modeline_swiper}{StatusLine} %opt{bufname_abbrev} {StatusLineBlack}(%val{cursor_line}:%val{cursor_char_column} {StatusLineBlack}%val{buf_line_count}L){{context_info}} {{mode_info}} {ts_comment}%val{client}@[%val{session}]'
 
 # LSP
-
 eval %sh{ kak-lsp --kakoune -s $kak_session }
 
 ## common options
@@ -351,11 +300,3 @@ hook global InsertCompletionShow .* %{
         }
     }
 }
-
-# GIT BINDINGS
-declare-user-mode git
-map global user g ':enter-user-mode git<ret>' -docstring 'git mode'
-map global git b ':tig-blame<ret>' -docstring 'git blame'
-map global git g ':git-open<ret>' -docstring 'lazygit'
-
-map global user t ': enter-user-mode tig<ret>' -docstring 'tig commands'
