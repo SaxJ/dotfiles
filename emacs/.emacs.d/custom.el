@@ -19,7 +19,7 @@
               evil-collection evil-commentary evil-org evil-surround
               forge general git-timemachine graphql-ts-mode
               graphviz-dot-mode haskell-mode helm-org httprepl
-              hurl-mode jira jiralib2 jq-mode json-mode
+              hurl-mode jira jiralib2 jq-mode js-doc json-mode
               kubernetes-evil lastfm marginalia mood-line mpris
               mu4e-alert multi-vterm nvm orderless org-modern
               org-music org-ql org-roam origami otpp pocket-reader
@@ -29,9 +29,7 @@
               vertico vue-mode web-mode yaml-mode yasnippet yeetube
               yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
-   '((mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch
-            "master")
-     (confluence-markup-mode :url
+   '((confluence-markup-mode :url
                              "https://github.com/rmloveland/confluence-markup-mode"
                              :branch "master")
      (build :url "https://github.com/SaxJ/build.el" :branch "master")
