@@ -7,7 +7,7 @@ local funcs = require("functions")
 
 require("jira")
 require("timelog")
-require('terminal')
+local Terminal = require('terminal')
 
 local o = vim.opt
 
@@ -88,6 +88,11 @@ require("lazy").setup({
     { "mistweaverco/kulala.nvim",   opts = {} },
     { "danymat/neogen",             config = true },
     { "ii14/neorepl.nvim" },
+    {
+      'windwp/nvim-autopairs',
+      event = "InsertEnter",
+      config = true
+    }
   },
   -- Configure any other settings here. See the documentation for more details.
   -- colorscheme that will be used when installing plugins.
@@ -211,7 +216,9 @@ vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
 -- project
 vim.keymap.set("n", "<leader>p", "", { desc = "+project" })
-vim.keymap.set("n", "<leader>pt", ":ToggleTerm direction=vertical name=project<CR>", { desc = "Project Terminal" })
+vim.keymap.set("n", "<leader>pt", function()
+  Terminal.open_terminal("", 'vertical', "project-term")
+end, { desc = "Project Terminal" })
 
 -- remote
 vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
@@ -221,7 +228,10 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>oj", ":JiraList<CR>", { desc = "Jira" })
+vim.keymap.set("n", "<leader>oj",
+  [[:FTerm jira issue list --jql "assignee = currentUser() AND project = MKT AND statusCategory != Done"<CR>]],
+  { desc = "Jira" })
+vim.keymap.set("n", "<leader>ot", ":HTerm<CR>", { desc = "Terminal" })
 
 vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
 vim.keymap.set("n", "<leader>obb", ":OverseerToggle<CR>", { desc = "+build" })
@@ -300,8 +310,9 @@ end, {
   complete = function(lead, _, _)
     vim.fn.printf(lead)
     local branches = vim.system(
-    { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format("*%s*", lead) }, { text = true })
-    :wait()
+          { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format("*%s*", lead) },
+          { text = true })
+        :wait()
     if branches.code == 0 then
       return vim.split(branches.stdout, '\n')
     else
