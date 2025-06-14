@@ -174,6 +174,47 @@ local scp_download = function()
   vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
 end
 
+local ToggleTerm = require('toggleterm.terminal').Terminal
+local jira_term = ToggleTerm:new({
+  cmd = 'jira issue list --jql "assignee = currentUser() AND project = MKT AND statusCategory != Done"',
+  hidden = true,
+  direction = 'float',
+  dir = 'git_dir',
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+  end,
+
+  -- function to run on closing the terminal
+  on_close = function()
+    vim.cmd("startinsert!")
+  end,
+})
+
+local git_term = ToggleTerm:new({
+  cmd = 'lazygit',
+  hidden = true,
+  direction = 'float',
+  dir = 'git_dir',
+  on_open = function(term)
+    vim.cmd("startinsert!")
+    vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>", { noremap = true, silent = true })
+  end,
+
+  -- function to run on closing the terminal
+  on_close = function()
+    vim.cmd("startinsert!")
+  end,
+})
+
+local toggle_jira = function()
+  jira_term:toggle()
+end
+
+local toggle_git = function ()
+  git_term:toggle()
+end
+
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
 
@@ -191,6 +232,7 @@ end, { desc = "Open Link" })
 vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
+vim.keymap.set('n', '<leader>-', ':Explore<CR>', { desc = 'File browser' })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -205,7 +247,7 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", ":FTerm lazygit<CR>i", { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gg", toggle_git, { desc = "Git Status" })
 vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
@@ -223,9 +265,7 @@ vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>oj",
-  [[:FTerm jira issue list --jql "assignee = currentUser() AND project = MKT AND statusCategory != Done"<CR>]],
-  { desc = "Jira" })
+vim.keymap.set("n", "<leader>oj", toggle_jira, { desc = "Jira" })
 vim.keymap.set("n", "<leader>ot", ":HTerm<CR>", { desc = "Terminal" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
