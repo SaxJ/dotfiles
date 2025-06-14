@@ -85,7 +85,6 @@ require("lazy").setup({
 
     -- optional for icons
     { "nvim-tree/nvim-web-devicons" },
-    { "mistweaverco/kulala.nvim",   opts = {} },
     { "danymat/neogen",             config = true },
     { "ii14/neorepl.nvim" },
     {
@@ -189,17 +188,13 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open Link" })
 
 -- general
-vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", ":Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>.", function()
-  require("mini.pick").builtin.files({}, { source = { cwd = vim.fn.expand("%:p:h") } })
-end, { desc = "Siblings" })
-vim.keymap.set("n", "<leader>-", MiniFiles.open, { desc = "Files" })
-vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", ":Pick buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
@@ -210,7 +205,7 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gg", ":FTerm lazygit<CR>i", { desc = "Git Status" })
 vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
@@ -232,14 +227,6 @@ vim.keymap.set("n", "<leader>oj",
   [[:FTerm jira issue list --jql "assignee = currentUser() AND project = MKT AND statusCategory != Done"<CR>]],
   { desc = "Jira" })
 vim.keymap.set("n", "<leader>ot", ":HTerm<CR>", { desc = "Terminal" })
-
-vim.keymap.set("n", "<leader>ob", "", { desc = "+build" })
-vim.keymap.set("n", "<leader>obb", ":OverseerToggle<CR>", { desc = "+build" })
-vim.keymap.set("n", "<leader>obr", ":OverseerRun<CR>", { desc = "+build" })
-
-vim.keymap.set("n", "<leader>ok", function()
-  require("kubectl").toggle({ tab = true })
-end, { noremap = true, silent = true, desc = "Kubectl" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
