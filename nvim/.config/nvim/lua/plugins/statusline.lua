@@ -2,10 +2,15 @@ return {
 	"nvim-lualine/lualine.nvim",
 	dependencies = { "nvim-tree/nvim-web-devicons" },
 	config = function()
-    local function project()
-      local pwd = vim.uv.cwd() or "none"
-      return "Project: " .. vim.fn.fnamemodify(pwd, ":t")
+    local current_timelog = function ()
+      local response = vim.system({'current_clock'}, {text = true}):wait()
+      if response.code == 0 then
+        return response.stdout
+      else
+        return ''
+      end
     end
+
 		require("lualine").setup({
 			options = {
 				icons_enabled = true,
@@ -30,7 +35,7 @@ return {
 				lualine_a = { "mode" },
 				lualine_b = { "branch", "diff", "diagnostics" },
 				lualine_c = { "filename" },
-				lualine_x = { project, "fileformat", "filetype" },
+				lualine_x = { current_timelog, "fileformat", "filetype" },
 				lualine_y = { "progress" },
 				lualine_z = { "location" },
 			},
