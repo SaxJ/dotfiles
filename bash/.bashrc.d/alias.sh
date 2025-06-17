@@ -9,6 +9,9 @@ alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 
+alias ci=clockin
+alias co=clockout
+
 alias vpnc="openvpn3 session-start --config ~/office.ovpn"
 alias vpnd="openvpn3 session-manage --disconnect --config ~/office.ovpn"
 
