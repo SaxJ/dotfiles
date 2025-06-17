@@ -92,7 +92,8 @@
   "Setup the commit buffer with common git content."
   (interactive)
   (let* ((branch (car (vc-git-branches))))
-    (if (string-match-p "[[:alpha:]]+-[[:digit:]]+" branch)
+    (if (and (string-match-p "[[:alpha:]]+-[[:digit:]]+" branch)
+             (not (s-contains-p (format "%s:" branch) (buffer-string))))
         (progn
           (insert (format "%s: " branch))
           (evil-insert-state))

@@ -164,7 +164,8 @@
 (use-package emacs
   :ensure nil
   :config
-  (setq global-mode-string '("🎵 " (:eval (saxon/get-mpris-track-title))
+  (setq global-mode-string '(
+                             ;;"🎵 " (:eval (saxon/get-mpris-track-title))
                              (:eval (mu4e--modeline-string))
                              ""
                              display-time-string
