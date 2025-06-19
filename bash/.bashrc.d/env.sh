@@ -1,1 +1,1 @@
-export TIMELOG_FILE=~/.emacs.d/timelog
+export TIMELOG_FILE=~/time/timelog
