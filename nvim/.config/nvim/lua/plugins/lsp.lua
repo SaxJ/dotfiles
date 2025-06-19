@@ -112,5 +112,8 @@ return {
     nvim_lsp["bashls"].setup({
       on_attach = on_attach,
     })
+    nvim_lsp['hls'].setup({
+      on_attach = on_attach
+    })
   end,
 }
