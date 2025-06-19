@@ -41,7 +41,6 @@ o.autoread = true
 o.updatetime = 1000
 o.completeopt = { "menuone", "noselect", "noinsert" }
 o.shortmess:append "c"
-o.laststatus = 3
 
 vim.diagnostic.config({
   virtual_text = false,
