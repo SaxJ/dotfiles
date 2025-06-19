@@ -3,7 +3,7 @@ alias lg=lazygit
 alias v=nvim
 
 alias ji="jira issue list --jql=\"assignee = currentUser() AND project = MKT AND statusCategory != Done\""
-alias ytd="yt-dlp -t aac -o \"~/Music/%(title)s.%(ext)s\" --restrict-filenames"
+alias ytd="yt-dlp -t aac -o \"~/Music/%(title)s.%(ext)s\" --restrict-filenames --embed-thumbnail --embed-metadata"
 
 alias gs="git status"
 alias gd="git diff"
