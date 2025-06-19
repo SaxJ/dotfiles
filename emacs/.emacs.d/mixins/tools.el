@@ -114,13 +114,29 @@
             (insert (format "%s - %s" (car similar-entry) (cadr similar-entry)))
             (org-entry-put nil "TYPE" "song")))))))
 
+
 (use-package yeetube
   :ensure t
-  :init (define-prefix-command 'my/yeetube-map)
   :config
   (setf yeetube-mpv-disable-video t)
   (setq yeetube-download-directory "~/Music"
-        yeetube-download-audio-format "aac"))
+        yeetube-download-audio-format "aac")
+  
+  (advice-add 'yeetube-download--ytdlp :override (lambda (url &optional name audio-format)
+                                                   (unless (executable-find "yt-dlp")
+                                                     (error "Executable for yt-dlp not found.  Please install yt-dlp"))
+                                                   (let* ((tor-command (when yeetube-enable-tor (executable-find "torsocks")))
+                                                          (name-command (when name (format "-o %s" (shell-quote-argument name))))
+                                                          (format-command (when audio-format
+			                                                                (format "--embed-thumbnail --embed-metadata --extract-audio --audio-format %s"
+				                                                                    (shell-quote-argument audio-format))))
+                                                          (command (mapconcat 'identity (delq nil
+					                                                                          (list tor-command
+						                                                                            (executable-find "yt-dlp")
+						                                                                            (shell-quote-argument url)
+						                                                                            name-command format-command))
+			                                                                  " ")))
+                                                     (call-process-shell-command command nil 0)))))
 
 (use-package casual
   :ensure t)
@@ -217,9 +233,13 @@
   :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch "master")
   :ensure t)
 
-(use-package jira
+(use-package timeclock
+  :ensure nil
+  :config
+  (setq timeclock-file "~/time/timelog"))
+
+(use-package todotxt
   :ensure t
   :config
-  (setq jira-base-url "https://hejira.atlassian.net") ;; Jira instance URL
-  (setq jira-username "saxon.jensen@healthengine.com.au") ;; Jira username (usually, an email)
-  (setq jira-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
+  (setq todotxt-file "~/time/todo.txt")
+  (add-hook 'todotxt-mode-hook #'evil-emacs-state))
