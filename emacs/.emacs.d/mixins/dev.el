@@ -304,7 +304,7 @@
   :ensure t
   :after magit
   :config
-  (add-hook 'forge-post-mode-hook #'(lambda () (setq forge-buffer-draft-p t))))
+  (add-hook 'forge-post-mode-hook #'forge-topic-toggle-draft))
 
 (use-package origami
   :ensure t

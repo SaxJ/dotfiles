@@ -68,6 +68,13 @@
     (tab-bar-rename-tab "Mail")
     (mu4e)))
 
+(defun saxon/open-yeetube ()
+  (interactive)
+  (progn
+    (tab-bar-new-tab-to -1)
+    (tab-bar-rename-tab "Yeet")
+    (yeetube-mode)))
+
 (defun saxon/shell-replace-region ()
   (interactive)
   (shell-command-on-region (point-min) (point-max) (read-shell-command "Command: ") (current-buffer) t "*Command Errors*" nil))
@@ -228,7 +235,7 @@
     "ob" 'build-menu
     "ot" 'multi-vterm
     "op" 'prodigy
-    "oj" 'jira-issues
+    "oj" 'emira
 
     ;; chezmoi
     "cf" 'chezmoi-find
