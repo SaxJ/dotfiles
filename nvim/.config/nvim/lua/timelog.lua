@@ -3,6 +3,11 @@ local funcs = require('functions')
 local function open_log_file(mode)
   local cache_dir = vim.fn.stdpath("data")
   local log_file = cache_dir .. '/timelog'
+
+  if vim.env.TIMELOG_FILE ~= nil then
+    log_file = vim.env.TIMELOG_FILE
+  end
+
   if vim.g.timelog_file ~= nil then
     log_file = vim.g.timelog_file
   end

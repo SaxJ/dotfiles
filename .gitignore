@@ -1,0 +1,12 @@
+emacs/.emacs.d/eln-cache/
+emacs/.emacs.d/elpa/
+emacs/.emacs.d/emms/
+emacs/.emacs.d/forge-database.sqlite
+emacs/.emacs.d/history
+emacs/.emacs.d/newsticker/
+emacs/.emacs.d/org-roam.db
+emacs/.emacs.d/projects
+emacs/.emacs.d/timelog
+emacs/.emacs.d/tramp
+emacs/.emacs.d/transient/
+emacs/.emacs.d/tree-sitter/
