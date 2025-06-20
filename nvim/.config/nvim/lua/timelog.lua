@@ -85,7 +85,7 @@ end, {
 
 vim.api.nvim_create_user_command("ClockOut", function(args)
   timeclock_out(args['args'])
-end, { desc = "Clock in", nargs = 1 })
+end, { desc = "Clock out"})
 
 vim.api.nvim_create_autocmd('VimLeavePre', {
   callback = function()
