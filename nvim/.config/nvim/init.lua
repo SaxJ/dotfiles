@@ -206,7 +206,7 @@ vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Na
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
-vim.keymap.set("n", "<leader>gg", [[:echo "Don't even try."<CR>]], { desc = "Git Status" })
+vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Git Status" })
 vim.keymap.set("n", "<leader>gd", ":FzfLua git_diff<CR>", { desc = "Git Status" })
 vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
