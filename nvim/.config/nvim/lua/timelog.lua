@@ -3,6 +3,11 @@ local funcs = require('functions')
 local function open_log_file(mode)
   local cache_dir = vim.fn.stdpath("data")
   local log_file = cache_dir .. '/timelog'
+
+  if vim.env.TIMELOG_FILE ~= nil then
+    log_file = vim.env.TIMELOG_FILE
+  end
+
   if vim.g.timelog_file ~= nil then
     log_file = vim.g.timelog_file
   end
@@ -80,7 +85,7 @@ end, {
 
 vim.api.nvim_create_user_command("ClockOut", function(args)
   timeclock_out(args['args'])
-end, { desc = "Clock in", nargs = 1 })
+end, { desc = "Clock out"})
 
 vim.api.nvim_create_autocmd('VimLeavePre', {
   callback = function()
