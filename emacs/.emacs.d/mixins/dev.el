@@ -303,8 +303,7 @@
 (use-package forge
   :ensure t
   :after magit
-  :config
-  (add-hook 'forge-post-mode-hook #'forge-topic-toggle-draft))
+  :config)
 
 (use-package origami
   :ensure t
