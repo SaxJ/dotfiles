@@ -84,14 +84,7 @@ return {
     -- See the fuzzy documentation for more information
     fuzzy = { implementation = "prefer_rust_with_warning" },
     cmdline = {
-      keymap = {
-        preset = 'none',
-        ['<C-n>'] = { 'select_next', 'fallback' },
-        ['<C-p>'] = { 'select_prev', 'fallback' },
-        ['<C-j>'] = { 'select_next', 'fallback' },
-        ['<C-k>'] = { 'select_prev', 'fallback' },
-        ['<Tab>'] = { 'select_and_accept' },
-      },
+      keymap = { preset = 'inherit' },
       completion = { menu = { auto_show = true } },
     }
   },

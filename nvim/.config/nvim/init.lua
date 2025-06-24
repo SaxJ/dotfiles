@@ -117,6 +117,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
+
+    vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", {desc = "Restart LS"})
   end,
 })
 
@@ -192,6 +194,7 @@ vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Explore<CR>', { desc = 'File browser' })
+vim.keymap.set('n', '<leader>.', ":FzfLua files cwd=expand('%:p')<CR>", {desc = "Siblings"})
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
