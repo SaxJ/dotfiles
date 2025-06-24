@@ -175,7 +175,10 @@
                              ""
                              display-time-string
                              emms-playing-time-string
-                             (:eval mu4e-alert-mode-line))))
+                             (:eval mu4e-alert-mode-line)))
+  (setq remote-file-name-inhibit-locks t
+        tramp-use-scp-direct-remote-copying t
+        remote-file-name-inhibit-auto-save-visited t))
 
 (use-package mood-line
   :ensure t
