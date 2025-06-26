@@ -100,14 +100,11 @@ vim.api.nvim_create_autocmd('VimLeavePre', {
       file:close()
     end
     if last_in then
-      local choice = vim.fn.confirm('You are clocked in.', "&Yes\n&No\n&Clock Out", 2)
+      local choice = vim.fn.confirm('You are clocked in. Continue to exit?', "&Yes\n&No", 2)
       if choice == 1 then
         return true
       elseif choice == 2 then
         return false
-      else
-        timeclock_out("")
-        return true
       end
     end
     return true
