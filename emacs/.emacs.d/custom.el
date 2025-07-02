@@ -21,9 +21,9 @@
               graphviz-dot-mode haskell-mode helm-org httprepl
               hurl-mode jira jiralib2 jq-mode js-doc json-mode
               kubernetes-evil lastfm marginalia mood-line mpris
-              mu4e-alert multi-vterm nerd-icons-corfu nvm orderless
-              org-modern org-music org-ql org-roam origami otpp
-              pocket-reader popper pr-review prescient prodigy
+              mu4e-alert multi-vterm nerd-icons-corfu nvm ordered-set
+              orderless org-modern org-music org-ql org-roam origami
+              otpp pocket-reader popper pr-review prescient prodigy
               rainbow-mode soundcloud string-inflection sudo-edit
               templ-ts-mode terraform-mode todotxt tramp tramp-term
               tuareg vc-use-package vertico vue-mode web-mode
@@ -59,8 +59,7 @@
      (ssh-deploy-root-local . "/home/saxonj/Documents/megatron/")
      (rsync-local-path . "/home/saxonj/Documents/megatron/")
      (rsync-remote-paths "minikube:/home/ubuntu/megatron")))
- '(tramp-connection-timeout 10)
- '(tramp-verbose 10))
+ '(tramp-connection-timeout 10))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
