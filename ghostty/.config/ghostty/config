@@ -23,7 +23,7 @@
 # window-padding-x = 2
 font-family = FiraCode Nerd Font Mono#
 font-size = 14
-# initial-command = zellij
+initial-command = zellij
 maximize = true
 
 # # Spacing around the equals sign does not matter.
