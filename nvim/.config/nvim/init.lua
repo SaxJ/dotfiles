@@ -38,7 +38,7 @@ o.termguicolors = true
 o.wrap = false              -- disable line wrapping
 o.titlestring = "%{fnamemodify(getcwd(), ':t')} %m"
 o.autoread = true
-o.updatetime = 1000
+o.updatetime = 500
 o.completeopt = { "menuone", "noselect", "noinsert" }
 o.shortmess:append "c"
 
@@ -118,7 +118,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
 
-    vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", {desc = "Restart LS"})
+    vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", { desc = "Restart LS" })
   end,
 })
 
@@ -196,7 +196,7 @@ vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Explore<CR>', { desc = 'File browser' })
-vim.keymap.set('n', '<leader>.', ":FzfLua files cwd=expand('%:p')<CR>", {desc = "Siblings"})
+vim.keymap.set('n', '<leader>.', ":FzfLua files cwd=expand('%:p')<CR>", { desc = "Siblings" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -207,7 +207,10 @@ end, { desc = "Format Buffer" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
-vim.keymap.set("n", "<leader>fY", ':let @+ = expand("%")<CR>', { desc = "Yank Name" })
+vim.keymap.set("n", "<leader>fY", function ()
+  vim.cmd('let @+ = expand("%")')
+  print("Yanked file name.")
+end, { desc = "Yank Name" })
 
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
@@ -260,22 +263,6 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
   pattern = "*",
   callback = Diag_if_no_float,
 })
-
--- vim.keymap.set("i", "<CR>", function()
---   if vim.fn.complete_info()["selected"] ~= -1 then return "<C-y>" end
---   if vim.fn.pumvisible() ~= 0 then return "<C-e><CR>" end
---   return "<CR>"
--- end, { expr = true })
---
--- vim.keymap.set("i", "<Tab>", function()
---   if vim.fn.pumvisible() ~= 0 then return "<C-n>" end
---   return "<Tab>"
--- end, { expr = true })
---
--- vim.keymap.set("i", "<S-Tab>", function()
---   if vim.fn.pumvisible() ~= 0 then return "<C-p>" end
---   return "<S-Tab>"
--- end, { expr = true })
 
 vim.api.nvim_create_user_command("FileToBranch", function(args)
   local local_relative_filename = vim.fn.expand("%:p:.")
