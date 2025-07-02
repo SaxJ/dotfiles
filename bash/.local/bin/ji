@@ -1,0 +1,2 @@
+#!/bin/bash
+jira issue list --jql="assignee = currentUser() AND project = MKT AND statusCategory != Done"
