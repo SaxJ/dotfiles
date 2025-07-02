@@ -1,5 +1,8 @@
+#!/bin/bash
+# Hello yeahhh
 fzf \
   --with-nth 2.. \
+  --preview="thumb-yt {}" \
   --bind="change:reload-sync(query-yt {q})" \
   --bind="enter:execute(play-yt {})" \
   --bind="ctrl-d:execute(download-yt {})"

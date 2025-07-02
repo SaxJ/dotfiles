@@ -1,0 +1,23 @@
+#!/bin/bash
+videolink="https://youtu.be/"
+
+choice=$1
+if [ -z "$choice" ]; then exit; fi
+
+id=$(echo -e "$choice" | cut -d'	' -f1) # get id of choice
+case "$id" in
+  ???????????)
+  yt-dlp --skip-download --write-thumbnail --quiet -o "/tmp/%(id)s" "$videolink$id"
+  ;;
+
+  ??????????????????????????????????)
+  echo "Can't download a playlist"
+  exit
+  ;;
+
+  *)
+  exit
+  ;;
+esac
+
+fzf-image-preview "/tmp/$id.webp"
