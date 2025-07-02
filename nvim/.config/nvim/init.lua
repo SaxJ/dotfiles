@@ -178,6 +178,8 @@ end
 
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
+vim.keymap.set('t', '<C-k>', '<up>')
+vim.keymap.set('t', '<C-j>', '<down>')
 
 -- links
 vim.keymap.set("n", "gx", function()
@@ -234,13 +236,6 @@ vim.api.nvim_create_autocmd("VimEnter", {
   end,
 })
 
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter", "FocusGained" }, {
-  pattern = { "*" },
-  callback = function()
-    vim.cmd("checktime")
-  end,
-})
-
 function Diag_if_no_float()
   for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
     if vim.api.nvim_win_get_config(winid).zindex then
@@ -266,20 +261,21 @@ vim.api.nvim_create_autocmd({ "CursorHold" }, {
   callback = Diag_if_no_float,
 })
 
-vim.keymap.set("i", "<CR>", function()
-  if vim.fn.complete_info()["selected"] ~= -1 then return "<C-y>" end
-  if vim.fn.pumvisible() ~= 0 then return "<C-e><CR>" end
-  return "<CR>"
-end, { expr = true })
-vim.keymap.set("i", "<Tab>", function()
-  if vim.fn.pumvisible() ~= 0 then return "<C-n>" end
-  return "<Tab>"
-end, { expr = true })
-
-vim.keymap.set("i", "<S-Tab>", function()
-  if vim.fn.pumvisible() ~= 0 then return "<C-p>" end
-  return "<S-Tab>"
-end, { expr = true })
+-- vim.keymap.set("i", "<CR>", function()
+--   if vim.fn.complete_info()["selected"] ~= -1 then return "<C-y>" end
+--   if vim.fn.pumvisible() ~= 0 then return "<C-e><CR>" end
+--   return "<CR>"
+-- end, { expr = true })
+--
+-- vim.keymap.set("i", "<Tab>", function()
+--   if vim.fn.pumvisible() ~= 0 then return "<C-n>" end
+--   return "<Tab>"
+-- end, { expr = true })
+--
+-- vim.keymap.set("i", "<S-Tab>", function()
+--   if vim.fn.pumvisible() ~= 0 then return "<C-p>" end
+--   return "<S-Tab>"
+-- end, { expr = true })
 
 vim.api.nvim_create_user_command("FileToBranch", function(args)
   local local_relative_filename = vim.fn.expand("%:p:.")

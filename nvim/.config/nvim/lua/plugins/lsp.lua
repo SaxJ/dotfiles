@@ -79,7 +79,15 @@ return {
         Lua = {},
       },
     })
-    nvim_lsp["intelephense"].setup({})
+    nvim_lsp["intelephense"].setup({
+      settings = {
+        intelephense = {
+          environment = {
+            phpVersion = "8.3.0"
+          }
+        }
+      }
+    })
     nvim_lsp["omnisharp"].setup({
       cmd = { "omnisharp" },
       on_attach = on_attach,
