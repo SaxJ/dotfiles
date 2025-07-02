@@ -2,6 +2,20 @@ keybinds clear-defaults=true {
     locked {
         bind "Ctrl g" { SwitchToMode "normal"; }
     }
+    normal {
+        bind "j" {
+            Run "ji" {
+                cwd "~"
+            };
+            SwitchToMode "locked";
+        }
+        bind "a" {
+            NewTab {
+                cwd "~"
+                name "Mail"
+            };
+        }
+    }
     pane {
         bind "left" { MoveFocus "left"; }
         bind "down" { MoveFocus "down"; }
