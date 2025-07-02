@@ -166,6 +166,10 @@
   (unless (eq (mpris-get-metadata) 'no-player)
     (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist))))
 
+(defun saxon/modeline-get-mode ()
+  "Get the current mode"
+  (capitalize (symbol-name major-mode)))
+
 (use-package emacs
   :ensure nil
   :config
@@ -176,6 +180,17 @@
                              display-time-string
                              emms-playing-time-string
                              (:eval mu4e-alert-mode-line)))
+
+  ;; WIP
+  ;; (setq-default mode-line-format '("%e"
+  ;;                                  mode-line-front-space
+  ;;                                  mode-line-modified
+  ;;                                  " %b"
+  ;;                                  " "
+  ;;                                  (:eval (saxon/modeline-get-mode))
+  ;;                                  mode-line-end-spaces))
+
+  ;; Speeding up tramp
   (setq remote-file-name-inhibit-locks t
         tramp-use-scp-direct-remote-copying t
         remote-file-name-inhibit-auto-save-visited t))

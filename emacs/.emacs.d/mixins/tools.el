@@ -1,10 +1,10 @@
 (use-package tramp
   :ensure nil
   :config
-  (setq tramp-use-ssh-controlmaster-options nil
-        tramp-debug-buffer t
-        tramp-default-remote-shell "/bin/bash"
-        tramp-encoding-shell "/bin/bash"))
+  (setq ;; tramp-use-ssh-controlmaster-options nil
+   ;; tramp-debug-buffer t
+   tramp-default-remote-shell "/bin/bash"
+   tramp-encoding-shell "/bin/bash"))
 
 (use-package zone-rainbow
   :ensure t)

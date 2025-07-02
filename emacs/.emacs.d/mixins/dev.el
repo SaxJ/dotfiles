@@ -93,7 +93,7 @@
   (interactive)
   (let* ((branch (car (vc-git-branches))))
     (if (and (string-match-p "[[:alpha:]]+-[[:digit:]]+" branch)
-             (not (s-contains-p (format "%s:" branch) (buffer-string))))
+             (not (s-contains-p "Merge" (buffer-string))))
         (progn
           (insert (format "%s: " branch))
           (evil-insert-state))
