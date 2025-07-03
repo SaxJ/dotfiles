@@ -257,10 +257,11 @@
     "ys" 'yeetube-search
     "yp" 'yeetube-mpv-toggle-pause)
 
-  (general-def 'normal 'yeetube-mode
-    "SPC" 'yeetube-play
+  (general-def 'normal 'yeetube-mode-map
+    "RET" 'yeetube-play
     "p" 'yeetube-mpv-toggle-pause
-    "v" 'yeetube-mpv-toggle-video)
+    "v" 'yeetube-mpv-toggle-video
+    "d" 'yeetube-download-video)
 
   (general-def 'normal 'magit-status-mode
     "b" 'forge-browse)

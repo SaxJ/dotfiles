@@ -62,6 +62,12 @@
   (let* ((pairs (timeclock-summarise--pair-entries)))
     (mapcar #'timeclock-summarise--parse-in-out-pair pairs)))
 
+(defun timeclock-summarise--entries-grouped (entries grouping)
+  "Parse the timelog file into durations grouped by 'day or 'project."
+  (cl-case grouping
+    ('day (seq-group-by (lambda (entry) (nth 1 entry)) entries))
+    ('project (seq-group-by (lambda (entry) (nth 0 entry)) entries))))
+
 (defun timeclock-summarise ()
   "Summarise timeclock and display the summary in a buffer."
   (interactive)
