@@ -11,7 +11,27 @@ local function open_log_file(mode)
   if vim.g.timelog_file ~= nil then
     log_file = vim.g.timelog_file
   end
+
   return io.open(log_file, mode)
+end
+
+local function get_unique_projects()
+  local file = open_log_file('r')
+  if file == nil then return {} end
+
+  local projects = {}
+  for line in file:lines() do
+    local io = string.match(line, "[io]")
+    if io == 'i' then
+      local cleaned, _ = string.gsub(line, "[%w%p]+", 3)
+      cleaned = vim.trim(cleaned)
+
+      table.insert(projects, cleaned)
+    end
+  end
+  file:close()
+
+  return funcs.table.unique(projects)
 end
 
 local function timeclock_in(note)
@@ -53,39 +73,45 @@ local function timeclock_out(note)
   end
 end
 
+local function timeclock_summary()
+  local f = open_log_file("r")
+
+  local lastEntry = nil
+  while true do
+    local line = f:read()
+    if line == nil then break end
+
+    local io = string.match(line, "[io]")
+    if io == 'i' then
+      local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
+      local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
+
+      local project, _ = string.gsub(line, "[%w%p]+", 3)
+      project = vim.trim(project)
+
+      lastEntry = { datetime = dateTable, project = project }
+    else
+    end
+  end
+end
+
 vim.api.nvim_create_user_command("ClockIn", function(args)
   timeclock_in(args['args'])
 end, {
   desc = "Clock in",
   nargs = 1,
-  complete = function()
-    local file = open_log_file("r")
-    local suggestions = {}
-    if file ~= nil then
-      local lines = {}
-      for line in file:lines() do
-        table.insert(lines, line)
-      end
-      file:close()
+  complete = get_unique_projects
+})
 
-      for _, line in ipairs(lines) do
-        local m = ""
-        for match in string.gmatch(line, "%a %d+/%d+/%d+ %d+:%d+:%d+ (.*)") do
-          m = funcs.string.trim(match)
-        end
-
-        if m ~= "" then
-          table.insert(suggestions, m)
-        end
-      end
-    end
-    return funcs.table.unique(suggestions)
-  end
+vim.api.nvim_create_user_command('ClockSummary', function()
+  timeclock_summary()
+end, {
+  desc = 'Summary of clocked times',
 })
 
 vim.api.nvim_create_user_command("ClockOut", function(args)
   timeclock_out(args['args'])
-end, { desc = "Clock out"})
+end, { desc = "Clock out" })
 
 vim.api.nvim_create_autocmd('VimLeavePre', {
   callback = function()

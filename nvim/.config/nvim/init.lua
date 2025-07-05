@@ -129,7 +129,7 @@ vim.g.scp_projects = {
   ["unicron"] = "/home/ubuntu/unicron",
 }
 
-vim.g.timelog_file = "/home/saxonj/.emacs.d/timelog"
+vim.g.timelog_file = "/home/saxonj/time/timelog"
 
 local get_project = function()
   local pwd = vim.uv.cwd() or ""
