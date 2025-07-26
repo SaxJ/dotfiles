@@ -77,6 +77,8 @@ local function timeclock_summary()
   local f = open_log_file("r")
 
   local lastEntry = nil
+  local daysSummary = {}
+
   while true do
     local line = f:read()
     if line == nil then break end
@@ -91,8 +93,31 @@ local function timeclock_summary()
 
       lastEntry = { datetime = dateTable, project = project }
     else
+      if lastEntry == nil then
+        error('Checkout with no corresponding checkin')
+      end
+
+      local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
+      local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
+
+      local lastDate = lastEntry['datetime']
+      local project = lastEntry['project']
+
+      local dayKey = string.format("%d/%d/%d", lastDate['day'], lastDate['month'], lastDate['year'])
+      if daysSummary[dayKey] == nil then
+        daysSummary[dayKey] = {}
+      end
+
+      if daysSummary[dayKey][project] == nil then
+        daysSummary[dayKey][project] = 0
+      end
+
+      local timeDifference = os.difftime(os.time(dateTable), os.time(lastDate))
+      daysSummary[dayKey][project] = daysSummary[dayKey][project] + math.abs(timeDifference)
     end
   end
+
+  return daysSummary
 end
 
 vim.api.nvim_create_user_command("ClockIn", function(args)
@@ -104,7 +129,10 @@ end, {
 })
 
 vim.api.nvim_create_user_command('ClockSummary', function()
-  timeclock_summary()
+  local summary = timeclock_summary()
+  local buf, _ = funcs.windows.open_split()
+
+  vim.api.nvim_buf_set_lines(buf, 0, -1, false, { vim.json.encode(summary) })
 end, {
   desc = 'Summary of clocked times',
 })

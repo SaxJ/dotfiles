@@ -1,7 +1,4 @@
-return {
-	"nvim-lualine/lualine.nvim",
-	dependencies = { "nvim-tree/nvim-web-devicons" },
-	config = function()
+
     local current_timelog = function ()
       local response = vim.system({'current_clock'}, {text = true}):wait()
       if response.code == 0 then
@@ -52,5 +49,3 @@ return {
 			inactive_winbar = {},
 			extensions = {},
 		})
-	end,
-}

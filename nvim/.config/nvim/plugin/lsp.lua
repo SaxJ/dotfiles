@@ -1,27 +1,3 @@
-return {
-
-  "neovim/nvim-lspconfig",
-  -- event = { "BufReadPre", "BufNewFile" },
-  dependencies = {
-    {
-      "folke/lazydev.nvim",
-      ft = "lua", -- only load on lua files
-      opts = {
-        library = {
-          -- See the configuration section for more details
-          -- Load luvit types when the `vim.uv` word is found
-          { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-        },
-      },
-    },
-    {
-      "Bilal2453/luvit-meta",
-      lazy = true,
-    },
-    'mason-org/mason-lspconfig.nvim',
-    "mason-org/mason.nvim",
-  },
-  config = function()
     local mason = require('mason')
     mason.setup()
     require("mason-lspconfig").setup({
@@ -123,5 +99,3 @@ return {
     nvim_lsp['hls'].setup({
       on_attach = on_attach
     })
-  end,
-}

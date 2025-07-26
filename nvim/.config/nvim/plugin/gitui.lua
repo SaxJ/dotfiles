@@ -1,6 +1,3 @@
-return {
-	"lewis6991/gitsigns.nvim",
-	config = function()
 		local gitsigns = require("gitsigns")
 		gitsigns.setup({
 			signs = {
@@ -41,5 +38,3 @@ return {
 				col = 1,
 			},
 		})
-	end,
-}

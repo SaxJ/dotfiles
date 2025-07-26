@@ -1,3 +1,37 @@
+vim.pack.add({
+  "https://github.com/Bilal2453/luvit-meta",
+  "https://github.com/MunifTanjim/nui.nvim",
+  "https://github.com/NeogitOrg/neogit",
+  "https://github.com/coffebar/transfer.nvim",
+  "https://github.com/folke/lazydev.nvim",
+  "https://github.com/folke/trouble.nvim",
+  "https://github.com/ibhagwan/fzf-lua",
+  "https://github.com/ibhagwan/fzf-lua",
+  "https://github.com/ii14/neorepl.nvim",
+  "https://github.com/jellydn/hurl.nvim",
+  "https://github.com/kylechui/nvim-surround",
+  "https://github.com/lewis6991/gitsigns.nvim",
+  "https://github.com/manuuurino/autoread.nvim",
+  "https://github.com/mason-org/mason.nvim",
+  "https://github.com/neovim/nvim-lspconfig",
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-lua/plenary.nvim",
+  "https://github.com/nvim-lualine/lualine.nvim",
+  "https://github.com/nvim-orgmode/orgmode",
+  "https://github.com/nvim-tree/nvim-web-devicons",
+  "https://github.com/nvim-treesitter/nvim-treesitter",
+  "https://github.com/waiting-for-dev/ergoterm.nvim",
+  "https://github.com/sindrets/diffview.nvim",
+  "https://github.com/stevearc/conform.nvim",
+  "https://github.com/tiagovla/tokyodark.nvim",
+  "https://github.com/yochem/jq-playground.nvim",
+  'https://github.com/echasnovski/mini.nvim',
+  'https://github.com/fredeeb/tardis.nvim',
+  'https://github.com/mason-org/mason-lspconfig.nvim',
+  'https://github.com/saghen/blink.cmp',
+  'https://github.com/windwp/nvim-autopairs',
+})
+
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "grn")
 vim.keymap.del("n", "gra")
@@ -7,7 +41,7 @@ local funcs = require("functions")
 
 require("jira")
 require("timelog")
-local Terminal = require('terminal')
+require('terminal')
 
 local o = vim.opt
 
@@ -41,6 +75,7 @@ o.autoread = true
 o.updatetime = 500
 o.completeopt = { "menuone", "noselect", "noinsert" }
 o.shortmess:append "c"
+o.exrc = true
 
 vim.diagnostic.config({
   virtual_text = false,
@@ -55,50 +90,11 @@ vim.diagnostic.config({
   },
 })
 
--- Bootstrap lazy.nvim
-local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
-if not (vim.uv or vim.loop).fs_stat(lazypath) then
-  local lazyrepo = "https://github.com/folke/lazy.nvim.git"
-  local out = vim.fn.system({ "git", "clone", "--filter=blob:none", "--branch=stable", lazyrepo, lazypath })
-  if vim.v.shell_error ~= 0 then
-    vim.api.nvim_echo({
-      { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out,                            "WarningMsg" },
-      { "\nPress any key to exit..." },
-    }, true, {})
-    vim.fn.getchar()
-    os.exit(1)
-  end
-end
-vim.opt.rtp:prepend(lazypath)
-
 -- Make sure to setup `mapleader` and `maplocalleader` before
 -- loading lazy.nvim so that mappings are correct.
 -- This is also a good place to setup other settings (vim.opt)
 vim.g.mapleader = " "
 vim.g.maplocalleader = ","
-
--- Setup lazy.nvim
-require("lazy").setup({
-  spec = {
-    { import = "plugins" },
-
-    -- optional for icons
-    { "nvim-tree/nvim-web-devicons" },
-    { "danymat/neogen",             config = true },
-    { "ii14/neorepl.nvim" },
-    {
-      'windwp/nvim-autopairs',
-      event = "InsertEnter",
-      config = true
-    }
-  },
-  -- Configure any other settings here. See the documentation for more details.
-  -- colorscheme that will be used when installing plugins.
-  install = { colorscheme = { "habamax" } },
-  -- automatically check for plugin updates
-  checker = { enabled = true },
-})
 
 -- Attach LSP keybinds
 vim.api.nvim_create_autocmd("LspAttach", {
@@ -207,7 +203,7 @@ end, { desc = "Format Buffer" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
-vim.keymap.set("n", "<leader>fY", function ()
+vim.keymap.set("n", "<leader>fY", function()
   vim.cmd('let @+ = expand("%")')
   print("Yanked file name.")
 end, { desc = "Yank Name" })

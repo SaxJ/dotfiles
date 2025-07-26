@@ -46,13 +46,13 @@
     (list date encoded-time note)))
 
 (defun timeclock-summarise--parse-in-out-pair (pair)
-  "Takes a (in . out) cons cell and produces (project day duration-secs)."
+  "Takes a (in . out) cons cell and produces (project day duration-secs in-datetime out-datetime)."
   (let* ((in (timeclock-summarise--get-encoded-time (car pair)))
          (out (timeclock-summarise--get-encoded-time (cdr pair)))
          (date (nth 0 in))
          (project (nth 2 in))
          (duration (float-time (time-subtract (nth 1 out) (nth 1 in)))))
-    (list project date duration)))
+    (list project date duration (nth 1 in) (nth 1 out))))
 
 (defun timeclock-summarise--timelog-file-to-durations ()
   "Parse the timelog file into a list of durations."
