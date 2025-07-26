@@ -30,6 +30,7 @@ vim.pack.add({
   'https://github.com/mason-org/mason-lspconfig.nvim',
   'https://github.com/saghen/blink.cmp',
   'https://github.com/windwp/nvim-autopairs',
+  'https://github.com/stevearc/oil.nvim',
 })
 
 vim.keymap.del("n", "grr")
@@ -38,10 +39,6 @@ vim.keymap.del("n", "gra")
 vim.keymap.del("n", "gri")
 
 local funcs = require("functions")
-
-require("jira")
-require("timelog")
-require('terminal')
 
 local o = vim.opt
 
@@ -64,8 +61,7 @@ o.ttimeoutlen = 0           -- The time in milliseconds that is waited for a key
 o.wildmenu = true           -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 o.showcmd = true            -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 o.showmatch = true          -- When a bracket is inserted, briefly jump to the matching one.
-o.inccommand =
-"split"                     -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
+o.inccommand = "split"                     -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
 o.splitright = true
 o.splitbelow = true         -- When on, splitting a window will put the new window below the current one
 o.termguicolors = true
@@ -118,59 +114,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
   end,
 })
 
--- SCP Functions
-vim.g.scp_projects = {
-  ["megatron"] = "/home/ubuntu/megatron",
-  ["hannibal"] = "/home/ubuntu/hannibal",
-  ["unicron"] = "/home/ubuntu/unicron",
-}
-
 vim.g.timelog_file = "/home/saxonj/time/timelog"
-
-local get_project = function()
-  local pwd = vim.uv.cwd() or ""
-  return vim.fn.fnamemodify(pwd, ":t")
-end
-
-local scp_on_exit = function()
-  vim.notify("SCP transfer complete", vim.log.levels.INFO)
-end
-
-local scp_upload = function()
-  local project = get_project()
-  local remote_path = vim.g.scp_projects[project]
-  if remote_path == nil then
-    vim.notify("Project not configured for SCP", vim.log.levels.ERROR)
-    return
-  end
-
-  local local_relative_filename = vim.fn.expand("%:p:.")
-  local scp_cmd = {
-    "scp",
-    local_relative_filename,
-    string.format("ubuntu@minikube:%s/%s", remote_path, local_relative_filename),
-  }
-
-  vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
-end
-
-local scp_download = function()
-  local project = get_project()
-  local remote_path = vim.g.scp_projects[project]
-  if remote_path == nil then
-    vim.notify("Project not configured for SCP", vim.log.levels.ERROR)
-    return
-  end
-
-  local local_relative_filename = vim.fn.expand("%:p:.")
-  local scp_cmd = {
-    "scp",
-    string.format("ubuntu@minikube:%s/%s", remote_path, local_relative_filename),
-    local_relative_filename,
-  }
-
-  vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
-end
 
 -- terminal
 vim.keymap.set("t", "<Esc>", "<C-\\><C-n>")
@@ -191,8 +135,11 @@ end, { desc = "Open Link" })
 vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
-vim.keymap.set('n', '<leader>-', ':Explore<CR>', { desc = 'File browser' })
-vim.keymap.set('n', '<leader>.', ":FzfLua files cwd=expand('%:p')<CR>", { desc = "Siblings" })
+vim.keymap.set('n', '<leader>-', ':Oil<CR>', { desc = 'File browser' })
+vim.keymap.set('n', '<leader>.', function ()
+  local cwd = vim.fn.expand('%:p:h')
+  vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
+end, { desc = "Siblings" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
@@ -221,8 +168,8 @@ vim.keymap.set("n", "<leader>pt", ":VTerm<CR>i", { desc = "Project Terminal" })
 
 -- remote
 vim.keymap.set("n", "<leader>r", "", { desc = "+remote" })
-vim.keymap.set("n", "<leader>ru", scp_upload, { desc = "Upload" })
-vim.keymap.set("n", "<leader>rd", scp_download, { desc = "Download" })
+vim.keymap.set("n", "<leader>ru", ":ScpUpload<CR>", { desc = "Upload" })
+vim.keymap.set("n", "<leader>rd", ":ScpDownload<CR>", { desc = "Download" })
 
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
@@ -255,7 +202,7 @@ function Diag_if_no_float()
 end
 
 vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
-vim.api.nvim_create_autocmd({ "CursorHold" }, {
+vim.api.nvim_create_autocmd("CursorHold", {
   pattern = "*",
   callback = Diag_if_no_float,
 })
