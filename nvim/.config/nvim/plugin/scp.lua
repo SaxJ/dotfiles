@@ -49,5 +49,5 @@ local scp_download = function()
   vim.system(scp_cmd, nil, vim.schedule_wrap(scp_on_exit))
 end
 
-vim.api.nvim_create_user_command('ScpUpload', scp_upload, {desc = 'Upload file to corresponding project'})
-vim.api.nvim_create_user_command('ScpDownload', scp_download, {desc = 'Upload file to corresponding project'})
+vim.api.nvim_create_user_command('ScpUpload', scp_upload, { desc = 'Upload file to corresponding project' })
+vim.api.nvim_create_user_command('ScpDownload', scp_download, { desc = 'Upload file to corresponding project' })

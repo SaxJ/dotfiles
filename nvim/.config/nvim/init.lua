@@ -2,10 +2,7 @@ vim.pack.add({
   "https://github.com/Bilal2453/luvit-meta",
   "https://github.com/MunifTanjim/nui.nvim",
   "https://github.com/NeogitOrg/neogit",
-  "https://github.com/coffebar/transfer.nvim",
-  "https://github.com/folke/lazydev.nvim",
   "https://github.com/folke/trouble.nvim",
-  "https://github.com/ibhagwan/fzf-lua",
   "https://github.com/ibhagwan/fzf-lua",
   "https://github.com/ii14/neorepl.nvim",
   "https://github.com/jellydn/hurl.nvim",
@@ -15,12 +12,10 @@ vim.pack.add({
   "https://github.com/mason-org/mason.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nvim-lua/plenary.nvim",
-  "https://github.com/nvim-lua/plenary.nvim",
   "https://github.com/nvim-lualine/lualine.nvim",
   "https://github.com/nvim-orgmode/orgmode",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/waiting-for-dev/ergoterm.nvim",
   "https://github.com/sindrets/diffview.nvim",
   "https://github.com/stevearc/conform.nvim",
   "https://github.com/tiagovla/tokyodark.nvim",
@@ -32,6 +27,14 @@ vim.pack.add({
   'https://github.com/windwp/nvim-autopairs',
   'https://github.com/stevearc/oil.nvim',
 })
+
+require("nvim-surround").setup({})
+require('tardis-nvim').setup({})
+require("nvim-surround").setup({})
+require('trouble').setup({})
+vim.cmd("colorscheme tokyodark")
+require("nvim-autopairs").setup({})
+require('neogit').setup({ graph_style = 'kitty' })
 
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "grn")
@@ -61,7 +64,8 @@ o.ttimeoutlen = 0           -- The time in milliseconds that is waited for a key
 o.wildmenu = true           -- When 'wildmenu' is on, command-line completion operates in an enhanced mode.
 o.showcmd = true            -- Show (partial) command in the last line of the screen. Set this option off if your terminal is slow.
 o.showmatch = true          -- When a bracket is inserted, briefly jump to the matching one.
-o.inccommand = "split"                     -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
+o.inccommand =
+"split"                     -- When nonempty, shows the effects of :substitute, :smagic, :snomagic and user commands with the :command-preview flag as you type.
 o.splitright = true
 o.splitbelow = true         -- When on, splitting a window will put the new window below the current one
 o.termguicolors = true
@@ -136,7 +140,7 @@ vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
 vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Oil<CR>', { desc = 'File browser' })
-vim.keymap.set('n', '<leader>.', function ()
+vim.keymap.set('n', '<leader>.', function()
   local cwd = vim.fn.expand('%:p:h')
   vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
 end, { desc = "Siblings" })
@@ -147,6 +151,15 @@ vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
+vim.keymap.set('n', '<leader>bt', function()
+  require('fzf-lua').buffers({
+    opts = {
+      filter = function(b)
+        return b ~= require('fzf-lua.core').CTX().bufnr and not require("fzf-lua.utils").is_term_buffer(b)
+      end
+    }
+  })
+end, { desc = "Terminal buffers" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
