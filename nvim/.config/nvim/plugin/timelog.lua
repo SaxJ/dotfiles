@@ -23,10 +23,12 @@ local function get_unique_projects()
   for line in file:lines() do
     local io = string.match(line, "[io]")
     if io == 'i' then
-      local cleaned, _ = string.gsub(line, "[%w%p]+", 3)
+      local cleaned, _ = string.gsub(line, "[io] %d+/%d+/%d+ %d+:%d+:%d+", "")
       cleaned = vim.trim(cleaned)
 
-      table.insert(projects, cleaned)
+      if cleaned ~= "" then
+        table.insert(projects, cleaned)
+      end
     end
   end
   file:close()
