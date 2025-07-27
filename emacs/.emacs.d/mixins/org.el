@@ -373,3 +373,10 @@
 (use-package dslide
   :ensure t
   :after org)
+
+(use-package denote
+  :ensure t
+  :config
+  (setq denote-directory (expand-file-name "~/Documents/wiki/notes/")
+        denote-save-buffers t)
+  (denote-rename-buffer-mode 1))

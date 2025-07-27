@@ -14,8 +14,8 @@
  '(mu4e-search-results-limit -1)
  '(package-selected-packages
    '(apheleia avy build cape casual chezmoi confluence-markup-mode
-              corfu-terminal csproj-mode csv-mode dslide dune eat
-              ef-themes eglot-fsharp elm-mode embark-consult
+              corfu-terminal csproj-mode csv-mode denote dslide dune
+              eat ef-themes eglot-fsharp elm-mode embark-consult
               evil-collection evil-commentary evil-org evil-surround
               forge general git-timemachine graphql-ts-mode
               graphviz-dot-mode haskell-mode helm-org httprepl
