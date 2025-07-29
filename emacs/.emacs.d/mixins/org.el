@@ -285,9 +285,9 @@
   (setq org-refile-use-outline-path 'file)
 
   (setq org-capture-templates
-        '(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
+        `(("t" "Todo" entry (file "todo.org") "* TODO [#%^{A|B|C}] %? %t")
           ("s" "Slack" entry (file "inbox.org") "* %?\n%i\n%a\n%U" :kill-buffer t)
-          ("j" "Journal" entry (file+olp+datetree "journal.org") "* %<%l:%M %p>\n%i%?")
+          ("j" "Journal" entry (file+olp+datetree "journal.org") "**** %U\n%?" :kill-buffer t)
           ("w" "Work" entry (file "todo.org") "* TODO [#%^{A|B|C}] %^{JiraIssueKey}p")
           ("f" "File Context" entry (file+headline "notes.org" "Working notes") "** [[%L][%(saxon/project-relative-file-name \"%F\")]] %^{prompt}\n%?")))
 
