@@ -15,7 +15,12 @@ org.setup({
   },
   org_capture_templates = {
     t = { description = "Todo", target = "~/Documents/wiki/todo.org", template = "* TODO [#%^{A|B|C}] %? %t" },
-    j = { description = "Journal", target = "~/Documents/wiki/journal.org", template = "\n*** %<%Y-%m-%d> %<%A>\n**** %U\n\n%?" },
+    j = {
+      description = "Journal",
+      target = "~/Documents/wiki/journal.org",
+      template = "%?",
+      datetree = true
+    },
     f = { description = "File Context", template = "** %^{header}\n*** %a\n%?", headline = "Working notes" },
   },
   mappings = {
