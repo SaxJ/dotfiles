@@ -43,7 +43,7 @@
          (note (nth 8 matches))
          (encoded-time (encode-time (list secs minute hour day month year nil -1 nil)))
          (date (format "%d-%d-%d" year month day)))
-    (list date encoded-time note)))
+    (list date encoded-time note (format "%d:%d" hour minute))))
 
 (defun timeclock-summarise--parse-in-out-pair (pair)
   "Takes a (in . out) cons cell and produces (project day duration-secs in-datetime out-datetime)."
@@ -52,21 +52,45 @@
          (date (nth 0 in))
          (project (nth 2 in))
          (duration (float-time (time-subtract (nth 1 out) (nth 1 in)))))
-    (list project date duration (nth 1 in) (nth 1 out))))
+    (list project date duration (nth 1 in) (nth 1 out) (nth 3 in) (nth 3 out))))
 
 (defun timeclock-summarise--timelog-file-to-durations ()
   "Parse the timelog file into a list of durations."
   (let* ((pairs (timeclock-summarise--pair-entries)))
     (mapcar #'timeclock-summarise--parse-in-out-pair pairs)))
 
-(defun timeclock-summarise--entries-grouped (entries grouping)
+(defun timeclock-summarise--entries-grouped (grouping)
   "Parse the timelog file into durations grouped by 'day or 'project."
-  (cl-case grouping
-    ('day (seq-group-by (lambda (entry) (nth 1 entry)) entries))
-    ('project (seq-group-by (lambda (entry) (nth 0 entry)) entries))))
+  (let* ((entries (timeclock-summarise--timelog-file-to-durations)))
+    (cl-case grouping
+      (day (seq-group-by (lambda (entry) (nth 1 entry)) entries))
+      (project (seq-group-by (lambda (entry) (nth 0 entry)) entries)))))
 
 (defun timeclock-summarise ()
   "Summarise timeclock and display the summary in a buffer."
   (interactive)
-  (with-current-buffer (get-buffer-create "*timelog-summary*")
-    (org-mode)))
+  (let* ((groups (timeclock-summarise--entries-grouped 'project)))
+    (with-current-buffer (get-buffer-create "*timelog-summary*")
+      (org-mode)
+      (cl-dolist (group groups)
+        (let* ((project (car group))
+               (entries (cdr group)))
+          (progn
+            (insert (format "* %s\n:TIMELOG:\n" project))
+            ;; (insert (format (with-output-to-string (print entries))))
+            (cl-dolist (entry entries)
+              (let* ((duration (nth 2 entry))
+                     (hours (/ duration 6000))
+                     (minutes (/ (mod duration 6000) 1000))
+                     (date (nth 1 entry))
+                     (in-time (nth 5 entry))
+                     (out-time (nth 6 entry)))
+                (insert (format
+                         "CLOCK: [%s %s]--[%s %s] =>  %d:%d\n"
+                         date
+                         in-time
+                         date
+                         out-time
+                         hours
+                         minutes))))
+            (insert ":END:\n")))))))
