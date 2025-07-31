@@ -1,7 +1,7 @@
 -- Setup orgmode
 local org = require("orgmode")
 org.setup({
-  org_agenda_files = "~/Documents/wiki/**/*",
+  org_agenda_files = "~/Documents/wiki/**/*.org",
   org_default_notes_file = "~/Documents/wiki/notes.org",
   org_todo_keywords = { "TODO(t!)", "PROG(p!)", "BLOCKED(b!)", "HOLD(h!)", "REVIEW(r!)", "|", "DONE(d!)" },
   org_todo_keyword_faces = {

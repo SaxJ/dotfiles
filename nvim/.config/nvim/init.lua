@@ -145,6 +145,9 @@ vim.keymap.set('n', '<leader>.', function()
   vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
 end, { desc = "Siblings" })
 
+vim.keymap.set('n', '<leader>qq', ':qa<CR>', { desc = "Quit" })
+vim.keymap.set('n', '<leader>qr', ':restart<CR>', { desc = "Restart" })
+
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
 vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<CR>", { desc = "Buffers" })
