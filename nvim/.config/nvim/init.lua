@@ -144,8 +144,17 @@ vim.keymap.set('n', '<leader>.', function()
   vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
 end, { desc = "Siblings" })
 
+-- quitting
+vim.keymap.set('n', '<leader>q', '', { desc = "+Quitting" })
 vim.keymap.set('n', '<leader>qq', ':qa<CR>', { desc = "Quit" })
 vim.keymap.set('n', '<leader>qr', ':restart<CR>', { desc = "Restart" })
+
+-- tabs
+vim.keymap.set('n', '<leader><tab>', '', { desc = '+Tabs' })
+vim.keymap.set('n', '<leader><tab>c', ':tabclose<CR>', { desc = 'Close' })
+vim.keymap.set('n', '<leader><tab>o', ':tabnew<CR>', { desc = 'Open' })
+vim.keymap.set('n', '<leader><tab>n', ':tabnext<CR>', { desc = 'Next' })
+vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
