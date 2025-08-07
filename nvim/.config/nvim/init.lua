@@ -24,6 +24,7 @@ vim.pack.add({
   'https://github.com/stevearc/oil.nvim',
   "https://github.com/brianaung/compl.nvim",
   "https://github.com/brianhuster/unnest.nvim",
+  "https://codeberg.org/historia/simple-denote.nvim",
 })
 
 require("nvim-surround").setup({})
@@ -34,11 +35,16 @@ vim.cmd("colorscheme tokyodark")
 require("nvim-autopairs").setup({})
 require('neogit').setup({ graph_style = 'kitty' })
 require('compl').setup({})
+require('simple-denote').setup({
+  ext = "org",
+  dir = "~/Documents/wiki/notes/"
+})
 
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "grn")
 vim.keymap.del("n", "gra")
 vim.keymap.del("n", "gri")
+vim.keymap.del("n", "grt")
 
 local funcs = require("functions")
 
