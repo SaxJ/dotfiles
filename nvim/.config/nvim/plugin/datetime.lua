@@ -1,0 +1,5 @@
+vim.api.nvim_create_user_command("UnixTimestampAtPoint", function()
+  local timestamp = vim.fn.expand("<cword>")
+  local date = vim.fn.system(string.format("date --date='@%s'", timestamp))
+  print(date)
+end, { desc = "Display the datetime of the unix timestamp at the cursor." })
