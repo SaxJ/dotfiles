@@ -4,6 +4,11 @@
     (eglot-shutdown-all)
     (eglot)))
 
+(defun saxon/timestamp-at-point ()
+  (interactive)
+  (let* ((word (word-at-point)))
+    (message (shell-command-to-string (format "date '--date=@%s'" word)))))
+
 (defun saxon/rename-file (new-name &optional force-p)
   (interactive
    (list (read-file-name "Rename to: ")

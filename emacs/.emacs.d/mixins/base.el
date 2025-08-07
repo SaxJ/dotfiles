@@ -178,7 +178,6 @@
                              (:eval (mu4e--modeline-string))
                              ""
                              display-time-string
-                             emms-playing-time-string
                              (:eval mu4e-alert-mode-line)))
 
   ;; WIP

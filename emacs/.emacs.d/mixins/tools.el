@@ -87,12 +87,6 @@
 (use-package graphviz-dot-mode
   :ensure t)
 
-(use-package emms
-  :config
-  (emms-minimalistic)
-  (setq emms-player-list '(emms-player-mpv)
-        emms-info-functions '(emms-info-native)))
-
 (use-package soundcloud
   :ensure t)
 

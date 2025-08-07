@@ -20,7 +20,7 @@
               forge general git-timemachine graphql-ts-mode
               graphviz-dot-mode haskell-mode helm-org hurl-mode jira
               jiralib2 jq-mode json-mode kubernetes-evil lastfm
-              marginalia mood-line mpris mu4e-alert multi-vterm
+              marginalia mingus mood-line mpris mu4e-alert multi-vterm
               nerd-icons-corfu nvm orderless org-modern org-music
               org-ql org-roam origami otpp plz popper pr-review
               prescient prodigy rainbow-mode soundcloud
