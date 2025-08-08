@@ -237,3 +237,8 @@
   :config
   (setq todotxt-file "~/time/todo.txt")
   (add-hook 'todotxt-mode-hook #'evil-emacs-state))
+
+(use-package dired-preview
+  :ensure t
+  :config
+  (dired-preview-global-mode))
