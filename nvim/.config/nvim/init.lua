@@ -120,6 +120,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
 
     vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", { desc = "Restart LS" })
+
+    vim.keymap.set('i', '<C-Space>', vim.lsp.buf.completion, { desc = 'Force complete' })
   end,
 })
 
