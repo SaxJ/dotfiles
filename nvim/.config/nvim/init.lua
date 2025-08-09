@@ -170,15 +170,6 @@ vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
-vim.keymap.set('n', '<leader>bt', function()
-  require('fzf-lua').buffers({
-    opts = {
-      filter = function(b)
-        return b ~= require('fzf-lua.core').CTX().bufnr and not require("fzf-lua.utils").is_term_buffer(b)
-      end
-    }
-  })
-end, { desc = "Terminal buffers" })
 
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
