@@ -244,31 +244,37 @@
    :override t
    '((ERROR) @php-ts-mode--fontify-error)))
 
+(defun hurl-ts-mode--setup-ts ()
+  "Setup treesitter stuff for hurl-ts-mode"
+
+  (setq-local treesit-font-lock-settings
+              (append (hurl-ts-mode--font-lock-settings)))
+
+  ;; (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
+  ;; (setq-local treesit-simple-indent-rules hurl-ts-mode--indent-rules)
+  (treesit-major-mode-setup))
+
 ;;;###autoload
 (define-derived-mode hurl-ts-mode prog-mode "Hurl"
   "Major mode for editing hurl, powered by tree-sitter"
   (if (not (and
-            (treesit-ready-p 'json)
-            (treesit-ready-p 'graphql)
-            (treesit-ready-p 'hurl)
-            (treesit-ready-p 'html)))
+            ;; (treesit-ready-p 'json)
+            ;; (treesit-ready-p 'graphql)
+            ;; (treesit-ready-p 'html)
+            (treesit-ready-p 'hurl)))
       (error "Required tree-sitter grammars are not available")
 
-    (treesit-parser-create 'html)
-    (treesit-parser-create 'graphql)
-    (treesit-parser-create 'json)
+    (treesit-parser-create 'hurl)
+    ;; (treesit-parser-create 'html)
+    ;; (treesit-parser-create 'graphql)
+    ;; (treesit-parser-create 'json)
+    (setq-local treesit-primary-parser (treesit-parser-create 'hurl))
 
     ;; define injected ranges
     ;; <here>
 
-    (setq-local treesit-font-lock-settings
-                (append (hurl-ts-mode--font-lock-settings)
-                        json-ts-mode--font-lock-settings))
-    (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
-
     ;; initialise the hurl grammar itself
-    (setq-local treesit-primary-parser (treesit-parser-create 'hurl))
-    (treesit-major-mode-setup)))
+    (hurl-ts-mode--setup-ts)))
 
 (provide 'hurl-ts-mode)
 
