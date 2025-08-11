@@ -1,7 +1,6 @@
 vim.pack.add({
   "https://github.com/NeogitOrg/neogit",
   "https://github.com/folke/trouble.nvim",
-  "https://github.com/ibhagwan/fzf-lua",
   "https://github.com/ii14/neorepl.nvim",
   "https://github.com/kylechui/nvim-surround",
   "https://github.com/lewis6991/gitsigns.nvim",
@@ -27,13 +26,20 @@ vim.pack.add({
   "https://codeberg.org/historia/simple-denote.nvim",
 })
 
+require('mini.pick').setup()
 require("nvim-surround").setup({})
 require('tardis-nvim').setup({})
 require("nvim-surround").setup({})
 require('trouble').setup({})
 vim.cmd("colorscheme tokyodark")
 require("nvim-autopairs").setup({})
-require('neogit').setup({ graph_style = 'kitty' })
+require('neogit').setup({
+  graph_style = 'kitty',
+  integrations = {
+    diffview = true,
+    mini_pick = true,
+  }
+})
 require('compl').setup({})
 require('simple-denote').setup({
   ext = "org",
@@ -143,14 +149,14 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open Link" })
 
 -- general
-vim.keymap.set("n", "<leader>/", ":FzfLua live_grep<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", ":FzfLua live_grep<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader><leader>", ":FzfLua files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", ":Pick grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Oil<CR>', { desc = 'File browser' })
-vim.keymap.set('n', '<leader>.', function()
-  local cwd = vim.fn.expand('%:p:h')
-  vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
-end, { desc = "Siblings" })
+-- vim.keymap.set('n', '<leader>.', function()
+--   local cwd = vim.fn.expand('%:p:h')
+--   vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
+-- end, { desc = "Siblings" })
 
 -- quitting
 vim.keymap.set('n', '<leader>q', '', { desc = "+Quitting" })
@@ -166,7 +172,7 @@ vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", ":FzfLua buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", ":Pick buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
@@ -181,7 +187,7 @@ end, { desc = "Yank Name" })
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Git Status" })
-vim.keymap.set("n", "<leader>gd", ":FzfLua git_diff<CR>", { desc = "Git Status" })
+-- vim.keymap.set("n", "<leader>gd", ":FzfLua git_diff<CR>", { desc = "Git Status" })
 vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
