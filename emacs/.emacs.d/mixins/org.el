@@ -3,6 +3,7 @@
 ;;;   Critical variables
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(server-start)
 (require 'org-protocol)
 
 (defun saxon/jira-status-to-org-status (jira-status)

@@ -145,7 +145,6 @@
       tab-bar-tab-hints t)
 
 (add-hook 'after-init-hook 'saxon/add-to-work-log)
-(add-hook 'after-init-hook 'server-start)
 
 (add-to-list 'display-buffer-alist
              '("\\`\\*\\(Warnings\\|Compile-Log\\)\\*\\'"
