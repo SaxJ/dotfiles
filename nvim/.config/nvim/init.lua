@@ -21,12 +21,22 @@ vim.pack.add({
   'https://github.com/mason-org/mason-lspconfig.nvim',
   'https://github.com/windwp/nvim-autopairs',
   'https://github.com/stevearc/oil.nvim',
-  "https://github.com/brianaung/compl.nvim",
+  "https://github.com/saghen/blink.cmp",
   "https://github.com/brianhuster/unnest.nvim",
   "https://codeberg.org/historia/simple-denote.nvim",
+  "https://github.com/folke/lazydev.nvim",
+  "https://github.com/folke/snacks.nvim",
+})
+Snacks.setup({
+  picker = {
+    enabled = true,
+    sources = {
+      files = { hidden = true }
+    }
+  }
 })
 
-require('mini.pick').setup()
+require('lazydev').setup()
 require("nvim-surround").setup({})
 require('tardis-nvim').setup({})
 require("nvim-surround").setup({})
@@ -37,14 +47,14 @@ require('neogit').setup({
   graph_style = 'kitty',
   integrations = {
     diffview = true,
-    mini_pick = true,
+    snacks = true,
   }
 })
-require('compl').setup({})
 require('simple-denote').setup({
   ext = "org",
   dir = "~/Documents/wiki/notes/"
 })
+
 
 vim.keymap.del("n", "grr")
 vim.keymap.del("n", "grn")
@@ -126,8 +136,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
 
     vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", { desc = "Restart LS" })
-
-    vim.keymap.set('i', '<C-Space>', vim.lsp.buf.completion, { desc = 'Force complete' })
   end,
 })
 
@@ -149,14 +157,14 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open Link" })
 
 -- general
-vim.keymap.set("n", "<leader>/", ":Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", ":Pick grep_live<CR>", { desc = "Grep" })
-vim.keymap.set("n", "<leader><leader>", ":Pick files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
+vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Oil<CR>', { desc = 'File browser' })
--- vim.keymap.set('n', '<leader>.', function()
---   local cwd = vim.fn.expand('%:p:h')
---   vim.cmd(string.format("FzfLua files cwd='%s'", cwd))
--- end, { desc = "Siblings" })
+vim.keymap.set('n', '<leader>.', function()
+  local cwd = vim.fn.expand('%:p:h')
+  Snacks.picker.files({ cwd = cwd })
+end, { desc = "Siblings" })
 
 -- quitting
 vim.keymap.set('n', '<leader>q', '', { desc = "+Quitting" })
@@ -172,7 +180,7 @@ vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", ":Pick buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
