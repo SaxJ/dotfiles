@@ -195,10 +195,9 @@
     "sp" 'consult-ripgrep
 
     ;; music
-    "mn" 'emms-next
-    "mp" 'emms-previous
-    "mt" 'emms-pause
-    "ms" 'emms-show
+    "mn" 'mpd-next
+    "mp" 'mpd-prev
+    "mt" 'mpd-pause
 
     ;; notes
     "nj" 'org-journal-new-entry
