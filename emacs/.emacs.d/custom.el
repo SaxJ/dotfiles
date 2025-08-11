@@ -21,7 +21,7 @@
               graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
               httprepl hurl-mode jira jiralib2 jq-mode js-doc
               json-mode kubernetes-evil lastfm marginalia mingus
-              mood-line mpris mu4e-alert mu4easy multi-vterm
+              mood-line mpdel mpris mu4e-alert mu4easy multi-vterm
               nerd-icons-corfu nvm ordered-set orderless org-modern
               org-music org-ql org-roam origami otpp pocket-reader
               popper pr-review prescient prodigy rainbow-mode
