@@ -244,4 +244,6 @@
   (dired-preview-global-mode))
 
 (use-package mpdel
-  :ensure t)
+  :ensure t
+  :config
+  (mpdel-mode))

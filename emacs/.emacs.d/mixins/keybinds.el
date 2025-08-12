@@ -195,6 +195,7 @@
     "sp" 'consult-ripgrep
 
     ;; music
+    "mm" 'mpdel-browser-open
     "mn" 'mpd-next
     "mp" 'mpd-prev
     "mt" 'mpd-pause
