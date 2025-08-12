@@ -27,7 +27,7 @@ vim.pack.add({
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/folke/snacks.nvim",
 })
-Snacks.setup({
+require('snacks').setup({
   picker = {
     enabled = true,
     sources = {
@@ -124,7 +124,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = event.buf })
     vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
     vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, { desc = "Goto implementation", buffer = event.buf })
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
+      { desc = "Goto implementation", buffer = event.buf })
     vim.keymap.set(
       "n",
       "gr",
@@ -188,7 +189,7 @@ end, { desc = "Format Buffer" })
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
 vim.keymap.set("n", "<leader>fY", function()
-  vim.cmd('let @+ = expand("%")')
+  vim.cmd('let @+ = expand("%:.")')
   print("Yanked file name.")
 end, { desc = "Yank Name" })
 
@@ -260,7 +261,8 @@ end, {
   complete = function(lead, _, _)
     vim.fn.printf(lead)
     local branches = vim.system(
-          { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format("*%s*", lead) },
+          { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format(
+            "*%s*", lead) },
           { text = true })
         :wait()
     if branches.code == 0 then
