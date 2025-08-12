@@ -1,1 +1,1 @@
-export HELIX_RUNTIME=~/Documents/helix/runtime
+#export HELIX_RUNTIME=~/Documents/helix/runtime
