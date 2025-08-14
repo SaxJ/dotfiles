@@ -26,6 +26,7 @@ vim.pack.add({
   "https://codeberg.org/historia/simple-denote.nvim",
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/folke/snacks.nvim",
+  "https://github.com/chomosuke/term-edit.nvim",
 })
 require('snacks').setup({
   picker = {
@@ -39,6 +40,9 @@ require('snacks').setup({
   }
 })
 
+require('term-edit').setup({
+  prompt_end = "%$ "
+})
 require('lazydev').setup()
 require("nvim-surround").setup({})
 require('tardis-nvim').setup({})
