@@ -43,9 +43,12 @@ require("lspconfig").lua_ls.setup({
 nvim_lsp["intelephense"].setup({
   settings = {
     intelephense = {
+      telemetry = {
+        enabled = false,
+      },
       environment = {
         phpVersion = "8.3.0"
-      }
+      },
     }
   }
 })

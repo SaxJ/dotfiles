@@ -76,11 +76,6 @@
   :ensure t
   :after kubernetes)
 
-;; (use-package kubel
-;;   :after vterm
-;;   :ensure t
-;;   :config (kubel-vterm-setup))
-
 (use-package chezmoi
   :ensure t)
 
@@ -231,12 +226,6 @@
   :ensure nil
   :config
   (setq timeclock-file "~/time/timelog"))
-
-(use-package todotxt
-  :ensure t
-  :config
-  (setq todotxt-file "~/time/todo.txt")
-  (add-hook 'todotxt-mode-hook #'evil-emacs-state))
 
 (use-package dired-preview
   :ensure t

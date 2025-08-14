@@ -32,7 +32,10 @@ require('snacks').setup({
     enabled = true,
     sources = {
       files = { hidden = true }
-    }
+    },
+  },
+  terminal = {
+    enabled = true,
   }
 })
 
@@ -186,6 +189,10 @@ vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
 
+-- time tracking
+vim.keymap.set("n", "<leader>t", "", { desc = "+time" })
+vim.keymap.set("n", "<leader>tt", ":tabnew ~/Documents/wiki/time.org<CR>", { desc = "Clocking" })
+
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
 vim.keymap.set("n", "<leader>fY", function()
@@ -212,7 +219,7 @@ vim.keymap.set("n", "<leader>rd", ":ScpDownload<CR>", { desc = "Download" })
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>ot", ":HTerm<CR>i", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>ot", Snacks.terminal.open, { desc = "Terminal" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
@@ -272,3 +279,8 @@ end, {
     end
   end
 })
+
+vim.api.nvim_create_user_command('Test', function()
+  Snacks.picker.pick({
+  })
+end, {})
