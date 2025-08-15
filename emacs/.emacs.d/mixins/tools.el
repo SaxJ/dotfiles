@@ -32,6 +32,9 @@
 (use-package nvm
   :ensure t)
 
+(use-package plz
+  :ensure t)
+
 (use-package prodigy
   :ensure t
   :config
@@ -170,13 +173,13 @@
          (auth (auth-source-pick-first-password :host "buildkite"))
          (auth-header (format "Bearer %s" auth)))
     (plz 'get url
-      :headers `(("Content-Type" . "application/json")
-                 ("Authorization" . ,auth-header))
-      :as #'json-read
-      :then (lambda (response)
-              (seq-do (lambda (item)
-                        (let-alist item
-                          (saxon/notify "Buildkite" (format "%s done" .message)))) response)))))
+         :headers `(("Content-Type" . "application/json")
+                    ("Authorization" . ,auth-header))
+         :as #'json-read
+         :then (lambda (response)
+                 (seq-do (lambda (item)
+                           (let-alist item
+                             (saxon/notify "Buildkite" (format "%s done" .message)))) response)))))
 
 (run-with-timer 60 60 'saxon/list-running-buildkite)
 

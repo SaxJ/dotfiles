@@ -149,8 +149,7 @@
           (c-mode . c-ts-mode)
           (c++-mode . c++-ts-mode)
           (dockerfile-mode . dockerfile-ts-mode)
-          (yaml-mode . yaml-ts-mode)
-          (markdown-mode . markdown-ts-mode)))
+          (yaml-mode . yaml-ts-mode)))
 
   (add-hook 'php-ts-mode-hook (lambda () (setq comment-use-syntax t)))
 
@@ -382,10 +381,6 @@
   :ensure t)
 
 (use-package json-mode
-  :ensure t)
-
-(use-package markdown-ts-mode
-  :mode ("\\.md\\'" . markdown-ts-mode)
   :ensure t)
 
 (use-package csproj-mode
