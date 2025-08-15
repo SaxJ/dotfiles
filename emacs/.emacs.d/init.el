@@ -202,7 +202,9 @@
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
  '(package-vc-selected-packages
-   '((confluence-markup-mode :url
+   '((mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch
+            "master")
+     (confluence-markup-mode :url
                              "https://github.com/rmloveland/confluence-markup-mode"
                              :branch "master")
      (build :url "https://github.com/SaxJ/build.el" :branch "master")

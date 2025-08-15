@@ -112,26 +112,28 @@
           (cmake "https://github.com/uyha/tree-sitter-cmake")
           (cpp "https://github.com/tree-sitter/tree-sitter-cpp")
           (css "https://github.com/tree-sitter/tree-sitter-css")
+          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
           (elisp "https://github.com/Wilfred/tree-sitter-elisp")
           (go "https://github.com/tree-sitter/tree-sitter-go")
           (gomod "https://github.com/camdencheek/tree-sitter-go-mod")
+          (graphql "https://github.com/bkegley/tree-sitter-graphql")
+          (html "https://github.com/tree-sitter/tree-sitter-html")
           (html "https://github.com/tree-sitter/tree-sitter-html")
           (javascript "https://github.com/tree-sitter/tree-sitter-javascript" "v0.23.1" "src")
-          (dockerfile "https://github.com/camdencheek/tree-sitter-dockerfile")
+          (jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc")
           (json "https://github.com/tree-sitter/tree-sitter-json")
           (make "https://github.com/alemuller/tree-sitter-make")
           (markdown "https://github.com/ikatyang/tree-sitter-markdown")
+          (ocaml "https://github.com/tree-sitter/tree-sitter-ocaml" "v0.21.0" "ocaml/src")
           (php "https://github.com/tree-sitter/tree-sitter-php" "v0.23.11" "php/src")
           (python "https://github.com/tree-sitter/tree-sitter-python")
-          (jsdoc "https://github.com/tree-sitter/tree-sitter-jsdoc")
           (rust "https://github.com/tree-sitter/tree-sitter-rust")
           (toml "https://github.com/tree-sitter/tree-sitter-toml")
-          (html "https://github.com/tree-sitter/tree-sitter-html")
           (tsx "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "tsx/src")
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
-          (graphql "https://github.com/bkegley/tree-sitter-graphql")
-          (ocaml "https://github.com/tree-sitter/tree-sitter-ocaml" "v0.21.0" "ocaml/src")))
+          (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown/src")
+          (markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")))
 
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
@@ -147,7 +149,8 @@
           (c-mode . c-ts-mode)
           (c++-mode . c++-ts-mode)
           (dockerfile-mode . dockerfile-ts-mode)
-          (yaml-mode . yaml-ts-mode)))
+          (yaml-mode . yaml-ts-mode)
+          (markdown-mode . markdown-ts-mode)))
 
   (add-hook 'php-ts-mode-hook (lambda () (setq comment-use-syntax t)))
 
@@ -379,6 +382,10 @@
   :ensure t)
 
 (use-package json-mode
+  :ensure t)
+
+(use-package markdown-ts-mode
+  :mode ("\\.md\\'" . markdown-ts-mode)
   :ensure t)
 
 (use-package csproj-mode
