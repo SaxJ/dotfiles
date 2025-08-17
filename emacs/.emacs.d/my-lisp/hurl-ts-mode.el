@@ -50,7 +50,8 @@
   (treesit-font-lock-rules
    :language 'hurl
    :feature 'method
-   '((method) @font-lock-constant-face)
+   '((method) @font-lock-type-face
+     (multiline_string_type) @font-lock-type-face)
 
    :language 'hurl
    :feature 'comment
@@ -58,11 +59,16 @@
 
    :language 'hurl
    :feature 'string
-   '((value_string_text) @font-lock-string-face)
+   '((value_string) @font-lock-string-face
+     (quoted_string) @font-lock-string-face
+     (json_string) @font-lock-string-face
+     (file_value) @font-lock-string-face
+     (regex) @font-lock-regex-face)
 
    :language 'hurl
    :feature 'property
-   '((key_string_text) @font-lock-property-name-face)
+   '((key_string) @font-lock-property-name-face
+     (json_key_string) @font-lock-property-name-face)
 
    :language 'hurl
    :feature 'keyword
@@ -73,7 +79,116 @@
       "[Captures]"
       "[Asserts]"
       "[Options]"
-      "[BasicAuth]"] @font-lock-keyword-face)))
+      "[BasicAuth]"] @font-lock-keyword-face)
+
+   :language 'hurl
+   :feature 'escapes
+   '("\\\\" @font-lock-escape-face
+     (regex_escaped_char) @font-lock-escape-face
+     (quoted_string_escaped_char) @font-lock-escape-face
+     (key_string_escaped_char) @font-lock-escape-face
+     (value_string_escaped_char) @font-lock-escape-face
+     (oneline_string_escaped_char) @font-lock-escape-face
+     (multiline_string_escaped_char) @font-lock-escape-face
+     (filename_escaped_char) @font-lock-escape-face
+     (json_string_escaped_char) @font-lock-escape-face)
+
+   :language 'hurl
+   :feature 'builtins
+   '(["status"
+      "url"
+      "header"
+      "cookie"
+      "body"
+      "xpath"
+      "jsonpath"
+      "regex"
+      "variable"
+      "duration"
+      "sha256"
+      "md5"
+      "bytes"
+      "daysAfterNow"
+      "daysBeforeNow"
+      "htmlEscape"
+      "htmlUnescape"
+      "decode"
+      "format"
+      "nth"
+      "replace"
+      "split"
+      "toDate"
+      "toInt"
+      "urlEncode"
+      "urlDecode"
+      "count"] @font-lock-builtin-face)
+
+   :language 'hurl
+   :feature 'attribute
+   '((filter) @font-lock-function-use-face)
+
+   :language 'hurl
+   :feature 'constant
+   '(["null"
+      "cacert"
+      "compressed"
+      "location"
+      "insecure"
+      "path-as-is"
+      "proxy"
+      "max-redirs"
+      "retry"
+      "retry-interval"
+      "retry-max-count"
+      "verbose"
+      "very-verbose"] @font-lock-constant-face
+      (variable_option "variable") @font-lock-constant-face
+      (boolean) @font-lock-constant-face)
+
+   :language 'hurl
+   :feature 'variable
+   '((variable_name) @font-lock-variable-use-face)
+
+   :language 'hurl
+   :feature 'operator
+   '(["not"
+      "equals"
+      "=="
+      "notEquals"
+      "!="
+      "greaterThan"
+      ">"
+      "greaterThanOrEquals"
+      ">="
+      "lessThan"
+      "<"
+      "lessThanOrEquals"
+      "<="
+      "startsWith"
+      "endsWith"
+      "contains"
+      "matches"
+      "exists"
+      "includes"
+      "isInteger"
+      "isFloat"
+      "isBoolean"
+      "isString"
+      "isCollection"] @font-lock-operator-face)
+
+   :language 'hurl
+   :feature 'base
+   '((integer) @font-lock-number-face
+     (float) @font-lock-number-face
+     (status) @font-lock-number-face
+     (json_number) @font-lock-number-face
+     ":" @font-lock-delimiter-face
+     "," @font-lock-misc-punctuation-face
+     ["[" "]" "{" "}" "{{" "}}"] @font-lock-bracket-face)
+
+   :language 'hurl
+   :feature 'special
+   '(["base64," "file," "hex,"] @font-lock-preprocessor-face)))
 
 (defun hurl-ts-mode--setup-ts ()
   "Setup treesitter stuff for hurl-ts-mode"
@@ -81,8 +196,10 @@
   (setq-local treesit-font-lock-settings
               (append (hurl-ts-mode--font-lock-settings)))
 
-  (setq treesit-font-lock-feature-list
-        '((method comment string property keyword)))
+  (setq-local treesit-font-lock-feature-list
+              '((method comment string property keyword)
+                (escapes builtins attribute constant)
+                (variable operator base special)))
 
   ;; (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
   ;; (setq-local treesit-simple-indent-rules hurl-ts-mode--indent-rules)
