@@ -7,6 +7,10 @@ local current_timelog = function()
   end
 end
 
+local current_project = function()
+  return vim.fs.basename(vim.uv.cwd())
+end
+
 require("lualine").setup({
   options = {
     icons_enabled = true,
@@ -31,7 +35,7 @@ require("lualine").setup({
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff", "diagnostics" },
     lualine_c = { "filename" },
-    lualine_x = { current_timelog, "fileformat", "filetype" },
+    lualine_x = { current_project, current_timelog, "fileformat", "filetype" },
     lualine_y = { "progress" },
     lualine_z = { "location" },
   },

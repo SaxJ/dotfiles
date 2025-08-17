@@ -226,7 +226,8 @@ vim.keymap.set("n", "<leader>rd", ":ScpDownload<CR>", { desc = "Download" })
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>ot", Snacks.terminal.open, { desc = "Terminal" })
+vim.keymap.set("n", "<leader>ot", ":HTerm<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>ob", ":OpenBuildRunner<CR>", { desc = "Terminal" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
