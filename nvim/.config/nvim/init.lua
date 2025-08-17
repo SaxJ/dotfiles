@@ -186,6 +186,9 @@ vim.keymap.set('n', '<leader><tab>o', ':tabnew<CR>', { desc = 'Open' })
 vim.keymap.set('n', '<leader><tab>n', ':tabnext<CR>', { desc = 'Next' })
 vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
+-- project
+vim.keymap.set('n', '<leader>pp', Snacks.picker.zoxide, { desc = "Switch project" })
+
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
 vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
