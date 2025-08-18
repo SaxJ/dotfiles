@@ -1,7 +1,7 @@
 colorscheme ef-winter
 
 # Windowing
-require-module zellij
+require-module kitty
 
 # general
 set global indentwidth 2
@@ -18,13 +18,5 @@ add-highlighter global/hl-col-120 column 120 default,black+d
 set-option global grepcmd 'rg --column --smart-case --sort path'
 
 declare-user-mode window
-map global window h ':zellij-action move-focus left<ret>' -docstring 'Focus left'
-map global window l ':zellij-action move-focus right<ret>' -docstring 'Focus right'
-map global window j ':zellij-action move-focus down<ret>' -docstring 'Focus down'
-map global window k ':zellij-action move-focus up<ret>' -docstring 'Focus up'
-
-map global window v ':zellij-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Verical split'
-map global window s ':zellij-terminal-vertical kak -c %val{session}<ret>' -docstring 'Horizontal split'
-map global window x ':zellij-action close-pane<ret>' -docstring 'Close'
-
+map global window n ':kitty-terminal-window kak -c %val{session}<ret>' -docstring 'New Client'
 map global normal <c-w> ':enter-user-mode window<ret>' -docstring 'Windows'
