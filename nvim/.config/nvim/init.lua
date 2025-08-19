@@ -25,24 +25,30 @@ vim.pack.add({
   "https://github.com/brianhuster/unnest.nvim",
   "https://codeberg.org/historia/simple-denote.nvim",
   "https://github.com/folke/lazydev.nvim",
-  "https://github.com/folke/snacks.nvim",
   "https://github.com/chomosuke/term-edit.nvim",
-})
-require('snacks').setup({
-  picker = {
-    enabled = true,
-    sources = {
-      files = { hidden = true }
-    },
-  },
-  terminal = {
-    enabled = true,
-  }
+  "https://github.com/nvim-telescope/telescope.nvim",
+  "https://github.com/mollerhoj/telescope-recent-files.nvim",
 })
 
-require('term-edit').setup({
-  prompt_end = "%$ "
+local telescope = require("telescope")
+local actions = require("telescope.actions")
+
+telescope.setup({
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.move_selection_next,
+        ["<C-k>"] = actions.move_selection_previous,
+      },
+    },
+  },
 })
+telescope.load_extension("recent-files")
+
+require('term-edit').setup({
+  prompt_end = '%➜ ',
+})
+
 require('lazydev').setup()
 require("nvim-surround").setup({})
 require('tardis-nvim').setup({})
@@ -54,7 +60,7 @@ require('neogit').setup({
   graph_style = 'kitty',
   integrations = {
     diffview = true,
-    snacks = true,
+    telescope = true,
   }
 })
 require('simple-denote').setup({
@@ -165,13 +171,12 @@ vim.keymap.set("n", "gx", function()
 end, { desc = "Open Link" })
 
 -- general
-vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
-vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
-vim.keymap.set("n", "<leader><leader>", Snacks.picker.files, { desc = "Files" })
+vim.keymap.set("n", "<leader>/", ":Telescope live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", ":Telescope live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader><leader>", telescope.extensions['recent-files'].recent_files, { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Oil<CR>', { desc = 'File browser' })
 vim.keymap.set('n', '<leader>.', function()
-  local cwd = vim.fn.expand('%:p:h')
-  Snacks.picker.files({ cwd = cwd })
+  require('telescope.builtin').find_files({ cwd = require('telescope.utils').buffer_dir() })
 end, { desc = "Siblings" })
 
 -- quitting
@@ -187,11 +192,11 @@ vim.keymap.set('n', '<leader><tab>n', ':tabnext<CR>', { desc = 'Next' })
 vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
 -- project
-vim.keymap.set('n', '<leader>pp', Snacks.picker.zoxide, { desc = "Switch project" })
+-- vim.keymap.set('n', '<leader>pp', Snacks.picker.zoxide, { desc = "Switch project" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
-vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", ":Telescope buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
   require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
@@ -287,8 +292,3 @@ end, {
     end
   end
 })
-
-vim.api.nvim_create_user_command('Test', function()
-  Snacks.picker.pick({
-  })
-end, {})
