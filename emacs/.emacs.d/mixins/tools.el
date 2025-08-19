@@ -173,13 +173,13 @@
          (auth (auth-source-pick-first-password :host "buildkite"))
          (auth-header (format "Bearer %s" auth)))
     (plz 'get url
-         :headers `(("Content-Type" . "application/json")
-                    ("Authorization" . ,auth-header))
-         :as #'json-read
-         :then (lambda (response)
-                 (seq-do (lambda (item)
-                           (let-alist item
-                             (saxon/notify "Buildkite" (format "%s done" .message)))) response)))))
+      :headers `(("Content-Type" . "application/json")
+                 ("Authorization" . ,auth-header))
+      :as #'json-read
+      :then (lambda (response)
+              (seq-do (lambda (item)
+                        (let-alist item
+                          (saxon/notify "Buildkite" (format "%s done" .message)))) response)))))
 
 (run-with-timer 60 60 'saxon/list-running-buildkite)
 
@@ -195,21 +195,36 @@
   :vc (confluence-markup-mode :url "https://github.com/rmloveland/confluence-markup-mode" :branch "master"))
 (require 'confluence-markup)
 
-(use-package newsticker
+(use-package elfeed
+  :ensure t
   :config
-  (setq newsticker-url-list-defaults nil
-        newsticker-url-list '(("Console.dev" "https://console.dev/rss.xml")
-                              ("Shiey" "https://www.youtube.com/feeds/videos.xml?channel_id=UCpXwMqnXfJzazKS5fJ8nrVw")
-                              ("Liveoverflow" "https://www.youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w")
-                              ("Hato" "https://www.youtube.com/feeds/videos.xml?channel_id=UCDqTWzgcXxQZxbLjTLj8qhQ")
-                              ("EWU" "https://www.youtube.com/feeds/videos.xml?channel_id=UCJWKjrrUh2KL1d3zXQW79cQ")
-                              ("OG Crew" "https://www.youtube.com/feeds/videos.xml?channel_id=UCEEYC7-n3iCQSyZBAZOmpEg")
-                              ("Gameranx" "https://www.youtube.com/feeds/videos.xml?channel_id=UCNvzD7Z-g64bPXxGzaQaa4g")
-                              ("Systemcrafters" "https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ")
-                              ("Dashcams" "https://www.youtube.com/feeds/videos.xml?channel_id=UCvfqpaehdaqtkXPNhvJRyGA")
-                              ("F1 News" "https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg")
-                              ("Emacs News" "https://sachachua.com/blog/category/emacs-news/feed")))
-  (add-hook 'after-init-hook 'newsticker-start))
+  (setq elfeed-feeds '(("https://console.dev/rss.xml" programming)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCpXwMqnXfJzazKS5fJ8nrVw" youtube interesting)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UClcE-kVhqyiHCcjYwcpfj9w" youtube hacking programming)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCDqTWzgcXxQZxbLjTLj8qhQ" youtube music)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCJWKjrrUh2KL1d3zXQW79cQ" youtube crime)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCEEYC7-n3iCQSyZBAZOmpEg" youtube comedy)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCNvzD7Z-g64bPXxGzaQaa4g" youtube gaming)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" youtube emacs programming)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCvfqpaehdaqtkXPNhvJRyGA" youtube driving)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg" youtube f1)
+                       ("https://sachachua.com/blog/category/emacs-news/feed" emacs news))))
+
+(use-package elfeed-tube
+  :ensure t ;; or :straight t
+  :after elfeed
+  :demand t
+  :config
+  ;; (setq elfeed-tube-auto-save-p nil) ; default value
+  ;; (setq elfeed-tube-auto-fetch-p t)  ; default value
+  (elfeed-tube-setup)
+
+  :bind (:map elfeed-show-mode-map
+              ("F" . elfeed-tube-fetch)
+              ([remap save-buffer] . elfeed-tube-save)
+              :map elfeed-search-mode-map
+              ("F" . elfeed-tube-fetch)
+              ([remap save-buffer] . elfeed-tube-save)))
 
 (defun saxon/vpn-connect ()
   "Connect to vpn"

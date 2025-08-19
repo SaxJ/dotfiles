@@ -166,9 +166,8 @@
   (unless (eq (mpris-get-metadata) 'no-player)
     (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist))))
 
-(defun saxon/modeline-get-mode ()
-  "Get the current mode"
-  (capitalize (symbol-name major-mode)))
+(defun saxon/browse-url-mpv (url &rest args)
+  (start-process "mpv" "*mpv*" "mpv" url))
 
 (use-package emacs
   :ensure nil
@@ -180,19 +179,12 @@
                              display-time-string
                              (:eval mu4e-alert-mode-line)))
 
-  ;; WIP
-  ;; (setq-default mode-line-format '("%e"
-  ;;                                  mode-line-front-space
-  ;;                                  mode-line-modified
-  ;;                                  " %b"
-  ;;                                  " "
-  ;;                                  (:eval (saxon/modeline-get-mode))
-  ;;                                  mode-line-end-spaces))
-
   ;; Speeding up tramp
   (setq remote-file-name-inhibit-locks t
         tramp-use-scp-direct-remote-copying t
-        remote-file-name-inhibit-auto-save-visited t))
+        remote-file-name-inhibit-auto-save-visited t)
+
+  (setq browse-url-handlers '(("https:\\/\\/www\\.youtube." . saxon/browse-url-mpv))))
 
 (use-package mood-line
   :ensure t
