@@ -4,7 +4,8 @@ local readJsonFile = function(path)
     error('No package.json file.')
   end
 
-  local json = packageFile.read(packageFile, "*a")
+  local json = packageFile:read('*a')
+  packageFile:close()
   return vim.json.decode(json)
 end
 
@@ -30,7 +31,7 @@ local picker = function()
   if package == nil then
     error('Could not read runner scripts')
   end
-  local scripts = package.json
+  local scripts = vim.fn.keys(package.json)
 
   local items = {}
   for idx, command in ipairs(scripts) do
