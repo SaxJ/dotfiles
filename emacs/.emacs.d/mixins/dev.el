@@ -419,3 +419,13 @@
         compilation-scroll-output t
         ansi-color-for-compilation-mode t)
   (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter))
+
+
+(use-package gptel
+  :ensure t
+  :config
+  (setq gptel-model 'qwen2.5-coder:32b
+        gptel-backend (gptel-make-ollama "Ollama"
+                        :host "localhost:11434"
+                        :stream t
+                        :models '(qwen2.5-coder:32b))))
