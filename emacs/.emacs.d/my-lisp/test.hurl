@@ -1,9 +1,9 @@
 # This is a comment
-POST https://example.org/api
+POST https://api.healthengine.com.au/graphql
 
 ```graphql
 query {
-    practice(id: 1234) {
+    practice(id: 42118) {
         id
     }
 }
