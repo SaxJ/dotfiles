@@ -254,3 +254,6 @@
   :ensure t
   :config
   (mpdel-mode))
+
+(use-package pomo-cat
+  :ensure t)
