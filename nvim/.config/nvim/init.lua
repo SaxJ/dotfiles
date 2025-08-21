@@ -26,8 +26,11 @@ vim.pack.add({
   "https://codeberg.org/historia/simple-denote.nvim",
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/chomosuke/term-edit.nvim",
+
+  -- Telescope
   "https://github.com/nvim-telescope/telescope.nvim",
   "https://github.com/mollerhoj/telescope-recent-files.nvim",
+  "https://github.com/jvgrootveld/telescope-zoxide",
 })
 
 local telescope = require("telescope")
@@ -44,6 +47,7 @@ telescope.setup({
   },
 })
 telescope.load_extension("recent-files")
+telescope.load_extension('zoxide')
 
 require('term-edit').setup({
   prompt_end = '%➜ ',
@@ -192,7 +196,7 @@ vim.keymap.set('n', '<leader><tab>n', ':tabnext<CR>', { desc = 'Next' })
 vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
 -- project
--- vim.keymap.set('n', '<leader>pp', Snacks.picker.zoxide, { desc = "Switch project" })
+vim.keymap.set('n', '<leader>pp', ":Telescope zoxide list<CR>", { desc = "Switch project" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
