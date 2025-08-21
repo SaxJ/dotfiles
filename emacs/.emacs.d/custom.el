@@ -12,7 +12,24 @@
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(aidermacs apheleia avy build cape casual chezmoi
+               confluence-markup-mode corfu-terminal csproj-mode
+               csv-mode denote-journal dired-preview dslide dune eat
+               ef-themes eglot-fsharp elfeed-tube ellama elm-mode
+               embark-consult evil-collection evil-commentary evil-org
+               evil-surround forge general git-timemachine gptel
+               graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
+               httprepl hurl-mode jira jiralib2 jq-mode js-doc
+               json-mode kubernetes-evil lastfm magit-prime marginalia
+               mingus mood-line mpdel mpris mu4easy multi-vterm
+               nerd-icons-corfu nvm ordered-set orderless org-modern
+               org-music org-ql org-roam origami otpp pocket-reader
+               pomo-cat popper pr-review prescient prodigy
+               rainbow-mode soundcloud string-inflection sudo-edit
+               templ-ts-mode terraform-mode tramp tramp-term tuareg
+               vc-use-package vertico vue-mode web-mode yaml-mode
+               yasnippet yeetube yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
    '((mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch
             "master")
