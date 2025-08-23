@@ -190,6 +190,12 @@
    :feature 'special
    '((["base64," "file," "hex,"]) @font-lock-preprocessor-face)))
 
+(defvar hurl-ts-mode--graphql-keywords
+  '("query" "mutation" "subscription" "fragment" "on" "type" "interface"
+    "union" "scalar" "enum" "input" "extend" "schema" "directive"
+    "implements" "repeatable")
+  "GraphQL keywords for syntax highlighting.")
+
 (defun hurl-ts-mode--graphql-font-lock-settings ()
   (treesit-font-lock-rules
    :language 'graphql
@@ -210,7 +216,8 @@
    :language 'graphql
    :feature 'constant
    :override t
-   '([([(boolean_value) (null_value)] @font-lock-constant-face)
+   '([((boolean_value) @font-lock-constant-face)
+      ((null_value) @font-lock-constant-face)
       ((directive_location) @font-lock-constant-face)])
 
    :language 'graphql
@@ -241,7 +248,7 @@
    :language 'graphql
    :feature 'keyword
    :override t
-   `([,@graphql-ts-mode--keywords] @font-lock-keyword-face)
+   `([,@hurl-ts-mode--graphql-keywords] @font-lock-keyword-face)
 
    :language 'graphql
    :feature 'keyword
@@ -310,8 +317,7 @@
 
   (setq-local treesit-language-at-point-function #'hurl-ts-mode--language-at-point)
 
-  ;; (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
-  ;; (setq-local treesit-simple-indent-rules hurl-ts-mode--indent-rules)
+
   (treesit-major-mode-setup))
 
 ;;;###autoload
@@ -338,4 +344,4 @@
 
 (provide 'hurl-ts-mode)
 
-;;; emira.el ends here
+;;; hurl-ts-mode.el ends here
