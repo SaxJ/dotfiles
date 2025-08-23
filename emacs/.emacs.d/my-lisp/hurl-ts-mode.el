@@ -274,6 +274,12 @@
                 (escapes builtins attribute constant)
                 (variable operator base special)))
 
+  (setq-local treesit-range-settings
+              (treesit-range-rules
+               :embed 'graphql
+               :host 'hurl
+               '((multiline_string_content) @capture)))
+
   ;; (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
   ;; (setq-local treesit-simple-indent-rules hurl-ts-mode--indent-rules)
   (treesit-major-mode-setup))
