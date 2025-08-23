@@ -278,7 +278,10 @@
               (treesit-range-rules
                :embed 'graphql
                :host 'hurl
-               '((multiline_string_content) @capture)))
+               '((multiline_string 
+                  (multiline_string_type) @type
+                  (multiline_string_content) @capture)
+                 (:match "^graphql$" @type))))
 
   ;; (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
   ;; (setq-local treesit-simple-indent-rules hurl-ts-mode--indent-rules)
