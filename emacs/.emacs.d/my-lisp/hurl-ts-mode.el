@@ -262,6 +262,31 @@
                              (name) @font-lock-function-name-face))]))
   "Tree sitter font lock rules for `graphql-ts-mode'.")
 
+(defun hurl-ts-mode--language-at-point (point)
+  "Return the language at POINT."
+  (let* ((node (treesit-node-at point 'hurl))
+         (parent (treesit-node-parent node)))
+    (cond
+     ;; Check if we're in a multiline_string_content with graphql type
+     ((and (equal (treesit-node-type node) "multiline_string_content")
+           (let ((multiline-string (treesit-node-parent node)))
+             (when (equal (treesit-node-type multiline-string) "multiline_string")
+               (let ((type-node (treesit-node-child-by-field-name multiline-string "type")))
+                 (when type-node
+                   (equal (treesit-node-text type-node) "graphql"))))))
+      'graphql)
+     ;; Check if parent is multiline_string_content with graphql type
+     ((and parent
+           (equal (treesit-node-type parent) "multiline_string_content")
+           (let ((multiline-string (treesit-node-parent parent)))
+             (when (equal (treesit-node-type multiline-string) "multiline_string")
+               (let ((type-node (treesit-node-child-by-field-name multiline-string "type")))
+                 (when type-node
+                   (equal (treesit-node-text type-node) "graphql"))))))
+      'graphql)
+     ;; Default to hurl
+     (t 'hurl))))
+
 (defun hurl-ts-mode--setup-ts ()
   "Setup treesitter stuff for hurl-ts-mode"
 
@@ -282,6 +307,8 @@
                   (multiline_string_type) @type
                   (multiline_string_content) @capture)
                  (:match "^graphql$" @type))))
+
+  (setq-local treesit-language-at-point-function #'hurl-ts-mode--language-at-point)
 
   ;; (setq-local treesit-font-lock-feature-list hurl-ts-mode--feature-list)
   ;; (setq-local treesit-simple-indent-rules hurl-ts-mode--indent-rules)
