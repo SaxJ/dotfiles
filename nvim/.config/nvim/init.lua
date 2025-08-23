@@ -26,6 +26,7 @@ vim.pack.add({
   "https://codeberg.org/historia/simple-denote.nvim",
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/chomosuke/term-edit.nvim",
+  "https://github.com/David-Kunz/gen.nvim",
 
   -- Telescope
   "https://github.com/nvim-telescope/telescope.nvim",
@@ -70,6 +71,10 @@ require('neogit').setup({
 require('simple-denote').setup({
   ext = "org",
   dir = "~/Documents/wiki/notes/"
+})
+
+require('gen').setup({
+  model = "deepseek-coder-v2:latest",
 })
 
 
