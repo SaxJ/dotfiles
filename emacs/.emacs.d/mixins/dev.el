@@ -424,8 +424,11 @@
 (use-package gptel
   :ensure t
   :config
-  (setq gptel-model 'qwen2.5-coder:32b
+  (setq gptel-model 'deepseek-coder-v2:latest
         gptel-backend (gptel-make-ollama "Ollama"
                         :host "localhost:11434"
                         :stream t
-                        :models '(qwen2.5-coder:32b))))
+                        :models '(deepseek-coder-v2:latest)))
+  (gptel-make-anthropic "Claude"
+    :stream t
+    :key (lambda () (auth-source-pick-first-password :host "anthropic"))))
