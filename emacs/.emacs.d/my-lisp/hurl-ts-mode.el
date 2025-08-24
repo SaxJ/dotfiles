@@ -190,12 +190,6 @@
    :feature 'special
    '((["base64," "file," "hex,"]) @font-lock-preprocessor-face)))
 
-(defvar hurl-ts-mode--graphql-keywords
-  '("query" "mutation" "subscription" "fragment" "on" "type" "interface"
-    "union" "scalar" "enum" "input" "extend" "schema" "directive"
-    "implements" "repeatable")
-  "GraphQL keywords for syntax highlighting.")
-
 (defun hurl-ts-mode--graphql-font-lock-settings ()
   (treesit-font-lock-rules
    :language 'graphql
@@ -234,65 +228,38 @@
    :language 'graphql
    :feature 'variable
    :override t
-   '([((variable) @font-lock-variable-use-face)
-      (input_value_definition (name) @font-lock-variable-name-face)
-      (argument (name) @font-lock-variable-name-face)
-      (object_field (name) @font-lock-property-name-face)])
+   '(((variable) @font-lock-variable-use-face)
+     (argument (name) @font-lock-variable-name-face))
 
    :language 'graphql
    :feature 'type
    :override t
-   '([((type) @font-lock-type-face)
-      ((named_type) @font-lock-type-face)])
+   '(((type) @font-lock-type-face)
+     ((named_type) @font-lock-type-face))
 
    :language 'graphql
    :feature 'keyword
    :override t
-   `([,@hurl-ts-mode--graphql-keywords] @font-lock-keyword-face)
+   '(["query" "mutation" "subscription" "fragment" "on" "directive" "schema" "scalar" "type" "interface" "union" "enum" "input" "extend" "implements"] @font-lock-keyword-face)
 
    :language 'graphql
-   :feature 'keyword
+   :feature 'builtin
    :override t
-   '((directive "@" @font-lock-builtin-face (name) @font-lock-builtin-face))
-
-   :language 'graphql
-   :feature 'definition
-   :override t
-   '([(object_type_definition (name) @font-lock-function-name-face)
-      (enum_type_definition (name) @font-lock-function-name-face)
-      (input_object_type_definition (name) @font-lock-function-name-face)
-      (union_type_definition (name) @font-lock-function-name-face)
-      (interface_type_definition (name) @font-lock-function-name-face)
-      (scalar_type_definition (name) @font-lock-function-name-face)
-      (fragment_definition (fragment_name) @font-lock-function-name-face)
-      (directive_definition ("@" @font-lock-function-name-face
-                             (name) @font-lock-function-name-face))]))
-  "Tree sitter font lock rules for `graphql-ts-mode'.")
+   '((directive "@" @font-lock-builtin-face (name) @font-lock-builtin-face))))
 
 (defun hurl-ts-mode--language-at-point (point)
   "Return the language at POINT."
   (let* ((node (treesit-node-at point 'hurl))
-         (parent (treesit-node-parent node)))
-    (cond
-     ;; Check if we're in a multiline_string_content with graphql type
-     ((and (equal (treesit-node-type node) "multiline_string_content")
-           (let ((multiline-string (treesit-node-parent node)))
-             (when (equal (treesit-node-type multiline-string) "multiline_string")
-               (let ((type-node (treesit-node-child-by-field-name multiline-string "type")))
-                 (when type-node
-                   (equal (treesit-node-text type-node) "graphql"))))))
-      'graphql)
-     ;; Check if parent is multiline_string_content with graphql type
-     ((and parent
-           (equal (treesit-node-type parent) "multiline_string_content")
-           (let ((multiline-string (treesit-node-parent parent)))
-             (when (equal (treesit-node-type multiline-string) "multiline_string")
-               (let ((type-node (treesit-node-child-by-field-name multiline-string "type")))
-                 (when type-node
-                   (equal (treesit-node-text type-node) "graphql"))))))
-      'graphql)
-     ;; Default to hurl
-     (t 'hurl))))
+         (multiline-node (treesit-parent-until node "^multiline_string$")))
+    (if multiline-node
+        (let* ((type-node (treesit-node-child multiline-node 1))
+               (type-text (when type-node (treesit-node-text type-node t))))
+          (cond
+           ((string-equal type-text "graphql") 'graphql)
+           ((string-equal type-text "json") 'json)
+           ((string-equal type-text "html") 'html)
+           (t 'hurl)))
+      'hurl)))
 
 (defun hurl-ts-mode--setup-ts ()
   "Setup treesitter stuff for hurl-ts-mode"
@@ -302,7 +269,7 @@
                       (hurl-ts-mode--graphql-font-lock-settings)))
 
   (setq-local treesit-font-lock-feature-list
-              '((method comment string property keyword definition number bracket)
+              '((method comment string property keyword number bracket)
                 (escapes builtins attribute constant)
                 (variable operator base special)))
 
@@ -310,10 +277,11 @@
               (treesit-range-rules
                :embed 'graphql
                :host 'hurl
-               '((multiline_string 
-                  (multiline_string_type) @type
-                  (multiline_string_content) @capture)
-                 (:match "^graphql$" @type))))
+               :local t
+               '((multiline_string
+                  (multiline_string_type) @_type
+                  (multiline_string_content) @content
+                  (:match "^graphql$" @_type)))))
 
   (setq-local treesit-language-at-point-function #'hurl-ts-mode--language-at-point)
 
