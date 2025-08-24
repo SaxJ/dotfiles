@@ -26,7 +26,10 @@ vim.pack.add({
   "https://codeberg.org/historia/simple-denote.nvim",
   "https://github.com/folke/lazydev.nvim",
   "https://github.com/chomosuke/term-edit.nvim",
+
+  -- AI
   "https://github.com/David-Kunz/gen.nvim",
+  "https://github.com/Robitx/gp.nvim",
 
   -- Telescope
   "https://github.com/nvim-telescope/telescope.nvim",
@@ -75,6 +78,43 @@ require('simple-denote').setup({
 
 require('gen').setup({
   model = "deepseek-coder-v2:latest",
+})
+
+require('gp').setup({
+  default_chat_agent = "ChatClaude-Sonnet-4",
+  providers = {
+    openai = { disable = true },
+    anthropic = {
+      disable = false,
+      secret = { "pass", "anthropic" }
+    },
+    ollama = {
+      disable = false,
+    },
+  },
+  agents = {
+    {
+      provider = "anthropic",
+      name = "ChatClaude-Sonnet-4",
+      chat = true,
+      command = false,
+      -- string with model name or table with model name and parameters
+      model = { model = "claude-sonnet-4-20250514", thinking_budget = 1024 },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = require("gp.defaults").code_system_prompt,
+    },
+    {
+      provider = "ollama",
+      name = "Deepseek Coder",
+      chat = true,
+      command = false,
+      -- string with model name or table with model name and parameters
+      model = { model = "deepseek-coder-v2:latest", think = false },
+      -- system prompt (use this to specify the persona/role of the AI)
+      system_prompt = require("gp.defaults").code_system_prompt,
+    },
+  },
+  toggle_target = 'tabnew',
 })
 
 
