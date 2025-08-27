@@ -152,8 +152,8 @@
 
 (defun saxon/get-random-giphy-image ()
   (interactive)
-  (let* ((search (read-string "Search: "))
-         (api-key (auth-source-pick-first-password :host "giphy"))
+  (let* ((search (url-encode-url (read-string "Search: ")))
+         (api-key (s-trim (auth-source-pick-first-password :host "giphy")))
          (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=1" api-key search))
          (response (plz 'get url :headers '(("Content-Type" . "application/json")) :as #'json-read)))
     (let-alist response
@@ -208,7 +208,8 @@
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCAiiOTio8Yu69c3XnR7nQBQ" youtube emacs programming)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCvfqpaehdaqtkXPNhvJRyGA" youtube driving)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg" youtube f1)
-                       ("https://sachachua.com/blog/category/emacs-news/feed" emacs news))))
+                       ("https://sachachua.com/blog/category/emacs-news/feed" emacs news)
+                       ("https://lobste.rs/top/rss" lobsters news programming))))
 
 (use-package elfeed-tube
   :ensure t ;; or :straight t
@@ -236,10 +237,6 @@
   (interactive)
   (shell-command "openvpn3 session-manage --disconnect --config ~/office.ovpn"))
 
-(use-package mpris
-  :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch "master")
-  :ensure t)
-
 (use-package timeclock
   :ensure nil
   :config
@@ -250,10 +247,5 @@
   :config
   (dired-preview-global-mode))
 
-(use-package mpdel
-  :ensure t
-  :config
-  (mpdel-mode))
-
-(use-package pomo-cat
-  :ensure t)
+(use-package pomo-cat :ensure t)
+(use-package simple-mpc :ensure t)
