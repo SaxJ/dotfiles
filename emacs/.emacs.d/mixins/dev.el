@@ -441,3 +441,21 @@
   (gptel-make-anthropic "Claude"
     :stream t
     :key (lambda () (auth-source-pick-first-password :host "anthropic"))))
+
+(use-package chatgpt-shell
+  :ensure t
+  :custom
+  ((chatgpt-shell-model-version "claude-sonnet-4-20250514")
+   (chatgpt-shell-anthropic-key
+    (lambda ()
+      (auth-source-pick-first-password :host "anthropic")))))
+
+
+(defun saxon/ai-explain (from to)
+  "Ask the AI to explain a selection"
+  (interactive "r")
+  (let* ((command "sc 'Explain this concisely.'"))
+    (if mark-active
+        (shell-command-on-region from to command "*smart-cat*")
+      (shell-command-on-region (point-min) (point-max) command "*smart-cat*"))
+    (display-buffer "*smart-cat*")))
