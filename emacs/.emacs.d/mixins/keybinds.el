@@ -73,13 +73,6 @@
     (tab-bar-rename-tab "Mail")
     (mu4e)))
 
-(defun saxon/open-music ()
-  (interactive)
-  (progn
-    (tab-bar-new-tab-to -1)
-    (tab-bar-rename-tab "Music")
-    (emms-browser)))
-
 (defun saxon/open-yeetube ()
   (interactive)
   (progn
@@ -202,10 +195,7 @@
     "sp" 'consult-ripgrep
 
     ;; music
-    "mm" 'saxon/open-music
-    "mn" 'mpd-next
-    "mp" 'mpd-prev
-    "mt" 'mpd-pause
+    "mm" 'simple-mpc
 
     ;; notes
     "nj" 'org-journal-new-entry
