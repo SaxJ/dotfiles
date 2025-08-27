@@ -1,9 +1,5 @@
 # This is a comment
 POST https://api.healthengine.com.au/graphql
-{
-"hello": "wor;ld",
-"thing":null,
-}
 
 ```graphql
 # Commanet
@@ -13,3 +9,5 @@ query($thing: String!) {
     }
 }
 ```
+
+GET https://google.com

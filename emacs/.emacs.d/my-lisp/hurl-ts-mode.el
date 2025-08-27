@@ -288,6 +288,16 @@
 
   (treesit-major-mode-setup))
 
+(defun hurl-ts-mode-run-test-at-point (point)
+  "Run the hurl test at point."
+  (interactive "d")
+  (let* ((node (treesit-node-at point 'hurl))
+         (entry (treesit-parent-until node (lambda (n) (equal (treesit-node-type n) "entry"))))
+         (idx (int-to-string (treesit-node-index entry t)))
+         (hurl-file (buffer-file-name))
+         (proc (start-process "Hurl" "*hurl*" "hurl" "--from-entry" idx "--to-entry" idx hurl-file)))
+    (display-buffer (process-buffer proc))))
+
 ;;;###autoload
 (define-derived-mode hurl-ts-mode prog-mode "Hurl"
   "Major mode for editing hurl, powered by tree-sitter"
