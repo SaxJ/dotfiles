@@ -17,12 +17,12 @@
                confluence-markup-mode corfu-terminal csproj-mode
                csv-mode denote-journal dired-preview dslide dune eat
                ef-themes eglot-fsharp elfeed-tube ellama elm-mode
-               embark-consult evil-collection evil-commentary evil-org
-               evil-surround forge general git-timemachine gptel
-               graphql-ts-mode graphviz-dot-mode haskell-mode helm-org
-               httprepl hurl-mode jira jiralib2 jq-mode js-doc
-               json-mode kubernetes-evil lastfm magit-prime marginalia
-               mingus mood-line mpdel mpdmacs mpris mu4easy
+               embark-consult epresent evil-collection evil-commentary
+               evil-org evil-surround forge general git-timemachine
+               gptel graphql-ts-mode graphviz-dot-mode haskell-mode
+               helm-org httprepl hurl-mode jira jiralib2 jq-mode
+               js-doc json-mode kubernetes-evil lastfm magit-prime
+               marginalia mingus mood-line mpdel mpdmacs mpris mu4easy
                multi-vterm nerd-icons-corfu nvm ordered-set orderless
                org-modern org-music org-ql org-roam origami otpp
                pocket-reader pomo-cat popper pr-review prescient
