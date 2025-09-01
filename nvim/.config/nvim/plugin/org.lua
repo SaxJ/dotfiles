@@ -29,3 +29,13 @@ org.setup({
     },
   },
 })
+
+require('denote').setup({
+  filetype = 'org',
+  directory = "~/Documents/wiki/notes/",
+  prompts = { 'title', 'keywords' },
+  integrations = {
+    oil = true,
+    telescope = true,
+  }
+})
