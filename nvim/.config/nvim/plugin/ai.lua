@@ -58,8 +58,7 @@ end
 -- @param mode The mode in which to execute the command, either 'n' for normal mode or 'v' for visual mode.
 -- @param cmd The command to execute for filtering the buffer contents.
 local function filterBufferToNew(cmd)
-  local mode = vim.api.nvim_get_mode();
-  local tempFile = mode == 'v' and regionToTmpFile() or bufferToTmpFile()
+  local tempFile = mode == 'n' and bufferToTmpFile() or regionToTmpFile()
 
   local outputBuf = vim.api.nvim_create_buf(false, true)
   vim.api.nvim_buf_call(outputBuf, function()
@@ -71,27 +70,19 @@ local function filterBufferToNew(cmd)
   vim.api.nvim_set_current_buf(outputBuf)
 end
 
-vim.api.nvim_create_user_command('PipeCommandToNewBuffer', function(args)
-  filterBufferToNew(args['args'])
-end, { nargs = 1 })
-
 vim.api.nvim_create_user_command(
   'AiExplain',
-  [[PipeCommandToNewBuffer sc "Concisely explain this buffer contents."]],
-  { desc = 'Explain the selection or buffer.' }
+  function()
+    filterBufferToNew('sc "Concisely explain this buffer contents."')
+  end,
+  { desc = 'Explain the selection or buffer.', range = true }
 )
 
 vim.api.nvim_create_user_command(
   'AiPrompt',
   function()
     local prompt = vim.fn.input("Prompt> ")
-    local outputBuf = vim.api.nvim_create_buf(false, true)
-    vim.api.nvim_buf_call(outputBuf, function()
-      vim.cmd("%! " .. string.format('sc "%s"', prompt))
-    end)
-
-    vim.cmd('vsplit')
-    vim.api.nvim_set_current_buf(outputBuf)
+    filterBufferToNew(string.format('sc "%s"', prompt))
   end,
-  { desc = 'Just prompt.' }
+  { desc = 'Just prompt.', range = true }
 )
