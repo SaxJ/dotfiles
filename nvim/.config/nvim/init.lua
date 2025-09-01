@@ -7,7 +7,6 @@ vim.pack.add({
   "https://github.com/manuuurino/autoread.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nvim-lualine/lualine.nvim",
-  "https://github.com/nvim-orgmode/orgmode",
   "https://github.com/nvim-treesitter/nvim-treesitter",
   "https://github.com/nvim-tree/nvim-web-devicons",
   "https://github.com/sindrets/diffview.nvim",
@@ -23,8 +22,14 @@ vim.pack.add({
   'https://github.com/stevearc/oil.nvim',
   "https://github.com/saghen/blink.cmp",
   "https://github.com/brianhuster/unnest.nvim",
-  "https://codeberg.org/historia/simple-denote.nvim",
   "https://github.com/folke/lazydev.nvim",
+
+  -- AI
+  "https://github.com/bytesoverflow/smartcat.nvim",
+
+  -- Notes
+  "https://github.com/nvim-orgmode/orgmode",
+  "https://github.com/cvigilv/denote.nvim",
 
   -- Telescope
   "https://github.com/nvim-telescope/telescope.nvim",
@@ -44,6 +49,17 @@ telescope.setup({
       },
     },
   },
+  extensions = {
+    zoxide = {
+      mappings = {
+        default = {
+          after_action = function(selection)
+            telescope.extensions['recent-files'].recent_files()
+          end
+        }
+      }
+    }
+  }
 })
 telescope.load_extension("recent-files")
 telescope.load_extension('zoxide')
@@ -61,10 +77,6 @@ require('neogit').setup({
     diffview = true,
     telescope = true,
   }
-})
-require('simple-denote').setup({
-  ext = "org",
-  dir = "~/Documents/wiki/notes/"
 })
 
 vim.keymap.del("n", "grr")
@@ -230,7 +242,7 @@ vim.keymap.set("n", "<leader>rd", ":ScpDownload<CR>", { desc = "Download" })
 -- open
 vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
-vim.keymap.set("n", "<leader>ot", ":HTerm<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>ot", ":HTerm<CR>i", { desc = "Terminal" })
 vim.keymap.set("n", "<leader>ob", ":OpenBuildRunner<CR>", { desc = "Terminal" })
 
 vim.keymap.set("n", "<leader>oa", "", { desc = "+ai" })
@@ -238,6 +250,7 @@ vim.keymap.set("n", "<leader>oa", "", { desc = "+ai" })
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     funcs.util.log_work_date()
+    require('smartcat').setup()
   end,
 })
 
