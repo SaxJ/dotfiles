@@ -38,7 +38,13 @@ require("lualine").setup({
   sections = {
     lualine_a = { "mode" },
     lualine_b = { "branch", "diff", "diagnostics" },
-    lualine_c = { "filename" },
+    lualine_c = {
+      {
+        "filename",
+        path = 1,
+        shorting_target = 80,
+      }
+    },
     lualine_x = { current_project, current_clock, "fileformat", "filetype" },
     lualine_y = { "progress", },
     lualine_z = { "location" },
