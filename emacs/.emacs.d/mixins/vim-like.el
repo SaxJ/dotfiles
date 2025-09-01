@@ -24,7 +24,7 @@
   (setq evil-want-keybinding nil)       ; prep to load evil-collection
   (setq evil-want-integration t)
 
-  ;; (setq evil-want-C-u-scroll t)
+  (setq evil-want-C-u-scroll t)
   :config
   (evil-mode))
 
