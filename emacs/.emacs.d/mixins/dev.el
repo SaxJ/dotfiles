@@ -459,3 +459,27 @@
         (shell-command-on-region from to command "*smart-cat*")
       (shell-command-on-region (point-min) (point-max) command "*smart-cat*"))
     (display-buffer "*smart-cat*")))
+
+(defun saxon/scp-upload ()
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (project (project-name (project-current))))
+    (progn
+      (call-process "scp" nil nil nil filename (format "ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)))
+      (message "Uploaded"))))
+
+(defun saxon/scp-download ()
+  (interactive)
+  (let ((filename (buffer-file-name))
+        (project (project-name (project-current))))
+    (progn
+      (call-process "scp" nil nil nil (format "ubuntu@minikube:/home/ubuntu/%s/%s" project (saxon/project-relative-path filename)) filename)
+      (message "Uploaded"))))
+
+(defun saxon/remote-command (cmd)
+  (interactive "sRun: ")
+  (let* ((project (project-name (project-current)))
+         (remote-pwd (format "/home/ubuntu/%s/" project))
+         (default-directory (expand-file-name (format "/ssh:minikube:%s" remote-pwd))))
+    (with-connection-local-variables
+     (shell-command cmd))))

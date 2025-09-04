@@ -24,9 +24,9 @@
                js-doc json-mode kubernetes-evil lastfm magit-prime
                marginalia mingus mood-line mpdel mpdmacs mpris mu4easy
                multi-vterm nerd-icons-corfu nvm ordered-set orderless
-               org-modern org-music org-ql org-roam origami otpp
-               pocket-reader pomo-cat popper pr-review prescient
-               prodigy rainbow-mode simple-mpc soundcloud
+               org-modern org-music org-ql org-roam org-tree-slide
+               origami otpp pocket-reader pomo-cat popper pr-review
+               prescient prodigy rainbow-mode simple-mpc soundcloud
                string-inflection sudo-edit templ-ts-mode
                terraform-mode tramp tramp-term tuareg vc-use-package
                vertico vue-mode web-mode yaml-mode yasnippet yeetube

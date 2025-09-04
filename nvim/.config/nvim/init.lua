@@ -24,9 +24,6 @@ vim.pack.add({
   "https://github.com/brianhuster/unnest.nvim",
   "https://github.com/folke/lazydev.nvim",
 
-  -- AI
-  "https://github.com/bytesoverflow/smartcat.nvim",
-
   -- Notes
   "https://github.com/nvim-orgmode/orgmode",
   "https://github.com/cvigilv/denote.nvim",
@@ -250,7 +247,6 @@ vim.keymap.set("n", "<leader>oa", "", { desc = "+ai" })
 vim.api.nvim_create_autocmd("VimEnter", {
   callback = function()
     funcs.util.log_work_date()
-    require('smartcat').setup()
   end,
 })
 
