@@ -249,3 +249,6 @@
 
 (use-package pomo-cat :ensure t)
 (use-package simple-mpc :ensure t)
+
+(use-package org-tree-slide
+  :ensure t)
