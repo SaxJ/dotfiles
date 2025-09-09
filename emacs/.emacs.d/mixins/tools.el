@@ -209,7 +209,9 @@
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCvfqpaehdaqtkXPNhvJRyGA" youtube driving)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXQBAleLZGKLSfNrqsjDOyg" youtube f1)
                        ("https://sachachua.com/blog/category/emacs-news/feed" emacs news)
-                       ("https://lobste.rs/top/rss" lobsters news programming))))
+                       ("https://lobste.rs/top/rss" lobsters news programming)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXONTfGmLC7ltFgLAlHs24g" youtube crime)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9h8BDcXwkhZtnqoQJ7PggA" youtube politics))))
 
 (use-package elfeed-tube
   :ensure t ;; or :straight t
@@ -252,3 +254,14 @@
 
 (use-package org-tree-slide
   :ensure t)
+
+(use-package mpris
+  :ensure t
+  :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch "main"))
+
+(use-package jira
+  :ensure t
+  :config
+  (setopt jira-base-url "https://hejira.atlassian.net"
+          jira-username "saxon.jensen@healthengine.com.au"
+          jira-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
