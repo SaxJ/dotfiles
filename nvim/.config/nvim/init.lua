@@ -24,6 +24,9 @@ vim.pack.add({
   "https://github.com/brianhuster/unnest.nvim",
   "https://github.com/folke/lazydev.nvim",
 
+  -- Email
+  "https://github.com/pimalaya/himalaya-vim",
+
   -- Notes
   "https://github.com/nvim-orgmode/orgmode",
   "https://github.com/cvigilv/denote.nvim",
@@ -223,8 +226,7 @@ end, { desc = "Yank Name" })
 -- git
 vim.keymap.set("n", "<leader>g", "", { desc = "+git" })
 vim.keymap.set("n", "<leader>gg", ":Neogit<CR>", { desc = "Git Status" })
--- vim.keymap.set("n", "<leader>gd", ":FzfLua git_diff<CR>", { desc = "Git Status" })
-vim.keymap.set("n", "<localleader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
+vim.keymap.set("n", "<leader>gb", ":Gitsigns blame<CR>", { desc = "Blame" })
 vim.keymap.set("n", "<leader>gh", ":Tardis<CR>", { desc = "Timemachine" })
 
 -- project
@@ -241,6 +243,7 @@ vim.keymap.set("n", "<leader>o", "", { desc = "+open" })
 vim.keymap.set("n", "<leader>od", ":Trouble diagnostics<CR>", { desc = "Diagnostics" })
 vim.keymap.set("n", "<leader>ot", ":HTerm<CR>i", { desc = "Terminal" })
 vim.keymap.set("n", "<leader>ob", ":OpenBuildRunner<CR>", { desc = "Terminal" })
+vim.keymap.set("n", "<leader>om", ":tabnew<CR>:Himalaya<CR>", { desc = "Mail" })
 
 vim.keymap.set("n", "<leader>oa", "", { desc = "+ai" })
 
