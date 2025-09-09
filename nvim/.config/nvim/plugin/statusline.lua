@@ -1,18 +1,23 @@
-local current_timelog = function()
-  local response = vim.system({ 'current_clock' }, { text = true }):wait()
-  if response.code == 0 then
-    return response.stdout
-  else
-    return ''
-  end
-end
-
 local current_project = function()
   return vim.fs.basename(vim.uv.cwd())
 end
 
 local current_clock = function()
   return orgmode.statusline()
+end
+
+local mpris = function()
+  local response = vim.system({ 'playerctl', 'metadata', '-f', '{{trunc(title, 52)}}' }, { text = true }):wait()
+  if response.code == 0 then
+    return vim.trim(response.stdout)
+  else
+    return ''
+  end
+end
+
+local datetime = function()
+  local resp = vim.system({ 'date', '+%d %b %g @ %I:%M %p' }, { text = true }):wait()
+  return vim.trim(resp.stdout)
 end
 
 require("lualine").setup({
@@ -43,11 +48,11 @@ require("lualine").setup({
         "filename",
         path = 1,
         shorting_target = 80,
-      }
+      },
     },
-    lualine_x = { current_project, current_clock, "fileformat", "filetype" },
-    lualine_y = { "progress", },
-    lualine_z = { "location" },
+    lualine_x = { mpris, current_project, current_clock, "fileformat", "filetype" },
+    lualine_y = {},
+    lualine_z = { datetime },
   },
   inactive_sections = {
     lualine_a = {},
