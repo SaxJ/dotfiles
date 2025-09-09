@@ -420,16 +420,6 @@
         ansi-color-for-compilation-mode t)
   (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter))
 
-(use-package ellama
-  :ensure t
-  :bind ("SPC e" . ellama)
-  :hook (org-ctrl-c-ctrl-c-final . ellama-chat-send-last-message)
-  :init
-  (setopt ellama-auto-scroll t)
-  :config
-  (ellama-context-header-line-global-mode +1)
-  (ellama-session-header-line-global-mode +1))
-
 (use-package gptel
   :ensure t
   :config
@@ -441,15 +431,6 @@
   (gptel-make-anthropic "Claude"
     :stream t
     :key (lambda () (auth-source-pick-first-password :host "anthropic"))))
-
-(use-package chatgpt-shell
-  :ensure t
-  :custom
-  ((chatgpt-shell-model-version "claude-sonnet-4-20250514")
-   (chatgpt-shell-anthropic-key
-    (lambda ()
-      (auth-source-pick-first-password :host "anthropic")))))
-
 
 (defun saxon/ai-explain (from to)
   "Ask the AI to explain a selection"
