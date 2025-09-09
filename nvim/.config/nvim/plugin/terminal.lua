@@ -53,6 +53,11 @@ vim.api.nvim_create_user_command("FTerm", function(args)
   open_terminal(args['args'], 'float')
 end, { desc = "Open a horizontal terminal", nargs = '?' })
 
+vim.api.nvim_create_user_command('TTerm', function(args)
+  vim.cmd('tabnew')
+  vim.cmd('terminal ' .. args['args'])
+end, { desc = "Open terminal in new tab", nargs = '?' })
+
 return {
   open_terminal = open_terminal,
 }
