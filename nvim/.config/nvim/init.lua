@@ -20,7 +20,7 @@ vim.pack.add({
   'https://github.com/mason-org/mason-lspconfig.nvim',
   'https://github.com/windwp/nvim-autopairs',
   'https://github.com/stevearc/oil.nvim',
-  "https://github.com/saghen/blink.cmp",
+  { src = "https://github.com/saghen/blink.cmp", version = "v1.6.0" },
   "https://github.com/brianhuster/unnest.nvim",
   "https://github.com/folke/lazydev.nvim",
 

@@ -464,3 +464,6 @@
          (default-directory (expand-file-name (format "/ssh:minikube:%s" remote-pwd))))
     (with-connection-local-variables
      (shell-command cmd))))
+
+(use-package wgrep
+  :ensure t)
