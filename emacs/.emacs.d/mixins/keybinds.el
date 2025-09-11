@@ -214,21 +214,14 @@
     "oa" 'org-agenda
     "o-" 'saxon/open-dired-at-buffer
     "os" 'scratch-buffer
-    "on" 'saxon/open-news
+    "on" 'elfeed
     "oz" 'zone
     "om" 'saxon/open-mail
     "ok" 'kele-dispatch
     "ob" 'build-menu
     "ot" 'multi-vterm
     "op" 'prodigy
-    "oj" 'emira
-
-    ;; chezmoi
-    "cf" 'chezmoi-find
-    "cd" 'chezmoi-diff
-    "cw" 'chezmoi-write
-    "cg" 'chezmoi-magit-status
-    "cs" 'chezmoi-sync-files
+    "oj" 'jira-issues
 
     ;; clocking
     "ti" 'timeclock-in

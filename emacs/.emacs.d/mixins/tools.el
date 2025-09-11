@@ -211,7 +211,8 @@
                        ("https://sachachua.com/blog/category/emacs-news/feed" emacs news)
                        ("https://lobste.rs/top/rss" lobsters news programming)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXONTfGmLC7ltFgLAlHs24g" youtube crime)
-                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9h8BDcXwkhZtnqoQJ7PggA" youtube politics))))
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9h8BDcXwkhZtnqoQJ7PggA" youtube politics)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD3ppgfpHyK_U72XZoY-Yhw" youtube music))))
 
 (use-package elfeed-tube
   :ensure t ;; or :straight t
@@ -265,3 +266,10 @@
   (setopt jira-base-url "https://hejira.atlassian.net"
           jira-username "saxon.jensen@healthengine.com.au"
           jira-token (auth-source-pick-first-password :host "hejira.atlassian.net")))
+
+(use-package tinee
+  :ensure t
+  :vc (tinee :url "https://codeberg.org/tusharhero/tinee.git")
+  :custom
+  ((tinee-send-text-function 'tinee-write)
+   (tinee-frame-name "tinee")))
