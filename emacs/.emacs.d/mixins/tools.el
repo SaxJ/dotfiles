@@ -253,8 +253,34 @@
 (use-package pomo-cat :ensure t)
 (use-package simple-mpc :ensure t)
 
+;;;;;;;;;;;;;;;;;;;
+;; PRESENTATIONS ;;
+;;;;;;;;;;;;;;;;;;;
+
+(use-package hide-mode-line :ensure t)
+
+(defun saxon/presentation-start ()
+  (hide-mode-line-mode 1)
+  (org-display-inline-images)
+  (setopt text-scale-mode-amount 3)
+  (text-scale-mode 1))
+(defun saxon/presentation-stop ()
+  (hide-mode-line-mode 0)
+  (text-scale-mode 0))
+
 (use-package org-tree-slide
-  :ensure t)
+  :ensure t
+  :hook ((org-tree-slide-play . saxon/presentation-start)
+         (org-tree-slide-stop . saxon/presentation-stop))
+  :custom
+  (org-tree-slide-in-effect t)
+  (org-tree-slide-header t)
+  (org-tree-slide-breadcrumbs " > ")
+  (org-image-actual-width nil))
+
+;;;;;;;;;;;
+;; MUSIC ;;
+;;;;;;;;;;;
 
 (use-package mpris
   :ensure t
