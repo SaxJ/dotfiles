@@ -30,7 +30,7 @@ org.setup({
   },
 })
 
-require('denote').setup({
+vim.g.denote = {
   filetype = 'org',
   directory = "~/Documents/wiki/notes/",
   prompts = { 'title', 'keywords' },
@@ -38,4 +38,4 @@ require('denote').setup({
     oil = true,
     telescope = true,
   }
-})
+}
