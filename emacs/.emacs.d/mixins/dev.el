@@ -198,12 +198,17 @@
          ("C-c g" . magit-status)
          ("C-c C-o" . 'forge-browse-this-topic)))
 
+(use-package magit-prime
+  :ensure t
+  :config
+  (add-hook 'magit-pre-refresh-hook 'magit-prime-refresh-cache))
+
 (use-package project
   :config
   (setq project-switch-commands 
         '((project-find-file "Find file" ?f)
           (project-eshell "Eshell" ?e)
-          (eat-project "Shell" ?s)
+          (multi-vterm-project "Shell" ?s)
           (magit-project-status "Magit" ?g)))
   (setq project-vc-extra-root-markers '(".project")))
 
@@ -465,5 +470,5 @@
     (with-connection-local-variables
      (shell-command cmd))))
 
-(use-package wgrep
-  :ensure t)
+(use-package wgrep :ensure t)
+(use-package pug-mode :ensure t)
