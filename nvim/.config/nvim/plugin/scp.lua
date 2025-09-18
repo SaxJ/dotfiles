@@ -2,6 +2,7 @@ vim.g.scp_projects = {
   ["megatron"] = "/home/ubuntu/megatron",
   ["hannibal"] = "/home/ubuntu/hannibal",
   ["unicron"] = "/home/ubuntu/unicron",
+  ["catalyst"] = '/home/ubuntu/catalyst',
 }
 
 local get_project = function()
