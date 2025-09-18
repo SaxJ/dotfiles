@@ -26,7 +26,7 @@
                mpdmacs mpris mu4easy multi-vterm nerd-icons-corfu nvm
                ordered-set orderless org-modern org-music org-ql
                org-roam org-tree-slide origami otpp pocket-reader
-               pomo-cat popper pr-review prescient prodigy
+               pomo-cat popper pr-review prescient prodigy pug-mode
                rainbow-mode simple-mpc soundcloud string-inflection
                sudo-edit templ-ts-mode terraform-mode tinee tramp
                tramp-term tuareg vc-use-package vertico vue-mode
