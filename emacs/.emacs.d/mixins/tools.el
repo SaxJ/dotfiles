@@ -71,6 +71,14 @@
     :init-async (lambda (done)
                   (nvm-use-for "~/Documents/hannibal" done))
     :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t)
+  (prodigy-define-service
+    :name "Morbo"
+    :command "npm"
+    :args '("run" "dev")
+    :cwd "~/Documents/morbo"
+    :tags '(work)
+    :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
 (use-package kubernetes
@@ -212,7 +220,8 @@
                        ("https://lobste.rs/top/rss" lobsters news programming)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXONTfGmLC7ltFgLAlHs24g" youtube crime)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9h8BDcXwkhZtnqoQJ7PggA" youtube politics)
-                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD3ppgfpHyK_U72XZoY-Yhw" youtube music))))
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD3ppgfpHyK_U72XZoY-Yhw" youtube music)
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCRWyPm7MrfotIYF8A8MGV3g" youtube gaming))))
 
 (use-package elfeed-tube
   :ensure t ;; or :straight t
