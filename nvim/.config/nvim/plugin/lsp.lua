@@ -4,7 +4,6 @@ require("mason-lspconfig").setup({
   automatic_enable = false
 })
 
-local nvim_lsp = require("lspconfig")
 
 local on_attach = function(client, bufnr)
   -- format on save
@@ -19,7 +18,7 @@ local on_attach = function(client, bufnr)
   end
 end
 
-require("lspconfig").lua_ls.setup({
+vim.lsp.config('lua_ls', {
   on_attach = on_attach,
   settings = {
     Lua = {
@@ -40,7 +39,9 @@ require("lspconfig").lua_ls.setup({
     },
   },
 })
-nvim_lsp["intelephense"].setup({
+vim.lsp.enable('lua_ls')
+
+vim.lsp.config("intelephense", {
   settings = {
     intelephense = {
       telemetry = {
@@ -52,38 +53,61 @@ nvim_lsp["intelephense"].setup({
     }
   }
 })
-nvim_lsp["omnisharp"].setup({
+vim.lsp.enable('intelephense')
+
+vim.lsp.config("omnisharp", {
   cmd = { "omnisharp" },
   on_attach = on_attach,
 })
-nvim_lsp["ts_ls"].setup({
+vim.lsp.enable('omnisharp')
+
+vim.lsp.config("ts_ls", {
   on_attach = on_attach,
 })
-nvim_lsp["cssls"].setup({
+vim.lsp.enable('ts_ls')
+
+vim.lsp.config("cssls", {
   on_attach = on_attach,
 })
-nvim_lsp["html"].setup({
+vim.lsp.enable('cssls')
+
+vim.lsp.config("html", {
   on_attach = on_attach,
 })
-nvim_lsp["jsonls"].setup({
+vim.lsp.enable('html')
+
+vim.lsp.config("jsonls", {
   on_attach = on_attach,
 })
-nvim_lsp["pyright"].setup({
+vim.lsp.enable('jsonls')
+
+vim.lsp.config("pyright", {
   on_attach = on_attach,
 })
-nvim_lsp["ocamllsp"].setup({
+vim.lsp.enable('pyright')
+
+vim.lsp.config("ocamllsp", {
   cmd = { "opam", "exec", "--", "ocamllsp" },
   on_attach = on_attach,
 })
-nvim_lsp["templ"].setup({
+vim.lsp.enable('ocamllsp')
+
+vim.lsp.config("templ", {
   on_attach = on_attach,
 })
-nvim_lsp["gopls"].setup({
+vim.lsp.enable('templ')
+
+vim.lsp.config("gopls", {
   on_attach = on_attach,
 })
-nvim_lsp["bashls"].setup({
+vim.lsp.enable('gopls')
+
+vim.lsp.config("bashls", {
   on_attach = on_attach,
 })
-nvim_lsp['hls'].setup({
+vim.lsp.enable('bashls')
+
+vim.lsp.config("hls", {
   on_attach = on_attach
 })
+vim.lsp.enable('hls')
