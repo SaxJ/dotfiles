@@ -31,32 +31,43 @@ local picker = function()
   if package == nil then
     error('Could not read runner scripts')
   end
-  local scriptsList = vim.fn.keys(package.json)
+  local scripts_list = vim.fn.keys(package.json)
 
-  local pickers = require("telescope.pickers")
-  local finders = require("telescope.finders")
-  local conf = require("telescope.config").values
-  local actions = require "telescope.actions"
-  local action_state = require "telescope.actions.state"
+  local items = {}
+  for idx, cmd in ipairs(scripts_list) do
+    local item = {
+      idx = idx,
+      name = cmd,
+      text = cmd,
+      action = string.format(package.runner, cmd),
+      preview = package.json[cmd],
+    }
 
-  local myPicker = pickers.new({}, {
-    prompt_title = 'Run',
-    finder = finders.new_table({
-      results = scriptsList,
-    }),
-    sorter = conf.generic_sorter({}),
-    attach_mappings = function(prompt_bufnr, map)
-      actions.select_default:replace(function()
-        actions.close(prompt_bufnr)
-        local selection = action_state.get_selected_entry()
+    table.insert(items, item)
+  end
 
-        vim.cmd(string.format("FTerm " .. package.runner, selection[1]))
-      end)
-      return true
+  Snacks.picker({
+    title = "Runner",
+    layout = {
+      preset = 'default',
+      preview = nil,
+    },
+    preview = function (ctx)
+      ctx.preview:reset()
+      ctx.preview:highlight({ft = 'bash'})
+      ctx.preview:set_lines({ctx.item.preview})
+    end,
+    format = function(item)
+      return {
+        { item.text }
+      }
+    end,
+    items = items,
+    confirm = function(picker, item)
+      picker:close()
+      vim.cmd('FTerm ' .. item.action)
     end
   })
-
-  myPicker:find()
 end
 
 
