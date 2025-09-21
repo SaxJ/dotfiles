@@ -1,34 +1,50 @@
-vim.api.nvim_create_user_command("JiraList", function()
-  local buf = vim.api.nvim_create_buf(true, true)
-  local win = vim.api.nvim_open_win(buf, true, {
-    win = -1,
-    split = 'below',
-  });
+local get_issues = function()
+  local handle = vim.system({ 'jira', 'issue', 'list', '--raw' }, { text = true }):wait()
+  if handle.code > 0 then
+    error('An error occurred running jira command')
+    return {}
+  end
 
-  vim.api.nvim_set_option_value('wrap', false, { win = win })
-  vim.api.nvim_set_option_value('filetype', 'jira-issues', { buf = buf })
-  vim.api.nvim_set_option_value('tabstop', 8, { buf = buf })
+  return vim.json.decode(handle.stdout)
+end
 
-  vim.keymap.set('n', 'q', ':bd<CR>', { buffer = buf })
-  vim.keymap.set('n', 'o', function()
-    local line = vim.api.nvim_get_current_line()
-    local key = vim.fn.split(line)[1]
-    vim.keymap.set('n', 'o', string.format(':! jira open %s<CR>', key))
-  end)
-  vim.keymap.set('n', 'v', function()
-    local info_buf = vim.api.nvim_create_buf(false, true)
-    local line = vim.api.nvim_get_current_line()
-    local key = vim.fn.split(line)[1]
+local picker = function()
+  local issues = get_issues()
 
-    vim.api.nvim_win_set_buf(win, info_buf)
-    vim.cmd(string.format(".! jira issue view %s --plain", key))
+  local items = {}
+  for idx, issue in ipairs(issues) do
+    local item = {
+      idx = idx,
+      key = issue['key'],
+      text = issue['key'] .. issue['fields']['summary'],
+      summary = issue['fields']['summary'],
+      preview = {
+        text = issue['fields']['summary']
+      },
+    }
 
-    vim.keymap.set('n', 'q', ':bd<CR>', { buffer = info_buf })
-    vim.keymap.set('n', 'o', string.format(':! jira open %s<CR>', key), { buffer = info_buf })
-    vim.keymap.set('n', 'a', string.format(':HTerm jira issue move %s<CR>', key), { buffer = info_buf })
-    vim.api.nvim_set_option_value('modifiable', false, { buf = info_buf })
-  end, { buffer = buf })
+    table.insert(items, item)
+  end
 
-  vim.cmd([[.! jira issue list -s "~✅ Done" --columns key,status,summary --plain --no-headers]])
-  vim.api.nvim_set_option_value('modifiable', false, { buf = buf })
-end, { desc = "List Jira issues" })
+  Snacks.picker({
+    title = "Runner",
+    layout = {
+      preset = 'default',
+    },
+    format = function(item)
+      return {
+        { item.key },
+        { "  " },
+        { item.summary },
+      }
+    end,
+    items = items,
+    confirm = function(picker, item)
+      picker:close()
+      print(item.key)
+    end,
+  })
+end
+
+
+vim.api.nvim_create_user_command('JiraIssues', picker, { desc = 'List jira issues' })
