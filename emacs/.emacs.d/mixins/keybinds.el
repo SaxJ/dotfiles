@@ -179,7 +179,9 @@
     "sp" 'consult-ripgrep
 
     ;; music
-    "mm" 'simple-mpc
+    "mp" 'mpris-play-pause
+    "m]" 'mpris-next
+    "m[" 'mpris-previous
 
     ;; notes
     "nj" 'org-journal-new-entry
