@@ -22,16 +22,17 @@
                gptel graphql-ts-mode graphviz-dot-mode haskell-mode
                helm-org hide-mode-line httprepl hurl-mode jira
                jiralib2 jq-mode js-doc json-mode kubernetes-evil
-               lastfm magit-prime marginalia mingus mood-line mpdel
-               mpdmacs mpris mu4easy multi-vterm nerd-icons-corfu nvm
-               ordered-set orderless org-modern org-music org-ql
-               org-roam org-tree-slide origami otpp pocket-reader
-               pomo-cat popper pr-review prescient prodigy pug-mode
-               rainbow-mode simple-mpc soundcloud string-inflection
-               sudo-edit templ-ts-mode terraform-mode tinee tramp
-               tramp-term tuareg vc-use-package vertico vue-mode
-               web-mode wgrep yaml-mode yasnippet yeetube yuck-mode
-               zone-nyan zone-rainbow))
+               lastfm magit-prime marginalia meow mingus mood-line
+               mpdel mpdmacs mpris mu4easy multi-vterm
+               nerd-icons-corfu nvm ordered-set orderless org-modern
+               org-music org-ql org-roam org-tree-slide origami otpp
+               pocket-reader pomo-cat popper pr-review prescient
+               prodigy pug-mode rainbow-mode simple-mpc soundcloud
+               string-inflection sudo-edit templ-ts-mode
+               terraform-mode tinee tramp tramp-term tuareg
+               vc-use-package vertico vue-mode web-mode wgrep
+               yaml-mode yasnippet yeetube yuck-mode zone-nyan
+               zone-rainbow))
  '(package-vc-selected-packages
    '((mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch
             "master")
