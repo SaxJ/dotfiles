@@ -1,49 +1,53 @@
 vim.pack.add({
-  "https://github.com/NeogitOrg/neogit",
-  "https://github.com/folke/trouble.nvim",
-  "https://github.com/ii14/neorepl.nvim",
-  "https://github.com/kylechui/nvim-surround",
-  "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/manuuurino/autoread.nvim",
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/nvim-lualine/lualine.nvim",
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-tree/nvim-web-devicons",
-  "https://github.com/sindrets/diffview.nvim",
-  "https://github.com/stevearc/conform.nvim",
-  "https://github.com/tiagovla/tokyodark.nvim",
-  "https://github.com/yochem/jq-playground.nvim",
-  'https://github.com/echasnovski/mini.nvim',
-  "https://github.com/nvim-lua/plenary.nvim",
-  'https://github.com/fredeeb/tardis.nvim',
-  "https://github.com/mason-org/mason.nvim",
-  'https://github.com/mason-org/mason-lspconfig.nvim',
-  'https://github.com/windwp/nvim-autopairs',
-  'https://github.com/stevearc/oil.nvim',
-  { src = "https://github.com/saghen/blink.cmp", version = "v1.7.0" },
-  "https://github.com/brianhuster/unnest.nvim",
-  "https://github.com/folke/lazydev.nvim",
+	"https://github.com/NeogitOrg/neogit",
+	"https://github.com/folke/trouble.nvim",
+	"https://github.com/ii14/neorepl.nvim",
+	"https://github.com/kylechui/nvim-surround",
+	"https://github.com/lewis6991/gitsigns.nvim",
+	"https://github.com/manuuurino/autoread.nvim",
+	"https://github.com/neovim/nvim-lspconfig",
+	"https://github.com/nvim-lualine/lualine.nvim",
+	"https://github.com/nvim-treesitter/nvim-treesitter",
+	"https://github.com/nvim-tree/nvim-web-devicons",
+	"https://github.com/sindrets/diffview.nvim",
+	"https://github.com/stevearc/conform.nvim",
+	"https://github.com/tiagovla/tokyodark.nvim",
+	"https://github.com/yochem/jq-playground.nvim",
+	'https://github.com/echasnovski/mini.nvim',
+	"https://github.com/nvim-lua/plenary.nvim",
+	'https://github.com/fredeeb/tardis.nvim',
+	"https://github.com/mason-org/mason.nvim",
+	'https://github.com/mason-org/mason-lspconfig.nvim',
+	'https://github.com/windwp/nvim-autopairs',
+	'https://github.com/stevearc/oil.nvim',
+	{ src = "https://github.com/saghen/blink.cmp", version = "v1.7.0" },
+	"https://github.com/brianhuster/unnest.nvim",
+	"https://github.com/folke/lazydev.nvim",
 
-  -- Email
-  "https://github.com/pimalaya/himalaya-vim",
+	-- CSV
+	"https://github.com/emmanueltouzery/decisive.nvim",
 
-  -- Notes
-  "https://github.com/nvim-orgmode/orgmode",
-  "https://github.com/cvigilv/denote.nvim",
+	-- Email
+	"https://github.com/pimalaya/himalaya-vim",
 
-  -- Snacks
-  "https://github.com/folke/snacks.nvim",
+	-- Notes
+	"https://github.com/nvim-orgmode/orgmode",
+	"https://github.com/cvigilv/denote.nvim",
+
+	-- Snacks
+	"https://github.com/folke/snacks.nvim",
 })
 
 require('snacks').setup({
-  picker = {
-    matcher = {
-      cwd_bonus = true,
-      frecency = true,
-    }
-  }
+	picker = {
+		matcher = {
+			cwd_bonus = true,
+			frecency = true,
+		}
+	}
 })
 
+require('decisive').setup({})
 require('lazydev').setup()
 require("nvim-surround").setup({})
 require('tardis-nvim').setup({})
@@ -52,11 +56,11 @@ require('trouble').setup({})
 vim.cmd("colorscheme tokyodark")
 require("nvim-autopairs").setup({})
 require('neogit').setup({
-  graph_style = 'kitty',
-  integrations = {
-    diffview = true,
-    snacks = true,
-  }
+	graph_style = 'kitty',
+	integrations = {
+		diffview = true,
+		snacks = true,
+	}
 })
 
 vim.keymap.del("n", "grr")
@@ -102,16 +106,16 @@ o.shortmess:append "c"
 o.exrc = true
 
 vim.diagnostic.config({
-  virtual_text = false,
-  virtual_lines = false,
-  signs = true,
-  update_in_insert = false,
-  severity_sort = true,
-  underline = true,
-  float = {
-    border = "rounded",
-    severity_sort = true,
-  },
+	virtual_text = false,
+	virtual_lines = false,
+	signs = true,
+	update_in_insert = false,
+	severity_sort = true,
+	underline = true,
+	float = {
+		border = "rounded",
+		severity_sort = true,
+	},
 })
 
 -- Make sure to setup `mapleader` and `maplocalleader` before
@@ -122,25 +126,25 @@ vim.g.maplocalleader = ","
 
 -- Attach LSP keybinds
 vim.api.nvim_create_autocmd("LspAttach", {
-  desc = "LSP Actions",
-  callback = function(event)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = event.buf })
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
-    vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
-      { desc = "Goto implementation", buffer = event.buf })
-    vim.keymap.set(
-      "n",
-      "gr",
-      vim.lsp.buf.references,
-      { desc = "Goto references", buffer = event.buf, noremap = true, nowait = true }
-    )
-    vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
-    vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
+	desc = "LSP Actions",
+	callback = function(event)
+		vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover", buffer = event.buf })
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition, { desc = "Goto definition", buffer = event.buf })
+		vim.keymap.set("n", "gD", vim.lsp.buf.references, { desc = "Goto definition", buffer = event.buf })
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation,
+			{ desc = "Goto implementation", buffer = event.buf })
+		vim.keymap.set(
+			"n",
+			"gr",
+			vim.lsp.buf.references,
+			{ desc = "Goto references", buffer = event.buf, noremap = true, nowait = true }
+		)
+		vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = event.buf })
+		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename, { desc = "Code rename", buffer = event.buf })
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, { desc = "Code actions", buffer = event.buf })
 
-    vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", { desc = "Restart LS" })
-  end,
+		vim.keymap.set('n', '<leader>lr', ":LspRestart<CR>", { desc = "Restart LS" })
+	end,
 })
 
 vim.g.timelog_file = "/home/saxonj/time/timelog"
@@ -152,25 +156,25 @@ vim.keymap.set('t', '<C-j>', '<down>')
 
 -- links
 vim.keymap.set("n", "gx", function()
-  local path = vim.fn.expand("<cfile>")
-  if path:match("^[A-Za-z]+%-[0-9]+") then
-    vim.ui.open(string.format("https://hejira.atlassian.net/browse/%s", path))
-  else
-    vim.ui.open(path)
-  end
+	local path = vim.fn.expand("<cfile>")
+	if path:match("^[A-Za-z]+%-[0-9]+") then
+		vim.ui.open(string.format("https://hejira.atlassian.net/browse/%s", path))
+	else
+		vim.ui.open(path)
+	end
 end, { desc = "Open Link" })
 
 -- general
 vim.keymap.set("n", "<leader>/", Snacks.picker.grep, { desc = "Grep" })
 vim.keymap.set("n", "<leader>sp", Snacks.picker.grep, { desc = "Grep" })
 vim.keymap.set("n", "<leader><leader>", function()
-  Snacks.picker.files({hidden = true})
+	Snacks.picker.files({ hidden = true })
 end, { desc = "Files" })
 vim.keymap.set('n', '<leader>-', ':Oil<CR>', { desc = 'File browser' })
 vim.keymap.set('n', '<leader>R', ':RefreshBuffers<CR>', { desc = 'Refresh Buffers' })
 vim.keymap.set('n', '<leader>.', function()
-  local dir = vim.fn.expand('%:p')
-  Snacks.picker.files({cwd = dir, hidden = true})
+	local dir = vim.fn.expand('%:p')
+	Snacks.picker.files({ cwd = dir, hidden = true })
 end, { desc = "Siblings" })
 
 -- quitting
@@ -187,14 +191,14 @@ vim.keymap.set('n', '<leader><tab>p', ':tabprevious<CR>', { desc = 'Prev' })
 
 -- project
 vim.keymap.set('n', '<leader>pp', function()
-  Snacks.picker.zoxide({hidden = true})
+	Snacks.picker.zoxide({ hidden = true })
 end, { desc = "Switch project" })
 
 -- buffers
 vim.keymap.set("n", "<leader>b", "", { desc = "+buffer" })
 vim.keymap.set("n", "<leader>bb", Snacks.picker.buffers, { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bf", function()
-  require("conform").format({ lsp_fallback = true, async = false })
+	require("conform").format({ lsp_fallback = true, async = false })
 end, { desc = "Format Buffer" })
 
 -- time tracking
@@ -204,8 +208,8 @@ vim.keymap.set("n", "<leader>tt", ":tabnew ~/Documents/wiki/time.org<CR>", { des
 -- files
 vim.keymap.set("n", "<leader>f", "", { desc = "+files" })
 vim.keymap.set("n", "<leader>fY", function()
-  vim.cmd('let @+ = expand("%:.")')
-  print("Yanked file name.")
+	vim.cmd('let @+ = expand("%:.")')
+	print("Yanked file name.")
 end, { desc = "Yank Name" })
 
 -- git
@@ -233,60 +237,60 @@ vim.keymap.set("n", "<leader>om", ":tabnew<CR>:Himalaya<CR>", { desc = "Mail" })
 vim.keymap.set("n", "<leader>oa", "", { desc = "+ai" })
 
 vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    funcs.util.log_work_date()
-  end,
+	callback = function()
+		funcs.util.log_work_date()
+	end,
 })
 
 function Diag_if_no_float()
-  for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
-    if vim.api.nvim_win_get_config(winid).zindex then
-      return
-    end
-  end
-  vim.diagnostic.open_float({
-    scope = "cursor",
-    focusable = true,
-    close_events = {
-      "CursorMoved",
-      "CursorMovedI",
-      "BufHidden",
-      "InsertCharPre",
-      "WinLeave",
-    },
-  })
+	for _, winid in pairs(vim.api.nvim_tabpage_list_wins(0)) do
+		if vim.api.nvim_win_get_config(winid).zindex then
+			return
+		end
+	end
+	vim.diagnostic.open_float({
+		scope = "cursor",
+		focusable = true,
+		close_events = {
+			"CursorMoved",
+			"CursorMovedI",
+			"BufHidden",
+			"InsertCharPre",
+			"WinLeave",
+		},
+	})
 end
 
 vim.api.nvim_create_augroup("lsp_diagnostics_hold", { clear = true })
 vim.api.nvim_create_autocmd("CursorHold", {
-  pattern = "*",
-  callback = Diag_if_no_float,
+	pattern = "*",
+	callback = Diag_if_no_float,
 })
 
 vim.api.nvim_create_user_command("FileToBranch", function(args)
-  local local_relative_filename = vim.fn.expand("%:p:.")
-  local branch = args['args']
+	local local_relative_filename = vim.fn.expand("%:p:.")
+	local branch = args['args']
 
-  local result = vim.system({ 'git', 'checkout', branch, '--', local_relative_filename }, { text = true }):wait()
-  if result.code == 0 then
-    vim.fn.printf("Reverted file to %s", branch)
-  else
-    error(result.stdout)
-  end
+	local result = vim.system({ 'git', 'checkout', branch, '--', local_relative_filename }, { text = true }):wait()
+	if result.code == 0 then
+		vim.fn.printf("Reverted file to %s", branch)
+	else
+		error(result.stdout)
+	end
 end, {
-  desc = "Revert a file to the version on the given branch.",
-  nargs = 1,
-  complete = function(lead, _, _)
-    vim.fn.printf(lead)
-    local branches = vim.system(
-          { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format(
-            "*%s*", lead) },
-          { text = true })
-        :wait()
-    if branches.code == 0 then
-      return vim.split(branches.stdout, '\n')
-    else
-      return {}
-    end
-  end
+	desc = "Revert a file to the version on the given branch.",
+	nargs = 1,
+	complete = function(lead, _, _)
+		vim.fn.printf(lead)
+		local branches = vim.system(
+			    { 'git', 'branch', '--list', '--all', '--format=%(refname:short)', '-i', string.format(
+				    "*%s*", lead) },
+			    { text = true })
+		    :wait()
+		if branches.code == 0 then
+			return vim.split(branches.stdout, '\n')
+		else
+			return {}
+		end
+	end
 })
