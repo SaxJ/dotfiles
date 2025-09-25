@@ -68,8 +68,6 @@
     :args '("dev")
     :cwd "~/Documents/hannibal"
     :tags '(work)
-    :init-async (lambda (done)
-                  (nvm-use-for "~/Documents/hannibal" done))
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t)
   (prodigy-define-service
@@ -81,11 +79,6 @@
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
-(use-package kubernetes
-  :ensure t)
-(use-package kubernetes-evil
-  :ensure t
-  :after kubernetes)
 
 (use-package chezmoi
   :ensure t)
@@ -295,6 +288,10 @@
   :ensure t
   :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch "main"))
 
+;;;;;;;;;;
+;; JIRA ;;
+;;;;;;;;;;
+
 (use-package jira
   :ensure t
   :config
@@ -308,3 +305,17 @@
   :custom
   ((tinee-send-text-function 'tinee-write)
    (tinee-frame-name "tinee")))
+
+;;;;;;;;;;;;;;;;
+;; KUBERNETES ;;
+;;;;;;;;;;;;;;;;
+
+(use-package kubernetes
+  :ensure t)
+
+(use-package kubernetes-evil
+  :ensure t
+  :after kubernetes)
+
+(use-package kubed
+  :ensure t)
