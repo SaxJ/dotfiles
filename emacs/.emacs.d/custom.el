@@ -21,7 +21,7 @@
                evil-org evil-surround forge general git-timemachine
                gptel graphql-ts-mode graphviz-dot-mode haskell-mode
                helm-org hide-mode-line httprepl hurl-mode jira
-               jiralib2 jq-mode js-doc json-mode kubernetes-evil
+               jiralib2 jq-mode js-doc json-mode kubed kubernetes-evil
                lastfm magit-prime marginalia meow mingus mood-line
                mpdel mpdmacs mpris mu4easy multi-vterm
                nerd-icons-corfu nvm ordered-set orderless org-modern
