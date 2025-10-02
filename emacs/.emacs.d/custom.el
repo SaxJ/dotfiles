@@ -16,37 +16,24 @@
    '(aidermacs apheleia avy build cape casual chatgpt-shell chezmoi
                confluence-markup-mode corfu-terminal csproj-mode
                csv-mode denote-journal dired-preview dslide dune eat
-               ef-themes eglot-fsharp elfeed-tube ellama elm-mode
-               embark-consult epresent evil-collection evil-commentary
-               evil-org evil-surround forge general git-timemachine
-               gptel graphql-ts-mode graphviz-dot-mode haskell-mode
-               helm-org hide-mode-line httprepl hurl-mode jira
-               jiralib2 jq-mode js-doc json-mode kubed kubernetes-evil
-               lastfm magit-prime marginalia meow mingus mood-line
-               mpdel mpdmacs mpris mu4easy multi-vterm
-               nerd-icons-corfu nvm ordered-set orderless org-modern
-               org-music org-ql org-roam org-tree-slide origami otpp
-               pocket-reader pomo-cat popper pr-review prescient
-               prodigy pug-mode rainbow-mode simple-mpc soundcloud
-               string-inflection sudo-edit templ-ts-mode
-               terraform-mode tinee tramp tramp-term tuareg
-               vc-use-package vertico vue-mode web-mode wgrep
+               ef-themes eglot-fsharp ejira3 elfeed-tube ellama
+               elm-mode embark-consult epresent evil-collection
+               evil-commentary evil-org evil-surround forge general
+               git-timemachine gptel graphql-ts-mode graphviz-dot-mode
+               haskell-mode helm-org hide-mode-line httprepl hurl-mode
+               jira jiralib2 jiralib3 jq-mode js-doc json-mode kubed
+               kubernetes-evil lastfm magit-prime marginalia meow
+               mingus mood-line mpdel mpdmacs mpris mu4easy
+               multi-vterm nerd-icons-corfu nvm ordered-set orderless
+               org-modern org-music org-ql org-roam org-tree-slide
+               origami otpp ox-jira3 pocket-reader pomo-cat popper
+               pr-review prescient prodigy pug-mode rainbow-mode
+               simple-mpc soundcloud string-inflection sudo-edit
+               templ-ts-mode terraform-mode tinee tramp tramp-term
+               tuareg vc-use-package vertico vue-mode web-mode wgrep
                yaml-mode yasnippet yeetube yuck-mode zone-nyan
                zone-rainbow))
- '(package-vc-selected-packages
-   '((mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch
-            "master")
-     (confluence-markup-mode :url
-                             "https://github.com/rmloveland/confluence-markup-mode"
-                             :branch "master")
-     (build :url "https://github.com/SaxJ/build.el" :branch "master")
-     (org-music :url "https://github.com/debanjum/org-music" :branch
-                "master")
-     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
-             "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package")))
+ '(package-vc-selected-packages '((ejira3 :url "https://git.sr.ht/~madearl/ejira3")))
  '(safe-local-variable-values
    '((ssh-deploy-async . 0)
      (ssh-deploy-root-remote
