@@ -43,6 +43,9 @@ local picker = function()
       picker:close()
       print(item.key)
     end,
+    preview = function(ctx)
+      Snacks.picker.preview.cmd({ 'jira', 'issue', 'view', ctx.item.key, '--plain' }, ctx, { ft = 'markdown' })
+    end
   })
 end
 
