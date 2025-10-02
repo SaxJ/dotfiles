@@ -201,21 +201,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(helm-minibuffer-history-key "M-p")
- '(package-vc-selected-packages
-   '((mpris :url "https://code.tecosaur.net/tec/mpris.el" :branch
-            "master")
-     (confluence-markup-mode :url
-                             "https://github.com/rmloveland/confluence-markup-mode"
-                             :branch "master")
-     (build :url "https://github.com/SaxJ/build.el" :branch "master")
-     (org-music :url "https://github.com/debanjum/org-music" :branch
-                "master")
-     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
-             "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package"))))
+ '(package-vc-selected-packages '((ejira3 :url "https://git.sr.ht/~madearl/ejira3"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
