@@ -310,12 +310,5 @@
 ;; KUBERNETES ;;
 ;;;;;;;;;;;;;;;;
 
-(use-package kubernetes
-  :ensure t)
-
-(use-package kubernetes-evil
-  :ensure t
-  :after kubernetes)
-
 (use-package kubed
   :ensure t)
