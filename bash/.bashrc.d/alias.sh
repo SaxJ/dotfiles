@@ -22,3 +22,8 @@ function cd() {
     zellij action rename-tab "$(basename "$(pwd)")"
   fi
 }
+
+# Kakoune
+function k() {
+  kak -s $(basename "$(pwd)")
+}
