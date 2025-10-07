@@ -2,10 +2,12 @@
   :ensure t
   :config
   (setq meow-cheatsheet-layout meow-cheatsheet-layout-qwerty)
+
   (meow-motion-define-key
    '("j" . meow-next)
    '("k" . meow-prev)
    '("<escape>" . ignore))
+
   (meow-leader-define-key
    ;; Use SPC (0-9) for digit arguments.
    '("1" . meow-digit-argument)
@@ -20,6 +22,7 @@
    '("0" . meow-digit-argument)
    '("/" . meow-keypad-describe-key)
    '("?" . meow-cheatsheet))
+
   (meow-normal-define-key
    '("0" . meow-expand-0)
    '("9" . meow-expand-9)
@@ -82,4 +85,5 @@
    '("z" . meow-pop-selection)
    '("'" . repeat)
    '("<escape>" . ignore))
+
   (meow-global-mode))
