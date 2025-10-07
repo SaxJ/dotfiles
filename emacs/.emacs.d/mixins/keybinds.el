@@ -132,6 +132,10 @@
   :ensure t
   :config
   (general-evil-setup)
+
+  (general-mmap
+    "f" 'avy-goto-char-in-line)
+
   (general-nmap
     :prefix "SPC"
     "SPC" 'project-find-file
