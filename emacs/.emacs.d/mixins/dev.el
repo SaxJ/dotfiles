@@ -22,6 +22,9 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(defun saxon/eglot-capf ()
+  (setq-local completion-at-point-functions (list (cape-capf-super #'cape-dabbrev #'eglot-completion-at-point #'cape-file))))
+
 (defun saxon/install-language-server ()
   "Install a language server for the current buffer."
   (interactive)
@@ -269,7 +272,10 @@
                '(tuareg-mode . ("opam" "exec" "--" "ocamllsp")))
 
   (setq-default eglot-workspace-configuration
-                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.3.0")))))
+                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.3.0"))))
+
+  ;;(add-hook 'eglot-managed-mode-hook #'saxon/eglot-capf)
+  )
 
 (defun saxon/no-format-p ()
   (member major-mode '("php-ts-mode")))
