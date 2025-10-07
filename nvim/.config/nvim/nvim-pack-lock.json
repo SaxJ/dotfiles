@@ -1,0 +1,35 @@
+{
+  "plugins": {
+    "autoread.nvim": [],
+    "blink.cmp": {
+      "version": "'v1.7.0'"
+    },
+    "conform.nvim": [],
+    "decisive.nvim": [],
+    "denote.nvim": [],
+    "diffview.nvim": [],
+    "gitsigns.nvim": [],
+    "himalaya-vim": [],
+    "jq-playground.nvim": [],
+    "lazydev.nvim": [],
+    "lualine.nvim": [],
+    "mason-lspconfig.nvim": [],
+    "mason.nvim": [],
+    "mini.nvim": [],
+    "neogit": [],
+    "neorepl.nvim": [],
+    "nvim-autopairs": [],
+    "nvim-lspconfig": [],
+    "nvim-surround": [],
+    "nvim-treesitter": [],
+    "nvim-web-devicons": [],
+    "oil.nvim": [],
+    "orgmode": [],
+    "plenary.nvim": [],
+    "snacks.nvim": [],
+    "tardis.nvim": [],
+    "tokyodark.nvim": [],
+    "trouble.nvim": [],
+    "unnest.nvim": []
+  }
+}
