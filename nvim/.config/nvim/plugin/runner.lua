@@ -52,10 +52,10 @@ local picker = function()
       preset = 'default',
       preview = nil,
     },
-    preview = function (ctx)
+    preview = function(ctx)
       ctx.preview:reset()
-      ctx.preview:highlight({ft = 'bash'})
-      ctx.preview:set_lines({ctx.item.preview})
+      ctx.preview:highlight({ ft = 'bash' })
+      ctx.preview:set_lines({ ctx.item.preview })
     end,
     format = function(item)
       return {
@@ -65,7 +65,7 @@ local picker = function()
     items = items,
     confirm = function(picker, item)
       picker:close()
-      vim.cmd('FTerm ' .. item.action)
+      vim.cmd('HTerm ' .. item.action)
     end
   })
 end
