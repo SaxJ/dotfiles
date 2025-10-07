@@ -99,9 +99,14 @@
   :init
   (global-corfu-mode)
   :config
-  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
   (setq corfu-auto t)
+  ;; Add some completions
+  ;; (setq cape-dabbrev-buffer-function 'current-buffer
+  ;;       dabbrev-case-replace t)
+  ;; (add-to-list 'completion-at-point-functions #'cape-file)
+  ;; (add-to-list 'completion-at-point-functions #'dabbrev-capf)
   :bind
   (:map corfu-map
         ([tab] . corfu-next)
