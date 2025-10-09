@@ -4,18 +4,26 @@
     "blink.cmp": {
       "version": "'v1.7.0'"
     },
-    "conform.nvim": [],
+    "conform.nvim": {
+      "rev": "fbcb4fa"
+    },
     "decisive.nvim": [],
     "denote.nvim": [],
     "diffview.nvim": [],
     "gitsigns.nvim": [],
     "himalaya-vim": [],
     "jq-playground.nvim": [],
-    "lazydev.nvim": [],
+    "lazydev.nvim": {
+      "rev": "e28ce52"
+    },
     "lualine.nvim": [],
-    "mason-lspconfig.nvim": [],
+    "mason-lspconfig.nvim": {
+      "rev": "6bdb14f"
+    },
     "mason.nvim": [],
-    "mini.nvim": [],
+    "mini.nvim": {
+      "rev": "ef89bb1"
+    },
     "neogit": [],
     "neorepl.nvim": [],
     "nvim-autopairs": [],
@@ -26,10 +34,14 @@
     "oil.nvim": [],
     "orgmode": [],
     "plenary.nvim": [],
-    "snacks.nvim": [],
+    "snacks.nvim": {
+      "rev": "dae80fb"
+    },
     "tardis.nvim": [],
     "tokyodark.nvim": [],
-    "trouble.nvim": [],
+    "trouble.nvim": {
+      "rev": "c098362"
+    },
     "unnest.nvim": []
   }
 }
