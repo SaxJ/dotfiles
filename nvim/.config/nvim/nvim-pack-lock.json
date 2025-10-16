@@ -16,26 +16,36 @@
     "lazydev.nvim": {
       "rev": "e28ce52"
     },
-    "lualine.nvim": [],
+    "lualine.nvim": {
+      "rev": "e533fac"
+    },
     "mason-lspconfig.nvim": {
       "rev": "6bdb14f"
     },
     "mason.nvim": [],
     "mini.nvim": {
-      "rev": "ef89bb1"
+      "rev": "89eecd8"
     },
-    "neogit": [],
+    "neogit": {
+      "rev": "0f48491a"
+    },
     "neorepl.nvim": [],
-    "nvim-autopairs": [],
-    "nvim-lspconfig": [],
+    "nvim-autopairs": {
+      "rev": "7a2c97c"
+    },
+    "nvim-lspconfig": {
+      "rev": "ac98db2"
+    },
     "nvim-surround": [],
     "nvim-treesitter": [],
     "nvim-web-devicons": [],
-    "oil.nvim": [],
+    "oil.nvim": {
+      "rev": "200df01"
+    },
     "orgmode": [],
     "plenary.nvim": [],
     "snacks.nvim": {
-      "rev": "dae80fb"
+      "rev": "454ba02"
     },
     "tardis.nvim": [],
     "tokyodark.nvim": [],
