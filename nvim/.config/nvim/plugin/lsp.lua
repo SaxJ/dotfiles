@@ -1,10 +1,3 @@
-local mason = require('mason')
-mason.setup()
-require("mason-lspconfig").setup({
-  automatic_enable = false
-})
-
-
 local on_attach = function(client, bufnr)
   -- format on save
   if client.server_capabilities.documentFormattingProvider then

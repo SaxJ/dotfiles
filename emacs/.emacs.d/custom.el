@@ -22,8 +22,8 @@
               helm-org hide-mode-line hurl-mode jira jiralib2 jq-mode
               json-mode kubed lastfm magit-prime marginalia mood-line
               mpris mu4e-alert multi-vterm nerd-icons-corfu nvm
-              orderless org-modern org-music org-ql org-roam
-              org-tree-slide origami otpp plz pomo-cat popper
+              ob-mermaid orderless org-modern org-music org-ql
+              org-roam org-tree-slide origami otpp plz pomo-cat popper
               pr-review prescient prodigy pug-mode rainbow-mode
               simple-mpc soundcloud string-inflection sudo-edit
               templ-ts-mode terraform-mode tinee tuareg vc-use-package
