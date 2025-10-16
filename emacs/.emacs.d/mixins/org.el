@@ -381,3 +381,10 @@
   (setq denote-directory (expand-file-name "~/Documents/wiki/notes/")
         denote-save-buffers t)
   (denote-rename-buffer-mode 1))
+
+(use-package org-tempo
+  :after org)
+
+(use-package ob-mermaid
+  :ensure t
+  :after org)

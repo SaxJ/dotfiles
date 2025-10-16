@@ -169,7 +169,12 @@
 (defun saxon/get-mpris-track-title ()
   "Get the title of the currently playing track"
   (unless (eq (mpris-get-metadata) 'no-player)
-    (s-trim (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist)))))
+    (s-truncate 50 (s-trim (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist))))))
+
+(defun saxon/clocking-status ()
+  "Clearly show when not clocking time."
+  (if (org-clocking-p) ""
+    (propertize "Not Clocking " 'face 'mood-line-status-error)))
 
 (defun saxon/browse-url-mpv (url &rest args)
   (start-process "mpv" "*mpv*" "mpv" url))
@@ -178,6 +183,7 @@
   :ensure nil
   :config
   (setq global-mode-string '(
+                             (:eval (saxon/clocking-status))
                              "🎵 " (:eval (saxon/get-mpris-track-title))
                              (:eval (mu4e--modeline-string))
                              " 🕓 " display-time-string
