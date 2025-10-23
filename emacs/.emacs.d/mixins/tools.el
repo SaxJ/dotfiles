@@ -242,10 +242,11 @@
   (interactive)
   (shell-command "openvpn3 session-manage --disconnect --config ~/office.ovpn"))
 
-(use-package timeclock
-  :ensure nil
-  :config
-  (setq timeclock-file "~/time/timelog"))
+(defun saxon/start-kube ()
+  "Start dev server"
+  (interactive)
+  (let ((default-directory "~/Documents/k8s/"))
+    (async-shell-command "./tools/start-dev-instance.sh")))
 
 (use-package dired-preview
   :ensure t
@@ -312,3 +313,18 @@
 
 (use-package kubed
   :ensure t)
+
+;;;;;;;;;;;;;;;;;;;;;
+;; TIME MANAGEMENT ;;
+;;;;;;;;;;;;;;;;;;;;;
+
+(use-package twen-twen-tw
+  :ensure t
+  :vc (twen-twen-tw :url "https://github.com/benbellick/twen-twen-tw.el.git")
+  :config
+  (twen-twen-tw-mode 1))
+
+(use-package timeclock
+  :ensure nil
+  :config
+  (setq timeclock-file "~/time/timelog"))
