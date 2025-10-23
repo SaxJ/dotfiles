@@ -102,11 +102,6 @@
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
   (setq corfu-auto t)
-  ;; Add some completions
-  ;; (setq cape-dabbrev-buffer-function 'current-buffer
-  ;;       dabbrev-case-replace t)
-  ;; (add-to-list 'completion-at-point-functions #'cape-file)
-  ;; (add-to-list 'completion-at-point-functions #'dabbrev-capf)
   :bind
   (:map corfu-map
         ([tab] . corfu-next)
@@ -169,7 +164,7 @@
 (defun saxon/get-mpris-track-title ()
   "Get the title of the currently playing track"
   (unless (eq (mpris-get-metadata) 'no-player)
-    (s-truncate 50 (s-trim (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist))))))
+    (s-truncate 30 (s-trim (format "%s" (mpris-track-attr 'title))))))
 
 (defun saxon/clocking-status ()
   "Clearly show when not clocking time."
@@ -182,6 +177,10 @@
 (use-package emacs
   :ensure nil
   :config
+  ;; Text expansion
+  (global-set-key [remap dabbrev-expand] 'hippie-expand)
+
+  ;; Mode line
   (setq global-mode-string '(
                              (:eval (saxon/clocking-status))
                              "🎵 " (:eval (saxon/get-mpris-track-title))
