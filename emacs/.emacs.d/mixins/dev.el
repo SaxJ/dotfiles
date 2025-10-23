@@ -22,9 +22,6 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-(defun saxon/eglot-capf ()
-  (setq-local completion-at-point-functions (list (cape-capf-super #'cape-dabbrev #'eglot-completion-at-point #'cape-file))))
-
 (defun saxon/install-language-server ()
   "Install a language server for the current buffer."
   (interactive)
@@ -215,9 +212,12 @@
           (magit-project-status "Magit" ?g)))
   (setq project-vc-extra-root-markers '(".project")))
 
+(use-package yasnippet-snippets
+  :ensure t)
 (use-package yasnippet
   :ensure t
   :config
+  (setq hippie-expand-try-functions-list (cons 'yas-hippie-try-expand hippie-expand-try-functions-list))
   (yas-global-mode 1))
 
 (use-package eglot
@@ -478,3 +478,4 @@
 
 (use-package wgrep :ensure t)
 (use-package pug-mode :ensure t)
+(use-package devdocs :ensure t)
