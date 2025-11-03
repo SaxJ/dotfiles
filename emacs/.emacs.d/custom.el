@@ -12,22 +12,9 @@
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
- '(package-selected-packages '(devdocs twen-twen-tw))
+ '(package-selected-packages nil)
  '(package-vc-selected-packages
-   '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
-     (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch
-            "main")
-     (confluence-markup-mode :url
-                             "https://github.com/rmloveland/confluence-markup-mode"
-                             :branch "master")
-     (build :url "https://github.com/SaxJ/build.el" :branch "master")
-     (org-music :url "https://github.com/debanjum/org-music" :branch
-                "master")
-     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
-             "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package")))
+   '((org-ql :url "https://github.com/alphapapa/org-ql" :branch "master")))
  '(safe-local-variable-values
    '((ssh-deploy-async . 0)
      (ssh-deploy-root-remote
