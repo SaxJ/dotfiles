@@ -318,12 +318,6 @@
 ;; TIME MANAGEMENT ;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(use-package twen-twen-tw
-  :ensure t
-  :vc (twen-twen-tw :url "https://github.com/benbellick/twen-twen-tw.el.git")
-  :config
-  (twen-twen-tw-mode 1))
-
 (use-package timeclock
   :ensure nil
   :config
