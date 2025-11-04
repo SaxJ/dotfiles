@@ -131,9 +131,6 @@
 			                                                                  " ")))
                                                      (call-process-shell-command command nil 0)))))
 
-(use-package casual
-  :ensure t)
-
 (use-package pr-review
   :ensure t)
 
@@ -322,3 +319,20 @@
   :ensure nil
   :config
   (setq timeclock-file "~/time/timelog"))
+
+;;;;;;;;
+;; UI ;;
+;;;;;;;;
+
+(use-package casual
+  :ensure t)
+
+(use-package casual-calc
+  :ensure nil
+  :bind (:map
+         calc-mode-map
+         ("C-o" . casual-calc-tmenu)
+         :map
+         calc-alg-map
+         ("C-o" . casual-calc-tmenu))
+  :after (calc))
