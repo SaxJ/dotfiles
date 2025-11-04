@@ -2,7 +2,6 @@ vim.pack.add({
   "https://github.com/NeogitOrg/neogit",
   "https://github.com/kylechui/nvim-surround",
   "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/manuuurino/autoread.nvim",
   "https://github.com/neovim/nvim-lspconfig",
   "https://github.com/nvim-lualine/lualine.nvim",
   "https://github.com/nvim-treesitter/nvim-treesitter",
@@ -22,9 +21,6 @@ vim.pack.add({
   -- CSV
   "https://github.com/emmanueltouzery/decisive.nvim",
 
-  -- Email
-  "https://github.com/pimalaya/himalaya-vim",
-
   -- Notes
   "https://github.com/nvim-orgmode/orgmode",
   "https://github.com/cvigilv/denote.nvim",
@@ -42,7 +38,6 @@ require('snacks').setup({
   }
 })
 
-require('autoread').setup({})
 require('decisive').setup({})
 require('lazydev').setup()
 require("nvim-surround").setup({})
