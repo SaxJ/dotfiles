@@ -388,3 +388,11 @@
 (use-package ob-mermaid
   :ensure t
   :after org)
+
+(use-package epresent
+  :ensure t
+  :config
+  (setq epresent-text-scale 300
+        epresent-src-blocks-visible nil
+        epresent-mode-line nil)
+  (add-hook 'epresent-start-presentation-hook #'evil-emacs-state))
