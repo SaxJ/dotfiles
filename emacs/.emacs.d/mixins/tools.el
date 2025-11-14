@@ -322,9 +322,12 @@
   :ensure t
   :vc (twen-twen-tw :url "https://github.com/benbellick/twen-twen-tw.el.git")
   :config
+  (setq twen-twen-tw-interval 60)
   (twen-twen-tw-mode 1))
 
 (use-package timeclock
   :ensure nil
   :config
   (setq timeclock-file "~/time/timelog"))
+
+(use-package time-zones :ensure t)
