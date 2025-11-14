@@ -1,37 +1,76 @@
-vim.pack.add({
-  "https://github.com/NeogitOrg/neogit",
-  "https://github.com/kylechui/nvim-surround",
-  "https://github.com/lewis6991/gitsigns.nvim",
-  "https://github.com/manuuurino/autoread.nvim",
-  "https://github.com/neovim/nvim-lspconfig",
-  "https://github.com/nvim-lualine/lualine.nvim",
-  "https://github.com/nvim-treesitter/nvim-treesitter",
-  "https://github.com/nvim-tree/nvim-web-devicons",
-  "https://github.com/sindrets/diffview.nvim",
-  "https://github.com/stevearc/conform.nvim",
-  "https://github.com/tiagovla/tokyodark.nvim",
-  'https://github.com/echasnovski/mini.nvim',
-  "https://github.com/nvim-lua/plenary.nvim",
-  'https://github.com/fredeeb/tardis.nvim',
-  'https://github.com/windwp/nvim-autopairs',
-  'https://github.com/stevearc/oil.nvim',
-  { src = "https://github.com/saghen/blink.cmp", version = "v1.7.0" },
-  "https://github.com/brianhuster/unnest.nvim",
-  "https://github.com/folke/lazydev.nvim",
+-- Clone 'mini.nvim' manually in a way that it gets managed by 'mini.deps'
+local path_package = vim.fn.stdpath('data') .. '/site/'
+local mini_path = path_package .. 'pack/deps/start/mini.nvim'
+if not vim.loop.fs_stat(mini_path) then
+  vim.cmd('echo "Installing `mini.nvim`" | redraw')
+  local clone_cmd = {
+    'git', 'clone', '--filter=blob:none',
+    'https://github.com/nvim-mini/mini.nvim', mini_path
+  }
+  vim.fn.system(clone_cmd)
+  vim.cmd('packadd mini.nvim | helptags ALL')
+  vim.cmd('echo "Installed `mini.nvim`" | redraw')
+end
 
-  -- CSV
-  "https://github.com/emmanueltouzery/decisive.nvim",
+-- Set up 'mini.deps' (customize to your liking)
+require('mini.deps').setup({ path = { package = path_package } })
+local add = MiniDeps.add
 
-  -- Email
-  "https://github.com/pimalaya/himalaya-vim",
-
-  -- Notes
-  "https://github.com/nvim-orgmode/orgmode",
-  "https://github.com/cvigilv/denote.nvim",
-
-  -- Snacks
-  "https://github.com/folke/snacks.nvim",
+add({
+  source = "NeogitOrg/neogit",
+  depends = {
+    "nvim-lua/plenary.nvim",         -- required
+    "sindrets/diffview.nvim",        -- optional - Diff integration
+    "folke/snacks.nvim",             -- optional
+  }
 })
+
+
+add({
+  source = 'nvim-treesitter/nvim-treesitter',
+  -- Use 'master' while monitoring updates in 'main'
+  checkout = 'master',
+  monitor = 'main',
+  -- Perform action after every checkout
+  hooks = { post_checkout = function() vim.cmd('TSUpdate') end },
+})
+
+add({ source = "kylechui/nvim-surround" })
+add({source = "lewis6991/gitsigns.nvim" })
+add({source = "neovim/nvim-lspconfig"})
+add({
+  source = "nvim-lualine/lualine.nvim",
+  depends = {"nvim-tree/nvim-web-devicons"}
+})
+add({source = "stevearc/conform.nvim"})
+add({source = "tiagovla/tokyodark.nvim"})
+add({
+  source = "fredeeb/tardis.nvim",
+  depends = {
+    "nvim-lua/plenary.nvim"
+  }
+})
+add({source = "windwp/nvim-autopairs"})
+add({
+  source = "stevearc/oil.nvim",
+  depends = {
+    "nvim-mini/mini.icons",
+  }
+})
+add({
+  source = "saghen/blink.cmp",
+  checkout = "v1.7.0"
+})
+add({source = "folke/lazydev.nvim"})
+add({source = "nvim-orgmode/orgmode"})
+add({source = "cvigilv/denote.nvim"})
+
+add({source = "brettanomyces/nvim-editcommand"})
+vim.g.editcommand_prompt = '➜'
+-- vim.g.editcommand_use_temp_file = 1
+
+add({source = "samjwill/nvim-unception"})
+vim.g.unception_open_buffer_in_new_tab = true
 
 require('snacks').setup({
   picker = {
@@ -42,8 +81,6 @@ require('snacks').setup({
   }
 })
 
-require('autoread').setup({})
-require('decisive').setup({})
 require('lazydev').setup()
 require("nvim-surround").setup({})
 require('tardis-nvim').setup({})
@@ -99,6 +136,7 @@ o.updatetime = 500
 o.completeopt = { "menuone", "noselect", "noinsert" }
 o.shortmess:append "c"
 o.exrc = true
+o.winborder = 'rounded'
 
 vim.diagnostic.config({
   virtual_text = false,

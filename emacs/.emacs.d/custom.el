@@ -12,7 +12,24 @@
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
- '(package-selected-packages '(devdocs twen-twen-tw))
+ '(package-selected-packages
+   '(apheleia avy build cape casual chezmoi confluence-markup-mode
+              corfu-terminal csproj-mode csv-mode denote devdocs
+              dired-preview dslide dune eat ef-themes eglot-fsharp
+              elfeed-tube elm-mode embark-consult epresent
+              evil-collection evil-commentary evil-org evil-surround
+              forge general git-timemachine gptel graphql-ts-mode
+              graphviz-dot-mode haskell-mode helm-org hide-mode-line
+              hurl-mode jira jiralib2 jq-mode json-mode kubed lastfm
+              magit-prime marginalia mood-line mpris mu4e-alert
+              multi-vterm nerd-icons-corfu nvm ob-mermaid orderless
+              org-modern org-music org-ql org-roam org-tree-slide
+              origami otpp plz pomo-cat popper pr-review prescient
+              prodigy pug-mode rainbow-mode simple-mpc soundcloud
+              string-inflection sudo-edit templ-ts-mode terraform-mode
+              tinee tuareg twen-twen-tw vc-use-package vertico
+              vue-mode web-mode wgrep yaml-mode yasnippet-snippets
+              yeetube yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
    '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
      (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch

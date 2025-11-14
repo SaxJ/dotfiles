@@ -1,57 +1,52 @@
 {
   "plugins": {
-    "autoread.nvim": [],
     "blink.cmp": {
       "version": "'v1.7.0'"
     },
     "conform.nvim": {
-      "rev": "fbcb4fa"
+      "rev": "26c02e1"
     },
     "decisive.nvim": [],
     "denote.nvim": [],
     "diffview.nvim": [],
-    "gitsigns.nvim": [],
-    "himalaya-vim": [],
-    "jq-playground.nvim": [],
+    "gitsigns.nvim": {
+      "rev": "20ad441"
+    },
     "lazydev.nvim": {
-      "rev": "e28ce52"
+      "rev": "371cd74"
     },
     "lualine.nvim": {
-      "rev": "e533fac"
+      "rev": "3946f01"
     },
-    "mason-lspconfig.nvim": {
-      "rev": "6bdb14f"
-    },
-    "mason.nvim": [],
     "mini.nvim": {
-      "rev": "89eecd8"
+      "rev": "f545dcc"
     },
     "neogit": {
-      "rev": "0f48491a"
+      "rev": "d2a2ae44"
     },
-    "neorepl.nvim": [],
-    "nvim-autopairs": {
-      "rev": "7a2c97c"
-    },
+    "nvim-autopairs": [],
     "nvim-lspconfig": {
-      "rev": "ac98db2"
+      "rev": "2010fc6"
     },
-    "nvim-surround": [],
+    "nvim-surround": {
+      "rev": "fcfa7e0"
+    },
     "nvim-treesitter": [],
-    "nvim-web-devicons": [],
-    "oil.nvim": {
-      "rev": "200df01"
+    "nvim-web-devicons": {
+      "rev": "8dcb311"
     },
-    "orgmode": [],
+    "oil.nvim": {
+      "rev": "7e1cd77"
+    },
+    "orgmode": {
+      "rev": "0312641"
+    },
     "plenary.nvim": [],
     "snacks.nvim": {
-      "rev": "454ba02"
+      "rev": "41712e3"
     },
     "tardis.nvim": [],
     "tokyodark.nvim": [],
-    "trouble.nvim": {
-      "rev": "c098362"
-    },
     "unnest.nvim": []
   }
 }
