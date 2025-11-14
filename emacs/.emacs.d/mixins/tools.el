@@ -131,9 +131,6 @@
 			                                                                  " ")))
                                                      (call-process-shell-command command nil 0)))))
 
-(use-package casual
-  :ensure t)
-
 (use-package pr-review
   :ensure t)
 
@@ -318,16 +315,25 @@
 ;; TIME MANAGEMENT ;;
 ;;;;;;;;;;;;;;;;;;;;;
 
-(use-package twen-twen-tw
-  :ensure t
-  :vc (twen-twen-tw :url "https://github.com/benbellick/twen-twen-tw.el.git")
-  :config
-  (setq twen-twen-tw-interval 60)
-  (twen-twen-tw-mode 1))
-
 (use-package timeclock
   :ensure nil
   :config
   (setq timeclock-file "~/time/timelog"))
 
 (use-package time-zones :ensure t)
+;;;;;;;;
+;; UI ;;
+;;;;;;;;
+
+(use-package casual
+  :ensure t)
+
+(use-package casual-calc
+  :ensure nil
+  :bind (:map
+         calc-mode-map
+         ("C-o" . casual-calc-tmenu)
+         :map
+         calc-alg-map
+         ("C-o" . casual-calc-tmenu))
+  :after (calc))
