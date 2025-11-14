@@ -19,7 +19,7 @@
 (setq ring-bell-function 'ignore)
 (setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
 (setq display-time-default-load-average nil) ; this information is useless for most
-(setq initial-buffer-choice #'vterm)
+(setq initial-buffer-choice t)
 
 ;; Automatically reread from disk if the underlying file changes
 (setq auto-revert-interval 1)
@@ -190,7 +190,7 @@
 (load-file (expand-file-name "mixins/org.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/tools.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/mail.el" user-emacs-directory))
-; (load-file (expand-file-name "mixins/meow.el" user-emacs-directory))
+                                        ; (load-file (expand-file-name "mixins/meow.el" user-emacs-directory))
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
