@@ -308,8 +308,12 @@
 ;; KUBERNETES ;;
 ;;;;;;;;;;;;;;;;
 
-(use-package kubed
-  :ensure t)
+(use-package kubernetes
+  :ensure t
+  :commands (kubernetes-overview)
+  :config
+  (setq kubernetes-poll-frequency 3600
+        kubernetes-redraw-frequency 3600))
 
 ;;;;;;;;;;;;;;;;;;;;;
 ;; TIME MANAGEMENT ;;
@@ -336,3 +340,9 @@
          calc-alg-map
          ("C-o" . casual-calc-tmenu))
   :after (calc))
+
+
+(use-package mason
+  :ensure t
+  :config
+  (mason-ensure))
