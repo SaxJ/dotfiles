@@ -479,3 +479,7 @@
 (use-package wgrep :ensure t)
 (use-package pug-mode :ensure t)
 (use-package devdocs :ensure t)
+
+(use-package uv-mode
+  :ensure t
+  :hook (python-ts-mode . uv-mode-auto-activate-hook))
