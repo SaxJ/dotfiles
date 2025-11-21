@@ -1,2 +1,0 @@
-local picker = function()
-end
