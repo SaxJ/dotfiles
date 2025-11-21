@@ -324,6 +324,7 @@
   :config
   (setq timeclock-file "~/time/timelog"))
 
+(use-package time-zones :ensure t)
 ;;;;;;;;
 ;; UI ;;
 ;;;;;;;;
