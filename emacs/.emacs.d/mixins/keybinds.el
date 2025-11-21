@@ -153,6 +153,7 @@
     "TAB TAB" 'tab-switch
     "TAB n" 'tab-next
     "TAB p" 'tab-previous
+    "TAB r" 'tab-recent
 
     ;; buffer bindings
     "bb" 'consult-project-buffer
