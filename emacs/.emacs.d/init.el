@@ -13,7 +13,7 @@
   (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
-(set-face-attribute 'default nil :font "FiraCode Nerd Font-14")
+(set-face-attribute 'default nil :font "Fira Code-14")
 
 (setq inhibit-splash-screen t)
 (setq ring-bell-function 'ignore)
@@ -176,7 +176,7 @@
 (use-package ef-themes
   :ensure t
   :config
-  (load-theme 'ef-winter t))
+  (load-theme 'ef-dream t))
 ;; (load-theme 'modus-vivendi-tinted t)
 
 ;;;;;;;;;;;;;;;;;;;;
@@ -190,7 +190,7 @@
 (load-file (expand-file-name "mixins/org.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/tools.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/mail.el" user-emacs-directory))
-; (load-file (expand-file-name "mixins/meow.el" user-emacs-directory))
+                                        ; (load-file (expand-file-name "mixins/meow.el" user-emacs-directory))
 
 (setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
@@ -214,9 +214,7 @@
                 "master")
      (org-ql :url "https://github.com/alphapapa/org-ql" :branch
              "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package"))))
+     (hurl-mode :url "https://github.com/JasZhe/hurl-mode"))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
