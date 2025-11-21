@@ -1,7 +1,7 @@
 alias vim=nvim
 alias lg=lazygit
 alias v=nvim
-alias hx=helix
+# alias hx=helix
 
 alias ytd="yt-dlp -t aac -o \"~/Music/%(title)s.%(ext)s\" --restrict-filenames --embed-thumbnail --embed-metadata"
 
