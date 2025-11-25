@@ -257,7 +257,7 @@
                '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
                                        (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
-               `(csharp-ts-mode . (,(expand-file-name "lsp/omnisharp/OmniSharp" user-emacs-directory) "--languageserver")))
+               `(csharp-ts-mode . ("OmniSharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
