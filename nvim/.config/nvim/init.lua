@@ -6,6 +6,7 @@ vim.g.have_nerd_font = false
 
 vim.o.number = true
 vim.o.relativenumber = true
+vim.o.nowrap = true
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = "a"
@@ -60,7 +61,7 @@ vim.o.confirm = true
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
-vim.keymap.set("n", "<leader>q", vim.diagnostic.setloclist, { desc = "[Q]uickfix list" })
+vim.keymap.set("n", "<leader>od", vim.diagnostic.setloclist, { desc = "[D]iagnostics" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 
@@ -69,6 +70,13 @@ vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left wind
 vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right window" })
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
+
+vim.keymap.set("n", "<leader>fY", '<cmd>let @+ = expand("%")', { desc = "[Y]ank file name" })
+
+vim.keymap.set("n", "<leader>ru", "<cmd>ScpUpload<CR>", { desc = "[R]emote [U]pload" })
+vim.keymap.set("n", "<leader>rd", "<cmd>ScpDownload<CR>", { desc = "[R]emote [U]pload" })
+
+vim.keymap.set("n", "<leader>ot", "<cmd>terminal<CR>", { desc = "[O]pen [T]erminal" })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -178,6 +186,7 @@ require("lazy").setup({
 			},
 			{ "nvim-telescope/telescope-ui-select.nvim" },
 			{ "nvim-telescope/telescope-project.nvim" },
+			{ "jvgrootveld/telescope-zoxide" },
 
 			-- Useful for getting pretty icons, but requires a Nerd Font.
 			{ "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
@@ -189,44 +198,36 @@ require("lazy").setup({
 						require("telescope.themes").get_dropdown(),
 					},
 				},
+				defaults = {
+					mappings = {
+						i = {
+							["<C-j>"] = require("telescope.actions").move_selection_next,
+							["<C-k>"] = require("telescope.actions").move_selection_previous,
+						},
+					},
+				},
 			})
 
 			-- Enable Telescope extensions if they are installed
 			pcall(require("telescope").load_extension, "fzf")
 			pcall(require("telescope").load_extension, "ui-select")
 			pcall(require("telescope").load_extension, "project")
+			pcall(require("telescope").load_extension, "zoxide")
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
 			vim.keymap.set("n", "<leader>hh", builtin.help_tags, { desc = "[H]elp" })
 			vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[K]eymaps" })
-			vim.keymap.set("n", "<leader>ff", builtin.find_files, { desc = "[S]earch [F]iles" })
 			vim.keymap.set("n", "<leader>ht", builtin.builtin, { desc = "[T]elescope" })
 			vim.keymap.set("n", "<leader>pw", builtin.grep_string, { desc = "[W]ord" })
-			vim.keymap.set("n", "<leader>sp", builtin.live_grep, { desc = "[S]earch [P]roject" })
-			vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[D]iagnostics" })
+			vim.keymap.set("n", "<leader>sp", "<cmd>Telescope live_grep<CR>", { desc = "[S]earch [P]roject" })
+			-- vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[D]iagnostics" })
 			vim.keymap.set("n", "<leader>.", function()
 				builtin.find_files({ cwd = "%:p:h" })
 			end, { desc = "Local Files" })
 			vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Project Files" })
-			vim.keymap.set("n", "<leader>pp", require("telescope").extensions.project.project, { desc = "[P]rojects" })
-
-			vim.keymap.set("n", "<leader>/", function()
-				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep",
-				})
-			end, { desc = "Search" })
-
-			-- It's also possible to pass additional configuration options.
-			--  See `:help telescope.builtin.live_grep()` for information about particular keys
-			vim.keymap.set("n", "<leader>sp", function()
-				builtin.live_grep({
-					grep_open_files = true,
-					prompt_title = "Live Grep",
-				})
-			end, { desc = "[S]earch [P]roject" })
-
+			vim.keymap.set("n", "<leader>pp", require("telescope").extensions.zoxide.list, { desc = "[P]rojects" })
+			vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<CR>", { desc = "Search" })
 			-- Shortcut for searching your Neovim configuration files
 			vim.keymap.set("n", "<leader>oc", function()
 				builtin.find_files({ cwd = vim.fn.stdpath("config") })
@@ -295,7 +296,7 @@ require("lazy").setup({
 
 					-- WARN: This is not Goto Definition, this is Goto Declaration.
 					--  For example, in C this would take you to the header.
-					map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+					map("gD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
 
 					-- Fuzzy find all the symbols in your current document.
 					--  Symbols are things like variables, functions, types, etc.
@@ -312,7 +313,7 @@ require("lazy").setup({
 					-- Jump to the type of the word under your cursor.
 					--  Useful when you're not sure what type a variable is and you want to see
 					--  the definition of its *type*, not where it was *defined*.
-					map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
+					-- map("grt", require("telescope.builtin").lsp_type_definitions, "[G]oto [T]ype Definition")
 
 					-- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
 					---@param client vim.lsp.Client
@@ -439,6 +440,7 @@ require("lazy").setup({
 			local ensure_installed = vim.tbl_keys(servers or {})
 			vim.list_extend(ensure_installed, {
 				"stylua", -- Used to format Lua code
+				"prettier",
 			})
 			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
 
@@ -465,12 +467,12 @@ require("lazy").setup({
 		cmd = { "ConformInfo" },
 		keys = {
 			{
-				"<leader>f",
+				"<leader>bf",
 				function()
 					require("conform").format({ async = true, lsp_format = "fallback" })
 				end,
 				mode = "",
-				desc = "[F]ormat buffer",
+				desc = "[B]uffer [F]ormat",
 			},
 		},
 		opts = {
@@ -491,6 +493,9 @@ require("lazy").setup({
 			end,
 			formatters_by_ft = {
 				lua = { "stylua" },
+				javscript = { "prettier" },
+				typescript = { "prettier" },
+				typescriptreact = { "prettier" },
 				-- Conform can also run multiple formatters sequentially
 				-- python = { "isort", "black" },
 				--
@@ -670,6 +675,40 @@ require("lazy").setup({
 				additional_vim_regex_highlighting = { "ruby" },
 			},
 			indent = { enable = true, disable = { "ruby" } },
+		},
+	},
+	{
+		"NeogitOrg/neogit",
+		lazy = true,
+		dependencies = {
+			"nvim-lua/plenary.nvim", -- required
+			"sindrets/diffview.nvim", -- optional - Diff integration
+
+			"nvim-telescope/telescope.nvim",
+		},
+		cmd = "Neogit",
+		keys = {
+			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
+		},
+	},
+	{
+		"stevearc/oil.nvim",
+		---@module 'oil'
+		---@type oil.SetupOpts
+		opts = {
+			default_file_explorer = true,
+			skip_confirm_for_simple_edits = true,
+			view_options = {
+				show_hidden = true,
+			},
+		},
+		-- Optional dependencies
+		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
+		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
+		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
+		lazy = false,
+		keys = {
+			{ "<leader>-", "<cmd>Oil<CR>", desc = "Oil" },
 		},
 	},
 

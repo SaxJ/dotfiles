@@ -1,0 +1,12 @@
+#!/usr/bin/bash
+
+root=$(git rev-parse --show-toplevel)
+project=$(basename "$root")
+
+cd "$root"
+
+for fl in $(git diff --name-only);
+do
+	scp "$root/$fl" "minikube:/home/ubuntu/$project/$fl"
+done
+
