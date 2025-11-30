@@ -6,7 +6,7 @@ vim.g.have_nerd_font = false
 
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.nowrap = true
+vim.o.wrap = false
 
 -- Enable mouse mode, can be useful for resizing splits for example!
 vim.o.mouse = "a"
@@ -71,12 +71,21 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
-vim.keymap.set("n", "<leader>fY", '<cmd>let @+ = expand("%")', { desc = "[Y]ank file name" })
+-- Yanking
+vim.keymap.set("n", "<leader>fY", '<cmd>let @+ = expand("%")<CR>', { desc = "[Y]ank file name" })
+vim.keymap.set("n", "<leader>bY", "ggVGy", { desc = "Yank buffer" })
 
+-- Remote upload/download
 vim.keymap.set("n", "<leader>ru", "<cmd>ScpUpload<CR>", { desc = "[R]emote [U]pload" })
 vim.keymap.set("n", "<leader>rd", "<cmd>ScpDownload<CR>", { desc = "[R]emote [U]pload" })
 
+-- Open
 vim.keymap.set("n", "<leader>ot", "<cmd>terminal<CR>", { desc = "[O]pen [T]erminal" })
+
+-- Tabs
+vim.keymap.set("n", "<leader><tab>c", "<cmd>tabclose<CR>", { desc = "Close Tab" })
+vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnext<CR>", { desc = "Next Tab" })
+vim.keymap.set("n", "<leader><tab>p", "<cmd>tabp<CR>", { desc = "Prev Tab" })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -216,22 +225,25 @@ require("lazy").setup({
 
 			-- See `:help telescope.builtin`
 			local builtin = require("telescope.builtin")
+			-- Help bindings
 			vim.keymap.set("n", "<leader>hh", builtin.help_tags, { desc = "[H]elp" })
 			vim.keymap.set("n", "<leader>hk", builtin.keymaps, { desc = "[K]eymaps" })
 			vim.keymap.set("n", "<leader>ht", builtin.builtin, { desc = "[T]elescope" })
+
+			-- Buffers
+			vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "[B]uffers" })
+
+			-- Project bindings
 			vim.keymap.set("n", "<leader>pw", builtin.grep_string, { desc = "[W]ord" })
+			vim.keymap.set("n", "<leader>pp", require("telescope").extensions.zoxide.list, { desc = "[P]rojects" })
 			vim.keymap.set("n", "<leader>sp", "<cmd>Telescope live_grep<CR>", { desc = "[S]earch [P]roject" })
-			-- vim.keymap.set("n", "<leader>od", builtin.diagnostics, { desc = "[D]iagnostics" })
+
+			-- General Bindings
 			vim.keymap.set("n", "<leader>.", function()
 				builtin.find_files({ cwd = "%:p:h" })
 			end, { desc = "Local Files" })
 			vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Project Files" })
-			vim.keymap.set("n", "<leader>pp", require("telescope").extensions.zoxide.list, { desc = "[P]rojects" })
 			vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<CR>", { desc = "Search" })
-			-- Shortcut for searching your Neovim configuration files
-			vim.keymap.set("n", "<leader>oc", function()
-				builtin.find_files({ cwd = vim.fn.stdpath("config") })
-			end, { desc = "[C]onfig" })
 		end,
 	},
 
@@ -397,6 +409,8 @@ require("lazy").setup({
 						}
 						return diagnostic_message[diagnostic.severity]
 					end,
+					virt_text_pos = "right_align",
+					current_line = true,
 				},
 			})
 
@@ -631,6 +645,8 @@ require("lazy").setup({
 			require("mini.ai").setup({ n_lines = 500 })
 
 			require("mini.surround").setup()
+			require("mini.pairs").setup()
+			require("mini.files").setup()
 
 			local statusline = require("mini.statusline")
 			-- set use_icons to true if you have a Nerd Font
@@ -686,30 +702,29 @@ require("lazy").setup({
 
 			"nvim-telescope/telescope.nvim",
 		},
+		---@module 'neogit'
+		---@type NeogitConfig
+		opts = {
+			prompt_force_push = false,
+			graph_style = "kitty",
+			process_spinner = true,
+		},
 		cmd = "Neogit",
 		keys = {
 			{ "<leader>gg", "<cmd>Neogit<cr>", desc = "Show Neogit UI" },
 		},
 	},
 	{
-		"stevearc/oil.nvim",
-		---@module 'oil'
-		---@type oil.SetupOpts
-		opts = {
-			default_file_explorer = true,
-			skip_confirm_for_simple_edits = true,
-			view_options = {
-				show_hidden = true,
-			},
-		},
-		-- Optional dependencies
-		dependencies = { { "nvim-mini/mini.icons", opts = {} } },
-		-- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if you prefer nvim-web-devicons
-		-- Lazy loading is not recommended because it is very tricky to make it work correctly in all situations.
-		lazy = false,
-		keys = {
-			{ "<leader>-", "<cmd>Oil<CR>", desc = "Oil" },
-		},
+		"nvim-orgmode/orgmode",
+		event = "VeryLazy",
+		ft = { "org" },
+		config = function()
+			-- Setup orgmode
+			require("orgmode").setup({
+				org_agenda_files = "~/Documents/wiki/**/*.org",
+				org_default_notes_file = "~/Documents/wiki/inbox.org",
+			})
+		end,
 	},
 
 	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
