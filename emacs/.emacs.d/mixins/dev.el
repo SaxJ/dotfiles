@@ -91,11 +91,13 @@
 (defun saxon/setup-git-commit ()
   "Setup the commit buffer with common git content."
   (interactive)
-  (let* ((branch (car (vc-git-branches))))
-    (if (and (string-match-p "[[:alpha:]]+-[[:digit:]]+" branch)
+  (let* ((branch (car (vc-git-branches)))
+         (match-index (string-match "[[:alpha:]]+-[[:digit:]]+" branch))
+         (issue (match-string 0 branch)))
+    (if (and match-index
              (not (s-contains-p "Merge" (buffer-string))))
         (progn
-          (insert (format "%s: " branch))
+          (insert (format "%s: " issue))
           (evil-insert-state))
       (evil-insert-state))))
 
@@ -272,7 +274,12 @@
                '(tuareg-mode . ("opam" "exec" "--" "ocamllsp")))
 
   (setq-default eglot-workspace-configuration
-                '(:intelephense (:telemetry (:enabled :json-false) :environment (:phpVersion "8.3.0"))))
+                '(:intelephense (:telemetry (:enabled :json-false)
+                                            :environment (:phpVersion "8.3.0")
+                                            :completion (:triggerParameterHints :json-false)
+                                            :inlayHint (:returnTypes :json-false
+                                                                     :parameterTypes :json-false
+                                                                     :parameterNames :json-false))))
 
   ;;(add-hook 'eglot-managed-mode-hook #'saxon/eglot-capf)
   )
