@@ -15,6 +15,7 @@ emacs/.emacs.d/mason
 emacs/.emacs.d/%backup%~
 emacs/.emacs.d/devdocs
 emacs/.emacs.d/mixins/mail.el
+emacs/.emacs.d/eshell
 
 # bash
 bash/.local/bin/hurl*
