@@ -16,7 +16,11 @@ emacs/.emacs.d/%backup%~
 emacs/.emacs.d/devdocs
 emacs/.emacs.d/mixins/mail.el
 emacs/.emacs.d/eshell
+emacs/.emacs.d/auto-save-list
 
 # bash
 bash/.local/bin/hurl*
 bash/.local/bin/qlot
+
+# GHC
+ghcup
