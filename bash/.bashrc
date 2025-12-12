@@ -23,3 +23,5 @@ if [ -d ~/.bashrc.d ]; then
     done
 fi
 unset rc
+
+[ -f "/home/saxonj/.ghcup/env" ] && . "/home/saxonj/.ghcup/env" # ghcup-env
