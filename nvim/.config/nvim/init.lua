@@ -397,21 +397,22 @@ require("lazy").setup({
 						[vim.diagnostic.severity.HINT] = "󰌶 ",
 					},
 				} or {},
-				virtual_text = {
-					source = "if_many",
-					spacing = 2,
-					format = function(diagnostic)
-						local diagnostic_message = {
-							[vim.diagnostic.severity.ERROR] = diagnostic.message,
-							[vim.diagnostic.severity.WARN] = diagnostic.message,
-							[vim.diagnostic.severity.INFO] = diagnostic.message,
-							[vim.diagnostic.severity.HINT] = diagnostic.message,
-						}
-						return diagnostic_message[diagnostic.severity]
-					end,
-					virt_text_pos = "right_align",
-					current_line = true,
-				},
+				virtual_text = false,
+				--     {
+				-- 	source = "if_many",
+				-- 	spacing = 2,
+				-- 	format = function(diagnostic)
+				-- 		local diagnostic_message = {
+				-- 			[vim.diagnostic.severity.ERROR] = diagnostic.message,
+				-- 			[vim.diagnostic.severity.WARN] = diagnostic.message,
+				-- 			[vim.diagnostic.severity.INFO] = diagnostic.message,
+				-- 			[vim.diagnostic.severity.HINT] = diagnostic.message,
+				-- 		}
+				-- 		return diagnostic_message[diagnostic.severity]
+				-- 	end,
+				-- 	virt_text_pos = "right_align",
+				-- 	current_line = true,
+				-- },
 			})
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -495,7 +496,7 @@ require("lazy").setup({
 				-- Disable "format_on_save lsp_fallback" for languages that don't
 				-- have a well standardized coding style. You can add additional
 				-- languages here or re-enable it for the disabled ones.
-				local disable_filetypes = { c = true, cpp = true }
+				local disable_filetypes = { c = true, cpp = true, php = true }
 				if disable_filetypes[vim.bo[bufnr].filetype] then
 					return nil
 				else
@@ -730,6 +731,14 @@ require("lazy").setup({
 				org_agenda_files = "~/Documents/wiki/**/*.org",
 				org_default_notes_file = "~/Documents/wiki/inbox.org",
 			})
+		end,
+	},
+	{
+		"rachartier/tiny-inline-diagnostic.nvim",
+		event = "VeryLazy",
+		priority = 1000,
+		config = function()
+			require("tiny-inline-diagnostic").setup()
 		end,
 	},
 
