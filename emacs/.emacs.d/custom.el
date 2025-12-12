@@ -13,18 +13,18 @@
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
  '(package-selected-packages
-   '(apheleia avy build cape casual chezmoi confluence-markup-mode
-              corfu-terminal csproj-mode csv-mode denote devdocs
-              dired-preview dslide dune eat ef-themes eglot-fsharp
+   '(apheleia avy bbdb build cape casual chezmoi confluence-markup-mode
+              corfu-terminal csproj-mode denote devdocs dired-preview
+              dslide dune eat ef-themes eglot-booster eglot-fsharp
               elfeed-tube elm-mode embark-consult epresent
               evil-collection evil-commentary evil-org evil-surround
               forge general git-timemachine gptel graphql-ts-mode
               graphviz-dot-mode haskell-mode helm-org hide-mode-line
               hurl-mode jira jiralib2 jq-mode json-mode kubernetes
-              lastfm magit-prime marginalia mason mood-line mpris
-              mu4e-alert multi-vterm nerd-icons-corfu nvm ob-mermaid
-              orderless org-modern org-music org-ql org-roam
-              org-tree-slide origami otpp plz pomo-cat popper
+              lastfm magit-delta magit-prime marginalia mason
+              mood-line mpris mu4e-alert multi-vterm nerd-icons-corfu
+              nvm ob-mermaid orderless org-modern org-music org-ql
+              org-roam org-tree-slide origami otpp plz pomo-cat popper
               pr-review prescient prodigy pug-mode rainbow-mode
               simple-mpc soundcloud string-inflection sudo-edit
               templ-ts-mode terraform-mode time-zones tinee tuareg
@@ -32,18 +32,7 @@
               yaml-mode yasnippet-snippets yeetube yuck-mode zone-nyan
               zone-rainbow))
  '(package-vc-selected-packages
-   '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
-     (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch
-            "main")
-     (confluence-markup-mode :url
-                             "https://github.com/rmloveland/confluence-markup-mode"
-                             :branch "master")
-     (build :url "https://github.com/SaxJ/build.el" :branch "master")
-     (org-music :url "https://github.com/debanjum/org-music" :branch
-                "master")
-     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
-             "master")
-     (hurl-mode :url "https://github.com/JasZhe/hurl-mode")))
+   '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster")))
  '(safe-local-variable-values
    '((ssh-deploy-async . 0)
      (ssh-deploy-root-remote

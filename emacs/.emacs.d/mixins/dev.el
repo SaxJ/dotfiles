@@ -200,10 +200,9 @@
          ("C-c g" . magit-status)
          ("C-c C-o" . 'forge-browse-this-topic)))
 
-(use-package magit-prime
+(use-package magit-delta
   :ensure t
-  :config
-  (add-hook 'magit-pre-refresh-hook 'magit-prime-refresh-cache))
+  :hook (magit-mode . magit-delta-mode))
 
 (use-package project
   :config
@@ -482,6 +481,16 @@
          (default-directory (expand-file-name (format "/ssh:minikube:%s" remote-pwd))))
     (with-connection-local-variables
      (shell-command cmd))))
+
+(defun saxon/remote-project-shell ()
+  (interactive)
+  (let* ((project (project-name (project-current)))
+         (remote-pwd (format "/home/ubuntu/%s/" project)))
+    (progn
+      (vterm-other-window (format "*Vterm-remote-%s*" project))
+      (vterm-send-string (format "ssh -t minikube 'cd %s; bash --login'" remote-pwd) t)
+      (vterm-send-return))))
+
 
 (use-package wgrep :ensure t)
 (use-package pug-mode :ensure t)
