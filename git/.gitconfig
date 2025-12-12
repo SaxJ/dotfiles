@@ -16,6 +16,7 @@
     ui = auto
 [init]
 	defaultBranch = master
+	templateDir = /home/saxonj/.git_template
 [interactive]
 	diffFilter = delta --color-only
 [delta]
