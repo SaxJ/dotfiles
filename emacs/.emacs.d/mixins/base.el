@@ -99,8 +99,8 @@
   :init
   (global-corfu-mode)
   :config
-  ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
-  ;; (advice-add 'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
+  (advice-add 'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
   (setq corfu-auto t)
   :bind
   (:map corfu-map
