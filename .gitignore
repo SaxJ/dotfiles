@@ -1,24 +1,28 @@
 # emacs
+emacs/.emacs.d/%backup%~
+emacs/.emacs.d/auto-save-list
+emacs/.emacs.d/devdocs
 emacs/.emacs.d/eln-cache/
 emacs/.emacs.d/elpa/
 emacs/.emacs.d/emms/
+emacs/.emacs.d/eshell
 emacs/.emacs.d/forge-database.sqlite
 emacs/.emacs.d/history
+emacs/.emacs.d/ielm-history*
+emacs/.emacs.d/mason
+emacs/.emacs.d/mixins/mail.el
 emacs/.emacs.d/newsticker/
 emacs/.emacs.d/org-roam.db
 emacs/.emacs.d/projects
+emacs/.emacs.d/request
 emacs/.emacs.d/timelog
 emacs/.emacs.d/tramp
 emacs/.emacs.d/transient/
 emacs/.emacs.d/tree-sitter/
-emacs/.emacs.d/mason
-emacs/.emacs.d/%backup%~
-emacs/.emacs.d/devdocs
-emacs/.emacs.d/mixins/mail.el
-emacs/.emacs.d/eshell
-emacs/.emacs.d/request
-emacs/.emacs.d/ielm-history*
 
 # bash
 bash/.local/bin/hurl*
 bash/.local/bin/qlot
+
+# GHC
+ghcup
