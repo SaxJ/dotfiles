@@ -16,6 +16,8 @@ emacs/.emacs.d/%backup%~
 emacs/.emacs.d/devdocs
 emacs/.emacs.d/mixins/mail.el
 emacs/.emacs.d/eshell
+emacs/.emacs.d/request
+emacs/.emacs.d/ielm-history*
 
 # bash
 bash/.local/bin/hurl*
