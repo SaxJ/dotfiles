@@ -14,6 +14,9 @@ vim.o.mouse = "a"
 -- Don't show the mode, since it's already in the status line
 vim.o.showmode = false
 
+-- Show one global statusline
+vim.o.laststatus = 3
+
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
@@ -64,6 +67,8 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 vim.keymap.set("n", "<leader>od", vim.diagnostic.setloclist, { desc = "[D]iagnostics" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-k>", "<Up>", { desc = "Exit terminal mode" })
+vim.keymap.set("t", "<C-j>", "<Down>", { desc = "Exit terminal mode" })
 
 -- Keybinds to make split navigation easier.
 vim.keymap.set("n", "<C-h>", "<C-w><C-h>", { desc = "Move focus to the left window" })
@@ -93,6 +98,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
 		vim.hl.on_yank()
+	end,
+})
+
+-- Checktime on file on focus
+vim.api.nvim_create_autocmd("BufEnter", {
+	desc = "Refresh file on buffer focus",
+	callback = function()
+		vim.cmd("checktime")
 	end,
 })
 
@@ -536,12 +549,12 @@ require("lazy").setup({
 					-- `friendly-snippets` contains a variety of premade snippets.
 					--    See the README about individual language/framework/plugin snippets:
 					--    https://github.com/rafamadriz/friendly-snippets
-					-- {
-					--   'rafamadriz/friendly-snippets',
-					--   config = function()
-					--     require('luasnip.loaders.from_vscode').lazy_load()
-					--   end,
-					-- },
+					{
+						"rafamadriz/friendly-snippets",
+						config = function()
+							require("luasnip.loaders.from_vscode").lazy_load()
+						end,
+					},
 				},
 				opts = {},
 			},
@@ -596,7 +609,7 @@ require("lazy").setup({
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets", "lazydev" },
+				default = { "snippets", "lsp", "path", "lazydev" },
 				providers = {
 					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
 				},
@@ -651,18 +664,47 @@ require("lazy").setup({
 			require("mini.files").setup()
 
 			local statusline = require("mini.statusline")
+
+			local statusline_content = function()
+				local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+				local git = MiniStatusline.section_git({ trunc_width = 40 })
+				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+				local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+				local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
+				local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+				local location = "%2l:%-2v"
+				local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+				local songinfo = vim.fn.trim(vim.fn.system({ "playerctl", "metadata", "title" }))
+
+				return MiniStatusline.combine_groups({
+					{ hl = mode_hl, strings = { mode } },
+					{ hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+					"%<", -- Mark general truncate point
+					{ hl = "MiniStatuslineFilename", strings = { filename } },
+					"%=", -- End left alignment
+					{ hl = mode_hl, strings = { songinfo } },
+					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+					{ hl = mode_hl, strings = { search, location } },
+				})
+			end
+
 			-- set use_icons to true if you have a Nerd Font
 			statusline.setup({
 				use_icons = vim.g.have_nerd_font,
+				content = {
+					active = statusline_content,
+				},
 			})
 
 			-- You can configure sections in the statusline by overriding their
 			-- default behavior. For example, here we set the section for
 			-- cursor location to LINE:COLUMN
 			---@diagnostic disable-next-line: duplicate-set-field
-			statusline.section_location = function()
-				return "%2l:%-2v"
-			end
+			-- statusline.section_location = function()
+			-- 	return "%2l:%-2v"
+			-- end
 		end,
 		keys = {
 			{ "<leader>-", "<cmd>lua MiniFiles.open()<CR>", desc = "Files" },
