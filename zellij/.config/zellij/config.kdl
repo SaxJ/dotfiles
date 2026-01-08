@@ -265,7 +265,7 @@ load_plugins {
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-// theme "dracula"
+theme "dracula"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -366,7 +366,7 @@ pane_frames false
  
 // Path to the default editor to use to edit pane scrollbuffer
 // Default: $EDITOR or $VISUAL
-scrollback_editor "/usr/bin/helix"
+scrollback_editor "/usr/bin/hx"
  
 // A fixed name to always give the Zellij session.
 // Consider also setting `attach_to_session true,`
