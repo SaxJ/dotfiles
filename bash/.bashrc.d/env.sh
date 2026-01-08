@@ -1,3 +1,3 @@
 export TIMELOG_FILE=~/time/timelog
-export EDITOR=$(which nvim)
+export EDITOR=$(which hx)
 # export JIRA_API_TOKEN=$(pass jira)
