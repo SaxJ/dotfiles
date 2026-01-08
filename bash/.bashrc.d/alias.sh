@@ -9,7 +9,6 @@ alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 alias gci="git commit --interactive"
-alias prc="gh pr create -r adriansyah,mikeyjk,lucasangelon,GoodPie -d -t \"$(git branch --show-current): \" -e"
 
 alias ci="timelog clockin"
 alias co="timelog clockout"
@@ -27,4 +26,9 @@ function cd() {
 # Kakoune
 function k() {
   kak -s $(basename "$(pwd)")
+}
+
+function prc() {
+	title="$(git branch --show-current): "
+	gh pr create -r adriansyah,mikeyjk,lucasangelon,GoodPie -d -t "$title" -e
 }
