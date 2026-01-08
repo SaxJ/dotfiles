@@ -60,6 +60,11 @@ vim.o.scrolloff = 10
 -- instead raise a dialog asking if you wish to save the current file(s)
 vim.o.confirm = true
 
+-- CUSTOM FILETYPES
+vim.filetype.add({ pattern = {
+	[".*%.blade%.php"] = "blade",
+} })
+
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
@@ -276,8 +281,6 @@ require("lazy").setup({
 		"neovim/nvim-lspconfig",
 		dependencies = {
 			{ "mason-org/mason.nvim", opts = {} },
-			"mason-org/mason-lspconfig.nvim",
-			"WhoIsSethDaniel/mason-tool-installer.nvim",
 
 			-- Useful status updates for LSP.
 			{ "j-hui/fidget.nvim", opts = {} },
@@ -289,9 +292,6 @@ require("lazy").setup({
 			vim.api.nvim_create_autocmd("LspAttach", {
 				group = vim.api.nvim_create_augroup("kickstart-lsp-attach", { clear = true }),
 				callback = function(event)
-					-- NOTE: Remember that Lua is a real programming language, and as such it is possible
-					-- to define small helper and utility functions so you don't have to repeat yourself.
-					--
 					-- In this case, we create a function that lets us more easily define mappings specific
 					-- for LSP related items. It sets the mode, buffer and description for us each time.
 					local map = function(keys, func, desc, mode)
@@ -411,21 +411,6 @@ require("lazy").setup({
 					},
 				} or {},
 				virtual_text = false,
-				--     {
-				-- 	source = "if_many",
-				-- 	spacing = 2,
-				-- 	format = function(diagnostic)
-				-- 		local diagnostic_message = {
-				-- 			[vim.diagnostic.severity.ERROR] = diagnostic.message,
-				-- 			[vim.diagnostic.severity.WARN] = diagnostic.message,
-				-- 			[vim.diagnostic.severity.INFO] = diagnostic.message,
-				-- 			[vim.diagnostic.severity.HINT] = diagnostic.message,
-				-- 		}
-				-- 		return diagnostic_message[diagnostic.severity]
-				-- 	end,
-				-- 	virt_text_pos = "right_align",
-				-- 	current_line = true,
-				-- },
 			})
 
 			local capabilities = require("blink.cmp").get_lsp_capabilities()
@@ -436,56 +421,37 @@ require("lazy").setup({
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-			local servers = {
-				-- clangd = {},
-				-- gopls = {},
-				-- pyright = {},
-				-- rust_analyzer = {},
-				-- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
-				--
-				-- Some languages (like typescript) have entire language plugins that can be useful:
-				--    https://github.com/pmizio/typescript-tools.nvim
-				--
-				-- But for many setups, the LSP (`ts_ls`) will work just fine
-				ts_ls = {},
-				--
+			vim.lsp.config("ts_ls", {
+				capabilities = capabilities,
+			})
+			vim.lsp.enable("ts_ls")
 
-				lua_ls = {
-					-- cmd = { ... },
-					-- filetypes = { ... },
-					-- capabilities = {},
-					settings = {
-						Lua = {
-							completion = {
-								callSnippet = "Replace",
-							},
-							diagnostics = { disable = { "missing-fields" } },
+			vim.lsp.config("lua_ls", {
+				capabilities = capabilities,
+				settings = {
+					Lua = {
+						completion = {
+							callSnippet = "Replace",
 						},
+						diagnostics = { disable = { "missing-fields" } },
 					},
 				},
-			}
-
-			local ensure_installed = vim.tbl_keys(servers or {})
-			vim.list_extend(ensure_installed, {
-				"stylua", -- Used to format Lua code
-				"prettier",
 			})
-			require("mason-tool-installer").setup({ ensure_installed = ensure_installed })
+			vim.lsp.enable("lua_ls")
 
-			require("mason-lspconfig").setup({
-				ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-				automatic_installation = false,
-				handlers = {
-					function(server_name)
-						local server = servers[server_name] or {}
-						-- This handles overriding only values explicitly passed
-						-- by the server configuration above. Useful when disabling
-						-- certain features of an LSP (for example, turning off formatting for ts_ls)
-						server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-						require("lspconfig")[server_name].setup(server)
-					end,
+			vim.lsp.config("html", {
+				capabilities = capabilities,
+				filetypes = { "blade" },
+				init_options = {
+					configurationSection = { "html", "css", "javascript" },
+					embeddedLanguages = {
+						css = true,
+						javascript = true,
+					},
+					provideFormatter = true,
 				},
 			})
+			vim.lsp.enable("html")
 		end,
 	},
 
@@ -609,7 +575,7 @@ require("lazy").setup({
 			},
 
 			sources = {
-				default = { "snippets", "lsp", "path", "lazydev" },
+				default = { "lsp", "path", "lazydev" },
 				providers = {
 					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
 				},
