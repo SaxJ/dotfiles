@@ -211,7 +211,8 @@
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCXONTfGmLC7ltFgLAlHs24g" youtube crime)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UC9h8BDcXwkhZtnqoQJ7PggA" youtube politics)
                        ("https://www.youtube.com/feeds/videos.xml?channel_id=UCD3ppgfpHyK_U72XZoY-Yhw" youtube music)
-                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCRWyPm7MrfotIYF8A8MGV3g" youtube gaming))))
+                       ("https://www.youtube.com/feeds/videos.xml?channel_id=UCRWyPm7MrfotIYF8A8MGV3g" youtube gaming)
+                       ("https://www.gamingonlinux.com/article_rss.php" gaming))))
 
 (use-package elfeed-tube
   :ensure t ;; or :straight t

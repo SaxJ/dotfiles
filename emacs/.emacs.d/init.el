@@ -56,7 +56,8 @@
 
 ;; url browsing stuff
 (setq browse-url-firefox-program "firefox"
-      browse-url-firefox-new-window-is-tab t)
+      browse-url-firefox-new-window-is-tab t
+      browse-url-chrome-program "brave-browser")
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
