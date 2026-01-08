@@ -45,7 +45,7 @@ right = ["diagnostics", "selections", "position", "version-control"]
 [keys.normal.space]
 "." = "file_picker_in_current_buffer_directory"
 "space" = "file_picker_in_current_directory"
-"minus" = ":open %sh{ zellij run -fc -- sh -c \"yazi --chooser-file=/proc/$$/fd/1 -- %{buffer_name}; kill -s CONT $$\"; kill -s STOP $$ }"
+"minus" = ":open %sh{ kitty @ launch --type=overlay sh -c \"yazi --chooser-file=/proc/$$/fd/1 -- %{buffer_name}; kill -s CONT $$\"; kill -s STOP $$ }"
 "t" = ":echo %sh{realpath $(dirname %{buffer_name})}"
 
 [keys.normal."C-f"]
