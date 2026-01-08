@@ -34,7 +34,7 @@
  '(package-vc-selected-packages
    '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster")))
  '(safe-local-variable-values
-   '((ssh-deploy-async . 0)
+   '((hcl-indent-level . 2) (ssh-deploy-async . 0)
      (ssh-deploy-root-remote
       . "/ssh:ubuntu@minikube:/home/ubuntu/megatron/")
      (gac-automatically-add-new-files-p . t)

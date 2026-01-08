@@ -109,6 +109,7 @@
   (setq treesit-font-lock-level 4)
   (setq treesit-language-source-alist
         '((bash "https://github.com/tree-sitter/tree-sitter-bash")
+          (blade "https://github.com/EmranMR/tree-sitter-blade")
           (c "https://github.com/tree-sitter/tree-sitter-c")
           (c-sharp "https://github.com/tree-sitter/tree-sitter-c-sharp.git")
           (cmake "https://github.com/uyha/tree-sitter-cmake")
@@ -491,10 +492,10 @@
       (vterm-send-string (format "ssh -t minikube 'cd %s; bash --login'" remote-pwd) t)
       (vterm-send-return))))
 
-
 (use-package wgrep :ensure t)
 (use-package pug-mode :ensure t)
 (use-package devdocs :ensure t)
+(use-package blade-ts-mode :load-path "~/Documents/blade-ts-mode/")
 
 (use-package uv-mode
   :ensure t

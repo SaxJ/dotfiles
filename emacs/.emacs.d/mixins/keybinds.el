@@ -128,6 +128,10 @@
   (let ((branch (magit-read-branch "Branch: ")))
     (magit-file-checkout branch (buffer-file-name))))
 
+(defun saxon/compile-on-file (cmd)
+  (interactive "sCommand: ")
+  (compile (format "%s %s" cmd (buffer-file-name))))
+
 (use-package general
   :ensure t
   :config
@@ -229,6 +233,8 @@
     "ot" 'multi-vterm
     "op" 'prodigy
     "oj" 'jira-issues
+
+    "cc" 'saxon/compile-on-file
 
     ;; clocking
     "ti" 'timeclock-in
