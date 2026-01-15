@@ -82,15 +82,21 @@ vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower win
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
 -- Yanking
-vim.keymap.set("n", "<leader>fY", '<cmd>let @+ = expand("%")<CR>', { desc = "[Y]ank file name" })
-vim.keymap.set("n", "<leader>bY", "ggVGy", { desc = "Yank buffer" })
+vim.keymap.set(
+	"n",
+	"<leader>fY",
+	'<cmd>let @+ = expand("%:.")<CR><cmd>echo "Path Yanked"<CR>',
+	{ desc = "[Y]ank file name" }
+)
+vim.keymap.set("n", "<leader>bY", 'ggVGy<cmd>echo "Buffer contents yanked"<CR>', { desc = "Yank buffer" })
 
 -- Remote upload/download
 vim.keymap.set("n", "<leader>ru", "<cmd>ScpUpload<CR>", { desc = "[R]emote [U]pload" })
 vim.keymap.set("n", "<leader>rd", "<cmd>ScpDownload<CR>", { desc = "[R]emote [U]pload" })
 
--- Open
-vim.keymap.set("n", "<leader>ot", "<cmd>terminal<CR>", { desc = "[O]pen [T]erminal" })
+-- Terminal
+vim.keymap.set("n", "<leader>ot", "<cmd>HTerm<CR>", { desc = "[O]pen [T]erminal" })
+vim.keymap.set("n", "<leader>oT", "<cmd>term<CR>", { desc = "[O]pen [T]erminal" })
 
 -- Tabs
 vim.keymap.set("n", "<leader><tab>c", "<cmd>tabclose<CR>", { desc = "Close Tab" })
@@ -141,6 +147,9 @@ require("lazy").setup({
 				topdelete = { text = "‾" },
 				changedelete = { text = "~" },
 			},
+		},
+		keys = {
+			{ "<leader>gb", "<cmd>Gitsigns blame<cr>", desc = "[G]it [B]lame" },
 		},
 	},
 
@@ -255,6 +264,7 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>pw", builtin.grep_string, { desc = "[W]ord" })
 			vim.keymap.set("n", "<leader>pp", require("telescope").extensions.zoxide.list, { desc = "[P]rojects" })
 			vim.keymap.set("n", "<leader>sp", "<cmd>Telescope live_grep<CR>", { desc = "[S]earch [P]roject" })
+			vim.keymap.set("n", "<leader>pt", "<cmd>VTerm<CR>", { desc = "[O]pen [T]erminal" })
 
 			-- General Bindings
 			vim.keymap.set("n", "<leader>.", function()
@@ -452,6 +462,16 @@ require("lazy").setup({
 				},
 			})
 			vim.lsp.enable("html")
+
+			vim.lsp.config("gopls", {
+				capabilities = capabilities,
+			})
+			vim.lsp.enable("gopls")
+
+			vim.lsp.config("intelephense", {
+				capabilities = capabilities,
+			})
+			vim.lsp.enable("intelephense")
 		end,
 	},
 
@@ -512,15 +532,7 @@ require("lazy").setup({
 					return "make install_jsregexp"
 				end)(),
 				dependencies = {
-					-- `friendly-snippets` contains a variety of premade snippets.
-					--    See the README about individual language/framework/plugin snippets:
-					--    https://github.com/rafamadriz/friendly-snippets
-					{
-						"rafamadriz/friendly-snippets",
-						config = function()
-							require("luasnip.loaders.from_vscode").lazy_load()
-						end,
-					},
+					{ "rafamadriz/friendly-snippets" },
 				},
 				opts = {},
 			},
@@ -552,11 +564,8 @@ require("lazy").setup({
 				--
 				-- See :h blink-cmp-config-keymap for defining your own keymap
 				preset = "enter",
-				["<Tab>"] = {
-					"insert_next",
-					"fallback",
-				},
-				["<S-Tab>"] = { "insert_prev" },
+				["<Tab>"] = { "snippet_forward", "insert_next", "fallback" },
+				["<S-Tab>"] = { "snippet_backward", "insert_prev", "fallback" },
 
 				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
 				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
@@ -565,7 +574,7 @@ require("lazy").setup({
 			appearance = {
 				-- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
 				-- Adjusts spacing to ensure icons are aligned
-				nerd_font_variant = "mono",
+				nerd_font_variant = "normal",
 			},
 
 			completion = {
@@ -575,7 +584,7 @@ require("lazy").setup({
 			},
 
 			sources = {
-				default = { "lsp", "path", "lazydev" },
+				default = { "lsp", "path", "lazydev", "snippets" },
 				providers = {
 					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
 				},
@@ -643,6 +652,7 @@ require("lazy").setup({
 				local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
 				local songinfo = vim.fn.trim(vim.fn.system({ "playerctl", "metadata", "title" }))
+				local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { mode } },
@@ -652,7 +662,7 @@ require("lazy").setup({
 					"%=", -- End left alignment
 					{ hl = mode_hl, strings = { songinfo } },
 					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-					{ hl = mode_hl, strings = { search, location } },
+					{ hl = mode_hl, strings = { project, search, location } },
 				})
 			end
 
@@ -663,17 +673,22 @@ require("lazy").setup({
 					active = statusline_content,
 				},
 			})
-
-			-- You can configure sections in the statusline by overriding their
-			-- default behavior. For example, here we set the section for
-			-- cursor location to LINE:COLUMN
-			---@diagnostic disable-next-line: duplicate-set-field
-			-- statusline.section_location = function()
-			-- 	return "%2l:%-2v"
-			-- end
 		end,
 		keys = {
-			{ "<leader>-", "<cmd>lua MiniFiles.open()<CR>", desc = "Files" },
+			{
+				"<leader>-",
+				function()
+					MiniFiles.open()
+				end,
+				desc = "Files",
+			},
+			{
+				"<leader>o-",
+				function()
+					MiniFiles.open(expand("%:p"), true)
+				end,
+				desc = "Local Files",
+			},
 		},
 	},
 	{ -- Highlight, edit, and navigate code
@@ -723,6 +738,12 @@ require("lazy").setup({
 			prompt_force_push = false,
 			graph_style = "kitty",
 			process_spinner = true,
+			mappings = {
+				finder = {
+					["<C-j>"] = "Next",
+					["<C-k"] = "Previous",
+				},
+			},
 		},
 		cmd = "Neogit",
 		keys = {
@@ -748,6 +769,25 @@ require("lazy").setup({
 		config = function()
 			require("tiny-inline-diagnostic").setup()
 		end,
+	},
+	{
+		"blob42/codegpt-ng.nvim",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"MunifTanjim/nui.nvim",
+		},
+		---@module 'codegpt'
+		---@type codegpt.Options
+		opts = {
+			connection = {
+				api_provider = "ollama",
+			},
+			models = {
+				ollama = {
+					default = "qwen3-coder:30b",
+				},
+			},
+		},
 	},
 
 	--  Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
