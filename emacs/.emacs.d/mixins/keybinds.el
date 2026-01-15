@@ -233,6 +233,7 @@
     "ot" 'multi-vterm
     "op" 'prodigy
     "oj" 'jira-issues
+    "od" 'dired
 
     "cc" 'saxon/compile-on-file
 
