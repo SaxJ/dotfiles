@@ -273,13 +273,13 @@
   (add-to-list 'eglot-server-programs
                '(tuareg-mode . ("opam" "exec" "--" "ocamllsp")))
 
-  (setq-default eglot-workspace-configuration
-                '(:intelephense (:telemetry (:enabled :json-false)
-                                            :environment (:phpVersion "8.3.0")
-                                            :completion (:triggerParameterHints :json-false)
-                                            :inlayHint (:returnTypes :json-false
-                                                                     :parameterTypes :json-false
-                                                                     :parameterNames :json-false))))
+  ;; (setq-default eglot-workspace-configuration
+  ;;               '(:intelephense (:telemetry (:enabled :json-false)
+  ;;                                           :environment (:phpVersion "8.3.0"))))
+  ;; :completion (:triggerParameterHints :json-false)
+  ;; :inlayHint (:returnTypes :json-false
+  ;;                          :parameterTypes :json-false
+  ;;                          :parameterNames :json-false))))
 
   ;;(add-hook 'eglot-managed-mode-hook #'saxon/eglot-capf)
   )
@@ -355,12 +355,6 @@
 ;;;   Common file types
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-(use-package hurl-mode
-  :ensure t
-  :vc (hurl-mode :url "https://github.com/JasZhe/hurl-mode")
-  :config
-  (add-to-list 'auto-mode-alist '("\\.hurl\\'" . hurl-mode)))
 
 (use-package fsharp-mode
   :ensure t)
@@ -450,6 +444,9 @@
     :stream t
     :key (lambda () (auth-source-pick-first-password :host "anthropic"))))
 
+(use-package ollama-buddy
+  :ensure t)
+
 (defun saxon/ai-explain (from to)
   "Ask the AI to explain a selection"
   (interactive "r")
@@ -495,7 +492,9 @@
 (use-package wgrep :ensure t)
 (use-package pug-mode :ensure t)
 (use-package devdocs :ensure t)
+
 (use-package blade-ts-mode :load-path "~/Documents/blade-ts-mode/")
+(use-package hurl-ts-mode :load-path "~/Documents/hurl-ts-mode/")
 
 (use-package uv-mode
   :ensure t
