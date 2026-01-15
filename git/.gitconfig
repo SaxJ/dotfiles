@@ -5,7 +5,7 @@
 	name = SaxJ
 [core]
 	editor = nvim
-	pager = delta
+	; pager = delta
 [alias]
     co = checkout
     cob = checkout -b
@@ -17,10 +17,10 @@
 [init]
 	defaultBranch = master
 	templateDir = /home/saxonj/.git_template
-[interactive]
-	diffFilter = delta --color-only
-[delta]
-	navigate = true
+; [interactive]
+; 	diffFilter = delta --color-only
+; [delta]
+; 	navigate = true
 [merge]
 	conflictStyle = zdiff3
 [pull]
