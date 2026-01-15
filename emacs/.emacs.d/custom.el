@@ -23,14 +23,14 @@
               hurl-mode jira jiralib2 jq-mode json-mode kubernetes
               lastfm magit-delta magit-prime marginalia mason
               mood-line mpris mu4e-alert multi-vterm nerd-icons-corfu
-              nvm ob-mermaid orderless org-modern org-music org-ql
-              org-roam org-tree-slide origami otpp plz pomo-cat popper
-              pr-review prescient prodigy pug-mode rainbow-mode
-              simple-mpc soundcloud string-inflection sudo-edit
-              templ-ts-mode terraform-mode time-zones tinee tuareg
-              uv-mode vc-use-package vertico vue-mode web-mode wgrep
-              yaml-mode yasnippet-snippets yeetube yuck-mode zone-nyan
-              zone-rainbow))
+              nvm ob-mermaid ollama-buddy orderless org-modern
+              org-music org-ql org-roam org-tree-slide origami otpp
+              plz pomo-cat popper pr-review prescient prodigy pug-mode
+              rainbow-mode simple-mpc soundcloud string-inflection
+              sudo-edit templ-ts-mode terraform-mode time-zones tinee
+              tuareg uv-mode vc-use-package vertico vue-mode web-mode
+              wgrep yaml-mode yasnippet-snippets yeetube yuck-mode
+              zone-nyan zone-rainbow))
  '(package-vc-selected-packages
    '((eglot-booster :url "https://github.com/jdtsmith/eglot-booster")))
  '(safe-local-variable-values
