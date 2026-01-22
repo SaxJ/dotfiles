@@ -646,10 +646,11 @@ require("lazy").setup({
 				local diff = MiniStatusline.section_diff({ trunc_width = 75 })
 				local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
 				local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
-				local filename = MiniStatusline.section_filename({ trunc_width = 140 })
 				local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 				local location = "%2l:%-2v"
 				local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+				local filename = "%f%m%r"
 
 				local songinfo = vim.fn.trim(vim.fn.system({ "playerctl", "metadata", "title" }))
 				local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
