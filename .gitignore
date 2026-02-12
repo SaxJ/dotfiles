@@ -19,6 +19,11 @@ emacs/.emacs.d/timelog
 emacs/.emacs.d/tramp
 emacs/.emacs.d/transient/
 emacs/.emacs.d/tree-sitter/
+emacs/.emacs.d/awesome-chatgpt-prompts/
+emacs/.emacs.d/bookmarks
+emacs/.emacs.d/org-social-mentions
+emacs/.emacs.d/v-social.org
+emacs/.emacs.d/url/
 
 # bash
 bash/.local/bin/hurl*
