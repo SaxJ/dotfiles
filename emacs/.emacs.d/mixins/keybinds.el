@@ -59,18 +59,28 @@
       (kill-new (saxon/project-relative-path filename))
       (message "Copied file name"))))
 
+(defun saxon/open-or-switch-to-tab (name)
+  "Opens a tab with the given name, or switches to it if it already exists."
+  (interactive)
+  (let* ((tab-names (cl-mapcar
+                     (lambda (it) (cdr (assoc 'name it)))
+                     (tab-bar-tabs))))
+    (if (seq-contains-p tab-names name)
+        (tab-bar-switch-to-tab name)
+      (progn
+        (tab-bar-new-tab-to -1)
+        (tab-bar-rename-tab name)))))
+
 (defun saxon/open-news ()
   (interactive)
   (progn
-    (tab-bar-new-tab-to -1)
-    (tab-bar-rename-tab "Newsticker")
-    (newsticker-show-news)))
+    (saxon/open-or-switch-to-tab "News")
+    (elfeed)))
 
 (defun saxon/open-mail ()
   (interactive)
   (progn
-    (tab-bar-new-tab-to -1)
-    (tab-bar-rename-tab "Mail")
+    (saxon/open-or-switch-to-tab "Mail")
     (mu4e)))
 
 (defun saxon/open-yeetube ()
@@ -191,6 +201,10 @@
     "mp" 'mpris-play-pause
     "m]" 'mpris-next
     "m[" 'mpris-previous
+    "Mp" 'emms-pause
+    "Ms" 'emms-show-all
+    "M]" 'emms-next
+    "M[" 'emms-previous
 
     ;; notes
     "nj" 'org-journal-new-entry
@@ -225,7 +239,7 @@
     "oa" 'org-agenda
     "o-" 'saxon/open-dired-at-buffer
     "os" 'scratch-buffer
-    "on" 'elfeed
+    "on" 'saxon/open-news
     "oz" 'zone
     "om" 'saxon/open-mail
     "ok" 'kele-dispatch
