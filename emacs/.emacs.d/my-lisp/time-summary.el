@@ -66,31 +66,15 @@
       (day (seq-group-by (lambda (entry) (nth 1 entry)) entries))
       (project (seq-group-by (lambda (entry) (nth 0 entry)) entries)))))
 
-(defun timeclock-summarise ()
-  "Summarise timeclock and display the summary in a buffer."
+(defun timeclock-summarise--sum-times (entries)
+  "Sum the time in seconds of each log entry."
+  (-sum (cl-mapcar (lambda (e) (nth 2 e)) entries)))
+
+(defun timeclock-summarise-by-project ()
+  "Open a buffer and summarise the timelog file by project."
   (interactive)
-  (let* ((groups (timeclock-summarise--entries-grouped 'project)))
-    (with-current-buffer (get-buffer-create "*timelog-summary*")
-      (org-mode)
+  (let* ((groups (timeclock-summarise--entries-grouped 'project))
+         (buffer (get-buffer-create "*timelog-summary*")))
+    (with-current-buffer buffer
       (cl-dolist (group groups)
-        (let* ((project (car group))
-               (entries (cdr group)))
-          (progn
-            (insert (format "* %s\n:TIMELOG:\n" project))
-            ;; (insert (format (with-output-to-string (print entries))))
-            (cl-dolist (entry entries)
-              (let* ((duration (nth 2 entry))
-                     (hours (/ duration 6000))
-                     (minutes (/ (mod duration 6000) 1000))
-                     (date (nth 1 entry))
-                     (in-time (nth 5 entry))
-                     (out-time (nth 6 entry)))
-                (insert (format
-                         "CLOCK: [%s %s]--[%s %s] =>  %d:%d\n"
-                         date
-                         in-time
-                         date
-                         out-time
-                         hours
-                         minutes))))
-            (insert ":END:\n")))))))
+        (insert (format "%s - %d\n" (car group) (timeclock-summarise--sum-times (cdr group))))))))
