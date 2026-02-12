@@ -70,6 +70,8 @@ vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>od", vim.diagnostic.setloclist, { desc = "[D]iagnostics" })
+vim.keymap.set("n", "<leader>ob", "<cmd>Runner<CR>", { desc = "Task runner" })
+vim.keymap.set("n", "<leader>op", "<cmd>Background<CR>", { desc = "Background job" })
 
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-k>", "<Up>", { desc = "Exit terminal mode" })
@@ -88,7 +90,7 @@ vim.keymap.set(
 	'<cmd>let @+ = expand("%:.")<CR><cmd>echo "Path Yanked"<CR>',
 	{ desc = "[Y]ank file name" }
 )
-vim.keymap.set("n", "<leader>bY", 'ggVGy<cmd>echo "Buffer contents yanked"<CR>', { desc = "Yank buffer" })
+vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Remote upload/download
 vim.keymap.set("n", "<leader>ru", "<cmd>ScpUpload<CR>", { desc = "[R]emote [U]pload" })
@@ -102,6 +104,7 @@ vim.keymap.set("n", "<leader>oT", "<cmd>term<CR>", { desc = "[O]pen [T]erminal" 
 vim.keymap.set("n", "<leader><tab>c", "<cmd>tabclose<CR>", { desc = "Close Tab" })
 vim.keymap.set("n", "<leader><tab>n", "<cmd>tabnext<CR>", { desc = "Next Tab" })
 vim.keymap.set("n", "<leader><tab>p", "<cmd>tabp<CR>", { desc = "Prev Tab" })
+vim.keymap.set("n", "<leader><tab>t", "<cmd>TTerm<CR>", { desc = "Terminal in Tab" })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -135,7 +138,42 @@ local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
 
 require("lazy").setup({
-	"NMAC427/guess-indent.nvim", -- Detect tabstop and shiftwidth automatically
+	"chrisbra/Colorizer",
+	{
+		"NMAC427/guess-indent.nvim",
+		config = function()
+			require("guess-indent").setup({})
+		end,
+	}, -- Detect tabstop and shiftwidth automatically
+	{
+		"ej-shafran/compile-mode.nvim",
+		version = "^5.0.0",
+		-- you can just use the latest version:
+		-- branch = "latest",
+		-- or the most up-to-date updates:
+		-- branch = "nightly",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			-- if you want to enable coloring of ANSI escape codes in
+			-- compilation output, add:
+			-- { "m00qek/baleia.nvim", tag = "v1.3.0" },
+		},
+		config = function()
+			---@type CompileModeOpts
+			vim.g.compile_mode = {
+				-- if you use something like `nvim-cmp` or `blink.cmp` for completion,
+				-- set this to fix tab completion in command mode:
+				-- input_word_completion = true,
+
+				-- to add ANSI escape code support, add:
+				-- baleia_setup = true,
+
+				-- to make `:Compile` replace special characters (e.g. `%`) in
+				-- the command (and behave more like `:!`), add:
+				-- bang_expansion = true,
+			}
+		end,
+	},
 
 	{ -- Adds git related signs to the gutter, as well as utilities for managing changes
 		"lewis6991/gitsigns.nvim",
@@ -273,18 +311,6 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "Project Files" })
 			vim.keymap.set("n", "<leader>/", "<cmd>Telescope live_grep<CR>", { desc = "Search" })
 		end,
-	},
-
-	-- LSP Plugins
-	{
-		"folke/lazydev.nvim",
-		ft = "lua",
-		opts = {
-			library = {
-				-- Load luvit types when the `vim.uv` word is found
-				{ path = "${3rd}/luv/library", words = { "vim%.uv" } },
-			},
-		},
 	},
 	{
 		-- Main LSP Configuration
@@ -443,7 +469,24 @@ require("lazy").setup({
 						completion = {
 							callSnippet = "Replace",
 						},
-						diagnostics = { disable = { "missing-fields" } },
+						diagnostics = {
+							disable = { "missing-fields" },
+							globals = { "vim" },
+						},
+						workspace = {
+							library = {
+								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+								[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+								-- Plugins
+								[vim.fn.stdpath("data") .. "/lazy"] = true,
+								-- Config
+								[vim.fn.stdpath("config") .. "/lua"] = true,
+							},
+							checkThirdParty = false,
+						},
+						telemetry = {
+							enable = false,
+						},
 					},
 				},
 			})
@@ -536,39 +579,14 @@ require("lazy").setup({
 				},
 				opts = {},
 			},
-			"folke/lazydev.nvim",
 		},
 		--- @module 'blink.cmp'
 		--- @type blink.cmp.Config
 		opts = {
 			keymap = {
-				-- 'default' (recommended) for mappings similar to built-in completions
-				--   <c-y> to accept ([y]es) the completion.
-				--    This will auto-import if your LSP supports it.
-				--    This will expand snippets if the LSP sent a snippet.
-				-- 'super-tab' for tab to accept
-				-- 'enter' for enter to accept
-				-- 'none' for no mappings
-				--
-				-- For an understanding of why the 'default' preset is recommended,
-				-- you will need to read `:help ins-completion`
-				--
-				-- No, but seriously. Please read `:help ins-completion`, it is really good!
-				--
-				-- All presets have the following mappings:
-				-- <tab>/<s-tab>: move to right/left of your snippet expansion
-				-- <c-space>: Open menu or open docs if already open
-				-- <c-n>/<c-p> or <up>/<down>: Select next/previous item
-				-- <c-e>: Hide menu
-				-- <c-k>: Toggle signature help
-				--
-				-- See :h blink-cmp-config-keymap for defining your own keymap
 				preset = "enter",
 				["<Tab>"] = { "snippet_forward", "insert_next", "fallback" },
 				["<S-Tab>"] = { "snippet_backward", "insert_prev", "fallback" },
-
-				-- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-				--    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
 			},
 
 			appearance = {
@@ -584,24 +602,13 @@ require("lazy").setup({
 			},
 
 			sources = {
-				default = { "lsp", "path", "lazydev", "snippets" },
-				providers = {
-					lazydev = { module = "lazydev.integrations.blink", score_offset = 100 },
-				},
+				default = { "lsp", "path", "snippets" },
 			},
 
 			snippets = { preset = "luasnip" },
 
-			-- Blink.cmp includes an optional, recommended rust fuzzy matcher,
-			-- which automatically downloads a prebuilt binary when enabled.
-			--
-			-- By default, we use the Lua implementation instead, but you may enable
-			-- the rust implementation via `'prefer_rust_with_warning'`
-			--
-			-- See :h blink-cmp-config-fuzzy for more information
 			fuzzy = { implementation = "lua" },
 
-			-- Shows a signature help window while you type arguments for a function
 			signature = { enabled = true },
 		},
 	},
@@ -652,8 +659,8 @@ require("lazy").setup({
 
 				local filename = "%f%m%r"
 
-				local songinfo = vim.fn.trim(vim.fn.system({ "playerctl", "metadata", "title" }))
 				local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
+				local clocking = TimeClock.status()
 
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { mode } },
@@ -663,7 +670,8 @@ require("lazy").setup({
 					"%=", -- End left alignment
 					{ hl = mode_hl, strings = { songinfo } },
 					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-					{ hl = mode_hl, strings = { project, search, location } },
+					{ hl = "MiniStatuslineFilename", strings = { project, clocking } },
+					{ hl = mode_hl, strings = { search, location } },
 				})
 			end
 
@@ -686,7 +694,7 @@ require("lazy").setup({
 			{
 				"<leader>o-",
 				function()
-					MiniFiles.open(expand("%:p"), true)
+					MiniFiles.open(vim.fn.expand("%:p"), true)
 				end,
 				desc = "Local Files",
 			},
@@ -736,6 +744,7 @@ require("lazy").setup({
 		---@module 'neogit'
 		---@type NeogitConfig
 		opts = {
+			kind = "auto",
 			prompt_force_push = false,
 			graph_style = "kitty",
 			process_spinner = true,
@@ -760,6 +769,15 @@ require("lazy").setup({
 			require("orgmode").setup({
 				org_agenda_files = "~/Documents/wiki/**/*.org",
 				org_default_notes_file = "~/Documents/wiki/inbox.org",
+				org_capture_templates = {
+					t = { description = "Task", template = "* TODO [#%^{A|B|C}] %? %t" },
+					j = {
+						description = "Journal",
+						template = "%?",
+						datetree = true,
+						target = "~/Documents/wiki/journal.org",
+					},
+				},
 			})
 		end,
 	},
@@ -788,6 +806,12 @@ require("lazy").setup({
 					default = "qwen3-coder:30b",
 				},
 			},
+		},
+	},
+	{
+		"David-Kunz/gen.nvim",
+		opts = {
+			model = "qwen3-coder:30b",
 		},
 	},
 
