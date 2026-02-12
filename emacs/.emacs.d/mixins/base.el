@@ -183,7 +183,7 @@
   ;; Mode line
   (setq global-mode-string '(
                              (:eval (saxon/clocking-status))
-                             "🎵 " (:eval (saxon/get-mpris-track-title))
+                             ;; "🎵 " (:eval (saxon/get-mpris-track-title))
                              (:eval (mu4e--modeline-string))
                              " 🕓 " display-time-string
                              (:eval mu4e-alert-mode-line)))
