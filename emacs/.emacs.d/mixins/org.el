@@ -371,10 +371,6 @@
                              (if (equal buffer-file-name (expand-file-name org-music-file))
                                  (org-music-mode)))))
 
-(use-package dslide
-  :ensure t
-  :after org)
-
 (use-package denote
   :ensure t
   :config
