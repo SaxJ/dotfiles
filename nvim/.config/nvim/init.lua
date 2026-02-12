@@ -68,11 +68,15 @@ vim.filetype.add({ pattern = {
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
 
+-- Misc useful keymaps
+vim.keymap.set("n", "<leader>R", "<cmd>bufdo checktime<CR>", { desc = "[R]eload buffers" })
+
 -- Diagnostic keymaps
 vim.keymap.set("n", "<leader>od", vim.diagnostic.setloclist, { desc = "[D]iagnostics" })
 vim.keymap.set("n", "<leader>ob", "<cmd>Runner<CR>", { desc = "Task runner" })
 vim.keymap.set("n", "<leader>op", "<cmd>Background<CR>", { desc = "Background job" })
 
+-- Terminal
 vim.keymap.set("t", "<Esc><Esc>", "<C-\\><C-n>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-k>", "<Up>", { desc = "Exit terminal mode" })
 vim.keymap.set("t", "<C-j>", "<Down>", { desc = "Exit terminal mode" })
