@@ -348,3 +348,13 @@
   :ensure t
   :config
   (mason-ensure))
+
+(use-package emms
+  :config
+  (emms-all)
+  (add-to-list 'emms-info-functions 'emms-info-mpd)
+  (add-to-list 'emms-player-list 'emms-player-mpd)
+  (setq emms-player-mpd-music-directory "~/Music"
+        emms-source-file-default-directory (expand-file-name "~/Music/")
+        emms-browser-default-browse-type 'emms-browse-by-album)
+  (add-hook 'emms-playlist-cleared-hook 'emms-player-mpd-clear))
