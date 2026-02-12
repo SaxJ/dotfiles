@@ -224,9 +224,11 @@
 
 (use-package eglot
   :custom
-  (eglot-send-changes-idle-time 0.1)
+  (eglot-send-changes-idle-time 0.5)
   (eglot-confirm-server-initiated-edits nil)
   (eglot-inlay-hints-mode nil)
+  (eglot-events-buffer-config '(:size 0 :format full))
+
 
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
@@ -435,14 +437,19 @@
 (use-package gptel
   :ensure t
   :config
-  (setq gptel-model 'deepseek-coder-v2:latest
+  (setq gptel-model 'devstral-small-2:latest
         gptel-backend (gptel-make-ollama "Ollama"
                         :host "localhost:11434"
                         :stream t
-                        :models '(deepseek-coder-v2:latest)))
+                        :models '(devstral-small-2:latest)))
   (gptel-make-anthropic "Claude"
     :stream t
     :key (lambda () (auth-source-pick-first-password :host "anthropic"))))
+
+(use-package gptel-agent
+  :ensure t
+  :after gptel
+  :config (gptel-agent-update))
 
 (use-package ollama-buddy
   :ensure t)
@@ -499,3 +506,12 @@
 (use-package uv-mode
   :ensure t
   :hook (python-ts-mode . uv-mode-auto-activate-hook))
+
+(use-package httprepl
+  :ensure t)
+
+(use-package gptel-forge-prs
+  :ensure t
+  :after forge
+  :config
+  (gptel-forge-prs-install))
