@@ -72,7 +72,7 @@ local function timeclock_in(note)
 			last_in = c == "i"
 		end
 
-		local datetime = os.date("%Y/%m/%d %I:%M:%S")
+		local datetime = os.date("%Y/%m/%d %H:%M:%S")
 
 		if last_in then
 			file:write(string.format("o %s\n", datetime))
@@ -92,7 +92,7 @@ local function timeclock_out(note)
 			last_in = c == "i"
 		end
 
-		local datetime = os.date("%Y/%m/%d %I:%M:%S")
+		local datetime = os.date("%Y/%m/%d %H:%M:%S")
 
 		if last_in then
 			file:write(string.format("o %s %s\n", datetime, note))
@@ -117,7 +117,8 @@ local function timeclock_summary()
 		local io = string.match(line, "[io]")
 		if io == "i" then
 			local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
-			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
+			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second =
+			second }
 
 			local project, _ = string.gsub(line, "[%w%p]+", 3)
 			project = vim.trim(project)
@@ -129,7 +130,8 @@ local function timeclock_summary()
 			end
 
 			local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
-			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
+			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second =
+			second }
 
 			local lastDate = lastEntry["datetime"]
 			local project = lastEntry["project"]
