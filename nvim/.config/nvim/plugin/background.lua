@@ -32,8 +32,11 @@ local function runner()
 					local selection = action_state.get_selected_entry()
 					local task = tasks[selection[1]]
 
-					local cmd = string.format([[TTerm cd %s && %s]], task["dir"], task["cmd"])
-					vim.cmd(cmd)
+					local buf = vim.api.nvim_create_buf(true, false)
+					vim.api.nvim_buf_call(buf, function()
+						local cmd = string.format([[term cd %s && %s]], task["dir"], task["cmd"])
+						vim.cmd(cmd)
+					end)
 				end)
 
 				return true

@@ -143,6 +143,7 @@ rtp:prepend(lazypath)
 
 require("lazy").setup({
 	"chrisbra/Colorizer",
+	"kassio/neoterm",
 	{
 		"NMAC427/guess-indent.nvim",
 		config = function()
@@ -465,6 +466,10 @@ require("lazy").setup({
 				capabilities = capabilities,
 			})
 			vim.lsp.enable("ts_ls")
+			-- vim.lsp.config("tsgo", {
+			-- 	capabilities = capabilities,
+			-- })
+			-- vim.lsp.enable("tsgo")
 
 			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
@@ -674,7 +679,8 @@ require("lazy").setup({
 					"%=", -- End left alignment
 					{ hl = mode_hl, strings = { songinfo } },
 					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-					{ hl = "MiniStatuslineFilename", strings = { project, clocking } },
+					{ hl = "MiniStatuslineFilename", strings = { project } },
+					{ hl = "MiniStatuslineDevinfo", strings = { clocking } },
 					{ hl = mode_hl, strings = { search, location } },
 				})
 			end
@@ -741,14 +747,14 @@ require("lazy").setup({
 		lazy = true,
 		dependencies = {
 			"nvim-lua/plenary.nvim", -- required
-			"sindrets/diffview.nvim", -- optional - Diff integration
+			"esmuellert/codediff.nvim",
 
 			"nvim-telescope/telescope.nvim",
 		},
 		---@module 'neogit'
 		---@type NeogitConfig
 		opts = {
-			kind = "auto",
+			kind = "split_below_all",
 			prompt_force_push = false,
 			graph_style = "kitty",
 			process_spinner = true,
@@ -757,6 +763,9 @@ require("lazy").setup({
 					["<C-j>"] = "Next",
 					["<C-k"] = "Previous",
 				},
+			},
+			integrations = {
+				codediff = true,
 			},
 		},
 		cmd = "Neogit",

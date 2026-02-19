@@ -2,6 +2,43 @@ local funcs = require("functions")
 
 local module = {}
 
+---@param datetime_str string
+local function parse_datetime(datetime_str)
+	local fmt = "(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)"
+	local year, month, day, hour, min, sec = datetime_str:match(fmt)
+	if not year then
+		error("Problem parsing datetime format.")
+	end
+	return os.time({
+		year = tonumber(year),
+		month = tonumber(month),
+		day = tonumber(day),
+		hour = tonumber(hour),
+		min = tonumber(min),
+		sec = tonumber(sec),
+	})
+end
+
+---@param seconds integer
+local function format_duration(seconds)
+	seconds = math.abs(seconds)
+	if seconds < 60 then
+		return string.format("%ds", seconds)
+	elseif seconds < 3600 then
+		local min = seconds / 60
+		local sec = seconds % 60
+		return string.format("%dm %ds", min, sec)
+	elseif seconds < 86400 then
+		local hrs = seconds / 3600
+		local min = (seconds % 3600) / 60
+		return string.format("%dh %dm", hrs, min)
+	else
+		local days = seconds / 86400
+		local hrs = (seconds % 86400) / 3600
+		return string.format("%dd %dh", days, hrs)
+	end
+end
+
 local function open_log_file(mode)
 	local cache_dir = vim.fn.stdpath("data")
 	local log_file = cache_dir .. "/timelog"
@@ -44,6 +81,7 @@ local function timeclock_status()
 	local file = open_log_file("r")
 	local last_in = false
 	local project = nil
+	local datetime = nil
 	if file ~= nil then
 		for line in file:lines() do
 			local c = string.sub(line, 1, 1)
@@ -51,14 +89,19 @@ local function timeclock_status()
 
 			if c == "i" then
 				local extracted_project, _ = string.gsub(line, "[io] %d+/%d+/%d+ %d+:%d+:%d+", "")
+				local extracted = vim.split(line, " ", { plain = true, trimempty = true })
+
+				datetime = string.format("%s %s", extracted[2], extracted[3])
 				project = vim.trim(extracted_project)
 			end
 		end
 
 		file:close()
 	end
+
 	if last_in then
-		return string.format("Clocking: %s", project)
+		local duration = parse_datetime(datetime) - os.time()
+		return string.format("%s %s", project, format_duration(duration))
 	end
 	return "Clocked Out"
 end
@@ -72,7 +115,7 @@ local function timeclock_in(note)
 			last_in = c == "i"
 		end
 
-		local datetime = os.date("%Y/%m/%d %I:%M:%S")
+		local datetime = os.date("%Y/%m/%d %H:%M:%S")
 
 		if last_in then
 			file:write(string.format("o %s\n", datetime))
@@ -92,7 +135,7 @@ local function timeclock_out(note)
 			last_in = c == "i"
 		end
 
-		local datetime = os.date("%Y/%m/%d %I:%M:%S")
+		local datetime = os.date("%Y/%m/%d %H:%M:%S")
 
 		if last_in then
 			file:write(string.format("o %s %s\n", datetime, note))
