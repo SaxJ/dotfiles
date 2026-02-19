@@ -233,55 +233,50 @@
   :config
   (add-hook 'tsx-ts-mode-hook 'eglot-ensure)
   (add-hook 'csharp-ts-mode-hook 'eglot-ensure)
-  ;; (add-hook 'csharp-mode-hook 'eglot-ensure)
   (add-hook 'typescript-ts-mode-hook 'eglot-ensure)
-  ;;(add-hook 'php-mode-hook 'eglot-ensure)
   (add-hook 'php-ts-mode-hook 'eglot-ensure)
   (add-hook 'json-ts-mode-hook 'eglot-ensure)
   (add-hook 'yaml-ts-mode-hook 'eglot-ensure)
   (add-hook 'fsharp-mode-hook 'eglot-ensure)
   (add-hook 'vue-mode-hook 'eglot-ensure)
   (add-hook 'python-ts-mode-hook 'eglot-ensure)
-  (add-hook 'c-ts-mode 'eglot-ensure)
-  (add-hook 'c++-ts-mode 'eglot-ensure)
-  (add-hook 'graphql-ts-mode 'eglot-ensure)
-  (add-hook 'rust-ts-mode 'eglot-ensure)
-  (add-hook 'haskell-mode 'eglot-ensure)
-  (add-hook 'elm-mode 'eglot-ensure)
-  (add-hook 'go-ts-mode 'eglot-ensure)
-  (add-hook 'tuareg-mode 'eglot-ensure)
+  (add-hook 'c-ts-mode-hook 'eglot-ensure)
+  (add-hook 'c++-ts-mode-hook 'eglot-ensure)
+  (add-hook 'graphql-ts-mode-hook 'eglot-ensure)
+  (add-hook 'rust-ts-mode-hook 'eglot-ensure)
+  (add-hook 'haskell-mode-hook 'eglot-ensure)
+  (add-hook 'elm-mode-hook 'eglot-ensure)
+  (add-hook 'go-ts-mode-hook 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
   (add-to-list 'eglot-server-programs
-               '(tsx-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+               '(tsx-ts-mode . ("typescript-language-server" "--stdio"
+                                :initializationOptions
                                 (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
                                               :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
                                               :tsserver (:logVerbosity "off")))))
   (add-to-list 'eglot-server-programs
-               '(typescript-ts-mode . ("typescript-language-server" "--stdio" :initializationOptions
+               '(typescript-ts-mode . ("typescript-language-server" "--stdio"
+                                       :initializationOptions
                                        (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
                `(csharp-ts-mode . ("OmniSharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
-               '(php-mode . ("intelephense" "--stdio")))
-  (add-to-list 'eglot-server-programs
 	           '(php-ts-mode . ("intelephense" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(vue-mode . ("vue-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(graphql-ts-mode . ("graphql-lsp" "server" "-m" "stream")))
-  (add-to-list 'eglot-server-programs
-               '(tuareg-mode . ("opam" "exec" "--" "ocamllsp")))
 
-  ;; (setq-default eglot-workspace-configuration
-  ;;               '(:intelephense (:telemetry (:enabled :json-false)
-  ;;                                           :environment (:phpVersion "8.3.0"))))
-  ;; :completion (:triggerParameterHints :json-false)
-  ;; :inlayHint (:returnTypes :json-false
-  ;;                          :parameterTypes :json-false
-  ;;                          :parameterNames :json-false))))
+  (setq-default eglot-workspace-configuration
+                '(:intelephense (:telemetry (:enabled :json-false)
+                                            :environment (:phpVersion "8.3.0")
+                                            :completion (:triggerParameterHints :json-false)
+                                            :inlayHint (:returnTypes :json-false
+                                                                     :parameterTypes :json-false
+                                                                     :parameterNames :json-false))))
 
   ;;(add-hook 'eglot-managed-mode-hook #'saxon/eglot-capf)
   )
@@ -415,11 +410,6 @@
   :config
   (setq go-ts-mode-indent-offset 4))
 
-(use-package tuareg
-  :ensure t
-  :config
-  (setq tuareg-opam-insinuate t))
-
 (use-package dune
   :ensure t)
 
@@ -433,35 +423,6 @@
         compilation-scroll-output t
         ansi-color-for-compilation-mode t)
   (add-hook 'compilation-filter-hook #'ansi-color-compilation-filter))
-
-(use-package gptel
-  :ensure t
-  :config
-  (setq gptel-model 'devstral-small-2:latest
-        gptel-backend (gptel-make-ollama "Ollama"
-                        :host "localhost:11434"
-                        :stream t
-                        :models '(devstral-small-2:latest)))
-  (gptel-make-anthropic "Claude"
-    :stream t
-    :key (lambda () (auth-source-pick-first-password :host "anthropic"))))
-
-(use-package gptel-agent
-  :ensure t
-  :after gptel
-  :config (gptel-agent-update))
-
-(use-package ollama-buddy
-  :ensure t)
-
-(defun saxon/ai-explain (from to)
-  "Ask the AI to explain a selection"
-  (interactive "r")
-  (let* ((command "sc 'Explain this concisely.'"))
-    (if mark-active
-        (shell-command-on-region from to command "*smart-cat*")
-      (shell-command-on-region (point-min) (point-max) command "*smart-cat*"))
-    (display-buffer "*smart-cat*")))
 
 (defun saxon/scp-upload ()
   (interactive)
@@ -510,8 +471,13 @@
 (use-package httprepl
   :ensure t)
 
-(use-package gptel-forge-prs
+(use-package ellama
   :ensure t
-  :after forge
+  :bind ("SPC e" . ellama)
+  :hook (org-ctrl-c-ctrl-c-final . ellama-chat-send-last-message)
+  :init (setopt ellama-auto-scroll t)
   :config
-  (gptel-forge-prs-install))
+  (require 'llm-ollama)
+  (setopt ellama-provider
+          (make-llm-ollama
+           :chat-model "devstral-small-2:latest")))
