@@ -160,7 +160,8 @@ local function timeclock_summary()
 		local io = string.match(line, "[io]")
 		if io == "i" then
 			local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
-			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
+			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second =
+			second }
 
 			local project, _ = string.gsub(line, "[%w%p]+", 3)
 			project = vim.trim(project)
@@ -172,7 +173,8 @@ local function timeclock_summary()
 			end
 
 			local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
-			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
+			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second =
+			second }
 
 			local lastDate = lastEntry["datetime"]
 			local project = lastEntry["project"]
