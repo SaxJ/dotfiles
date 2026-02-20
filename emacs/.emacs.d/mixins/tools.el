@@ -358,3 +358,5 @@
         emms-source-file-default-directory (expand-file-name "~/Music/")
         emms-browser-default-browse-type 'emms-browse-by-album)
   (add-hook 'emms-playlist-cleared-hook 'emms-player-mpd-clear))
+
+(use-package simple-httpd :ensure t)
