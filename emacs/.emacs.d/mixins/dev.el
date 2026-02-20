@@ -473,11 +473,10 @@
 
 (use-package ellama
   :ensure t
-  :bind ("SPC e" . ellama)
   :hook (org-ctrl-c-ctrl-c-final . ellama-chat-send-last-message)
   :init (setopt ellama-auto-scroll t)
   :config
   (require 'llm-ollama)
   (setopt ellama-provider
           (make-llm-ollama
-           :chat-model "devstral-small-2:latest")))
+           :chat-model "qwen3-coder-next:cloud")))
