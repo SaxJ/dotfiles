@@ -803,28 +803,9 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"blob42/codegpt-ng.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"MunifTanjim/nui.nvim",
-		},
-		---@module 'codegpt'
-		---@type codegpt.Options
-		opts = {
-			connection = {
-				api_provider = "ollama",
-			},
-			models = {
-				ollama = {
-					default = "qwen3-coder:30b",
-				},
-			},
-		},
-	},
-	{
 		"David-Kunz/gen.nvim",
 		opts = {
-			model = "qwen3-coder:30b",
+			model = "devstral-small-2:latest",
 		},
 	},
 
