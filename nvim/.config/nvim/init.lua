@@ -608,6 +608,14 @@ require("lazy").setup({
 				documentation = { auto_show = true, auto_show_delay_ms = 500 },
 				menu = { auto_show = true },
 				list = { selection = { preselect = false } },
+				menu = {
+					draw = {
+						columns = {
+							{ "label", "label_description", gap = 1 },
+							{ "kind_icon", "kind" },
+						},
+					},
+				},
 			},
 
 			sources = {
