@@ -24,6 +24,7 @@ emacs/.emacs.d/bookmarks
 emacs/.emacs.d/org-social-mentions
 emacs/.emacs.d/v-social.org
 emacs/.emacs.d/url/
+emacs/.emacs.d/ellama-sessions/
 
 # bash
 bash/.local/bin/hurl*
