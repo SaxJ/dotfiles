@@ -137,6 +137,15 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 	end
 end
 
+local has_words_before = function()
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	if col == 0 then
+		return false
+	end
+	local line = vim.api.nvim_get_current_line()
+	return line:sub(col, col):match("%s") == nil
+end
+
 ---@type vim.Option
 local rtp = vim.opt.rtp
 rtp:prepend(lazypath)
@@ -275,6 +284,19 @@ require("lazy").setup({
 				extensions = {
 					["ui-select"] = {
 						require("telescope.themes").get_dropdown(),
+					},
+					zoxide = {
+						prompt_title = "Switchy switch",
+						mappings = {
+							default = {
+								action = function(selection)
+									vim.cmd.tcd(selection.path)
+								end,
+								after_action = function(selection)
+									vim.notify("Tab directory changed to " .. selection.path)
+								end,
+							},
+						},
 					},
 				},
 				defaults = {
@@ -462,15 +484,9 @@ require("lazy").setup({
 			--  - capabilities (table): Override fields in capabilities. Can be used to disable certain LSP features.
 			--  - settings (table): Override the default settings passed when initializing the server.
 			--        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
-			vim.lsp.config("ts_ls", {
+			vim.lsp.config("vtsls", {
 				capabilities = capabilities,
 			})
-			vim.lsp.enable("ts_ls")
-			-- vim.lsp.config("tsgo", {
-			-- 	capabilities = capabilities,
-			-- })
-			-- vim.lsp.enable("tsgo")
-
 			vim.lsp.config("lua_ls", {
 				capabilities = capabilities,
 				settings = {
@@ -499,8 +515,6 @@ require("lazy").setup({
 					},
 				},
 			})
-			vim.lsp.enable("lua_ls")
-
 			vim.lsp.config("html", {
 				capabilities = capabilities,
 				filetypes = { "blade" },
@@ -513,17 +527,16 @@ require("lazy").setup({
 					provideFormatter = true,
 				},
 			})
-			vim.lsp.enable("html")
 
 			vim.lsp.config("gopls", {
 				capabilities = capabilities,
 			})
-			vim.lsp.enable("gopls")
 
 			vim.lsp.config("intelephense", {
 				capabilities = capabilities,
 			})
-			vim.lsp.enable("intelephense")
+
+			vim.lsp.enable({ "intelephense", "gopls", "html", "lua_ls", "vtsls" })
 		end,
 	},
 
@@ -593,9 +606,26 @@ require("lazy").setup({
 		--- @type blink.cmp.Config
 		opts = {
 			keymap = {
-				preset = "enter",
-				["<Tab>"] = { "snippet_forward", "insert_next", "fallback" },
-				["<S-Tab>"] = { "snippet_backward", "insert_prev", "fallback" },
+				-- preset = "enter",
+				-- ["<Tab>"] = { "snippet_forward", "insert_next", "fallback" },
+				-- ["<S-Tab>"] = { "snippet_backward", "insert_prev", "fallback" },
+				preset = "none",
+				["<Tab>"] = {
+					function(cmp)
+						if has_words_before() then
+							return cmp.insert_next()
+						end
+					end,
+					"fallback",
+				},
+				-- Navigate to the previous suggestion or cancel completion if currently on the first one.
+				["<S-Tab>"] = { "insert_prev" },
+				["<C-Space>"] = {
+					function(cmp)
+						cmp.show()
+					end,
+				},
+				["<CR>"] = { "accept", "fallback" },
 			},
 
 			appearance = {
@@ -606,9 +636,10 @@ require("lazy").setup({
 
 			completion = {
 				documentation = { auto_show = true, auto_show_delay_ms = 500 },
-				menu = { auto_show = true },
 				list = { selection = { preselect = false } },
 				menu = {
+					border = "single",
+					auto_show = true,
 					draw = {
 						columns = {
 							{ "label", "label_description", gap = 1 },
@@ -619,7 +650,7 @@ require("lazy").setup({
 			},
 
 			sources = {
-				default = { "lsp", "path", "snippets" },
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
 
 			snippets = { preset = "luasnip" },
@@ -813,7 +844,8 @@ require("lazy").setup({
 	{
 		"David-Kunz/gen.nvim",
 		opts = {
-			model = "devstral-small-2:latest",
+			model = "gpt-oss:120b-cloud",
+			display_mode = "split_below_all",
 		},
 	},
 
@@ -840,6 +872,65 @@ require("lazy").setup({
 		},
 	},
 })
+
+--------------------------------------------------------------
+-- 1. Helper: turn a full path into a nice short name
+--------------------------------------------------------------
+local function short_path(path)
+	-- If the cwd is the home directory, show "~"
+	if path == vim.env.HOME then
+		return "~"
+	end
+
+	-- Show only the last component (the leaf folder)
+	return vim.fn.fnamemodify(path, ":t")
+end
+
+--------------------------------------------------------------
+-- 2. The actual tabline generator
+--------------------------------------------------------------
+function _G.my_tabline()
+	local result = ""
+
+	-- Iterate over all tabpages (the order they appear in the UI)
+	for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
+		local tabnr = vim.api.nvim_tabpage_get_number(tabpage) -- 1‑based index
+		local cwd = vim.fn.getcwd(0, tabnr) -- tab‑local cwd
+
+		-- Fallback: if a tab has no tab‑local cwd (very rare) use the global one
+		if cwd == "" then
+			cwd = vim.fn.getcwd()
+		end
+
+		-- Choose the highlight group
+		if tabpage == vim.api.nvim_get_current_tabpage() then
+			result = result .. "%#TabLineSel#" -- active tab
+		else
+			result = result .. "%#TabLine#" -- inactive tabs
+		end
+
+		-- Build the click‑area for the tab (so you can click it)
+		-- %{:tabpage_number} makes the label jump to that tab when clicked
+		result = result .. string.format("%%%dT", tabnr)
+
+		-- The visible label (you can tweak it as you like)
+		result = result .. " " .. short_path(cwd) .. " "
+
+		-- Close the click‑area (Neovim automatically resets it at the next %)
+	end
+
+	-- Add a trailing filler so the line stretches across the whole window
+	result = result .. "%#TabLineFill#%="
+
+	return result
+end
+
+--------------------------------------------------------------
+-- 3. Tell Neovim to use the function for its tabline
+--------------------------------------------------------------
+-- The `%!v:lua.my_tabline()` syntax means “evaluate the Lua function and
+-- use its return value as the tabline”.
+vim.o.tabline = "%!v:lua.my_tabline()"
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
