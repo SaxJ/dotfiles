@@ -479,4 +479,4 @@
   (require 'llm-ollama)
   (setopt ellama-provider
           (make-llm-ollama
-           :chat-model "qwen3-coder-next:cloud")))
+           :chat-model "gpt-oss:120b-cloud")))
