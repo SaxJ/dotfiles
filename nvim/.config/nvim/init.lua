@@ -4,6 +4,17 @@ vim.g.maplocalleader = ","
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+vim.g.background_tasks = {
+	["Hannibal Dev"] = {
+		dir = "~/Documents/hannibal/",
+		cmd = "yarn dev -- -p 4000",
+	},
+	["Unicron Dev"] = {
+		dir = "~/Documents/unicron/",
+		cmd = "npm run dev -- -p 3000",
+	},
+}
+
 vim.o.number = true
 vim.o.relativenumber = true
 vim.o.wrap = false
@@ -290,7 +301,7 @@ require("lazy").setup({
 						mappings = {
 							default = {
 								action = function(selection)
-									vim.cmd.tcd(selection.path)
+									Project.open_tab_if_not_existing(selection.path)
 								end,
 								after_action = function(selection)
 									vim.notify("Tab directory changed to " .. selection.path)
@@ -323,7 +334,9 @@ require("lazy").setup({
 			vim.keymap.set("n", "<leader>ht", builtin.builtin, { desc = "[T]elescope" })
 
 			-- Buffers
-			vim.keymap.set("n", "<leader>bb", builtin.buffers, { desc = "[B]uffers" })
+			vim.keymap.set("n", "<leader>bb", function()
+				builtin.buffers({ only_cwd = true })
+			end, { desc = "[B]uffers" })
 
 			-- Project bindings
 			vim.keymap.set("n", "<leader>pw", builtin.grep_string, { desc = "[W]ord" })
@@ -709,6 +722,7 @@ require("lazy").setup({
 
 				local project = vim.fn.fnamemodify(vim.fn.getcwd(), ":t")
 				local clocking = TimeClock.status()
+				local tasks = string.format("Tasks: %d", vim.g.background_tasks_count)
 
 				return MiniStatusline.combine_groups({
 					{ hl = mode_hl, strings = { mode } },
@@ -720,6 +734,7 @@ require("lazy").setup({
 					{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 					{ hl = "MiniStatuslineFilename", strings = { project } },
 					{ hl = "MiniStatuslineDevinfo", strings = { clocking } },
+					{ hl = "MiniStatuslineFilename", strings = { tasks } },
 					{ hl = mode_hl, strings = { search, location } },
 				})
 			end
@@ -842,10 +857,39 @@ require("lazy").setup({
 		end,
 	},
 	{
-		"David-Kunz/gen.nvim",
+		"olimorris/codecompanion.nvim",
+		version = "^19.0.0",
 		opts = {
-			model = "gpt-oss:120b-cloud",
-			display_mode = "split_below_all",
+			interactions = {
+				chat = {
+					adapter = {
+						name = "ollama",
+						model = "qwen3-coder-next:cloud",
+					},
+				},
+				inline = {
+					adapter = {
+						name = "ollama",
+						model = "qwen3-coder-next:cloud",
+					},
+				},
+				cmd = {
+					adapter = {
+						name = "ollama",
+						model = "qwen3-coder-next:cloud",
+					},
+				},
+				background = {
+					adapter = {
+						name = "ollama",
+						model = "qwen3-coder-next:cloud",
+					},
+				},
+			},
+		},
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
 		},
 	},
 
