@@ -2,7 +2,7 @@
 BUILDKITE_API_KEY=$(pass buildkite_api)
 BUILDKITE_ORG="healthengineau"
 
-finished_from=$(date --date='2 minutes ago' --utc +%Y-%m-%dT%H:%MZ)
+finished_from=$(date --date='1 minute ago' --utc +%Y-%m-%dT%H:%MZ)
 api_key=$BUILDKITE_API_KEY
 org=$BUILDKITE_ORG
 user_id=$(curl -H "Authorization: Bearer $api_key" https://api.buildkite.com/v2/user | jq -rc '.id')

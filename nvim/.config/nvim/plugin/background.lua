@@ -1,14 +1,3 @@
-local tasks = {
-	["Hannibal Dev"] = {
-		dir = "~/Documents/hannibal/",
-		cmd = "yarn dev -- -p 4000",
-	},
-	["Unicron Dev"] = {
-		dir = "~/Documents/unicron/",
-		cmd = "npm run dev -- -p 3000",
-	},
-}
-
 local pickers = require("telescope.pickers")
 local finders = require("telescope.finders")
 local conf = require("telescope.config").values
@@ -16,7 +5,17 @@ local conf = require("telescope.config").values
 local actions = require("telescope.actions")
 local action_state = require("telescope.actions.state")
 
-local function runner()
+if vim.g.background_tasks_count == nil then
+	vim.g.background_tasks_count = 0
+end
+
+--- @param opts table
+local function runner(opts)
+	local tasks = vim.g.background_tasks
+	if tasks == nil then
+		print("No background tasks set!")
+	end
+
 	local results = vim.fn.keys(tasks)
 
 	pickers
@@ -26,17 +25,27 @@ local function runner()
 				results = results,
 			}),
 			sorter = conf.generic_sorter(),
-			attach_mappings = function(prompt_buf, map)
+			attach_mappings = function(prompt_buf, _)
 				actions.select_default:replace(function()
 					actions.close(prompt_buf)
 					local selection = action_state.get_selected_entry()
 					local task = tasks[selection[1]]
 
 					local buf = vim.api.nvim_create_buf(true, false)
+
+					vim.api.nvim_create_autocmd({ "BufDelete" }, {
+						buffer = buf,
+						callback = function()
+							vim.g.background_tasks_count = vim.fn.max({ 0, vim.g.background_tasks_count - 1 })
+						end,
+					})
+
 					vim.api.nvim_buf_call(buf, function()
 						local cmd = string.format([[term cd %s && %s]], task["dir"], task["cmd"])
 						vim.cmd(cmd)
 					end)
+
+					vim.g.background_tasks_count = vim.g.background_tasks_count + 1
 				end)
 
 				return true
@@ -45,7 +54,20 @@ local function runner()
 		:find()
 end
 
+vim.api.nvim_create_autocmd("VimLeavePre", {
+	callback = function()
+		if vim.g.background_tasks_count > 0 then
+			local choice = vim.fn.confirm("You have tasks running. Continue to exit?", "&Yes\n&No", 2)
+			if choice == 1 then
+				return true
+			else
+				return false
+			end
+		end
+	end,
+})
+
 vim.api.nvim_create_user_command("Background", function()
-	runner()
+	runner({})
 end, { desc = "Run background task" })
 -- vim: ts=2 sts=2 sw=2 et

@@ -169,9 +169,6 @@
     "TAB p" 'tab-previous
     "TAB r" 'tab-recent
 
-    ;; Ellama
-    "e" 'ellama
-
     ;; buffer bindings
     "bb" 'consult-project-buffer
     "bc" 'clone-indirect-buffer

@@ -480,3 +480,10 @@
   (setopt ellama-provider
           (make-llm-ollama
            :chat-model "gpt-oss:120b-cloud")))
+
+(use-package gptel
+  :ensure t
+  :config
+  (gptel-make-ollama "Ollama"
+    :stream t
+    :models '(qwen3-coder-next:cloud)))
