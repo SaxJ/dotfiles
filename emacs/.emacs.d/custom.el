@@ -20,12 +20,12 @@
               evil-commentary evil-org evil-surround forge general
               git-timemachine gptel graphql-mode graphql-ts-mode
               graphviz-dot-mode haskell-mode helm-org hide-mode-line
-              httprepl jira jiralib2 jq-mode json-mode kubernetes
-              lastfm magit-delta magit-prime marginalia mason
-              mood-line mpris mu4e-alert multi-vterm nerd-icons-corfu
-              nvm ob-mermaid orderless org-modern org-music org-ql
-              org-roam org-social org-tree-slide origami otpp pomo-cat
-              popper pr-review prescient prodigy pug-mode rainbow-mode
+              httprepl jira jiralib2 jq-mode json-mode lastfm
+              magit-delta magit-prime marginalia mason mood-line mpris
+              mu4e-alert multi-vterm nerd-icons-corfu nvm ob-mermaid
+              orderless org-modern org-music org-ql org-roam
+              org-social org-tree-slide origami otpp pomo-cat popper
+              pr-review prescient prodigy pug-mode rainbow-mode
               simple-httpd simple-mpc soundcloud string-inflection
               sudo-edit templ-ts-mode terraform-mode time-zones tinee
               uv-mode vc-use-package versuri vertico vue-mode web-mode

@@ -210,11 +210,8 @@
     "nj" 'org-journal-new-entry
     "nn" 'org-roam-capture
 
-    ;; jira
-    "js" 'saxon/pull-jira-assigned
-    "jj" 'saxon/jira-act-on-current-ticket
-    "jd" 'saxon/jira-describe-current-ticket
-    "jb" 'saxon/jira-act-on-board-ticket
+    ;; jumping
+    "jj" 'evil-collection-consult-jump-list
 
     ;; remote
     "ro" 'saxon/open-remote-file
