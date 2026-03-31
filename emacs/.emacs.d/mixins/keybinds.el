@@ -1,3 +1,11 @@
+(require 'ghub-legacy)
+(require 'forge)
+
+(defun saxon/jira-open-branch-ticket ()
+  (interactive)
+  (let ((ticket (car(vc-git-branches))))
+    (browse-url (format "https://hejira.atlassian.net/browse/%s" ticket))))
+
 (defun saxon/restart-eglot ()
   (interactive)
   (progn
@@ -142,6 +150,14 @@
   (interactive "sCommand: ")
   (compile (format "%s %s" cmd (buffer-file-name))))
 
+(defun saxon/review-pr ()
+  (interactive)
+  (let* ((pr (forge-read-pullreq "Review"))
+         (url (forge-get-url (forge-get-topic pr))))
+    (progn
+      (forge-checkout-pullreq pr)
+      (pr-review url t))))
+
 (use-package general
   :ensure t
   :config
@@ -231,6 +247,8 @@
     "gg" 'magit-project-status
     "gb" 'magit-blame
     "gh" 'git-timemachine
+    "gp" 'forge-checkout-pullreq
+    "gP" 'saxon/review-pr
 
     ;; openers
     "oa" 'org-agenda
