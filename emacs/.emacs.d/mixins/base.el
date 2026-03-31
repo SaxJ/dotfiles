@@ -208,3 +208,10 @@
                           :right
                           (((mood-line-segment-vc) . " ")
                            ((mood-line-segment-major-mode) . "")))))
+
+;; (use-package nano-modeline
+;;   :ensure t
+;;   :config
+;;   (setopt nano-modeline-position #'nano-modeline-footer
+;;           nano-modeline-padding '(0.1 . 0.1))
+;;   (add-hook 'prog-mode-hook #'nano-modeline-prog-mode))
