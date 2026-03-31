@@ -159,6 +159,11 @@
         (let-alist gif
           (message .images.downsized_large.url))))))
 
+(defun saxon/get-random-giphy-html ()
+  (interactive)
+  (when-let ((link (saxon/get-random-giphy-image)))
+    (kill-new (format "<img src=\"%s\" />" link))))
+
 (defun saxon/get-random-giphy-markdown ()
   (interactive)
   (when-let ((link (saxon/get-random-giphy-image)))
