@@ -227,7 +227,7 @@
   (eglot-send-changes-idle-time 0.5)
   (eglot-confirm-server-initiated-edits nil)
   (eglot-inlay-hints-mode nil)
-  (eglot-events-buffer-config '(:size 0 :format full))
+  (eglot-events-buffer-config '(:size 1000 :format full))
 
 
   :config
@@ -249,16 +249,13 @@
   (add-hook 'go-ts-mode-hook 'eglot-ensure)
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio"
                                 :initializationOptions
                                 (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
                                               :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
                                               :tsserver (:logVerbosity "off")))))
-  (add-to-list 'eglot-server-programs
-               '(typescript-ts-mode . ("typescript-language-server" "--stdio"
-                                       :initializationOptions
-                                       (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)))))
   (add-to-list 'eglot-server-programs
                `(csharp-ts-mode . ("OmniSharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
@@ -416,6 +413,16 @@
 (use-package templ-ts-mode
   :ensure t)
 
+;; (use-package jtsx
+;;   :ensure t
+;;   :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
+;;          ("\\.tsx\\'" . jtsx-tsx-mode)
+;;          ("\\.ts\\'" . jtsx-typescript-mode))
+;;   :commands jtsx-install-treesit-language
+;;   :hook ((jtsx-jsx-mode . hs-minor-mode)
+;;          (jtsx-tsx-mode . hs-minor-mode)
+;;          (jtsx-typescript-mode . hs-minor-mode)))
+
 (use-package compile
   :ensure nil
   :config
@@ -487,3 +494,13 @@
   (gptel-make-ollama "Ollama"
     :stream t
     :models '(qwen3-coder-next:cloud)))
+
+(use-package gptel-agent
+  :ensure t)
+
+(use-package pulse
+  :config
+  (defun saxon/evil-pulse (orig beg end &rest args)
+    (pulse-momentary-highlight-region beg end)
+    (apply orig beg end args))
+  (advice-add 'evil-yank :around 'saxon/evil-pulse))
