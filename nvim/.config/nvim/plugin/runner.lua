@@ -1,10 +1,3 @@
-local pickers = require("telescope.pickers")
-local finders = require("telescope.finders")
-local conf = require("telescope.config").values
-
-local actions = require("telescope.actions")
-local action_state = require("telescope.actions.state")
-
 --- @return 'composer'|'yarn'|'npm'|nil
 local function detect_project()
 	if vim.fn.filereadable("composer.json") == 1 then
@@ -18,7 +11,7 @@ local function detect_project()
 	end
 end
 
-local function runner(opts)
+local function runner()
 	local project_type = detect_project()
 	local results = {}
 	local cmd_root = ""
@@ -36,26 +29,14 @@ local function runner(opts)
 		cmd_root = "npm run "
 	end
 
-	opts = opts or {}
-	pickers
-		.new(opts, {
-			prompt_title = "Runner",
-			finder = finders.new_table({
-				results = results,
-			}),
-			sorter = conf.generic_sorter(opts),
-			attach_mappings = function(prompt_buf, map)
-				actions.select_default:replace(function()
-					actions.close(prompt_buf)
-					local selection = action_state.get_selected_entry()
+	vim.ui.select(results, nil, function(choice)
+		local cmd = cmd_root .. choice
+		Terminal.open_terminal(cmd, "horizontal")
 
-					vim.cmd("HTerm " .. cmd_root .. selection[1])
-				end)
+		vim.keymap.set("n", "q", "<cmd>bd<CR>", { buffer = 0, desc = "Quit" })
 
-				return true
-			end,
-		})
-		:find()
+		vim.keymap.set("n", "gr", string.format("<cmd>terminal %s<CR>", cmd), { buffer = 0, desc = "Recompile" })
+	end)
 end
 
 vim.api.nvim_create_user_command("Runner", function()

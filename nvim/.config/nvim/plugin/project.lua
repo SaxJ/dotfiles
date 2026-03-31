@@ -4,8 +4,8 @@ local module = {}
 function open_tab_if_not_existing(project)
 	local tabids = vim.api.nvim_list_tabpages()
 	local tabs = {}
-	for _, tabid in ipairs(tabids) do
-		local twd = vim.fn.getcwd(-1, tabid)
+	for tabnr, tabid in ipairs(tabids) do
+		local twd = vim.fn.getcwd(-1, tabnr)
 		local tabname = vim.fn.fnamemodify(twd, ":t")
 		tabs[tabname] = tabid
 	end
