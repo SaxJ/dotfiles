@@ -30,5 +30,9 @@ function k() {
 
 function prc() {
 	title="$(git branch --show-current): "
-	gh pr create -r adriansyah,mikeyjk,lucasangelon,GoodPie -d -t "$title" -e
+	gh pr create -d -t "$title" -e
+}
+
+function serve() {
+  npx http-server "$1" -o -p 8080
 }
