@@ -79,6 +79,7 @@ vim.o.confirm = true
 vim.filetype.add({ pattern = {
 	[".*%.blade%.php"] = "blade",
 } })
+vim.filetype.add({ extension = { templ = "templ" } })
 
 -- Clear highlights on search when pressing <Esc> in normal mode
 vim.keymap.set("n", "<Esc>", "<cmd>nohlsearch<CR>")
@@ -129,35 +130,41 @@ vim.keymap.set("n", "<leader><tab>t", "<cmd>TTerm<CR>", { desc = "Terminal in Ta
 vim.keymap.set("n", "<leader>bb", "<cmd>Pick buffers<CR>", { desc = "Buffers" })
 
 -- Git
-vim.keymap.set('n', '<leader>gg', '<cmd>Neogit<CR>', {desc = 'Git'})
-vim.keymap.set('n', '<leader>gb', '<cmd>Gitsigns blame<CR>', {desc = 'Blame'})
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
 
 -- Power
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qr", "<cmd>restart<CR>", { desc = "Restart" })
 
 -- Projects
-vim.keymap.set('n', "<leader>pp", function ()
-  local picked = MiniPick.builtin.cli({command = {'zoxide', 'query', '--all', '--list'}})
-  open_tab_if_not_existing(picked)
-end, {desc = "Projects"})
-vim.keymap.set('n', '<leader>pt', '<cmd>VTerm<CR>i')
-vim.keymap.set('n', '<leader>sp', '<cmd>Pick grep_live<CR>', {desc = 'Grep'})
+vim.keymap.set("n", "<leader>pp", function()
+	local picked = MiniPick.builtin.cli({ command = { "zoxide", "query", "--all", "--list" } })
+  vim.cmd('tabnew')
+  vim.cmd('tcd ' .. picked)
+end, { desc = "Projects" })
+vim.keymap.set("n", "<leader>pt", "<cmd>VTerm<CR>i")
+vim.keymap.set("n", "<leader>sp", "<cmd>Pick grep_live<CR>", { desc = "Grep" })
 
 -- General
-vim.keymap.set('n', '<leader><leader>', '<cmd>Pick files<CR>', {desc = "Files"})
+vim.keymap.set("n", "<leader><leader>", "<cmd>Pick files<CR>", { desc = "Files" })
+vim.keymap.set('n', '<leader>-', function ()
+  MiniFiles.open(MiniFiles.get_latest_path())
+end)
 
 -- Completion
-vim.keymap.set('i', '<Tab>', [[pumvisible() ? "\<C-n>" : "\<Tab>"]], {expr = true})
-vim.keymap.set('i', '<S-Tab>', [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], {expr = true})
-vim.keymap.set('i', '<CR>', function()
-  -- If there is selected item in popup, accept it with <C-y>
-  if vim.fn.complete_info()['selected'] ~= -1 then return '\25' end
-  -- Fall back to plain `<CR>`. You might want to customize according
-  -- to other plugins. For example if 'mini.pairs' is set up, replace
-  -- next line with `return MiniPairs.cr()`
-  return '\r'
-end, {expr = true})
+vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
+vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
+vim.keymap.set("i", "<CR>", function()
+	-- If there is selected item in popup, accept it with <C-y>
+	if vim.fn.complete_info()["selected"] ~= -1 then
+		return "\25"
+	end
+	-- Fall back to plain `<CR>`. You might want to customize according
+	-- to other plugins. For example if 'mini.pairs' is set up, replace
+	-- next line with `return MiniPairs.cr()`
+	return "\r"
+end, { expr = true })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -227,218 +234,266 @@ local function gh(slug)
 end
 
 vim.pack.add({
-  -- Colours
-  gh("miikanissi/modus-themes.nvim"),
-  gh("folke/tokyonight.nvim"),
+	-- Pretty
+	gh("miikanissi/modus-themes.nvim"),
+	gh("folke/tokyonight.nvim"),
+	gh("3rd/image.nvim"),
 
 	-- Util
 	gh("nvim-lua/plenary.nvim"),
-  gh("stevearc/conform.nvim"),
+	gh("stevearc/conform.nvim"),
 
 	-- LSP
-  gh("j-hui/fidget.nvim"),
-  gh("mason-org/mason.nvim"),
+	gh("j-hui/fidget.nvim"),
+	gh("mason-org/mason.nvim"),
   gh("neovim/nvim-lspconfig"),
 	gh("rachartier/tiny-inline-diagnostic.nvim"),
 
 	-- Treesitter
-	gh("nvim-treesitter/nvim-treesitter"),
+  {
+    src = gh("nvim-treesitter/nvim-treesitter"),
+    version = "main",
+  },
 
-  -- Mini
-  gh("nvim-mini/mini.nvim"),
+	-- Mini
+	gh("nvim-mini/mini.nvim"),
 
-  -- Notes
-  gh("nvim-orgmode/orgmode"),
+	-- Notes
+	gh("nvim-orgmode/orgmode"),
 
-  -- Git
+	-- Git
 	gh("NeogitOrg/neogit"),
-  gh("esmuellert/codediff.nvim"),
-  gh("lewis6991/gitsigns.nvim"),
+	gh("esmuellert/codediff.nvim"),
+	gh("lewis6991/gitsigns.nvim"),
 
-  -- AI
-  gh("olimorris/codecompanion.nvim"),
+	-- AI
+	gh("olimorris/codecompanion.nvim"),
 })
 
 vim.cmd("colorscheme tokyonight-night")
 
-require('codecompanion').setup({
-  interactions = {
-    chat = {
-      adapter = {
-        name = "ollama",
-        model = "minimax-m2.7:cloud",
-      },
-    },
-    inline = {
-      adapter = {
-        name = "ollama",
-        model = "minimax-m2.7:cloud",
-      },
-    },
-    cmd = {
-      adapter = {
-        name = "ollama",
-        model = "minimax-m2.7:cloud",
-      },
-    },
-    background = {
-      adapter = {
-        name = "ollama",
-        model = "minimax-m2.7:cloud",
-      },
-    },
-  },
+local treesitter_langs = {
+	"bash",
+	"c",
+	"cpp",
+	"go",
+	"gomod",
+	"html",
+  "css",
+	"javascript",
+	"lua",
+	"python",
+	"regex",
+	"rust",
+	"tsx",
+	"typescript",
+	"vim",
+	"vimdoc",
+	"vue",
+	"xml",
+  "php",
+  "templ",
+}
+
+require('nvim-treesitter').install(treesitter_langs)
+
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = treesitter_langs,
+	callback = function()
+		vim.treesitter.start()
+	end,
 })
 
-require('conform').setup({
-  notify_on_error = function(buf)
-    local disabled_filetypes = {
-      'c',
-      'cpp',
-      'php'
-    }
-    if vim.list_contains(disabled_filetypes, vim.bo[buf].filetype) then
-      return nil
-    else
-      return {
-        timeout_ms = 500,
-        lsp_format = "fallback",
-      }
-    end
-  end,
-  formatters_by_ft = {
-    lua = { "stylua" },
-    javscript = { "prettier" },
-    typescript = { "prettier" },
-    typescriptreact = { "prettier" },
-  },
+require("codecompanion").setup({
+	interactions = {
+		chat = {
+			adapter = {
+				name = "ollama",
+				model = "minimax-m2.7:cloud",
+			},
+		},
+		inline = {
+			adapter = {
+				name = "ollama",
+				model = "minimax-m2.7:cloud",
+			},
+		},
+		cmd = {
+			adapter = {
+				name = "ollama",
+				model = "minimax-m2.7:cloud",
+			},
+		},
+		background = {
+			adapter = {
+				name = "ollama",
+				model = "minimax-m2.7:cloud",
+			},
+		},
+	},
 })
 
-require('gitsigns').setup({
-  signs = {
-    add = { text = "+" },
-    change = { text = "~" },
-    delete = { text = "_" },
-    topdelete = { text = "‾" },
-    changedelete = { text = "~" },
-  },
+require("conform").setup({
+	formatters_by_ft = {
+		lua = { "stylua" },
+		javascript = { "prettier" },
+		typescript = { "prettier" },
+		typescriptreact = { "prettier" },
+	},
+})
+
+require("gitsigns").setup({
+	signs = {
+		add = { text = "+" },
+		change = { text = "~" },
+		delete = { text = "_" },
+		topdelete = { text = "‾" },
+		changedelete = { text = "~" },
+	},
 })
 
 -- Neogit
-require('neogit').setup({
-    kind = "split_below_all",
-    prompt_force_push = false,
-    graph_style = "unicode",
-    process_spinner = true,
-    mappings = {
-      finder = {
-        ["<C-j>"] = "Next",
-        ["<C-k"] = "Previous",
-      },
-    },
-    integrations = {
-      codediff = true,
-    },
+require("neogit").setup({
+	kind = "split_below_all",
+	prompt_force_push = false,
+	graph_style = "unicode",
+	process_spinner = true,
+	mappings = {
+		finder = {
+			["<C-j>"] = "Next",
+			["<C-k>"] = "Previous",
+		},
+	},
+	integrations = {
+		codediff = true,
+	},
 })
 
 -- Org
 require("orgmode").setup({
-  org_agenda_files = "~/Documents/wiki/**/*.org",
-  org_default_notes_file = "~/Documents/wiki/inbox.org",
-  org_capture_templates = {
-    t = { description = "Task", template = "* TODO [#%^{A|B|C}] %? %t" },
-    j = {
-      description = "Journal",
-      template = "%?",
-      datetree = true,
-      target = "~/Documents/wiki/journal.org",
-    },
-  },
+	org_agenda_files = "~/Documents/wiki/**/*.org",
+	org_default_notes_file = "~/Documents/wiki/inbox.org",
+	org_capture_templates = {
+		t = { description = "Task", template = "* TODO [#%^{A|B|C}] %? %t" },
+		j = {
+			description = "Journal",
+			template = "%?",
+			datetree = true,
+			target = "~/Documents/wiki/journal.org",
+		},
+	},
 })
 
 -- Mini setup
-require('mini.ai').setup({})
-require('mini.comment').setup({})
-require('mini.icons').setup()
-require('mini.snippets').setup()
-require('mini.completion').setup({
-  source_func = 'omnifunc',
-  auto_setup = false,
+require("mini.ai").setup({})
+require("mini.comment").setup({})
+require("mini.icons").setup()
+require("mini.snippets").setup()
+require("mini.completion").setup({
+	source_func = "omnifunc",
+	auto_setup = false,
 })
-require('mini.pairs').setup()
-require('mini.surround').setup()
-require('mini.files').setup({
-  options = {
-    use_as_default_explorer = false,
-  },
+require("mini.pairs").setup()
+require("mini.surround").setup()
+require("mini.files").setup({
+	options = {
+		use_as_default_explorer = false,
+	},
 })
-require('mini.pick').setup()
-require('mini.visits').setup()
-require('mini.notify').setup()
-require('mini.git').setup()
-require('mini.diff').setup()
-require('mini.statusline').setup()
+require("mini.pick").setup()
+require("mini.visits").setup()
+require("mini.notify").setup()
+require("mini.git").setup()
+require("mini.diff").setup()
+require("mini.statusline").setup({
+	content = {
+		active = function()
+			local mode, mode_hl = MiniStatusline.section_mode({ trunc_width = 120 })
+			local git = MiniStatusline.section_git({ trunc_width = 40 })
+			local diff = MiniStatusline.section_diff({ trunc_width = 75 })
+			local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
+			local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
+			local filename = MiniStatusline.section_filename({ trunc_width = 140 })
+			local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+			local location = MiniStatusline.section_location({ trunc_width = 75 })
+			local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
+
+			-- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
+			-- correct padding with spaces between groups (accounts for 'missing'
+			-- sections, etc.)
+			return MiniStatusline.combine_groups({
+				{ hl = mode_hl, strings = { mode } },
+				{ hl = "MiniStatuslineDevinfo", strings = { git, diff, diagnostics, lsp } },
+				"%<", -- Mark general truncate point
+				{ hl = "MiniStatuslineFilename", strings = { filename } },
+				"%=", -- End left alignment
+				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+				{ hl = mode_hl, strings = {} },
+			})
+		end,
+	},
+})
 
 -- MASON
-require('mason').setup()
+require("mason").setup()
 
 -- LSP
-require('fidget').setup({})
+require("fidget").setup({})
 
 local capabilities = MiniCompletion.get_lsp_capabilities()
-vim.lsp.config('vtsls', {capabilities = capabilities})
-vim.lsp.config('intelephense', {capabilities = capabilities})
+vim.lsp.config("vtsls", { capabilities = capabilities })
+vim.lsp.config("intelephense", { capabilities = capabilities })
 vim.lsp.config("lua_ls", {
-  capabilities = capabilities,
-  settings = {
-    Lua = {
-      completion = {
-        callSnippet = "Replace",
-      },
-      diagnostics = {
-        disable = { "missing-fields" },
-        globals = { "vim" },
-      },
-      workspace = {
-        library = {
-          [vim.fn.expand("$VIMRUNTIME/lua")] = true,
-          [vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
-          -- Plugins
-          [vim.fn.stdpath("data") .. "/lazy"] = true,
-          -- Config
-          [vim.fn.stdpath("config") .. "/lua"] = true,
-        },
-        checkThirdParty = false,
-      },
-      telemetry = {
-        enable = false,
-      },
-    },
-  },
+	capabilities = capabilities,
+	settings = {
+		Lua = {
+			completion = {
+				callSnippet = "Replace",
+			},
+			diagnostics = {
+				disable = { "missing-fields" },
+				globals = { "vim" },
+			},
+			workspace = {
+				library = {
+					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
+					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
+					-- Plugins
+					[vim.fn.stdpath("data") .. "/lazy"] = true,
+					-- Config
+					[vim.fn.stdpath("config") .. "/lua"] = true,
+				},
+				checkThirdParty = false,
+			},
+			telemetry = {
+				enable = false,
+			},
+		},
+	},
 })
 vim.lsp.enable({
-  'intelephense',
-  'lua_ls',
-  'vtsls',
-  'gopls',
-  'templ',
+	"intelephense",
+	"lua_ls",
+	"vtsls",
+	"gopls",
+	"templ",
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
-  callback = function(args)
-    vim.keymap.set('n', '<leader>cr', vim.lsp.buf.rename)
-    vim.keymap.set('n', '<leader>ca', vim.lsp.buf.code_action)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation)
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition)
+vim.api.nvim_create_autocmd("LspAttach", {
+	callback = function(args)
+		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
+		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
+		vim.keymap.set("n", "gr", vim.lsp.buf.references)
+		vim.keymap.set("n", "gi", vim.lsp.buf.implementation)
+		vim.keymap.set("n", "gd", vim.lsp.buf.definition)
 
-    vim.diagnostic.config({
-      float = {border = 'rounded'},
-    })
-    vim.diagnostic.enable(true)
+		vim.diagnostic.config({
+			float = { border = "rounded" },
+		})
+		vim.diagnostic.enable(true)
 
-    vim.bo[args.buf].omnifunc = 'v:lua.MiniCompletion.completefunc_lsp'
-  end
+		vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
+	end,
 })
 
 -- vim: ts=2 sts=2 sw=2 et
