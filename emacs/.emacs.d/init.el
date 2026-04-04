@@ -13,7 +13,7 @@
   (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
-(set-face-attribute 'default nil :font "Fira Code-14")
+(set-face-attribute 'default nil :font "Noto Sans Mono-14")
 
 (setq inhibit-splash-screen t)
 (setq ring-bell-function 'ignore)
