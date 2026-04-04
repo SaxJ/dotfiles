@@ -317,7 +317,8 @@
 (use-package forge
   :ensure t
   :after magit
-  :config)
+  :config
+  (add-hook 'forge-post-mode-hook #'markdown-toggle-inline-images))
 
 (use-package origami
   :ensure t
@@ -381,7 +382,9 @@
 
 (use-package markdown-mode
   :ensure t
-  :hook ((markdown-mode . visual-line-mode)))
+  :hook ((markdown-mode . visual-line-mode))
+  :config
+  (setopt markdown-display-remote-images t))
 
 (use-package yaml-mode
   :ensure t)
@@ -412,16 +415,6 @@
 
 (use-package templ-ts-mode
   :ensure t)
-
-;; (use-package jtsx
-;;   :ensure t
-;;   :mode (("\\.jsx?\\'" . jtsx-jsx-mode)
-;;          ("\\.tsx\\'" . jtsx-tsx-mode)
-;;          ("\\.ts\\'" . jtsx-typescript-mode))
-;;   :commands jtsx-install-treesit-language
-;;   :hook ((jtsx-jsx-mode . hs-minor-mode)
-;;          (jtsx-tsx-mode . hs-minor-mode)
-;;          (jtsx-typescript-mode . hs-minor-mode)))
 
 (use-package compile
   :ensure nil
