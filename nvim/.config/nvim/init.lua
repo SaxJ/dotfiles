@@ -459,7 +459,7 @@ vim.lsp.config("lua_ls", {
 					[vim.fn.expand("$VIMRUNTIME/lua")] = true,
 					[vim.fn.expand("$VIMRUNTIME/lua/vim/lsp")] = true,
 					-- Plugins
-					[vim.fn.stdpath("data") .. "/lazy"] = true,
+					[vim.fn.stdpath("data") .. "/site"] = true,
 					-- Config
 					[vim.fn.stdpath("config") .. "/lua"] = true,
 				},
