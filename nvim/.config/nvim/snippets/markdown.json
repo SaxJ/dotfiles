@@ -1,0 +1,7 @@
+{
+    "endslide": {
+        "prefix": "endslide",
+        "body": ["<!-- end_slide -->${0}"],
+        "description": "End current presenterm slide"
+    }
+}
