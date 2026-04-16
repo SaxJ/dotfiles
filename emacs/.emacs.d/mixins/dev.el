@@ -194,12 +194,19 @@
         magit-section-initial-visibility-alist '((stashes . hide)
                                                  (untracked . hide)))
 
+  (remove-hook 'magit-status-sections-hook 'magit-insert-tags-header)
+
   (add-hook 'forge-post-submit-callback-hook 'saxon/on-create-pr)
   (add-hook 'git-commit-setup-hook 'saxon/setup-git-commit)
 
   :bind (("s-g" . magit-status)
          ("C-c g" . magit-status)
          ("C-c C-o" . 'forge-browse-this-topic)))
+
+(use-package magit-prime
+  :ensure t
+  :config
+  (magit-prime-mode))
 
 (use-package magit-delta
   :ensure t
@@ -227,7 +234,7 @@
   (eglot-send-changes-idle-time 0.5)
   (eglot-confirm-server-initiated-edits nil)
   (eglot-inlay-hints-mode nil)
-  (eglot-events-buffer-config '(:size 1000 :format full))
+  (eglot-events-buffer-config '(:size 0 :format full))
 
 
   :config
@@ -484,9 +491,10 @@
 (use-package gptel
   :ensure t
   :config
-  (gptel-make-ollama "Ollama"
-    :stream t
-    :models '(qwen3-coder-next:cloud)))
+  (setopt gptel-backend (gptel-make-ollama "Ollama"
+                          :stream t
+                          :models '(gemma4:26b))
+          gptel-model 'gemma4:26b))
 
 (use-package gptel-agent
   :ensure t)
@@ -497,3 +505,12 @@
     (pulse-momentary-highlight-region beg end)
     (apply orig beg end args))
   (advice-add 'evil-yank :around 'saxon/evil-pulse))
+
+(use-package agent-shell
+  :ensure t
+  :config
+  (setopt agent-shell-anthropic-claude-environment
+          (agent-shell-make-environment-variables :inherit-env t)))
+
+;; Make executable if shabanged
+(add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
