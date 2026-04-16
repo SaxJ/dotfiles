@@ -385,10 +385,39 @@
   :ensure t
   :after org)
 
+(use-package visual-fill-column
+  :ensure t
+  :config
+  (setopt visual-fill-column-width 110
+          visual-fill-column-center-text t))
+
+(use-package org-present
+  :ensure t
+  :config
+  (defun saxon/org-present-start ()
+    (visual-fill-column-mode 1)
+    (visual-line-mode 1)
+    (setq-local face-remapping-alist '((default (:height 1.5) variable-pitch)
+                                       (header-line (:height 4.0) variable-pitch)
+                                       (org-document-title (:height 1.75) org-document-title)
+                                       (org-code (:height 1.55) org-code)
+                                       (org-verbatim (:height 1.55) org-verbatim)
+                                       (org-block (:height 1.25) org-block)
+                                       (org-block-begin-line (:height 0.7) org-block))))
+
+  (defun saxon/org-present-stop ()
+    (visual-fill-column-mode 0)
+    (visual-line-mode 0)
+    (setq-local face-remapping-alist '((default variable-pitch default))))
+
+  (add-hook 'org-present-mode-hook 'saxon/org-present-start)
+  (add-hook 'org-present-mode-quit-hook 'saxon/org-present-stop))
+
 (use-package epresent
   :ensure t
   :config
-  (setq epresent-text-scale 300
-        epresent-src-blocks-visible nil
-        epresent-mode-line nil)
+  (setopt epresent-text-scale 300
+          epresent-src-blocks-visible nil
+          epresent-mode-line nil
+          epresent-pretty-entities t)
   (add-hook 'epresent-start-presentation-hook #'evil-emacs-state))
