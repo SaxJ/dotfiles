@@ -4,14 +4,27 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-;; Startup speed, annoyance suppression
+;; Performance
 (setq gc-cons-threshold 100000000)
-(setq read-process-output-max (* 1024 1024))
+(setq read-process-output-max (* 4 1024 1024))
 (setq byte-compile-warnings '(not obsolete))
 (setq warning-suppress-log-types '((comp) (bytecomp)))
 (setq native-comp-async-report-warnings-errors 'silent)
 (setq load-prefer-newer t)
 (setq gnus-init-file (expand-file-name "gnus.el" user-emacs-directory))
+
+(setq-default bidi-display-reordering 'left-to-right
+              bidi-paragraph-direction 'left-to-right)
+(setq bidi-inhibit-bpa t)
+(setq redisplay-skip-fontification-on-input t)
+
+(setq-default cursor-in-non-selected-windows nil)
+(setq highlight-nonselected-windows nil)
+
+(setq save-interprogram-paste-before-kill t)
+(setq kill-do-not-save-duplicates t)
+(setq savehist-additional-variables
+      '(search-ring regexp-search-ring kill-ring))
 
 (setenv "LSP_USE_PLISTS" "true")
 (setenv "AWS_PROFILE" "hedev")
