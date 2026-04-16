@@ -103,14 +103,14 @@ vim.keymap.set("n", "<C-l>", "<C-w><C-l>", { desc = "Move focus to the right win
 vim.keymap.set("n", "<C-j>", "<C-w><C-j>", { desc = "Move focus to the lower window" })
 vim.keymap.set("n", "<C-k>", "<C-w><C-k>", { desc = "Move focus to the upper window" })
 
--- Yanking
+-- Files
 vim.keymap.set(
 	"n",
 	"<leader>fY",
 	'<cmd>let @+ = expand("%:.")<CR><cmd>echo "Path Yanked"<CR>',
 	{ desc = "[Y]ank file name" }
 )
-vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
+vim.keymap.set("n", "<leader>fD", "<cmd>!rm %<CR><cmd>bd<CR>", { desc = "Delete File" })
 
 -- Remote upload/download
 vim.keymap.set("n", "<leader>ru", "<cmd>ScpUpload<CR>", { desc = "[R]emote [U]pload" })
@@ -127,7 +127,8 @@ vim.keymap.set("n", "<leader><tab>p", "<cmd>tabp<CR>", { desc = "Prev Tab" })
 vim.keymap.set("n", "<leader><tab>t", "<cmd>TTerm<CR>", { desc = "Terminal in Tab" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bb", "<cmd>Pick buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
@@ -138,33 +139,13 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qr", "<cmd>restart<CR>", { desc = "Restart" })
 
 -- Projects
-vim.keymap.set("n", "<leader>pp", function()
-	local picked = MiniPick.builtin.cli({ command = { "zoxide", "query", "--all", "--list" } })
-  vim.cmd('tabnew')
-  vim.cmd('tcd ' .. picked)
-end, { desc = "Projects" })
+vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
 vim.keymap.set("n", "<leader>pt", "<cmd>VTerm<CR>i")
-vim.keymap.set("n", "<leader>sp", "<cmd>Pick grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua grep_live<CR>", { desc = "Grep" })
 
 -- General
-vim.keymap.set("n", "<leader><leader>", "<cmd>Pick files<CR>", { desc = "Files" })
-vim.keymap.set('n', '<leader>-', function ()
-  MiniFiles.open(MiniFiles.get_latest_path())
-end)
-
--- Completion
-vim.keymap.set("i", "<Tab>", [[pumvisible() ? "\<C-n>" : "\<Tab>"]], { expr = true })
-vim.keymap.set("i", "<S-Tab>", [[pumvisible() ? "\<C-p>" : "\<S-Tab>"]], { expr = true })
-vim.keymap.set("i", "<CR>", function()
-	-- If there is selected item in popup, accept it with <C-y>
-	if vim.fn.complete_info()["selected"] ~= -1 then
-		return "\25"
-	end
-	-- Fall back to plain `<CR>`. You might want to customize according
-	-- to other plugins. For example if 'mini.pairs' is set up, replace
-	-- next line with `return MiniPairs.cr()`
-	return "\r"
-end, { expr = true })
+vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Files" })
+vim.keymap.set("n", "<leader>-", "<cmd>Explore<CR>", { desc = "File Browser" })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -246,14 +227,18 @@ vim.pack.add({
 	-- LSP
 	gh("j-hui/fidget.nvim"),
 	gh("mason-org/mason.nvim"),
-  gh("neovim/nvim-lspconfig"),
+	gh("neovim/nvim-lspconfig"),
 	gh("rachartier/tiny-inline-diagnostic.nvim"),
 
-	-- Treesitter
-  {
-    src = gh("nvim-treesitter/nvim-treesitter"),
-    version = "main",
-  },
+	-- Completion
+	{
+		src = gh("saghen/blink.cmp"),
+		version = vim.version.range("v1.*"),
+	},
+	gh("rafamadriz/friendly-snippets"),
+
+	-- Picker
+	gh("ibhagwan/fzf-lua"),
 
 	-- Mini
 	gh("nvim-mini/mini.nvim"),
@@ -272,36 +257,36 @@ vim.pack.add({
 
 vim.cmd("colorscheme tokyonight-night")
 
-local treesitter_langs = {
-	"bash",
-	"c",
-	"cpp",
-	"go",
-	"gomod",
-	"html",
-  "css",
-	"javascript",
-	"lua",
-	"python",
-	"regex",
-	"rust",
-	"tsx",
-	"typescript",
-	"vim",
-	"vimdoc",
-	"vue",
-	"xml",
-  "php",
-  "templ",
-}
+-- Completion
+local has_words_before = function()
+	local col = vim.api.nvim_win_get_cursor(0)[2]
+	if col == 0 then
+		return false
+	end
+	local line = vim.api.nvim_get_current_line()
+	return line:sub(col, col):match("%s") == nil
+end
 
-require('nvim-treesitter').install(treesitter_langs)
+require("blink.cmp").setup({
+	keymap = {
+		preset = "none",
 
-vim.api.nvim_create_autocmd("FileType", {
-	pattern = treesitter_langs,
-	callback = function()
-		vim.treesitter.start()
-	end,
+		-- If completion hasn't been triggered yet, insert the first suggestion; if it has, cycle to the next suggestion.
+		["<Tab>"] = {
+			function(cmp)
+				if has_words_before() then
+					return cmp.insert_next()
+				end
+			end,
+			"fallback",
+		},
+		-- Navigate to the previous suggestion or cancel completion if currently on the first one.
+		["<S-Tab>"] = { "insert_prev" },
+	},
+	completion = {
+		menu = { enabled = true },
+		list = { selection = { preselect = false }, cycle = { from_top = false } },
+	},
 })
 
 require("codecompanion").setup({
@@ -309,25 +294,25 @@ require("codecompanion").setup({
 		chat = {
 			adapter = {
 				name = "ollama",
-				model = "minimax-m2.7:cloud",
+				model = "gemma4:26b",
 			},
 		},
 		inline = {
 			adapter = {
 				name = "ollama",
-				model = "minimax-m2.7:cloud",
+				model = "gemma4:26b",
 			},
 		},
 		cmd = {
 			adapter = {
 				name = "ollama",
-				model = "minimax-m2.7:cloud",
+				model = "gemma4:26b",
 			},
 		},
 		background = {
 			adapter = {
 				name = "ollama",
-				model = "minimax-m2.7:cloud",
+				model = "gemma4:26b",
 			},
 		},
 	},
@@ -340,6 +325,13 @@ require("conform").setup({
 		typescript = { "prettier" },
 		typescriptreact = { "prettier" },
 	},
+})
+
+vim.api.nvim_create_autocmd("BufWritePre", {
+	pattern = "*",
+	callback = function(args)
+		require("conform").format({ bufnr = args.buf })
+	end,
 })
 
 require("gitsigns").setup({
@@ -385,26 +377,7 @@ require("orgmode").setup({
 })
 
 -- Mini setup
-require("mini.ai").setup({})
-require("mini.comment").setup({})
 require("mini.icons").setup()
-require("mini.snippets").setup()
-require("mini.completion").setup({
-	source_func = "omnifunc",
-	auto_setup = false,
-})
-require("mini.pairs").setup()
-require("mini.surround").setup()
-require("mini.files").setup({
-	options = {
-		use_as_default_explorer = false,
-	},
-})
-require("mini.pick").setup()
-require("mini.visits").setup()
-require("mini.notify").setup()
-require("mini.git").setup()
-require("mini.diff").setup()
 require("mini.statusline").setup({
 	content = {
 		active = function()
@@ -415,8 +388,6 @@ require("mini.statusline").setup({
 			local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
 			local filename = MiniStatusline.section_filename({ trunc_width = 140 })
 			local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
-			local location = MiniStatusline.section_location({ trunc_width = 75 })
-			local search = MiniStatusline.section_searchcount({ trunc_width = 75 })
 
 			-- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
 			-- correct padding with spaces between groups (accounts for 'missing'
@@ -440,7 +411,7 @@ require("mason").setup()
 -- LSP
 require("fidget").setup({})
 
-local capabilities = MiniCompletion.get_lsp_capabilities()
+local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("vtsls", { capabilities = capabilities })
 vim.lsp.config("intelephense", { capabilities = capabilities })
 vim.lsp.config("lua_ls", {
@@ -491,8 +462,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
 			float = { border = "rounded" },
 		})
 		vim.diagnostic.enable(true)
-
-		vim.bo[args.buf].omnifunc = "v:lua.MiniCompletion.completefunc_lsp"
 	end,
 })
 
