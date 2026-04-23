@@ -141,11 +141,29 @@ vim.keymap.set("n", "<leader>qr", "<cmd>restart<CR>", { desc = "Restart" })
 -- Projects
 vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
 vim.keymap.set("n", "<leader>pt", "<cmd>VTerm<CR>i")
-vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua grep_live<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua live_grep<CR>", { desc = "Grep" })
 
 -- General
 vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Files" })
 vim.keymap.set("n", "<leader>-", "<cmd>Explore<CR>", { desc = "File Browser" })
+vim.keymap.set("n", "<leader>.", "<cmd>FzfLua files cwd=%:p:h<cr>")
+
+-- Kubernetes
+local function kubectl_pick_pod(cb)
+	require("fzf-lua").fzf_exec("kubectl get pods --no-headers -o custom-columns=NAME:.metadata.name", {
+		prompt = "Pod> ",
+		actions = {
+			["default"] = function(selected)
+				cb(selected[1])
+			end,
+		},
+	})
+end
+vim.keymap.set("n", "<leader>kp", function()
+	kubectl_pick_pod(function(pod)
+		vim.cmd(string.format("VTerm kubectl exec -it %s -- bash", pod))
+	end)
+end, { desc = "Pick pod (copy name)" })
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -161,6 +179,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	desc = "Refresh file on buffer focus",
 	callback = function()
 		vim.cmd("checktime")
+	end,
+})
+
+vim.api.nvim_create_autocmd("CursorHold", {
+	desc = "Show diagnostics float on cursor hold",
+	callback = function()
+		vim.diagnostic.open_float(nil, { focus = false })
 	end,
 })
 
@@ -223,6 +248,7 @@ vim.pack.add({
 	-- Util
 	gh("nvim-lua/plenary.nvim"),
 	gh("stevearc/conform.nvim"),
+	gh("windwp/nvim-autopairs"),
 
 	-- LSP
 	gh("j-hui/fidget.nvim"),
@@ -257,14 +283,19 @@ vim.pack.add({
 
 vim.cmd("colorscheme tokyonight-night")
 
+require("nvim-autopairs").setup({})
 -- Completion
 require("blink.cmp").setup({
 	keymap = {
-		preset = "enter",
+		preset = "default",
+		["<Tab>"] = { "select_next", "fallback" },
+		["<S-Tab>"] = { "select_prev", "fallback" },
+		["<CR>"] = { "accept", "fallback" },
 	},
 	completion = {
 		menu = { enabled = true },
 		list = { selection = { preselect = false }, cycle = { from_top = false } },
+		documentation = { auto_show = true },
 	},
 })
 
