@@ -1,6 +1,18 @@
 (require 'ghub-legacy)
 (require 'forge)
 
+(defun saxon/kubectl-exec-pod ()
+  "Select a Kubernetes pod and open a vterm with `kubectl exec -it <pod> -- bash`."
+  (interactive)
+  (let* ((output (shell-command-to-string "kubectl get pods --no-headers"))
+         (pods (mapcar (lambda (line) (car (split-string line)))
+                       (split-string output "\n" t)))
+         (pod (completing-read "Pod: " pods nil t)))
+    (when (and pod (not (string-empty-p pod)))
+      (let ((vterm-shell (format "kubectl exec -it %s -- bash" pod))
+            (vterm-buffer-name (format "*vterm-%s*" pod)))
+        (vterm vterm-buffer-name)))))
+
 (defun saxon/jira-open-branch-ticket ()
   (interactive)
   (let ((ticket (car(vc-git-branches))))
