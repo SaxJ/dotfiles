@@ -168,7 +168,7 @@
 
 (defun saxon/clocking-status ()
   "Clearly show when not clocking time."
-  (if (org-clocking-p) ""
+  (if (and (fboundp 'org-clocking-p) (org-clocking-p)) ""
     (propertize "Not Clocking " 'face 'mood-line-status-error)))
 
 (defun saxon/browse-url-mpv (url &rest args)
