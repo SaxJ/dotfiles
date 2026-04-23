@@ -264,7 +264,32 @@
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
   ;; Make exporting quotes better
-  (setq org-export-with-smart-quotes t))
+  (setq org-export-with-smart-quotes t)
+
+  (setopt org-hide-emphasis-markers t)
+
+  ;; Resize org headers
+  (dolist (face '((org-level-1 . 1.2)
+                  (org-level-2 . 1.1)
+                  (org-level-3 . 1.05)
+                  (org-level-4 . 1.0)
+                  (org-level-5 . 1.1)
+                  (org-level-6 . 1.1)
+                  (org-level-7 . 1.1)
+                  (org-level-8 . 1.1)))
+    (set-face-attribute (car face) nil :font "Noto Sans" :weight 'medium :height (cdr face)))
+
+  ;; Make document title big
+  (set-face-attribute 'org-document-title nil :font "Noto Sans" :weight 'bold :height 1.3)
+
+  (set-face-attribute 'org-block nil :foreground nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-table nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-formula nil :inherit 'fixed-pitch)
+  (set-face-attribute 'org-code nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-verbatim nil :inherit '(shadow fixed-pitch))
+  (set-face-attribute 'org-special-keyword nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-meta-line nil :inherit '(font-lock-comment-face fixed-pitch))
+  (set-face-attribute 'org-checkbox nil :inherit 'fixed-pitch))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -304,7 +329,9 @@
         org-mobile-inbox-for-pull "~/Documents/wiki/from-mobile.org"
         org-mobile-files (org-agenda-files)
         org-protocol-default-template-key "s"
-        org-protocol-protocol-alist '(("youtube" :protocol "youtube" :function org-protocol-capture))))
+        org-protocol-protocol-alist '(("youtube" :protocol "youtube" :function org-protocol-capture)))
+
+  (add-hook 'org-mode-hook 'variable-pitch-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;
@@ -394,6 +421,11 @@
 (use-package org-present
   :ensure t
   :config
+  (defun saxon/org-present-setup-slide (buffer-name heading)
+    (org-overview)
+    (org-fold-show-entry)
+    (org-fold-show-children))
+  
   (defun saxon/org-present-start ()
     (visual-fill-column-mode 1)
     (visual-line-mode 1)
@@ -411,7 +443,8 @@
     (setq-local face-remapping-alist '((default variable-pitch default))))
 
   (add-hook 'org-present-mode-hook 'saxon/org-present-start)
-  (add-hook 'org-present-mode-quit-hook 'saxon/org-present-stop))
+  (add-hook 'org-present-mode-quit-hook 'saxon/org-present-stop)
+  (add-hook 'org-present-after-navigate-functions 'saxon/org-present-setup-slide))
 
 (use-package epresent
   :ensure t
