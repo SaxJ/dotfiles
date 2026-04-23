@@ -36,3 +36,30 @@ function prc() {
 function serve() {
   npx http-server "$1" -o -p 8080
 }
+
+git_relative_path() {
+  local file_path="$1"
+  local git_root
+  git_root=$(git -C "$(dirname "$file_path")" rev-parse --show-toplevel 2>/dev/null) || {
+    echo "Error: Not inside a git repository" >&2
+    return 1
+  }
+
+  realpath --relative-to="$git_root" "$(realpath "$file_path")"
+}
+
+function ru() {
+  local root=$(git rev-parse --show-toplevel)
+  local project=$(basename "$root")
+  local file=$(git_relative_path "$1")
+
+  scp "$root/$file" "minikube:/home/ubuntu/$project/$file"
+}
+
+function rd() {
+  local root=$(git rev-parse --show-toplevel)
+  local project=$(basename "$root")
+  local file=$(git_relative_path "$1")
+
+  scp "minikube:/home/ubuntu/$project/$file" "$root/$file"
+}
