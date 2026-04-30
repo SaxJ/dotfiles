@@ -41,7 +41,7 @@
   (prodigy-define-service
     :name "Unicron Dev Server"
     :command "npm"
-    :args '("run" "dev" "--" "-p" "3000")
+    :args '("run" "dev")
     :cwd "~/Documents/unicron"
     :tags '(work)
     :stop-signal 'sigkill
