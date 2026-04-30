@@ -139,7 +139,6 @@ vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qr", "<cmd>restart<CR>", { desc = "Restart" })
 
 -- Projects
-vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
 vim.keymap.set("n", "<leader>pt", "<cmd>VTerm<CR>i")
 vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua live_grep<CR>", { desc = "Grep" })
 
@@ -278,8 +277,22 @@ vim.pack.add({
 	gh("lewis6991/gitsigns.nvim"),
 
 	-- AI
-	gh("olimorris/codecompanion.nvim"),
+	gh("carlos-algms/agentic.nvim"),
 })
+
+require("fzf-lua").setup({})
+vim.keymap.set("n", "<leader>pp", function()
+	FzfLua.zoxide({
+		actions = {
+			enter = function(selected, opts)
+				Project.open_tab_if_not_existing(selected[2])
+				FzfLua.actions.zoxide_cd(selected, opts)
+			end,
+		},
+		scope = "tab",
+	})
+end, { desc = "Projects" })
+-- vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
 
 vim.cmd("colorscheme tokyonight-night")
 
@@ -299,34 +312,8 @@ require("blink.cmp").setup({
 	},
 })
 
-require("codecompanion").setup({
-	interactions = {
-		chat = {
-			adapter = {
-				name = "ollama",
-				model = "gemma4:26b",
-			},
-		},
-		inline = {
-			adapter = {
-				name = "ollama",
-				model = "gemma4:26b",
-			},
-		},
-		cmd = {
-			adapter = {
-				name = "ollama",
-				model = "gemma4:26b",
-			},
-		},
-		background = {
-			adapter = {
-				name = "ollama",
-				model = "gemma4:26b",
-			},
-		},
-	},
-})
+require("agentic").setup({})
+vim.keymap.set("n", "<leader>aa", require("agentic").toggle, { desc = "Toggle Agent" })
 
 require("conform").setup({
 	formatters_by_ft = {
@@ -356,7 +343,7 @@ require("gitsigns").setup({
 
 -- Neogit
 require("neogit").setup({
-	kind = "split_below_all",
+	kind = "auto",
 	prompt_force_push = false,
 	graph_style = "unicode",
 	process_spinner = true,
@@ -399,6 +386,16 @@ require("mini.statusline").setup({
 			local filename = MiniStatusline.section_filename({ trunc_width = 140 })
 			local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 
+			vim.api.nvim_set_hl(0, "ClockedIn", { fg = "#000000", bg = "#3fec02" })
+			vim.api.nvim_set_hl(0, "ClockedOut", { fg = "#c2230f", bg = "#292e42" })
+
+			local is_checked_in = TimeClock.is_checked_in()
+			local status = TimeClock.status()
+			local status_hl = "ClockedOut"
+			if is_checked_in then
+				status_hl = "ClockedIn"
+			end
+
 			-- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
 			-- correct padding with spaces between groups (accounts for 'missing'
 			-- sections, etc.)
@@ -409,11 +406,13 @@ require("mini.statusline").setup({
 				{ hl = "MiniStatuslineFilename", strings = { filename } },
 				"%=", -- End left alignment
 				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
-				{ hl = mode_hl, strings = {} },
+				{ hl = status_hl, strings = { status } },
 			})
 		end,
 	},
 })
+
+require("tiny-inline-diagnostic").setup({})
 
 -- MASON
 require("mason").setup()

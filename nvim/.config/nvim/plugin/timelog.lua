@@ -145,6 +145,24 @@ local function timeclock_out(note)
 	end
 end
 
+local function timeclock_is_checked_in()
+	local file = open_log_file("r")
+	local last_in = false
+	if file ~= nil then
+		for line in file:lines() do
+			local c = string.sub(line, 1, 1)
+			last_in = c == "i"
+		end
+
+		file:close()
+	end
+
+	if last_in then
+		return true
+	end
+	return false
+end
+
 local function timeclock_summary()
 	local f = open_log_file("r")
 
@@ -160,8 +178,7 @@ local function timeclock_summary()
 		local io = string.match(line, "[io]")
 		if io == "i" then
 			local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
-			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second =
-			second }
+			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
 
 			local project, _ = string.gsub(line, "[%w%p]+", 3)
 			project = vim.trim(project)
@@ -173,8 +190,7 @@ local function timeclock_summary()
 			end
 
 			local year, month, day, hour, minute, second = line:match("(%d+)/(%d+)/(%d+) (%d+):(%d+):(%d+)")
-			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second =
-			second }
+			local dateTable = { year = year, month = month, day = day, hour = hour, minute = minute, second = second }
 
 			local lastDate = lastEntry["datetime"]
 			local project = lastEntry["project"]
@@ -242,5 +258,6 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 })
 
 module.status = timeclock_status
+module.is_checked_in = timeclock_is_checked_in
 
 _G.TimeClock = module
