@@ -16,7 +16,11 @@ select_reason() {
   gum filter
 }
 
-reason=$(select_reason)
+reason="$1"
+if [ -z "$reason" ]; then
+  reason=$(select_reason)
+fi
+
 datetime=$(date "+%Y/%m/%d %T")
 last_line=$(tail -n1 "$TIMELOG_FILE")
 if [[ "$last_line" =~ ^i ]]; then
