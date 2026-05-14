@@ -500,10 +500,12 @@
 (use-package gptel
   :ensure t
   :config
-  (setopt gptel-backend (gptel-make-ollama "Ollama"
+  (setopt gptel-model 'qwen/qwen3.6-27b
+          gptel-backend (gptel-make-openai "lm-studio"
                           :stream t
-                          :models '(gemma4:26b))
-          gptel-model 'gemma4:26b))
+                          :protocol "http"
+                          :host "localhost:1234"
+                          :models '(qwen/qwen3.6-27b))))
 
 (use-package gptel-agent
   :ensure t)
@@ -519,7 +521,9 @@
   :ensure t
   :config
   (setopt agent-shell-anthropic-claude-environment
-          (agent-shell-make-environment-variables :inherit-env t)))
+          (agent-shell-make-environment-variables :inherit-env t)
+          agent-shell-goose-authentication
+          (agent-shell-make-goose-authentication :none t)))
 
 ;; Make executable if shabanged
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
