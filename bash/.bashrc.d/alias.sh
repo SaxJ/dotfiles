@@ -9,6 +9,7 @@ alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 alias gci="git commit --interactive"
+alias gl="git log --graph"
 
 alias ci="timelog clockin"
 alias co="timelog clockout"
