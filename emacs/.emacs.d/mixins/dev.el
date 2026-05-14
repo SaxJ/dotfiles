@@ -136,7 +136,8 @@
           (typescript "https://github.com/tree-sitter/tree-sitter-typescript" "v0.23.2" "typescript/src")
           (yaml "https://github.com/ikatyang/tree-sitter-yaml")
           (markdown "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown/src")
-          (markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")))
+          (markdown-inline "https://github.com/tree-sitter-grammars/tree-sitter-markdown" "split_parser" "tree-sitter-markdown-inline/src")
+          (mermaid "https://github.com/monaqa/tree-sitter-mermaid")))
 
   (setq major-mode-remap-alist
         '((yaml-mode . yaml-ts-mode)
