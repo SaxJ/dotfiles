@@ -11,7 +11,7 @@ vim.g.background_tasks = {
 	},
 	["Unicron Dev"] = {
 		dir = "~/Documents/unicron/",
-		cmd = "npm run dev -- -p 3000",
+		cmd = "npm run dev",
 	},
 	["Unicron Storybook"] = {
 		dir = "~/Documents/unicron/",
@@ -134,6 +134,14 @@ vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<
 vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
 
+-- Logging
+vim.keymap.set("n", "<leader>ti", function()
+	TimeClock.clockin()
+end, { desc = "Clock in" })
+vim.keymap.set("n", "<leader>to", function()
+	TimeClock.clockout()
+end, { desc = "Clock out" })
+
 -- Power
 vim.keymap.set("n", "<leader>qq", "<cmd>qa<CR>", { desc = "Quit" })
 vim.keymap.set("n", "<leader>qr", "<cmd>restart<CR>", { desc = "Restart" })
@@ -181,16 +189,13 @@ vim.api.nvim_create_autocmd("BufEnter", {
 	end,
 })
 
-vim.api.nvim_create_autocmd("CursorHold", {
-	desc = "Show diagnostics float on cursor hold",
-	callback = function()
-		vim.diagnostic.open_float(nil, { focus = false })
-	end,
-})
-
 local function short_path(path)
 	if path == vim.env.HOME then
 		return "~"
+	end
+
+	if path == "" then
+		return "Default"
 	end
 
 	return vim.fn.fnamemodify(path, ":t")
@@ -203,11 +208,6 @@ _G.my_tabline = function()
 	for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
 		local tabnr = vim.api.nvim_tabpage_get_number(tabpage) -- 1‑based index
 		local cwd = vim.fn.getcwd(0, tabnr) -- tab‑local cwd
-
-		-- Fallback: if a tab has no tab‑local cwd (very rare) use the global one
-		if cwd == "" then
-			cwd = vim.fn.getcwd()
-		end
 
 		-- Choose the highlight group
 		if tabpage == vim.api.nvim_get_current_tabpage() then
@@ -305,6 +305,7 @@ require("blink.cmp").setup({
 		["<S-Tab>"] = { "select_prev", "fallback" },
 		["<CR>"] = { "accept", "fallback" },
 	},
+	signature = { enabled = true },
 	completion = {
 		menu = { enabled = true },
 		list = { selection = { preselect = false }, cycle = { from_top = false } },
@@ -313,7 +314,11 @@ require("blink.cmp").setup({
 })
 
 require("agentic").setup({})
-vim.keymap.set("n", "<leader>aa", require("agentic").toggle, { desc = "Toggle Agent" })
+vim.keymap.set("n", "<leader>aa", function()
+	require("agentic").toggle({ auto_add_to_context = false, focus_prompt = true })
+end, { desc = "Toggle Agent" })
+vim.keymap.set("n", "<leader>ar", require("agentic").restore_session, { desc = "Resume Agent" })
+vim.keymap.set("n", "<leader>an", require("agentic").new_session, { desc = "New Agent" })
 
 require("conform").setup({
 	formatters_by_ft = {
@@ -339,6 +344,23 @@ require("gitsigns").setup({
 		topdelete = { text = "‾" },
 		changedelete = { text = "~" },
 	},
+	on_attach = function()
+		-- next/prev diff
+		vim.keymap.set("n", "[c", function()
+			if vim.wo.diff then
+				vim.cmd.normal({ "[c", bang = true })
+			else
+				require("gitsigns").nav_hunk("prev")
+			end
+		end)
+		vim.keymap.set("n", "]c", function()
+			if vim.wo.diff then
+				vim.cmd.normal({ "]c", bang = true })
+			else
+				require("gitsigns").nav_hunk("next")
+			end
+		end)
+	end,
 })
 
 -- Neogit
@@ -396,6 +418,8 @@ require("mini.statusline").setup({
 				status_hl = "ClockedIn"
 			end
 
+			local tasks = string.format("%d Tasks", vim.g.background_tasks_count)
+
 			-- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
 			-- correct padding with spaces between groups (accounts for 'missing'
 			-- sections, etc.)
@@ -407,6 +431,7 @@ require("mini.statusline").setup({
 				"%=", -- End left alignment
 				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 				{ hl = status_hl, strings = { status } },
+				{ hl = "MiniStatuslineFileinfo", strings = { tasks } },
 			})
 		end,
 	},

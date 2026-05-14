@@ -126,6 +126,12 @@ local function timeclock_in(note)
 	end
 end
 
+local function timeclock_in_full()
+	vim.ui.select(get_unique_projects(), {}, function(selection)
+		timeclock_in(selection)
+	end)
+end
+
 local function timeclock_out(note)
 	local file = open_log_file("a+")
 	local last_in = false
@@ -259,5 +265,9 @@ vim.api.nvim_create_autocmd("VimLeavePre", {
 
 module.status = timeclock_status
 module.is_checked_in = timeclock_is_checked_in
+module.clockin = timeclock_in_full
+module.clockout = function()
+	timeclock_out("")
+end
 
 _G.TimeClock = module
