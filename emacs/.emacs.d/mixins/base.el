@@ -40,7 +40,7 @@
   :config
   ;; Narrowing lets you restrict results to certain groups of candidates
   (setq consult-narrow-key "<")
-  (setq consult-ripgrep-args "rg --null --line-buffered --color=never --max-columns=1000 --path-separator / --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob=!.git/"))
+  (setq consult-ripgrep-args "rg --null --line-buffered --color=never --max-columns=1000 --path-separator / --smart-case --no-heading --with-filename --line-number --search-zip --hidden --glob=!.git/ --glob=!.agent-shell/"))
 
 (use-package embark
   :ensure t
@@ -168,8 +168,9 @@
 
 (defun saxon/clocking-status ()
   "Clearly show when not clocking time."
-  (if (and (fboundp 'org-clocking-p) (org-clocking-p)) ""
-    (propertize "Not Clocking " 'face 'mood-line-status-error)))
+  (if (string= (car timeclock-last-event) "i")
+      (propertize (nth 2 timeclock-last-event) 'face 'mood-line-status-success)
+    (propertize "Not Clocking" 'face 'mood-line-status-error)))
 
 (defun saxon/browse-url-mpv (url &rest args)
   (start-process "mpv" "*mpv*" "mpv" url))
