@@ -24,13 +24,13 @@
                  graphviz-dot-mode haskell-mode helm-org
                  hide-mode-line httprepl jira jiralib2 jq-mode
                  json-mode lastfm magit-delta magit-prime marginalia
-                 mason mood-line mpris mu4e-alert multi-vterm
-                 nerd-icons-corfu nvm ob-mermaid org-modern org-music
-                 org-present org-ql org-roam org-tree-slide origami
-                 otpp pomo-cat popper pr-review prescient prodigy
-                 pug-mode rainbow-mode simple-httpd simple-mpc
-                 soundcloud string-inflection sudo-edit templ-ts-mode
-                 terraform-mode time-zones tinee uv-mode
+                 mason mermaid-mode mood-line mpris mu4e-alert
+                 multi-vterm nerd-icons-corfu nvm ob-mermaid
+                 org-modern org-music org-present org-ql org-roam
+                 org-tree-slide origami otpp pomo-cat popper pr-review
+                 prescient prodigy pug-mode rainbow-mode simple-httpd
+                 simple-mpc soundcloud string-inflection sudo-edit
+                 templ-ts-mode terraform-mode time-zones tinee uv-mode
                  vc-use-package vertico visual-fill-column vue-mode
                  web-mode wgrep yaml-mode yasnippet-snippets yeetube
                  yuck-mode zone-nyan zone-rainbow))
