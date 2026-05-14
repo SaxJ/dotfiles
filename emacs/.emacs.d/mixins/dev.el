@@ -258,6 +258,12 @@
 
   (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
 
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(((typescript-ts-mode :language-id "typescript")
+  ;;                 (tsx-ts-mode :language-id "typescriptreact")
+  ;;                 (js-ts-mode :language-id "javascript")
+  ;;                 (typescript-mode :language-id "typescript"))
+  ;;                . ("tsgo" "--lsp" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio"
                                 :initializationOptions
