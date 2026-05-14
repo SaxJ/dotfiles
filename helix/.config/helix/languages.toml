@@ -6,6 +6,8 @@ haskell-language-server = { command = "haskell-language-server-wrapper", args = 
 deno = { command = "deno", args = ["lsp"], config = {deno = {enable = true, lint = true}}, required-root-patterns = ["deno.jsonc", "deno.json"]}
 
 [language-server.typescript-language-server]
+command = "tsgo"
+args = ["--lsp", "--stdio"]
 required-root-patterns = ["package.json"]
 
 [language-server.typescript-language-server.config.preferences]
