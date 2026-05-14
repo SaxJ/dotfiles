@@ -271,6 +271,8 @@
                                               :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
                                               :tsserver (:logVerbosity "off")))))
   (add-to-list 'eglot-server-programs
+               `(json-ts-mode . ("vscode-json-language-server" "--stdio")))
+  (add-to-list 'eglot-server-programs
                `(csharp-ts-mode . ("OmniSharp" "--languageserver")))
   (add-to-list 'eglot-server-programs
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
