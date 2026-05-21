@@ -1,0 +1,6 @@
+#!/usr/bin/bash
+fzf \
+	--query="" \
+	--with-nth=2.. \
+	--bind="change:reload-sync(search-prs {q})" \
+	--bind="enter:become(checkout_pr {})"
