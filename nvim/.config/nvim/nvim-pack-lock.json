@@ -74,6 +74,10 @@
       "src": "https://github.com/nvim-treesitter/nvim-treesitter",
       "version": "'main'"
     },
+    "octo.nvim": {
+      "rev": "b495047f0b9d35de3d8c6b84fad9de296d353b41",
+      "src": "https://github.com/pwntester/octo.nvim"
+    },
     "orgmode": {
       "rev": "98b3a2b7ff1475ddd921803df54558da22a0f354",
       "src": "https://github.com/nvim-orgmode/orgmode"
