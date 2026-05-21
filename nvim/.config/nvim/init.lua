@@ -155,23 +155,6 @@ vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Files
 vim.keymap.set("n", "<leader>-", "<cmd>Explore<CR>", { desc = "File Browser" })
 vim.keymap.set("n", "<leader>.", "<cmd>FzfLua files cwd=%:p:h<cr>")
 
--- Kubernetes
-local function kubectl_pick_pod(cb)
-	require("fzf-lua").fzf_exec("kubectl get pods --no-headers -o custom-columns=NAME:.metadata.name", {
-		prompt = "Pod> ",
-		actions = {
-			["default"] = function(selected)
-				cb(selected[1])
-			end,
-		},
-	})
-end
-vim.keymap.set("n", "<leader>kp", function()
-	kubectl_pick_pod(function(pod)
-		vim.cmd(string.format("VTerm kubectl exec -it %s -- bash", pod))
-	end)
-end, { desc = "Pick pod (copy name)" })
-
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
@@ -188,51 +171,6 @@ vim.api.nvim_create_autocmd("BufEnter", {
 		vim.cmd("checktime")
 	end,
 })
-
-local function short_path(path)
-	if path == vim.env.HOME then
-		return "~"
-	end
-
-	if path == "" then
-		return "Default"
-	end
-
-	return vim.fn.fnamemodify(path, ":t")
-end
-
-_G.my_tabline = function()
-	local result = ""
-
-	-- Iterate over all tabpages (the order they appear in the UI)
-	for _, tabpage in ipairs(vim.api.nvim_list_tabpages()) do
-		local tabnr = vim.api.nvim_tabpage_get_number(tabpage) -- 1‑based index
-		local cwd = vim.fn.getcwd(0, tabnr) -- tab‑local cwd
-
-		-- Choose the highlight group
-		if tabpage == vim.api.nvim_get_current_tabpage() then
-			result = result .. "%#TabLineSel#" -- active tab
-		else
-			result = result .. "%#TabLine#" -- inactive tabs
-		end
-
-		-- Build the click‑area for the tab (so you can click it)
-		-- %{:tabpage_number} makes the label jump to that tab when clicked
-		result = result .. string.format("%%%dT", tabnr)
-
-		-- The visible label (you can tweak it as you like)
-		result = result .. " " .. short_path(cwd) .. " "
-
-		-- Close the click‑area (Neovim automatically resets it at the next %)
-	end
-
-	-- Add a trailing filler so the line stretches across the whole window
-	result = result .. "%#TabLineFill#%="
-
-	return result
-end
-
-vim.o.tabline = "%!v:lua.my_tabline()"
 
 local function gh(slug)
 	return "https://github.com/" .. slug
@@ -281,18 +219,18 @@ vim.pack.add({
 })
 
 require("fzf-lua").setup({})
-vim.keymap.set("n", "<leader>pp", function()
-	FzfLua.zoxide({
-		actions = {
-			enter = function(selected, opts)
-				Project.open_tab_if_not_existing(selected[2])
-				FzfLua.actions.zoxide_cd(selected, opts)
-			end,
-		},
-		scope = "tab",
-	})
-end, { desc = "Projects" })
--- vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
+-- vim.keymap.set("n", "<leader>pp", function()
+-- 	FzfLua.zoxide({
+-- 		actions = {
+-- 			enter = function(selected, opts)
+-- 				Project.open_tab_if_not_existing(selected[2])
+-- 				FzfLua.actions.zoxide_cd(selected, opts)
+-- 			end,
+-- 		},
+-- 		scope = "tab",
+-- 	})
+-- end, { desc = "Projects" })
+vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
 
 vim.cmd("colorscheme tokyonight-night")
 
@@ -396,6 +334,7 @@ require("orgmode").setup({
 })
 
 -- Mini setup
+require("mini.surround").setup()
 require("mini.icons").setup()
 require("mini.statusline").setup({
 	content = {
@@ -410,6 +349,7 @@ require("mini.statusline").setup({
 
 			vim.api.nvim_set_hl(0, "ClockedIn", { fg = "#000000", bg = "#3fec02" })
 			vim.api.nvim_set_hl(0, "ClockedOut", { fg = "#c2230f", bg = "#292e42" })
+			vim.api.nvim_set_hl(0, "Project", { fg = "#000000", bg = "#bb91f8" })
 
 			local is_checked_in = TimeClock.is_checked_in()
 			local status = TimeClock.status()
@@ -429,6 +369,7 @@ require("mini.statusline").setup({
 				"%<", -- Mark general truncate point
 				{ hl = "MiniStatuslineFilename", strings = { filename } },
 				"%=", -- End left alignment
+				{ hl = "Project", strings = { vim.fn.getcwd() } },
 				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 				{ hl = status_hl, strings = { status } },
 				{ hl = "MiniStatuslineFileinfo", strings = { tasks } },
@@ -485,7 +426,7 @@ vim.lsp.enable({
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
-	callback = function(args)
+	callback = function()
 		vim.keymap.set("n", "<leader>cr", vim.lsp.buf.rename)
 		vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action)
 		vim.keymap.set("n", "gr", vim.lsp.buf.references)
