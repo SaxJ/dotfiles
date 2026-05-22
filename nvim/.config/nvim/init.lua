@@ -216,6 +216,13 @@ vim.pack.add({
 
 	-- AI
 	gh("carlos-algms/agentic.nvim"),
+  gh("pablopunk/pi.nvim"),
+})
+
+require("pi").setup({
+  provider = "ollama",
+  model = "qwen3-coder-next:cloud",
+  thinking = "off",
 })
 
 require("fzf-lua").setup({})
