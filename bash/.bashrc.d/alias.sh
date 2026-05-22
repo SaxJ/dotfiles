@@ -5,11 +5,15 @@ alias v=nvim
 
 alias ytd="yt-dlp -x --audio-format best --audio-quality 0 --embed-metadata --embed-thumbnail -o \"~/Music/%(title)s.%(ext)s\" --restrict-filenames"
 
+alias gp="git push"
+alias ga="git add -i"
 alias gs="git status"
 alias gd="git diff"
 alias gc="git commit"
 alias gci="git commit --interactive"
 alias gl="git log --graph"
+alias gmt="git mergetool"
+alias gmm="git merge master"
 
 alias ci="timelog clockin"
 alias co="timelog clockout"

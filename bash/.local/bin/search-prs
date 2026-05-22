@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+gh pr list --json 'title,url' -q ".[] | select(.title | contains(\"$1\")) | \"\\(.url) \\(.title)\""
