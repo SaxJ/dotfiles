@@ -321,8 +321,8 @@
   (setq eat-enable-auto-line-mode t
         eat-kill-buffer-on-exit t))
 
-(use-package vterm
-  :ensure t)
+(use-package ghostel :ensure t)
+(use-package vterm :ensure t)
 
 (use-package multi-vterm
   :after vterm
