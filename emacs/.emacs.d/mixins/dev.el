@@ -256,7 +256,8 @@
   (add-hook 'elm-mode-hook 'eglot-ensure)
   (add-hook 'go-ts-mode-hook 'eglot-ensure)
 
-  (fset #'jsonrpc--log-event #'ignore)  ; massive perf boost---don't log every event
+  ;; massive perf boost---don't log every event
+  (fset #'jsonrpc--log-event #'ignore)  
 
   ;; (add-to-list 'eglot-server-programs
   ;;              '(((typescript-ts-mode :language-id "typescript")
@@ -291,8 +292,10 @@
                                                                      :parameterTypes :json-false
                                                                      :parameterNames :json-false))))
 
-  ;;(add-hook 'eglot-managed-mode-hook #'saxon/eglot-capf)
-  )
+  ;; Ignore these capabilities for performance impact
+  (setopt eglot-ignored-server-capabilities '(:documentFormattingProvider
+                                              :documentRangeFormattingProvider
+                                              :documentOnTypeFormattingProvider)))
 
 (defun saxon/no-format-p ()
   (member major-mode '("php-ts-mode")))
