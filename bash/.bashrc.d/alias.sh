@@ -68,3 +68,8 @@ function rd() {
 
   scp "minikube:/home/ubuntu/$project/$file" "$root/$file"
 }
+
+function jt() {
+  local ticket=$(board_tickets)
+  git co -b "$ticket"
+}
