@@ -490,16 +490,6 @@
 (use-package httprepl
   :ensure t)
 
-(use-package ellama
-  :ensure t
-  :hook (org-ctrl-c-ctrl-c-final . ellama-chat-send-last-message)
-  :init (setopt ellama-auto-scroll t)
-  :config
-  (require 'llm-ollama)
-  (setopt ellama-provider
-          (make-llm-ollama
-           :chat-model "gpt-oss:120b-cloud")))
-
 (use-package gptel
   :ensure t
   :config
