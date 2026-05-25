@@ -215,14 +215,12 @@ vim.pack.add({
 	gh("lewis6991/gitsigns.nvim"),
 
 	-- AI
-	gh("carlos-algms/agentic.nvim"),
-  gh("pablopunk/pi.nvim"),
+	gh("azorng/goose.nvim"),
 })
 
-require("pi").setup({
-  provider = "ollama",
-  model = "qwen3-coder-next:cloud",
-  thinking = "off",
+require("goose").setup({
+	preferred_picker = "fzf",
+	default_global_keymaps = false,
 })
 
 require("fzf-lua").setup({})
@@ -257,13 +255,6 @@ require("blink.cmp").setup({
 		documentation = { auto_show = true },
 	},
 })
-
-require("agentic").setup({})
-vim.keymap.set("n", "<leader>aa", function()
-	require("agentic").toggle({ auto_add_to_context = false, focus_prompt = true })
-end, { desc = "Toggle Agent" })
-vim.keymap.set("n", "<leader>ar", require("agentic").restore_session, { desc = "Resume Agent" })
-vim.keymap.set("n", "<leader>an", require("agentic").new_session, { desc = "New Agent" })
 
 require("conform").setup({
 	formatters_by_ft = {
