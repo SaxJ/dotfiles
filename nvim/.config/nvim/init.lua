@@ -127,11 +127,11 @@ vim.keymap.set("n", "<leader><tab>p", "<cmd>tabp<CR>", { desc = "Prev Tab" })
 vim.keymap.set("n", "<leader><tab>t", "<cmd>TTerm<CR>", { desc = "Terminal in Tab" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers cwd_only=true<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Git<CR>", { desc = "Git" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
 
 -- Logging
@@ -210,9 +210,9 @@ vim.pack.add({
 	gh("nvim-orgmode/orgmode"),
 
 	-- Git
-	gh("NeogitOrg/neogit"),
 	gh("esmuellert/codediff.nvim"),
 	gh("lewis6991/gitsigns.nvim"),
+	gh("tpope/vim-fugitive"),
 
 	-- AI
 	gh("azorng/goose.nvim"),
@@ -224,17 +224,6 @@ require("goose").setup({
 })
 
 require("fzf-lua").setup({})
--- vim.keymap.set("n", "<leader>pp", function()
--- 	FzfLua.zoxide({
--- 		actions = {
--- 			enter = function(selected, opts)
--- 				Project.open_tab_if_not_existing(selected[2])
--- 				FzfLua.actions.zoxide_cd(selected, opts)
--- 			end,
--- 		},
--- 		scope = "tab",
--- 	})
--- end, { desc = "Projects" })
 vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
 
 vim.cmd("colorscheme tokyonight-night")
@@ -297,23 +286,6 @@ require("gitsigns").setup({
 			end
 		end)
 	end,
-})
-
--- Neogit
-require("neogit").setup({
-	kind = "auto",
-	prompt_force_push = false,
-	graph_style = "unicode",
-	process_spinner = true,
-	mappings = {
-		finder = {
-			["<C-j>"] = "Next",
-			["<C-k>"] = "Previous",
-		},
-	},
-	integrations = {
-		codediff = true,
-	},
 })
 
 -- Org
