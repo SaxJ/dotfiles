@@ -264,7 +264,11 @@
   ;;                 (tsx-ts-mode :language-id "typescriptreact")
   ;;                 (js-ts-mode :language-id "javascript")
   ;;                 (typescript-mode :language-id "typescript"))
-  ;;                . ("tsgo" "--lsp" "--stdio")))
+  ;;                . ("tsgo" "--lsp" "--stdio"
+  ;;                   :initializationOptions
+  ;;                   (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
+  ;;                                 :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
+  ;;                                 :tsserver (:logVerbosity "off")))))
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio"
                                 :initializationOptions
@@ -493,12 +497,12 @@
 (use-package gptel
   :ensure t
   :config
-  (setopt gptel-model 'qwen/qwen3.6-27b
+  (setopt gptel-model 'google/gemma-4-26b-a4b
           gptel-backend (gptel-make-openai "lm-studio"
                           :stream t
                           :protocol "http"
                           :host "localhost:1234"
-                          :models '(qwen/qwen3.6-27b))))
+                          :models '(qwen/qwen3.6-27b google/gemma-4-26b-a4b))))
 
 (use-package gptel-agent
   :ensure t)
