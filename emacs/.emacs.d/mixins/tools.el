@@ -77,6 +77,14 @@
     :cwd "~/Documents/morbo"
     :tags '(work)
     :stop-signal 'sigkill
+    :kill-process-buffer-on-stop t)
+  (prodigy-define-service
+    :name "Searx"
+    :command "docker"
+    :args '("compose" "up")
+    :cwd "~/Documents/searx"
+    :tags '(personal)
+    :stop-signal 'sigkill
     :kill-process-buffer-on-stop t))
 
 
