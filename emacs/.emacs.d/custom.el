@@ -31,7 +31,7 @@
                  pr-review prescient prodigy pug-mode rainbow-mode
                  simple-httpd simple-mpc soundcloud string-inflection
                  sudo-edit templ-ts-mode terraform-mode time-zones
-                 tinee uv-mode vc-use-package vertico
+                 tinee uv-mode vc-use-package verb vertico
                  visual-fill-column vue-mode web-mode wgrep yaml-mode
                  yasnippet-snippets yeetube yuck-mode zone-nyan
                  zone-rainbow))
