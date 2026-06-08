@@ -1,0 +1,34 @@
+#!/bin/bash
+
+function detect_runner() {
+  if [ -f "composer.json" ]; then
+    echo "composer"
+    return
+  fi
+
+  if [ -f "yarn.lock" ]; then
+    echo "yarn"
+    return
+  fi
+  
+  if [ -f "package.json" ]; then
+    echo "npm"
+    return
+  fi
+
+  echo "none"
+}
+
+runner=$(detect_runner)
+if [ "$runner" = "none" ]; then
+  exit 0
+fi
+
+if [ "$runner" = "yarn" ] || [ "$runner" = "npm" ]; then
+  cat package.json | jq -cr '.scripts | keys | .[] | "yarn run \(.)"'
+fi
+
+if [ "$runner" = "composer" ]; then
+  cat composer.json | jq -cr '.scripts | keys | .[] | "composer \(.)"'
+fi
+
