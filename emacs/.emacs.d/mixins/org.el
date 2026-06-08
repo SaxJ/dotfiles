@@ -260,6 +260,8 @@
   :config
   (add-to-list 'org-export-backends 'md)
 
+  (define-key org-mode-map (kbd "C-c C-r") verb-command-map)
+
   ;; Make org-open-at-point follow file links in the same window
   (setf (cdr (assoc 'file org-link-frame-setup)) 'find-file)
 
@@ -454,3 +456,6 @@
           epresent-mode-line nil
           epresent-pretty-entities t)
   (add-hook 'epresent-start-presentation-hook #'evil-emacs-state))
+
+(use-package verb
+  :ensure t)
