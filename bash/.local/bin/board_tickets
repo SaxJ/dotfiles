@@ -3,12 +3,12 @@
 # https://developer.atlassian.com/cloud/jira/software/rest/api-group-board/#api-rest-software-1-0-board-boardid-issue-get
  
 function jira_fetch() {
-   local token=$(pass jira_token)
+   local token=$(pass jira_cli)
    local email=$(pass jira_email)
    curl \
       --silent \
       --request GET \
-      --url "https://hejira.atlassian.net/rest/software/1.0/board/362/issue?fields=key,summary,status&maxResults=5000" \
+      --url "https://hejira.atlassian.net/rest/agile/1.0/board/259/issue?fields=key,summary,status&maxResults=5000" \
       --user "$email:$token" \
       --header "Accept: application/json" | jq -c -r '.issues.[] | [.key, .fields.summary, .fields.status.name] | join("\t")'
 }
