@@ -9,8 +9,6 @@
   (add-to-list 'package-archives '("devel" . "https://elpa.gnu.org/devel/") t))
 
 ;; Not needed for emacs-30
-(unless (package-installed-p 'vc-use-package)
-  (package-vc-install "https://github.com/slotThe/vc-use-package"))
 (require 'vc-use-package)
 
 (set-face-attribute 'default nil :font "Fira Code-14")
@@ -20,6 +18,7 @@
 (setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
 (setq display-time-default-load-average nil) ; this information is useless for most
 (setq initial-buffer-choice t)
+(setopt package-review-policy t)
 
 ;; Automatically reread from disk if the underlying file changes
 (setq auto-revert-interval 1)
