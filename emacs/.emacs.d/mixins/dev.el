@@ -181,7 +181,7 @@
 ;;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (defun saxon/on-create-pr (value _headers _status _req)
-  (when-let ((url (alist-get 'html_url value)))
+  (when-let* ((url (alist-get 'html_url value)))
     (browse-url url)))
 
 ;; Magit: best Git client to ever exist
@@ -469,7 +469,7 @@
          (remote-pwd (format "/home/ubuntu/%s/" project))
          (default-directory (expand-file-name (format "/ssh:minikube:%s" remote-pwd))))
     (with-connection-local-variables
-     (shell-command cmd))))
+      (shell-command cmd))))
 
 (defun saxon/remote-project-shell ()
   (interactive)
