@@ -169,11 +169,16 @@
 (defun saxon/clocking-status ()
   "Clearly show when not clocking time."
   (if (string= (car timeclock-last-event) "i")
-      (propertize (nth 2 timeclock-last-event) 'face 'mood-line-status-success)
-    (propertize "Not Clocking" 'face 'mood-line-status-error)))
+      (propertize (nth 2 timeclock-last-event) 'face 'success)
+    (propertize "Not Clocking" 'face 'error)))
 
 (defun saxon/browse-url-mpv (url &rest args)
   (start-process "mpv" "*mpv*" "mpv" url))
+
+(defun saxon/format-git-modeline ()
+  "Clean up the modeline string"
+  (when vc-mode
+    (replace-regexp-in-string "^ Git[:-]" "\uf418 " vc-mode)))
 
 (use-package emacs
   :ensure nil
@@ -189,6 +194,25 @@
                              " 🕓 " display-time-string
                              (:eval mu4e-alert-mode-line)))
 
+  (setq-default mode-line-format
+                '((:propertize "" mode-line-modified mode-line-remote)
+                  mode-line-frame-identification
+                  mode-line-buffer-identification
+                  " "
+                  mode-line-position
+                  mode-line-format-right-align
+                  " "
+                  (:eval (saxon/format-git-modeline))
+                  " "
+                  mode-line-modes
+                  mode-line-misc-info
+                  " ")
+                project-mode-line nil
+                mode-line-buffer-identification '(" %b")
+                mode-line-position-line-format '(" %l:%c"))
+  (setopt mode-line-modes-delimiters '("" . "")
+          mode-line-collapse-minor-modes t)
+
   ;; Speeding up tramp
   (setq remote-file-name-inhibit-locks t
         tramp-use-scp-direct-remote-copying t
@@ -196,23 +220,3 @@
 
   (setq browse-url-handlers '(("https:\\/\\/www\\.youtube." . saxon/browse-url-mpv))))
 
-(use-package mood-line
-  :ensure t
-  :config
-  (mood-line-mode)
-  (setq mood-line-glyph-alist mood-line-glyphs-fira-code
-        mood-line-format (mood-line-defformat
-                          :left
-                          (((mood-line-segment-modal) . " ")
-                           ((mood-line-segment-buffer-status) . " ")
-                           ((mood-line-segment-buffer-name) . " "))
-                          :right
-                          (((mood-line-segment-vc) . " ")
-                           ((mood-line-segment-major-mode) . "")))))
-
-;; (use-package nano-modeline
-;;   :ensure t
-;;   :config
-;;   (setopt nano-modeline-position #'nano-modeline-footer
-;;           nano-modeline-padding '(0.1 . 0.1))
-;;   (add-hook 'prog-mode-hook #'nano-modeline-prog-mode))
