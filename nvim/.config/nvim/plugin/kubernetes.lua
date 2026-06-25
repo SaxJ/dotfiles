@@ -15,4 +15,10 @@ vim.keymap.set("n", "<leader>kp", function()
 		vim.cmd(string.format("VTerm kubectl exec -it %s -- bash", pod))
 	end)
 end, { desc = "Pick pod (copy name)" })
+
+vim.keymap.set("n", "<leader>kl", function()
+	kubectl_pick_pod(function(pod)
+		vim.cmd(string.format("VTerm stern %s", pod))
+	end)
+end, { desc = "Pod logs" })
 -- vim: ts=2 sts=2 sw=2 et
