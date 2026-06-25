@@ -163,18 +163,18 @@
          (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=1" api-key search))
          (response (plz 'get url :headers '(("Content-Type" . "application/json")) :as #'json-read)))
     (let-alist response
-      (when-let ((gif (aref .data 0)))
+      (when-let* ((gif (aref .data 0)))
         (let-alist gif
           (message .images.downsized_large.url))))))
 
 (defun saxon/get-random-giphy-html ()
   (interactive)
-  (when-let ((link (saxon/get-random-giphy-image)))
+  (when-let* ((link (saxon/get-random-giphy-image)))
     (kill-new (format "<img src=\"%s\" />" link))))
 
 (defun saxon/get-random-giphy-markdown ()
   (interactive)
-  (when-let ((link (saxon/get-random-giphy-image)))
+  (when-let* ((link (saxon/get-random-giphy-image)))
     (kill-new (format "![image](%s)" link))))
 
 
