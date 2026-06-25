@@ -32,6 +32,9 @@ vim.o.showmode = false
 -- Show one global statusline
 vim.o.laststatus = 3
 
+vim.o.showtabline = 2
+vim.o.tabline = "%!v:lua.MyTabLine()"
+
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
 end)
@@ -131,7 +134,7 @@ vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers cwd_only=true<CR>", { des
 vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>Git<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
 vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
 
 -- Logging
@@ -154,6 +157,35 @@ vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua live_grep<CR>", { desc = "Grep" }
 vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Files" })
 vim.keymap.set("n", "<leader>-", "<cmd>Explore<CR>", { desc = "File Browser" })
 vim.keymap.set("n", "<leader>.", "<cmd>FzfLua files cwd=%:p:h<cr>")
+
+-- Return to previous tab when a tab is closed (e.g. Neogit)
+-- Track tabs in recency order so closing one (which itself fires TabLeave)
+-- doesn't clobber the tab we actually want to return to.
+local tab_history = {}
+vim.api.nvim_create_autocmd("TabLeave", {
+	callback = function()
+		local t = vim.api.nvim_get_current_tabpage()
+		for i, v in ipairs(tab_history) do
+			if v == t then
+				table.remove(tab_history, i)
+				break
+			end
+		end
+		table.insert(tab_history, t)
+	end,
+})
+vim.api.nvim_create_autocmd("TabClosed", {
+	callback = function()
+		for i = #tab_history, 1, -1 do
+			local t = tab_history[i]
+			if vim.api.nvim_tabpage_is_valid(t) then
+				vim.api.nvim_set_current_tabpage(t)
+				return
+			end
+			table.remove(tab_history, i)
+		end
+	end,
+})
 
 -- Highlight when yanking (copying) text
 vim.api.nvim_create_autocmd("TextYankPost", {
@@ -212,7 +244,8 @@ vim.pack.add({
 	-- Git
 	gh("esmuellert/codediff.nvim"),
 	gh("lewis6991/gitsigns.nvim"),
-	gh("tpope/vim-fugitive"),
+	-- gh("tpope/vim-fugitive"),
+	gh("NeogitOrg/neogit"),
 
 	-- AI
 	gh("azorng/goose.nvim"),
@@ -223,10 +256,31 @@ require("goose").setup({
 	default_global_keymaps = false,
 })
 
-require("fzf-lua").setup({})
-vim.keymap.set("n", "<leader>pp", "<cmd>FzfLua zoxide<CR>", { desc = "Projects" })
+require("fzf-lua").setup({
+	keymap = {
+		fzf = {
+			true,
+			["ctrl-q"] = "select-all+accept",
+		},
+	},
+})
+vim.keymap.set("n", "<leader>pp", function()
+	require("fzf-lua").zoxide({
+		actions = {
+			["default"] = function(selected)
+				if selected and selected[1] then
+					local path = selected[1]:match("(/.*)")
+					if path then
+						open_tab_if_not_existing(path)
+					end
+				end
+			end,
+		},
+	})
+end, { desc = "Projects" })
 
 vim.cmd("colorscheme tokyonight-night")
+vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#1a1b26", bg = "#bb9af7" })
 
 require("nvim-autopairs").setup({})
 -- Completion
