@@ -494,33 +494,12 @@
 (use-package httprepl
   :ensure t)
 
-(use-package gptel
-  :ensure t
-  :config
-  (setopt gptel-model 'google/gemma-4-26b-a4b
-          gptel-backend (gptel-make-openai "lm-studio"
-                          :stream t
-                          :protocol "http"
-                          :host "localhost:1234"
-                          :models '(qwen/qwen3.6-27b google/gemma-4-26b-a4b))))
-
-(use-package gptel-agent
-  :ensure t)
-
 (use-package pulse
   :config
   (defun saxon/evil-pulse (orig beg end &rest args)
     (pulse-momentary-highlight-region beg end)
     (apply orig beg end args))
   (advice-add 'evil-yank :around 'saxon/evil-pulse))
-
-(use-package agent-shell
-  :ensure t
-  :config
-  (setopt agent-shell-anthropic-claude-environment
-          (agent-shell-make-environment-variables :inherit-env t)
-          agent-shell-goose-authentication
-          (agent-shell-make-goose-authentication :none t)))
 
 ;; Make executable if shabanged
 (add-hook 'after-save-hook #'executable-make-buffer-file-executable-if-script-p)
