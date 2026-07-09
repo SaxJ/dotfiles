@@ -1,7 +1,7 @@
 local module = {}
 
 --- @param project string
-function open_tab_if_not_existing(project)
+local function open_tab_if_not_existing(project)
 	local tabids = vim.api.nvim_list_tabpages()
 	local tabs = {}
 	for tabnr, tabid in ipairs(tabids) do

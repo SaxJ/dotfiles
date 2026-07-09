@@ -29,7 +29,7 @@ local function runner()
 		cmd_root = "npm run "
 	end
 
-	vim.ui.select(results, nil, function(choice)
+	vim.ui.select(results, {}, function(choice)
 		local cmd = cmd_root .. choice
 		Terminal.open_terminal(cmd, "horizontal")
 
