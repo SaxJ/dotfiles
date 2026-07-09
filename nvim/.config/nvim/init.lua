@@ -17,6 +17,10 @@ vim.g.background_tasks = {
 		dir = "~/Documents/unicron/",
 		cmd = "npm run storybook",
 	},
+	["Searx"] = {
+		dir = "~/Documents/searx/",
+		cmd = "docker compose up",
+	},
 }
 
 vim.o.number = true
@@ -192,7 +196,7 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	desc = "Highlight when yanking (copying) text",
 	group = vim.api.nvim_create_augroup("kickstart-highlight-yank", { clear = true }),
 	callback = function()
-		vim.hl.on_yank()
+		vim.hl.hl_op()
 	end,
 })
 
@@ -244,19 +248,11 @@ vim.pack.add({
 	-- Git
 	gh("esmuellert/codediff.nvim"),
 	gh("lewis6991/gitsigns.nvim"),
-	-- gh("tpope/vim-fugitive"),
 	gh("NeogitOrg/neogit"),
-
-	-- AI
-	gh("azorng/goose.nvim"),
-})
-
-require("goose").setup({
-	preferred_picker = "fzf",
-	default_global_keymaps = false,
 })
 
 require("fzf-lua").setup({
+	ui_select = true,
 	keymap = {
 		fzf = {
 			true,
@@ -271,7 +267,7 @@ vim.keymap.set("n", "<leader>pp", function()
 				if selected and selected[1] then
 					local path = selected[1]:match("(/.*)")
 					if path then
-						open_tab_if_not_existing(path)
+						Project.open_tab_if_not_existing(path)
 					end
 				end
 			end,
