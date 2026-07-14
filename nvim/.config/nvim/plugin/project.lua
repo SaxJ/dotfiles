@@ -43,4 +43,6 @@ function MyTabLine()
 	return s
 end
 
+vim.o.tabline = "%!v:lua.MyTabLine()"
+
 _G.Project = module

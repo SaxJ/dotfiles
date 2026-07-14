@@ -37,7 +37,6 @@ vim.o.showmode = false
 vim.o.laststatus = 3
 
 vim.o.showtabline = 2
-vim.o.tabline = "%!v:lua.MyTabLine()"
 
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
@@ -138,8 +137,10 @@ vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers cwd_only=true<CR>", { des
 vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
-vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
+vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gb", "<cmd>G blame<CR>", { desc = "Blame" })
+vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
+vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
 
 -- Logging
 vim.keymap.set("n", "<leader>ti", function()
@@ -249,6 +250,8 @@ vim.pack.add({
 	gh("esmuellert/codediff.nvim"),
 	gh("lewis6991/gitsigns.nvim"),
 	gh("NeogitOrg/neogit"),
+	gh("tpope/vim-fugitive"),
+	gh("tpope/vim-eunuch"),
 })
 
 require("fzf-lua").setup({
