@@ -13,7 +13,26 @@
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
  '(nano-modeline-position 'nano-modeline-footer)
- '(package-selected-packages nil)
+ '(package-selected-packages
+   '(apheleia avy build cape casual chezmoi confluence-markup-mode
+              csproj-mode denote devdocs dired-preview dune eat
+              ef-themes eglot-fsharp elfeed-tube elm-mode
+              embark-consult epresent evil-collection evil-commentary
+              evil-org evil-surround forge general ghostel
+              git-timemachine graphql-ts-mode graphviz-dot-mode
+              haskell-mode helm-org hide-mode-line httprepl jira
+              jiralib2 jq-mode json-mode lastfm magit-delta
+              magit-prime marginalia mason mermaid-mode minimail
+              modusregal modusregel mood-line mpris mu4e-alert
+              multi-vterm nerd-icons-corfu nvm ob-mermaid orderless
+              org-modern org-music org-present org-ql org-roam
+              org-tree-slide origami otpp plz pomo-cat popper
+              pr-review prescient prodigy pug-mode rainbow-mode
+              simple-httpd simple-mpc soundcloud string-inflection
+              sudo-edit templ-ts-mode terraform-mode time-zones tinee
+              uv-mode vc-use-package verb vertico visual-fill-column
+              vue-mode web-mode wgrep yaml-mode yasnippet-snippets
+              yeetube yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
    '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
      (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch
