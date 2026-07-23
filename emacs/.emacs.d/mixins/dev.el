@@ -209,9 +209,9 @@
   :config
   (magit-prime-mode))
 
-(use-package magit-delta
-  :ensure t
-  :hook (magit-mode . magit-delta-mode))
+;; (use-package magit-delta
+;;   :ensure t
+;;   :hook (magit-mode . magit-delta-mode))
 
 (use-package project
   :config
@@ -259,16 +259,15 @@
   ;; massive perf boost---don't log every event
   (fset #'jsonrpc--log-event #'ignore)  
 
-  ;; (add-to-list 'eglot-server-programs
-  ;;              '(((typescript-ts-mode :language-id "typescript")
-  ;;                 (tsx-ts-mode :language-id "typescriptreact")
-  ;;                 (js-ts-mode :language-id "javascript")
-  ;;                 (typescript-mode :language-id "typescript"))
-  ;;                . ("tsgo" "--lsp" "--stdio"
-  ;;                   :initializationOptions
-  ;;                   (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
-  ;;                                 :plugins [(:name "@styled/typescript-styled-plugin" :location "/usr/lib/node_modules/@styled/typescript-styled-plugin")]
-  ;;                                 :tsserver (:logVerbosity "off")))))
+  (add-to-list 'eglot-server-programs
+               '(((typescript-ts-mode :language-id "typescript")
+                  (tsx-ts-mode :language-id "typescriptreact")
+                  (js-ts-mode :language-id "javascript")
+                  (typescript-mode :language-id "typescript"))
+                 . ("tsgo" "--lsp" "--stdio"
+                    :initializationOptions
+                    (:preferences (:importModuleSpecifierPreference "relative" :includePackageJsonAutoImports "on" :allowRenameImportPath t)
+                                  :tsserver (:logVerbosity "off")))))
   (add-to-list 'eglot-server-programs
                '(tsx-ts-mode . ("typescript-language-server" "--stdio"
                                 :initializationOptions
@@ -283,6 +282,8 @@
                '(haskell-mode . ("haskell-language-server-wrapper" "--lsp")))
   (add-to-list 'eglot-server-programs
 	           '(php-ts-mode . ("intelephense" "--stdio")))
+  ;; (add-to-list 'eglot-server-programs
+  ;;              '(php-ts-mode . ("phpantom_lsp" "--stdio")))
   (add-to-list 'eglot-server-programs
                '(vue-mode . ("vue-language-server" "--stdio")))
   (add-to-list 'eglot-server-programs
