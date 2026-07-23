@@ -137,10 +137,10 @@ vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers cwd_only=true<CR>", { des
 vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Git" })
-vim.keymap.set("n", "<leader>gb", "<cmd>G blame<CR>", { desc = "Blame" })
-vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
-vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
+vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
+-- vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
+-- vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
 
 -- Logging
 vim.keymap.set("n", "<leader>ti", function()
@@ -412,6 +412,7 @@ require("fidget").setup({})
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("vtsls", { capabilities = capabilities })
 vim.lsp.config("intelephense", { capabilities = capabilities })
+vim.lsp.config("phpantom_lsp", { capabilities = capabilities })
 vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	settings = {
@@ -441,7 +442,7 @@ vim.lsp.config("lua_ls", {
 	},
 })
 vim.lsp.enable({
-	"intelephense",
+	"phpantom_lsp",
 	"lua_ls",
 	"vtsls",
 	"gopls",
