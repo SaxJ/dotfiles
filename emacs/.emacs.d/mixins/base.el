@@ -98,10 +98,18 @@
   :after cape
   :init
   (global-corfu-mode)
+  (corfu-popupinfo-mode)
+  (corfu-history-mode)
   :config
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-buster)
   (advice-add 'eglot-completion-at-point :around #'cape-wrap-noninterruptible)
   (setq corfu-auto t)
+
+  (setq corfu-auto t
+        corfu-popupinfo-delay '(0.5 . 0.1)
+        corfu-popupinfo-hide t
+        corfu-quit-no-match 'separator)
+
   :bind
   (:map corfu-map
         ([tab] . corfu-next)
@@ -109,30 +117,6 @@
         ([backtab] . corfu-previous)
         ("S-TAB" . corfu-previous)))
 
-;; Part of corfu
-(use-package corfu-popupinfo
-  :after corfu
-  :hook (corfu-mode . corfu-popupinfo-mode)
-  :custom
-  (corfu-popupinfo-delay '(0.25 . 0.1))
-  (corfu-popupinfo-hide nil)
-  :config
-  (corfu-popupinfo-mode))
-
-;; Make corfu popup come up in terminal overlay
-(use-package corfu-terminal
-  :if (not (display-graphic-p))
-  :ensure t
-  :config
-  (corfu-terminal-mode))
-
-;; Pretty icons for corfu
-;; (use-package kind-icon
-;;   :if (display-graphic-p)
-;;   :ensure t
-;;   :after corfu
-;;   :config
-;;   (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
 (use-package nerd-icons-corfu
   :ensure t
   :after corfu
@@ -185,11 +169,14 @@
   :config
   ;; Text expansion
   (global-set-key [remap dabbrev-expand] 'hippie-expand)
+  (setq mpris-preferred-players '("plasma-browser-integration")
+        mpris-disliked-players '("kdeconnect" "firefox" "chromium")
+        mpris-current-player "org.mpris.MediaPlayer2.plasma-browser-integration")
 
   ;; Mode line
   (setq global-mode-string '(
                              (:eval (saxon/clocking-status))
-                             ;; "🎵 " (:eval (saxon/get-mpris-track-title))
+                             " 🎵 " (:eval (saxon/get-mpris-track-title))
                              (:eval (mu4e--modeline-string))
                              " 🕓 " display-time-string
                              (:eval mu4e-alert-mode-line)))
@@ -219,4 +206,9 @@
         remote-file-name-inhibit-auto-save-visited t)
 
   (setq browse-url-handlers '(("https:\\/\\/www\\.youtube." . saxon/browse-url-mpv))))
+
+(use-package modusregel
+  :vc (modusregel :url "https://codeberg.org/jjba23/modusregel.git" :rev :newest)
+  :config
+  (setq-default mode-line-format modusregel-format))
 
