@@ -4,6 +4,17 @@ vim.g.maplocalleader = ","
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
+-- minibuffer options
+require("vim._core.ui2").enable({ enable = true, msg = { targets = "msg" } })
+vim.g.minibuffer = {
+	cmd = {
+		-- NOTE: minibuffer cmd is not compatible with command line plugins that force `wildtrigger()` each `wildchar` such as mini.cmdline
+		enabled = true, -- Enable command line wildmenu replacement through the minibuffer
+		dynamic_height = false, -- Automatically shrink and grow the command window as suggestions change
+		max_height = 15, -- Maximum height when using the command line
+	},
+}
+
 vim.g.background_tasks = {
 	["Hannibal Dev"] = {
 		dir = "~/Documents/hannibal/",
@@ -133,14 +144,14 @@ vim.keymap.set("n", "<leader><tab>p", "<cmd>tabp<CR>", { desc = "Prev Tab" })
 vim.keymap.set("n", "<leader><tab>t", "<cmd>TTerm<CR>", { desc = "Terminal in Tab" })
 
 -- Buffers
-vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers cwd_only=true<CR>", { desc = "Buffers" })
+vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers<CR>", { desc = "Buffers" })
 vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Git" })
-vim.keymap.set("n", "<leader>gb", "<cmd>Gitsigns blame<CR>", { desc = "Blame" })
--- vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
--- vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
+vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Status" })
+vim.keymap.set("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "Status" })
+vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
+vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
 
 -- Logging
 vim.keymap.set("n", "<leader>ti", function()
@@ -160,7 +171,7 @@ vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua live_grep<CR>", { desc = "Grep" }
 
 -- General
 vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Files" })
-vim.keymap.set("n", "<leader>-", "<cmd>Explore<CR>", { desc = "File Browser" })
+vim.keymap.set("n", "<leader>-", "<cmd>e %:p:h<CR>", { desc = "File Browser" })
 vim.keymap.set("n", "<leader>.", "<cmd>FzfLua files cwd=%:p:h<cr>")
 
 -- Return to previous tab when a tab is closed (e.g. Neogit)
@@ -201,14 +212,6 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 	end,
 })
 
--- Checktime on file on focus
-vim.api.nvim_create_autocmd("BufEnter", {
-	desc = "Refresh file on buffer focus",
-	callback = function()
-		vim.cmd("checktime")
-	end,
-})
-
 local function gh(slug)
 	return "https://github.com/" .. slug
 end
@@ -223,6 +226,8 @@ vim.pack.add({
 	gh("nvim-lua/plenary.nvim"),
 	gh("stevearc/conform.nvim"),
 	gh("windwp/nvim-autopairs"),
+	gh("brianhuster/unnest.nvim"),
+	gh("simifalaye/minibuffer.nvim"),
 
 	-- LSP
 	gh("j-hui/fidget.nvim"),
@@ -252,10 +257,50 @@ vim.pack.add({
 	gh("NeogitOrg/neogit"),
 	gh("tpope/vim-fugitive"),
 	gh("tpope/vim-eunuch"),
+	gh("kdheepak/lazygit.nvim"),
 })
 
+vim.ui.select = require("minibuffer.builtin.ui_select")
+vim.ui.input = require("minibuffer.builtin.ui_input")
+
 require("fzf-lua").setup({
-	ui_select = true,
+	-- ui_select = {},
+	winopts = function()
+		return {
+			height = 0.35,
+			width = 1,
+			row = 0.35,
+			col = 0.50,
+			border = "none",
+			backdrop = 100,
+			relative = "minibuffer",
+			use_minibuffer = true,
+			winhl = true,
+			preview = {
+				hidden = true,
+			},
+		}
+	end,
+	hls = {
+		normal = "Normal",
+	},
+	-- Depending on your fzf-lua version/config structure,
+	-- this is best applied to the individual pickers:
+	files = {
+		previewer = false,
+	},
+	buffers = {
+		previewer = false,
+	},
+	grep = {
+		previewer = false,
+	},
+	live_grep = {
+		previewer = false,
+	},
+	git_branches = {
+		previewer = false,
+	},
 	keymap = {
 		fzf = {
 			true,
@@ -265,6 +310,7 @@ require("fzf-lua").setup({
 })
 vim.keymap.set("n", "<leader>pp", function()
 	require("fzf-lua").zoxide({
+		previewer = false,
 		actions = {
 			["default"] = function(selected)
 				if selected and selected[1] then
@@ -373,6 +419,7 @@ require("mini.statusline").setup({
 			vim.api.nvim_set_hl(0, "ClockedIn", { fg = "#000000", bg = "#3fec02" })
 			vim.api.nvim_set_hl(0, "ClockedOut", { fg = "#c2230f", bg = "#292e42" })
 			vim.api.nvim_set_hl(0, "Project", { fg = "#000000", bg = "#bb91f8" })
+			vim.api.nvim_set_hl(0, "MusicPlaying", { fg = "#FFFFFF", bg = "#5E2063" })
 
 			local is_checked_in = TimeClock.is_checked_in()
 			local status = TimeClock.status()
@@ -383,6 +430,8 @@ require("mini.statusline").setup({
 
 			local tasks = string.format("%d Tasks", vim.g.background_tasks_count)
 
+			local song_info_cmd = vim.system({ "playerctl", "metadata", "-f", "{{title}} - {{artist}}" }):wait()
+
 			-- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
 			-- correct padding with spaces between groups (accounts for 'missing'
 			-- sections, etc.)
@@ -392,7 +441,7 @@ require("mini.statusline").setup({
 				"%<", -- Mark general truncate point
 				{ hl = "MiniStatuslineFilename", strings = { filename } },
 				"%=", -- End left alignment
-				{ hl = "Project", strings = { vim.fn.getcwd() } },
+				{ hl = "MusicPlaying", strings = { vim.trim(song_info_cmd.stdout) } },
 				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 				{ hl = status_hl, strings = { status } },
 				{ hl = "MiniStatuslineFileinfo", strings = { tasks } },
@@ -412,7 +461,7 @@ require("fidget").setup({})
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("vtsls", { capabilities = capabilities })
 vim.lsp.config("intelephense", { capabilities = capabilities })
-vim.lsp.config("phpantom_lsp", { capabilities = capabilities })
+-- vim.lsp.config("phpantom_lsp", { capabilities = capabilities })
 vim.lsp.config("lua_ls", {
 	capabilities = capabilities,
 	settings = {
@@ -442,7 +491,7 @@ vim.lsp.config("lua_ls", {
 	},
 })
 vim.lsp.enable({
-	"phpantom_lsp",
+	"intelephense",
 	"lua_ls",
 	"vtsls",
 	"gopls",
