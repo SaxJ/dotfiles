@@ -94,24 +94,34 @@
     :headers `(("Authorization" . ,(emira--make-auth-header-value)))
     :as #'json-read))
 
-(defun emira--get-all-board-issues ()
+(defun emira--get-all-board-issues (board)
   "Get all issues, iterating through pages."
-  (let* ((issues nil)
+  (let* ((board-id (alist-get 'id board))
+         (issues nil)
          (response nil)
          (results nil)
          (total 0)
          (offset 0))
-    (setq response (emira--get-board-issues-page offset)
-          results (alist-get 'values response)
+    (setq response (emira--get-board-issues-page offset board-id)
+          results (alist-get 'issues response)
           total (alist-get 'total response)
           issues (vconcat issues results)
           offset (+ offset (alist-get 'maxResults response)))
     (while (not (= (length issues) total))
-      (setq response (emira--get-board-issues-page offset)
-            results (alist-get 'values response)
+      (setq response (emira--get-board-issues-page offset board-id)
+            results (alist-get 'issues response)
             offset (+ offset (length results))
             issues (vconcat issues results)))
     issues))
+
+;;;###autoload
+(defun emira-select-issue ()
+  "Interactively select a jira issue, and return the issue."
+  (let* ((board (emira--select-board))
+         (issues (emira--get-all-board-issues board))
+         (issue-choices (mapcar #'emira--map-board-to-completion-entry issues))
+         (issue-choice (completing-read "Issue: " issue-choices nil t)))
+    (alist-get issue-choice issue-choices nil nil #'string-equal)))
 
 (define-derived-mode emira-board-mode magit-section-mode "Boards"
   "Showing issues in a board."
