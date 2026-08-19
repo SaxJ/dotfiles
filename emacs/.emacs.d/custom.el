@@ -9,6 +9,7 @@
      default))
  '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
  '(helm-minibuffer-history-key "M-p")
+ '(httpd-port 8081)
  '(ignored-local-variable-values '((checkdoc-allow-quoting-nil-and-t . t)))
  '(image-use-external-converter t)
  '(mu4e-search-results-limit -1)
@@ -21,13 +22,13 @@
               evil-org evil-surround forge general ghostel
               git-timemachine graphql-ts-mode graphviz-dot-mode
               haskell-mode helm-org hide-mode-line httprepl jira
-              jiralib2 jq-mode json-mode lastfm magit-delta
-              magit-prime marginalia mason mermaid-mode minimail
-              modusregal modusregel mood-line mpris mu4e-alert
-              multi-vterm nerd-icons-corfu nvm ob-mermaid orderless
-              org-modern org-music org-present org-ql org-roam
-              org-tree-slide origami otpp plz pomo-cat popper
-              pr-review prescient prodigy pug-mode rainbow-mode
+              jiralib2 jq-mode json-mode lastfm logview lorem-ipsum
+              magit-delta magit-prime marginalia mason meow
+              mermaid-mode minimail modusregal modusregel mood-line
+              mpris mu4e-alert multi-vterm nerd-icons-corfu nvm
+              ob-mermaid orderless org-modern org-music org-present
+              org-ql org-roam org-tree-slide origami otpp plz pomo-cat
+              popper pr-review prescient prodigy pug-mode rainbow-mode
               simple-httpd simple-mpc soundcloud string-inflection
               sudo-edit templ-ts-mode terraform-mode time-zones tinee
               uv-mode vc-use-package verb vertico visual-fill-column
