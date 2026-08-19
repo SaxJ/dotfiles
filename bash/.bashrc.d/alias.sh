@@ -14,6 +14,7 @@ alias gci="git commit --interactive"
 alias gl="git log --graph"
 alias gmt="git mergetool"
 alias gmm="git merge master"
+alias gf="git fuzzy"
 
 alias ci="timelog clockin"
 alias co="timelog clockout"
