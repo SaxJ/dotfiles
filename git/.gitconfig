@@ -4,7 +4,7 @@
 	email = saxon.jensen@gmail.com
 	name = SaxJ
 [core]
-	editor = hx
+	editor = nvim
 	pager = delta
 [alias]
     co = checkout
