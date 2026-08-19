@@ -156,27 +156,48 @@
   (let ((loc (saxon/get-lat-lng)))
     (kill-new (format "%s, %s" (car loc) (cdr loc)))))
 
-(defun saxon/get-random-giphy-image ()
+(defun saxon/make-giphy-plist (item)
+  (let-alist item
+    (let* ((title .title)
+           (url .images.downsized.url)
+           (preview .images.fixed_width_small_still.url))
+      `(:title ,title :url ,url :preview ,preview))))
+
+(defun saxon/fetch-giphy-images (search)
+  "Fetch a list of giphy images using the giphy API."
   (interactive)
-  (let* ((search (url-encode-url (read-string "Search: ")))
-         (api-key (s-trim (auth-source-pick-first-password :host "giphy")))
-         (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=1" api-key search))
+  (let* ((api-key (s-trim (auth-source-pick-first-password :host "giphy")))
+         (query (url-encode-url search))
+         (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=50" api-key query))
          (response (plz 'get url :headers '(("Content-Type" . "application/json")) :as #'json-read)))
-    (let-alist response
-      (when-let* ((gif (aref .data 0)))
-        (let-alist gif
-          (message .images.downsized_large.url))))))
+    (let* ((data (alist-get 'data response)))
+      (mapcar #'saxon/make-giphy-plist data))))
 
-(defun saxon/get-random-giphy-html ()
-  (interactive)
-  (when-let* ((link (saxon/get-random-giphy-image)))
-    (kill-new (format "<img src=\"%s\" />" link))))
+(defun saxon/giphy-cache-thumb (url)
+  (let* ((file (expand-file-name (concat (secure-hash 'md5 url) ".gif") temporary-file-directory)))
+    (unless (file-exists-p file)
+      (url-copy-file url file t))
+    file))
 
-(defun saxon/get-random-giphy-markdown ()
-  (interactive)
-  (when-let* ((link (saxon/get-random-giphy-image)))
-    (kill-new (format "![image](%s)" link))))
+(defun saxon/giphy-select (query)
+  (interactive "sSearch: ")
+  (let* ((results (saxon/fetch-giphy-images query))
+         (candidates (mapcar
+                      (lambda (item)
+                        (let* ((url (plist-get item :url))
+                               (title (plist-get item :title))
+                               (thumb (saxon/giphy-cache-thumb (plist-get item :preview))))
+                          (propertize title 'giphy-url url 'giphy-thumb thumb)))
+                      results))
+         (completion-extra-properties '(:category giphy-gif))
+         (choice (completing-read "Giphy: " candidates nil t))
+         (url (get-text-property 0 'giphy-url (car (member choice candidates)))))
+    (kill-new url)))
 
+(defun saxon/get-random-giphy-image (query)
+  (interactive "sSearch: ")
+  (let* ((results (saxon/fetch-giphy-images query)))
+    (plist-get (nth 0 results) :url)))
 
 (defun saxon/list-running-buildkite ()
   (let* ((from-time (format-time-string "%Y-%m-%dT%H:%M:%SZ" (time-subtract (current-time) (seconds-to-time 60)) t))
@@ -298,7 +319,11 @@
 
 (use-package mpris
   :ensure t
-  :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch "main"))
+  :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch "main")
+  :config
+  (setopt mpris-preferred-players '("plasma-browser-integration")
+          mpris-disliked-players '("kdeconnect" "firefox" "chromium"))
+  (mpris-update-current-player))
 
 ;;;;;;;;;;
 ;; JIRA ;;
