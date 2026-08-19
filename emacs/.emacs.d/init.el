@@ -13,12 +13,12 @@
 
 (set-face-attribute 'default nil :font "Fira Code-14")
 
-(setq inhibit-splash-screen t)
-(setq ring-bell-function 'ignore)
-(setq initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
-(setq display-time-default-load-average nil) ; this information is useless for most
-(setq initial-buffer-choice t)
-(setopt package-review-policy t)
+(setopt inhibit-splash-screen t)
+(setopt ring-bell-function 'ignore)
+(setopt initial-major-mode 'fundamental-mode)  ; default mode for the *scratch* buffer
+(setopt display-time-default-load-average nil) ; this information is useless for most
+(setopt initial-buffer-choice t)
+(setopt package-review-policy '(archive "melpa"))
 
 ;; Automatically reread from disk if the underlying file changes
 (setq auto-revert-interval 1)

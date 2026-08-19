@@ -87,7 +87,14 @@
 (use-package marginalia
   :ensure t
   :config
-  (marginalia-mode))
+  (marginalia-mode)
+
+  (defun saxon/giphy-annotate (cand)
+    (let* ((thumb (get-text-property 0 'giphy-thumb cand)))
+      (if (and thumb (file-exists-p thumb))
+          (concat "  " (propertize "*" 'display (create-image thumb nil nil :max-height 120))))))
+  
+  (add-to-list 'marginalia-annotators '(giphy-gif saxon/giphy-annotate builtin none)))
 
 (use-package cape
   :ensure t)
@@ -148,7 +155,7 @@
 (defun saxon/get-mpris-track-title ()
   "Get the title of the currently playing track"
   (unless (eq (mpris-get-metadata) 'no-player)
-    (s-truncate 30 (s-trim (format "%s" (mpris-track-attr 'title))))))
+    (s-truncate 30 (s-trim (format "%s - %s" (mpris-track-attr 'title) (mpris-track-attr 'artist))))))
 
 (defun saxon/clocking-status ()
   "Clearly show when not clocking time."
@@ -169,15 +176,11 @@
   :config
   ;; Text expansion
   (global-set-key [remap dabbrev-expand] 'hippie-expand)
-  (setq mpris-preferred-players '("plasma-browser-integration")
-        mpris-disliked-players '("kdeconnect" "firefox" "chromium")
-        mpris-current-player "org.mpris.MediaPlayer2.plasma-browser-integration")
 
   ;; Mode line
   (setq global-mode-string '(
-                             (:eval (saxon/clocking-status))
-                             " 🎵 " (:eval (saxon/get-mpris-track-title))
                              (:eval (mu4e--modeline-string))
+                             " 🎵 " (:eval (saxon/get-mpris-track-title))
                              " 🕓 " display-time-string
                              (:eval mu4e-alert-mode-line)))
 
@@ -188,12 +191,14 @@
                   " "
                   mode-line-position
                   mode-line-format-right-align
+
+                  (:eval (saxon/clocking-status))
                   " "
                   (:eval (saxon/format-git-modeline))
                   " "
                   mode-line-modes
-                  mode-line-misc-info
-                  " ")
+                  mode-line-misc-info)
+
                 project-mode-line nil
                 mode-line-buffer-identification '(" %b")
                 mode-line-position-line-format '(" %l:%c"))
@@ -206,9 +211,4 @@
         remote-file-name-inhibit-auto-save-visited t)
 
   (setq browse-url-handlers '(("https:\\/\\/www\\.youtube." . saxon/browse-url-mpv))))
-
-(use-package modusregel
-  :vc (modusregel :url "https://codeberg.org/jjba23/modusregel.git" :rev :newest)
-  :config
-  (setq-default mode-line-format modusregel-format))
 
