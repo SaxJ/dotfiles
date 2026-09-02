@@ -5,7 +5,6 @@
 	name = SaxJ
 [core]
 	editor = nvim
-	pager = delta
 [alias]
     co = checkout
     cob = checkout -b
