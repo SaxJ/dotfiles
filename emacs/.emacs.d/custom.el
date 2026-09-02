@@ -16,8 +16,8 @@
  '(nano-modeline-position 'nano-modeline-footer)
  '(package-selected-packages
    '(apheleia avy build cape casual chezmoi confluence-markup-mode
-              csproj-mode denote devdocs dired-preview dune eat
-              ef-themes eglot-fsharp elfeed-tube elm-mode
+              csproj-mode denote devdocs diff-hl dired-preview dune
+              eat ef-themes eglot-fsharp elfeed-tube elm-mode
               embark-consult epresent evil-collection evil-commentary
               evil-org evil-surround forge general ghostel
               git-timemachine graphql-ts-mode graphviz-dot-mode
