@@ -5,6 +5,8 @@ alias v=nvim
 
 alias ytd="yt-dlp -x --audio-format best --audio-quality 0 --embed-metadata --embed-thumbnail -o \"~/Music/%(title)s.%(ext)s\" --restrict-filenames"
 
+alias ls="ls --color"
+
 alias gp="git push"
 alias ga="git add -i"
 alias gs="git status"
@@ -21,6 +23,10 @@ alias co="timelog clockout"
 
 alias vpnc="openvpn3 session-start --config ~/office.ovpn"
 alias vpnd="openvpn3 session-manage --disconnect --config ~/office.ovpn"
+
+title() {
+  echo -ne "\033]0;$1\007"
+}
 
 function cd() {
   z "$1"
