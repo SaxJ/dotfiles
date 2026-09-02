@@ -4,17 +4,6 @@ vim.g.maplocalleader = ","
 -- Set to true if you have a Nerd Font installed and selected in the terminal
 vim.g.have_nerd_font = true
 
--- minibuffer options
-require("vim._core.ui2").enable({ enable = true, msg = { targets = "msg" } })
-vim.g.minibuffer = {
-	cmd = {
-		-- NOTE: minibuffer cmd is not compatible with command line plugins that force `wildtrigger()` each `wildchar` such as mini.cmdline
-		enabled = true, -- Enable command line wildmenu replacement through the minibuffer
-		dynamic_height = false, -- Automatically shrink and grow the command window as suggestions change
-		max_height = 15, -- Maximum height when using the command line
-	},
-}
-
 vim.g.background_tasks = {
 	["Hannibal Dev"] = {
 		dir = "~/Documents/hannibal/",
@@ -47,7 +36,7 @@ vim.o.showmode = false
 -- Show one global statusline
 vim.o.laststatus = 3
 
-vim.o.showtabline = 2
+vim.o.showtabline = 1
 
 vim.schedule(function()
 	vim.o.clipboard = "unnamedplus"
@@ -148,10 +137,10 @@ vim.keymap.set("n", "<leader>bb", "<cmd>FzfLua buffers<CR>", { desc = "Buffers" 
 vim.keymap.set("n", "<leader>bY", [[maggVGy'a<cmd>echo "Buffer contents yanked"<CR>]], { desc = "Yank buffer" })
 
 -- Git
-vim.keymap.set("n", "<leader>gg", "<cmd>G<CR>", { desc = "Status" })
-vim.keymap.set("n", "<leader>gb", "<cmd>FzfLua git_branches<CR>", { desc = "Status" })
-vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
-vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
+vim.keymap.set("n", "<leader>gg", "<cmd>Neogit<CR>", { desc = "Status" })
+vim.keymap.set("n", "<leader>gb", "<cmd>Git blame<CR>", { desc = "Blame" })
+-- vim.keymap.set("n", "<leader>gF", "<cmd>G pull<CR>", { desc = "Pull" })
+-- vim.keymap.set("n", "<leader>gP", "<cmd>G push<CR>", { desc = "Push" })
 
 -- Logging
 vim.keymap.set("n", "<leader>ti", function()
@@ -167,7 +156,9 @@ vim.keymap.set("n", "<leader>qr", "<cmd>restart<CR>", { desc = "Restart" })
 
 -- Projects
 vim.keymap.set("n", "<leader>pt", "<cmd>VTerm<CR>i")
-vim.keymap.set("n", "<leader>sp", "<cmd>FzfLua live_grep<CR>", { desc = "Grep" })
+vim.keymap.set("n", "<leader>sp", function()
+	FzfLua.live_grep({ cmd = "rg --hidden --line-number --column" })
+end, { desc = "Grep" })
 
 -- General
 vim.keymap.set("n", "<leader><leader>", "<cmd>FzfLua files<CR>", { desc = "Files" })
@@ -227,7 +218,6 @@ vim.pack.add({
 	gh("stevearc/conform.nvim"),
 	gh("windwp/nvim-autopairs"),
 	gh("brianhuster/unnest.nvim"),
-	gh("simifalaye/minibuffer.nvim"),
 
 	-- LSP
 	gh("j-hui/fidget.nvim"),
@@ -260,46 +250,10 @@ vim.pack.add({
 	gh("kdheepak/lazygit.nvim"),
 })
 
-vim.ui.select = require("minibuffer.builtin.ui_select")
-vim.ui.input = require("minibuffer.builtin.ui_input")
-
 require("fzf-lua").setup({
-	-- ui_select = {},
-	winopts = function()
-		return {
-			height = 0.35,
-			width = 1,
-			row = 0.35,
-			col = 0.50,
-			border = "none",
-			backdrop = 100,
-			relative = "minibuffer",
-			use_minibuffer = true,
-			winhl = true,
-			preview = {
-				hidden = true,
-			},
-		}
-	end,
+	ui_select = {},
 	hls = {
 		normal = "Normal",
-	},
-	-- Depending on your fzf-lua version/config structure,
-	-- this is best applied to the individual pickers:
-	files = {
-		previewer = false,
-	},
-	buffers = {
-		previewer = false,
-	},
-	grep = {
-		previewer = false,
-	},
-	live_grep = {
-		previewer = false,
-	},
-	git_branches = {
-		previewer = false,
 	},
 	keymap = {
 		fzf = {
@@ -308,21 +262,21 @@ require("fzf-lua").setup({
 		},
 	},
 })
-vim.keymap.set("n", "<leader>pp", function()
-	require("fzf-lua").zoxide({
-		previewer = false,
-		actions = {
-			["default"] = function(selected)
-				if selected and selected[1] then
-					local path = selected[1]:match("(/.*)")
-					if path then
-						Project.open_tab_if_not_existing(path)
-					end
-				end
-			end,
-		},
-	})
-end, { desc = "Projects" })
+-- vim.keymap.set("n", "<leader>pp", function()
+-- 	require("fzf-lua").zoxide({
+-- 		previewer = false,
+-- 		actions = {
+-- 			["default"] = function(selected)
+-- 				if selected and selected[1] then
+-- 					local path = selected[1]:match("(/.*)")
+-- 					if path then
+-- 						Project.open_tab_if_not_existing(path)
+-- 					end
+-- 				end
+-- 			end,
+-- 		},
+-- 	})
+-- end, { desc = "Projects" })
 
 vim.cmd("colorscheme tokyonight-night")
 vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#1a1b26", bg = "#bb9af7" })
@@ -432,6 +386,9 @@ require("mini.statusline").setup({
 
 			local song_info_cmd = vim.system({ "playerctl", "metadata", "-f", "{{title}} - {{artist}}" }):wait()
 
+			local cwd = vim.fn.getcwd(0)
+			local project_name = vim.fn.fnamemodify(cwd, ":t")
+
 			-- Usage of `MiniStatusline.combine_groups()` ensures highlighting and
 			-- correct padding with spaces between groups (accounts for 'missing'
 			-- sections, etc.)
@@ -445,6 +402,7 @@ require("mini.statusline").setup({
 				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 				{ hl = status_hl, strings = { status } },
 				{ hl = "MiniStatuslineFileinfo", strings = { tasks } },
+				{ hl = "Project", strings = { project_name } },
 			})
 		end,
 	},
@@ -460,6 +418,7 @@ require("fidget").setup({})
 
 local capabilities = require("blink.cmp").get_lsp_capabilities()
 vim.lsp.config("vtsls", { capabilities = capabilities })
+vim.lsp.config("tsc", { capabilities = capabilities })
 vim.lsp.config("intelephense", { capabilities = capabilities })
 -- vim.lsp.config("phpantom_lsp", { capabilities = capabilities })
 vim.lsp.config("lua_ls", {
@@ -493,9 +452,9 @@ vim.lsp.config("lua_ls", {
 vim.lsp.enable({
 	"intelephense",
 	"lua_ls",
-	"vtsls",
 	"gopls",
 	"templ",
+	"tsc",
 })
 
 vim.api.nvim_create_autocmd("LspAttach", {
