@@ -209,9 +209,7 @@
        do (org-entry-put pt property value)))))
 
 ;; Agenda variables
-(setq org-directory "~/Documents/wiki/") ; Non-absolute paths for agenda and
-                                        ; capture templates will look here.
-
+(setq org-directory "~/Documents/wiki/")
 (setq org-agenda-files '("~/Documents/wiki/pages" "~/Documents/wiki/journals" "~/Documents/wiki"))
 
 ;; Default tags

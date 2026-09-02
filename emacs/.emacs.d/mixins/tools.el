@@ -139,8 +139,7 @@
 			                                                                  " ")))
                                                      (call-process-shell-command command nil 0)))))
 
-(use-package pr-review
-  :ensure t)
+(use-package pr-review :ensure t)
 
 (defun saxon/get-lat-lng ()
   (interactive)
@@ -168,7 +167,7 @@
   (interactive)
   (let* ((api-key (s-trim (auth-source-pick-first-password :host "giphy")))
          (query (url-encode-url search))
-         (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=50" api-key query))
+         (url (format "https://api.giphy.com/v1/gifs/search?api_key=%s&q=%s&limit=10" api-key query))
          (response (plz 'get url :headers '(("Content-Type" . "application/json")) :as #'json-read)))
     (let* ((data (alist-get 'data response)))
       (mapcar #'saxon/make-giphy-plist data))))
