@@ -215,9 +215,11 @@ vim.pack.add({
 
 	-- Util
 	gh("nvim-lua/plenary.nvim"),
+	gh("nvim-tree/nvim-web-devicons"),
 	gh("stevearc/conform.nvim"),
 	gh("windwp/nvim-autopairs"),
 	gh("brianhuster/unnest.nvim"),
+	gh("tpope/vim-eunuch"),
 
 	-- LSP
 	gh("j-hui/fidget.nvim"),
@@ -246,8 +248,8 @@ vim.pack.add({
 	gh("lewis6991/gitsigns.nvim"),
 	gh("NeogitOrg/neogit"),
 	gh("tpope/vim-fugitive"),
-	gh("tpope/vim-eunuch"),
 	gh("kdheepak/lazygit.nvim"),
+	gh("pwntester/octo.nvim"),
 })
 
 require("fzf-lua").setup({
@@ -262,21 +264,10 @@ require("fzf-lua").setup({
 		},
 	},
 })
--- vim.keymap.set("n", "<leader>pp", function()
--- 	require("fzf-lua").zoxide({
--- 		previewer = false,
--- 		actions = {
--- 			["default"] = function(selected)
--- 				if selected and selected[1] then
--- 					local path = selected[1]:match("(/.*)")
--- 					if path then
--- 						Project.open_tab_if_not_existing(path)
--- 					end
--- 				end
--- 			end,
--- 		},
--- 	})
--- end, { desc = "Projects" })
+require("octo").setup({
+	picker = "fzf-lua",
+	use_local_fs = true,
+})
 
 vim.cmd("colorscheme tokyonight-night")
 vim.api.nvim_set_hl(0, "TabLineSel", { fg = "#1a1b26", bg = "#bb9af7" })
@@ -398,7 +389,7 @@ require("mini.statusline").setup({
 				"%<", -- Mark general truncate point
 				{ hl = "MiniStatuslineFilename", strings = { filename } },
 				"%=", -- End left alignment
-				{ hl = "MusicPlaying", strings = { vim.trim(song_info_cmd.stdout) } },
+				-- { hl = "MusicPlaying", strings = { vim.trim(song_info_cmd.stdout) } },
 				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 				{ hl = status_hl, strings = { status } },
 				{ hl = "MiniStatuslineFileinfo", strings = { tasks } },
