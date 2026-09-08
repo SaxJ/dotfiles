@@ -15,25 +15,28 @@
  '(mu4e-search-results-limit -1)
  '(nano-modeline-position 'nano-modeline-footer)
  '(package-selected-packages
-   '(apheleia avy build cape casual chezmoi confluence-markup-mode
-              csproj-mode denote devdocs diff-hl dired-preview dune
-              eat ef-themes eglot-fsharp elfeed-tube elm-mode
-              embark-consult epresent evil-collection evil-commentary
-              evil-org evil-surround forge general ghostel
-              git-timemachine graphql-ts-mode graphviz-dot-mode
-              haskell-mode helm-org hide-mode-line httprepl jira
-              jiralib2 jq-mode json-mode lastfm logview lorem-ipsum
-              magit-delta magit-prime marginalia mason meow
-              mermaid-mode minimail modusregal modusregel mood-line
-              mpris mu4e-alert multi-vterm nerd-icons-corfu nvm
-              ob-mermaid orderless org-modern org-music org-present
-              org-ql org-roam org-tree-slide origami otpp plz pomo-cat
-              popper pr-review prescient prodigy pug-mode rainbow-mode
-              simple-httpd simple-mpc soundcloud string-inflection
-              sudo-edit templ-ts-mode terraform-mode time-zones tinee
-              uv-mode vc-use-package verb vertico visual-fill-column
-              vue-mode web-mode wgrep yaml-mode yasnippet-snippets
-              yeetube yuck-mode zone-nyan zone-rainbow))
+   '(apheleia avy build cape casual chezmoi compat cond-let
+              confluence-markup-mode consult corfu csproj-mode denote
+              devdocs diff-hl dired-preview dune eat ef-themes
+              eglot-fsharp elfeed elfeed-tube elm-mode embark-consult
+              epresent evil-collection evil-commentary evil-org
+              evil-surround forge general ghostel ghub git-timemachine
+              gptel graphql-ts-mode graphviz-dot-mode haskell-mode
+              helm helm-core helm-org hide-mode-line httprepl jira
+              jiralib2 jq-mode json-mode keymap-popup lastfm logview
+              lorem-ipsum magit magit-delta magit-prime magit-section
+              marginalia markdown-mode mason meow mermaid-mode
+              minimail modus-themes modusregal modusregel mood-line
+              mpris mu4e-alert multi-vterm nerd-icons nerd-icons-corfu
+              nvm ob-mermaid orderless org-modern org-music
+              org-present org-ql org-roam org-tree-slide origami otpp
+              plz pomo-cat popper posframe pr-review prescient prodigy
+              pug-mode rainbow-mode simple-httpd simple-mpc soundcloud
+              string-inflection sudo-edit templ-ts-mode terraform-mode
+              time-zones tinee transient uv-mode vc-use-package verb
+              vertico visual-fill-column vue-mode web-mode wgrep
+              with-editor yaml-mode yasnippet-snippets yeetube
+              yuck-mode zone-nyan zone-rainbow))
  '(package-vc-selected-packages
    '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
      (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch
