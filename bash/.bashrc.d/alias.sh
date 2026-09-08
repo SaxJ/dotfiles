@@ -37,7 +37,7 @@ function cd() {
 
 # Kakoune
 function k() {
-  kak -s $(basename "$(pwd)")
+  kak -C $ZELLIJ_SESSION_NAME
 }
 
 function prc() {
