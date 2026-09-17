@@ -27,6 +27,7 @@
 
 ;; Spelling
 (setq ispell-alternate-dictionary "/usr/share/dict/words")
+(setq ispell-alternate-dictionary nil)
 
 ;; Turn off lock files
 (setq create-lockfiles nil)
