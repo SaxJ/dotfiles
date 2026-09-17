@@ -33,8 +33,8 @@ local function runner()
 		local cmd = cmd_root .. choice
 		Terminal.open_terminal(cmd, "horizontal")
 
+		vim.api.nvim_feedkeys("<esc><esc>", "t", true)
 		vim.keymap.set("n", "q", "<cmd>bd<CR>", { buffer = 0, desc = "Quit" })
-
 		vim.keymap.set("n", "gr", string.format("<cmd>terminal %s<CR>", cmd), { buffer = 0, desc = "Recompile" })
 	end)
 end

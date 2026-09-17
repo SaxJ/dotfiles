@@ -359,7 +359,7 @@ require("mini.statusline").setup({
 			local diagnostics = MiniStatusline.section_diagnostics({ trunc_width = 75 })
 			local lsp = MiniStatusline.section_lsp({ trunc_width = 75 })
 			local filename = MiniStatusline.section_filename({ trunc_width = 140 })
-			local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
+			-- local fileinfo = MiniStatusline.section_fileinfo({ trunc_width = 120 })
 
 			vim.api.nvim_set_hl(0, "ClockedIn", { fg = "#000000", bg = "#3fec02" })
 			vim.api.nvim_set_hl(0, "ClockedOut", { fg = "#c2230f", bg = "#292e42" })
@@ -389,8 +389,8 @@ require("mini.statusline").setup({
 				"%<", -- Mark general truncate point
 				{ hl = "MiniStatuslineFilename", strings = { filename } },
 				"%=", -- End left alignment
-				-- { hl = "MusicPlaying", strings = { vim.trim(song_info_cmd.stdout) } },
-				{ hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
+				{ hl = "MusicPlaying", strings = { vim.trim(song_info_cmd.stdout) } },
+				-- { hl = "MiniStatuslineFileinfo", strings = { fileinfo } },
 				{ hl = status_hl, strings = { status } },
 				{ hl = "MiniStatuslineFileinfo", strings = { tasks } },
 				{ hl = "Project", strings = { project_name } },
