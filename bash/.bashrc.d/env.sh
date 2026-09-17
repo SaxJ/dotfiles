@@ -4,3 +4,5 @@ export PROMPT_COMMAND='echo -ne "\033]2;${PWD##*/}\a"'
 export RIPGREP_CONFIG_PATH='~/.config/ripgreprc'
 export PATH="/home/saxonj/.duckdb/cli/latest":$PATH
 export PATH="/home/saxonj/Documents/git-fuzzy/bin:$PATH"
+
+export JIRA_API_TOKEN=$(pass jira)
