@@ -39,6 +39,18 @@
 (defgroup emira nil
   "Jira stuff")
 
+(defun emira-view-issue (issue)
+  (interactive "sIssue: ")
+  (with-environment-variables (("JIRA_API_TOKEN" (auth-source-pick-first-password :host "hejira.atlassian.net")))
+    (set-process-sentinel
+     (start-process "jira-view" "*jira-view*" "jira" "issue" "view" issue)
+     (lambda (p _m)
+       (unless (process-live-p p)
+         (with-current-buffer (process-buffer p)
+           (ansi-color-apply-on-region (point-min) (point-max))
+           (display-buffer (current-buffer))))))))
+
+
 (defvar emira-jira-domain "setme.atlassian.net"
   "The the domain the jira instance is on. For example, `company.atlassian.net'")
 
