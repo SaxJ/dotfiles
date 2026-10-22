@@ -206,6 +206,8 @@
     "|" 'saxon/shell-command-output
     "-" 'project-dired
 
+    "am" 'agent-shell-manager-toggle
+
     ;; tab bindings
     "TAB c" 'tab-close
     "TAB k" 'project-kill-buffers
@@ -365,6 +367,9 @@
   (general-def 'normal 'hurl-mode-map
     "C-c C-c" 'saxon/run-hurl-file
     ",x" 'saxon/run-hurl-file)
+
+  (general-def 'normal 'agent-shell-manager-mode-map
+    "c" 'agent-shell-manager-new)
 
   (general-def 'normal 'json-ts-mode-map
     ",jq" 'jq-interactively)

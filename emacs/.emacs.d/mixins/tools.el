@@ -56,16 +56,16 @@
     :kill-process-buffer-on-stop t)
   (prodigy-define-service
     :name "Catalyst Dev"
-    :command "yarn"
-    :args '("dev")
+    :command "npm"
+    :args '("run" "dev")
     :cwd "~/Documents/catalyst"
     :tags '(work)
     :stop-signal 'sigkill
     :kill-process-buffer-on-stop t)
   (prodigy-define-service
     :name "Hannibal Dev Server"
-    :command "yarn"
-    :args '("dev")
+    :command "npm"
+    :args '("run" "dev")
     :cwd "~/Documents/hannibal"
     :tags '(work)
     :stop-signal 'sigkill
@@ -321,7 +321,7 @@
   :vc (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch "main")
   :config
   (setopt mpris-preferred-players '("plasma-browser-integration")
-          mpris-disliked-players '("kdeconnect" "firefox" "chromium"))
+          mpris-disliked-players '("kdeconnect" "firefox" "chromium" "vivaldi"))
   (mpris-update-current-player))
 
 ;;;;;;;;;;
@@ -386,3 +386,25 @@
   (add-hook 'emms-playlist-cleared-hook 'emms-player-mpd-clear))
 
 (use-package simple-httpd :ensure t)
+
+(defun saxon/md-convert-yank (str)
+  (cond
+   ((string-match-p "^https://.+\.gif$" str)
+    (format "![GIF](%s)" str))
+
+   (t str)))
+
+(add-hook 'markdown-mode-hook (lambda nil
+                                (make-variable-buffer-local 'yank-transform-functions)
+                                (add-to-list 'yank-transform-functions #'saxon/md-convert-yank)))
+
+(defun saxon/sync-kube-config ()
+  "Pull kube config from remote."
+  (let* ((ip (with-current-buffer (find-file-noselect "/etc/hosts")
+               (re-search-forward "\\([[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+\\.[[:digit:]]+\\)[[:space:]]+.*dev\\.he0\\.io")
+               (match-string-no-properties 1))))
+    (progn
+      (call-process "scp" nil nil nil "minikube:/etc/rancher/k3s/k3s.yaml" "~/.kube/config")
+      (with-current-buffer (find-file-noselect "~/.kube/config")
+        (replace-string "127.0.0.1" ip))
+      (message "Done"))))
