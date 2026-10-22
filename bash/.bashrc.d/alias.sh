@@ -80,3 +80,12 @@ function jt() {
   local ticket=$(board_tickets)
   git co -b "$ticket"
 }
+
+# Interactive worktree switcher using fzf
+wti() {
+  local selected
+  selected=$(git worktree list | fzf --height 40% --reverse)
+  if [ -n "$selected" ]; then
+    cd "$(echo "$selected" | awk '{print $1}')" || return
+  fi
+}
