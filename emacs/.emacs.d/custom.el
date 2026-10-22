@@ -15,33 +15,38 @@
  '(mu4e-search-results-limit -1)
  '(nano-modeline-position 'nano-modeline-footer)
  '(package-selected-packages
-   '(agent-shell apheleia avy build cape casual chezmoi compat cond-let
-                 confluence-markup-mode consult corfu csproj-mode
-                 denote devdocs diff-hl dired-preview dune eat
-                 ef-themes eglot-fsharp elfeed elfeed-tube elm-mode
-                 embark-consult epresent evil-collection
-                 evil-commentary evil-org evil-surround forge general
-                 ghostel ghub git-timemachine gptel gptel-agent
-                 graphql-ts-mode graphviz-dot-mode haskell-mode helm
-                 helm-core helm-org hide-mode-line httprepl jira
-                 jiralib2 jq-mode json-mode keymap-popup lastfm
-                 logview lorem-ipsum magit magit-delta magit-prime
-                 magit-section marginalia markdown-mode mason meow
-                 mermaid-mode minimail modus-themes modusregal
-                 modusregel mood-line mpris mu4e-alert multi-vterm
-                 nerd-icons nerd-icons-corfu nvm ob-mermaid orderless
-                 org-modern org-music org-present org-ql org-roam
-                 org-tree-slide origami otpp plz pomo-cat popper
-                 posframe pr-review prescient prodigy pug-mode
-                 rainbow-mode simple-httpd simple-mpc soundcloud
-                 string-inflection sudo-edit templ-ts-mode
-                 terraform-mode time-zones tinee tmpl-mode transient
-                 uv-mode vc-use-package verb vertico
-                 visual-fill-column vue-mode web-mode wgrep
-                 with-editor yaml-mode yasnippet-snippets yeetube
-                 yuck-mode zone-nyan zone-rainbow))
+   '(acp agent-shell agent-shell-manager apheleia avy build cape casual
+         chezmoi compat cond-let confluence-markup-mode consult corfu
+         csproj-mode denote devdocs diff-hl dired-preview dune eat
+         ef-themes eglot-fsharp elfeed elfeed-tube elm-mode
+         embark-consult epresent evil-collection evil-commentary
+         evil-org evil-surround forge general ghostel ghub
+         git-timemachine gptel gptel-agent graphql-ts-mode
+         graphviz-dot-mode haskell-mode helm helm-core helm-org
+         hide-mode-line httprepl jira jiralib2 jq-mode json-mode
+         keymap-popup lastfm logview lorem-ipsum magit magit-delta
+         magit-prime magit-section marginalia markdown-mode mason meow
+         mermaid-mode minimail modus-themes modusregal modusregel
+         mood-line mpris mu4e-alert multi-vterm nerd-icons
+         nerd-icons-corfu nvm ob-mermaid orderless org-modern
+         org-music org-present org-ql org-roam org-tree-slide origami
+         otpp plz pomo-cat popper posframe pr-review prescient prodigy
+         pug-mode rainbow-mode simple-httpd simple-mpc soundcloud
+         string-inflection sudo-edit templ-ts-mode terraform-mode
+         time-zones tinee tmpl-mode transient uv-mode vc-use-package
+         verb vertico visual-fill-column vue-mode web-mode wgrep
+         with-editor yaml-mode yasnippet-snippets yeetube yuck-mode
+         zone-nyan zone-rainbow))
  '(package-vc-selected-packages
-   '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
+   '((agent-shell-notifications :url
+                                "https://github.com/zackattackz/agent-shell-notifications"
+                                :branch "main" :ignored-files
+                                ("agent-shell-notifications-knockknock.el"
+                                 "agent-shell-notifications-tests.el"))
+     (agent-shell-manager :url
+                          "https://github.com/jethrokuan/agent-shell-manager"
+                          :branch "main")
+     (tinee :url "https://codeberg.org/tusharhero/tinee.git")
      (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch
             "main")
      (confluence-markup-mode :url
