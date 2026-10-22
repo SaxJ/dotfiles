@@ -11,6 +11,8 @@
 ;; Not needed for emacs-30
 (require 'vc-use-package)
 
+(setq custom-file (locate-user-emacs-file "custom.el"))
+
 (set-face-attribute 'default nil :font "Fira Code-14")
 
 (setopt inhibit-splash-screen t)
@@ -191,34 +193,6 @@
 (load-file (expand-file-name "mixins/org.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/tools.el" user-emacs-directory))
 (load-file (expand-file-name "mixins/mail.el" user-emacs-directory))
+(load-file (expand-file-name "mixins/ai.el" user-emacs-directory))
 
-(setq custom-file (locate-user-emacs-file "custom.el"))
 (load custom-file :no-error-if-file-is-missing)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(eglot-confirm-server-edits nil nil nil "Customized with use-package eglot")
- '(helm-minibuffer-history-key "M-p")
- '(package-vc-selected-packages
-   '((tinee :url "https://codeberg.org/tusharhero/tinee.git")
-     (mpris :url "https://code.tecosaur.net/tec/mpris.el.git" :branch
-            "main")
-     (confluence-markup-mode :url
-                             "https://github.com/rmloveland/confluence-markup-mode"
-                             :branch "master")
-     (build :url "https://github.com/SaxJ/build.el" :branch "master")
-     (org-music :url "https://github.com/debanjum/org-music" :branch
-                "master")
-     (org-ql :url "https://github.com/alphapapa/org-ql" :branch
-             "master")
-     (vc-use-package :vc-backend Git :url
-                     "https://github.com/slotThe/vc-use-package"))))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
