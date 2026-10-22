@@ -17,16 +17,7 @@ add-highlighter global/hl-col-120 column 120 default,black+d
 # better grep
 set-option global grepcmd 'rg --column --smart-case --sort path'
 
-# Global binds
-map global normal <c-c> ':comment-line' -docstring 'Comment'
-
-declare-user-mode open
-
-declare-user-mode window
-map global window v ':zellij-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Vertical Split'
-map global window s ':zellij-terminal-vertical kak -c %val{session}<ret>' -docstring 'Horizontal Split'
-map global normal <c-w> ':enter-user-mode window<ret>' -docstring 'Windows'
-
+# Functions
 define-command -params 1 -docstring %{Run a project command} project-run %{
   evaluate-commands %sh{
     echo "zellij-terminal-horizontal kak -c $kak_session"
@@ -35,5 +26,22 @@ define-command -params 1 -docstring %{Run a project command} project-run %{
 		$1 > $file & disown
   }
 }
+
+define-command -params 0 -docstring %{Fuzzy fine file} fuzzy-find %{
+  evaluate-commands %sh{
+    name="$(fzf --popup)"
+    echo "edit $file"
+  }
+}
+
+# Global binds
+map global normal <a-c> ':comment-line' -docstring 'Comment'
+map global user <space> ':echo foo<ret>' -docstring 'Select file'
+
+declare-user-mode window
+map global window v ':zellij-terminal-horizontal kak -c %val{session}<ret>' -docstring 'Vertical Split'
+map global window s ':zellij-terminal-vertical kak -c %val{session}<ret>' -docstring 'Horizontal Split'
+map global normal <c-w> ':enter-user-mode window<ret>' -docstring 'Windows'
+
 
 complete-command -menu project-run shell-script-candidates kak_runner_options
