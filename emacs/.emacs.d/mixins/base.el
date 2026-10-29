@@ -140,14 +140,23 @@
   :config
   (setq completion-styles '(orderless prescient)))
 
-(use-package otpp
+(use-package project-x
   :ensure t
   :after project
-  :init
-  (otpp-mode 1)
-  ;; If you want to advice the commands in `otpp-override-commands`
-  ;; to be run in the current's tab (so, current project's) root directory
-  (otpp-override-mode 1))
+  :config
+  (setq project-x-auto-save-delay nil)
+  (project-x-mode 1)
+  (project-x-tabs-mode 1)
+
+  (defvar saxon/tab-repo-groups (make-hash-table :test 'equal))
+  (defun saxon/tab-repo-group (tab)
+    (or (tab-bar-tab-group-default tab)
+        (when-let* ((root (project-x--tab-get-root tab)))
+          (with-memoization (gethash root saxon/tab-repo-groups)
+            (when-let* ((repo (saxon/repo-root root)))
+              (file-name-nondirectory (directory-file-name repo)))))))
+  (setq tab-bar-tab-group-function #'saxon/tab-repo-group)
+  (setq tab-bar-format (cl-substitute 'tab-bar-format-tabs-groups 'tab-bar-format-tabs tab-bar-format)))
 
 (use-package prescient
   :ensure t)
