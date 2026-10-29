@@ -188,6 +188,22 @@
       (forge-checkout-pullreq pr)
       (pr-review url t))))
 
+(defun saxon/repo-root (dir)
+  "Root of the main worktree for the repo containing DIR."
+  (let ((default-directory dir))
+    (when-let* ((common (magit-git-string "rev-parse" "--path-format=absolute" "--git-common-dir")))
+      (file-name-directory (directory-file-name common)))))
+
+(defun saxon/new-worktree (branch)
+  (interactive "sNew branch: ")
+  (let* ((root (or (saxon/repo-root default-directory) (user-error "Not in a git repo")))
+         (dir (format "%s_%s" (directory-file-name root) (string-replace "/" "-" branch)))
+         (default-directory root))
+    (unless (zerop (magit-call-git "worktree" "add" "-b" branch dir "master"))
+      (magit-process-buffer)
+      (user-error "Failed to create worktree"))
+    (project-switch-project (file-name-as-directory dir))))
+
 (use-package general
   :ensure t
   :config
@@ -242,6 +258,7 @@
     "pa" 'project-remember-projects-under
     "pk" 'project-kill-buffers
     "pc" 'project-compile
+    "pw" 'saxon/new-worktree
 
     "sp" 'consult-ripgrep
 
