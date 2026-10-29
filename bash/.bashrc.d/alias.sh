@@ -83,9 +83,33 @@ function jt() {
 
 # Interactive worktree switcher using fzf
 wti() {
-  local selected
-  selected=$(git worktree list | fzf --height 40% --reverse)
-  if [ -n "$selected" ]; then
-    cd "$(echo "$selected" | awk '{print $1}')" || return
-  fi
+  local out key selected path
+  out=$(git worktree list | fzf --height 40% --reverse \
+    --header 'enter: cd | ctrl-o: open | ctrl-d: delete' \
+    --expect=ctrl-o,ctrl-d) || return
+  key=$(head -1 <<<"$out")
+  selected=$(sed -n 2p <<<"$out")
+  [ -n "$selected" ] || return
+  path=$(awk '{print $1}' <<<"$selected")
+
+  case "$key" in
+  ctrl-o)
+    [ "$HERDR_ENV" = 1 ] && herdr workspace create --cwd "$path" --label "$(basename "$path")" --focus
+    ;;
+  ctrl-d)
+    if [ "$path" = "$(git worktree list | head -1 | awk '{print $1}')" ]; then
+      echo "Refusing to delete main worktree" >&2
+      return 1
+    fi
+    read -rp "Delete worktree $path? [y/N] " ans
+    [[ "$ans" =~ ^[Yy]$ ]] || return
+    if ! git worktree remove "$path"; then
+      read -rp "Force delete? [y/N] " ans
+      [[ "$ans" =~ ^[Yy]$ ]] && git worktree remove --force "$path"
+    fi
+    ;;
+  *)
+    cd "$path" || return
+    ;;
+  esac
 }
